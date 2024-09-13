@@ -1,0 +1,17 @@
+[
+    {
+        "id": "nft-nifti",
+        "latest": "0.0.1",
+        "url": "https://github.com/scilus/nft-nifti",
+        "github": "scilus/nft-nifti",
+        "description": "Provides support for NIFTI files.",
+        "author": "Arnaud Boré and Alex V Caron",
+        "keywords": [],
+        "releases": [
+            {
+                "version": "0.0.1",
+                "url": "https://github.com/scilus/nft-nifti/releases/download/0.0.1/nft-nifti-0.0.1.jar"
+            }
+        ]
+    }
+]
