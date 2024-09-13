@@ -1,0 +1,58 @@
+nextflow_workflow {
+
+    name "Test Subworkflow BUNDLE_SEG"
+    script "../main.nf"
+    workflow "BUNDLE_SEG"
+    config "./nextflow.config"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/bundle_seg"
+
+    tag "bundle/recognize"
+    tag "registration/ants"
+
+    tag "load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "tracking.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("rbx - base - no_atlas_folder") {
+
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/fa.nii.gz")
+                    ]
+                }
+                input[1] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/pft.trk")
+                    ]
+                }
+                input[2] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

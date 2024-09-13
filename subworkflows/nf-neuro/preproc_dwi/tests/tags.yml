@@ -1,0 +1,2 @@
+subworkflows/preproc_dwi:
+  - subworkflows/nf-scil/preproc_dwi/**

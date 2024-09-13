@@ -1,0 +1,73 @@
+{
+    "rbx - base - no_atlas_folder": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__AF_L_cleaned.trk:md5,b9a6567efffa206202f37c11afea2391",
+                            "test__CC_Fr_2_cleaned.trk:md5,ad18f4415d6d5baae1ec81359ccffecb",
+                            "test__CC_Pr_Po_cleaned.trk:md5,dca763cddc2decfa64baf452cc035b5a",
+                            "test__CG_R_An_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
+                            "test__CG_R_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
+                            "test__FPT_L_Brainstem_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
+                            "test__FPT_L_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
+                            "test__ILF_L_cleaned.trk:md5,00f9f6e33e59bfe8bbe3a5afd18b0f2e",
+                            "test__MCP_cleaned.trk:md5,ed86370180b35e125ae410aa3d520625",
+                            "test__OR_ML_L_cleaned.trk:md5,721b658ed8a4de104c4e7c207d4fe170",
+                            "test__POPT_R_Brainstem_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
+                            "test__POPT_R_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
+                            "test__PYT_L_cleaned.trk:md5,ac9973ef987c34ecee0328004033ea46",
+                            "test__PYT_R_Brainstem_cleaned.trk:md5,28b4be34422e356030b6b081efca31d5",
+                            "test__PYT_R_cleaned.trk:md5,50f8127bbaab6f4b9fea790a7c11679d",
+                            "test__SLF_L_cleaned.trk:md5,3660a62ee7e0e413f7417e80c1842e60"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,0e994f9824f1e014fd5e939e0bce7061",
+                    "versions.yml:md5,e63f6133bb2e78ce211054111993be59"
+                ],
+                "bundles": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__AF_L_cleaned.trk:md5,b9a6567efffa206202f37c11afea2391",
+                            "test__CC_Fr_2_cleaned.trk:md5,ad18f4415d6d5baae1ec81359ccffecb",
+                            "test__CC_Pr_Po_cleaned.trk:md5,dca763cddc2decfa64baf452cc035b5a",
+                            "test__CG_R_An_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
+                            "test__CG_R_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
+                            "test__FPT_L_Brainstem_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
+                            "test__FPT_L_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
+                            "test__ILF_L_cleaned.trk:md5,00f9f6e33e59bfe8bbe3a5afd18b0f2e",
+                            "test__MCP_cleaned.trk:md5,ed86370180b35e125ae410aa3d520625",
+                            "test__OR_ML_L_cleaned.trk:md5,721b658ed8a4de104c4e7c207d4fe170",
+                            "test__POPT_R_Brainstem_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
+                            "test__POPT_R_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
+                            "test__PYT_L_cleaned.trk:md5,ac9973ef987c34ecee0328004033ea46",
+                            "test__PYT_R_Brainstem_cleaned.trk:md5,28b4be34422e356030b6b081efca31d5",
+                            "test__PYT_R_cleaned.trk:md5,50f8127bbaab6f4b9fea790a7c11679d",
+                            "test__SLF_L_cleaned.trk:md5,3660a62ee7e0e413f7417e80c1842e60"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0e994f9824f1e014fd5e939e0bce7061",
+                    "versions.yml:md5,e63f6133bb2e78ce211054111993be59"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-13T15:58:13.048892"
+    }
+}

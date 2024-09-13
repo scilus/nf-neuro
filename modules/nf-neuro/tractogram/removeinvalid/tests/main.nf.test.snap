@@ -1,0 +1,53 @@
+{
+    "tractogram - remove invalid": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__bundle_0.trk:md5,6fb44e5444b09eaf6e612e1bde04b0ed",
+                            "test__bundle_1.trk:md5,04fbc7404a45e197d203d05e1bde351a",
+                            "test__bundle_2.trk:md5,91cf2d5b1e8ca0e219012dbcaf4a8edb",
+                            "test__bundle_3.trk:md5,a2b56e397fc062691ed4c99f8fe67228",
+                            "test__bundle_4.trk:md5,3fe0cd679a23e53079bcfdfb3a777e89",
+                            "test__bundle_5.trk:md5,9a7d5da64e557eb6622a051593886e4a",
+                            "test__bundle_6.trk:md5,29434c0aa3bc72c721e8879edd4f0dca"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,9c98a9977d211116b5e0585b635769c1"
+                ],
+                "tractograms": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__bundle_0.trk:md5,6fb44e5444b09eaf6e612e1bde04b0ed",
+                            "test__bundle_1.trk:md5,04fbc7404a45e197d203d05e1bde351a",
+                            "test__bundle_2.trk:md5,91cf2d5b1e8ca0e219012dbcaf4a8edb",
+                            "test__bundle_3.trk:md5,a2b56e397fc062691ed4c99f8fe67228",
+                            "test__bundle_4.trk:md5,3fe0cd679a23e53079bcfdfb3a777e89",
+                            "test__bundle_5.trk:md5,9a7d5da64e557eb6622a051593886e4a",
+                            "test__bundle_6.trk:md5,29434c0aa3bc72c721e8879edd4f0dca"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,9c98a9977d211116b5e0585b635769c1"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.1"
+        },
+        "timestamp": "2024-05-21T14:39:05.238848"
+    }
+}

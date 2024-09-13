@@ -1,0 +1,37 @@
+{
+    "registration - antsapplytransforms": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__warped.nii.gz:md5,f5df5ab8622bfd2f3ea4c59e3c4f482e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,180609e91d7d492cd7db9b09f47f055d"
+                ],
+                "versions": [
+                    "versions.yml:md5,180609e91d7d492cd7db9b09f47f055d"
+                ],
+                "warped_image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__warped.nii.gz:md5,f5df5ab8622bfd2f3ea4c59e3c4f482e"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-01T13:21:10.708882"
+    }
+}

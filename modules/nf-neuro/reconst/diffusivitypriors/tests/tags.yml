@@ -1,0 +1,2 @@
+reconst/diffusivitypriors:
+  - "modules/nf-scil/reconst/diffusivitypriors/**"

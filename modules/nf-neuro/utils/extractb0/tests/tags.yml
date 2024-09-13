@@ -1,0 +1,2 @@
+utils/extractb0:
+  - "modules/nf-scil/utils/extractb0/**"

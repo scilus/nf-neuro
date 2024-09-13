@@ -1,0 +1,74 @@
+nextflow_process {
+
+    name "Test Process IMAGE_APPLYMASK"
+    script "../main.nf"
+    process "IMAGE_APPLYMASK"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "image"
+    tag "image/applymask"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-scil/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "heavy.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("image - applymask - 4D") {
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi/mask.nii.gz")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("image - applymask - 3D") {
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
+                        file("\${test_data_directory}/anat/anat_mask.nii.gz")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

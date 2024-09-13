@@ -1,0 +1,50 @@
+nextflow_process {
+
+    name "Test Process SEGMENTATION_FASTSURFER"
+    script "../main.nf"
+    process "SEGMENTATION_FASTSURFER"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "segmentation"
+    tag "segmentation/fastsurfer"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-scil/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "freesurfer.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("segmentation - fastsurfer") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/anat_image.nii.gz"),
+                        file("\${test_data_directory}/license.txt")
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.fastsurferdirectory.get(0).get(1)).name,
+                    process.out.versions).match()}
+            )
+        }
+    }
+}

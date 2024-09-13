@@ -1,0 +1,86 @@
+name: "anatomical_segmentation"
+description: |
+  Subworkflow performing anatomical segmentation to produce WM, GM and CSF maps/masks. It handles
+  two type of input channels, either an anatomical image (most likely T1) or freesurfer parcellations
+  files. Depending on which channel is provided, the subworkflow will perform either of the following:
+  1)  Channel with an anatomical image will result in using FSL's fast segmentation producing WM, GM,
+      and CSF masks/maps.
+  2)  Channel with FreeSurfer's parcellations files will result in using Scilpy's tools to produce
+      WM, GM, and CSF masks (probability maps are not produced with this option).
+  Typical next steps after this subworkflow would be to combine the resulting masks/maps with fODF
+  data to perform TRACKING.
+keywords:
+  - Anatomical
+  - Segmentation
+  - Maps
+  - Masks
+components:
+  - segmentation/fastseg
+  - segmentation/freesurferseg
+input:
+  - ch_image:
+      type: file
+      description: |
+        The input channel containing the anatomical images (typically T1s). If provided, the
+        subworkflow will perform segmentation using FSL's fast.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_freesurferseg:
+      type: file
+      description: |
+        The input channel containing freesurfer parcellations files (aparc+aseg and wm_parc
+        parcellations). If provided, the subworkflow will use Scilpy's tools to convert the
+        parcellations into masks.
+        Structure: [ val(meta), path(aparc_aseg), path(wm_parc) ]
+      pattern: "*.mgz"
+output:
+  - wm_mask:
+      type: file
+      description: |
+        Channel containing WM mask files. Will be outputted regardless of the selected
+        segmentation method and inputs provided.
+        Structure: [ val(meta), path(wm_mask) ]
+      pattern: "*.{nii,nii.gz}"
+  - gm_mask:
+      type: file
+      description: |
+        Channel containing GM mask files. Will be outputted regardless of the selected
+        segmentation method and inputs provided.
+        Structure: [ val(meta), path(gm_mask) ]
+      pattern: "*.{nii,nii.gz}"
+  - csf_mask:
+      type: file
+      description: |
+        Channel containing CSF mask files. Will be outputted regardless of the selected
+        segmentation method and inputs provided.
+        Structure: [ val(meta), path(csf_mask) ]
+      pattern: "*.{nii,nii.gz}"
+  - wm_maps:
+      type: file
+      description: |
+        Channel containing WM probability maps. Will be only outputted if FSL's fast segmentation
+        is used and not with FreeSurfer's parcellation files.
+        Structure: [ val(meta), path(wm_maps) ]
+      pattern: "*.{nii,nii.gz}"
+  - gm_maps:
+      type: file
+      description: |
+        Channel containing GM probability maps. Will be only outputted if FSL's fast segmentation
+        is used and not with FreeSurfer's parcellation files.
+        Structure: [ val(meta), path(gm_maps) ]
+      pattern: "*.{nii,nii.gz}"
+  - csf_maps:
+      type: file
+      description: |
+        Channel containing CSF probability maps. Will be only outputted if FSL's fast segmentation
+        is used and not with FreeSurfer's parcellation files.
+        Structure: [ val(meta), path(csf_maps) ]
+      pattern: "*.{nii,nii.gz}"
+  - versions:
+      type: file
+      description: |
+        File containing software versions.
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@gagnonanthony"

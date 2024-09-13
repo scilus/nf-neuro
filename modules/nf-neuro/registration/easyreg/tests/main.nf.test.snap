@@ -1,0 +1,20 @@
+{
+    "registration - easyreg": {
+        "content": [
+            "test_reference_segmentation.nii.gz",
+            "test_floating_segmentation.nii.gz",
+            "test_reference_registered.nii.gz:md5:header,c5e41f89848f91c53a9a7be44970d4b1,data,1501221fe23cd62bfdafb33367cadf4d",
+            "test_floating_registered.nii.gz:md5:header,ec5893cd9ea024e630c4444bd914c331,data,d75ae3fc935cd5cc70ea6797a4c70775",
+            "test_forward_field.nii.gz:md5:header,0db0a80786ff39864cc17506ed1a0146,data,e4fa6c626729cbf236c34680e5c76df4",
+            "test_backward_field.nii.gz:md5:header,74c92ee4cd3c4abfecf3da6cdb1d4650,data,8f26afa5c3de21469466213498542486",
+            [
+                "versions.yml:md5,4661210880c42a986923e8257f64c760"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-12T16:01:24.00559"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "segmentation - fsreconall": {
+        "content": [
+            "test__recon_all",
+            [
+                "versions.yml:md5,12027dd965b94e4d68b7e8a630a04d00"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-21T18:19:43.835172"
+    }
+}

@@ -1,0 +1,161 @@
+nextflow_workflow {
+
+    name "Test Subworkflow TOPUP_EDDY"
+    script "../main.nf"
+    workflow "TOPUP_EDDY"
+    config "./nextflow.config"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/topup_eddy"
+
+    tag "preproc"
+    tag "preproc/topup"
+    tag "preproc/eddy"
+    tag "utils/extractb0"
+
+    tag "load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "topup_eddy_light.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("eddy") {
+
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
+                    ]}
+                input[1] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
+                    ]}
+                input[2] = []
+                input[3] = []
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.b0_mask,
+                    workflow.out.bval,
+                    workflow.out.versions,
+                    file(workflow.out.dwi.get(0).get(1)).name,
+                    file(workflow.out.bvec.get(0).get(1)).name,
+                    file(workflow.out.b0.get(0).get(1)).name).match() })
+        }
+    }
+
+    test("topup_eddy_rev_b0") {
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
+                    ]}
+                input[1] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
+                    ]}
+                input[2] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        [],
+                        [],
+                        []
+                    ]}
+
+                input[3] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz")
+                    ]}
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.b0_mask,
+                    workflow.out.bval,
+                    workflow.out.versions,
+                    file(workflow.out.dwi.get(0).get(1)).name,
+                    file(workflow.out.bvec.get(0).get(1)).name,
+                    file(workflow.out.b0.get(0).get(1)).name).match() })
+        }
+    }
+
+    test("topup_eddy_rev_dwi") {
+
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
+                    ]}
+                input[1] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
+                    ]}
+                input[2] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/sub-01_dir-PA_dwi.nii.gz"),
+                        file("\${test_data_directory}/sub-01_dir-PA_dwi.bval"),
+                        file("\${test_data_directory}/sub-01_dir-PA_dwi.bvec")
+                    ]}
+                input[3] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz")
+                    ]}
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.b0_mask,
+                    workflow.out.bval,
+                    workflow.out.versions,
+                    file(workflow.out.dwi.get(0).get(1)).name,
+                    file(workflow.out.bvec.get(0).get(1)).name,
+                    file(workflow.out.b0.get(0).get(1)).name).match() })
+        }
+    }
+}

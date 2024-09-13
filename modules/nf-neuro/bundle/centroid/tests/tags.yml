@@ -1,0 +1,2 @@
+bundle/centroid:
+  - "modules/nf-scil/bundle/centroid/**"

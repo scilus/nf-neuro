@@ -1,0 +1,37 @@
+{
+    "bundle - fixelafd": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__tracking_afd_metric.nii.gz:md5,01ac9796dc0ff6861c2992d513d690d3"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,ad93266aca700e520e81c846f48d0ed1"
+                ],
+                "fixel_afd": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__tracking_afd_metric.nii.gz:md5,01ac9796dc0ff6861c2992d513d690d3"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ad93266aca700e520e81c846f48d0ed1"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-22T18:04:46.370916"
+    }
+}

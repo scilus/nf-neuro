@@ -1,0 +1,96 @@
+{
+    "betcrop - cropvolume - outputbbox": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,93cc10f69b0829409c69bf743e9c95ef"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped_bbox.pkl:md5,d6a03b61669b07683e8c4b21a613f16c"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,7eb8e64496eab011bfb2b89f9035729a"
+                ],
+                "bounding_box": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped_bbox.pkl:md5,d6a03b61669b07683e8c4b21a613f16c"
+                    ]
+                ],
+                "image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,93cc10f69b0829409c69bf743e9c95ef"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,7eb8e64496eab011bfb2b89f9035729a"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T19:11:45.676513"
+    },
+    "betcrop - cropvolume": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,93cc10f69b0829409c69bf743e9c95ef"
+                    ]
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    "versions.yml:md5,7eb8e64496eab011bfb2b89f9035729a"
+                ],
+                "bounding_box": [
+                    
+                ],
+                "image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,93cc10f69b0829409c69bf743e9c95ef"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,7eb8e64496eab011bfb2b89f9035729a"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T19:11:33.750977"
+    }
+}

@@ -1,0 +1,2 @@
+io/readbids:
+  - "modules/nf-scil/io/readbids/**"

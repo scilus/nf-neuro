@@ -1,0 +1,2 @@
+bundle/fixelafd:
+  - "modules/nf-scil/bundle/fixelafd/**"

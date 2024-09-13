@@ -1,0 +1,2 @@
+segmentation/fastsurfer:
+  - "modules/nf-scil/segmentation/fastsurfer/**"

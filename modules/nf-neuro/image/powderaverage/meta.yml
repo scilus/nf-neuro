@@ -1,0 +1,55 @@
+---
+name: "image_powderaverage"
+description: Calculate the powder average of a 4D diffusion volume.
+keywords:
+  - DWI
+  - Powder Average
+  - BET
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: Nifti DWI volume to compute the powder average on.
+      pattern: "*.nii.gz"
+
+  - bval:
+      type: file
+      description: b-values file.
+      pattern: "*.bval"
+
+  - mask:
+      type: file
+      description: Binary mask to apply on the DWI volume.
+      pattern: "*.nii.gz"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - pwd_avg:
+      type: file
+      description: Powder averaged DWI volume.
+      pattern: "*.nii.gz"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"

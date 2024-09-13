@@ -1,0 +1,25 @@
+{
+    "io - readbids - folder": {
+        "content": [
+            {
+                "0": [
+                    "tractoflow_bids_struct.json:md5,58e0494c51d30eb3494f7c9198986bb9"
+                ],
+                "1": [
+                    "versions.yml:md5,0af9864a1818468702fa7d6ac7985e29"
+                ],
+                "bidsstructure": [
+                    "tractoflow_bids_struct.json:md5,58e0494c51d30eb3494f7c9198986bb9"
+                ],
+                "versions": [
+                    "versions.yml:md5,0af9864a1818468702fa7d6ac7985e29"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-29T20:34:58.293363"
+    }
+}

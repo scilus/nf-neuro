@@ -1,0 +1,137 @@
+nextflow_workflow {
+
+    name "Test Subworkflow PREPROC_T1"
+    script "../main.nf"
+    workflow "PREPROC_T1"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/preproc_t1"
+
+    tag "denoising/nlmeans"
+    tag "preproc/n4"
+    tag "image/resample"
+    tag "betcrop/antsbet"
+    tag "betcrop/cropvolume"
+
+    tag "load_test_data"
+
+        setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "antsbet.zip" , "others.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("preproc_t1_classic") {
+        config "./nextflow.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        antsbet: it.simpleName == "antsbet"
+                        others: it.simpleName == "others"
+                    }
+                input[0] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_unaligned.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_template.nii.gz")
+                    ]}
+                input[2] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                    ]}
+                input[3] = ch_split_test_data.others.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[4] = ch_split_test_data.others.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        [],
+                        []
+                    ]}
+                input[5] = ch_split_test_data.others.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("preproc_t1_option") {
+        config "./nextflow_2.config"
+
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        antsbet: it.simpleName == "antsbet"
+                        others: it.simpleName == "others"
+                    }
+                input[0] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_unaligned.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_template.nii.gz")
+                    ]}
+                input[2] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                    ]}
+                input[3] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_unaligned_brainmask.nii.gz")
+                    ]}
+                input[4] = ch_split_test_data.others.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        [],
+                        []
+                    ]}
+                input[5] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_unaligned.nii.gz")
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+}

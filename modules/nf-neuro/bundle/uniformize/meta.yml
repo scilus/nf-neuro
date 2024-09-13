@@ -1,0 +1,51 @@
+---
+name: "bundle_uniformize"
+description: Uniformize streamlines' endpoints according to a defined axis. Useful for tractometry or models creation.
+keywords:
+  - uniformize
+  - Bundles
+  - endpoints
+  - tractometry
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - bundles:
+      type: file
+      description: Bundle or list of bundles to uniformize.
+      pattern: "*.trk"
+
+  - centroids:
+      type: file
+      description: Match endpoints of the streamlines to align it to a reference unique streamline (centroid). (optional)
+      pattern: "*.trk"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - bundles:
+      type: file
+      description: Bundle or list of bundles uniformized.
+      pattern: "*.trk"
+
+authors:
+  - "@ThoumyreStanislas"
+maintainers:
+  - "@ThoumyreStanislas"

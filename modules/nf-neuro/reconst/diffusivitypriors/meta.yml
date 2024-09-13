@@ -1,0 +1,94 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-scil/main/modules/meta-schema.json
+name: "reconst_diffusivitypriors"
+description: Compute the axial (para_diff) and mean (iso_diff) diffusivity priors.
+keywords:
+  - diffusivity
+  - axial
+  - isotropic
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - fa:
+      type: file
+      description: Nifti DTI FA volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - ad:
+      type: file
+      description: Nifti DTI AD volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - rd:
+      type: file
+      description: Nifti DTI RD volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - md:
+      type: file
+      description: Nifti DTI MD volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - priors:
+      type: directory
+      description: Folder containg text files for isotropic and parallel diffusivity values.
+      pattern: "priors"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - para_diff:
+      type: file
+      description: Text files for parallel diffusivity values.
+      pattern: "*.txt"
+
+  - perp_diff:
+      type: file
+      description: Text files for perpendicular diffusivity values.
+      pattern: "*.txt"
+
+  - iso_diff:
+      type: file
+      description: Text files for isotropic diffusivity values.
+      pattern: "*.txt"
+
+  - mean_para_diff:
+      type: file
+      description: Text file for average parallel diffusivity value.
+      pattern: "*.txt"
+
+  - mean_perp_diff:
+      type: file
+      description: Text file for average perpendicular diffusivity value.
+      pattern: "*.txt"
+
+  - mean_iso_diff:
+      type: file
+      description: Text file for average isotropic diffusivity value.
+      pattern: "*.txt"
+
+  - priors:
+      type: directory
+      description: Folder containing text files for isotropic, parallel and perpendicular diffusivity values.
+      pattern: "priors"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@Manonedde"

@@ -1,0 +1,91 @@
+---
+name: "registration_easyreg"
+description: Image registration and SynthSeg v2 segmentation with easyreg from freesurfer
+keywords:
+  - nifti
+  - registration
+  - segmentation
+  - easyreg
+  - freesurfer
+tools:
+  - "Freesurfer":
+      description: "Software package for the analysis and visualization of structural and functional neuroimaging data."
+      homepage: "https://surfer.nmr.mgh.harvard.edu/fswiki"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - reference:
+      type: file
+      description: the reference image in .nii(.gz) or .mgz format (note that, since the method is symmetric, the choice of reference vs floating is arbitrary).
+      pattern: "*.{nii,nii.gz,mgz}"
+
+  - floating:
+      type: file
+      description: the floating image in .nii(.gz) or .mgz format.
+      pattern: "*.{nii,nii.gz,mgz}"
+
+  - ref_segmentation:
+      type: file
+      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the reference image.
+        If it does not exist, EasyReg will create it. If it already exists (e.g., from a previous EasyReg run), then EasyReg will read it from disk (which is faster than segmenting).
+      pattern: "*.{nii,nii.gz}"
+
+  - flo_segmentation:
+      type: file
+      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the floating image.
+        If it does not exist, EasyReg will create it. If it already exists (e.g., from a previous EasyReg run), then EasyReg will read it from disk (which is faster than segmenting).
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - ref_seg:
+      type: file
+      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the reference image.
+      pattern: "*_reference_segmentation.nii.gz"
+
+  - flo_seg:
+      type: file
+      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the floating image.
+      pattern: "*_floating_segmentation.nii.gz"
+
+  - ref_reg:
+      type: file
+      description: this is the file where the deformed (registered) reference image is written.
+      pattern: "*_reference_registered.nii.gz"
+
+  - flo_reg:
+      type: file
+      description: this is the file where the deformed (registered) floating image is written.
+      pattern: "*_floating_registered.nii.gz"
+
+  - fwd_field:
+      type: file
+      description:
+        this is the file where the forward deformation field is written. The deformation includes both the affine and nonlinear components.
+        Must be a nifti (.nii/.nii.gz) or .mgz file; it is encoded as the real world (RAS) coordinates of the target location for each voxel.
+      pattern: "*_forward_field.nii.gz"
+
+  - bak_field:
+      type: file
+      description: this is the file where the backward deformation field is written. It must also be a nifty or mgz file.
+      pattern: "*_backward_field.nii.gz"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@ThoumyreStanislas"
+maintainers:
+  - "@ThoumyreStanislas"

@@ -1,0 +1,35 @@
+{
+    "denoising - mppca": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_dwi_denoised.nii.gz:md5,697aa941c0cb71fe1865662da5b727fa"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,c9915fbc1956d7f54bee0748f1ddf920"
+                ],
+                "image": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_dwi_denoised.nii.gz:md5,697aa941c0cb71fe1865662da5b727fa"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,c9915fbc1956d7f54bee0748f1ddf920"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-05T15:17:51.718413"
+    }
+}

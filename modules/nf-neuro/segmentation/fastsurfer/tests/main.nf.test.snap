@@ -1,0 +1,15 @@
+{
+    "segmentation - fastsurfer": {
+        "content": [
+            "test_fastsurfer",
+            [
+                "versions.yml:md5,89a1cae763de31f351ea51b92c49fe41"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-05T14:37:22.562225"
+    }
+}

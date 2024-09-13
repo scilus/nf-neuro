@@ -1,0 +1,2 @@
+tracking/pfttracking:
+  - "modules/nf-scil/tracking/pfttracking/**"

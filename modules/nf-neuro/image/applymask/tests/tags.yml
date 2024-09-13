@@ -1,0 +1,2 @@
+image/applymask:
+  - "modules/nf-scil/image/applymask/**"

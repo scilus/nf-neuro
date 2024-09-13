@@ -1,0 +1,2 @@
+betcrop/synthbet:
+  - "modules/nf-scil/betcrop/synthbet/**"

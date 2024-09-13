@@ -1,0 +1,83 @@
+nextflow_process {
+
+    name "Test Process RECONST_FREEWATER"
+    script "../main.nf"
+    process "RECONST_FREEWATER"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "reconst"
+    tag "reconst/freewater"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    config "./nextflow.config"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-scil/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "commit_amico.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("reconst - freewater") {
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/dwi.bvec", checkIfExists: true),
+                        file("\${test_data_directory}/mask.nii.gz", checkIfExists: true),
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("reconst - freewater_no_mask") {
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/dwi.bvec", checkIfExists: true),
+                        [],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

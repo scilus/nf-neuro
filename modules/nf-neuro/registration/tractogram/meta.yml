@@ -1,0 +1,64 @@
+---
+name: "registration_tractogram"
+description: Apply a transform to a tractogram or multiple tractograms
+keywords:
+  - Diffusion MRI
+  - Registration
+  - Bundles
+  - Tractogram
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - anat:
+      type: file
+      description: FA nifti format as anatomical image
+      pattern: "*.{nii,nii.gz}"
+
+  - transfo:
+      type: file
+      description: ANTs affine transform
+      pattern: "*.mat"
+
+  - tractogram:
+      type: file
+      description: Tractogram or list of tractograms to register
+      pattern: "*.{trk,tck}"
+
+  - ref:
+      type: file
+      description: Reference anatomy for tck/vtk/fib/dpy file support (.nii or .nii.gz) (optional)
+      pattern: "*.{tck,vtk,fib,dpy}"
+
+  - deformation:
+      type: file
+      description: Path to the file containing a deformation field (optional)
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - tractogram:
+      type: file
+      description: Warped tractogram(s)
+      pattern: "*.{trk,tck}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@scilus"

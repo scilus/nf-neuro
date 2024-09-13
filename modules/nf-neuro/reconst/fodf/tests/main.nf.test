@@ -1,0 +1,235 @@
+nextflow_process {
+
+    name "Test Process RECONST_FODF"
+    script "../main.nf"
+    process "RECONST_FODF"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "reconst"
+    tag "reconst/fodf"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-scil/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "processing.zip" , "commit_amico.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("reconst - fodf") {
+
+        config "./nextflow.config"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        ssst: it.simpleName == "processing"
+                        msmt: it.simpleName == "commit_amico"
+                    }
+                input[0] = ch_split_test_data.ssst.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        file("\${test_data_directory}/cc.nii.gz"),
+                        file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/md.nii.gz"),
+                        file("\${test_data_directory}/frf.txt"),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("reconst - fodf_with_shells") {
+
+        config "./nextflow_shells.config"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        ssst: it.simpleName == "processing"
+                        msmt: it.simpleName == "commit_amico"
+                    }
+                input[0] = ch_split_test_data.ssst.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        file("\${test_data_directory}/cc.nii.gz"),
+                        file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/md.nii.gz"),
+                        file("\${test_data_directory}/frf.txt"),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("reconst - fodf_no_mask") {
+
+        config "./nextflow.config"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        ssst: it.simpleName == "processing"
+                        msmt: it.simpleName == "commit_amico"
+                    }
+                input[0] = ch_split_test_data.ssst.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        [],
+                        file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/md.nii.gz"),
+                        file("\${test_data_directory}/frf.txt"),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("reconst - fodf_no_metrics") {
+
+        config "./nextflow_no_metrics.config"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        ssst: it.simpleName == "processing"
+                        msmt: it.simpleName == "commit_amico"
+                    }
+                input[0] = ch_split_test_data.ssst.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        file("\${test_data_directory}/cc.nii.gz"),
+                        file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/md.nii.gz"),
+                        file("\${test_data_directory}/frf.txt"),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("reconst - fodf_msmt") {
+
+        config "./nextflow_msmt.config"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        ssst: it.simpleName == "processing"
+                        msmt: it.simpleName == "commit_amico"
+                    }
+                input[0] = ch_split_test_data.msmt.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        file("\${test_data_directory}/mask.nii.gz"),
+                        file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/md.nii.gz"),
+                        file("\${test_data_directory}/wm_frf.txt"),
+                        file("\${test_data_directory}/gm_frf.txt"),
+                        file("\${test_data_directory}/csf_frf.txt")
+
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.wm_fodf.get(0).get(1)).name,
+                    file(process.out.gm_fodf.get(0).get(1)).name,
+                    file(process.out.csf_fodf.get(0).get(1)).name,
+                    file(process.out.vf.get(0).get(1)).name,
+                    file(process.out.vf_rgb.get(0).get(1)).name,
+                    file(process.out.peaks.get(0).get(1)).name,
+                    file(process.out.peak_values.get(0).get(1)).name,
+                    file(process.out.peak_indices.get(0).get(1)).name,
+                    file(process.out.afd_max.get(0).get(1)).name,
+                    file(process.out.afd_total.get(0).get(1)).name,
+                    file(process.out.afd_sum.get(0).get(1)).name,
+                    file(process.out.nufo.get(0).get(1)).name).match() }
+            )
+        }
+
+    }
+
+}

@@ -1,0 +1,2 @@
+image/powderaverage:
+  - "modules/nf-scil/image/powderaverage/**"

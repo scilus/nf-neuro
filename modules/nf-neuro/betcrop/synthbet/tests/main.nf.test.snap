@@ -1,0 +1,55 @@
+{
+    "betcrop - synthbet": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__bet_image.nii.gz:md5,6f5eb365a11dfc52b8c80cd7bcee7b9d"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__brain_mask.nii.gz:md5,52871114b59d09dca864cb0ea4f12832"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,f0a96d8fd7ca9d9935818dceaf91f457"
+                ],
+                "bet_image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__bet_image.nii.gz:md5,6f5eb365a11dfc52b8c80cd7bcee7b9d"
+                    ]
+                ],
+                "brain_mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__brain_mask.nii.gz:md5,52871114b59d09dca864cb0ea4f12832"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,f0a96d8fd7ca9d9935818dceaf91f457"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-06-11T14:52:54.970673"
+    }
+}

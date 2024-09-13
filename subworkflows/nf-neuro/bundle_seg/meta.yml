@@ -1,0 +1,66 @@
+name: "bundle_seg"
+description: |
+  Subworkflow to perform BundleSeg [1] to extract major white matter bundle from a tractogram.
+
+  [1] St-Onge, Etienne, Kurt G. Schilling, and Francois Rheault.
+      "BundleSeg: A versatile,reliable and reproducible approach to white
+      matter bundle segmentation." International Workshop on Computational
+      Diffusion MRI. Cham: Springer Nature Switzerland (2023)
+
+  ---------  Steps  --------------------
+  Antomical Registration (ANTs)
+      Use the FA map from the subject to register the atlas anatomical file and compute the transformations.
+  Bundle Recognition (scilpy)
+      Perform bundle recognition and extraction using BundleSeg.
+keywords:
+  - BundleSeg
+  - WM bundles
+  - Tractogram
+  - Segmentation
+components:
+  - registration/ants
+  - bundle/recognize
+input:
+  - ch_fa:
+      type: file
+      description: |
+        The input channel containing the FA map. This map is used to compute the transformation between the atlas'
+        space and the subject's space.
+        Structure: [ val(meta), path(fa) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_tractogram:
+      type: file
+      description: |
+        The input channel containing the whole-brain tractogram to be segmented.
+        Structure: [ val(meta), path(tractogram) ]
+      pattern: "*.trk"
+  - atlas_directory:
+      type: directory
+      description: |
+        The input channel containing the atlas directory. The folder MUST follow this specific structure:
+              atlas_directory
+              ├── atlas
+              │   └── pop_average
+              ├── centroids
+              ├── *.json          (config file)
+              └── *.{nii,nii.gz}  (atlas anatomical file)
+        If no directory is provided, the subworkflow will automatically fetch the atlas archive available on
+        Zenodo (https://zenodo.org/records/10103446).
+        Structure: [ path(directory) ]
+output:
+  - bundles:
+      type: file
+      description: |
+        Channel containing all the segmented bundle files.
+        Structure: [ val(meta), path(bundles) ]
+      pattern: "*.trk"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"

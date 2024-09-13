@@ -1,0 +1,2 @@
+betcrop/fslbetcrop:
+  - "modules/nf-scil/betcrop/fslbetcrop/**"

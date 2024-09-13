@@ -1,0 +1,48 @@
+---
+name: "segmentation_fsreconall"
+description: "Performs Freesurfer's recon-all script to segment your anatomy (probably a T1) into labels, surfaces, and much more. See the full documentation here: https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all."
+keywords:
+  - FreeSurfer
+  - Segmentation
+  - Tissues
+tools:
+  - "Freesurfer":
+      description: "An open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images."
+      homepage: "https://surfer.nmr.mgh.harvard.edu/"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - anat:
+      type: file
+      description: An anatomy (ex, .nii.gz).
+      pattern: "*.{nii,nii.gz,mgz}"
+
+  - fs_license:
+      type: file
+      description: The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html. Optional. If you have already set your license as prescribed by Freesurfer (copied to a .license file in your $FREESURFER_HOME), this is not required.
+      pattern: "*.txt"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - recon_all_out_folder:
+      type: directory
+      description: Directory containing all recon-all outputs.
+      pattern: "*.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@EmmaRenauld"

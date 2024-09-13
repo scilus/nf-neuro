@@ -1,0 +1,2 @@
+image/resample:
+  - "modules/nf-scil/image/resample/**"

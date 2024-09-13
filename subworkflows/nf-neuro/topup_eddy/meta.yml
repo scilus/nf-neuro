@@ -1,0 +1,113 @@
+name: "topup_eddy"
+description: |
+  Subworkflow performing distorsions correction/eddy correction/motion correction.
+  If a reverse B0 or a reverse DWI is provided it will run topup and then eddy,
+  otherwise only eddy will run.
+  ---------  Steps  --------------------
+  PREPROC_TOPUP (topup, FSL)
+    Prepare data and apply FSL topup
+  PREPROC_EDDY (eddy, FSL)
+    Apply Eddy (and Topup if already run)
+  UTILS_EXTRACTb0 (scilpy, scilus)
+    Extract a b0 volume from a DWI image.
+keywords:
+  - preprocessing
+  - dwi
+  - topup
+  - eddy
+  - distorsion
+  - extract_b0
+components:
+  - preproc/topup
+  - preproc/eddy
+  - utils/extractb0
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: DWI Nifti image
+      pattern: "*.{nii,nii.gz}"
+
+  - bval:
+      type: file
+      description: B-values in FSL format [DWI].
+      pattern: "*.bval"
+
+  - bvec:
+      type: file
+      description: B-vectors in FSL format [DWI].
+      pattern: "*.bvec"
+
+  - b0:
+      type: file
+      description: b0 [DWI]. Optional
+      pattern: "*.{nii,nii.gz}"
+
+  - rev_dwi:
+      type: file
+      description: DWI Nifti image [rev-DWI]. Optional
+      pattern: "*.{nii,nii.gz}"
+
+  - rev_bval:
+      type: file
+      description: B-values in FSL format [rev-DWI]. Optional
+      pattern: "*.bval"
+
+  - rev_bvec:
+      type: file
+      description: B-vectors in FSL format [rev-DWI]. Optional
+      pattern: "*.bvec"
+
+  - rev_b0:
+      type: file
+      description: Reversed b0 [rev-DWI]. Optional
+      pattern: "*.{nii,nii.gz}"
+
+  - config_topup:
+      type: file
+      description: topup config file. Optional. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
+      pattern: "*cnf"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi_corrected:
+      type: file
+      description: Nifti volume - DWI corrected
+      pattern: "*__dwi_corrected.nii.gz"
+
+  - bval_corrected:
+      type: file
+      description: B-values corrected in FSL format
+      pattern: "*__bval_eddy"
+
+  - bvec_corrected:
+      type: file
+      description: B-vectors corrected in FSL format
+      pattern: "*__dwi_eddy_corrected.bvec"
+
+  - b0:
+      type: file
+      description: Nifti volume - b0 corrected
+      pattern: "*__b0_mask.nii.gz"
+
+  - b0_mask:
+      type: file
+      description: Nifti volume - Mask for b0 corrected
+      pattern: "*__b0_bet_mask.nii.gz"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+authors:
+  - "@arnaudbore"

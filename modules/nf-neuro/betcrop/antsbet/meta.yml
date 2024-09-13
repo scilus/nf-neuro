@@ -1,0 +1,64 @@
+---
+name: "betcrop_antsbet"
+description: Perform Brain extraction using antsBrainExtraction.sh on T1 image.
+keywords:
+  - T1
+  - BET
+  - ants
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+  - "MRtrix3":
+      description: "Toolbox for image processing, analysis and visualisation of dMRI."
+      homepage: "https://mrtrix.readthedocs.io/en/latest/"
+  - "ants":
+      description: "Advanced Normalization Tools."
+      homepage: "https://github.com/ANTsX/ANTs"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - t1:
+      type: file
+      description: Nifti t1 volume to perform BET.
+      pattern: "*.{nii,nii.gz}"
+
+  - template:
+      type: file
+      description: Nifti Anatomical template to perform BET.
+      pattern: "*.{nii,nii.gz}"
+
+  - tissues_probabilities:
+      type: file
+      description: Brain probability mask, with intensity range 1 (definitely brain) to 0 (definitely background).
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - t1:
+      type: file
+      description: Nifti T1 volume brain-extracted.
+      pattern: "*t1_bet.{nii,nii.gz}"
+
+  - mask:
+      type: file
+      description: T1 mask brain-extracted and cropped.
+      pattern: "*t1_bet_mask.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@ThoumyreStanislas"

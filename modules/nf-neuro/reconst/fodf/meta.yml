@@ -1,0 +1,156 @@
+---
+name: "reconst_fodf"
+description: Perform FODF reconstruction and compute FODF metrics from a dwi volume for a selected number of shells.
+  Note that multiple choices of FODF reconstruction method are available through the method argument.
+  The single-shell single-tissue (ssst) method is performed by selecting only one shell (task.ext.fodf_shells)
+  and choosing the ssst method (task.ext.method).
+  The multi-shell single-tissue (msst) method (default) is performed by selecting multiple shells (task.ext.fodf_shells)
+  and choosing the ssst method (task.ext.method). Both ssst and msst are expected to output only WM FODF.
+  The multi-shell multi-tissue (msmt) method is performed by selecting multiple shells (task.ext.fodf_shells)
+  and choosing the msmt method (task.ext.method). The msmt method is expected to output WM FODF, GM FODF and CSF FODF,
+  along with volume fraction (vf) maps. In every case, chosen FODF metrics are outputed.
+keywords:
+  - FODF
+  - Local Model
+  - Reconst
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: Nifti DWI volume to reconstruct FODF from.
+      pattern: "*.{nii,nii.gz}"
+
+  - bval:
+      type: file
+      description: B-values in FSL format.
+      pattern: "*.bval"
+
+  - bvec:
+      type: file
+      description: B-vectors in FSL format.
+      pattern: "*.bvec"
+
+  - mask:
+      type: file
+      description: B0 mask.
+      pattern: "*.{nii,nii.gz}"
+
+  - fa:
+      type: file
+      description: FA map.
+      pattern: "*.{nii,nii.gz}"
+
+  - md:
+      type: file
+      description: MD map.
+      pattern: "*.{nii,nii.gz}"
+
+  - wm_frf:
+      type: file
+      description: Fiber Response Function (FRF) for the white matter (WM).
+        In the case of single-shell method, this should be the only input FRF.
+        In the case of multi-shell method, gm_frf and csf_frf are also mandatory.
+      pattern: "*.txt"
+
+  - gm_frf:
+      type: file
+      description: Fiber Response Function (FRF) for the grey matter (GM).
+        Only use with multi-shell method, along with wm_frf and csf_frf.
+      pattern: "*.txt"
+
+  - csf_frf:
+      type: file
+      description: Fiber Response Function (FRF) for the CSF.
+        Only use with multi-shell method, along with wm_frf and gm_frf.
+      pattern: "*.txt"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - fodf:
+      type: file
+      description: FODF map.
+      pattern: "*fodf.nii.gz"
+
+  - wm_fodf:
+      type: file
+      description: WM FODF map.
+      pattern: "*wm_fodf.nii.gz"
+
+  - gm_fodf:
+      type: file
+      description: GM FODF map.
+      pattern: "*gm_fodf.nii.gz"
+
+  - csf_fodf:
+      type: file
+      description: CSF FODF map.
+      pattern: "*csf_fodf.nii.gz"
+
+  - vf:
+      type: file
+      description: Volume fraction map.
+      pattern: "*vf.nii.gz"
+
+  - vf_rgb:
+      type: file
+      description: Volume fraction map in rgb.
+      pattern: "*vf_rgb.nii.gz"
+
+  - peaks:
+      type: file
+      description: Peaks file.
+      pattern: "*peaks.nii.gz"
+
+  - peak_values:
+      type: file
+      description: Peak values file.
+      pattern: "*peak_values.nii.gz"
+
+  - peak_indices:
+      type: file
+      description: Peak indices file.
+      pattern: "*peak_indices.nii.gz"
+
+  - afd_max:
+      type: file
+      description: Maximum Apparent Fiber Density (AFDmax) map.
+      pattern: "*afd_max.nii.gz"
+
+  - afd_total:
+      type: file
+      description: Total Apparent Fiber Density (AFDtotal) map.
+      pattern: "*afd_total.nii.gz"
+
+  - afd_sum:
+      type: file
+      description: Sum of all Apparent Fiber Density (Afdsum) map.
+      pattern: "*afd_sum.nii.gz"
+
+  - nufo:
+      type: file
+      description: Number of Fiber Orientation (NuFO) map.
+      pattern: "*nufo.nii.gz"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@gagnonanthony"
+  - "@karanphil"

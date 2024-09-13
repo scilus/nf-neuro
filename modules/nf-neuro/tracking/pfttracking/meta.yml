@@ -1,0 +1,92 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-scil/main/modules/meta-schema.json
+name: "tracking_pfttracking"
+description: Compute include and exclude maps, and the seeding mask
+  from partial volume estimation (PVE) maps.
+  Generates a tractogram using anatomically-constrained particle
+  filter tracking, Particle Filtering Tractography (PFT).
+keywords:
+  - Diffusion MRI
+  - Tractography
+  - Particle Filtering Tractography
+
+tools:
+  - "DIPY":
+      description: "DIPY is the paragon 3D/4D+ imaging library in Python."
+      homepage: https://dipy.org
+      doi: "10.1016/j.neuroimage.2014.04.074"
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - wm:
+      type: file
+      description: Nifti white matter probability map.
+      pattern: "*.{nii,nii.gz}"
+
+  - gm:
+      type: file
+      description: Nifti grey matter probability map.
+      pattern: "*.{nii,nii.gz}"
+
+  - csf:
+      type: file
+      description: Nifti cerebrospinal fuild probability map.
+      pattern: "*.{nii,nii.gz}"
+
+  - fodf:
+      type: file
+      description: Nifti image of Spherical harmonic file (fodf).
+      pattern: "*.{nii,nii.gz}"
+
+  - fa:
+      type: file
+      description: Nifti image of FA.
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - trk:
+      type: file
+      description: Tractogram output file.
+      pattern: "*.{trk,tck}"
+
+  - config:
+      type: file
+      description: Json file containing tracking parameters.
+      pattern: "*.{json}"
+
+  - include:
+      type: file
+      description: Nifti probability map for tracking of ending the streamline and including it in the output.
+      pattern: "*.{nii,nii.gz}"
+
+  - exclude:
+      type: file
+      description: Nifti probability map for tracking of ending the streamline and excluding it in the output.
+      pattern: "*.{nii,nii.gz}"
+
+  - seeding:
+      type: file
+      description: Nifti seeding mask for tracking.
+      pattern: "*.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@Manonedde"

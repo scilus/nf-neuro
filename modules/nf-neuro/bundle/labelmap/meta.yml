@@ -1,0 +1,63 @@
+---
+name: "bundle_labelmap"
+description: Perform SCILPY scil_bundle_label_map.py. Compute the label image (Nifti) from a centroid and tractograms (all representing the same bundle). The label image represents the coverage of the bundle, segmented into regions labelled from 0 to --nb_pts, starting from the head, ending in the tail. Each voxel will have the label of its nearest centroid point. The number of labels will be the same as the centroid's number of points.
+keywords:
+  - bundle
+  - distance
+  - label
+  - centroid
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - bundles:
+      type: file
+      description: List of trk files of the bundles
+      pattern: "*.{trk}"
+
+  - centroids:
+      type: file
+      description: List of trk files of the centroids
+      pattern: "*.{trk}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - labels:
+      type: file
+      description: Labels map, each pixel intensity corresponds to the label of the nearest centroid.
+      pattern: "*_labels.nii.gz"
+
+  - distances:
+      type: file
+      description: Distance map. The pixel intensity corresponds to the distance to the nearest centroid.
+      pattern: "*_distances.nii.gz"
+
+  - labels_trk:
+      type: file
+      description: Colored by labels bundle file. The streamline color corresponds to the label of the nearest centroid.
+      pattern: "*_labels.trk"
+
+  - distances_trk:
+      type: file
+      description: Colored by distance bundle file. The streamline color corresponds to the distance to the nearest centroid.
+      pattern: "*_distances.trk"
+
+authors:
+  - "@gagnonanthony"

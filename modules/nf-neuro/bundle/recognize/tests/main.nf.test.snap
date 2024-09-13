@@ -1,0 +1,96 @@
+{
+    "bundle - recognize - params": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__bundle_1_cleaned.trk:md5,4f5cb88d05f175d6b55509d0ad307ab3",
+                            "test__bundle_2_cleaned.trk:md5,58b4c1381603d72ad6e72cc705b4606e",
+                            "test__bundle_3_cleaned.trk:md5,8f24a8c534b6e2386bcc755bd8f0c4b9",
+                            "test__bundle_4_cleaned.trk:md5,eafac0796051d6ada4bfc5a5c576c536",
+                            "test__bundle_5_cleaned.trk:md5,0d512bcaaf49325415a1f4860a167f5e"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,33bf1f04d87c84bb617311a892ba882a"
+                ],
+                "bundles": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__bundle_1_cleaned.trk:md5,4f5cb88d05f175d6b55509d0ad307ab3",
+                            "test__bundle_2_cleaned.trk:md5,58b4c1381603d72ad6e72cc705b4606e",
+                            "test__bundle_3_cleaned.trk:md5,8f24a8c534b6e2386bcc755bd8f0c4b9",
+                            "test__bundle_4_cleaned.trk:md5,eafac0796051d6ada4bfc5a5c576c536",
+                            "test__bundle_5_cleaned.trk:md5,0d512bcaaf49325415a1f4860a167f5e"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,33bf1f04d87c84bb617311a892ba882a"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:58:28.42142"
+    },
+    "bundle - recognize - base": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__bundle_1_cleaned.trk:md5,6a5c47dccc9f51087572a8de006183ae",
+                            "test__bundle_2_cleaned.trk:md5,08e2bd3fe0432d4dd58b7db771c8080d",
+                            "test__bundle_3_cleaned.trk:md5,313c4401e7771a966c26be3f73ea7730",
+                            "test__bundle_4_cleaned.trk:md5,b2e8e5a6b9077d6a36552b6bfa579de4",
+                            "test__bundle_5_cleaned.trk:md5,3b975ace291d6fd4fd434ce37cc2263a"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,33bf1f04d87c84bb617311a892ba882a"
+                ],
+                "bundles": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__bundle_1_cleaned.trk:md5,6a5c47dccc9f51087572a8de006183ae",
+                            "test__bundle_2_cleaned.trk:md5,08e2bd3fe0432d4dd58b7db771c8080d",
+                            "test__bundle_3_cleaned.trk:md5,313c4401e7771a966c26be3f73ea7730",
+                            "test__bundle_4_cleaned.trk:md5,b2e8e5a6b9077d6a36552b6bfa579de4",
+                            "test__bundle_5_cleaned.trk:md5,3b975ace291d6fd4fd434ce37cc2263a"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,33bf1f04d87c84bb617311a892ba882a"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:55:40.819871"
+    }
+}

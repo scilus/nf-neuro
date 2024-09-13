@@ -1,0 +1,53 @@
+{
+    "bundle - coloring": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "bundle_0_colored.trk:md5,28654c91d0f6c5e3f3a7f101f7fd482d",
+                            "bundle_1_colored.trk:md5,3b58a00009f2bb24c4051dd88d53aeee",
+                            "bundle_2_colored.trk:md5,21d955afc36acfd8b214e562b199f929",
+                            "bundle_3_colored.trk:md5,5ce663fb79ad52f1b30fe462d5b48afe",
+                            "bundle_4_colored.trk:md5,da36a33cbaa5e38801480b51ee2943b4",
+                            "bundle_5_colored.trk:md5,0c2cd57e4372c2b71274cafc03d82490",
+                            "bundle_6_colored.trk:md5,0614ea97e6f1fa44e40cef2c2c67a4b1"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,99caf95a695ad5ae4c7e8e879af86b5a"
+                ],
+                "bundles": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "bundle_0_colored.trk:md5,28654c91d0f6c5e3f3a7f101f7fd482d",
+                            "bundle_1_colored.trk:md5,3b58a00009f2bb24c4051dd88d53aeee",
+                            "bundle_2_colored.trk:md5,21d955afc36acfd8b214e562b199f929",
+                            "bundle_3_colored.trk:md5,5ce663fb79ad52f1b30fe462d5b48afe",
+                            "bundle_4_colored.trk:md5,da36a33cbaa5e38801480b51ee2943b4",
+                            "bundle_5_colored.trk:md5,0c2cd57e4372c2b71274cafc03d82490",
+                            "bundle_6_colored.trk:md5,0614ea97e6f1fa44e40cef2c2c67a4b1"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,99caf95a695ad5ae4c7e8e879af86b5a"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-09-10T15:52:32.023077"
+    }
+}

@@ -1,0 +1,88 @@
+{
+    "registration - tractogram_bundles": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__bundle_0.trk:md5,6e14cc02b66d12d5dde0a0701918385a",
+                            "test__bundle_1.trk:md5,ef5a759144ab7e8d2f5abf30a463a152",
+                            "test__bundle_2.trk:md5,824bcbf796cbce3e1c93e39d1c98dcf9",
+                            "test__bundle_3.trk:md5,8877161b9aebaa6b12a4d7a8f8410407",
+                            "test__bundle_4.trk:md5,6c8658b946154896952ca89e88fcf29f",
+                            "test__bundle_5.trk:md5,fa058f93d9bfe4bed2ff027e9acd5682",
+                            "test__bundle_6.trk:md5,125e50561b4b0c5fd8ee23867c28bc51"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,609469c08e60062eed7528276deddf5e"
+                ],
+                "versions": [
+                    "versions.yml:md5,609469c08e60062eed7528276deddf5e"
+                ],
+                "warped_tractogram": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__bundle_0.trk:md5,6e14cc02b66d12d5dde0a0701918385a",
+                            "test__bundle_1.trk:md5,ef5a759144ab7e8d2f5abf30a463a152",
+                            "test__bundle_2.trk:md5,824bcbf796cbce3e1c93e39d1c98dcf9",
+                            "test__bundle_3.trk:md5,8877161b9aebaa6b12a4d7a8f8410407",
+                            "test__bundle_4.trk:md5,6c8658b946154896952ca89e88fcf29f",
+                            "test__bundle_5.trk:md5,fa058f93d9bfe4bed2ff027e9acd5682",
+                            "test__bundle_6.trk:md5,125e50561b4b0c5fd8ee23867c28bc51"
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-15T19:11:42.198039"
+    },
+    "registration - tractogram": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__bundle_2_mni.trk:md5,824bcbf796cbce3e1c93e39d1c98dcf9"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,609469c08e60062eed7528276deddf5e"
+                ],
+                "versions": [
+                    "versions.yml:md5,609469c08e60062eed7528276deddf5e"
+                ],
+                "warped_tractogram": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__bundle_2_mni.trk:md5,824bcbf796cbce3e1c93e39d1c98dcf9"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-15T19:11:52.03634"
+    }
+}

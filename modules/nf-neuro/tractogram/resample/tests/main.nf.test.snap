@@ -1,0 +1,51 @@
+{
+    "tractogram - resample - centroids": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_IFGWM_uni_c_10_resampled.trk:md5,5a4c819b4aa7ea048a4b89973ede812c"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,f593a3a81a06f02aaa1ba17ba0baccfd"
+                ],
+                "tractograms": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_IFGWM_uni_c_10_resampled.trk:md5,5a4c819b4aa7ea048a4b89973ede812c"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,f593a3a81a06f02aaa1ba17ba0baccfd"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.1"
+        },
+        "timestamp": "2024-05-22T11:23:01.440528"
+    },
+    "tractogram - resample - tractogram": {
+        "content": [
+            [
+                "versions.yml:md5,f593a3a81a06f02aaa1ba17ba0baccfd"
+            ],
+            "test_IFGWM_color_resampled.trk",
+            "test_IFGWM_resampled.trk"
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.1"
+        },
+        "timestamp": "2024-05-22T16:20:10.024974"
+    }
+}

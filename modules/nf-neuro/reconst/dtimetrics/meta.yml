@@ -1,0 +1,193 @@
+name: "reconst_dtimetrics"
+
+description: Script to compute all of the Diffusion Tensor Imaging (DTI) metrics
+keywords:
+  - nifti
+  - DTI
+  - tensor
+  - scilpy
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: Nifti DWI volume used to extract DTI metrics.
+      pattern: "*.{nii,nii.gz}"
+
+  - bval:
+      type: file
+      description: B-values in FSL format.
+      pattern: "*.bval"
+
+  - bvec:
+      type: file
+      description: B-vectors in FSL format.
+      pattern: "*.bvec"
+
+  - b0mask:
+      type: file
+      description: Nifti b0 volume file used to mask the input image.
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - ad:
+      type: file
+      description: Output filename for the axial diffusivity.
+      pattern: "*__ad.{nii,nii.gz}"
+
+  - evecs:
+      type: file
+      description: Output filename for the eigenvectors of the tensor.
+      pattern: "*__evecs.{nii,nii.gz}"
+
+  - evecs_v1:
+      type: file
+      description: Output filename for the first eigenvector.
+      pattern: "*__evecs_v1.{nii,nii.gz}"
+
+  - evecs_v2:
+      type: file
+      description: Output filename for the second eigenvector.
+      pattern: "*__evecs_v2.{nii,nii.gz}"
+
+  - evecs_v3:
+      type: file
+      description: Output filename for the third eigenvector.
+      pattern: "*__evecs_v3.{nii,nii.gz}"
+
+  - evals:
+      type: file
+      description: Output filename for the eigenvalues of the tensor.
+      pattern: "*__evals.{nii,nii.gz}"
+
+  - evals_e1:
+      type: file
+      description: Output filename for the first eigenvalue.
+      pattern: "*__evals_e1.{nii,nii.gz}"
+
+  - evals_e2:
+      type: file
+      description: Output filename for the second eigenvalue.
+      pattern: "*__evals_e2.{nii,nii.gz}"
+
+  - evals_e3:
+      type: file
+      description: Output filename for the third eigenvalue.
+      pattern: "*__evals_e3.{nii,nii.gz}"
+
+  - fa:
+      type: file
+      description: Output filename for the fractional anisotropy.
+      pattern: "*__fa.{nii,nii.gz}"
+
+  - ga:
+      type: file
+      description: Output filename for the geodesic anisotropy.
+      pattern: "*__ga.{nii,nii.gz}"
+
+  - rgb:
+      type: file
+      description: Output filename for the colored fractional anisotropy.
+      pattern: "*__rgb.{nii,nii.gz}"
+
+  - md:
+      type: file
+      description: Output filename for the mean diffusivity.
+      pattern: "*__md.{nii,nii.gz}"
+
+  - mode:
+      type: file
+      description: Output filename for the mode.
+      pattern: "*__mode.{nii,nii.gz}"
+
+  - norm:
+      type: file
+      description: Output filename for the tensor norm.
+      pattern: "*__norm.{nii,nii.gz}"
+
+  - rd:
+      type: file
+      description: Output filename for the radial diffusivity.
+      pattern: "*__rd.{nii,nii.gz}"
+
+  - tensor:
+      type: file
+      description: Output filename for the tensor coefficients.
+      pattern: "*__tensor.{nii,nii.gz}"
+
+  - nonphysical:
+      type: file
+      description: Output filename for the voxels with physically implausible
+        signals where the mean of b=0 images is below one or more
+        diffusion-weighted images.
+      pattern: "*__nonphysical.{nii,nii.gz}"
+
+  - pulsation_std_dwi:
+      type: file
+      description: Standard deviation map across all diffusion-weighted images.
+        Shows pulsation and misalignment artifacts.
+      pattern: "*__pulsation_std_dwi.{nii,nii.gz}"
+
+  - pulsation_std_b0:
+      type: file
+      description: Standard deviation map across b=0 images if more than one
+        is available. Shows pulsation and misalignment artifacts.
+      pattern: "*__pulsation_std_b0.{nii,nii.gz}"
+
+  - residual:
+      type: file
+      description: Output filename for the map of the residual of the tensor fit.
+      pattern: "*__residual.{nii,nii.gz}"
+
+  - residual_iqr_residuals:
+      type: file
+      description: Output filename for the interquartile range of the residual of the tensor fit.
+      pattern: "*__residual_iqr_residuals.npy"
+
+  - residual_mean_residuals:
+      type: file
+      description: Output filename for the mean of the residual of the tensor fit.
+      pattern: "*__residual_mean_residuals.npy"
+
+  - residual_q1_residuals:
+      type: file
+      description: Output filename for the firt quartile of the residual of the tensor fit.
+      pattern: "*__residual_q1_residuals.npy"
+
+  - residual_q3_residuals:
+      type: file
+      description: Output filename for the third quartile of the residual of the tensor fit.
+      pattern: "*__residual_q3_residuals.npy"
+
+  - residual_residuals_stats:
+      type: file
+      description: Output filename for the all statistics of the residual of the tensor fit.
+      pattern: "*__residual_residuals_stats.png"
+
+  - residual_std_residuals:
+      type: file
+      description: Output filename for the standard deviation of the residual of the tensor fit.
+      pattern: "*__residual_std_residuals.npy"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@scilus"

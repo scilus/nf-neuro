@@ -1,0 +1,138 @@
+{
+    "reconst - diffusivitypriors - mean priors": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    [
+                        "s1__iso_diff.txt:md5,3f13db606b697f920d21efd3c9cf8838",
+                        "s1__para_diff.txt:md5,b5ab394820e011a04e3787be3772ad6e",
+                        "s2__iso_diff.txt:md5,5b003c147cc5f202d2e8c61acaa5eaea",
+                        "s2__para_diff.txt:md5,202cb21086439607b99b81ead3e7f817"
+                    ]
+                ],
+                "4": [
+                    "mean_para_diff.txt:md5,4ef4f76ce3a673249bcbaa0eba9ce832"
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    "mean_iso_diff.txt:md5,b048050981231e15bfafcda4536e2d05"
+                ],
+                "7": [
+                    "versions.yml:md5,bc73c7d541abf11e86b32e2c596a3dfd"
+                ],
+                "iso_diff": [
+                    
+                ],
+                "mean_iso_diff": [
+                    "mean_iso_diff.txt:md5,b048050981231e15bfafcda4536e2d05"
+                ],
+                "mean_para_diff": [
+                    "mean_para_diff.txt:md5,4ef4f76ce3a673249bcbaa0eba9ce832"
+                ],
+                "mean_perp_diff": [
+                    
+                ],
+                "para_diff": [
+                    
+                ],
+                "perp_diff": [
+                    
+                ],
+                "priors": [
+                    [
+                        "s1__iso_diff.txt:md5,3f13db606b697f920d21efd3c9cf8838",
+                        "s1__para_diff.txt:md5,b5ab394820e011a04e3787be3772ad6e",
+                        "s2__iso_diff.txt:md5,5b003c147cc5f202d2e8c61acaa5eaea",
+                        "s2__para_diff.txt:md5,202cb21086439607b99b81ead3e7f817"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,bc73c7d541abf11e86b32e2c596a3dfd"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-14T19:15:29.241456"
+    },
+    "reconst - diffusivitypriors - compute_priors": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    [
+                        "test__iso_diff.txt:md5,3ee78992c128f9b9048549df1cc22c8e",
+                        "test__para_diff.txt:md5,8942c91713e155a00bad625911d62f8c",
+                        "test__perp_diff.txt:md5,b20dd3f07be6d7317004b929781ae085"
+                    ]
+                ],
+                "4": [
+                    "mean_para_diff.txt:md5,8942c91713e155a00bad625911d62f8c"
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    "mean_iso_diff.txt:md5,3ee78992c128f9b9048549df1cc22c8e"
+                ],
+                "7": [
+                    "versions.yml:md5,bc73c7d541abf11e86b32e2c596a3dfd"
+                ],
+                "iso_diff": [
+                    
+                ],
+                "mean_iso_diff": [
+                    "mean_iso_diff.txt:md5,3ee78992c128f9b9048549df1cc22c8e"
+                ],
+                "mean_para_diff": [
+                    "mean_para_diff.txt:md5,8942c91713e155a00bad625911d62f8c"
+                ],
+                "mean_perp_diff": [
+                    
+                ],
+                "para_diff": [
+                    
+                ],
+                "perp_diff": [
+                    
+                ],
+                "priors": [
+                    [
+                        "test__iso_diff.txt:md5,3ee78992c128f9b9048549df1cc22c8e",
+                        "test__para_diff.txt:md5,8942c91713e155a00bad625911d62f8c",
+                        "test__perp_diff.txt:md5,b20dd3f07be6d7317004b929781ae085"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,bc73c7d541abf11e86b32e2c596a3dfd"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-14T19:15:10.632882"
+    }
+}

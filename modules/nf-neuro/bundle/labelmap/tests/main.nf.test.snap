@@ -1,0 +1,18 @@
+{
+    "bundle - labelmap": {
+        "content": [
+            [
+                "versions.yml:md5,c126a7422f280ed6bd664cc0f6636931"
+            ],
+            "test__IFGWM_labels.nii.gz",
+            "test__IFGWM_labels.trk",
+            "test__IFGWM_distances.nii.gz",
+            "test__IFGWM_distances.trk"
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.1"
+        },
+        "timestamp": "2024-05-22T16:31:38.189887"
+    }
+}

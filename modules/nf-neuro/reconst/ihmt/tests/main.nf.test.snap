@@ -1,0 +1,413 @@
+{
+    "reconst - ihmt": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR.nii.gz:md5,85dcecd41514ac64b869b33de6592725",
+                            "test_MTsat.nii.gz:md5,8ae7e2dec3bc8968b72e95d045587e4b",
+                            "test_ihMTR.nii.gz:md5,51a26ad32649595cd0c9049476962618",
+                            "test_ihMTsat.nii.gz:md5,0fedb30ae5684bead99731418af2ca22"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTsat_dual.nii.gz:md5,8fab7d10ab8899b6a0c78577c72848f8",
+                            "test_MTsat_single_negative.nii.gz:md5,26ffc640e5451dae7f3295981b7b3397",
+                            "test_MTsat_single_positive.nii.gz:md5,2f35e072358f827144a8b03bde0144bf",
+                            "test_altnp.nii.gz:md5,891a8a105fae98aeab33356c44f60a86",
+                            "test_altpn.nii.gz:md5,c12fa9d69fbc3be137fa89654331a2a1",
+                            "test_apparent_R1.nii.gz:md5,1ee1c3fa365f6cc0be204468ed1d6ff7",
+                            "test_mtoff_PD.nii.gz:md5,e51840662160fb81804f33535f632a87",
+                            "test_mtoff_T1.nii.gz:md5,e01ad7dc30aa7c2df53df5b5e6670334",
+                            "test_negative.nii.gz:md5,c45acf1602eae475313e005d5db3ba60",
+                            "test_positive.nii.gz:md5,61feebeb5d74efb63f0ec02e2d475b57"
+                        ]
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ],
+                "comp_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTsat_dual.nii.gz:md5,8fab7d10ab8899b6a0c78577c72848f8",
+                            "test_MTsat_single_negative.nii.gz:md5,26ffc640e5451dae7f3295981b7b3397",
+                            "test_MTsat_single_positive.nii.gz:md5,2f35e072358f827144a8b03bde0144bf",
+                            "test_altnp.nii.gz:md5,891a8a105fae98aeab33356c44f60a86",
+                            "test_altpn.nii.gz:md5,c12fa9d69fbc3be137fa89654331a2a1",
+                            "test_apparent_R1.nii.gz:md5,1ee1c3fa365f6cc0be204468ed1d6ff7",
+                            "test_mtoff_PD.nii.gz:md5,e51840662160fb81804f33535f632a87",
+                            "test_mtoff_T1.nii.gz:md5,e01ad7dc30aa7c2df53df5b5e6670334",
+                            "test_negative.nii.gz:md5,c45acf1602eae475313e005d5db3ba60",
+                            "test_positive.nii.gz:md5,61feebeb5d74efb63f0ec02e2d475b57"
+                        ]
+                    ]
+                ],
+                "ihmt_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR.nii.gz:md5,85dcecd41514ac64b869b33de6592725",
+                            "test_MTsat.nii.gz:md5,8ae7e2dec3bc8968b72e95d045587e4b",
+                            "test_ihMTR.nii.gz:md5,51a26ad32649595cd0c9049476962618",
+                            "test_ihMTsat.nii.gz:md5,0fedb30ae5684bead99731418af2ca22"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-14T15:43:06.826302"
+    },
+    "reconst - ihmt_acq_params": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR.nii.gz:md5,85dcecd41514ac64b869b33de6592725",
+                            "test_MTsat.nii.gz:md5,c15d264fd3e70b553dd16187cdf8933b",
+                            "test_ihMTR.nii.gz:md5,51a26ad32649595cd0c9049476962618",
+                            "test_ihMTsat.nii.gz:md5,90cddc28dcd3892034c0ef95fc3546ef"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTsat_dual.nii.gz:md5,533b35e336cedc00ff00a546d9d331cb",
+                            "test_MTsat_single_negative.nii.gz:md5,0e09367f0249790c91e023a8ea28ef76",
+                            "test_MTsat_single_positive.nii.gz:md5,7eedfe91093bbd5f72579d272009487f",
+                            "test_altnp.nii.gz:md5,891a8a105fae98aeab33356c44f60a86",
+                            "test_altpn.nii.gz:md5,c12fa9d69fbc3be137fa89654331a2a1",
+                            "test_apparent_R1.nii.gz:md5,2372a28a8da58003034cef7d24bf9b86",
+                            "test_mtoff_PD.nii.gz:md5,e51840662160fb81804f33535f632a87",
+                            "test_mtoff_T1.nii.gz:md5,e01ad7dc30aa7c2df53df5b5e6670334",
+                            "test_negative.nii.gz:md5,c45acf1602eae475313e005d5db3ba60",
+                            "test_positive.nii.gz:md5,61feebeb5d74efb63f0ec02e2d475b57"
+                        ]
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ],
+                "comp_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTsat_dual.nii.gz:md5,533b35e336cedc00ff00a546d9d331cb",
+                            "test_MTsat_single_negative.nii.gz:md5,0e09367f0249790c91e023a8ea28ef76",
+                            "test_MTsat_single_positive.nii.gz:md5,7eedfe91093bbd5f72579d272009487f",
+                            "test_altnp.nii.gz:md5,891a8a105fae98aeab33356c44f60a86",
+                            "test_altpn.nii.gz:md5,c12fa9d69fbc3be137fa89654331a2a1",
+                            "test_apparent_R1.nii.gz:md5,2372a28a8da58003034cef7d24bf9b86",
+                            "test_mtoff_PD.nii.gz:md5,e51840662160fb81804f33535f632a87",
+                            "test_mtoff_T1.nii.gz:md5,e01ad7dc30aa7c2df53df5b5e6670334",
+                            "test_negative.nii.gz:md5,c45acf1602eae475313e005d5db3ba60",
+                            "test_positive.nii.gz:md5,61feebeb5d74efb63f0ec02e2d475b57"
+                        ]
+                    ]
+                ],
+                "ihmt_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR.nii.gz:md5,85dcecd41514ac64b869b33de6592725",
+                            "test_MTsat.nii.gz:md5,c15d264fd3e70b553dd16187cdf8933b",
+                            "test_ihMTR.nii.gz:md5,51a26ad32649595cd0c9049476962618",
+                            "test_ihMTsat.nii.gz:md5,90cddc28dcd3892034c0ef95fc3546ef"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-14T15:43:53.000664"
+    },
+    "reconst - ihmt_single_echo": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR_single_echo.nii.gz:md5,16145095f69c7573bb0b464de1b6ceca",
+                            "test_MTsat_single_echo.nii.gz:md5,1bda65969f8f06ea1f980d6f88c1df4b",
+                            "test_ihMTR_single_echo.nii.gz:md5,75fd27c70bfdc9b81067e78a470c954e",
+                            "test_ihMTsat_single_echo.nii.gz:md5,4353a072f94afe7b214514d8fc6d2f88"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTsat_dual.nii.gz:md5,d5d924dfb706f1d8d96301c010947a54",
+                            "test_MTsat_single_negative.nii.gz:md5,5b674a1298f63089cfb3a1f1abb1d824",
+                            "test_MTsat_single_positive.nii.gz:md5,14f7848cfa89bfff0b8e4f978e885a39",
+                            "test_altnp_single_echo.nii.gz:md5,5a0bd38101ba10dcdc37a574af40f129",
+                            "test_altpn_single_echo.nii.gz:md5,8b68a0de747e179a1a570fe3ef73f775",
+                            "test_apparent_R1.nii.gz:md5,a20692ac0f970cf8d854c71bfb71d5bf",
+                            "test_mtoff_PD_single_echo.nii.gz:md5,9543aa51c9289334204e5dc1b34ed28e",
+                            "test_mtoff_T1_single_echo.nii.gz:md5,d6d940ea0dd63a40c38d68b502fad832",
+                            "test_negative_single_echo.nii.gz:md5,891572e42cb148794758a5287b31480d",
+                            "test_positive_single_echo.nii.gz:md5,5838047a6d45fca11d66dfe14e4655f5"
+                        ]
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ],
+                "comp_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTsat_dual.nii.gz:md5,d5d924dfb706f1d8d96301c010947a54",
+                            "test_MTsat_single_negative.nii.gz:md5,5b674a1298f63089cfb3a1f1abb1d824",
+                            "test_MTsat_single_positive.nii.gz:md5,14f7848cfa89bfff0b8e4f978e885a39",
+                            "test_altnp_single_echo.nii.gz:md5,5a0bd38101ba10dcdc37a574af40f129",
+                            "test_altpn_single_echo.nii.gz:md5,8b68a0de747e179a1a570fe3ef73f775",
+                            "test_apparent_R1.nii.gz:md5,a20692ac0f970cf8d854c71bfb71d5bf",
+                            "test_mtoff_PD_single_echo.nii.gz:md5,9543aa51c9289334204e5dc1b34ed28e",
+                            "test_mtoff_T1_single_echo.nii.gz:md5,d6d940ea0dd63a40c38d68b502fad832",
+                            "test_negative_single_echo.nii.gz:md5,891572e42cb148794758a5287b31480d",
+                            "test_positive_single_echo.nii.gz:md5,5838047a6d45fca11d66dfe14e4655f5"
+                        ]
+                    ]
+                ],
+                "ihmt_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR_single_echo.nii.gz:md5,16145095f69c7573bb0b464de1b6ceca",
+                            "test_MTsat_single_echo.nii.gz:md5,1bda65969f8f06ea1f980d6f88c1df4b",
+                            "test_ihMTR_single_echo.nii.gz:md5,75fd27c70bfdc9b81067e78a470c954e",
+                            "test_ihMTsat_single_echo.nii.gz:md5,4353a072f94afe7b214514d8fc6d2f88"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-14T15:43:41.380429"
+    },
+    "reconst - ihmt_no_mask": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR.nii.gz:md5,f995c40bb079879421be4886070d192a",
+                            "test_MTsat.nii.gz:md5,7998925276d33f8c980745e48d68c899",
+                            "test_ihMTR.nii.gz:md5,1610be74304bff131fe49fd85c515c72",
+                            "test_ihMTsat.nii.gz:md5,6001aa937dc47b9c5a5293a7e22c0aea"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTsat_dual.nii.gz:md5,8fab7d10ab8899b6a0c78577c72848f8",
+                            "test_MTsat_single_negative.nii.gz:md5,26ffc640e5451dae7f3295981b7b3397",
+                            "test_MTsat_single_positive.nii.gz:md5,2f35e072358f827144a8b03bde0144bf",
+                            "test_altnp.nii.gz:md5,891a8a105fae98aeab33356c44f60a86",
+                            "test_altpn.nii.gz:md5,c12fa9d69fbc3be137fa89654331a2a1",
+                            "test_apparent_R1.nii.gz:md5,1ee1c3fa365f6cc0be204468ed1d6ff7",
+                            "test_mtoff_PD.nii.gz:md5,e51840662160fb81804f33535f632a87",
+                            "test_mtoff_T1.nii.gz:md5,e01ad7dc30aa7c2df53df5b5e6670334",
+                            "test_negative.nii.gz:md5,c45acf1602eae475313e005d5db3ba60",
+                            "test_positive.nii.gz:md5,61feebeb5d74efb63f0ec02e2d475b57"
+                        ]
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ],
+                "comp_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTsat_dual.nii.gz:md5,8fab7d10ab8899b6a0c78577c72848f8",
+                            "test_MTsat_single_negative.nii.gz:md5,26ffc640e5451dae7f3295981b7b3397",
+                            "test_MTsat_single_positive.nii.gz:md5,2f35e072358f827144a8b03bde0144bf",
+                            "test_altnp.nii.gz:md5,891a8a105fae98aeab33356c44f60a86",
+                            "test_altpn.nii.gz:md5,c12fa9d69fbc3be137fa89654331a2a1",
+                            "test_apparent_R1.nii.gz:md5,1ee1c3fa365f6cc0be204468ed1d6ff7",
+                            "test_mtoff_PD.nii.gz:md5,e51840662160fb81804f33535f632a87",
+                            "test_mtoff_T1.nii.gz:md5,e01ad7dc30aa7c2df53df5b5e6670334",
+                            "test_negative.nii.gz:md5,c45acf1602eae475313e005d5db3ba60",
+                            "test_positive.nii.gz:md5,61feebeb5d74efb63f0ec02e2d475b57"
+                        ]
+                    ]
+                ],
+                "ihmt_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR.nii.gz:md5,f995c40bb079879421be4886070d192a",
+                            "test_MTsat.nii.gz:md5,7998925276d33f8c980745e48d68c899",
+                            "test_ihMTR.nii.gz:md5,1610be74304bff131fe49fd85c515c72",
+                            "test_ihMTsat.nii.gz:md5,6001aa937dc47b9c5a5293a7e22c0aea"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-14T15:43:18.085622"
+    },
+    "reconst - ihmt_no_t1": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR.nii.gz:md5,85dcecd41514ac64b869b33de6592725",
+                            "test_ihMTR.nii.gz:md5,51a26ad32649595cd0c9049476962618"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_altnp.nii.gz:md5,891a8a105fae98aeab33356c44f60a86",
+                            "test_altpn.nii.gz:md5,c12fa9d69fbc3be137fa89654331a2a1",
+                            "test_mtoff_PD.nii.gz:md5,e51840662160fb81804f33535f632a87",
+                            "test_negative.nii.gz:md5,c45acf1602eae475313e005d5db3ba60",
+                            "test_positive.nii.gz:md5,61feebeb5d74efb63f0ec02e2d475b57"
+                        ]
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ],
+                "comp_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_altnp.nii.gz:md5,891a8a105fae98aeab33356c44f60a86",
+                            "test_altpn.nii.gz:md5,c12fa9d69fbc3be137fa89654331a2a1",
+                            "test_mtoff_PD.nii.gz:md5,e51840662160fb81804f33535f632a87",
+                            "test_negative.nii.gz:md5,c45acf1602eae475313e005d5db3ba60",
+                            "test_positive.nii.gz:md5,61feebeb5d74efb63f0ec02e2d475b57"
+                        ]
+                    ]
+                ],
+                "ihmt_maps": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_MTR.nii.gz:md5,85dcecd41514ac64b869b33de6592725",
+                            "test_ihMTR.nii.gz:md5,51a26ad32649595cd0c9049476962618"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,75d6a0b4ea043c389df223591fbaf755"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-14T15:43:29.142104"
+    }
+}

@@ -1,0 +1,46 @@
+---
+name: "tractogram_removeinvalid"
+description: |
+  Remove invalid streamlines from a single or multiple tractograms/bundles.
+keywords:
+  - Invalid
+  - Tractograms
+  - Streamlines
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - tractograms:
+      type: file
+      description: Tractogram or list of tractograms to register
+      pattern: "*.{trk,tck}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - tractogram:
+      type: file
+      description: Filtered tractogram(s).
+      pattern: "*.{trk,tck}"
+
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"

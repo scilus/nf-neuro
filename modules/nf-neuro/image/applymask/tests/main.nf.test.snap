@@ -1,0 +1,72 @@
+{
+    "image - applymask - 3D": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_masked.nii.gz:md5,2fef128e99cb8bf76e68d5ad7c8f9f6e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,72f62ad02bf476e0defd8c105c4eb83d"
+                ],
+                "image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_masked.nii.gz:md5,2fef128e99cb8bf76e68d5ad7c8f9f6e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,72f62ad02bf476e0defd8c105c4eb83d"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-25T15:12:20.565448"
+    },
+    "image - applymask - 4D": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_masked.nii.gz:md5,8c8b58052f2b573d6fa8a6a221405131"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,72f62ad02bf476e0defd8c105c4eb83d"
+                ],
+                "image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_masked.nii.gz:md5,8c8b58052f2b573d6fa8a6a221405131"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,72f62ad02bf476e0defd8c105c4eb83d"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-25T15:11:56.732018"
+    }
+}

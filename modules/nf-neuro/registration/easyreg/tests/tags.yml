@@ -1,0 +1,2 @@
+registration/easyreg:
+  - "modules/nf-scil/registration/easyreg/**"
