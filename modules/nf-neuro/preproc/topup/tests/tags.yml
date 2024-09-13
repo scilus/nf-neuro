@@ -1,2 +1,2 @@
 preproc/topup:
-  - "modules/nf-scil/preproc/topup/**"
+  - "modules/nf-neuro/preproc/topup/**"

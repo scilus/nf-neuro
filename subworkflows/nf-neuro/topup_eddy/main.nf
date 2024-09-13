@@ -1,7 +1,7 @@
-// ** Importing modules from nf-scil ** //
-include { PREPROC_TOPUP } from '../../../modules/nf-scil/preproc/topup/main'
-include { PREPROC_EDDY } from '../../../modules/nf-scil/preproc/eddy/main'
-include { UTILS_EXTRACTB0 } from '../../../modules/nf-scil/utils/extractb0/main'
+// ** Importing modules from nf-neuro ** //
+include { PREPROC_TOPUP } from '../../../modules/nf-neuro/preproc/topup/main'
+include { PREPROC_EDDY } from '../../../modules/nf-neuro/preproc/eddy/main'
+include { UTILS_EXTRACTB0 } from '../../../modules/nf-neuro/utils/extractb0/main'
 
 workflow TOPUP_EDDY {
 

@@ -3,8 +3,8 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.zip.ZipFile
 
-include { REGISTRATION_ANTS                 } from '../../../modules/nf-scil/registration/ants/main'
-include { BUNDLE_RECOGNIZE                  } from '../../../modules/nf-scil/bundle/recognize/main'
+include { REGISTRATION_ANTS                 } from '../../../modules/nf-neuro/registration/ants/main'
+include { BUNDLE_RECOGNIZE                  } from '../../../modules/nf-neuro/bundle/recognize/main'
 
 def fetch_bundleseg_atlas(atlasUrl, configUrl, dest) {
 

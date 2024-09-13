@@ -62,7 +62,6 @@
                         "${containerWorkspaceFolder}/.test_data",
                         "${containerWorkspaceFolder}/.vscode",
                         "${containerWorkspaceFolder}/.venv",
-                        "${containerWorkspaceFolder}/nf-scil-extensions",
                         "**/__pycache__",
                         "${containerWorkspaceFolder}/.git"
                     ],
@@ -72,7 +71,6 @@
                         "${containerWorkspaceFolder}/.test_data",
                         "${containerWorkspaceFolder}/.vscode",
                         "${containerWorkspaceFolder}/.venv",
-                        "${containerWorkspaceFolder}/nf-scil-extensions",
                         "**/__pycache__",
                         "${containerWorkspaceFolder}/.git"
                     ],

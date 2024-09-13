@@ -1,2 +1,2 @@
 subworkflows/topup_eddy:
-  - subworkflows/nf-scil/topup_eddy/**
+  - subworkflows/nf-neuro/topup_eddy/**

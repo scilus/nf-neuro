@@ -1,2 +1,2 @@
 bundle/labelmap:
-  - "modules/nf-scil/bundle/labelmap/**"
+  - "modules/nf-neuro/bundle/labelmap/**"

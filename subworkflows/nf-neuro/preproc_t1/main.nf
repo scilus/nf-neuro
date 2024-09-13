@@ -1,10 +1,10 @@
-// ** Importing modules from nf-scil ** //
-include { DENOISING_NLMEANS } from '../../../modules/nf-scil/denoising/nlmeans/main'
-include { PREPROC_N4 } from '../../../modules/nf-scil/preproc/n4/main'
-include { IMAGE_RESAMPLE } from '../../../modules/nf-scil/image/resample/main'
-include { BETCROP_ANTSBET } from '../../../modules/nf-scil/betcrop/antsbet/main'
-include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_T1 } from '../../../modules/nf-scil/betcrop/cropvolume/main'
-include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_MASK } from '../../../modules/nf-scil/betcrop/cropvolume/main'
+// ** Importing modules from nf-neuro ** //
+include { DENOISING_NLMEANS } from '../../../modules/nf-neuro/denoising/nlmeans/main'
+include { PREPROC_N4 } from '../../../modules/nf-neuro/preproc/n4/main'
+include { IMAGE_RESAMPLE } from '../../../modules/nf-neuro/image/resample/main'
+include { BETCROP_ANTSBET } from '../../../modules/nf-neuro/betcrop/antsbet/main'
+include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_T1 } from '../../../modules/nf-neuro/betcrop/cropvolume/main'
+include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_MASK } from '../../../modules/nf-neuro/betcrop/cropvolume/main'
 
 workflow PREPROC_T1 {
 

@@ -1,2 +1,2 @@
 preproc/gibbs:
-  - "modules/nf-scil/preproc/gibbs/**"
+  - "modules/nf-neuro/preproc/gibbs/**"

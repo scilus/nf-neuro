@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-scil/main/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
 name: "reconst_diffusivitypriors"
 description: Compute the axial (para_diff) and mean (iso_diff) diffusivity priors.
 keywords:

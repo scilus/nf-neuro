@@ -1,2 +1,2 @@
 bundle/centroid:
-  - "modules/nf-scil/bundle/centroid/**"
+  - "modules/nf-neuro/bundle/centroid/**"

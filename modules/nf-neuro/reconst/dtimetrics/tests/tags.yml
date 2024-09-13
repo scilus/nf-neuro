@@ -1,2 +1,2 @@
 reconst/dtimetrics:
-  - "modules/nf-scil/reconst/dtimetrics/**"
+  - "modules/nf-neuro/reconst/dtimetrics/**"

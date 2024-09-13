@@ -1,2 +1,2 @@
 reconst/shmetrics:
-  - "modules/nf-scil/reconst/shmetrics/**"
+  - "modules/nf-neuro/reconst/shmetrics/**"

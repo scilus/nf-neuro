@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-scil/main/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
 name: "segmentation_fastseg"
 description: Perform Brain Tissues Segmentation using FSL fast on a T1 image. Optionally, a binary mask of lesion can be add to correct the white matter mask.
 keywords:

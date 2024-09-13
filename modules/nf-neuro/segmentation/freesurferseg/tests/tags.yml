@@ -1,2 +1,2 @@
 segmentation/freesurferseg:
-  - "modules/nf-scil/segmentation/freesurferseg/**"
+  - "modules/nf-neuro/segmentation/freesurferseg/**"

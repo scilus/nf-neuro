@@ -1,2 +1,2 @@
 reconst/ihmt:
-  - "modules/nf-scil/reconst/ihmt/**"
+  - "modules/nf-neuro/reconst/ihmt/**"

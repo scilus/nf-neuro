@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-scil/main/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
 name: "reconst_frf"
 description: Compute a Fiber Response Function (FRF) from a DWI.
   Note that multiple types of FRF are available through the method argument.

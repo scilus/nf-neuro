@@ -1,2 +1,2 @@
 reconst/diffusivitypriors:
-  - "modules/nf-scil/reconst/diffusivitypriors/**"
+  - "modules/nf-neuro/reconst/diffusivitypriors/**"

@@ -1,6 +1,6 @@
-// ** Importing modules from nf-scil ** //
-include { SEGMENTATION_FASTSEG       } from '../../../modules/nf-scil/segmentation/fastseg/main'
-include { SEGMENTATION_FREESURFERSEG } from '../../../modules/nf-scil/segmentation/freesurferseg/main'
+// ** Importing modules from nf-neuro ** //
+include { SEGMENTATION_FASTSEG       } from '../../../modules/nf-neuro/segmentation/fastseg/main'
+include { SEGMENTATION_FREESURFERSEG } from '../../../modules/nf-neuro/segmentation/freesurferseg/main'
 
 workflow ANATOMICAL_SEGMENTATION {
 

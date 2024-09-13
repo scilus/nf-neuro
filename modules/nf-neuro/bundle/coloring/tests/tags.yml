@@ -1,2 +1,2 @@
 bundle/coloring:
-  - "modules/nf-scil/bundle/coloring/**"
+  - "modules/nf-neuro/bundle/coloring/**"

@@ -1,2 +1,2 @@
 denoising/mppca:
-  - "modules/nf-scil/denoising/mppca/**"
+  - "modules/nf-neuro/denoising/mppca/**"

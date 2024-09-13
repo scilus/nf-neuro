@@ -1,2 +1,2 @@
 preproc/n4:
-  - "modules/nf-scil/preproc/n4/**"
+  - "modules/nf-neuro/preproc/n4/**"

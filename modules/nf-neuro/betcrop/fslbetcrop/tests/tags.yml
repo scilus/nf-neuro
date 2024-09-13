@@ -1,2 +1,2 @@
 betcrop/fslbetcrop:
-  - "modules/nf-scil/betcrop/fslbetcrop/**"
+  - "modules/nf-neuro/betcrop/fslbetcrop/**"

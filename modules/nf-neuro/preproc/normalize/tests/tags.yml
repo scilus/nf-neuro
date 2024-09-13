@@ -1,2 +1,2 @@
 preproc/normalize:
-  - "modules/nf-scil/preproc/normalize/**"
+  - "modules/nf-neuro/preproc/normalize/**"

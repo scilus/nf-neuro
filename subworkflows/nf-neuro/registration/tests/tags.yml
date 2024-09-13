@@ -1,2 +1,2 @@
 subworkflows/registration:
-  - subworkflows/nf-scil/registration/**
+  - subworkflows/nf-neuro/registration/**

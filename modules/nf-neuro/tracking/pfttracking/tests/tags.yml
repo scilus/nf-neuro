@@ -1,2 +1,2 @@
 tracking/pfttracking:
-  - "modules/nf-scil/tracking/pfttracking/**"
+  - "modules/nf-neuro/tracking/pfttracking/**"

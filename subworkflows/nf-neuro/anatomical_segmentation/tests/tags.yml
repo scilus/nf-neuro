@@ -1,2 +1,2 @@
 subworkflows/anatomical_segmentation:
-  - subworkflows/nf-scil/anatomical_segmentation/**
+  - subworkflows/nf-neuro/anatomical_segmentation/**

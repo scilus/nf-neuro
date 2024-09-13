@@ -1,2 +1,2 @@
 bundle/stats:
-  - "modules/nf-scil/bundle/stats/**"
+  - "modules/nf-neuro/bundle/stats/**"

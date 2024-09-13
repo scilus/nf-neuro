@@ -1,2 +1,2 @@
 registration/easyreg:
-  - "modules/nf-scil/registration/easyreg/**"
+  - "modules/nf-neuro/registration/easyreg/**"

@@ -1,2 +1,2 @@
 preproc/eddy:
-  - "modules/nf-scil/preproc/eddy/**"
+  - "modules/nf-neuro/preproc/eddy/**"

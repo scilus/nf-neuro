@@ -1,2 +1,2 @@
 bundle/uniformize:
-  - "modules/nf-scil/bundle/uniformize/**"
+  - "modules/nf-neuro/bundle/uniformize/**"

@@ -1,2 +1,2 @@
 reconst/noddi:
-  - "modules/nf-scil/reconst/noddi/**"
+  - "modules/nf-neuro/reconst/noddi/**"

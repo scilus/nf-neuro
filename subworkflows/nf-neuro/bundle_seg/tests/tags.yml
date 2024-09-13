@@ -1,2 +1,2 @@
 subworkflows/bundle_seg:
-  - subworkflows/nf-scil/bundle_seg/**
+  - subworkflows/nf-neuro/bundle_seg/**

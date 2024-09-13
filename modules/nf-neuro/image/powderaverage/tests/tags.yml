@@ -1,2 +1,2 @@
 image/powderaverage:
-  - "modules/nf-scil/image/powderaverage/**"
+  - "modules/nf-neuro/image/powderaverage/**"

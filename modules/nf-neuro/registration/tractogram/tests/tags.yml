@@ -1,2 +1,2 @@
 registration/tractogram:
-  - "modules/nf-scil/registration/tractogram/**"
+  - "modules/nf-neuro/registration/tractogram/**"

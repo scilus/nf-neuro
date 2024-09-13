@@ -1,2 +1,2 @@
 segmentation/fsreconall:
-  - "modules/nf-scil/segmentation/fsreconall/**"
+  - "modules/nf-neuro/segmentation/fsreconall/**"

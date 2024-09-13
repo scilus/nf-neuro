@@ -1,2 +1,2 @@
 bundle/recognize:
-  - "modules/nf-scil/bundle/recognize/**"
+  - "modules/nf-neuro/bundle/recognize/**"

@@ -7,7 +7,7 @@ def fetch_archive ( name, destination, remote, database, data_identifiers ) {
         System.getenv('XDG_DATA_HOME') ?:
         "${System.getenv('HOME')}/.local/share"
     )
-    def cache_location = file("$storage/nf-scil-test-archives")
+    def cache_location = file("$storage/nf-neuro-test-archives")
     if ( !cache_location.exists() ) cache_location.mkdirs()
 
     // Fetch file from remote if not present in cache

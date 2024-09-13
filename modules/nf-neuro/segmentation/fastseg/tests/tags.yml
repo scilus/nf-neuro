@@ -1,2 +1,2 @@
 segmentation/fastseg:
-  - "modules/nf-scil/segmentation/fastseg/**"
+  - "modules/nf-neuro/segmentation/fastseg/**"

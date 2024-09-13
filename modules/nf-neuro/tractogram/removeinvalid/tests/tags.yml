@@ -1,2 +1,2 @@
 tractogram/removeinvalid:
-  - "modules/nf-scil/tractogram/removeinvalid/**"
+  - "modules/nf-neuro/tractogram/removeinvalid/**"

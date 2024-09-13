@@ -1,2 +1,2 @@
 bundle/fixelafd:
-  - "modules/nf-scil/bundle/fixelafd/**"
+  - "modules/nf-neuro/bundle/fixelafd/**"

@@ -1,5 +1,5 @@
-include { REGISTRATION_ANATTODWI  } from '../../../modules/nf-scil/registration/anattodwi/main'
-include { REGISTRATION_ANTS   } from '../../../modules/nf-scil/registration/ants/main'
+include { REGISTRATION_ANATTODWI  } from '../../../modules/nf-neuro/registration/anattodwi/main'
+include { REGISTRATION_ANTS   } from '../../../modules/nf-neuro/registration/ants/main'
 
 workflow REGISTRATION {
 

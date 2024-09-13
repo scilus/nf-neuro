@@ -1,2 +1,2 @@
 betcrop/synthbet:
-  - "modules/nf-scil/betcrop/synthbet/**"
+  - "modules/nf-neuro/betcrop/synthbet/**"
