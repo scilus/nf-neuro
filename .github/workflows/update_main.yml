@@ -1,0 +1,22 @@
+name: Merge to main checks
+on:
+  push:
+    branches:
+      - main
+
+# Cancel if a newer run is started
+concurrency:
+  group: ${{ github.workflow }}-main
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    uses: ./.github/workflows/run_checks_suite.yml
+    secrets: inherit
+
+  publish-extension-package:
+    if: github.repository == 'scilus/nf-neuro'
+    uses: ./.github/workflows/publish_extension.yml
+    with:
+      name: "extension-package"
+    secrets: inherit

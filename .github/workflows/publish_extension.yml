@@ -1,0 +1,42 @@
+name: Publish Extension
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Name of the extension to deploy"
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      name:
+        description: "Name of the extension to deploy"
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          sparse-checkout: |
+            .vscode/${{ inputs.name }}
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: .vscode/${{ inputs.name }}/package-lock.json
+
+      - name: npm clean install
+        working-directory: .vscode/${{ inputs.name }}
+        run: npm ci
+
+      - name: Publish to Visual Studio Marketplace
+        uses: HaaLeo/publish-vscode-extension@28e2d3f5817fccf23c1f219eb0cecc903132d1a2 # v1.6.2
+        with:
+          packagePath: .vscode/${{ inputs.name }}
+          pat: ${{ secrets.VSCE_TOKEN }}
+          registryUrl: https://marketplace.visualstudio.com
+          skipDuplicate: true
