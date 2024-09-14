@@ -1,0 +1,60 @@
+{
+    "name": "nf-neuro-extensionpack",
+    "displayName": "nf-neuro extension pack",
+    "description": "Extension pack for VS Code development of nf-neuro",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/scilus/nf-neuro.git"
+    },
+    "icon": "icon.avif",
+    "version": "1.0.0",
+    "publisher": "nf-neuro",
+    "engines": {
+        "vscode": "^1.84.0"
+    },
+    "categories": [
+        "Extension Packs"
+    ],
+    "extensionPack": [
+        "bierner.github-markdown-preview",
+        "bierner.markdown-checkbox",
+        "bierner.markdown-emoji",
+        "bierner.markdown-footnotes",
+        "bierner.markdown-mermaid",
+        "bierner.markdown-preview-github-styles",
+        "bierner.markdown-yaml-preamble",
+        "github.vscode-github-actions",
+        "GitHub.vscode-pull-request-github",
+        "mhutchie.git-graph",
+        "ms-azuretools.vscode-docker",
+        "ms-python.isort",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-ssh-edit",
+        "ms-vscode-remote.remote-wsl",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools-themes",
+        "ms-vscode.makefile-tools",
+        "ms-vscode.remote-explorer",
+        "ms-vscode.remote-server",
+        "ms-vsliveshare.vsliveshare",
+        "nf-core.nf-core-extensionpack",
+        "twxs.cmake",
+        "yahyabatulu.vscode-markdown-alert",
+        "yzhang.markdown-all-in-one",
+        "onnovalkering.vscode-singularity",
+        "nextflow.nextflow",
+        "KorbinianEckstein.niivue",
+        "mutantdino.resourcemonitor",
+        "christian-kohler.npm-intellisense",
+        "dbaeumer.vscode-eslint",
+        "connor4312.esbuild-problem-matchers",
+        "ms-vscode.extension-test-runner",
+        "nf-neuro.test-data-treeview"
+    ]
+}
