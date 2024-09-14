@@ -1,4 +1,4 @@
-name: PR checks
+name: PR update checks
 on:
   pull_request:
     branches:
