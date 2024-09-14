@@ -3,7 +3,7 @@
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
-            "NFTEST_VERSION": "0.9.0-rc1",
+            "NFTEST_VERSION": "0.9.0",
             "POETRY_VERSION": "1.8.*"
         }
     },
@@ -32,7 +32,7 @@
         },
         {
             "source": "nf-neuro-nf-test",
-            "target": "${containerWorkspaceFolder}/.nf-test",
+            "target": "${containerWorkspaceFolder}/tests/.runs",
             "type": "volume"
         },
         {
