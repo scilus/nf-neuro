@@ -138,8 +138,8 @@ jobs:
         path: [ "${{ fromJson(needs.nf-test-changes.outputs.paths) }}" ]
         include:
           - profile: docker
-          - runner: scilus-nf-scil-runners
-          - runner: scilus-nf-scil-bigmem-runners
+          - runner: scilus-nf-neuro-runners
+          - runner: scilus-nf-neuro-bigmem-runners
             path: modules/nf-neuro/registration/easyreg
         exclude:
           - path: subworkflows/nf-neuro/load_test_data
