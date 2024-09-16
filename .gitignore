@@ -22,6 +22,7 @@ yarn-error.log
 .work/
 .nextflow*
 .nf-test*
+tests/.runs/
 
 # Misc
 .DS_Store

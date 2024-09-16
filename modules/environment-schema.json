@@ -11,8 +11,8 @@
         "channels": {
             "type": "array",
             "items": {
-            	"type": "string"
-    	    }
+                "type": "string"
+            }
         },
         "dependencies": {
             "type": "array",
