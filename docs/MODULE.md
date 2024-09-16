@@ -1,19 +1,19 @@
 # Contributing to nf-neuro <!-- omit in toc -->
 
-* [Adding a new module to nf-neuro](#adding-a-new-module-to-nf-neuro)
-  * [Generate the template](#generate-the-template)
-  * [Edit the template](#edit-the-template)
-    * [Edit `main.nf`](#edit-mainnf)
-    * [Edit `environment.yml`](#edit-environmentyml)
-    * [Edit `meta.yml`](#edit-metayml)
-  * [Create test cases](#create-test-cases)
-    * [Edit `tests/main.nf.test`](#edit-testsmainnftest)
-    * [Edit `tests/nextflow.config`](#edit-testsnextflowconfig)
-  * [Generate tests snapshots](#generate-tests-snapshots)
-  * [Lint your code](#lint-your-code)
-  * [Submit your PR](#submit-your-pr)
-* [Defining optional input parameters](#defining-optional-input-parameters)
-* [Test data infrastructure](#test-data-infrastructure)
+- [Adding a new module to nf-neuro](#adding-a-new-module-to-nf-neuro)
+  - [Generate the template](#generate-the-template)
+  - [Edit the template](#edit-the-template)
+    - [Edit `main.nf`](#edit-mainnf)
+    - [Edit `environment.yml`](#edit-environmentyml)
+    - [Edit `meta.yml`](#edit-metayml)
+  - [Create test cases](#create-test-cases)
+    - [Edit `tests/main.nf.test`](#edit-testsmainnftest)
+    - [Edit `tests/nextflow.config`](#edit-testsnextflowconfig)
+  - [Generate tests snapshots](#generate-tests-snapshots)
+  - [Lint your code](#lint-your-code)
+  - [Submit your PR](#submit-your-pr)
+- [Defining optional input parameters](#defining-optional-input-parameters)
+- [Test data infrastructure](#test-data-infrastructure)
 
 # Adding a new module to nf-neuro
 
