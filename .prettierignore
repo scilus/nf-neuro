@@ -5,7 +5,7 @@
 .nextflow/
 .nf-test/
 .pytest_cache/
-.test_data/
+tests/.runs/
 venv/
 .venv/
 .vscode/
