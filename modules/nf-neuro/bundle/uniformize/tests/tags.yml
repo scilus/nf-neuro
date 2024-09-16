@@ -1,0 +1,2 @@
+bundle/uniformize:
+  - "modules/nf-neuro/bundle/uniformize/**"

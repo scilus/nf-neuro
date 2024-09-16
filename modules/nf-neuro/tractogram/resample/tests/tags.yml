@@ -1,0 +1,2 @@
+tractogram/resample:
+  - "modules/nf-neuro/tractogram/resample/**"

@@ -1,0 +1,66 @@
+---
+name: "segmentation_freesurferseg"
+description: Performs Brain Tissues Segmentation using the FreeSurfer aparc and wmparc output files.  Optionally, a binary mask of lesion can be add to correct the white matter mask.
+keywords:
+  - FreeSurfer
+  - Segmentation
+  - Tissues
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+  - "MRtrix3":
+      description: "Toolbox for image processing, analysis and visualisation of dMRI."
+      homepage: "https://mrtrix.readthedocs.io/en/latest/"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - aparc_aseg:
+      type: file
+      description: FreeSurfer cortical and subcortical parcellation output file.
+      pattern: "*.mgz"
+
+  - wmparc:
+      type: file
+      description: FreeSurfer WM parcellation output file.
+      pattern: "*.mgz"
+
+  - lesion:
+      type: file
+      description: Nifti lesion volume to correct the white matter with a lesion mask.  The lesion mask must be a binary mask.
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - wm_mask:
+      type: file
+      description: Nifti WM mask file.
+      pattern: "*.{nii,nii.gz}"
+
+  - gm_mask:
+      type: file
+      description: Nifti GM mask file.
+      pattern: "*.{nii,nii.gz}"
+
+  - csf_mask:
+      type: file
+      description: Nifti CSF mask file.
+      pattern: "*.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@gagnonanthony"

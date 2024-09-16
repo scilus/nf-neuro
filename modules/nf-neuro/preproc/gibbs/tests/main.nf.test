@@ -1,0 +1,48 @@
+nextflow_process {
+
+    name "Test Process PREPROC_GIBBS"
+    script "../main.nf"
+    process "PREPROC_GIBBS"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "preproc"
+    tag "preproc/gibbs"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    config "./nextflow.config"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "topup_eddy_light.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("preproc - gibbs") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true)
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

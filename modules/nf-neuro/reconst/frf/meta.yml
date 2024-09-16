@@ -1,0 +1,99 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "reconst_frf"
+description: Compute a Fiber Response Function (FRF) from a DWI.
+  Note that multiple types of FRF are available through the method argument.
+  The single-shell single-tissue (ssst) FRF is performed by choosing the ssst method (task.ext.method).
+  This is expected to output a single WM FRF.
+  The multi-shell multi-tissue (msmt) FRF is performed by choosing the msmt method (task.ext.method).
+  This is expected to output a WM FRF, a GM FRF and a CSF FRF, each containing values for every shells.
+keywords:
+  - Fiber Orientation Distribution Function
+  - Diffusion MRI
+  - Fiber Response Function
+tools:
+  - "DIPY":
+      description: "DIPY is the paragon 3D/4D+ imaging library in Python."
+      homepage: https://dipy.org
+
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: Nifti image of DWI.
+      pattern: "*.{nii,nii.gz}"
+
+  - bval:
+      type: file
+      description: B-values in FSL format.
+      pattern: "*.bval"
+
+  - bvec:
+      type: file
+      description: B-vectors in FSL format.
+      pattern: "*.bvec"
+
+  - mask:
+      type: file
+      description: Nifti b0 binary mask.
+      pattern: "*.{nii,nii.gz}"
+
+  - wm_mask:
+      type: file
+      description: Nifti binary WM mask.
+      pattern: "*.{nii,nii.gz}"
+
+  - gm_mask:
+      type: file
+      description: Nifti binary GM mask.
+      pattern: "*.{nii,nii.gz}"
+
+  - csf_mask:
+      type: file
+      description: Nifti binary CSF mask.
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - frf:
+      type: file
+      description: Fiber Response Function (FRF), in the case of ssst_frf.
+      pattern: "*.txt"
+
+  - wm_frf:
+      type: file
+      description: WM Fiber Response Function (FRF), in the case of msmt_frf.
+      pattern: "*.txt"
+
+  - gm_frf:
+      type: file
+      description: GM Fiber Response Function (FRF), in the case of msmt_frf.
+      pattern: "*.txt"
+
+  - csf_frf:
+      type: file
+      description: CSF Fiber Response Function (FRF), in the case of msmt_frf.
+      pattern: "*.txt"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@Manonedde"
+  - "@karanphil"

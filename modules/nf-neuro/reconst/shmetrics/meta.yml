@@ -1,0 +1,88 @@
+---
+name: "reconst_shmetrics"
+description: Compute FODF metrics from given FODF or SH map.
+keywords:
+  - FODF
+  - SH
+  - Metrics
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - sh:
+      type: file
+      description: SH or FODF map.
+      pattern: "*.{nii,nii.gz}"
+
+  - mask:
+      type: file
+      description: B0 mask.
+      pattern: "*.{nii,nii.gz}"
+
+  - fa:
+      type: file
+      description: FA map.
+      pattern: "*.{nii,nii.gz}"
+
+  - md:
+      type: file
+      description: MD map.
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - peaks:
+      type: file
+      description: Peaks file.
+      pattern: "*peaks.nii.gz"
+
+  - peak_indices:
+      type: file
+      description: Peak indices file.
+      pattern: "*peak_indices.nii.gz"
+
+  - afd_max:
+      type: file
+      description: Maximum Apparent Fiber Density (AFDmax) map.
+      pattern: "*afd_max.nii.gz"
+
+  - afd_total:
+      type: file
+      description: Total Apparent Fiber Density (AFDtotal) map.
+      pattern: "*afd_total.nii.gz"
+
+  - afd_sum:
+      type: file
+      description: Sum of all Apparent Fiber Density (Afdsum) map.
+      pattern: "*afd_sum.nii.gz"
+
+  - nufo:
+      type: file
+      description: Number of Fiber Orientation (NuFO) map.
+      pattern: "*nufo.nii.gz"
+
+  - vent_mask:
+      type: file
+      description: Ventricles mask.
+      pattern: "*ventricles_mask.nii.gz"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@karanphil"

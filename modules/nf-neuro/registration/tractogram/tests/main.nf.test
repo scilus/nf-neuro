@@ -1,0 +1,88 @@
+
+nextflow_process {
+
+    name "Test Process REGISTRATION_TRACTOGRAM"
+    script "../main.nf"
+    process "REGISTRATION_TRACTOGRAM"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "registration"
+    tag "registration/tractogram"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "bundles.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+
+    test("registration - tractogram_bundles") {
+
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/affine.txt", checkIfExists: true),
+                        file("\${test_data_directory}/fibercup_atlas/subj_1/*.trk", checkIfExists: true),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("registration - tractogram") {
+
+        config "./nextflow_suffix.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/affine.txt", checkIfExists: true),
+                        file("\${test_data_directory}/fibercup_atlas/subj_1/bundle_2.trk", checkIfExists: true),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+}

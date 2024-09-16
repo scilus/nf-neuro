@@ -1,0 +1,2 @@
+tracking/localtracking:
+  - "modules/nf-neuro/tracking/localtracking/**"

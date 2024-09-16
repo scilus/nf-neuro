@@ -1,0 +1,163 @@
+{
+    "reconst - shmetrics": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__peaks.nii.gz:md5,0f11af5b33b853edbe55fc2239a4966d"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__peak_values.nii.gz:md5,6470a18e37a61f08900516cbbf529327"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__peak_indices.nii.gz:md5,ab95b28218d8901af8336b45baec9b6e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_max.nii.gz:md5,7cadad1e2ab2e04c13c64d036d2feca1"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_total.nii.gz:md5,024a8c657e77c3611c5a15a9868e308d"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_sum.nii.gz:md5,7e668e506d26437b75b8db575fb2b27c"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__nufo.nii.gz:md5,0ba1886fb00013fa225e2e5f12a30ab8"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__ventricles_mask.nii.gz:md5,bd3b550c4470eb62fe279c28879b6b5d"
+                    ]
+                ],
+                "8": [
+                    "versions.yml:md5,a07e324c55b4310c93cc4003bee2cd6c"
+                ],
+                "afd_max": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_max.nii.gz:md5,7cadad1e2ab2e04c13c64d036d2feca1"
+                    ]
+                ],
+                "afd_sum": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_sum.nii.gz:md5,7e668e506d26437b75b8db575fb2b27c"
+                    ]
+                ],
+                "afd_total": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_total.nii.gz:md5,024a8c657e77c3611c5a15a9868e308d"
+                    ]
+                ],
+                "nufo": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__nufo.nii.gz:md5,0ba1886fb00013fa225e2e5f12a30ab8"
+                    ]
+                ],
+                "peak_indices": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__peak_indices.nii.gz:md5,ab95b28218d8901af8336b45baec9b6e"
+                    ]
+                ],
+                "peak_values": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__peak_values.nii.gz:md5,6470a18e37a61f08900516cbbf529327"
+                    ]
+                ],
+                "peaks": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__peaks.nii.gz:md5,0f11af5b33b853edbe55fc2239a4966d"
+                    ]
+                ],
+                "vent_mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__ventricles_mask.nii.gz:md5,bd3b550c4470eb62fe279c28879b6b5d"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,a07e324c55b4310c93cc4003bee2cd6c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-02T13:16:48.656406"
+    }
+}

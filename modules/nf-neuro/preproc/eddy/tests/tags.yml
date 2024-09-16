@@ -1,0 +1,2 @@
+preproc/eddy:
+  - "modules/nf-neuro/preproc/eddy/**"

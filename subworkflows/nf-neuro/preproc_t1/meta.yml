@@ -1,0 +1,141 @@
+name: "preproc_t1"
+description: |
+  Subworkflow for T1 image pre-processing, from denoising to brain extraction and cropping.
+  It requires three input channels, one with a raw T1 image you want to process (ch_image),
+  one with a T1 template (ch_template) and one with a brain probability mask (ch_probability_map).
+  The aim of the workflow is to carry out the first stages of pre-processing, through denoising,
+  N4 correction, resampling and brain extraction, right up to the cropping stage.
+  The resulting T1 is corrected, resampled, brain extracted and cropped.
+  You can retrieve the file after each step if you don't want to run the entire subworkflow.
+  The next steps would be to register the resulting T1-corrected image with the DWI-corrected image
+  with, for example, the REGISTRATION subworkflow.
+  -----------  Steps  -----------
+  Denoising (nlmeans, scil).
+    Used to remove the noise induced by the MRI acquisition,
+    enhance the signal to noise ratio and improve the image quality and following metrics.
+    The denoising is performed in the original spatial resolution and uses the nlmeans method.
+  N4 Image Intensities Bias Correction (N4BiasFieldCorrection, ANTs).
+    Used to normalize the image intensities and reduce biases (e.g. signal loss with distance in
+    multi-channel head coils), while preserving contrasts between tissues.
+  Resample (DIPY).
+    Resamples the T1 to an isotropic spatial resolution. The default is 1mm, a standard in humans which
+    usually facilitate registration with corrected DWI images.
+    This spatial resolution is modifiable in the configuration file.
+  Brain Extraction (bet, ANTs).
+    Isolates the brain tissue voxels from the remaining image. Also creates a binary brain mask.
+    This brain extraction is required for the T1 to DWI Registration.
+  Cropping (scil).
+    Crops the empty planes around the brain to optimize the next processing steps.
+  Subworkflow based on Tractoflow : https://www.sciencedirect.com/science/article/pii/S105381192030375X?via%3Dihub
+
+keywords:
+  - T1
+  - preprocessing
+  - nlmeans
+  - n4
+  - resample
+  - bet
+  - crop
+
+components:
+  - denoising/nlmeans
+  - preproc/n4
+  - image/resample
+  - betcrop/antsbet
+  - betcrop/cropvolume
+
+input:
+  - ch_image:
+      type: file
+      description: |
+        The input channel containing the anatomical image.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_template:
+      type: file
+      description: |
+        The input channel containing the anatomical template to perform BET.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_probability_map:
+      type: file
+      description: |
+        The input channel containing the brain probability mask, with intensity range 1 (definitely brain) to 0 (definitely background).
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_mask_nlmeans:
+      type: file
+      description: |
+        The input channel containing the brain mask for the nlmeans denoising. Optional
+        Structure: [ val(meta), path(mask) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_ref_n4:
+      type: file
+      description: |
+        The input channel containing the reference and the reference mask for the n4 correction. Optional
+        Structure: [ val(meta), path(ref), path(mask_ref) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_ref_resample:
+      type: file
+      description: |
+        The input channel containing the reference for the resampling. Optional
+        Structure: [ val(meta), path(ref) ]
+      pattern: "*.{nii,nii.gz}"
+output:
+  - image_nlmeans:
+      type: file
+      description: |
+        Channel containing the anatomical image after the nlmeans denoising.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - image_N4:
+      type: file
+      description: |
+        Channel containing the anatomical image after the N4 correction.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - image_resample:
+      type: file
+      description: |
+        Channel containing the anatomical image after the resampling.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - image_bet:
+      type: file
+      description: |
+        Channel containing the anatomical image after the brain-extraction.
+        Structure: [ val(meta), path(t1) ]
+      pattern: "*.{nii,nii.gz}"
+  - mask_bet:
+      type: file
+      description: |
+        Channel containing the binary mask after the brain-extraction.
+        Structure: [ val(meta), path(mask) ]
+      pattern: "*.{nii,nii.gz}"
+  - crop_box:
+      type: file
+      description: |
+        Channel containing the bouding box defining the limits of the crop.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{pkl}"
+  - mask_final:
+      type: file
+      description: |
+        Channel containing the binary mask after the all preprocessing.
+        Structure: [ val(meta), path(mask) ]
+      pattern: "*.{nii,nii.gz}"
+  - t1_final:
+      type: file
+      description: |
+        Channel containing the anatomical image after the all preprocessing.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+
+authors:
+  - "@ThoumyreStanislas"

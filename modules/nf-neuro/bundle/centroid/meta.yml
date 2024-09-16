@@ -1,0 +1,49 @@
+---
+name: "bundle_centroid"
+description: |
+  Compute bundles' centroids or resample existing centroids.
+keywords:
+  - Bundles
+  - Centroids
+  - Streamlines
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - bundles:
+      type: file
+      description: |
+        List of bundles to compute centroids for. If this input is supplied,
+        the module will compute centroids.
+      pattern: "*.trk"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - centroids:
+      type: file
+      description: |
+        Computed centroids.
+      pattern: "*.trk"
+
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"

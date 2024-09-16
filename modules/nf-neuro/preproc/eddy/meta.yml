@@ -1,0 +1,106 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "preproc_eddy"
+description: Apply Eddy (and Topup if already run)
+keywords:
+  - distorsion correction
+  - preproc
+  - eddy
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+  - "MRtrix3":
+      description: "Toolbox for image processing, analysis and visualisation of dMRI."
+      homepage: "https://mrtrix.readthedocs.io/en/latest/"
+  - "FSL":
+      description: "FSL Toolbox and Scilpy Toolbox"
+      homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: DWI Nifti image
+      pattern: "*.{nii,nii.gz}"
+
+  - bval:
+      type: file
+      description: B-values in FSL format [DWI].
+      pattern: "*.bval"
+
+  - bvec:
+      type: file
+      description: B-values in FSL format [DWI].
+      pattern: "*.bvec"
+
+  - rev_dwi:
+      type: file
+      description: DWI Nifti image [rev-DWI].
+      pattern: "*.{nii,nii.gz}"
+
+  - rev_bval:
+      type: file
+      description: B-values in FSL format [rev-DWI].
+      pattern: "*.bval"
+
+  - rev_bvec:
+      type: file
+      description: B-vectors in FSL format [rev-DWI].
+      pattern: "*.bvec"
+
+  - corrected_b0s:
+      type: file
+      description: Nifti volume b0 corrected
+      pattern: "*__corrected_b0s.nii.gz"
+
+  - topup_fieldcoef:
+      type: file
+      description: Nifti volume - topup field to correct for distorsion
+      pattern: "*_fieldcoef.nii.gz"
+
+  - topup_movpart:
+      type: file
+      description: Text file - topup movpart
+      pattern: "*__movpar.txt"
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi_corrected:
+      type: file
+      description: Nifti volume - DWI corrected
+      pattern: "*__dwi_corrected.nii.gz"
+
+  - bval_corrected:
+      type: file
+      description: B-values corrected in FSL format
+      pattern: "*__bval_eddy"
+
+  - bvec_corrected:
+      type: file
+      description: B-vectors corrected in FSL format
+      pattern: "*__dwi_eddy_corrected.bvec"
+
+  - b0_mask:
+      type: file
+      description: Nifti volume - Mask for b0 corrected
+      pattern: "*__b0_bet_mask.nii.gz"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@arnaudbore"

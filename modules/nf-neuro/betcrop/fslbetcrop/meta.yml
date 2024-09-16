@@ -1,0 +1,71 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "betcrop_fslbetcrop"
+description: Perform Brain extraction using FSL BET followed by cropping empty planes around the data.
+keywords:
+  - DWI
+  - T1
+  - BET
+  - Crop
+tools:
+  - "FSL":
+      description: "FSL Toolbox and Scilpy Toolbox"
+      homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+  - "MRtrix3":
+      description: "Toolbox for image processing, analysis and visualisation of dMRI."
+      homepage: "https://mrtrix.readthedocs.io/en/latest/"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti image volume to perform BET + crop.
+      pattern: "*.{nii,nii.gz}"
+
+  - bval:
+      type: file
+      description: B-values in FSL format.
+      pattern: "*.bval"
+
+  - bvec:
+      type: file
+      description: B-vectors in FSL format.
+      pattern: "*.bvec"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti volume brain-extracted and cropped.
+      pattern: "*_bet.{nii,nii.gz}"
+
+  - mask:
+      type: file
+      description: mask brain-extracted and cropped.
+      pattern: "*_bet_mask.{nii,nii.gz}"
+
+  - bbox:
+      type: file
+      description: BoundingBox used for cropping.
+      pattern: "*_boundingBox.pkl"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@gagnonanthony"

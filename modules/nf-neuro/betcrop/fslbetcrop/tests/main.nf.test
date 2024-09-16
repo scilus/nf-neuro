@@ -1,0 +1,111 @@
+nextflow_process {
+
+    name "Test Process BETCROP_FSLBETCROP"
+    script "../main.nf"
+    process "BETCROP_FSLBETCROP"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "betcrop"
+    tag "betcrop/fslbetcrop"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "heavy.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("betcrop - fslbetcrop - dwi") {
+
+        config "./nextflow.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi/dwi.bval"),
+                        file("\${test_data_directory}/dwi/dwi.bvec")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("betcrop - fslbetcrop - t1") {
+
+        config "./nextflow_t1.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("betcrop - fslbetcrop - t1 - dilate") {
+
+        config "./nextflow_t1_dilate.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

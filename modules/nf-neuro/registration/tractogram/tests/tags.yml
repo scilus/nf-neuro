@@ -1,0 +1,2 @@
+registration/tractogram:
+  - "modules/nf-neuro/registration/tractogram/**"

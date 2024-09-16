@@ -1,0 +1,2 @@
+segmentation/fastseg:
+  - "modules/nf-neuro/segmentation/fastseg/**"

@@ -1,0 +1,83 @@
+nextflow_process {
+
+    name "Test Process TRACKING_LOCALTRACKING"
+    script "../main.nf"
+    process "TRACKING_LOCALTRACKING"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "tracking"
+    tag "tracking/localtracking"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "tracking.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("tracking - localtracking - fa") {
+        config "./nextflow_fa.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/map_wm.nii.gz"),
+                        file("\${test_data_directory}/fodf.nii.gz"),
+                        file("\${test_data_directory}/fa.nii.gz")
+                ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.trk.get(0).get(1)).name,
+                    process.out.config,
+                    process.out.seedmask,
+                    process.out.trackmask,
+                    process.out.versions).match() }
+            )
+        }
+    }
+
+    test("tracking - localtracking - wm") {
+        config "./nextflow_wm.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/map_wm.nii.gz"),
+                        file("\${test_data_directory}/fodf.nii.gz"),
+                        file("\${test_data_directory}/fa.nii.gz")
+                ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.trk.get(0).get(1)).name,
+                    process.out.config,
+                    process.out.seedmask,
+                    process.out.trackmask,
+                    process.out.versions).match() }
+            )
+        }
+    }
+
+}

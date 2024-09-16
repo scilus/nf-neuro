@@ -1,0 +1,49 @@
+---
+name: "tractogram_resample"
+description: |
+  Resample bundles' centroids.
+keywords:
+  - Bundles
+  - Centroids
+  - Streamlines
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - tractograms:
+      type: file
+      description: |
+        List of tractograms to resample. If the tractogram is a centroid file
+        with a specific number of points, please use the nb_points parameter.
+      pattern: "*.{trk}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - tractograms:
+      type: file
+      description: |
+        Resampled tractograms.
+      pattern: "*_resampled.trk"
+
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"

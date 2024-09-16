@@ -1,0 +1,37 @@
+{
+    "preproc - gibbs": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__dwi_gibbs_corrected.nii.gz:md5,f15ce978797cd4342089e16204a40436"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,65c58dca4630ca36c724dd823f437585"
+                ],
+                "dwi": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__dwi_gibbs_corrected.nii.gz:md5,f15ce978797cd4342089e16204a40436"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,65c58dca4630ca36c724dd823f437585"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-08T17:18:35.063226"
+    }
+}

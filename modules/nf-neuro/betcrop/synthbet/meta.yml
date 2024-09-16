@@ -1,0 +1,53 @@
+---
+name: "betcrop_synthbet"
+description: Perform brain extraction using synthstrip on image
+keywords:
+  - anatomical image
+  - BET
+  - freesurfer
+tools:
+  - "Freesurfer":
+      description: "Software package for the analysis and visualization of structural and functional neuroimaging data."
+      homepage: "https://surfer.nmr.mgh.harvard.edu/fswiki"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti image volume to perform BET.
+      pattern: "*.{nii,nii.gz}"
+
+  - weights:
+      type: file
+      description: Alternative model weights
+      pattern: "*.pt"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - bet_image:
+      type: file
+      description: Nifti brain-extracted volume.
+      pattern: "*__bet_image.{nii,nii.gz}"
+
+  - brain_mask:
+      type: file
+      description: Brain-extracted image mask .
+      pattern: "*__brain_mask.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@anroy1"

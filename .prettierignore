@@ -1,0 +1,11 @@
+**/package-lock.json
+**/poetry.lock
+.devcontainer/
+.github/
+.nextflow/
+.nf-test/
+.pytest_cache/
+.test_data/
+venv/
+.venv/
+.vscode/

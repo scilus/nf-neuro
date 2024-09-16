@@ -1,0 +1,68 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "registration_anattodwi"
+description: Anatomical image registration on a diffusion image.
+keywords:
+  - nifti
+  - registration
+  - anatomical
+  - dwi
+
+tools:
+  - "antsRegistration":
+      description: "ANTs (Advanced Normalization Tools) open-source software package for image registration and segmentation"
+      homepage: "https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Linux-and-Mac-OS"
+      documentation: "http://stnava.github.io/ANTsDoc/"
+      doi: "10.1016/j.neuroimage.2010.09.025"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - t1:
+      type: file
+      description: Nifti image file to register on dwi
+      pattern: "*.{nii,nii.gz}"
+
+  - b0:
+      type: file
+      description: Nifti image file - b0
+      pattern: "*.{nii,nii.gz}"
+
+  - metric:
+      type: file
+      description: Nifti image file metric used to register (fa)
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - transfo_trk:
+      type: list
+      description: Tuple, Transformation files to warp tractogram/streamlines (mat file, nii InverseWarp)
+      pattern: "*.{mat,nii,nii.gz}"
+
+  - transfo_image:
+      type: list
+      description: Tuple, Transformation files to warp images (nii Warp, mat file)
+      pattern: "*.{nii,nii.gz,mat}"
+
+  - t1_warped:
+      type: file
+      description: Anatomical T1 warped to dwi space
+      pattern: "*.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@medde"

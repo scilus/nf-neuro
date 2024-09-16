@@ -1,0 +1,164 @@
+nextflow_process {
+
+    name "Test Process UTILS_EXTRACTB0"
+    script "../main.nf"
+    process "UTILS_EXTRACTB0"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "utils"
+    tag "utils/extractb0"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "topup_eddy_light.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("utils - extractb0") {
+        config "./nextflow.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true)
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("utils - extractb0 - all4d") {
+        config "./nextflow_all4d.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true)
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("utils - extractb0 - allseries") {
+        config "./nextflow_allseries.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true)
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("utils - extractb0 - clusterfirst") {
+        config "./nextflow_clusterfirst.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true)
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("utils - extractb0 - clustermean") {
+        config "./nextflow_clustermean.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true)
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("utils - extractb0 - mean") {
+        config "./nextflow_mean.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true)
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

@@ -1,0 +1,71 @@
+name: Lint nf-neuro component
+
+on:
+  workflow_dispatch:
+    inputs:
+      component:
+        description: "A tag describing the component"
+        required: true
+        type: string
+      type:
+        description: "Type of component"
+        required: true
+        type: choice
+        options:
+          - module
+          - subworkflow
+      nextflow_version:
+        description: "Nextflow version to use"
+        required: false
+        type: string
+        default: "24.04.4"
+  workflow_call:
+    inputs:
+      component:
+        description: "A tag describing the component"
+        required: true
+        type: string
+      type:
+        description: "Type of component"
+        required: true
+        type: string
+      nextflow_version:
+        description: "Nextflow version to use"
+        required: false
+        type: string
+        default: "24.04.4"
+
+run-name: Lint ${{ inputs.component }}
+jobs:
+  nf-core-lint:
+    runs-on: ubuntu-latest
+    name: lint - ${{ inputs.component }}
+
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: abatilo/actions-poetry@7b6d33e44b4f08d7021a1dee3c044e9c253d6439 # v3.0.0
+        with:
+          poetry-version: "1.8.*"
+      - uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
+        with:
+          python-version: "3.11"
+          cache: 'poetry'
+      - uses: actions/setup-java@2dfa2011c5b2a0f1489bf9e433881c92c1631f88 # v4.3.0
+        with:
+          distribution: "temurin"
+          java-version: "17"
+      - uses: nf-core/setup-nextflow@561fcfc7146dcb12e3871909b635ab092a781f34 # v2.0.0
+        with:
+          version: ${{ inputs.nextflow_version }}
+
+      - name: Install nf-core tools
+        run: |
+          poetry install --no-root
+
+      - name: Lint ${{ inputs.type }} ${{ inputs.component }}
+        env:
+          GIT_CLONE_PROTECTION_ACTIVE: false
+        run: |
+          poetry run nf-core --verbose ${{ inputs.type }}s \
+            --git-remote https://github.com/${{ github.repository }}.git \
+            lint ${{ inputs.component }}

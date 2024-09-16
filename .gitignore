@@ -1,0 +1,28 @@
+# Python
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+.venv/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# VS Code
+*.code-workspace
+
+# VS Code extension dev
+*.vsix
+.vscode-test/
+
+# Nextflow
+.work/
+.nextflow*
+.nf-test*
+
+# Misc
+.DS_Store
+Thumbs.db

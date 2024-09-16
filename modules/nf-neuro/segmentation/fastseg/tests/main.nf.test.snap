@@ -1,0 +1,38 @@
+{
+    "segmentation - fastseg - lesion": {
+        "content": [
+            "test__mask_wm.nii.gz:md5:header,18e02970ee42367e0ee9f81b36cde160,data,e4d00ba5559d32119050e6afe77b627c",
+            "test__mask_gm.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,d713974dbe87760182112e10f96a7f82",
+            "test__mask_csf.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,29599fab55e3ee75318cef36563684a4",
+            "test__map_wm.nii.gz:md5:header,58dc3623694060dace951ba8073d5e01,data,62a268dbc74814d62ed9f9596b5a72e5",
+            "test__map_gm.nii.gz:md5:header,58dc3623694060dace951ba8073d5e01,data,420e7664f81a5899f7007f71c08f28d8",
+            "test__map_csf.nii.gz:md5:header,58dc3623694060dace951ba8073d5e01,data,2bde307c6dae36a5fc00eba7a2ca7933",
+            [
+                "versions.yml:md5,d42da2620c5aa82292375b0f9d8d7092"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-04T20:12:08.928978"
+    },
+    "segmentation - fastseg": {
+        "content": [
+            "test__mask_wm.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,08b5c8665f0a07c182eb63f045d01855",
+            "test__mask_gm.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,d713974dbe87760182112e10f96a7f82",
+            "test__mask_csf.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,29599fab55e3ee75318cef36563684a4",
+            "test__map_wm.nii.gz:md5:header,58dc3623694060dace951ba8073d5e01,data,62a268dbc74814d62ed9f9596b5a72e5",
+            "test__map_gm.nii.gz:md5:header,58dc3623694060dace951ba8073d5e01,data,420e7664f81a5899f7007f71c08f28d8",
+            "test__map_csf.nii.gz:md5:header,58dc3623694060dace951ba8073d5e01,data,2bde307c6dae36a5fc00eba7a2ca7933",
+            [
+                "versions.yml:md5,d42da2620c5aa82292375b0f9d8d7092"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-04T20:03:24.730234"
+    }
+}

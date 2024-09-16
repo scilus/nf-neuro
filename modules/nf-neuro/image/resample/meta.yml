@@ -1,0 +1,49 @@
+---
+name: "image_resample"
+description: Script to resample a dataset to match the resolution of another reference dataset or to the resolution specified in argument. Needs either one of voxel_size, volume_size, iso_min or reference as parameter/input. Interpolation defaults as linear.
+keywords:
+  - resample
+  - nifti
+  - volume
+  - Scilpy
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti image file to resample to
+      pattern: "*.{nii,nii.gz}"
+
+  - ref:
+      type: file
+      description: Nifti reference image file
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti image file resampled
+      pattern: "*_resampled.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@scilus"

@@ -1,0 +1,90 @@
+nextflow_process {
+
+    name "Test Process SEGMENTATION_FASTSEG"
+    script "../main.nf"
+    process "SEGMENTATION_FASTSEG"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "segmentation"
+    tag "segmentation/fastseg"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    config "./nextflow.config"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "T1w.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("segmentation - fastseg") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/T1w.nii.gz", checkIfExists: true,),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.wm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.gm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.csf_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.wm_map.get(0).get(1)),
+                    niftiMD5SUM(process.out.gm_map.get(0).get(1)),
+                    niftiMD5SUM(process.out.csf_map.get(0).get(1)),
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+    test("segmentation - fastseg - lesion") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/T1w.nii.gz", checkIfExists: true,),
+                        file("\${test_data_directory}/T1w_mask.nii.gz", checkIfExists: true)
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.wm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.gm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.csf_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.wm_map.get(0).get(1)),
+                    niftiMD5SUM(process.out.gm_map.get(0).get(1)),
+                    niftiMD5SUM(process.out.csf_map.get(0).get(1)),
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+}

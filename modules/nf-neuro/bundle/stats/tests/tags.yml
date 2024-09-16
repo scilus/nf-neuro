@@ -1,0 +1,2 @@
+bundle/stats:
+  - "modules/nf-neuro/bundle/stats/**"

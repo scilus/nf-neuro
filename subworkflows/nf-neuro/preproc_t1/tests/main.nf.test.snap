@@ -1,0 +1,344 @@
+{
+    "preproc_t1_option": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_denoised.nii.gz:md5,ba910fdd1c9cc8f3d1c98b24dde522ef"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_n4.nii.gz:md5,f9b1e5305c8c176c8ef72168b8a33f2d"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__resampled.nii.gz:md5,a16a9d32732752b40f699cea2fb046bd"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet.nii.gz:md5,f0a2be8bc64bb8b0311bb7022e177623"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet_mask.nii.gz:md5,bdafc62e0e2ab35d0d48e1021d0a82db"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_t1_cropped_bbox.pkl:md5,39a3444e23d7ea6478ef1213f88e7715"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,02b2ca05a95c8494a85cda69ebe6d5e7"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_t1_cropped.nii.gz:md5,593d0b155da379bb41e8557ea5f9b92e"
+                    ]
+                ],
+                "8": [
+                    "versions.yml:md5,209daf2d60de195845dedbdf80c98afd",
+                    "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
+                    "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                    "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
+                    "versions.yml:md5,b979132991d8f72a3585465533bd5730",
+                    "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                ],
+                "crop_box": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_t1_cropped_bbox.pkl:md5,39a3444e23d7ea6478ef1213f88e7715"
+                    ]
+                ],
+                "image_N4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_n4.nii.gz:md5,f9b1e5305c8c176c8ef72168b8a33f2d"
+                    ]
+                ],
+                "image_bet": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet.nii.gz:md5,f0a2be8bc64bb8b0311bb7022e177623"
+                    ]
+                ],
+                "image_nlmeans": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_denoised.nii.gz:md5,ba910fdd1c9cc8f3d1c98b24dde522ef"
+                    ]
+                ],
+                "image_resample": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__resampled.nii.gz:md5,a16a9d32732752b40f699cea2fb046bd"
+                    ]
+                ],
+                "mask_bet": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet_mask.nii.gz:md5,bdafc62e0e2ab35d0d48e1021d0a82db"
+                    ]
+                ],
+                "mask_final": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,02b2ca05a95c8494a85cda69ebe6d5e7"
+                    ]
+                ],
+                "t1_final": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_t1_cropped.nii.gz:md5,593d0b155da379bb41e8557ea5f9b92e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,209daf2d60de195845dedbdf80c98afd",
+                    "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
+                    "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                    "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
+                    "versions.yml:md5,b979132991d8f72a3585465533bd5730",
+                    "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-10T19:57:38.341812"
+    },
+    "preproc_t1_classic": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_denoised.nii.gz:md5,b6d25b37b1101fea5c77bbbc711757c3"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_n4.nii.gz:md5,ef0d9af46aa1e330c5d7679ead500596"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__resampled.nii.gz:md5,88bae6bfeea1734111621b437e09548d"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet.nii.gz:md5,016f12c75e3543c27987a91eb2160a19"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet_mask.nii.gz:md5,cf0cc416ca8b352d3cba58d9132ab0da"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_t1_cropped_bbox.pkl:md5,5d9bd5d9c068031f34c34223b5892153"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,aee59cb0bf2a4e14bfe116dc68be365b"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_t1_cropped.nii.gz:md5,f4bea1286a90760eecf348dd9bffd2e6"
+                    ]
+                ],
+                "8": [
+                    "versions.yml:md5,209daf2d60de195845dedbdf80c98afd",
+                    "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
+                    "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                    "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
+                    "versions.yml:md5,b979132991d8f72a3585465533bd5730",
+                    "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                ],
+                "crop_box": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_t1_cropped_bbox.pkl:md5,5d9bd5d9c068031f34c34223b5892153"
+                    ]
+                ],
+                "image_N4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_n4.nii.gz:md5,ef0d9af46aa1e330c5d7679ead500596"
+                    ]
+                ],
+                "image_bet": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet.nii.gz:md5,016f12c75e3543c27987a91eb2160a19"
+                    ]
+                ],
+                "image_nlmeans": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_denoised.nii.gz:md5,b6d25b37b1101fea5c77bbbc711757c3"
+                    ]
+                ],
+                "image_resample": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__resampled.nii.gz:md5,88bae6bfeea1734111621b437e09548d"
+                    ]
+                ],
+                "mask_bet": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet_mask.nii.gz:md5,cf0cc416ca8b352d3cba58d9132ab0da"
+                    ]
+                ],
+                "mask_final": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,aee59cb0bf2a4e14bfe116dc68be365b"
+                    ]
+                ],
+                "t1_final": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_t1_cropped.nii.gz:md5,f4bea1286a90760eecf348dd9bffd2e6"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,209daf2d60de195845dedbdf80c98afd",
+                    "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
+                    "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                    "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
+                    "versions.yml:md5,b979132991d8f72a3585465533bd5730",
+                    "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-10T19:36:04.155481"
+    }
+}

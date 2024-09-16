@@ -1,0 +1,97 @@
+{
+    "name": "NF-NEURO development container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "NFTEST_VERSION": "0.9.0",
+            "POETRY_VERSION": "1.8.*"
+        }
+    },
+    "forwardPorts": [3000],
+    "onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
+    "updateContentCommand": "bash .devcontainer/updateContentCommand.sh",
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "containerEnv": {
+        "WORKSPACE": "${containerWorkspaceFolder}"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {},
+        "ghcr.io/robsyme/features/nextflow:1": {},
+        "ghcr.io/devcontainers-contrib/features/curl-apt-get:1": {},
+        "ghcr.io/devcontainers-contrib/features/tmux-apt-get:1": {},
+        "ghcr.io/devcontainers-contrib/features/wget-apt-get:1": {}
+    },
+    "mounts": [
+        {
+            "source": "nf-neuro-venv",
+            "target": "${containerWorkspaceFolder}/.venv",
+            "type": "volume"
+        },
+        {
+            "source": "nf-neuro-nf-test",
+            "target": "${containerWorkspaceFolder}/tests/.runs",
+            "type": "volume"
+        },
+        {
+            "target": "/tmp",
+            "type": "volume"
+        },
+        {
+            "source": "nf-neuro-profile",
+            "target": "/root",
+            "type": "volume"
+        },
+        {
+            "target": "/root/.vscode-server",
+            "type": "volume"
+        }
+    ],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "[prettier]": {
+                    "prettierPath": "/usr/lib/node_modules/prettier"
+                },
+                "[python]": {
+                    "analysis.exclude": [
+                        "${containerWorkspaceFolder}/.dvc",
+                        "${containerWorkspaceFolder}/.pytest_cache",
+                        "${containerWorkspaceFolder}/.test_data",
+                        "${containerWorkspaceFolder}/.vscode",
+                        "${containerWorkspaceFolder}/.venv",
+                        "**/__pycache__",
+                        "${containerWorkspaceFolder}/.git"
+                    ],
+                    "analysis.ignore": [
+                        "${containerWorkspaceFolder}/.dvc",
+                        "${containerWorkspaceFolder}/.pytest_cache",
+                        "${containerWorkspaceFolder}/.test_data",
+                        "${containerWorkspaceFolder}/.vscode",
+                        "${containerWorkspaceFolder}/.venv",
+                        "**/__pycache__",
+                        "${containerWorkspaceFolder}/.git"
+                    ],
+                    "createEnvironment.trigger": "off",
+                    "interpreter.infoVisibility": "always",
+                    "poetryPath": "/root/.local/bin/poetry",
+                    "defaultInterpreterPath": "${containerWorkspaceFolder}/.venv",
+                    "terminal.activateEnvironment": true,
+                    "terminal.activateEnvInCurrentTerminal": true,
+                    "terminal.focusAfterLaunch": true
+                }
+            },
+            "extensions": [
+                "nf-neuro.nf-neuro-extensions",
+                "ms-python.autopep8",
+                "ms-python.vscode-pylance",
+                "mutantdino.resourcemonitor",
+                "KorbinianEckstein.niivue"
+            ]
+        }
+    },
+    "init": true,
+    "privileged": true
+}

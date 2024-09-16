@@ -1,0 +1,2 @@
+subworkflows/load_test_data:
+  - subworkflows/nf-neuro/load_test_data/**

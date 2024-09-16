@@ -1,0 +1,2 @@
+image/applymask:
+  - "modules/nf-neuro/image/applymask/**"

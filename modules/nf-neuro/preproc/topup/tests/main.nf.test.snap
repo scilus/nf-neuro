@@ -1,0 +1,36 @@
+{
+    "topup": {
+        "content": [
+            "test__corrected_b0s.nii.gz",
+            "topup_results_fieldcoef.nii.gz",
+            "topup_results_movpar.txt",
+            "test__rev_b0_warped.nii.gz",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__rev_b0_mean.nii.gz:md5,a0c63d7a8a234d85eeb63045ae2a8f60"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__b0_mean.nii.gz:md5,f50e652bcdd1d45f7a4c592df7eb851a"
+                ]
+            ],
+            [
+                "versions.yml:md5,9e086ab052cde49b01096c3bc8f524c0"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-22T03:44:06.877352"
+    }
+}

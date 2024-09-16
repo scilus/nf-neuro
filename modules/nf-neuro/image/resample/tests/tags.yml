@@ -1,0 +1,2 @@
+image/resample:
+  - "modules/nf-neuro/image/resample/**"

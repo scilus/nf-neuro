@@ -1,0 +1,59 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "bundle_recognize"
+description: Extract bundles from one (or more) tractograms
+keywords:
+  - Diffusion MRI
+  - Tractogram
+  - Segmentation
+  - Bundles
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - tractograms:
+      type: file
+      description: Tractogram file(s) for bundle extraction
+      pattern: "*.trk"
+
+  - transform:
+      type: file
+      description: Transform matrix bringing the atlas to native space
+      pattern: "*.mat"
+
+  - config:
+      type: file
+      description: Bundle atlas configuration file
+      pattern: "*.json"
+
+  - directory:
+      type: directory
+      description: Directory containing the reference atlas
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - bundles:
+      type: file
+      description: Segmented and cleaned bundles
+      pattern: "*.trk"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@CHrlS98"

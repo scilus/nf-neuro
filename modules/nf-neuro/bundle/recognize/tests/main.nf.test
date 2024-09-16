@@ -1,0 +1,85 @@
+nextflow_process {
+
+    name "Test Process BUNDLE_RECOGNIZE"
+    script "../main.nf"
+    process "BUNDLE_RECOGNIZE"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "bundle"
+    tag "bundle/recognize"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "bundles.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("bundle - recognize - base") {
+
+        config "./nextflow.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.trk"),
+                        file("\${test_data_directory}/affine.txt"),
+                        file("\${test_data_directory}/config.json"),
+                        file("\${test_data_directory}/fibercup_atlas/")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("bundle - recognize - params") {
+
+        config "./nextflow_params.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.trk"),
+                        file("\${test_data_directory}/affine.txt"),
+                        file("\${test_data_directory}/config.json"),
+                        file("\${test_data_directory}/fibercup_atlas/")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

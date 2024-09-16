@@ -1,0 +1,143 @@
+name: "preproc_dwi"
+description: |
+  Subworkflow performing pre-processing of DWI image from from brain extraction to motion correction and resampling.
+  It requires at least one input channels including a DWI image with corresponding b-value (bval) and b-vector (bvec) files (ch_dwi).
+  The next 3 channels are optional and includes a reversed DWI image with correspond bval and bvec files (ch_rev_dwi),
+  a reversed phase encoded b = 0 image (ch_rev_b0) and a channel for Topup configuration file.
+    1) Required channel include the following main steps:
+          Brain Extraction, Denoising, Eddy, N4 Bias Correction, Normalization, and Resampling.
+    2) Required and optional channels include the following main steps:
+          Brain Extraction, Denoising, Topup+Eddy, N4 Bias Correction, Normalization and Resampling.
+  The resulting file from this subworkflows is a DWI that has been denoised, corrected for susceptibility,
+  eddy currents and motion, normalized, cropped and resampled.
+  The next step would be to extract diffusion profiles for the corrected DWI, using a module implementing either
+  DTI (see RECONST_DTI), fODF (see RECONST_FODF) or MAP-MRI (NotImplementedYet).
+  ---------  Steps  --------------------
+  Brain Extraction (bet, FSL).
+      Extract brain mask from the b0 image and applied to the whole DWI.
+      This brain extraction is required to remove the skull and prepare the DWI to the T1 Registration.
+  Denoising (dwidenoise, MPPCA method, MRtrix3).
+      Used to remove the noise induced by the MRI acquisition,
+      enhance the signal to noise ratio and improve the image quality and following metrics.
+      The denoising is performed in the original spatial resolution and uses the MP-PCA method.
+  Topup (FSL - optional).
+      Topup uses the b=0 and reversed phase encoded b=0 images to extract the deformation field and
+      corrects the brain deformation induced by the magnetic field susceptibility artefacts.
+  Eddy (FSL).
+      Eddy corrects eddy-currents, motion artefacts and performs slice-wise outlier detection and correction.
+      When Topup is run, the eddy command is performed using the topup output.
+  N4 Bias Correction (N4BiasFieldCorrection, ANTs).
+      The N4 Bias Correction normalizes the image intensities and reduces this intensity bias
+      (the center of the brain is less intense than its outer boundary due to multi-channel
+      head coils). N4 correction is performed on the b=0 and applied to the whole DWI.
+  Normalize (dwinormalise, MRtrix3).
+      The DWI is normalized to have a mean value in the WM of approximately 1000.
+      This task permits analyzing datasets from different MRI scanners with the same acquisition scheme.
+  Resample (DIPY).
+      The DWI is resampled to 1 mm isotropic spatial resolution, which is usually the spatial
+      resolution of the T1. This spatial resolution is modifiable in the configuration file.
+  See Tractoflow for more details, https://www.sciencedirect.com/science/article/pii/S105381192030375X?via%3Dihub
+keywords:
+  - Brain extraction
+  - Crop
+  - Denoising
+  - Topup-Eddy correction
+  - Normalization
+  - Resampling
+components:
+  - betcrop/cropvolume
+  - betcrop/fslbetcrop
+  - denoising/mppca
+  - image/resample
+  - preproc/n4
+  - preproc/normalize
+  - utils/extractb0
+  - topup_eddy
+input:
+  - ch_dwi:
+      type: file
+      description: |
+        The input channel containing the DWI file, B-values and B-vectors in FSL format files
+        Structure: [ val(meta), path(dwi), path(bval), path(bvec) ]
+      pattern: "*.{nii,nii.gz|bval|bvec}"
+  - ch_rev_dwi:
+      type: file
+      description: |
+        The input channel containing the reverse DWI file, reverse B-values and reverse B-vectors in FSL format files
+        Structure: [ val(meta), path(rev_dwi), path(bval), path(bvec) ]
+      pattern: "*.{nii,nii.gz|bval|bvec}"
+  - ch_b0:
+      type: file
+      description: |
+        The input channel containing the b0 file. This input is optional.
+        Structure: [ val(meta), path(rev_b0) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_rev_b0:
+      type: file
+      description: |
+        The input channel containing the reverse b0 file. This input is optional.
+        Structure: [ val(meta), path(rev_b0) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_config_topup:
+      type: file
+      description: |
+        The input channel containing the config file for Topup. This input is optional. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
+        Structure: [ path(config_file) ]
+      pattern: "*.{cnf}"
+output:
+  - dwi_resample:
+      type: file
+      description: |
+        Channel containing DWI denoised, corrected for susceptibility and/or eddy currents and motion, normalized, cropped and resampled.
+        Structure: [ val(meta), path(dwi) ]
+      pattern: "*_resampled.{nii,nii.gz}"
+  - bval:
+      type: file
+      description: |
+        Channel containing Eddy-corrected B-values in FSL format
+        Structure: [ val(meta), path(bval) ]
+      pattern: "*__bval_eddy"
+  - bvec:
+      type: file
+      description: |
+        Channel containing Eddy-corrected B-vectors in FSL format
+        Structure: [ val(meta), path(bvec) ]
+      pattern: "*__dwi_eddy_corrected.bvec"
+  - b0:
+      type: file
+      description: |
+        Channel containing b0 corrected file.
+        Structure: [ val(meta), path(b0) ]
+      pattern: "*__b0_bet.nii.gz"
+  - b0_mask:
+      type: file
+      description: |
+        Channel containing b0 corrected binary mask file.
+        Structure: [ val(meta), path(b0_mask) ]
+      pattern: "*__b0_bet_mask.nii.gz"
+  - dwi_bounding_box:
+      type: file
+      description: |
+        Channel containing the bounding box defining the limits of the crop.
+        Structure: [ val(meta), path(bounding_box) ]
+      pattern: "*.{pkl}"
+  - dwi_topup_eddy:
+      type: file
+      description: |
+        Channel containing DWI output after denoised, correction for susceptibility and/or eddy currents and motion (Topup-Eddy).
+        Structure: [ val(meta), path(dwi) ]
+      pattern: "*_corrected.{nii,nii.gz}"
+  - dwi_n4:
+      type: file
+      description: |
+        Channel containing DWI after denoised, corrected for susceptibility and/or eddy currents and motion, cropped and normalized (N4).
+        Structure: [ val(meta), path(dwi) ]
+      pattern: "*_normalized.{nii,nii.gz}"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@medde"

@@ -1,0 +1,2 @@
+denoising/mppca:
+  - "modules/nf-neuro/denoising/mppca/**"

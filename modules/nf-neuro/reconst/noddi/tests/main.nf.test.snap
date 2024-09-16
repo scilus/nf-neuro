@@ -1,0 +1,33 @@
+{
+    "reconst - noddi - extract_metrics": {
+        "content": [
+            "test__fit_dir.nii.gz",
+            "test__fit_FWF.nii.gz",
+            "test__fit_NDI.nii.gz",
+            "test__fit_ECVF.nii.gz",
+            "test__fit_ODI.nii.gz",
+            [
+                "versions.yml:md5,7d60348ede01d2f9bd3a2fe9da61741d"
+            ],
+            145
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-21T20:49:11.51428"
+    },
+    "reconst - noddi - save_kernels - no mask": {
+        "content": [
+            [
+                "versions.yml:md5,7d60348ede01d2f9bd3a2fe9da61741d"
+            ],
+            145
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-05-21T17:04:36.944861"
+    }
+}

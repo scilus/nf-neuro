@@ -1,0 +1,2 @@
+segmentation/fastsurfer:
+  - "modules/nf-neuro/segmentation/fastsurfer/**"

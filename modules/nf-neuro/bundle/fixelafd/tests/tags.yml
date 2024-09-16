@@ -1,0 +1,2 @@
+bundle/fixelafd:
+  - "modules/nf-neuro/bundle/fixelafd/**"

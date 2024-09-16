@@ -1,0 +1,68 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "registration_ants"
+description: Image registration with antsRegistrationSyN or antsRegistrationSyNQuick
+keywords:
+  - nifti
+  - registration
+  - antsRegistrationSyN
+  - antsRegistrationSyNQuick
+  - trk
+tools:
+  - "ants":
+      description: "Advanced Normalization Tools."
+      homepage: "https://github.com/ANTsX/ANTs"
+
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - fixedimage:
+      type: file
+      description: Fixed image(s) or source image(s) or reference image(s)
+      pattern: "*.{nii,nii.gz}"
+
+  - movingimage:
+      type: file
+      description: Moving image(s) or target image(s)
+      pattern: "*.{nii,nii.gz}"
+
+  - mask:
+      type: file
+      description: Mask(s) for the fixed image space
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti volume after registration.
+      pattern: "*_warped.nii.gz"
+
+  - transfo_image:
+      type: list
+      description: Tuple, Transformation files to warp images (nii Warp, mat file)
+      pattern: "*.{nii,nii.gz,mat}"
+
+  - transfo_trk:
+      type: list
+      description: Tuple, Transformation files to warp trk (nii InverseWarp, mat file)
+      pattern: "*.{nii,nii.gz,mat}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@ThoumyreStanislas"

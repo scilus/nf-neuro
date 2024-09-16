@@ -1,0 +1,68 @@
+---
+name: "tracking_localtracking"
+description: process local tracking
+keywords:
+  - Tractography
+  - Local tracking
+  - Diffusion MRI
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - wm:
+      type: file
+      description: Nifti image white matter mask.
+      pattern: "*.{nii,nii.gz}"
+
+  - fodf:
+      type: file
+      description: Nifti image of spherical harmonic file (fodf)
+      pattern: "*.{nii,nii.gz}"
+
+  - fa:
+      type: file
+      description: NIfti image binary mask for fa mask
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - trk:
+      type: file
+      description: Tractogram output file.
+      pattern: "*.{trk,tck}"
+
+  - config:
+      type: file
+      description: Json file containing tracking parameters.
+      pattern: "*.{json}"
+
+  - seedmask:
+      type: file
+      description: Nifti seeding mask for tracking.
+      pattern: "*.{nii,nii.gz}"
+
+  - trackmask:
+      type: file
+      description: Nifti tracking mask
+      pattern: "*.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@scilus"

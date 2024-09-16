@@ -1,0 +1,17 @@
+{
+    "editor.detectIndentation": false,
+    "python.missingPackage.severity": "Warning",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.terminal.focusAfterLaunch": true,
+    "python.testing.promptToConfigure": false,
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": true,
+    "python.analysis.exclude": ["**/__pycache__"],
+    "python.analysis.ignore": ["**/__pycache__"],
+    "python.analysis.importFormat": "relative",
+    "git.allowForcePush": true,
+    "git.branchProtection": ["main"],
+    "git.branchProtectionPrompt": "alwaysPrompt",
+    "github.branchProtection": true
+}

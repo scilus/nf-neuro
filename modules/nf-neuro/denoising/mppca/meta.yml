@@ -1,0 +1,49 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "denoising_mppca"
+description: denoise a dataset with the Marchenko-Pastur principal component analysis
+keywords:
+  - nifti
+  - denoising
+  - mppca
+  - mrtrix
+  - fsl
+tools:
+  - "MRtrix3":
+      description: "Toolbox for image processing, analysis and visualisation of dMRI."
+      homepage: "https://mrtrix.readthedocs.io/en/latest/"
+  - "FSL":
+      description: "FSL Toolbox and Scilpy Toolbox"
+      homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: Nifti dwi file to denoise
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Denoised Nifti image file
+      pattern: "*_dwi_denoised.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@scilus"

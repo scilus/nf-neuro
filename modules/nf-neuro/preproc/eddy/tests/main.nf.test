@@ -1,0 +1,62 @@
+nextflow_process {
+
+    name "Test Process PREPROC_EDDY"
+    script "../main.nf"
+    process "PREPROC_EDDY"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "preproc"
+    tag "preproc/eddy"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    config "./nextflow.config"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "topup_eddy_light.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("eddy") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01_dir-PA_dwi.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01_dir-PA_dwi.bval", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01_dir-PA_dwi.bvec", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01__corrected_b0s.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/topup_results_fieldcoef.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/topup_results_movpar.txt", checkIfExists: true)]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.dwi_corrected.get(0).get(1)).name,
+                    process.out.bval_corrected,
+                    file(process.out.bvec_corrected.get(0).get(1)).name,
+                    process.out.b0_mask,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+}

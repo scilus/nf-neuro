@@ -1,0 +1,76 @@
+nextflow_process {
+
+    name "Test Process TRACTOGRAM_RESAMPLE"
+    script "../main.nf"
+    process "TRACTOGRAM_RESAMPLE"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "tractogram"
+    tag "tractogram/resample"
+
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "tractometry.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("tractogram - resample - tractogram") {
+
+        config "./nextflow_tractogram.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${test_data_directory}/IFGWM.trk", checkIfExists: true),
+                        file("\${test_data_directory}/IFGWM_color.trk", checkIfExists: true)]
+                ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    file(process.out.tractograms.get(0).get(1).toList().get(0)).name,
+                    file(process.out.tractograms.get(0).get(1).toList().get(1)).name
+                    ).match() }
+            )
+        }
+    }
+
+    test("tractogram - resample - centroids") {
+
+        config "./nextflow_centroid.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/IFGWM_uni_c_10.trk", checkIfExists: true)
+                ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

@@ -1,0 +1,2 @@
+preproc/n4:
+  - "modules/nf-neuro/preproc/n4/**"

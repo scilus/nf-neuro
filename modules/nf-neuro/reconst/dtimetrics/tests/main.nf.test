@@ -1,0 +1,125 @@
+nextflow_process {
+
+    name "Test Process RECONST_DTIMETRICS"
+    script "../main.nf"
+    process "RECONST_DTIMETRICS"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "reconst"
+    tag "reconst/dtimetrics"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "DWIss1000-dir32.zip", "segmentation.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("reconst - dtimetrics") {
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                ch_dwi = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/brainmask.nii.gz")
+                    ]
+                }
+                input[0] = ch_dwi
+                    .join(ch_mask)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.ad.get(0).get(1), 6),
+                    file(process.out.evecs.get(0).get(1)).name,
+                    file(process.out.evecs_v1.get(0).get(1)).name,
+                    file(process.out.evecs_v2.get(0).get(1)).name,
+                    file(process.out.evecs_v3.get(0).get(1)).name,
+                    niftiMD5SUM(process.out.evals.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.evals_e1.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.evals_e2.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.evals_e3.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.fa.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.ga.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.rgb.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.md.get(0).get(1), 6),
+                    file(process.out.mode.get(0).get(1)).name,
+                    niftiMD5SUM(process.out.norm.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.rd.get(0).get(1), 6),
+                    file(process.out.tensor.get(0).get(1)).name,
+                    niftiMD5SUM(process.out.nonphysical.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.pulsation_std_dwi.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.pulsation_std_b0.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.residual.get(0).get(1), 2),
+                    process.out.residual_iqr_residuals,
+                    process.out.residual_mean_residuals,
+                    process.out.residual_q1_residuals,
+                    process.out.residual_q3_residuals,
+                    process.out.residual_residuals_stats,
+                    process.out.residual_std_residuals,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("reconst - dtimetrics_with_b0mask") {
+        config "./nextflow_light.config"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                input[0] = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.fa.get(0).get(1), 6),
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+}

@@ -1,0 +1,2 @@
+registration/easyreg:
+  - "modules/nf-neuro/registration/easyreg/**"

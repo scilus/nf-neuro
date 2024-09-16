@@ -1,0 +1,41 @@
+---
+name: "io_readbids"
+description: Module reading bids specification for an input folder.
+keywords:
+  - Bids
+  - Input
+  - Structure
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - bids_folder:
+      type: directory
+      description: Folder containing bids file
+      pattern: "*"
+
+  - fsfolder:
+      type: directory
+      description: Folder containing fs file
+      pattern: "*"
+
+  - bidsignore:
+      type: file
+      description: bidsignore file
+      pattern: "*.{bidsignore}"
+
+output:
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - bidsstructure:
+      type: file
+      description: json file containing tractoflow bids structure
+      pattern: "*.{json}"
+
+authors:
+  - "@harshana2011"

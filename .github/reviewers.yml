@@ -1,0 +1,79 @@
+reviewers:
+  defaults:
+    - repository-owners
+    - arnaudbore
+    - AlexVCaron
+
+  groups:
+    repository-owners:
+      - AlexVCaron
+      - arnaudbore
+    infrastructure-leads:
+      - AlexVCaron
+    documentation-leads:
+      - AlexVCaron
+      - arnaudbore
+      - gagnonanthony
+      - ThoumyreStanislas
+      - Manonedde
+    guidelines-leads:
+      - AlexVCaron
+      - arnaudbore
+      - gagnonanthony
+      - ThoumyreStanislas
+      - Manonedde
+    surgery-leads:
+      - GuillaumeTh
+    diffusion-mri-leads:
+      - GuillaumeTh
+      - AlexVCaron
+      - Manonedde
+
+  per_author:
+    anroy1:
+      - GuillaumeTh
+      - AlexVCaron
+    AlexVCaron:
+      - arnaudbore
+      - gagnonanthony
+
+files:
+  '**':
+    - infrastructure-leads
+    - repository-owners
+  'docs/**':
+    - documentation-leads
+  'LICENSE':
+    - repository-owners
+  'CONTRIBUTING.md':
+    - repository-owners
+    - documentation-leads
+  '.devcontainer/**':
+    - infrastructure-leads
+  '.github/**':
+    - infrastructure-leads
+  '.github/ISSUE_TEMPLATE/**':
+    - infrastructure-leads
+    - documentation-leads
+  '.github/PULL_REQUEST_TEMPLATE/**':
+    - infrastructure-leads
+    - documentation-leads
+  '.github/pull_request_template.md':
+    - infrastructure-leads
+    - documentation-leads
+  '.vscode/**':
+    - infrastructure-leads
+  'tests/**':
+    - infrastructure-leads
+  'modules/nf-neuro/**':
+    - guidelines-leads
+  'subworkflows/nf-neuro/**':
+    - guidelines-leads
+
+options:
+  ignore_draft: true
+  ignored_keywords:
+    - WIP
+    - Work in progress
+    - Hotfix
+  number_of_reviewers: 2

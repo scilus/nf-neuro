@@ -1,0 +1,2 @@
+tractogram/removeinvalid:
+  - "modules/nf-neuro/tractogram/removeinvalid/**"

@@ -1,0 +1,2 @@
+bundle/recognize:
+  - "modules/nf-neuro/bundle/recognize/**"

@@ -1,0 +1,2 @@
+bundle/labelmap:
+  - "modules/nf-neuro/bundle/labelmap/**"

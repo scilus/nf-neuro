@@ -1,0 +1,114 @@
+nextflow_process {
+
+    name "Test Process BUNDLE_UNIFORMIZE"
+    script "../main.nf"
+    process "BUNDLE_UNIFORMIZE"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "bundle"
+    tag "bundle/uniformize"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "bundles.zip" , "tractometry.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("bundle - uniformize") {
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        bundles: it.simpleName == "bundles"
+                        tractometry: it.simpleName == "tractometry"
+                    }
+                input[0] = ch_split_test_data.bundles.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/fibercup_atlas/subj_1/*.trk"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("bundle - uniformize_axis") {
+
+        config "./nextflow_axis.config"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        bundles: it.simpleName == "bundles"
+                        tractometry: it.simpleName == "tractometry"
+                    }
+                input[0] = ch_split_test_data.bundles.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/fibercup_atlas/subj_1/bundle_0.trk"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+    then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("bundle - uniformize_centroid") {
+
+        config "./nextflow_centroid.config"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        bundles: it.simpleName == "bundles"
+                        tractometry: it.simpleName == "tractometry"
+                    }
+                input[0] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/IFGWM.trk"),
+                        file("\${test_data_directory}/IFGWM_uni_c_10.trk")
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

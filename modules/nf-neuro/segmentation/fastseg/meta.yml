@@ -1,0 +1,77 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "segmentation_fastseg"
+description: Perform Brain Tissues Segmentation using FSL fast on a T1 image. Optionally, a binary mask of lesion can be add to correct the white matter mask.
+keywords:
+  - Segmentation
+  - T1
+  - Tissues
+tools:
+  - "FSL":
+      description: "FSL Toolbox and Scilpy Toolbox"
+      homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti T1 volume to segment into tissue maps.
+      pattern: "*.{nii,nii.gz}"
+
+  - lesion:
+      type: file
+      description: Nifti lesion volume to correct the white matter with a lesion mask. The lesion mask must be a binary mask.
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - wm_mask:
+      type: file
+      description: Nifti WM mask volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - gm_mask:
+      type: file
+      description: Nifti GM mask volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - csf_mask:
+      type: file
+      description: Nifti CSF mask volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - wm_map:
+      type: file
+      description: Nifti WM map volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - gm_map:
+      type: file
+      description: Nifti GM map volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - csf_map:
+      type: file
+      description: Nifti CSF map volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@gagnonanthony"

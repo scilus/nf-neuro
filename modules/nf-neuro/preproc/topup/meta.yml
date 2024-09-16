@@ -1,0 +1,114 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "preproc_topup"
+description: Prepare data and apply FSL topup
+keywords:
+  - DWI
+  - distorsion
+  - topup
+tools:
+  - "FSL":
+      description: "FSL Toolbox and Scilpy Toolbox"
+      homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: DWI Nifti image
+      pattern: "*.{nii,nii.gz}"
+
+  - bval:
+      type: file
+      description: B-values in FSL format [DWI].
+      pattern: "*.bval"
+
+  - bvec:
+      type: file
+      description: B-values in FSL format [DWI].
+      pattern: "*.bvec"
+
+  - b0:
+      type: file
+      description: b0 [DWI].
+      pattern: "*.bvec"
+
+  - rev_dwi:
+      type: file
+      description: DWI Nifti image [rev-DWI].
+      pattern: "*.{nii,nii.gz}"
+
+  - rev_bval:
+      type: file
+      description: B-values in FSL format [rev-DWI].
+      pattern: "*.bval"
+
+  - rev_bvec:
+      type: file
+      description: B-vectors in FSL format [rev-DWI].
+      pattern: "*.bvec"
+
+  - rev_b0:
+      type: file
+      description: Reversed b0 [rev-DWI].
+      pattern: "*.{nii,nii.gz}"
+
+  - config_topup:
+      type: file
+      description: topup config file. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
+      pattern: "*cnf"
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - topup_corrected_b0s:
+      type: file
+      description: Nifti volume - b0 corrected
+      pattern: "*__corrected_b0s.nii.gz"
+
+  - topup_fieldcoef:
+      type: file
+      description: Nifti volume - topup field to correct for distorsion
+      pattern: "*_fieldcoef.nii.gz"
+
+  - topup_movpart:
+      type: file
+      description: Text file - topup movpart
+      pattern: "*__movpar.txt"
+
+  - rev_b0_warped:
+      type: file
+      description: Nifti volume - rev b0 warped on b0
+      pattern: "*__rev_b0_warped.nii.gz"
+
+  - rev_b0_mean:
+      type: file
+      description: Nifti volume - rev b0 mean
+      pattern: "*__rev_b0_mean.nii.gz"
+
+  - b0_mean:
+      type: file
+      description: Nifti volume - b0 mean
+      pattern: "*__b0_mean.nii.gz"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@arnaudbore"

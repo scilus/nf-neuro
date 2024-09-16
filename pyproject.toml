@@ -1,0 +1,40 @@
+[build-system]
+
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+
+name = "nf-neuro"
+version = "1.0.0"
+description = "Tools for the NF-NEURO project"
+license = "GPL-3.0-or-later"
+readme = "README.md"
+
+authors = ["The SCIL developers"]
+
+maintainers = [
+    "alex valcourt caron <alex.valcourt.caron@usherbrooke.ca>",
+    "arnaud boré <arnaud.bore@gmail.com>"
+]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10"
+]
+
+homepage = "https://scil.usherbrooke.ca/"
+
+repository = "https://github.com/scilus/nf-neuro.git"
+
+[tool.poetry.dependencies]
+
+python = "<3.11,>=3.9"
+nf-core = "~2.14.1"
+black = "^24.1.1"
+isort = "^5.13.2"

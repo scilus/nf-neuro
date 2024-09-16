@@ -1,0 +1,83 @@
+name: "registration"
+description: |
+  Subworkflow to perform registration between a moving and a fixed image (e.g. T1 -> DWI).
+  It requires as input at least a moving (ch_image) and a reference (ch_ref) image to properly
+  perform registration. Two modes are available:
+  1)  if a metric file is supplied (ch_metric), the subworkflow will use the REGISTER_ANATTODWI
+      module calling AntsRegistration, with the metric as additional target.
+  2)  if NO metric file is supplied, the subworkflow will use the REGISTRATION_ANTS module calling
+      antsRegistrationSyN.sh or antsRegistrationSyNQuick.sh.
+  This subworkflow outputs transformation files that can be used with the ANTSAPPLYTRANSFORMS module
+  to warp any new image. Simply provide your moving image, reference image, and transformations files
+  to the module to register a new image in the current space. Similar steps can be used to register
+  bundles/tractograms using the BUNDLEREGISTRATION module.
+keywords:
+  - Registration
+  - Transformation
+  - DWI
+  - Anatomical
+components:
+  - registration/anattodwi
+  - registration/ants
+input:
+  - ch_image:
+      type: file
+      description: |
+        The input channel containing the moving image files. Typically your anatomical image to be
+        registered to dwi space.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_ref:
+      type: file
+      description: |
+        The input channel containing the fixed image files. Typically a reference image from the dwi
+        space (e.g. b0 image, etc.).
+        Structure: [ val(meta), path(ref) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_metric:
+      type: file
+      description: |
+        The input channel containing the metric files. Supplying this channel will make the subworkflow
+        use the module REGISTER_ANATTODWI calling AntsRegistration using the moving, reference and metric
+        image. For a T1 -> DWI registration, this is typically a FA map.
+        Structure: [ val(meta), path(metric) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_mask:
+      type: file
+      description: |
+        The input channel containing the mask files. Supplying this channel only affect the subworkflow
+        if the ch_metric is NOT supplied. This channel is only being used if the module called is
+        REGISTRATION_ANTS, see the description section above for more details.
+        Structure: [ val(meta), path(mask) ]
+      pattern: "*.{nii,nii.gz}"
+output:
+  - image_warped:
+      type: file
+      description: |
+        Channel containing warped moving images. Typically, this would be the warped T1 in DWI space.
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{nii,nii.gz}"
+  - transfo_image:
+      type: file
+      description: |
+        Channel containing the image transformation files. This channel contains the necessary transformation
+        files (warp and affine) to perform the anatomical -> dwi space registration. Those files could be
+        used in the future to bring anatomical labels into DWI space for connectomics.
+        Structure: [ val(meta), [ path(warp), path(affine) ] ]
+      pattern: "*.{nii,nii.gz,mat}"
+  - transfo_trk:
+      type: file
+      description: |
+        Channel containing the tractogram transformation files. This channel contains the necessary transformation
+        files (inverseAffine, inverseWarp) to perform the dwi -> anatomical space registration. Those files could
+        be used to register tractograms or bundle in the subject's anatomical space.
+        Structure: [ val(meta), [ path(inverseAffine), path(inverseWarp) ]
+      pattern: "*.{nii,nii.gz,mat}"
+  - versions:
+      type: file
+      description: |
+        File containing software versions used.
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@gagnonanthony"

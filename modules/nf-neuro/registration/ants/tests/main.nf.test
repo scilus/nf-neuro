@@ -1,0 +1,95 @@
+nextflow_process {
+
+    name "Test Process REGISTRATION_ANTS"
+    script "../main.nf"
+    process "REGISTRATION_ANTS"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "registration"
+    tag "registration/ants"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "others.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("registration - ants") {
+        config "./nextflow.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_crop.nii.gz"),
+                        file("\${test_data_directory}/t1_resample.nii.gz"),
+                        []
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("registration - ants - quick") {
+        config "./nextflow_quick.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_crop.nii.gz"),
+                        file("\${test_data_directory}/t1_resample.nii.gz"),
+                        []
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("registration - ants - options") {
+        config "./nextflow_options.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_crop.nii.gz"),
+                        file("\${test_data_directory}/t1_resample.nii.gz"),
+                        []
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

@@ -1,0 +1,51 @@
+nextflow_process {
+
+    name "Test Process RECONST_MEANFRF"
+    script "../main.nf"
+    process "RECONST_MEANFRF"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "reconst"
+    tag "reconst/meanfrf"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "processing.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("reconst - meanfrf") {
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [[
+                        file("\${test_data_directory}/frf.txt"),
+                        file("\${test_data_directory}/mfrf.txt"),
+                        file("\${test_data_directory}/nfrf.txt")
+                    ]]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+}

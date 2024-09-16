@@ -1,0 +1,26 @@
+name: Assign reviewers
+
+on:
+  pull_request_target:
+    types: [opened, ready_for_review, reopened]
+
+jobs:
+  assign-reviewers:
+    name: Assign reviewers
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    if: ${{ github.repository == 'scilus/nf-neuro' }}
+    steps:
+      - name: Get review assignment token
+        id: generate-token
+        uses: actions/create-github-app-token@5d869da34e18e7287c1daad50e0b8ea0f506ce69 # v1.11.0
+        with:
+          app-id: ${{ secrets.REVIEW_APP_ID }}
+          private-key: ${{ secrets.REVIEW_APP_KEY }}
+
+      - uses: necojackarc/auto-request-review@e89da1a8cd7c8c16d9de9c6e763290b6b0e3d424 # v0.13.0
+        with:
+          config: .github/reviewers.yml
+          token: ${{ steps.generate-token.outputs.token }}

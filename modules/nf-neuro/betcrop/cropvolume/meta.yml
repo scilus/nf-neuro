@@ -1,0 +1,54 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "betcrop_cropvolume"
+description: Crop empty planes around the data in a volume
+keywords:
+  - nifti
+  - crop
+  - scilpy
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti image file to crop
+      pattern: "*.{nii,nii.gz}"
+
+  - bounding_box:
+      type: file
+      description: Input bounding box to use to crop the image
+      pattern: "*.{pkl}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Cropped Nifti image file
+      pattern: "*_cropped.{nii,nii.gz}"
+
+  - bounding_box:
+      type: file
+      description: Bouding box defining the limits of the crop
+      pattern: "*.pkl"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@AlexVCaron"

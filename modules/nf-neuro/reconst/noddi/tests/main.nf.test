@@ -1,0 +1,88 @@
+nextflow_process {
+
+    name "Test Process RECONST_NODDI"
+    script "../main.nf"
+    process "RECONST_NODDI"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "reconst"
+    tag "reconst/noddi"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( ["commit_amico.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("reconst - noddi - save_kernels - no mask") {
+        when {
+            config "./nextflow_compute_only.config"
+            process {
+            """
+                input[0] = LOAD_DATA.out.test_data_directory
+                        .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        [],
+                        []
+                ]}
+            """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    file(process.out.kernels.get(0)).listFiles().size()
+                ).match() }
+            )
+        }
+
+    }
+
+    test("reconst - noddi - extract_metrics") {
+        when {
+            config "./nextflow_extract_metrics.config"
+            process {
+            """
+                input[0] = LOAD_DATA.out.test_data_directory
+                        .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        file("\${test_data_directory}/mask.nii.gz"),
+                        []
+                ]}
+            """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.dir.get(0).get(1)).name,
+                    file(process.out.fwf.get(0).get(1)).name,
+                    file(process.out.ndi.get(0).get(1)).name,
+                    file(process.out.ecvf.get(0).get(1)).name,
+                    file(process.out.odi.get(0).get(1)).name,
+                    process.out.versions,
+                    file(process.out.kernels.get(0)).listFiles().size()
+                ).match() }
+            )
+        }
+    }
+}

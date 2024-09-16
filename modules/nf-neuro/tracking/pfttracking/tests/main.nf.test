@@ -1,0 +1,119 @@
+nextflow_process {
+
+    name "Test Process TRACKING_PFTTRACKING"
+    script "../main.nf"
+    process "TRACKING_PFTTRACKING"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "tracking"
+    tag "tracking/pfttracking"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "tracking.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("tracking - pfttracking - wm") {
+        config "./nextflow_wm.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/map_wm.nii.gz"),
+                        file("\${test_data_directory}/map_gm.nii.gz"),
+                        file("\${test_data_directory}/map_csf.nii.gz"),
+                        file("\${test_data_directory}/fodf.nii.gz"),
+                        []
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.trk.get(0).get(1)).name,
+                    process.out.config,
+                    process.out.include,
+                    process.out.exclude,
+                    process.out.seeding,
+                    process.out.versions).match() }
+            )
+        }
+    }
+
+    test("tracking - pfttracking - fa") {
+        config "./nextflow_fa.config"
+        when {
+            process {
+            """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/map_wm.nii.gz"),
+                        file("\${test_data_directory}/map_gm.nii.gz"),
+                        file("\${test_data_directory}/map_csf.nii.gz"),
+                        file("\${test_data_directory}/fodf.nii.gz"),
+                        file("\${test_data_directory}/fa.nii.gz")
+                    ]}
+            """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.trk.get(0).get(1)).name,
+                    process.out.config,
+                    process.out.include,
+                    process.out.exclude,
+                    process.out.seeding,
+                    process.out.versions).match() }
+            )
+        }
+    }
+
+    test("tracking - pfttracking - interface") {
+        config "./nextflow_interface.config"
+        when {
+            process {
+            """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/map_wm.nii.gz"),
+                        file("\${test_data_directory}/map_gm.nii.gz"),
+                        file("\${test_data_directory}/map_csf.nii.gz"),
+                        file("\${test_data_directory}/fodf.nii.gz"),
+                        []
+                    ]}
+            """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.trk.get(0).get(1)).name,
+                    process.out.config,
+                    process.out.include,
+                    process.out.exclude,
+                    process.out.versions,
+                    process.out.seeding).match() }
+            )
+        }
+    }
+}

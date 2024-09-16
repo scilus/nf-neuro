@@ -1,0 +1,55 @@
+{
+    "betcrop - antsbet": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet.nii.gz:md5,31ccfe501376952248b4d933645f1304"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet_mask.nii.gz:md5,0874069d069f06bfc40d7f6be2347259"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,e7d67d24efb0a133d53537fed65516de"
+                ],
+                "mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet_mask.nii.gz:md5,0874069d069f06bfc40d7f6be2347259"
+                    ]
+                ],
+                "t1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_bet.nii.gz:md5,31ccfe501376952248b4d933645f1304"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,e7d67d24efb0a133d53537fed65516de"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-23T16:07:14.789765"
+    }
+}

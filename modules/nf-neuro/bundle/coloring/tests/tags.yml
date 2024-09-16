@@ -1,0 +1,2 @@
+bundle/coloring:
+  - "modules/nf-neuro/bundle/coloring/**"

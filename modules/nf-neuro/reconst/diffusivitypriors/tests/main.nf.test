@@ -1,0 +1,86 @@
+nextflow_process {
+
+    name "Test Process RECONST_DIFFUSIVITYPRIORS"
+    script "../main.nf"
+    process "RECONST_DIFFUSIVITYPRIORS"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "reconst"
+    tag "reconst/diffusivitypriors"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "processing.zip", "light.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("reconst - diffusivitypriors - compute_priors") {
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        processing: it.simpleName == "processing"
+                        light: it.simpleName == "light"
+                    }
+
+                input[0] = ch_split_test_data.processing
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/ad.nii.gz"),
+                        file("\${test_data_directory}/rd.nii.gz"),
+                        file("\${test_data_directory}/md.nii.gz"),
+                        []
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("reconst - diffusivitypriors - mean priors") {
+        when {
+            process {
+            """
+            ch_split_test_data = LOAD_DATA.out.test_data_directory
+                .branch{
+                    processing: it.simpleName == "processing"
+                    light: it.simpleName == "light"
+                }
+
+            input[0] = ch_split_test_data.light
+                .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    [],[],[],[],
+                    [file("\${test_data_directory}/priors/s1__iso_diff.txt"),
+                    file("\${test_data_directory}/priors/s1__para_diff.txt"),
+                    file("\${test_data_directory}/priors/s2__iso_diff.txt"),
+                    file("\${test_data_directory}/priors/s2__para_diff.txt")]
+                ]}
+            """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

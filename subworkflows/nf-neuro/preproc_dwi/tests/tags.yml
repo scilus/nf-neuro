@@ -1,0 +1,2 @@
+subworkflows/preproc_dwi:
+  - subworkflows/nf-neuro/preproc_dwi/**
