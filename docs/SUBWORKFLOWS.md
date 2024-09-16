@@ -1,16 +1,16 @@
 # Contributing to nf-neuro <!-- omit in toc -->
 
-- [Adding a new subworkflow to nf-neuro](#adding-a-new-subworkflow-to-nf-neuro)
-  - [Generate the template](#generate-the-template)
-  - [Edit the template](#edit-the-template)
-    - [Edit `main.nf`](#edit-mainnf)
-      - [Define your subworkflow inputs](#define-your-subworkflow-inputs)
-      - [Fill the `main:` section](#fill-the-main-section)
-      - [Define your Workflow outputs](#define-your-workflow-outputs)
-    - [Edit `meta.yml`](#edit-metayml)
-    - [Create test cases](#create-test-cases)
-  - [Lint your code](#lint-your-code)
-  - [Submit your PR](#submit-your-pr)
+* [Adding a new subworkflow to nf-neuro](#adding-a-new-subworkflow-to-nf-neuro)
+  * [Generate the template](#generate-the-template)
+  * [Edit the template](#edit-the-template)
+    * [Edit `main.nf`](#edit-mainnf)
+      * [Define your subworkflow inputs](#define-your-subworkflow-inputs)
+      * [Fill the `main:` section](#fill-the-main-section)
+      * [Define your Workflow outputs](#define-your-workflow-outputs)
+    * [Edit `meta.yml`](#edit-metayml)
+    * [Create test cases](#create-test-cases)
+  * [Lint your code](#lint-your-code)
+  * [Submit your PR](#submit-your-pr)
 
 # Adding a new subworkflow to nf-neuro
 
@@ -152,7 +152,14 @@ Run `prettier` on your new module, through the `nf-core` command line :
 nf-core subworkflows lint <subworkflow>
 ```
 
-and fix all `errors` and as many `warnings` as possible.
+and fix all `errors` and as many `warnings` as possible. If at any point you modified files outside of your module's directory, those also need to be linted. To do so, run the following commands at the root of the repository :
+
+```bash
+prettier --check .
+editorconfig-checker
+```
+
+You'll get lists of syntax errors to fix from both commands. For prettier, you can run `prettier --write .` to fix most of them automatically. For `editorconfig-checker`, you'll have to fix them manually.
 
 ## Submit your PR
 

@@ -18,44 +18,45 @@ primary focus of the library is to provide pre-built processes and processing se
 technologies and made easily available to pipeline's developers through the `nf-core`
 framework.
 
-- [Using modules from `nf-neuro`](#using-modules-from-nf-neuro)
-- [Developing in `nf-neuro`](#developing-in-nf-neuro)
-  - [Manual configuration](#manual-configuration)
-    - [Dependencies](#dependencies)
-    - [Python environment](#python-environment)
-    - [Loading the project's environment](#loading-the-projects-environment)
-    - [Global environment](#global-environment)
-    - [Working with VS Code](#working-with-vs-code)
-  - [Configuration via the `devcontainer` :](#configuration-via-the-devcontainer-)
-- [Contributing to the `nf-neuro` project](#contributing-to-the-nf-neuro-project)
-  - [Adding a new module to nf-neuro](./docs/MODULE.md#adding-a-new-module-to-nf-neuro)
-    - [Generate the template](./docs/MODULE.md#generate-the-template)
-    - [Edit the template](./docs/MODULE.md#edit-the-template)
-      - [Edit `main.nf`:](./docs/MODULE.md#edit-mainnf)
-      - [Edit `environment.yml`:](./docs/MODULE.md#edit-environmentyml)
-      - [Edit `meta.yml`:](./docs/MODULE.md#edit-metayml)
-    - [Create test cases](./docs/MODULE.md#create-test-cases)
-      - [Edit `tests/main.nf.test`:](./docs/MODULE.md#edit-testsmainnftest)
-      - [Edit `tests/nextflow.config`:](./docs/MODULE.md#edit-testsnextflowconfig)
-    - [Generate tests snapshots](./docs/MODULE.md#generate-tests-snapshots)
-    - [Lint your code](./docs/MODULE.md#lint-your-code)
-    - [Submit your PR](./docs/MODULE.md#submit-your-pr)
-  - [Defining optional input parameters](./docs/MODULE.md#defining-optional-input-parameters)
-  - [Test data infrastructure](./docs/MODULE.md#test-data-infrastructure)
-  - [Adding a new subworkflow to nf-neuro](./docs/SUBWORKFLOWS.md#adding-a-new-subworkflow-to-nf-neuro)
-    - [Generate the template](./docs/SUBWORKFLOWS.md#generate-the-template)
-    - [Edit the template](./docs/SUBWORKFLOWS.md#edit-the-template)
-      - [Edit `main.nf`](./docs/SUBWORKFLOWS.md#edit-mainnf)
-        - [Define your subworkflow inputs](./docs/SUBWORKFLOWS.md#define-your-subworkflow-inputs)
-        - [Fill the `main:` section](./docs/SUBWORKFLOWS.md#fill-the-main-section)
-        - [Define your Workflow outputs](./docs/SUBWORKFLOWS.md#define-your-workflow-outputs)
-      - [Edit `meta.yml`](./docs/SUBWORKFLOWS.md#edit-metayml)
-      - [Create test cases](./docs/SUBWORKFLOWS.md#create-test-cases)
-    - [Lint your code](./docs/SUBWORKFLOWS.md#lint-your-code)
-    - [Submit your PR](./docs/SUBWORKFLOWS.md#submit-your-pr)
-- [Running tests](#running-tests)
-- [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
-- [Installing Prettier](#installing-prettier)
+* [Using modules from `nf-neuro`](#using-modules-from-nf-neuro)
+* [Developing in `nf-neuro`](#developing-in-nf-neuro)
+  * [Manual configuration](#manual-configuration)
+    * [Dependencies](#dependencies)
+    * [Python environment](#python-environment)
+    * [Loading the project's environment](#loading-the-projects-environment)
+    * [Global environment](#global-environment)
+    * [Working with VS Code](#working-with-vs-code)
+  * [Configuration via the `devcontainer`](#configuration-via-the-devcontainer)
+* [Contributing to the `nf-neuro` project](#contributing-to-the-nf-neuro-project)
+  * [Adding a new module to nf-neuro](./docs/MODULE.md#adding-a-new-module-to-nf-neuro)
+    * [Generate the template](./docs/MODULE.md#generate-the-template)
+    * [Edit the template](./docs/MODULE.md#edit-the-template)
+      * [Edit `main.nf`](./docs/MODULE.md#edit-mainnf)
+      * [Edit `environment.yml`](./docs/MODULE.md#edit-environmentyml)
+      * [Edit `meta.yml`](./docs/MODULE.md#edit-metayml)
+    * [Create test cases](./docs/MODULE.md#create-test-cases)
+      * [Edit `tests/main.nf.test`](./docs/MODULE.md#edit-testsmainnftest)
+      * [Edit `tests/nextflow.config`](./docs/MODULE.md#edit-testsnextflowconfig)
+    * [Generate tests snapshots](./docs/MODULE.md#generate-tests-snapshots)
+    * [Lint your code](./docs/MODULE.md#lint-your-code)
+    * [Submit your PR](./docs/MODULE.md#submit-your-pr)
+  * [Defining optional input parameters](./docs/MODULE.md#defining-optional-input-parameters)
+  * [Test data infrastructure](./docs/MODULE.md#test-data-infrastructure)
+  * [Adding a new subworkflow to nf-neuro](./docs/SUBWORKFLOWS.md#adding-a-new-subworkflow-to-nf-neuro)
+    * [Generate the template](./docs/SUBWORKFLOWS.md#generate-the-template)
+    * [Edit the template](./docs/SUBWORKFLOWS.md#edit-the-template)
+      * [Edit `main.nf`](./docs/SUBWORKFLOWS.md#edit-mainnf)
+        * [Define your subworkflow inputs](./docs/SUBWORKFLOWS.md#define-your-subworkflow-inputs)
+        * [Fill the `main:` section](./docs/SUBWORKFLOWS.md#fill-the-main-section)
+        * [Define your Workflow outputs](./docs/SUBWORKFLOWS.md#define-your-workflow-outputs)
+      * [Edit `meta.yml`](./docs/SUBWORKFLOWS.md#edit-metayml)
+      * [Create test cases](./docs/SUBWORKFLOWS.md#create-test-cases)
+    * [Lint your code](./docs/SUBWORKFLOWS.md#lint-your-code)
+    * [Submit your PR](./docs/SUBWORKFLOWS.md#submit-your-pr)
+* [Running tests](#running-tests)
+* [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
+* [Installing Prettier and editorconfig](#installing-prettier-and-editorconfig)
+
 
 # Using modules from `nf-neuro`
 
@@ -187,7 +188,7 @@ This will make it so the `nf-core` commands target the right repository by defau
 The `nf-neuro` project curates a bundle of useful extensions for Visual Studio Code, the `nf-neuro-extensions` package. You can find it easily on the [extension
 marketplace](https://marketplace.visualstudio.com/items?itemName=nf-neuro.nf-neuro-extensions).
 
-## Configuration via the `devcontainer` :
+## Configuration via the `devcontainer`
 
 The `devcontainer` definition for the project contains all required dependencies and setup
 steps are automatically executed. To use this installation method, you need to have **Docker** (refer to [this section](#configuring-docker-for-easy-usage) for configuration requirements or validate your configuration) and **Visual Studio Code** installed on your system.
@@ -238,9 +239,9 @@ sudo usermod -aG docker $USER
 
 After running this command, you need to log out and log back in to apply the changes.
 
-# Installing Prettier
+# Installing Prettier and editorconfig
 
-To install **Prettier** for the project, you need to have `node` and `npm` installed on your system to at least version 14. On Ubuntu, you can do it using snap :
+To install **Prettier** and **editorconfig** for the project, you need to have `node` and `npm` installed on your system to at least version 14. On Ubuntu, you can do it using snap :
 
 ```bash
 sudo snap install node --classic
@@ -255,6 +256,8 @@ curl -fsSL https://deb.nodesource.com/setup_${NODE_MAJOR}.x | bash - &&\
 apt-get install -y nodejs
 
 npm install --save-dev --save-exact prettier
+npm install --save-dev --save-exact editorconfig-checker
 
 echo "function prettier() { npm exec prettier $@; }" >> ~/.bashrc
+echo "function editorconfig-checker() { npm exec editorconfig-checker $@; }" >> ~/.bashrc
 ```
