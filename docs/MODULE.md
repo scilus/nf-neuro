@@ -1,19 +1,19 @@
 # Contributing to nf-neuro <!-- omit in toc -->
 
-* [Adding a new module to nf-neuro](#adding-a-new-module-to-nf-neuro)
-  * [Generate the template](#generate-the-template)
-  * [Edit the template](#edit-the-template)
-    * [Edit `main.nf`:](#edit-mainnf)
-    * [Edit `environment.yml`:](#edit-environmentyml)
-    * [Edit `meta.yml`:](#edit-metayml)
-  * [Create test cases](#create-test-cases)
-    * [Edit `tests/main.nf.test`:](#edit-testsmainnftest)
-    * [Edit `tests/nextflow.config`:](#edit-testsnextflowconfig)
-  * [Generate tests snapshots](#generate-tests-snapshots)
-  * [Lint your code](#lint-your-code)
-  * [Submit your PR](#submit-your-pr)
-* [Defining optional input parameters](#defining-optional-input-parameters)
-* [Test data infrastructure](#test-data-infrastructure)
+- [Adding a new module to nf-neuro](#adding-a-new-module-to-nf-neuro)
+  - [Generate the template](#generate-the-template)
+  - [Edit the template](#edit-the-template)
+    - [Edit `main.nf`:](#edit-mainnf)
+    - [Edit `environment.yml`:](#edit-environmentyml)
+    - [Edit `meta.yml`:](#edit-metayml)
+  - [Create test cases](#create-test-cases)
+    - [Edit `tests/main.nf.test`:](#edit-testsmainnftest)
+    - [Edit `tests/nextflow.config`:](#edit-testsnextflowconfig)
+  - [Generate tests snapshots](#generate-tests-snapshots)
+  - [Lint your code](#lint-your-code)
+  - [Submit your PR](#submit-your-pr)
+- [Defining optional input parameters](#defining-optional-input-parameters)
+- [Test data infrastructure](#test-data-infrastructure)
 
 # Adding a new module to nf-neuro
 
@@ -316,7 +316,7 @@ nf-core modules test -u <category>/<tool>
 ```
 
 All the test case you defined will be run, watch out for errors ! Once everything runs
-smoothly, look at the snapshot file produced at `tests/main.nf.test.snap` in your module's 
+smoothly, look at the snapshot file produced at `tests/main.nf.test.snap` in your module's
 directory and validate that ALL outputs produced by test cases are caught. Their `md5sum` is
 critical to ensure future executions of your test produce valid outputs.
 

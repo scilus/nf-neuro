@@ -1,16 +1,16 @@
 # Contributing to nf-neuro <!-- omit in toc -->
 
-* [Adding a new subworkflow to nf-neuro](#adding-a-new-subworkflow-to-nf-neuro)
-  * [Generate the template](#generate-the-template)
-  * [Edit the template](#edit-the-template)
-    * [Edit `main.nf`](#edit-mainnf)
-      * [Define your subworkflow inputs](#define-your-subworkflow-inputs)
-      * [Fill the `main:` section](#fill-the-main-section)
-      * [Define your Workflow outputs](#define-your-workflow-outputs)
-    * [Edit `meta.yml`](#edit-metayml)
-    * [Create test cases](#create-test-cases)
-  * [Lint your code](#lint-your-code)
-  * [Submit your PR](#submit-your-pr)
+- [Adding a new subworkflow to nf-neuro](#adding-a-new-subworkflow-to-nf-neuro)
+  - [Generate the template](#generate-the-template)
+  - [Edit the template](#edit-the-template)
+    - [Edit `main.nf`](#edit-mainnf)
+      - [Define your subworkflow inputs](#define-your-subworkflow-inputs)
+      - [Fill the `main:` section](#fill-the-main-section)
+      - [Define your Workflow outputs](#define-your-workflow-outputs)
+    - [Edit `meta.yml`](#edit-metayml)
+    - [Create test cases](#create-test-cases)
+  - [Lint your code](#lint-your-code)
+  - [Submit your PR](#submit-your-pr)
 
 # Adding a new subworkflow to nf-neuro
 
