@@ -13,5 +13,11 @@
     "git.allowForcePush": true,
     "git.branchProtection": ["main"],
     "git.branchProtectionPrompt": "alwaysPrompt",
-    "github.branchProtection": true
+    "github.branchProtection": true,
+    "testDataExplorer.repository": "scilus/nf-neuro",
+    "testDataExplorer.branch": "main",
+    "testDataExplorer.dataserver": "scil.usherbrooke.ca",
+    "testDataExplorer.serverdatalocation": "scil_test_data/dvc-store/files/md5",
+    "testDataExplorer.localListingLocation": "tests/test_data.json",
+    "testDataExplorer.remoteListingLocation": "tests/test_data.json"
 }

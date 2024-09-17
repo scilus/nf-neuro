@@ -6,8 +6,7 @@ on:
   merge_group:
     types:
       - checks_requested
-    branches:
-      -main
+    branches: -main
 
 # Cancel if a newer run is started
 concurrency:

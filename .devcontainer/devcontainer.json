@@ -52,10 +52,8 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "[prettier]": {
-                    "prettierPath": "/usr/lib/node_modules/prettier"
-                },
-                "[python]": {
+                "prettier.prettierPath": "/usr/lib/node_modules/prettier",
+                "python": {
                     "analysis.exclude": [
                         "${containerWorkspaceFolder}/.dvc",
                         "${containerWorkspaceFolder}/.pytest_cache",
@@ -83,13 +81,7 @@
                     "terminal.focusAfterLaunch": true
                 }
             },
-            "extensions": [
-                "nf-neuro.nf-neuro-extensions",
-                "ms-python.autopep8",
-                "ms-python.vscode-pylance",
-                "mutantdino.resourcemonitor",
-                "KorbinianEckstein.niivue"
-            ]
+            "extensions": ["nf-neuro.nf-neuro-extensionpack"]
         }
     },
     "init": true,

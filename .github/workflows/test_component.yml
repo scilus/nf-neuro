@@ -9,14 +9,14 @@ on:
         type: string
       profile:
         description: "Which profile to use to run the component's tests"
-        default: 'docker'
+        default: "docker"
         type: choice
         options:
           - docker
           - singularity
       runner:
         description: "Runner label to use for the test run"
-        default: 'ubuntu-latest'
+        default: "ubuntu-latest"
         type: string
       nextflow_version:
         description: "Nextflow version to use"
@@ -39,11 +39,11 @@ on:
           Which profile to use to run the component's tests, either :
             - docker
             - singularity
-        default: 'docker'
+        default: "docker"
         type: string
       runner:
         description: "Runner label to use for the test run"
-        default: 'ubuntu-latest'
+        default: "ubuntu-latest"
         type: string
       nextflow_version:
         description: "Nextflow version to use"
@@ -78,7 +78,7 @@ jobs:
       - uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
         with:
           python-version: "3.11"
-          cache: 'pip'
+          cache: "pip"
       - uses: actions/setup-java@2dfa2011c5b2a0f1489bf9e433881c92c1631f88 # v4.3.0
         with:
           distribution: "temurin"
