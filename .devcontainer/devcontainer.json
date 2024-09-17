@@ -7,9 +7,7 @@
             "POETRY_VERSION": "1.8.*"
         }
     },
-    "forwardPorts": [
-        3000
-    ],
+    "forwardPorts": [3000],
     "onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
     "updateContentCommand": "bash .devcontainer/updateContentCommand.sh",
     "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
@@ -83,9 +81,7 @@
                     "terminal.focusAfterLaunch": true
                 }
             },
-            "extensions": [
-                "nf-neuro.nf-neuro-extensionpack"
-            ]
+            "extensions": ["nf-neuro.nf-neuro-extensionpack"]
         }
     },
     "init": true,
