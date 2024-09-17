@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
         with:
-          cache: 'pip'
+          cache: "pip"
       - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
         # FIXME Flip this off once we get to less than a couple hundred. Adding
         # this so it will only run against changed files. It'll make it much
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: "20"
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install Prettier
         run: npm ci
@@ -55,7 +55,7 @@ jobs:
       - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: "20"
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install editorconfig-checker
         run: npm ci
@@ -101,9 +101,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module: [
-          "${{ fromJson(needs.nf-test-changes.outputs.modules) }}"
-        ]
+        module: ["${{ fromJson(needs.nf-test-changes.outputs.modules) }}"]
     uses: ./.github/workflows/lint_component.yml
     with:
       type: "module"
@@ -118,9 +116,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        subworkflow: [
-          "${{ fromJson(needs.nf-test-changes.outputs.subworkflows) }}"
-        ]
+        subworkflow: ["${{ fromJson(needs.nf-test-changes.outputs.subworkflows) }}"]
     uses: ./.github/workflows/lint_component.yml
     with:
       type: "subworkflow"
@@ -135,7 +131,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        path: [ "${{ fromJson(needs.nf-test-changes.outputs.paths) }}" ]
+        path: ["${{ fromJson(needs.nf-test-changes.outputs.paths) }}"]
         include:
           - profile: docker
           - runner: scilus-nf-neuro-runners

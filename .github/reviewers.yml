@@ -38,36 +38,36 @@ reviewers:
       - gagnonanthony
 
 files:
-  '**':
+  "**":
     - infrastructure-leads
     - repository-owners
-  'docs/**':
+  "docs/**":
     - documentation-leads
-  'LICENSE':
+  "LICENSE":
     - repository-owners
-  'CONTRIBUTING.md':
+  "CONTRIBUTING.md":
     - repository-owners
     - documentation-leads
-  '.devcontainer/**':
+  ".devcontainer/**":
     - infrastructure-leads
-  '.github/**':
+  ".github/**":
     - infrastructure-leads
-  '.github/ISSUE_TEMPLATE/**':
-    - infrastructure-leads
-    - documentation-leads
-  '.github/PULL_REQUEST_TEMPLATE/**':
+  ".github/ISSUE_TEMPLATE/**":
     - infrastructure-leads
     - documentation-leads
-  '.github/pull_request_template.md':
+  ".github/PULL_REQUEST_TEMPLATE/**":
     - infrastructure-leads
     - documentation-leads
-  '.vscode/**':
+  ".github/pull_request_template.md":
     - infrastructure-leads
-  'tests/**':
+    - documentation-leads
+  ".vscode/**":
     - infrastructure-leads
-  'modules/nf-neuro/**':
+  "tests/**":
+    - infrastructure-leads
+  "modules/nf-neuro/**":
     - guidelines-leads
-  'subworkflows/nf-neuro/**':
+  "subworkflows/nf-neuro/**":
     - guidelines-leads
 
 options:
