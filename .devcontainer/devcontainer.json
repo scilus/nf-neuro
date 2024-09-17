@@ -7,7 +7,9 @@
             "POETRY_VERSION": "1.8.*"
         }
     },
-    "forwardPorts": [3000],
+    "forwardPorts": [
+        3000
+    ],
     "onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
     "updateContentCommand": "bash .devcontainer/updateContentCommand.sh",
     "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
@@ -52,10 +54,8 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "[prettier]": {
-                    "prettierPath": "/usr/lib/node_modules/prettier"
-                },
-                "[python]": {
+                "prettier.prettierPath": "/usr/lib/node_modules/prettier",
+                "python": {
                     "analysis.exclude": [
                         "${containerWorkspaceFolder}/.dvc",
                         "${containerWorkspaceFolder}/.pytest_cache",
@@ -84,11 +84,7 @@
                 }
             },
             "extensions": [
-                "nf-neuro.nf-neuro-extensions",
-                "ms-python.autopep8",
-                "ms-python.vscode-pylance",
-                "mutantdino.resourcemonitor",
-                "KorbinianEckstein.niivue"
+                "nf-neuro.nf-neuro-extensionpack"
             ]
         }
     },
