@@ -9,7 +9,7 @@
 [![Imports: nf-core](https://img.shields.io/badge/nf--core-nf?label=import&style=flat&labelColor=ef8336&color=24B064)](https://pycqa.github.io/nf-core/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
-![Checks](https://github.com/scilus/nf-neuro/workflows/nf-neuro%20merge%20checks/badge.svg)
+![Checks](https://github.com/scilus/nf-neuro/workflows/Merge%20to%20main%20checks/badge.svg)
 
 Welcome to the `nf-neuro` project ! A **Nextflow** modules and workflows repository for neuroimaging
 maintained by the [SCIL team](https://scil-documentation.readthedocs.io/en/latest/). The
