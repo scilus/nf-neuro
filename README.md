@@ -74,13 +74,13 @@ a list of the available modules, run :
 nf-core modules --git-remote https://github.com/scilus/nf-neuro.git list remote
 ```
 
-The same can be done for subworkflows, replacing `modules` in the `nf-core` command by `subworkflows, e.g. :
+The same can be done for subworkflows, replacing `modules` in the `nf-core` command by `subworkflows :
 
 ```bash
 nf-core subworkflows --git-remote https://github.com/scilus/nf-neuro.git install <category>/<subworkflow>
 ```
 
-It can become heavy to always prepend the commands with `--git-remote`, even so if you need to specify a `--branch` where to fetch the information. You can instead define the `git-remote` and `branch` using _Environment Variables_ :
+It can become heavy to always prepend the commands with `--git-remote`, more so if you need to specify a `--branch` where to fetch the information. You can instead define the `git-remote` and `branch` using _Environment Variables_ :
 
 ```bash
 export NFCORE_MODULES_GIT_REMOTE=https://github.com/scilus/nf-neuro.git
@@ -103,9 +103,9 @@ The `nf-neuro` project requires some specific tools to be installed on your syst
 - Docker &geq; 24 (we recommend using [Docker Desktop](https://www.docker.com/products/docker-desktop))
 - Java Runtime &geq; 11, &leq; 17
   - On Ubuntu, install `openjdk-jre-<version>` packages
-- Nextflow &geq; 21.04.3
-- nf-test &geq; 0.9.0-rc1
-- Node &geq; 14 and Prettier (see [below](#installing-prettier))
+- Nextflow &geq; 23.04.0
+- nf-test &geq; 0.9.0
+- Node &geq; 14, `Prettier` and `editorconfig` (see [below](#installing-prettier-and-editorconfig))
 
 > [!IMPORTANT]
 > Nextflow might not detect the right `Java virtual machine` by default, more so if
@@ -117,7 +117,7 @@ The `nf-neuro` project requires some specific tools to be installed on your syst
 > - MacOS : if the `Java jvm` is the preferential one, use `JAVA_HOME=$(/usr/libexec/java_home)`.
 >   Else, look into `/Library/Java/JavaVirtualMachines` for the folder with the correct
 >   runtime version (named `jdk<inner version>_1<runtime version>.jdk`) and use the
->   following : `/Library/Java/JavaVirtualMachines/dk<inner version>_1<runtime version>.jdk/Contents/Home`.
+>   following : `/Library/Java/JavaVirtualMachines/jdk<inner version>_1<runtime version>.jdk/Contents/Home`.
 
 ### Python environment
 
@@ -185,7 +185,7 @@ This will make it so the `nf-core` commands target the right repository by defau
 ### Working with VS Code
 
 The `nf-neuro` project curates a bundle of useful extensions for Visual Studio Code, the `nf-neuro-extensions` package. You can find it easily on the [extension
-marketplace](https://marketplace.visualstudio.com/items?itemName=nf-neuro.nf-neuro-extensions).
+marketplace](https://marketplace.visualstudio.com/items?itemName=nf-neuro.nf-neuro-extensionpack).
 
 ## Configuration via the `devcontainer`
 
@@ -201,15 +201,20 @@ environment.
   - `nf-neuro`, `nf-core` all accessible through the terminal, which is configured to load
     the `poetry` environment in shells automatically
   - `nf-neuro` configured as the main repository for all `nf-core` commands, using `NFCORE_*` environment variables
-  - `git`, `git-lfs`, `github-cli`
+  - `git`, `github-cli`
   - `curl`, `wget`, `apt-get`
   - `nextflow`, `nf-test`, `docker`, `tmux`
 
 - Available in the VS Code IDE through extensions :
   - Docker images and containers management
+  - Nextflow execution environemnt
   - Python and C++ linting, building and debugging tools
   - Github Pull Requests management
   - Github flavored markdown previewing
+  - Test Data introspection
+  - Resource monitoring
+  - Remote development
+  - Live sharing with collaborators
 
 # Contributing to the `nf-neuro` project
 
