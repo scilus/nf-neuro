@@ -13,6 +13,7 @@ nextflow_workflow {
     tag "registration/anattodwi"
     tag "registration"
     tag "registration/ants"
+    tag "registration/easyreg"
 
     tag "load_test_data"
 
@@ -29,7 +30,7 @@ nextflow_workflow {
     }
 
     test("registration - antsRegistration") {
-
+        config "./nextflow.config"
         when {
             workflow {
                 """
@@ -49,6 +50,8 @@ nextflow_workflow {
                         file("\${test_data_directory}/fa.nii.gz")
                     ]}
                 input[3] = []
+                input[4] = []
+                input[5] = []
                 """
             }
         }
@@ -56,13 +59,18 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1)),
+                    workflow.out.transfo_image,
+                    workflow.out.transfo_trk,
+                    workflow.out.versions
+                ).match()}
             )
         }
     }
 
     test("registration - SyNQuick") {
-
+        config "./nextflow.config"
         when {
             workflow {
                 """
@@ -78,6 +86,8 @@ nextflow_workflow {
                     ]}
                 input[2] = []
                 input[3] = []
+                input[4] = []
+                input[5] = []
                 """
             }
         }
@@ -85,7 +95,51 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1)),
+                    workflow.out.transfo_image,
+                    workflow.out.transfo_trk,
+                    workflow.out.versions
+                ).match()}
+            )
+        }
+    }
+
+    test("registration - surgery") {
+        config "./nextflow_surgery.config"
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/mni_masked_2x2x2.nii.gz")
+                    ]}
+                input[1] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/b0_mean.nii.gz")
+                    ]}
+                input[2] = []
+                input[3] = []
+                input[4] = []
+                input[5] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.ref_warped.get(0).get(1)),
+                    workflow.out.transfo_image,
+                    workflow.out.transfo_trk,
+                    niftiMD5SUM(workflow.out.segmentation.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.ref_segmentation.get(0).get(1)),
+                    workflow.out.versions
+                ).match()}
             )
         }
     }

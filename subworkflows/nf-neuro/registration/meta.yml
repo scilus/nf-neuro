@@ -2,11 +2,13 @@ name: "registration"
 description: |
   Subworkflow to perform registration between a moving and a fixed image (e.g. T1 -> DWI).
   It requires as input at least a moving (ch_image) and a reference (ch_ref) image to properly
-  perform registration. Two modes are available:
+  perform registration. Three modes are available:
   1)  if a metric file is supplied (ch_metric), the subworkflow will use the REGISTER_ANATTODWI
       module calling AntsRegistration, with the metric as additional target.
   2)  if NO metric file is supplied, the subworkflow will use the REGISTRATION_ANTS module calling
       antsRegistrationSyN.sh or antsRegistrationSyNQuick.sh.
+  3)  alternatively, if the run_synth parameter is activated, the subworkflow will use the REGISTRATION_EASYREG module
+      calling mri_easyreg.
   This subworkflow outputs transformation files that can be used with the ANTSAPPLYTRANSFORMS module
   to warp any new image. Simply provide your moving image, reference image, and transformations files
   to the module to register a new image in the current space. Similar steps can be used to register
@@ -19,6 +21,7 @@ keywords:
 components:
   - registration/anattodwi
   - registration/ants
+  - registration/easyreg
 input:
   - ch_image:
       type: file
@@ -50,6 +53,20 @@ input:
         REGISTRATION_ANTS, see the description section above for more details.
         Structure: [ val(meta), path(mask) ]
       pattern: "*.{nii,nii.gz}"
+  - ch_segmentation:
+      type: file
+      description: |
+        The input channel containing the the SynthSeg v2 (non-robust) segmentation + parcellation of the moving (floating in Easyreg naming convention) image.
+        If it does not exist, Easyreg will create it. If it already exists (e.g., from a previous EasyReg run),
+        then EasyReg will read it from disk (which is faster than segmenting).
+      pattern: "*.{nii,nii.gz}"
+  - ch_ref_segmentation:
+      type: file
+      description: |
+        The input channel containing the SynthSeg v2 (non-robust) segmentation + parcellation of the fixed (reference in Easyreg naming convention) image.
+        If it does not exist, Easyreg will create it. If it already exists (e.g., from a previous EasyReg run),
+        then EasyReg will read it from disk (which is faster than segmenting).
+      pattern: "*.{nii,nii.gz}"
 output:
   - image_warped:
       type: file
@@ -73,6 +90,16 @@ output:
         be used to register tractograms or bundle in the subject's anatomical space.
         Structure: [ val(meta), [ path(inverseAffine), path(inverseWarp) ]
       pattern: "*.{nii,nii.gz,mat}"
+  - out_segmentation:
+      type: file
+      description: |
+        Channel containing the file with the SynthSeg v2 (non-robust) segmentation + parcellation of the moving (floating in Easyreg naming convention) image.
+      pattern: "*.{nii,nii.gz}"
+  - out_ref_segmentation:
+      type: file
+      description: |
+        Channel containing the file with the SynthSeg v2 (non-robust) segmentation + parcellation of the fixed (reference in Easyreg naming convention) image.
+      pattern: "*.{nii,nii.gz}"
   - versions:
       type: file
       description: |
