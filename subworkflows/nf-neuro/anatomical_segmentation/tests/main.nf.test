@@ -3,7 +3,6 @@ nextflow_workflow {
     name "Test Subworkflow ANATOMICAL_SEGMENTATION"
     script "../main.nf"
     workflow "ANATOMICAL_SEGMENTATION"
-    config "./nextflow.config"
 
     tag "subworkflows"
     tag "subworkflows_nfcore"
@@ -28,7 +27,7 @@ nextflow_workflow {
         }
 
     test("anatomical_segmentation - fslfast") {
-
+        config "./nextflow.config"
         when {
             workflow {
                 """
@@ -51,13 +50,21 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    niftiMD5SUM(workflow.out.wm_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.gm_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.csf_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.wm_map.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.gm_map.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.csf_map.get(0).get(1)),
+                    workflow.out.versions
+                ).match()}
             )
         }
     }
 
     test("anatomical_segmentation - freesurferseg") {
-
+        config "./nextflow.config"
         when {
             workflow {
                 """
@@ -81,7 +88,46 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    niftiMD5SUM(workflow.out.wm_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.gm_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.csf_mask.get(0).get(1)),
+                    workflow.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("anatomical_segmentation - synthseg") {
+        config "./nextflow_synthseg.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        T1w: it.simpleName == "T1w"
+                        freesurfer: it.simpleName == "freesurfer_nifti"
+                    }
+                input[0] = ch_split_test_data.T1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/anat/anat_image.nii.gz", checkIfExists: true),
+                        []
+                    ]}
+                input[1] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    niftiMD5SUM(workflow.out.wm_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.gm_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.csf_mask.get(0).get(1)),
+                    workflow.out.versions
+                ).match()}
             )
         }
     }
