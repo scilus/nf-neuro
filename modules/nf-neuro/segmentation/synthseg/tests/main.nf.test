@@ -1,0 +1,156 @@
+nextflow_process {
+
+    name "Test Process SEGMENTATION_SYNTHSEG"
+    script "../main.nf"
+    process "SEGMENTATION_SYNTHSEG"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "segmentation"
+    tag "segmentation/synthseg"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "heavy.zip", "freesurfer.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("segmentation - synthseg - basic") {
+        config "./nextflow_basic.config"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        heavy: it.simpleName == "heavy"
+                        freesurfer: it.simpleName == "freesurfer"
+                    }
+                ch_anat = ch_split_test_data.heavy.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
+                        []
+                    ]
+                }
+                ch_license = ch_split_test_data.freesurfer.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/license.txt")
+                    ]
+                }
+                input[0] = ch_anat
+                    .join(ch_license)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.wm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.gm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.csf_mask.get(0).get(1)),
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("segmentation - synthseg - options") {
+        config "./nextflow_options.config"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        heavy: it.simpleName == "heavy"
+                        freesurfer: it.simpleName == "freesurfer"
+                    }
+                ch_anat = ch_split_test_data.heavy.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
+                        []
+                    ]
+                }
+                ch_license = ch_split_test_data.freesurfer.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/license.txt")
+                    ]
+                }
+                input[0] = ch_anat
+                    .join(ch_license)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.wm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.gm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.csf_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.parc.get(0).get(1)),
+                    process.out.resample,
+                    process.out.vol,
+                    process.out.qc,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("segmentation - synthseg - lesion") {
+        config "./nextflow_basic.config"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        heavy: it.simpleName == "heavy"
+                        freesurfer: it.simpleName == "freesurfer"
+                    }
+                ch_anat = ch_split_test_data.heavy.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
+                        file("\${test_data_directory}/anat/anat_mask.nii.gz")
+                    ]
+                }
+                ch_license = ch_split_test_data.freesurfer.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/license.txt")
+                    ]
+                }
+                input[0] = ch_anat
+                    .join(ch_license)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.wm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.gm_mask.get(0).get(1)),
+                    niftiMD5SUM(process.out.csf_mask.get(0).get(1)),
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+}

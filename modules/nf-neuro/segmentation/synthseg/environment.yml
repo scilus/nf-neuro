@@ -1,0 +1,7 @@
+---
+name: "segmentation_synthseg"
+channels:
+  - Docker
+  - Apptainer
+dependencies:
+  - "Freesurfer"
