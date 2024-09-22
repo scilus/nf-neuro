@@ -1,0 +1,7 @@
+---
+name: "registration_synthregistration"
+channels:
+  - Docker
+  - Apptainer
+dependencies:
+  - "Freesurfer:synthmorph"

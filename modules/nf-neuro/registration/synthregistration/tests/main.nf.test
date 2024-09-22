@@ -1,0 +1,53 @@
+nextflow_process {
+
+    name "Test Process REGISTRATION_SYNTHREGISTRATION"
+    script "../main.nf"
+    process "REGISTRATION_SYNTHREGISTRATION"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "registration"
+    tag "registration/synthregistration"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-scil/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "freesurfer.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("registration - synthregistration") {
+        config "./nextflow.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ],
+                    file("\${test_data_directory}/t1.nii.gz"),
+                    file("\${test_data_directory}/fa.nii.gz")
+                ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.warped_image.get(0).get(1)),
+                    niftiMD5SUM(process.out.deform_transform.get(0).get(1)),
+                    process.out.init_transform,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+}
