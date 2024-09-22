@@ -21,7 +21,7 @@ description: |
     Resamples the T1 to an isotropic spatial resolution. The default is 1mm, a standard in humans which
     usually facilitate registration with corrected DWI images.
     This spatial resolution is modifiable in the configuration file.
-  Brain Extraction (bet, ANTs).
+  Brain Extraction (bet, ANTs, freesurfer).
     Isolates the brain tissue voxels from the remaining image. Also creates a binary brain mask.
     This brain extraction is required for the T1 to DWI Registration.
   Cropping (scil).
@@ -42,6 +42,7 @@ components:
   - preproc/n4
   - image/resample
   - betcrop/antsbet
+  - betcrop/synthbet
   - betcrop/cropvolume
 
 input:
@@ -81,6 +82,12 @@ input:
         The input channel containing the reference for the resampling. Optional
         Structure: [ val(meta), path(ref) ]
       pattern: "*.{nii,nii.gz}"
+  - ch_weights:
+      type: file
+      description: |
+        The input channel containing an alternative model weights for synthbet. Optional
+        Structure: [ val(meta), path (weights)]
+      pattern: "*.pt"
 output:
   - image_nlmeans:
       type: file
