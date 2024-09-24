@@ -1,0 +1,25 @@
+{
+    "registration - synthregistration": {
+        "content": [
+            "test__output_warped.nii.gz:md5:header,a1c8a7cfd88d5b632700819988507e8b,data,2526d950d4d6786c40faf5285e2f08af",
+            "test__deform_warp.nii.gz:md5:header,4a9989cf78e087331c587e0d656ee96f,data,3dcaa6acc0ee1a933d8792d9c2fc740d",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__init_warp.lta:md5,eb15bf7f338f1d5bd71227c40b6dbc68"
+                ]
+            ],
+            [
+                "versions.yml:md5,49fb9c85da9f696926d1ab46ef0968fb"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-24T17:03:44.420784"
+    }
+}
