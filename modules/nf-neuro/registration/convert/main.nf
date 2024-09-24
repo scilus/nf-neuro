@@ -3,7 +3,6 @@ process REGISTRATION_CONVERT {
     label 'process_single'
 
     container "freesurfer/freesurfer:7.4.1"
-    containerOptions "--entrypoint ''"
     containerOptions "--env FSLOUTPUTTYPE='NIFTI_GZ'"
 
     input:
