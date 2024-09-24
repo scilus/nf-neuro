@@ -10,7 +10,7 @@ process REGISTRATION_CONVERT {
     tuple val(meta), path(affine), path(deform), path(source), path(target) /* optional, value = [] */, path(fs_license) /* optional, value = [] */
 
     output:
-    tuple val(meta), path("*.{txt,lta,mat,dat}"), emit: init_transform
+    tuple val(meta), path("*.{txt,lta,mat,dat}"), emit: affine_transform
     tuple val(meta), path("*.{nii,nii.gz,mgz,m3z}"), emit: deform_transform
     path "versions.yml"           , emit: versions
 

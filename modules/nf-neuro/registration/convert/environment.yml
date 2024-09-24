@@ -1,7 +1,3 @@
----
-name: "registration_convert"
-channels:
-  - Docker
-  - Apptainer
-dependencies:
-  - "Freesurfer"
+channels: []
+dependencies: []
+name: registration_convert

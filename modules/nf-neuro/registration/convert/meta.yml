@@ -1,10 +1,11 @@
 ---
 name: "registration_convert"
-description: Freesurfer transform conversion tool. Default usage is aim at receiving freesurfer format and converting to ANTs (ITK). See lta_convert --help and mri_warp_convert --help for alternatives.
+description: Freesurfer transform conversion tool. Default usage is aim at receiving freesurfer format and converting to ANTs (ITK). See lta_convert --help and mri_warp_convert --help for options.
 keywords:
   - Registration
   - Brain imaging
   - MRI
+  - Conversion
 tools:
   - "Freesurfer":
       description: "Freesurfer lta_convert (affine conversion) and mri_warp_convert (deform) tools for transform conversion"
@@ -50,9 +51,9 @@ output:
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
 
-  - init_transform:
+  - affine_transform:
       type: file
-      description: Init transform. Default usage outputs ANTs (ITK) format .txt
+      description: Affine transform. Default usage outputs ANTs (ITK) format .txt
       pattern: "*.{txt,lta,mat,dat}"
 
   - deform_transform:
