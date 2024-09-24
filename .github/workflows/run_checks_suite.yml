@@ -16,7 +16,7 @@ on:
         description: "nf-test version to use"
         required: false
         type: string
-        default: "0.9.0-rc1"
+        default: "0.9.0"
 
 jobs:
   pre-commit:

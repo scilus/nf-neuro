@@ -27,7 +27,7 @@ on:
         description: "nf-test version to use"
         required: false
         type: string
-        default: "0.9.0-rc1"
+        default: "0.9.0"
   workflow_call:
     inputs:
       paths:
@@ -54,7 +54,7 @@ on:
         description: "nf-test version to use"
         required: false
         type: string
-        default: "0.9.0-rc1"
+        default: "0.9.0"
 
 env:
   NXF_SINGULARITY_CACHEDIR: /home/runner/.singularity_cache/.singularity
