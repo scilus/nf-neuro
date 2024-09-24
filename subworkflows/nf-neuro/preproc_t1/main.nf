@@ -41,9 +41,7 @@ workflow PREPROC_T1 {
 
         // ** Brain extraction ** //
         if ( params.run_synthbet) {
-        BETCROP_ANTSBET ( ch_bet )
             ch_bet = IMAGE_RESAMPLE.out.image.join(ch_weights)
-        ch_versions = ch_versions.mix(BETCROP_ANTSBET.out.versions.first())
             BETCROP_SYNTHBET ( ch_bet )
             ch_versions = ch_versions.mix(BETCROP_SYNTHBET.out.versions.first())
 
@@ -65,12 +63,12 @@ workflow PREPROC_T1 {
         }
 
         // ** crop image ** //
-        ch_crop = image_bet.t1.map{it + [[]]}
+        ch_crop = image_bet.map{it + [[]]}
         BETCROP_CROPVOLUME_T1 ( ch_crop )
         ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_T1.out.versions.first())
 
         // ** crop mask ** //
-        ch_crop_mask = mask_bet.mask.join(BETCROP_CROPVOLUME_T1.out.bounding_box)
+        ch_crop_mask = mask_bet.join(BETCROP_CROPVOLUME_T1.out.bounding_box)
         BETCROP_CROPVOLUME_MASK ( ch_crop_mask )
         ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_MASK.out.versions.first())
 
