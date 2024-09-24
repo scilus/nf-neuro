@@ -7,7 +7,7 @@ process REGISTRATION_CONVERT {
     containerOptions "--env FSLOUTPUTTYPE='NIFTI_GZ'"
 
     input:
-    tuple val(meta), path(affine), path(deform), path(source), path(target) /* optional, value = [] */, path(fs_license) /* optional, value = [] */
+    tuple val(meta), path(affine), path(deform), path(source), path(target), path(fs_license)
 
     output:
     tuple val(meta), path("*.{txt,lta,mat,dat}"), emit: affine_transform
@@ -23,10 +23,10 @@ process REGISTRATION_CONVERT {
 
     //For arguments definition, lta_convert -h
     def invert = task.ext.invert ? "--invert" : ""
-    def source_geometry_init = "$source" ? "--src " + "$source" : ""
-    def target_geometry_init = "$target" ? "--trg " + "$target" : ""
-    def in_format_init = task.ext.in_format_init ? "--in" + task.ext.in_format_init + " " + "$affine" : "--inlta " + "$affine"
-    def out_format_init = task.ext.out_format_init ? "--out" + task.ext.out_format_init : "--outitk"
+    def source_geometry_affine = "$source" ? "--src " + "$source" : ""
+    def target_geometry_affine = "$target" ? "--trg " + "$target" : ""
+    def in_format_affine = task.ext.in_format_affine ? "--in" + task.ext.in_format_affine + " " + "$affine" : "--inlta " + "$affine"
+    def out_format_affine = task.ext.out_format_affine ? "--out" + task.ext.out_format_affine : "--outitk"
 
     //For arguments definition, mri_warp_convert -h
     def source_geometry_deform = "$source" ? "--insrcgeom " + "$source" : ""
@@ -49,7 +49,7 @@ process REGISTRATION_CONVERT {
                                     ["--outitk"]="txt" \
                                     ["--outvox"]="txt" )
 
-    ext_affine=\${affine_dictionnary[${out_format_init}]}
+    ext_affine=\${affine_dictionnary[${out_format_affine}]}
 
     declare -A deform_dictionnary=( ["--outm3z"]="m3z" \
                                     ["--outfsl"]="nii.gz" \
@@ -60,7 +60,7 @@ process REGISTRATION_CONVERT {
 
     ext_deform=\${deform_dictionnary[${out_format_deform}]}
 
-    lta_convert ${invert} ${source_geometry_init} ${target_geometry_init} ${in_format_init} ${out_format_init} ${prefix}__init_warp.\${ext_affine}
+    lta_convert ${invert} ${source_geometry_affine} ${target_geometry_affine} ${in_format_affine} ${out_format_affine} ${prefix}__affine_warp.\${ext_affine}
     mri_warp_convert ${source_geometry_deform} ${downsample} ${in_format_deform} ${out_format_deform}  ${prefix}__deform_warp.\${ext_deform}
 
     rm \$FREESURFER_HOME/license.txt
@@ -79,7 +79,7 @@ process REGISTRATION_CONVERT {
     lta_convert -h
     mri_warp_convert -h
 
-    touch ${prefix}__init_transform.txt
+    touch ${prefix}__affine_transform.txt
     touch ${prefix}__deform_transform.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
