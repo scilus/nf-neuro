@@ -12,10 +12,10 @@ process SEGMENTATION_SYNTHSEG {
     tuple val(meta), path("*__mask_wm.nii.gz")                , emit: wm_mask
     tuple val(meta), path("*__mask_gm.nii.gz")                , emit: gm_mask
     tuple val(meta), path("*__mask_csf.nii.gz")               , emit: csf_mask
-    tuple val(meta), path("*__parc.nii.gz")                   , emit: parc, optional: true
+    tuple val(meta), path("*__gm_parc.nii.gz")                , emit: gm_parc, optional: true
     tuple val(meta), path("*__resampled_image.nii.gz")        , emit: resample, optional: true
-    tuple val(meta), path("*__vol.csv")                       , emit: vol, optional: true
-    tuple val(meta), path("*__qc.csv")                        , emit: qc, optional: true
+    tuple val(meta), path("*__volume.csv")                    , emit: volume, optional: true
+    tuple val(meta), path("*__qc_score.csv")                  , emit: qc_score, optional: true
     path "versions.yml"                                       , emit: versions
 
     when:
@@ -26,13 +26,13 @@ process SEGMENTATION_SYNTHSEG {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     def gpu = task.ext.gpu ? "" : "--cpu"
-    def parc = task.ext.parc ? "--parc" : ""
+    def gm_parc = task.ext.gm_parc ? "--parc" : ""
     def robust = task.ext.robust ? "--robust" : ""
     def fast = task.ext.fast ? "--fast" : ""
     def ct = task.ext.ct ? "--ct" : ""
     def output_resample = task.ext.output_resample ? "--resample ${prefix}__resampled_image.nii.gz": ""
-    def output_vol = task.ext.output_vol ?  "--vol ${prefix}__vol.csv" : ""
-    def output_qc = task.ext.output_qc ?  "--qc ${prefix}__qc.csv" : ""
+    def output_volume = task.ext.output_volume ?  "--vol ${prefix}__volume.csv" : ""
+    def output_qc_score = task.ext.output_qc_score ?  "--qc ${prefix}__qc_score.csv" : ""
     def crop = task.ext.crop ? "--crop " + task.ext.crop: ""
 
     """
@@ -42,29 +42,29 @@ process SEGMENTATION_SYNTHSEG {
 
     cp $fs_license \$FREESURFER_HOME/license.txt
 
-    mri_synthseg --i $image --o seg.nii.gz --threads $task.cpus $gpu $robust $fast $ct $output_resample $output_vol $output_qc $crop
+    mri_synthseg --i $image --o seg.nii.gz --threads $task.cpus $gpu $robust $fast $ct $output_resample $output_volume $output_qc_score $crop
 
-    if [[ $task.parc ]];
+    if [[ $task.gm_parc ]];
     then
-        # Cortical parcellation
-        mri_synthseg --i $image --o ${prefix}__parc.nii.gz --threads $task.cpus $gpu $parc $robust $fast $crop
-        mri_convert -i ${prefix}__parc.nii.gz --out_data_type uchar -o ${prefix}__parc.nii.gz
+        # Cortical grey matter parcellation
+        mri_synthseg --i $image --o ${prefix}__gm_parc.nii.gz --threads $task.cpus $gpu $gm_parc $robust $fast $crop
+        mri_convert -i ${prefix}__gm_parc.nii.gz --out_data_type uchar -o ${prefix}__gm_parc.nii.gz
     fi
 
     # WM Mask
     mri_binarize --i seg.nii.gz \
-                --match 2 7 10 12 13 16 28 41 46 49 51 52 60 \
-                --o ${prefix}__mask_wm.nii.gz
+        --match 2 7 10 12 13 16 28 41 46 49 51 52 60 \
+        --o ${prefix}__mask_wm.nii.gz
 
     # GM Mask
     mri_binarize --i seg.nii.gz \
-                --match 3 8 11 17 18 26 42 47 50 52 53 54 58 \
-                --o ${prefix}__mask_gm.nii.gz
+        --match 3 8 11 17 18 26 42 47 50 52 53 54 58 \
+        --o ${prefix}__mask_gm.nii.gz
 
     # CSF Mask
     mri_binarize --i seg.nii.gz \
-                --match 4 5 14 15 24 43 44 \
-                --o ${prefix}__mask_csf.nii.gz
+        --match 4 5 14 15 24 43 44 \
+        --o ${prefix}__mask_csf.nii.gz
 
     if [[ -f "$lesion" ]];
     then
@@ -74,7 +74,7 @@ process SEGMENTATION_SYNTHSEG {
     mri_convert -i ${prefix}__mask_wm.nii.gz --out_data_type uchar -o ${prefix}__mask_wm.nii.gz
     mri_convert -i ${prefix}__mask_gm.nii.gz --out_data_type uchar -o ${prefix}__mask_gm.nii.gz
     mri_convert -i ${prefix}__mask_csf.nii.gz --out_data_type uchar -o ${prefix}__mask_csf.nii.gz
-    mri_convert -i ${prefix}__parc.nii.gz --out_data_type uchar ${prefix}__parc.nii.gz
+    mri_convert -i ${prefix}__gm_parc.nii.gz --out_data_type uchar ${prefix}__gm_parc.nii.gz
 
     rm \$FREESURFER_HOME/license.txt
 
@@ -96,10 +96,10 @@ process SEGMENTATION_SYNTHSEG {
     touch ${prefix}__mask_wm.nii.gz
     touch ${prefix}__mask_gm.nii.gz
     touch ${prefix}__mask_csf.nii.gz
-    touch ${prefix}__parc.nii.gz
+    touch ${prefix}__gm_parc.nii.gz
     touch ${prefix}__resampled_image.nii.gz
-    touch ${prefix}__vol.csv
-    touch ${prefix}__qc.csv
+    touch ${prefix}__volume.csv
+    touch ${prefix}__qc_score.csv
 
 
     cat <<-END_VERSIONS > versions.yml

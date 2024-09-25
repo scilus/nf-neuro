@@ -17,7 +17,7 @@ nextflow_process {
             script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
             process {
                 """
-                input[0] = Channel.from( [ "heavy.zip", "freesurfer.zip" ] )
+                input[0] = Channel.from( [ "heavy.zip", "freesurfer.zip", "processing.zip" ] )
                 input[1] = "test.load-test-data"
                 """
             }
@@ -73,13 +73,13 @@ nextflow_process {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
-                        heavy: it.simpleName == "heavy"
+                        processing: it.simpleName == "processing"
                         freesurfer: it.simpleName == "freesurfer"
                     }
-                ch_anat = ch_split_test_data.heavy.map{
+                ch_anat = ch_split_test_data.processing.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
+                        file("\${test_data_directory}/mni_masked_2x2x2.nii.gz"),
                         []
                     ]
                 }
@@ -102,10 +102,10 @@ nextflow_process {
                     niftiMD5SUM(process.out.wm_mask.get(0).get(1)),
                     niftiMD5SUM(process.out.gm_mask.get(0).get(1)),
                     niftiMD5SUM(process.out.csf_mask.get(0).get(1)),
-                    niftiMD5SUM(process.out.parc.get(0).get(1)),
-                    process.out.resample,
-                    process.out.vol,
-                    process.out.qc,
+                    niftiMD5SUM(process.out.gm_parc.get(0).get(1)),
+                    niftiMD5SUM(process.out.resample.get(0).get(1)),
+                    process.out.volume,
+                    process.out.qc_score,
                     process.out.versions
                 ).match() }
             )

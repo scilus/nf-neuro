@@ -4,6 +4,9 @@ keywords:
   - Segmentation
   - Freesurfer
   - Tissues
+  - Synthetic
+  - AI
+  - CNN
 tools:
   - "Freesurfer":
       description: "An open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images."
@@ -53,17 +56,17 @@ output:
       description: Nifti CSF mask volume.
       pattern: "*.{nii,nii.gz}"
 
-  - parc:
+  - gm_parc:
       type: file
       description: (optional) Nifti cortical parcellation volume.
       pattern: "*.{nii,nii.gz}"
 
-  - vol:
+  - volume:
       type: file
       description: (optional) Output CSV file with volumes for all structures and subjects.
       pattern: "*.csv"
 
-  - qc:
+  - qc_score:
       type: file
       description: (optional) Output CSV file with qc scores for all subjects.
       pattern: "*.csv"
