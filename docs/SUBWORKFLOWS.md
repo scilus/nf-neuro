@@ -142,7 +142,12 @@ don't need to specify them all. Provide at least 3 relevant `keywords` and list 
 
 ### Create test cases
 
-Adding tests to your subworkflow is nearly identical as creating tests for a module. For detailed instructions, please see [here](./MODULE.md#create-test-cases).
+Adding tests to your subworkflow is near identical to modules. For detailed instructions, please see [here](./MODULE.md#create-test-cases).
+
+> [!IMPORTANT]
+> Take attention to the `wording` ! As the section refers to `modules` and `process`, carefully
+> replace them with `subworkflow`, since both concepts boil down to this single descriptor in this
+> specific case.
 
 ## Lint your code
 
