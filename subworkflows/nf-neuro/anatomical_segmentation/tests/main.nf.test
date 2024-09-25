@@ -11,6 +11,7 @@ nextflow_workflow {
     tag "segmentation"
     tag "segmentation/fastseg"
     tag "segmentation/freesurferseg"
+    tag "segmentation/synthseg"
 
     tag "load_test_data"
 

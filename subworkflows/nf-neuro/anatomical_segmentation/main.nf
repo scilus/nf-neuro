@@ -1,10 +1,7 @@
 // ** Importing modules from nf-neuro ** //
 include { SEGMENTATION_FASTSEG       } from '../../../modules/nf-neuro/segmentation/fastseg/main'
 include { SEGMENTATION_FREESURFERSEG } from '../../../modules/nf-neuro/segmentation/freesurferseg/main'
-
 include { SEGMENTATION_SYNTHSEG      } from '../../../modules/nf-neuro/segmentation/synthseg/main'
-
-params.run_synthseg = params.run_synthseg ?: false
 
 workflow ANATOMICAL_SEGMENTATION {
 
@@ -18,10 +15,6 @@ workflow ANATOMICAL_SEGMENTATION {
     main:
 
         ch_versions = Channel.empty()
-
-        if ( ch_image && ch_freesurferseg ) {
-            error('Both input channels cannot be passed simultaneously')
-        }
 
         if ( ch_freesurferseg ) {
             // ** Freesurfer segmentation ** //
@@ -47,13 +40,13 @@ workflow ANATOMICAL_SEGMENTATION {
                 wm_mask = SEGMENTATION_SYNTHSEG.out.wm_mask
                 gm_mask = SEGMENTATION_SYNTHSEG.out.gm_mask
                 csf_mask = SEGMENTATION_SYNTHSEG.out.csf_mask
-                parc = SEGMENTATION_SYNTHSEG.out.parc
-                resample = SEGMENTATION_SYNTHSEG.out.resample
-                volume = SEGMENTATION_SYNTHSEG.out.vol
-                qc = SEGMENTATION_SYNTHSEG.out.qc
                 wm_map = Channel.empty()
                 gm_map = Channel.empty()
                 csf_map = Channel.empty()
+                gm_parc = SEGMENTATION_SYNTHSEG.out.gm_parc
+                resample = SEGMENTATION_SYNTHSEG.out.resample
+                volume = SEGMENTATION_SYNTHSEG.out.volume
+                qc_score = SEGMENTATION_SYNTHSEG.out.qc_score
             }
 
             else {
@@ -75,12 +68,13 @@ workflow ANATOMICAL_SEGMENTATION {
         wm_mask   = wm_mask                     // channel: [ val(meta), [ wm_mask ] ]
         gm_mask   = gm_mask                     // channel: [ val(meta), [ gm_mask ] ]
         csf_mask  = csf_mask                    // channel: [ val(meta), [ csf_mask ] ]
-        parc = parc                             // channel: [ val(meta), [ parc ] ]
-        resample = resample                     // channel: [ val(meta), [ resample ] ]
-        qc = qc                                 // channel: [ val(meta), [ qc ] ]
         wm_map    = wm_map                      // channel: [ val(meta), [ wm_map ] ]
         gm_map    = gm_map                      // channel: [ val(meta), [ gm_map ] ]
         csf_map   = csf_map                     // channel: [ val(meta), [ csf_map ] ]
+        gm_parc   = gm_parc                       // channel: [ val(meta), [ gm_parc ] ]
+        resample  = resample                     // channel: [ val(meta), [ resample ] ]
+        volume    = volume                         // channel: [ val(meta), [ volume ] ]
+        qc_score  = qc_score                     // channel: [ val(meta), [ qc_score ] ]
 
         versions = ch_versions                  // channel: [ versions.yml ]
 }
