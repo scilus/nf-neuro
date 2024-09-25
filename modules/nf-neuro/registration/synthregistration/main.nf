@@ -10,8 +10,8 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     output:
     tuple val(meta), path("*__output_warped.nii.gz"), emit: warped_image
+    tuple val(meta), path("*__affine_warp.lta"), emit: affine_transform
     tuple val(meta), path("*__deform_warp.nii.gz"), emit: deform_transform
-    tuple val (meta), path("*__init_warp.lta"), emit: init_transform
     path "versions.yml"           , emit: versions
 
     when:
@@ -21,7 +21,7 @@ process REGISTRATION_SYNTHREGISTRATION {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def init = task.ext.init ? "-m " + task.ext.init : "-m affine"
+    def affine = task.ext.affine ? "-m " + task.ext.affine : "-m affine"
     def warp = task.ext.warp ? "-m " + task.ext.warp : "-m deform"
     def header = task.ext.header ? "-H" : ""
     def gpu = task.ext.gpu ? "-g" : ""
@@ -35,8 +35,8 @@ process REGISTRATION_SYNTHREGISTRATION {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    mri_synthmorph -j $task.cpus ${init} -t ${prefix}__init_warp.lta $moving $fixed
-    mri_synthmorph -j $task.cpus ${warp} ${gpu} ${lambda} ${steps} ${extent} ${weight} -i ${prefix}__init_warp.lta  -t ${prefix}__deform_warp.nii.gz -o ${prefix}__output_warped.nii.gz $moving $fixed
+    mri_synthmorph -j $task.cpus ${affine} -t ${prefix}__affine_warp.lta $moving $fixed
+    mri_synthmorph -j $task.cpus ${warp} ${gpu} ${lambda} ${steps} ${extent} ${weight} -i ${prefix}__affine_warp.lta  -t ${prefix}__deform_warp.nii.gz -o ${prefix}__output_warped.nii.gz $moving $fixed
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -52,8 +52,8 @@ process REGISTRATION_SYNTHREGISTRATION {
     mri_synthmorph -h
 
     touch ${prefix}__output_warped.nii.gz
+    touch ${prefix}__affine_warp.lta
     touch ${prefix}__deform_warp.nii.gz
-    touch ${prefix}__init_warp.lta
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
