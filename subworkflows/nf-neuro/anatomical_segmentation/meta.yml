@@ -17,6 +17,7 @@ keywords:
 components:
   - segmentation/fastseg
   - segmentation/freesurferseg
+  - segmentation/synthseg
 input:
   - ch_image:
       type: file
@@ -62,24 +63,6 @@ output:
         is used and not with FreeSurfer's parcellation files.
         Structure: [ val(meta), path(wm_maps) ]
       pattern: "*.{nii,nii.gz}"
-  - parc:
-      type: file
-      description: |
-        Channel containing the optional nifti cortical parcellation volume from synthseg.
-        pattern: "*.{nii,nii.gz}"
-        Structure: [ val(meta), path(parc) ]
-  - vol:
-      type: file
-      description: |
-        Channel containing the optional Output CSV file with volumes for all structures and subjects.
-        Structure: [ val(meta), path(vol) ]
-      pattern: "*.csv"
-  - qc:
-      type: file
-      description: |
-        Channel containing the optional output CSV file with qc scores for all subjects.
-        Structure: [ val(meta), path(qc) ]
-      pattern: "*.csv"
   - gm_maps:
       type: file
       description: |
@@ -94,6 +77,24 @@ output:
         is used and not with FreeSurfer's parcellation files.
         Structure: [ val(meta), path(csf_maps) ]
       pattern: "*.{nii,nii.gz}"
+  - gm_parc:
+      type: file
+      description: |
+        Channel containing the optional nifti cortical parcellation volume from synthseg.
+        pattern: "*.{nii,nii.gz}"
+        Structure: [ val(meta), path(gm_parc) ]
+  - volume:
+      type: file
+      description: |
+        Channel containing the optional Output CSV file with volumes for all structures and subjects.
+        Structure: [ val(meta), path(volume) ]
+      pattern: "*.csv"
+  - qc_score:
+      type: file
+      description: |
+        Channel containing the optional output CSV file with qc scores for all subjects.
+        Structure: [ val(meta), path(qc_score) ]
+      pattern: "*.csv"
   - versions:
       type: file
       description: |
