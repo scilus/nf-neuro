@@ -1,11 +1,10 @@
 {
     "segmentation - synthseg - options": {
         "content": [
-            "test__seg.nii.gz:md5:header,ff063c025479983639fd545e1e8fd690,data,adeeec0078924b2fde1cd4667a2c330d",
-            "test__mask_wm.nii.gz:md5:header,07555a083d94f8f52a4227cacb0ed0b1,data,8ffff7c6810fc860e647d468f78da688",
-            "test__mask_gm.nii.gz:md5:header,07555a083d94f8f52a4227cacb0ed0b1,data,ef5d0fff6236bfff594a5c43ef509bd7",
-            "test__mask_csf.nii.gz:md5:header,07555a083d94f8f52a4227cacb0ed0b1,data,f26e143ee6e50ba6de14ffa663009980",
-            "test__gm_parc.nii.gz:md5:header,07555a083d94f8f52a4227cacb0ed0b1,data,82fcf874a436dbdcd0b45b429cd8e0c1",
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
+            "test__gm_parc.nii.gz",
             "test__resampled_image.nii.gz:md5:header,728dfc231a3dfcf567ac640930f68629,data,1f02837025def8b0701f79549c2955e1",
             [
                 
@@ -21,14 +20,13 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-26T18:04:30.619078"
+        "timestamp": "2024-09-26T19:29:31.173296"
     },
     "segmentation - synthseg - basic": {
         "content": [
-            "test__seg.nii.gz:md5:header,f84c3d38470f2b2c2741e78ee95b5367,data,f68a3f27105e7fe463bb108648b11459",
-            "test__mask_wm.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,1b5a4d63ae2b56d9d6936313b5225b55",
-            "test__mask_gm.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,c093a4b4c8c5804342b7ea8eea6164fb",
-            "test__mask_csf.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,c9abaab9c5e047fadf928a6520929d5e",
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
             [
                 "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
             ]
@@ -37,14 +35,13 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-26T17:56:01.141662"
+        "timestamp": "2024-09-26T19:27:57.646867"
     },
     "segmentation - synthseg - lesion": {
         "content": [
-            "test__seg.nii.gz:md5:header,f84c3d38470f2b2c2741e78ee95b5367,data,f68a3f27105e7fe463bb108648b11459",
-            "test__mask_wm.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,6d99d71cff4a2f9d147c45b1ee36dce0",
-            "test__mask_gm.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,c093a4b4c8c5804342b7ea8eea6164fb",
-            "test__mask_csf.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,c9abaab9c5e047fadf928a6520929d5e",
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
             [
                 "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
             ]
@@ -53,6 +50,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-26T17:57:43.31581"
+        "timestamp": "2024-09-26T19:30:24.018659"
     }
 }
