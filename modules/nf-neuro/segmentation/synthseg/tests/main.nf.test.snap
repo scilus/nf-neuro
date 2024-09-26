@@ -1,0 +1,55 @@
+{
+    "segmentation - synthseg - options": {
+        "content": [
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
+            "test__gm_parc.nii.gz",
+            "test__resampled_image.nii.gz:md5:header,728dfc231a3dfcf567ac640930f68629,data,1f02837025def8b0701f79549c2955e1",
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-26T19:29:31.173296"
+    },
+    "segmentation - synthseg - basic": {
+        "content": [
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
+            [
+                "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-26T19:27:57.646867"
+    },
+    "segmentation - synthseg - lesion": {
+        "content": [
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
+            [
+                "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-26T19:30:24.018659"
+    }
+}

@@ -1,0 +1,87 @@
+name: "segmentation_synthseg"
+description: Perform Brain Tissues Segmentation using Freesurfer synthseg on a T1 image. Optionally, a binary mask of lesion can be add to correct the white matter mask. Note that tests using synthseg are non-reproductible.
+keywords:
+  - Segmentation
+  - Freesurfer
+  - Tissues
+  - Synthetic
+  - AI
+  - CNN
+tools:
+  - "Freesurfer":
+      description: "An open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images."
+      homepage: "https://surfer.nmr.mgh.harvard.edu/"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti T1 volume to segment into tissue maps.
+      pattern: "*.{nii,nii.gz}"
+
+  - lesion:
+      type: file
+      description: Nifti lesion volume to correct the white matter with a lesion mask. The lesion mask must be a binary mask.
+      pattern: "*.{nii,nii.gz}"
+
+  - fs_license:
+      type: file
+      description: The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html. Optional. If you have already set your license as prescribed by Freesurfer (copied to a .license file in your $FREESURFER_HOME), this is not required.
+      pattern: "*.txt"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - wm_mask:
+      type: file
+      description: Nifti WM mask volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - gm_mask:
+      type: file
+      description: Nifti GM mask volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - csf_mask:
+      type: file
+      description: Nifti CSF mask volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - gm_parc:
+      type: file
+      description: (optional) Nifti cortical parcellation volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - volume:
+      type: file
+      description: (optional) Output CSV file with volumes for all structures and subjects.
+      pattern: "*.csv"
+
+  - qc_score:
+      type: file
+      description: (optional) Output CSV file with qc scores for all subjects.
+      pattern: "*.csv"
+
+  - resample:
+      type: file
+      description: (optional) in order to return segmentations at 1mm resolution, the input images are internally resampled (except if they already are at 1mm). Use this optional flag to save the resampled images. This must be the same type as --i.
+      pattern: "*.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@anroy1"
+maintainers:
+  - "@anroy1"
