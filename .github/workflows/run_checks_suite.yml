@@ -137,6 +137,8 @@ jobs:
           - runner: scilus-nf-neuro-runners
           - runner: scilus-nf-neuro-bigmem-runners
             path: modules/nf-neuro/registration/easyreg
+          - runner: scilus-nf-neuro-bigmem-runners
+            path: modules/nf-neuro/segmentation/synthseg
         exclude:
           - path: subworkflows/nf-neuro/load_test_data
     uses: ./.github/workflows/test_component.yml
