@@ -1,6 +1,5 @@
 name: "segmentation_synthseg"
-description: Perform Brain Tissues Segmentation using Freesurfer synthseg on a T1 image. Optionally, a binary mask of lesion can be add to correct the white matter mask.
-keywords:
+description: Perform Brain Tissues Segmentation using Freesurfer synthseg on a T1 image. Optionally, a binary mask of lesion can be add to correct the white matter mask. Note that Synthseg is an AI model and freesurfer does not control for randomness in computation yet, both in terms of seeding and operation ordering.
   - Segmentation
   - Freesurfer
   - Tissues
