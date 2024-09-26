@@ -9,6 +9,7 @@ process SEGMENTATION_SYNTHSEG {
     tuple val(meta), path(image), path(lesion) /* optional, input = [] */, path(fs_license) /* optional, input = [] */
 
     output:
+    tuple val(meta), path("*__seg.nii.gz")                    , emit: seg
     tuple val(meta), path("*__mask_wm.nii.gz")                , emit: wm_mask
     tuple val(meta), path("*__mask_gm.nii.gz")                , emit: gm_mask
     tuple val(meta), path("*__mask_csf.nii.gz")               , emit: csf_mask
@@ -44,7 +45,9 @@ process SEGMENTATION_SYNTHSEG {
 
     mri_synthseg --i $image --o seg.nii.gz --threads $task.cpus $gpu $robust $fast $ct $output_resample $output_volume $output_qc_score $crop
 
-    if [[ $task.gm_parc ]];
+    cp seg.nii.gz ${prefix}__seg.nii.gz
+
+    if [[ -n "$gm_parc" ]];
     then
         # Cortical grey matter parcellation
         mri_synthseg --i $image --o ${prefix}__gm_parc.nii.gz --threads $task.cpus $gpu $gm_parc $robust $fast $crop
@@ -74,7 +77,6 @@ process SEGMENTATION_SYNTHSEG {
     mri_convert -i ${prefix}__mask_wm.nii.gz --out_data_type uchar -o ${prefix}__mask_wm.nii.gz
     mri_convert -i ${prefix}__mask_gm.nii.gz --out_data_type uchar -o ${prefix}__mask_gm.nii.gz
     mri_convert -i ${prefix}__mask_csf.nii.gz --out_data_type uchar -o ${prefix}__mask_csf.nii.gz
-    mri_convert -i ${prefix}__gm_parc.nii.gz --out_data_type uchar ${prefix}__gm_parc.nii.gz
 
     rm \$FREESURFER_HOME/license.txt
 
@@ -93,6 +95,7 @@ process SEGMENTATION_SYNTHSEG {
     mri_binarize -h
     mri_convert -h
 
+    touch ${prefix}__seg.nii.gz
     touch ${prefix}__mask_wm.nii.gz
     touch ${prefix}__mask_gm.nii.gz
     touch ${prefix}__mask_csf.nii.gz
