@@ -1,10 +1,10 @@
 {
-    "Verbose": true,
+    "Verbose": false,
     "Debug": false,
     "IgnoreDefaults": false,
     "SpacesAftertabs": false,
     "NoColor": false,
-    "Exclude": ["^tests/.runs/", "^\\.nf-test/", "^\\.venv/", "^\\node_modules/", "\\.nf-test.log$"],
+    "Exclude": ["^tests/.runs/", "^\\.nf-test/", "^\\.venv/", "^\\node_modules/", "\\.nf-test.log$","^\\.git/"],
     "AllowedContentTypes": [],
     "PassedFiles": [],
     "Disable": {

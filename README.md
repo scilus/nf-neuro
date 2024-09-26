@@ -18,6 +18,20 @@ primary focus of the library is to provide pre-built processes and processing se
 technologies and made easily available to pipeline's developers through the `nf-core`
 framework.
 
+# WHY ? `nf-neuro`
+
+**Let's say you develop a pipeline for neuroimaging**. You want to make it the more _efficient,_
+_reliable, reproducible_ and also be able to _evaluate it_ and _control the quality_ of its outputs.
+That's what `nf-neuro` provides to you, **all in one repository**, hosting **all dependencies** you
+need to start developing and analyzing.
+
+The only thing we ask of you is to develop in `Nextflow DSL2`. We use principle and standards
+closely aligned with [nf-core](), but we'll make you adapt to them slowly as you go (we still
+haven't finished complying to all of them ourselves). Using `nf-neuro` helps accelerate
+development in **neuroimaging** and produces better research outcomes for all !
+
+---
+
 - [Using modules from `nf-neuro`](#using-modules-from-nf-neuro)
 - [Developing in `nf-neuro`](#developing-in-nf-neuro)
   - [Manual configuration](#manual-configuration)
@@ -38,6 +52,7 @@ framework.
       - [Edit `tests/main.nf.test`](./docs/MODULE.md#edit-testsmainnftest)
       - [Edit `tests/nextflow.config`](./docs/MODULE.md#edit-testsnextflowconfig)
     - [Generate tests snapshots](./docs/MODULE.md#generate-tests-snapshots)
+    - [Request for more test resources](./docs/MODULE.md#request-for-more-test-resources)
     - [Lint your code](./docs/MODULE.md#lint-your-code)
     - [Submit your PR](./docs/MODULE.md#submit-your-pr)
   - [Defining optional input parameters](./docs/MODULE.md#defining-optional-input-parameters)
@@ -56,6 +71,8 @@ framework.
 - [Running tests](#running-tests)
 - [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
 - [Installing Prettier and editorconfig](#installing-prettier-and-editorconfig)
+
+---
 
 # Using modules from `nf-neuro`
 

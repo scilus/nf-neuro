@@ -10,6 +10,7 @@
     - [Edit `tests/main.nf.test`](#edit-testsmainnftest)
     - [Edit `tests/nextflow.config`](#edit-testsnextflowconfig)
   - [Generate tests snapshots](#generate-tests-snapshots)
+  - [Request for more test resources](#request-for-more-test-resources)
   - [Lint your code](#lint-your-code)
   - [Submit your PR](#submit-your-pr)
 - [Defining optional input parameters](#defining-optional-input-parameters)
@@ -314,6 +315,53 @@ All the test case you defined will be run, watch out for errors ! Once everythin
 smoothly, look at the snapshot file produced at `tests/main.nf.test.snap` in your module's
 directory and validate that ALL outputs produced by test cases are caught. Their `md5sum` is
 critical to ensure future executions of your test produce valid outputs.
+
+## Request for more test resources
+
+Test runners are tailored to restrain their resources usage to specifically what is asked for by
+Nextflow through the configuration files. For `nf-neuro` tests, you can find this configuration in
+`tests/config/nextflow.config`. If any of your tests ask for more, you need to define it correctly.
+
+> [!NOTE]
+> The container detects out-of-bound resource consumption automatically, tests will fail if they
+> haven't been assigned them sufficiently. It's a good way to catch them.
+
+First, resource requirements need to be defined in the `nextflow.config` file(s) of your test
+cases. Add the `process.cpu` and `process.memory` and set their requirements as needed :
+
+```
+process.memory = '9G'
+process.cpus = 6
+```
+
+or
+
+```
+process {
+  memory = '10G'
+  cpus = 6
+}
+```
+
+To allow test runners on your PR to run with sufficient resources, you'll need to specify to which
+class of runners to assign to. To do so, edit `.github/workflows/run_checks_suite.yml`. Find the
+`matrix` definition for the `nf-test` job (currently around `line 133`) and add the following
+request for a runner in the `include` section :
+
+```
+- runner: <name-of-the-runner-class>
+  path: modules/nf-neuro/<category>/<tool>
+```
+
+Available runner classes that superseed `default` :
+
+| Runner Class                   | Resources                               |
+| ------------------------------ | --------------------------------------- |
+| (default)                      | <ul><li>4 CPU</li><li>4Gb RAM</li></ul> |
+| scilus-nf-neuro-bigmem-runners | <ul><li>16Gb RAM</li></ul>              |
+
+> [!IMPORTANT]
+> Specialized runners are limited !!! They are allocated for hungry processes, such as **AI/ML** models and **large dataset studies**, don't abuse them. _The more they are requested for, the longer PR take to merge_, so don't ask for them for nothing, meaning be smart in designing your modules ! **PRs deemed not needing them will be automatically closed.**
 
 ## Lint your code
 

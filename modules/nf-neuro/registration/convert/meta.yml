@@ -1,0 +1,70 @@
+---
+name: "registration_convert"
+description: Freesurfer transform conversion tool. Default usage is aim at receiving freesurfer format and converting to ANTs (ITK). See lta_convert --help and mri_warp_convert --help for options.
+keywords:
+  - Registration
+  - Brain imaging
+  - MRI
+  - Conversion
+tools:
+  - "Freesurfer":
+      description: "Freesurfer lta_convert (affine conversion) and mri_warp_convert (deform) tools for transform conversion"
+      homepage: "https://surfer.nmr.mgh.harvard.edu/"
+      documentation: "https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferWiki"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - affine:
+      type: file
+      description: Affine transform to convert. Default usage expects Freesurfer .lta format from mri_synthmorph
+      pattern: "*.{lta,txt,xfm,dat}"
+
+  - deform:
+      type: file
+      description: Deform transform to convert. Default usage expects Freesurfer .mgz format from mri_synthmorph
+      pattern: "*.{nii,nii.gz,mgz,m3z}"
+
+  - source:
+      type: file
+      description: Moving Nifti volume used for registration. Defines source image geometry
+      pattern: "*.{nii,nii.gz}"
+
+  - target:
+      type: file
+      description: Fixed Nifti volume used for registration. Defines target image geometry. (optional)
+      pattern: "*.{nii,nii.gz}"
+
+  - fs_license:
+      type: file
+      description: The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html. Optional. If you have already set your license as prescribed by Freesurfer (copied to a .license file in your $FREESURFER_HOME), this is not required.
+      pattern: "*.txt"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - affine_transform:
+      type: file
+      description: Affine transform. Default usage outputs ANTs (ITK) format .txt
+      pattern: "*.{txt,lta,mat,dat}"
+
+  - deform_transform:
+      type: file
+      description: Deform transform. Default usage outputs ANTs (ITK) format .nii.gz
+      pattern: "*.{nii,nii.gz,mgz,m3z}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@anroy1"
