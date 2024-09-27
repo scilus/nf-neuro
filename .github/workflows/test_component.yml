@@ -123,7 +123,7 @@ jobs:
           NFT_WORKDIR: ${{ env.NXF_WORKDIR }}/.nf-test
           NXF_CACHE_DIR: ${{ env.NXF_WORKDIR }}/.nextflow
           NXF_TEMP: ${{ env.NXF_WORKDIR }}/tmpdir
-          NFSCIL_TEST_DATA_HOME: ${{ env.NXF_WORKDIR }}
+          NFNEURO_TEST_DATA_HOME: ${{ env.NXF_WORKDIR }}
         run: |
           # use "docker_self_hosted" if it runs on self-hosted runner and inputs.profile=docker
           if [ "${{ inputs.profile }}" == "docker" ]; then
