@@ -3,7 +3,7 @@ import java.nio.file.Files
 def fetch_archive ( name, destination, remote, database, data_identifiers ) {
     // Find cache location for test archives
     def storage = file(
-        System.getenv('NFSCIL_TEST_DATA_HOME') ?:
+        System.getenv('NFNEURO_TEST_DATA_HOME') ?:
         System.getenv('XDG_DATA_HOME') ?:
         "${System.getenv('HOME')}/.local/share"
     )
@@ -52,9 +52,9 @@ workflow LOAD_TEST_DATA {
     ch_test_data_directory = ch_archive.map{ archive ->
         fetch_archive(
             archive, test_data_path,
-            params.nf_scil_test_data_remote,
-            params.nf_scil_test_database_path,
-            params.nf_scil_test_data_associations
+            params.test_data_remote,
+            params.test_database_path,
+            params.test_data_associations
         )
     }
 
