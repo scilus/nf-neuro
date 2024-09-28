@@ -10,6 +10,7 @@ ENV POETRY_VERSION=${POETRY_VERSION:-1.8.*}
 RUN apt update && apt install -y \
         curl \
         git \
+        openjdk-17-jre \
         python3-venv \
         wget \
     && rm -rf /var/lib/apt/lists/*
