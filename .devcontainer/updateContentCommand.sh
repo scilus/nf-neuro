@@ -11,6 +11,8 @@ CURRENT_BRANCH=
     CURRENT_BRANCH="main"
 }
 
+maxmem=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+
 cat <<EOF > $XDG_CONFIG_HOME/nf-neuro/.env
 # This file is used to store environment variables for the project.
 # It is sourced by the shell on startup of every terminals.
@@ -20,6 +22,12 @@ export NFCORE_MODULES_GIT_REMOTE=$GIT_REMOTE
 export NFCORE_MODULES_BRANCH=$CURRENT_BRANCH
 export NFCORE_SUBWORKFLOWS_GIT_REMOTE=$GIT_REMOTE
 export NFCORE_SUBWORKFLOWS_BRANCH=$CURRENT_BRANCH
+
+export DEVCONTAINER_RAM_LIMIT_GB=$((maxmem / 1024 / 1024))
+export DEVCONTAINER_CPU_LIMIT=$(grep -c ^processor /proc/cpuinfo)
+
 EOF
+
+unset maxmem
 
 poetry install --no-root
