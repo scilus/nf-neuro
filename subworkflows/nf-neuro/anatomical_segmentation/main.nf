@@ -28,6 +28,10 @@ workflow ANATOMICAL_SEGMENTATION {
             wm_map = Channel.empty()
             gm_map = Channel.empty()
             csf_map = Channel.empty()
+            gm_parc = Channel.empty()
+            resample = Channel.empty()
+            volume = Channel.empty()
+            qc_score = Channel.empty()
         }
 
         else {
@@ -61,6 +65,10 @@ workflow ANATOMICAL_SEGMENTATION {
                 wm_map = SEGMENTATION_FASTSEG.out.wm_map
                 gm_map = SEGMENTATION_FASTSEG.out.gm_map
                 csf_map = SEGMENTATION_FASTSEG.out.csf_map
+                gm_parc = Channel.empty()
+                resample = Channel.empty()
+                volume = Channel.empty()
+                qc_score = Channel.empty()
             }
         }
 
@@ -71,10 +79,10 @@ workflow ANATOMICAL_SEGMENTATION {
         wm_map    = wm_map                      // channel: [ val(meta), [ wm_map ] ]
         gm_map    = gm_map                      // channel: [ val(meta), [ gm_map ] ]
         csf_map   = csf_map                     // channel: [ val(meta), [ csf_map ] ]
-        gm_parc   = gm_parc                       // channel: [ val(meta), [ gm_parc ] ]
-        resample  = resample                     // channel: [ val(meta), [ resample ] ]
-        volume    = volume                         // channel: [ val(meta), [ volume ] ]
-        qc_score  = qc_score                     // channel: [ val(meta), [ qc_score ] ]
+        gm_parc   = gm_parc                     // channel: [ val(meta), [ gm_parc ] ]
+        resample  = resample                    // channel: [ val(meta), [ resample ] ]
+        volume    = volume                      // channel: [ val(meta), [ volume ] ]
+        qc_score  = qc_score                    // channel: [ val(meta), [ qc_score ] ]
 
         versions = ch_versions                  // channel: [ versions.yml ]
 }
