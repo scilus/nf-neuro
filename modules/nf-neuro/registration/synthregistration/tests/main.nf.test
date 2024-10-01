@@ -12,6 +12,9 @@ nextflow_process {
     tag "subworkflows"
     tag "subworkflows/load_test_data"
 
+    // ** Assertion only uses file name since there is a discrepancy when tests are ran remotly. ** //
+    // ** Synthmorph is an AI model and freesurfer does not control for randomness in computation yet, both in terms of seeding and operation ordering.** //
+
     setup {
             run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
@@ -42,9 +45,9 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    niftiMD5SUM(process.out.warped_image.get(0).get(1)),
-                    process.out.affine_transform,
-                    niftiMD5SUM(process.out.deform_transform.get(0).get(1)),
+                    file(process.out.warped_image.get(0).get(1)).name,
+                    file(process.out.affine_transform.get(0).get(1)).name,
+                    file(process.out.deform_transform.get(0).get(1)).name,
                     process.out.versions
                 ).match() }
             )
