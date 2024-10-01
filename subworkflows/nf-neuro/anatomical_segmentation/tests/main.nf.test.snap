@@ -1,204 +1,50 @@
 {
     "anatomical_segmentation - freesurferseg": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__mask_wm.nii.gz:md5,0ed4a06defc512b1b898d6e0c3ef678a"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__mask_gm.nii.gz:md5,a363d6207419b08346a7c05c6525430e"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__mask_csf.nii.gz:md5,3dbcb3eefb507bedab91fb80ed636f36"
-                    ]
-                ],
-                "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    
-                ],
-                "6": [
-                    "versions.yml:md5,18dfcb72144006d4f3e2afc759d2ee6b"
-                ],
-                "csf_map": [
-                    
-                ],
-                "csf_mask": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__mask_csf.nii.gz:md5,3dbcb3eefb507bedab91fb80ed636f36"
-                    ]
-                ],
-                "gm_map": [
-                    
-                ],
-                "gm_mask": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__mask_gm.nii.gz:md5,a363d6207419b08346a7c05c6525430e"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,18dfcb72144006d4f3e2afc759d2ee6b"
-                ],
-                "wm_map": [
-                    
-                ],
-                "wm_mask": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__mask_wm.nii.gz:md5,0ed4a06defc512b1b898d6e0c3ef678a"
-                    ]
-                ]
-            }
+            "test__mask_wm.nii.gz:md5:header,eda325c5c7040608c3326c751cf89e01,data,a568de20b7fdfbef5473dd4a4fe2efe9",
+            "test__mask_gm.nii.gz:md5:header,eda325c5c7040608c3326c751cf89e01,data,78af3589044454e0b7a4b1bbc6889872",
+            "test__mask_csf.nii.gz:md5:header,eda325c5c7040608c3326c751cf89e01,data,e4e7d227732acc6488f259b3f265f214",
+            [
+                "versions.yml:md5,18dfcb72144006d4f3e2afc759d2ee6b"
+            ]
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
+            "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-05T02:45:52.364394"
+        "timestamp": "2024-10-01T18:28:55.104587"
+    },
+    "anatomical_segmentation - synthseg": {
+        "content": [
+            "test__mask_wm.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,08b5c8665f0a07c182eb63f045d01855",
+            "test__mask_gm.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,d713974dbe87760182112e10f96a7f82",
+            "test__mask_csf.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,29599fab55e3ee75318cef36563684a4",
+            [
+                "versions.yml:md5,f098240b7d7f6df9a2a43215c5828669"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-01T18:42:17.424134"
     },
     "anatomical_segmentation - fslfast": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_wm.nii.gz:md5,98d75f5c0ddd2b7f2bfff8fbf1877e34"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_gm.nii.gz:md5,a840f08c5b90cb351d3272d8cab6f00c"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_csf.nii.gz:md5,f22037987a38e5132ccbb2887ee71842"
-                    ]
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_wm.nii.gz:md5,c7d666c66baea2132d70be38017c6901"
-                    ]
-                ],
-                "4": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_gm.nii.gz:md5,6dbc993e43f6efcdd6a3a097df2b4574"
-                    ]
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_csf.nii.gz:md5,dcc224f10f31ee306491ebbdcfbe5bfe"
-                    ]
-                ],
-                "6": [
-                    "versions.yml:md5,f098240b7d7f6df9a2a43215c5828669"
-                ],
-                "csf_map": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_csf.nii.gz:md5,dcc224f10f31ee306491ebbdcfbe5bfe"
-                    ]
-                ],
-                "csf_mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_csf.nii.gz:md5,f22037987a38e5132ccbb2887ee71842"
-                    ]
-                ],
-                "gm_map": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_gm.nii.gz:md5,6dbc993e43f6efcdd6a3a097df2b4574"
-                    ]
-                ],
-                "gm_mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_gm.nii.gz:md5,a840f08c5b90cb351d3272d8cab6f00c"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,f098240b7d7f6df9a2a43215c5828669"
-                ],
-                "wm_map": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_wm.nii.gz:md5,c7d666c66baea2132d70be38017c6901"
-                    ]
-                ],
-                "wm_mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_wm.nii.gz:md5,98d75f5c0ddd2b7f2bfff8fbf1877e34"
-                    ]
-                ]
-            }
+            "test__mask_wm.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,08b5c8665f0a07c182eb63f045d01855",
+            "test__mask_gm.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,d713974dbe87760182112e10f96a7f82",
+            "test__mask_csf.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,29599fab55e3ee75318cef36563684a4",
+            "test__map_wm.nii.gz:md5:header,58dc3623694060dace951ba8073d5e01,data,62a268dbc74814d62ed9f9596b5a72e5",
+            "test__map_gm.nii.gz:md5:header,58dc3623694060dace951ba8073d5e01,data,420e7664f81a5899f7007f71c08f28d8",
+            "test__map_csf.nii.gz:md5:header,58dc3623694060dace951ba8073d5e01,data,2bde307c6dae36a5fc00eba7a2ca7933",
+            [
+                "versions.yml:md5,f098240b7d7f6df9a2a43215c5828669"
+            ]
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
+            "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-05T02:38:48.75146"
+        "timestamp": "2024-10-01T18:26:07.387744"
     }
 }
