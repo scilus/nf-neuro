@@ -1,0 +1,56 @@
+nextflow_process {
+
+    name "Test Process REGISTRATION_SYNTHREGISTRATION"
+    script "../main.nf"
+    process "REGISTRATION_SYNTHREGISTRATION"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "registration"
+    tag "registration/synthregistration"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    // ** Assertion only uses file name since there is a discrepancy when tests are ran remotly. ** //
+    // ** Synthmorph is an AI model and freesurfer does not control for randomness in computation yet, both in terms of seeding and operation ordering.** //
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "processing.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("registration - synthregistration") {
+        config "./nextflow.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ],
+                    file("\${test_data_directory}/mni_masked_2x2x2.nii.gz"),
+                    file("\${test_data_directory}/b0_mean.nii.gz")
+                ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.warped_image.get(0).get(1)).name,
+                    file(process.out.affine_transform.get(0).get(1)).name,
+                    file(process.out.deform_transform.get(0).get(1)).name,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+}

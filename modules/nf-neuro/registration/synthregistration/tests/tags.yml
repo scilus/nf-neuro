@@ -1,0 +1,2 @@
+registration/synthregistration:
+  - "modules/nf-neuro/registration/synthregistration/**"
