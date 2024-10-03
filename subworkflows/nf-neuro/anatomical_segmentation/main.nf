@@ -11,6 +11,7 @@ workflow ANATOMICAL_SEGMENTATION {
     take:
         ch_image            // channel: [ val(meta), [ image ] ]
         ch_freesurferseg    // channel: [ val(meta), [ aparc_aseg, wmparc ] ]
+        ch_fs_license       // channel: [ val[meta], [ fs_license ] ], optional
 
     main:
 
@@ -22,6 +23,7 @@ workflow ANATOMICAL_SEGMENTATION {
             ch_versions = ch_versions.mix(SEGMENTATION_FREESURFERSEG.out.versions.first())
 
             // ** Setting outputs ** //
+            seg = Channel.empty()
             wm_mask = SEGMENTATION_FREESURFERSEG.out.wm_mask
             gm_mask = SEGMENTATION_FREESURFERSEG.out.gm_mask
             csf_mask = SEGMENTATION_FREESURFERSEG.out.csf_mask
@@ -37,10 +39,12 @@ workflow ANATOMICAL_SEGMENTATION {
         else {
             if ( params.run_synthseg ) {
                 // ** Freesurfer synthseg segmentation ** //
-                SEGMENTATION_SYNTHSEG ( ch_image )
+                ch_synthseg = ch_image.join(ch_fs_license)
+                SEGMENTATION_SYNTHSEG ( ch_synthseg )
                 ch_versions = ch_versions.mix(SEGMENTATION_SYNTHSEG.out.versions.first())
 
                 // ** Setting outputs ** //
+                seg = SEGMENTATION_SYNTHSEG.out.seg
                 wm_mask = SEGMENTATION_SYNTHSEG.out.wm_mask
                 gm_mask = SEGMENTATION_SYNTHSEG.out.gm_mask
                 csf_mask = SEGMENTATION_SYNTHSEG.out.csf_mask
@@ -59,6 +63,7 @@ workflow ANATOMICAL_SEGMENTATION {
                 ch_versions = ch_versions.mix(SEGMENTATION_FASTSEG.out.versions.first())
 
                 // ** Setting outputs ** //
+                seg = Channel.empty()
                 wm_mask = SEGMENTATION_FASTSEG.out.wm_mask
                 gm_mask = SEGMENTATION_FASTSEG.out.gm_mask
                 csf_mask = SEGMENTATION_FASTSEG.out.csf_mask
@@ -73,6 +78,7 @@ workflow ANATOMICAL_SEGMENTATION {
         }
 
     emit:
+        seg       = seg                         // channel: [ val(meta), [ seg ] ]
         wm_mask   = wm_mask                     // channel: [ val(meta), [ wm_mask ] ]
         gm_mask   = gm_mask                     // channel: [ val(meta), [ gm_mask ] ]
         csf_mask  = csf_mask                    // channel: [ val(meta), [ csf_mask ] ]

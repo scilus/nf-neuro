@@ -20,7 +20,7 @@ nextflow_workflow {
                 script "../../load_test_data/main.nf"
                 process {
                     """
-                    input[0] = Channel.from( [ "T1w.zip", "freesurfer_nifti.zip" ] )
+                    input[0] = Channel.from( [ "T1w.zip", "freesurfer_nifti.zip", "freesurfer.zip" ] )
                     input[1] = "test.load-test-data"
                     """
                 }
@@ -35,7 +35,8 @@ nextflow_workflow {
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         t1w: it.simpleName == "T1w"
-                        freesurfer: it.simpleName == "freesurfer_nifti"
+                        freesurfer_nifti: it.simpleName == "freesurfer_nifti"
+                        freesurfer: it.simpleName == "freesurfer"
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
@@ -44,6 +45,7 @@ nextflow_workflow {
                         []
                     ]}
                 input[1] = []
+                input[2] = []
                 """
             }
         }
@@ -72,16 +74,18 @@ nextflow_workflow {
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         t1w: it.simpleName == "T1w"
-                        freesurfer: it.simpleName == "freesurfer_nifti"
+                        freesurfer_nifti: it.simpleName == "freesurfer_nifti"
+                        freesurfer: it.simpleName == "freesurfer"
                     }
                 input[0] = []
-                input[1] = ch_split_test_data.freesurfer.map{
+                input[1] = ch_split_test_data.freesurfer_nifti.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ], // meta map
                         file("\${test_data_directory}/aparc+aseg.nii.gz", checkIfExists: true),
                         file("\${test_data_directory}/wmparc.nii.gz", checkIfExists: true),
                         []
                     ]}
+                input[2] = []
                 """
             }
         }
@@ -106,16 +110,22 @@ nextflow_workflow {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
-                        T1w: it.simpleName == "T1w"
-                        freesurfer: it.simpleName == "freesurfer_nifti"
+                        t1w: it.simpleName == "T1w"
+                        freesurfer_nifti: it.simpleName == "freesurfer_nifti"
+                        freesurfer: it.simpleName == "freesurfer"
                     }
-                input[0] = ch_split_test_data.T1w.map{
+                input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w.nii.gz", checkIfExists: true),
                         []
                     ]}
                 input[1] = []
+                input[2] = ch_split_test_data.freesurfer.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/license.txt", checkIfExists: true)
+                    ]}
                 """
             }
         }
@@ -124,6 +134,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
+                    niftiMD5SUM(workflow.out.seg.get(0).get(1)),
                     niftiMD5SUM(workflow.out.wm_mask.get(0).get(1)),
                     niftiMD5SUM(workflow.out.gm_mask.get(0).get(1)),
                     niftiMD5SUM(workflow.out.csf_mask.get(0).get(1)),

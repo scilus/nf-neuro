@@ -16,18 +16,19 @@
     },
     "anatomical_segmentation - synthseg": {
         "content": [
-            "test__mask_wm.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,08b5c8665f0a07c182eb63f045d01855",
-            "test__mask_gm.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,d713974dbe87760182112e10f96a7f82",
-            "test__mask_csf.nii.gz:md5:header,cb2d88714675fc7d8c450de4db5227c6,data,29599fab55e3ee75318cef36563684a4",
+            "test__seg.nii.gz:md5:header,74ed7e917b9fde7b2aaba7f512cc1edf,data,c1c22b6b60142ab6d305f8c078249322",
+            "test__mask_wm.nii.gz:md5:header,35a4de57a3bf53232f8194ca41b6a2f2,data,9370dc6de30c4ec01dfef675853a49b6",
+            "test__mask_gm.nii.gz:md5:header,35a4de57a3bf53232f8194ca41b6a2f2,data,81eaa57f7bc13b25430279671ead3cc2",
+            "test__mask_csf.nii.gz:md5:header,35a4de57a3bf53232f8194ca41b6a2f2,data,daa16a01f0b96a3d5aec968b1a4aab00",
             [
-                "versions.yml:md5,f098240b7d7f6df9a2a43215c5828669"
+                "versions.yml:md5,95e31db072c7bb2505128bd08beaecf4"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-01T18:42:17.424134"
+        "timestamp": "2024-10-03T02:06:56.003285993"
     },
     "anatomical_segmentation - fslfast": {
         "content": [
