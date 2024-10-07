@@ -7,7 +7,7 @@ include { BETCROP_SYNTHBET} from '../../../modules/nf-neuro/betcrop/synthbet/mai
 include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_T1 } from '../../../modules/nf-neuro/betcrop/cropvolume/main'
 include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_MASK } from '../../../modules/nf-neuro/betcrop/cropvolume/main'
 
-params.run_synthbet = params.run_synthbet ?: false
+params.run_synthbet = false
 
 workflow PREPROC_T1 {
 
@@ -18,7 +18,7 @@ workflow PREPROC_T1 {
         ch_mask_nlmeans    // channel: [ val(meta), [ mask ] ]            , optional
         ch_ref_n4          // channel: [ val(meta), [ ref, ref_mask ] ]   , optional
         ch_ref_resample    // channel: [ val(meta), [ ref ] ]             , optional
-        ch_weights         // channel: [ val(meta), [ weights ] ] , optional
+        ch_weights         // channel: [ val(meta), [ weights ] ]         , optional
 
     main:
 
