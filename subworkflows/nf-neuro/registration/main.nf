@@ -24,9 +24,17 @@ workflow REGISTRATION {
 
         if ( params.run_easyreg ) {
             // ** Set up input channel ** //
-            ch_register = ch_ref.combine(ch_image, by: 0)
-                                .combine(ch_ref_segmentation, by: 0)
-                                .combine(ch_segmentation, by: 0)
+            // FIX ME: in one command?
+            if ( ch_segmentation && ch_ref_segmentation ) {
+                ch_register = ch_ref.combine(ch_image, by: 0)
+                                    .combine(ch_ref_segmentation, by: 0)
+                                    .combine(ch_segmentation, by: 0)
+                                    // .map{ it[0..1] + [it[2] ?: []] + [it[3] ?: []]}
+            }
+            else {
+                ch_register = ch_ref.combine(ch_image, by: 0)
+                                    .map{ it + [[]] + [[]] }
+            }
 
             // ** Registration using Easyreg ** //
             REGISTRATION_EASYREG ( ch_register )
@@ -38,12 +46,13 @@ workflow REGISTRATION {
                 .map{ it + [[]] }
             transfo_trk = REGISTRATION_EASYREG.out.bak_field
                 .map{ [[]] + it }
-            ref_warped - REGISTRATION_EASYREG.out.ref_reg
+            ref_warped = REGISTRATION_EASYREG.out.ref_reg
 
             // ** Setting optional outputs. If segmentations are not provided as inputs, ** //
             // ** easyreg will outputs synthseg segmentations ** //
             out_segmentation = ch_segmentation ? Channel.empty() : REGISTRATION_EASYREG.out.flo_seg
             out_ref_segmentation = ch_ref_segmentation ? Channel.empty() : REGISTRATION_EASYREG.out.ref_seg
+
         }
 
         else {
@@ -60,6 +69,10 @@ workflow REGISTRATION {
                 image_warped = REGISTRATION_ANATTODWI.out.t1_warped
                 transfo_image = REGISTRATION_ANATTODWI.out.transfo_image
                 transfo_trk = REGISTRATION_ANATTODWI.out.transfo_trk
+                ref_warped = Channel.empty()
+                out_segmentation = Channel.empty()
+                out_ref_segmentation = Channel.empty()
+
             }
             else {
                 if ( ch_mask ) {
@@ -71,6 +84,20 @@ workflow REGISTRATION {
                     ch_register = ch_ref.combine(ch_image, by: 0)
                                         .map{ it + [[]] }
                 }
+
+                // ** Registration using antsRegistrationSyN.sh or antsRegistrationSyNQuick.sh. ** //
+                // ** Has to be defined in the config file or else the default (SyN) will be    ** //
+                // ** used.
+                REGISTRATION_ANTS ( ch_register )
+                ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions.first())
+
+                // ** Setting outputs ** //
+                image_warped = REGISTRATION_ANTS.out.image
+                transfo_image = REGISTRATION_ANTS.out.transfo_image
+                transfo_trk = REGISTRATION_ANTS.out.transfo_trk
+                ref_warped = Channel.empty()
+                out_segmentation = Channel.empty()
+                out_ref_segmentation = Channel.empty()
             }
         }
 

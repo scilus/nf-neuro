@@ -104,8 +104,8 @@ nextflow_workflow {
         }
     }
 
-    test("registration - surgery") {
-        config "./nextflow_surgery.config"
+    test("registration - easyreg") {
+        config "./nextflow_easyreg.config"
         when {
             workflow {
                 """

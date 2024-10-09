@@ -90,6 +90,12 @@ output:
         be used to register tractograms or bundle in the subject's anatomical space.
         Structure: [ val(meta), [ path(inverseAffine), path(inverseWarp) ]
       pattern: "*.{nii,nii.gz,mat}"
+  - ref_warped:
+      type: file
+      description: |
+        Channel containing warped reference image. Typically, this would be the warped DWI in T1 space.
+        Structure: [ val(meta), path(ref) ]
+      pattern: "*.{nii,nii.gz}"
   - out_segmentation:
       type: file
       description: |
