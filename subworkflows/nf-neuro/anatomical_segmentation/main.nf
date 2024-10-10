@@ -3,6 +3,8 @@ include { SEGMENTATION_FASTSEG       } from '../../../modules/nf-neuro/segmentat
 include { SEGMENTATION_FREESURFERSEG } from '../../../modules/nf-neuro/segmentation/freesurferseg/main'
 include { SEGMENTATION_SYNTHSEG      } from '../../../modules/nf-neuro/segmentation/synthseg/main'
 
+params.run_synthseg = false
+
 workflow ANATOMICAL_SEGMENTATION {
 
     // ** Two input channels for the segmentation processes since they are using   ** //
@@ -10,8 +12,8 @@ workflow ANATOMICAL_SEGMENTATION {
     // ** relevant will make the workflow run the appropriate module.              ** //
     take:
         ch_image            // channel: [ val(meta), [ image ] ]
-        ch_lesion           // channel: [ val(meta). [ lesion ] ], optional
         ch_freesurferseg    // channel: [ val(meta), [ aparc_aseg, wmparc ] ], optional
+        ch_lesion           // channel: [ val(meta), [ lesion ] ], optional
         ch_fs_license       // channel: [ val[meta], [ fs_license ] ], optional
 
     main:
@@ -20,11 +22,12 @@ workflow ANATOMICAL_SEGMENTATION {
 
         if ( params.run_synthseg ) {
             // ** Freesurfer synthseg segmentation ** //
-            ch_synthseg = ch_image
-                .join(ch_lesion)
-                .join(ch_fs_license)
-                .map{ it[0..1] + [[]] + it[2] }
-            SEGMENTATION_SYNTHSEG ( ch_synthseg )
+            SEGMENTATION_SYNTHSEG (
+                ch_image
+                    .join(ch_lesion, remainder: true)
+                    .join(ch_fs_license, remainder: true)
+                    .map{ it[0..1] + [it[2] ?: []] + [it[3] ?: []] }
+            )
             ch_versions = ch_versions.mix(SEGMENTATION_SYNTHSEG.out.versions.first())
 
             // ** Setting outputs ** //
@@ -39,6 +42,9 @@ workflow ANATOMICAL_SEGMENTATION {
             resample = SEGMENTATION_SYNTHSEG.out.resample
             volume = SEGMENTATION_SYNTHSEG.out.volume
             qc_score = SEGMENTATION_SYNTHSEG.out.qc_score
+            fs_wm_mask = Channel.empty()
+            fs_gm_mask = Channel.empty()
+            fs_csf_mask = Channel.empty()
         }
 
         else {
@@ -46,7 +52,7 @@ workflow ANATOMICAL_SEGMENTATION {
             SEGMENTATION_FASTSEG (
                 ch_image
                     .join(ch_lesion, remainder: true)
-                    .map{ it[0..1] + [it[2] ?: []] + [[]] }
+                    .map{ it[0..1] + [it[2] ?: []] }
             )
             ch_versions = ch_versions.mix(SEGMENTATION_FASTSEG.out.versions.first())
 
@@ -68,7 +74,7 @@ workflow ANATOMICAL_SEGMENTATION {
             SEGMENTATION_FREESURFERSEG (
                 ch_freesurferseg
                     .join(ch_lesion, remainder: true)
-                    .map{ it[0..2] + [it[3] ?: []] + [[]] }
+                    .map{ it[0..2] + [it[3] ?: []] }
             )
             ch_versions = ch_versions.mix(SEGMENTATION_FREESURFERSEG.out.versions.first())
 
@@ -76,14 +82,6 @@ workflow ANATOMICAL_SEGMENTATION {
             fs_wm_mask = SEGMENTATION_FREESURFERSEG.out.wm_mask
             fs_gm_mask = SEGMENTATION_FREESURFERSEG.out.gm_mask
             fs_csf_mask = SEGMENTATION_FREESURFERSEG.out.csf_mask
-            wm_map = Channel.empty()
-            gm_map = Channel.empty()
-            csf_map = Channel.empty()
-            seg = Channel.empty()
-            aparc_aseg = Channel.empty()
-            resample = Channel.empty()
-            volume = Channel.empty()
-            qc_score = Channel.empty()
         }
 
     emit:
@@ -98,6 +96,9 @@ workflow ANATOMICAL_SEGMENTATION {
         resample   = resample                    // channel: [ val(meta), [ resample ] ]
         volume     = volume                      // channel: [ val(meta), [ volume ] ]
         qc_score   = qc_score                    // channel: [ val(meta), [ qc_score ] ]
+        fs_wm_mask    = fs_wm_mask               // channel: [ val(meta), [ fs_wm_mask ] ]
+        fs_gm_mask    = fs_gm_mask               // channel: [ val(meta), [ fs_gm_mask ] ]
+        fs_csf_mask   = fs_csf_mask              // channel: [ val(meta), [ fs_csf_mask ] ]
 
         versions  = ch_versions                  // channel: [ versions.yml ]
 }

@@ -32,6 +32,8 @@ input:
       type: file
       description: |
         The input channel containing a lesion mask file to correct the white matter mask. The lesion mask must be a binary mask.
+        Structure: [ val(meta), path(lesion) ]
+      pattern: "*{nii.nii.gz}"
   - ch_freesurferseg:
       type: file
       description: |
@@ -109,6 +111,24 @@ output:
         Channel containing the optional output CSV file with qc scores for all subjects.
         Structure: [ val(meta), path(qc_score) ]
       pattern: "*.csv"
+  - fs_wm_mask:
+      type: file
+      description: |
+        Channel containing WM mask files produced by freesurferseg. Will be outputted only if aparc+aseg and wmparc are passed as inputs.
+        Structure: [ val(meta), path(wm_mask) ]
+      pattern: "*.{nii,nii.gz}"
+  - fs_gm_mask:
+      type: file
+      description: |
+        Channel containing GM mask files produced by freesurferseg. Will be outputted only if aparc+aseg and wmparc are passed as inputs.
+        Structure: [ val(meta), path(wm_mask) ]
+      pattern: "*.{nii,nii.gz}"
+  - fs_csf_mask:
+      type: file
+      description: |
+        Channel containing CSF mask files produced by freesurferseg. Will be outputted only if aparc+aseg and wmparc are passed as inputs.
+        Structure: [ val(meta), path(wm_mask) ]
+      pattern: "*.{nii,nii.gz}"
   - versions:
       type: file
       description: |
