@@ -11,10 +11,10 @@ process REGISTRATION_EASYREG {
     tuple val(meta), path(reference), path(floating), path(ref_segmentation), path(flo_segmentation)
 
     output:
-    tuple val(meta), path("*_reference_segmentation.nii.gz") , emit: ref_seg
-    tuple val(meta), path("*_floating_segmentation.nii.gz")  , emit: flo_seg
     tuple val(meta), path("*_reference_registered.nii.gz")   , emit: ref_reg
     tuple val(meta), path("*_floating_registered.nii.gz")    , emit: flo_reg
+    tuple val(meta), path("*_reference_segmentation.nii.gz") , emit: ref_seg, optional: true
+    tuple val(meta), path("*_floating_segmentation.nii.gz")  , emit: flo_seg, optional: true
     tuple val(meta), path("*_forward_field.nii.gz")          , emit: fwd_field, optional: true
     tuple val(meta), path("*_backward_field.nii.gz")         , emit: bak_field, optional: true
     path "versions.yml"                                      , emit: versions
@@ -67,10 +67,10 @@ process REGISTRATION_EASYREG {
     """
     mri_easyreg -h
 
-    touch ${prefix}_reference_segmentation.nii.gz
-    touch ${prefix}_floating_segmentation.nii.gz
     touch ${prefix}_reference_registered.nii.gz
     touch ${prefix}_floating_registered.nii.gz
+    touch ${prefix}_reference_segmentation.nii.gz
+    touch ${prefix}_floating_segmentation.nii.gz
     touch ${prefix}_forward_field.nii.gz
     touch ${prefix}_backward_field.nii.gz
 
