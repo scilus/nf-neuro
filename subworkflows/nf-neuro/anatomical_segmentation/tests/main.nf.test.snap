@@ -19,9 +19,9 @@
             "test__mask_wm.nii.gz:md5:header,35a4de57a3bf53232f8194ca41b6a2f2,data,4eb5a29cb8d731e6bd200cc61d802979",
             "test__mask_gm.nii.gz:md5:header,35a4de57a3bf53232f8194ca41b6a2f2,data,aa693527d1e8d7edac74cb4b066dbd2f",
             "test__mask_csf.nii.gz:md5:header,35a4de57a3bf53232f8194ca41b6a2f2,data,e24346c9779a2856baaa2fc54adef8bf",
-            "test__map_wm.nii.gz:md5:header,76231f3f9a5e86ab314a6c98fd9bfb5f,data,a1f3ed7510d9204f2c2f9b7de3e7f8f7",
-            "test__map_gm.nii.gz:md5:header,76231f3f9a5e86ab314a6c98fd9bfb5f,data,626bc2a59553000f66182784177c5d80",
-            "test__map_csf.nii.gz:md5:header,76231f3f9a5e86ab314a6c98fd9bfb5f,data,3a057b1125ca865bf5245690ac4d9178",
+            "test__map_wm.nii.gz:md5:header,76231f3f9a5e86ab314a6c98fd9bfb5f,data,5166dd907f14ca7823d826e7012009df",
+            "test__map_gm.nii.gz:md5:header,76231f3f9a5e86ab314a6c98fd9bfb5f,data,bd25866318e5bac30c103de237f27802",
+            "test__map_csf.nii.gz:md5:header,76231f3f9a5e86ab314a6c98fd9bfb5f,data,141b28b46dc9111b2f7ab2c705387b1f",
             "test__seg.nii.gz:md5:header,74ed7e917b9fde7b2aaba7f512cc1edf,data,cc224b57a80e41e06dc29adf4c82fc31",
             [
                 "versions.yml:md5,95e31db072c7bb2505128bd08beaecf4"
@@ -31,7 +31,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-10T20:10:39.774272027"
+        "timestamp": "2024-10-10T23:22:09.807681062"
     },
     "anatomical_segmentation - fslfast": {
         "content": [
