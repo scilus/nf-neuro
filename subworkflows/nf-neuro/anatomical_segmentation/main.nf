@@ -42,9 +42,6 @@ workflow ANATOMICAL_SEGMENTATION {
             resample = SEGMENTATION_SYNTHSEG.out.resample
             volume = SEGMENTATION_SYNTHSEG.out.volume
             qc_score = SEGMENTATION_SYNTHSEG.out.qc_score
-            fs_wm_mask = Channel.empty()
-            fs_gm_mask = Channel.empty()
-            fs_csf_mask = Channel.empty()
         }
 
         else {
@@ -79,9 +76,9 @@ workflow ANATOMICAL_SEGMENTATION {
             ch_versions = ch_versions.mix(SEGMENTATION_FREESURFERSEG.out.versions.first())
 
             // ** Setting outputs ** //
-            fs_wm_mask = SEGMENTATION_FREESURFERSEG.out.wm_mask
-            fs_gm_mask = SEGMENTATION_FREESURFERSEG.out.gm_mask
-            fs_csf_mask = SEGMENTATION_FREESURFERSEG.out.csf_mask
+            wm_mask = wm_mask.mix( SEGMENTATION_FREESURFERSEG.out.wm_mask )
+            gm_mask = gm_mask.mix( SEGMENTATION_FREESURFERSEG.out.gm_mask )
+            csf_mask = csf_mask.mix( SEGMENTATION_FREESURFERSEG.out.csf_mask )
         }
 
     emit:
@@ -96,9 +93,6 @@ workflow ANATOMICAL_SEGMENTATION {
         resample   = resample                    // channel: [ val(meta), [ resample ] ]
         volume     = volume                      // channel: [ val(meta), [ volume ] ]
         qc_score   = qc_score                    // channel: [ val(meta), [ qc_score ] ]
-        fs_wm_mask    = fs_wm_mask               // channel: [ val(meta), [ fs_wm_mask ] ]
-        fs_gm_mask    = fs_gm_mask               // channel: [ val(meta), [ fs_gm_mask ] ]
-        fs_csf_mask   = fs_csf_mask              // channel: [ val(meta), [ fs_csf_mask ] ]
 
         versions  = ch_versions                  // channel: [ versions.yml ]
 }

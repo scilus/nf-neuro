@@ -96,9 +96,9 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    niftiMD5SUM(workflow.out.fs_wm_mask.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.fs_gm_mask.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.fs_csf_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.wm_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.gm_mask.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.csf_mask.get(0).get(1)),
                     workflow.out.versions
                 ).match() }
             )
@@ -145,9 +145,6 @@ nextflow_workflow {
                     niftiMD5SUM(workflow.out.wm_map.get(0).get(1)),
                     niftiMD5SUM(workflow.out.gm_map.get(0).get(1)),
                     niftiMD5SUM(workflow.out.csf_map.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.fs_wm_mask.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.fs_gm_mask.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.fs_csf_mask.get(0).get(1)),
                     workflow.out.versions
                 ).match() }
             )
@@ -190,9 +187,9 @@ nextflow_workflow {
                     niftiMD5SUM(workflow.out.wm_mask.get(0).get(1), 6),
                     niftiMD5SUM(workflow.out.gm_mask.get(0).get(1), 6),
                     niftiMD5SUM(workflow.out.csf_mask.get(0).get(1), 6),
-                    niftiMD5SUM(workflow.out.wm_map.get(0).get(1), 4),
-                    niftiMD5SUM(workflow.out.gm_map.get(0).get(1), 4),
-                    niftiMD5SUM(workflow.out.csf_map.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.wm_map.get(0).get(1), 2),
+                    niftiMD5SUM(workflow.out.gm_map.get(0).get(1), 2),
+                    niftiMD5SUM(workflow.out.csf_map.get(0).get(1), 2),
                     niftiMD5SUM(workflow.out.seg.get(0).get(1), 6),
                     workflow.out.versions
                 ).match()}

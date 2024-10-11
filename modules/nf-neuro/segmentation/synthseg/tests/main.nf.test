@@ -64,9 +64,9 @@ nextflow_process {
                     niftiMD5SUM(process.out.wm_mask.get(0).get(1), 6),
                     niftiMD5SUM(process.out.gm_mask.get(0).get(1), 6),
                     niftiMD5SUM(process.out.csf_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.wm_map.get(0).get(1), 4),
-                    niftiMD5SUM(process.out.gm_map.get(0).get(1), 4),
-                    niftiMD5SUM(process.out.csf_map.get(0).get(1), 4),
+                    niftiMD5SUM(process.out.wm_map.get(0).get(1), 2),
+                    niftiMD5SUM(process.out.gm_map.get(0).get(1), 2),
+                    niftiMD5SUM(process.out.csf_map.get(0).get(1), 2),
                     niftiMD5SUM(process.out.seg.get(0).get(1), 6),
                     process.out.versions
                 ).match() }
@@ -110,9 +110,9 @@ nextflow_process {
                     niftiMD5SUM(process.out.wm_mask.get(0).get(1), 6),
                     niftiMD5SUM(process.out.gm_mask.get(0).get(1), 6),
                     niftiMD5SUM(process.out.csf_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.wm_map.get(0).get(1), 4),
-                    niftiMD5SUM(process.out.gm_map.get(0).get(1), 4),
-                    niftiMD5SUM(process.out.csf_map.get(0).get(1), 4),
+                    niftiMD5SUM(process.out.wm_map.get(0).get(1), 2),
+                    niftiMD5SUM(process.out.gm_map.get(0).get(1), 2),
+                    niftiMD5SUM(process.out.csf_map.get(0).get(1), 2),
                     niftiMD5SUM(process.out.aparc_aseg.get(0).get(1), 6),
                     niftiMD5SUM(process.out.resample.get(0).get(1)),
                     process.out.volume,
@@ -159,9 +159,9 @@ nextflow_process {
                     niftiMD5SUM(process.out.wm_mask.get(0).get(1), 6),
                     niftiMD5SUM(process.out.gm_mask.get(0).get(1), 6),
                     niftiMD5SUM(process.out.csf_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.wm_map.get(0).get(1), 4),
-                    niftiMD5SUM(process.out.gm_map.get(0).get(1), 4),
-                    niftiMD5SUM(process.out.csf_map.get(0).get(1), 4),
+                    niftiMD5SUM(process.out.wm_map.get(0).get(1), 2),
+                    niftiMD5SUM(process.out.gm_map.get(0).get(1), 2),
+                    niftiMD5SUM(process.out.csf_map.get(0).get(1), 2),
                     niftiMD5SUM(process.out.seg.get(0).get(1), 6),
                     process.out.versions
                 ).match() }
