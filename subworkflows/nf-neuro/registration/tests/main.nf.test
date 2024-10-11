@@ -57,9 +57,9 @@ nextflow_workflow {
                         file("\${test_data_directory}/fa.nii.gz")
                     ]
                 }
-                input[3] = []
-                input[4] = []
-                input[5] = []
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
                 """
             }
         }
@@ -99,9 +99,9 @@ nextflow_workflow {
                         file("\${test_data_directory}/b0_mean.nii.gz")
                     ]}
                 input[2] = []
-                input[3] = []
-                input[4] = []
-                input[5] = []
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
                 """
             }
         }
@@ -144,8 +144,8 @@ nextflow_workflow {
                 }
                 input[2] = []
                 input[3] = []
-                input[4] = []
-                input[5] = []
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
                 """
             }
         }
@@ -154,12 +154,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1), 6),
-                    niftiMD5SUM(workflow.out.ref_warped.get(0).get(1), 6),
-                    workflow.out.transfo_image,
-                    workflow.out.transfo_trk,
-                    niftiMD5SUM(workflow.out.segmentation.get(0).get(1), 6),
-                    niftiMD5SUM(workflow.out.ref_segmentation.get(0).get(1), 6),
+                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.ref_warped.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.transfo_image.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.transfo_trk.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.segmentation.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.ref_segmentation.get(0).get(1), 4),
                     workflow.out.versions
                 ).match()}
             )

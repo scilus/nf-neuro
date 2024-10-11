@@ -2,6 +2,8 @@ include { REGISTRATION_ANATTODWI  } from '../../../modules/nf-neuro/registration
 include { REGISTRATION_ANTS   } from '../../../modules/nf-neuro/registration/ants/main'
 include { REGISTRATION_EASYREG   } from '../../../modules/nf-neuro/registration/easyreg/main'
 
+params.run_easyreg = false
+
 workflow REGISTRATION {
 
     // ** The subworkflow requires at least ch_image and ch_ref as inputs to ** //
@@ -24,17 +26,11 @@ workflow REGISTRATION {
 
         if ( params.run_easyreg ) {
             // ** Set up input channel ** //
-            // FIX ME: in one command?
-            if ( ch_segmentation && ch_ref_segmentation ) {
-                ch_register = ch_ref.combine(ch_image, by: 0)
-                                    .combine(ch_ref_segmentation, by: 0)
-                                    .combine(ch_segmentation, by: 0)
-                                    // .map{ it[0..1] + [it[2] ?: []] + [it[3] ?: []]}
-            }
-            else {
-                ch_register = ch_ref.combine(ch_image, by: 0)
-                                    .map{ it + [[]] + [[]] }
-            }
+            ch_register = ch_ref.join(ch_image, remainder: true)
+                                .join(ch_ref_segmentation, remainder: true)
+                                .join(ch_segmentation, remainder: true)
+                                .map{ it[0..2] + [it[3] ?: []] + [it[4] ?: []] }
+
 
             // ** Registration using Easyreg ** //
             REGISTRATION_EASYREG ( ch_register )
@@ -43,15 +39,13 @@ workflow REGISTRATION {
             // ** Setting outputs ** //
             image_warped = REGISTRATION_EASYREG.out.flo_reg
             transfo_image = REGISTRATION_EASYREG.out.fwd_field
-                .map{ it + [[]] }
             transfo_trk = REGISTRATION_EASYREG.out.bak_field
-                .map{ [[]] + it }
             ref_warped = REGISTRATION_EASYREG.out.ref_reg
 
             // ** Setting optional outputs. If segmentations are not provided as inputs, ** //
             // ** easyreg will outputs synthseg segmentations ** //
-            out_segmentation = ch_segmentation ? Channel.empty() : REGISTRATION_EASYREG.out.flo_seg
-            out_ref_segmentation = ch_ref_segmentation ? Channel.empty() : REGISTRATION_EASYREG.out.ref_seg
+            out_segmentation = ch_segmentation.mix( REGISTRATION_EASYREG.out.flo_seg )
+            out_ref_segmentation = ch_ref_segmentation.mix( REGISTRATION_EASYREG.out.ref_seg )
 
         }
 
@@ -75,15 +69,9 @@ workflow REGISTRATION {
 
             }
             else {
-                if ( ch_mask ) {
-                    ch_register = ch_ref.combine(ch_image, by: 0)
-                                        .combine(ch_mask, by: 0)
-                }
-
-                else {
-                    ch_register = ch_ref.combine(ch_image, by: 0)
-                                        .map{ it + [[]] }
-                }
+                ch_register = ch_ref.join(ch_image, remainder: true)
+                                    .join(ch_mask, remainder: true)
+                                    .map{ it[0..2] + [it[3] ?: []] }
 
                 // ** Registration using antsRegistrationSyN.sh or antsRegistrationSyNQuick.sh. ** //
                 // ** Has to be defined in the config file or else the default (SyN) will be    ** //
@@ -104,8 +92,8 @@ workflow REGISTRATION {
     emit:
         image_warped  = image_warped               // channel: [ val(meta), [ image ] ]
         ref_warped = ref_warped                    // channel: [ val(meta), [ ref ] ]
-        transfo_image = transfo_image              // channel: [ val(meta), [ warp, affine ] ]
-        transfo_trk   = transfo_trk                // channel: [ val(meta), [ inverseAffine, inverseWarp ] ]
+        transfo_image = transfo_image              // channel: [ val(meta), [ warp, <affine> ] ]
+        transfo_trk   = transfo_trk                // channel: [ val(meta), [ <inverseAffine>, inverseWarp ] ]
         segmentation = out_segmentation            // channel: [ val(meta), [ segmentation ] ]
         ref_segmentation = out_ref_segmentation    // channel: [ val(meta), [ ref_segmentation ] ]
 
