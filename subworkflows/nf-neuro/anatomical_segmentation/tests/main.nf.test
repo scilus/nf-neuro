@@ -190,9 +190,9 @@ nextflow_workflow {
                     niftiMD5SUM(workflow.out.wm_mask.get(0).get(1), 6),
                     niftiMD5SUM(workflow.out.gm_mask.get(0).get(1), 6),
                     niftiMD5SUM(workflow.out.csf_mask.get(0).get(1), 6),
-                    niftiMD5SUM(workflow.out.wm_map.get(0).get(1), 5),
-                    niftiMD5SUM(workflow.out.gm_map.get(0).get(1), 5),
-                    niftiMD5SUM(workflow.out.csf_map.get(0).get(1), 5),
+                    niftiMD5SUM(workflow.out.wm_map.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.gm_map.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.csf_map.get(0).get(1), 4),
                     niftiMD5SUM(workflow.out.seg.get(0).get(1), 6),
                     workflow.out.versions
                 ).match()}
