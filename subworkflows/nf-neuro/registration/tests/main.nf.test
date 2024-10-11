@@ -68,7 +68,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1), 6),
                     workflow.out.transfo_image,
                     workflow.out.transfo_trk,
                     workflow.out.versions
@@ -110,7 +110,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1), 6),
                     workflow.out.transfo_image,
                     workflow.out.transfo_trk,
                     workflow.out.versions

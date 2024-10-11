@@ -39,7 +39,7 @@
     },
     "registration - antsRegistration": {
         "content": [
-            "test__t1_warped.nii.gz:md5:header,e327665710b9c0888bf345a10a73c20f,data,1e29233890cb0b9cd0420d581cc77397",
+            "test__t1_warped.nii.gz:md5:header,e327665710b9c0888bf345a10a73c20f,data,4eb70dcf5af0960512e531d3b71bf1ea",
             [
                 [
                     {
@@ -68,11 +68,11 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-10T00:03:32.179190822"
+        "timestamp": "2024-10-11T05:30:54.804593077"
     },
     "registration - SyNQuick": {
         "content": [
-            "test__warped.nii.gz:md5:header,e327665710b9c0888bf345a10a73c20f,data,61793ed987f5eac9779dd84acc189f9a",
+            "test__warped.nii.gz:md5:header,e327665710b9c0888bf345a10a73c20f,data,e56b53add57641d14ca5225ab3feaead",
             [
                 [
                     {
@@ -105,6 +105,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-09T23:45:19.049034952"
+        "timestamp": "2024-10-11T05:31:04.589386655"
     }
 }
