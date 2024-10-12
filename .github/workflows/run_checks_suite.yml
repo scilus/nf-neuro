@@ -143,6 +143,8 @@ jobs:
             path: modules/nf-neuro/registration/synthregistration
           - runner: scilus-nf-neuro-bigmem-runners
             path: subworkflows/nf-neuro/preproc_t1
+          - runner: scilus-nf-neuro-bigmem-runners
+            path: subworkflows/nf-neuro/registration
         exclude:
           - path: subworkflows/nf-neuro/load_test_data
     uses: ./.github/workflows/test_component.yml

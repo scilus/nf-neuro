@@ -3,7 +3,6 @@ nextflow_workflow {
     name "Test Subworkflow REGISTRATION"
     script "../main.nf"
     workflow "REGISTRATION"
-    config "./nextflow.config"
 
     tag "subworkflows"
     tag "subworkflows_nfcore"
@@ -13,6 +12,7 @@ nextflow_workflow {
     tag "registration/anattodwi"
     tag "registration"
     tag "registration/ants"
+    tag "registration/easyreg"
 
     tag "load_test_data"
 
@@ -21,7 +21,7 @@ nextflow_workflow {
             script "../../load_test_data/main.nf"
             process {
                 """
-                input[0] = Channel.from( [ "processing.zip" ] )
+                input[0] = Channel.from( [ "processing.zip", "freesurfer.zip", "registration.zip" ] )
                 input[1] = "test.load-test-data"
                 """
             }
@@ -29,26 +29,37 @@ nextflow_workflow {
     }
 
     test("registration - antsRegistration") {
-
+        config "./nextflow.config"
         when {
             workflow {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory.map{
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        processing: it.simpleName == "processing"
+                        t1: it.simpleName == "freesurfer"
+                        b0: it.simpleName == "registration"
+                    }
+                input[0] = ch_split_test_data.processing.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/mni_masked_2x2x2.nii.gz")
-                    ]}
-                input[1] = LOAD_DATA.out.test_data_directory.map{
+                    ]
+                }
+                input[1] = ch_split_test_data.processing.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/b0_mean.nii.gz")
-                    ]}
-                input[2] = LOAD_DATA.out.test_data_directory.map{
+                    ]
+                }
+                input[2] = ch_split_test_data.processing.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/fa.nii.gz")
-                    ]}
-                input[3] = []
+                    ]
+                }
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
                 """
             }
         }
@@ -62,22 +73,30 @@ nextflow_workflow {
     }
 
     test("registration - SyNQuick") {
-
+        config "./nextflow.config"
         when {
             workflow {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory.map{
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        processing: it.simpleName == "processing"
+                        t1: it.simpleName == "freesurfer"
+                        b0: it.simpleName == "registration"
+                    }
+                input[0] = ch_split_test_data.processing.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/mni_masked_2x2x2.nii.gz")
                     ]}
-                input[1] = LOAD_DATA.out.test_data_directory.map{
+                input[1] = ch_split_test_data.processing.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/b0_mean.nii.gz")
                     ]}
                 input[2] = []
-                input[3] = []
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
                 """
             }
         }
@@ -86,6 +105,53 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("registration - easyreg") {
+        config "./nextflow_easyreg.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        processing: it.simpleName == "processing"
+                        t1: it.simpleName == "freesurfer"
+                        b0: it.simpleName == "registration"
+                    }
+                input[0] = ch_split_test_data.t1.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1.nii.gz")
+                    ]
+                }
+                input[1] = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz")
+                    ]
+                }
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    file(workflow.out.image_warped.get(0).get(1)).name,
+                    file(workflow.out.ref_warped.get(0).get(1)).name,
+                    file(workflow.out.transfo_image.get(0).get(1)).name,
+                    file(workflow.out.transfo_trk.get(0).get(1)).name,
+                    niftiMD5SUM(workflow.out.segmentation.get(0).get(1), 6),
+                    file(workflow.out.ref_segmentation.get(0).get(1)).name,
+                    workflow.out.versions
+                ).match()}
             )
         }
     }

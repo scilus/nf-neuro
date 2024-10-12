@@ -48,16 +48,6 @@ output:
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
 
-  - ref_seg:
-      type: file
-      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the reference image.
-      pattern: "*_reference_segmentation.nii.gz"
-
-  - flo_seg:
-      type: file
-      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the floating image.
-      pattern: "*_floating_segmentation.nii.gz"
-
   - ref_reg:
       type: file
       description: this is the file where the deformed (registered) reference image is written.
@@ -67,6 +57,16 @@ output:
       type: file
       description: this is the file where the deformed (registered) floating image is written.
       pattern: "*_floating_registered.nii.gz"
+
+  - ref_seg:
+      type: file
+      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the reference image. Will produce image only if not passed as input.
+      pattern: "*_reference_segmentation.nii.gz"
+
+  - flo_seg:
+      type: file
+      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the floating image. Will produce image only if not passed as input.
+      pattern: "*_floating_segmentation.nii.gz"
 
   - fwd_field:
       type: file
