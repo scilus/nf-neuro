@@ -67,12 +67,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(
-                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1), 6),
-                    workflow.out.transfo_image,
-                    workflow.out.transfo_trk,
-                    workflow.out.versions
-                ).match()}
+                { assert snapshot(workflow.out).match()}
             )
         }
     }
@@ -109,12 +104,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(
-                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1), 6),
-                    workflow.out.transfo_image,
-                    workflow.out.transfo_trk,
-                    workflow.out.versions
-                ).match()}
+                { assert snapshot(workflow.out).match()}
             )
         }
     }
@@ -142,8 +132,8 @@ nextflow_workflow {
                         file("\${test_data_directory}/b0.nii.gz")
                     ]
                 }
-                input[2] = []
-                input[3] = []
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
                 input[4] = Channel.empty()
                 input[5] = Channel.empty()
                 """
@@ -154,12 +144,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1), 2),
-                    niftiMD5SUM(workflow.out.ref_warped.get(0).get(1), 2),
-                    niftiMD5SUM(workflow.out.transfo_image.get(0).get(1), 2),
-                    niftiMD5SUM(workflow.out.transfo_trk.get(0).get(1), 2),
-                    niftiMD5SUM(workflow.out.segmentation.get(0).get(1), 4),
-                    niftiMD5SUM(workflow.out.ref_segmentation.get(0).get(1), 2),
+                    file(workflow.out.image_warped.get(0).get(1)).name,
+                    file(workflow.out.ref_warped.get(0).get(1)).name,
+                    file(workflow.out.transfo_image.get(0).get(1)).name,
+                    file(workflow.out.transfo_trk.get(0).get(1)).name,
+                    niftiMD5SUM(workflow.out.segmentation.get(0).get(1), 6),
+                    file(workflow.out.ref_segmentation.get(0).get(1)).name,
                     workflow.out.versions
                 ).match()}
             )
