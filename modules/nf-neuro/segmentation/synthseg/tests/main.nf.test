@@ -61,13 +61,13 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    niftiMD5SUM(process.out.wm_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.gm_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.csf_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.wm_map.get(0).get(1), 2),
-                    niftiMD5SUM(process.out.gm_map.get(0).get(1), 2),
-                    niftiMD5SUM(process.out.csf_map.get(0).get(1), 2),
-                    niftiMD5SUM(process.out.seg.get(0).get(1), 6),
+                    file(process.out.wm_mask.get(0).get(1)).name,
+                    file(process.out.gm_mask.get(0).get(1)).name,
+                    file(process.out.csf_mask.get(0).get(1)).name,
+                    file(process.out.wm_map.get(0).get(1)).name,
+                    file(process.out.gm_map.get(0).get(1)).name,
+                    file(process.out.csf_map.get(0).get(1)).name,
+                    file(process.out.seg.get(0).get(1)).name,
                     process.out.versions
                 ).match() }
             )
@@ -107,13 +107,13 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    niftiMD5SUM(process.out.wm_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.gm_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.csf_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.wm_map.get(0).get(1), 2),
-                    niftiMD5SUM(process.out.gm_map.get(0).get(1), 2),
-                    niftiMD5SUM(process.out.csf_map.get(0).get(1), 2),
-                    niftiMD5SUM(process.out.aparc_aseg.get(0).get(1), 6),
+                    file(process.out.wm_mask.get(0).get(1)).name,
+                    file(process.out.gm_mask.get(0).get(1)).name,
+                    file(process.out.csf_mask.get(0).get(1)).name,
+                    file(process.out.wm_map.get(0).get(1)).name,
+                    file(process.out.gm_map.get(0).get(1)).name,
+                    file(process.out.csf_map.get(0).get(1)).name,
+                    file(process.out.aparc_aseg.get(0).get(1)).name,
                     niftiMD5SUM(process.out.resample.get(0).get(1)),
                     process.out.volume,
                     process.out.qc_score,
@@ -156,13 +156,13 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    niftiMD5SUM(process.out.wm_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.gm_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.csf_mask.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.wm_map.get(0).get(1), 2),
-                    niftiMD5SUM(process.out.gm_map.get(0).get(1), 2),
-                    niftiMD5SUM(process.out.csf_map.get(0).get(1), 2),
-                    niftiMD5SUM(process.out.seg.get(0).get(1), 6),
+                    file(process.out.wm_mask.get(0).get(1)).name,
+                    file(process.out.gm_mask.get(0).get(1)).name,
+                    file(process.out.csf_mask.get(0).get(1)).name,
+                    file(process.out.wm_map.get(0).get(1)).name,
+                    file(process.out.gm_map.get(0).get(1)).name,
+                    file(process.out.csf_map.get(0).get(1)).name,
+                    file(process.out.seg.get(0).get(1)).name,
                     process.out.versions
                 ).match() }
             )

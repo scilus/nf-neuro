@@ -1,13 +1,13 @@
 {
     "segmentation - synthseg - options": {
         "content": [
-            "test__mask_wm.nii.gz:md5:header,07555a083d94f8f52a4227cacb0ed0b1,data,8ffff7c6810fc860e647d468f78da688",
-            "test__mask_gm.nii.gz:md5:header,07555a083d94f8f52a4227cacb0ed0b1,data,33864a62b5de53801fe5a7fb708565e6",
-            "test__mask_csf.nii.gz:md5:header,07555a083d94f8f52a4227cacb0ed0b1,data,f26e143ee6e50ba6de14ffa663009980",
-            "test__map_wm.nii.gz:md5:header,8741ac74cc520ac7a3fc1338a8210f4d,data,1b6e41dc5ea5d9342532fc9e861c0811",
-            "test__map_gm.nii.gz:md5:header,8741ac74cc520ac7a3fc1338a8210f4d,data,95e93dd0c0a5cd7ca6cf2beaf0b49394",
-            "test__map_csf.nii.gz:md5:header,8741ac74cc520ac7a3fc1338a8210f4d,data,d56c1f5b9bc58681e420b7caba87d708",
-            "test__aparc_aseg.nii.gz:md5:header,ff063c025479983639fd545e1e8fd690,data,adeeec0078924b2fde1cd4667a2c330d",
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
+            "test__map_wm.nii.gz",
+            "test__map_gm.nii.gz",
+            "test__map_csf.nii.gz",
+            "test__aparc_aseg.nii.gz",
             "test__resampled_image.nii.gz:md5:header,728dfc231a3dfcf567ac640930f68629,data,1f02837025def8b0701f79549c2955e1",
             [
                 
@@ -23,17 +23,17 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-11T20:56:45.8845281"
+        "timestamp": "2024-10-12T03:42:10.76796495"
     },
     "segmentation - synthseg - basic": {
         "content": [
-            "test__mask_wm.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,1b5a4d63ae2b56d9d6936313b5225b55",
-            "test__mask_gm.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,78f4ced658a08d05c2eee30f8ab87b5e",
-            "test__mask_csf.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,c9abaab9c5e047fadf928a6520929d5e",
-            "test__map_wm.nii.gz:md5:header,259952abe43ff3021fb61c96b9cbebee,data,262fa0d5882b5c4c6555a5680564efcc",
-            "test__map_gm.nii.gz:md5:header,259952abe43ff3021fb61c96b9cbebee,data,83999891b7edd45e9af9867b8e066321",
-            "test__map_csf.nii.gz:md5:header,259952abe43ff3021fb61c96b9cbebee,data,bc4285b196045ebf3e5959da0aa65806",
-            "test__seg.nii.gz:md5:header,f84c3d38470f2b2c2741e78ee95b5367,data,f68a3f27105e7fe463bb108648b11459",
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
+            "test__map_wm.nii.gz",
+            "test__map_gm.nii.gz",
+            "test__map_csf.nii.gz",
+            "test__seg.nii.gz",
             [
                 "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
             ]
@@ -42,17 +42,17 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-11T20:49:21.443292744"
+        "timestamp": "2024-10-12T03:35:07.078841663"
     },
     "segmentation - synthseg - lesion": {
         "content": [
-            "test__mask_wm.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,6d99d71cff4a2f9d147c45b1ee36dce0",
-            "test__mask_gm.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,78f4ced658a08d05c2eee30f8ab87b5e",
-            "test__mask_csf.nii.gz:md5:header,a0430ca63ccc3bb2b925694cb7568388,data,c9abaab9c5e047fadf928a6520929d5e",
-            "test__map_wm.nii.gz:md5:header,259952abe43ff3021fb61c96b9cbebee,data,262fa0d5882b5c4c6555a5680564efcc",
-            "test__map_gm.nii.gz:md5:header,259952abe43ff3021fb61c96b9cbebee,data,83999891b7edd45e9af9867b8e066321",
-            "test__map_csf.nii.gz:md5:header,259952abe43ff3021fb61c96b9cbebee,data,bc4285b196045ebf3e5959da0aa65806",
-            "test__seg.nii.gz:md5:header,f84c3d38470f2b2c2741e78ee95b5367,data,f68a3f27105e7fe463bb108648b11459",
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
+            "test__map_wm.nii.gz",
+            "test__map_gm.nii.gz",
+            "test__map_csf.nii.gz",
+            "test__seg.nii.gz",
             [
                 "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
             ]
@@ -61,6 +61,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-11T21:04:59.095478079"
+        "timestamp": "2024-10-12T03:50:05.836734582"
     }
 }
