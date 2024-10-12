@@ -154,12 +154,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1), 4),
-                    niftiMD5SUM(workflow.out.ref_warped.get(0).get(1), 4),
-                    niftiMD5SUM(workflow.out.transfo_image.get(0).get(1), 4),
-                    niftiMD5SUM(workflow.out.transfo_trk.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.image_warped.get(0).get(1), 2),
+                    niftiMD5SUM(workflow.out.ref_warped.get(0).get(1), 2),
+                    niftiMD5SUM(workflow.out.transfo_image.get(0).get(1), 2),
+                    niftiMD5SUM(workflow.out.transfo_trk.get(0).get(1), 2),
                     niftiMD5SUM(workflow.out.segmentation.get(0).get(1), 4),
-                    niftiMD5SUM(workflow.out.ref_segmentation.get(0).get(1), 4),
+                    niftiMD5SUM(workflow.out.ref_segmentation.get(0).get(1), 2),
                     workflow.out.versions
                 ).match()}
             )

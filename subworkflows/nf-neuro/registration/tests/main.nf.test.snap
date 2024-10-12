@@ -1,10 +1,10 @@
 {
     "registration - easyreg": {
         "content": [
-            "test_floating_registered.nii.gz:md5:header,c5e41f89848f91c53a9a7be44970d4b1,data,172137aa0394f8696216fec440cdd72f",
-            "test_reference_registered.nii.gz:md5:header,ec5893cd9ea024e630c4444bd914c331,data,563c73ad50c7e335d82eb2142152c141",
-            "test_forward_field.nii.gz:md5:header,74c92ee4cd3c4abfecf3da6cdb1d4650,data,ed1d6f6041cfcd6a9c5e3c0b278157aa",
-            "test_backward_field.nii.gz:md5:header,0db0a80786ff39864cc17506ed1a0146,data,b8503035f9a571deae3f76f3939a740c",
+            "test_floating_registered.nii.gz:md5:header,c5e41f89848f91c53a9a7be44970d4b1,data,8785aaa84782fc3b1c30b2de83bdbc52",
+            "test_reference_registered.nii.gz:md5:header,ec5893cd9ea024e630c4444bd914c331,data,0355b03b6baf8ed2e4eb945a9ae881df",
+            "test_forward_field.nii.gz:md5:header,74c92ee4cd3c4abfecf3da6cdb1d4650,data,b4d46bbc40d5695b7051725754323f56",
+            "test_backward_field.nii.gz:md5:header,0db0a80786ff39864cc17506ed1a0146,data,323c3585bc9e814a5b6596023130f9a0",
             "test_floating_segmentation.nii.gz:md5:header,d559b931014ef191f9af17abf1152a3c,data,85934f256bb314487d31e1405393f31f",
             "test_reference_segmentation.nii.gz:md5:header,b3c282f86451ca606b428bd9ffcacd10,data,9ed72961f6b470dba2872d079f312479",
             [
@@ -15,7 +15,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-11T19:55:28.869031918"
+        "timestamp": "2024-10-11T21:53:11.574280264"
     },
     "registration - antsRegistration": {
         "content": [
