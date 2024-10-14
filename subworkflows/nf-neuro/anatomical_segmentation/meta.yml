@@ -4,7 +4,7 @@ description: |
   two type of input channels, either an anatomical image (most likely T1) and/or freesurfer parcellations
   files. Depending on which channel is provided, the subworkflow will perform either of the following:
   1)  Channel with an anatomical image with run_synthseg parameter will result in using Freesurfer synthseg producing WM, GM
-      and CSF mask/maps.
+      and CSF masks/maps.
   2)  Channel with an anatomical image will result in using FSL's fast segmentation producing WM, GM,
       and CSF masks/maps.
   3)  Channel with FreeSurfer's parcellations files will result in using Scilpy's tools to produce
@@ -28,12 +28,6 @@ input:
         subworkflow will perform segmentation using FSL's fast.
         Structure: [ val(meta), path(image) ]
       pattern: "*.{nii,nii.gz}"
-  - ch_lesion:
-      type: file
-      description: |
-        The input channel containing a lesion mask file to correct the white matter mask. The lesion mask must be a binary mask.
-        Structure: [ val(meta), path(lesion) ]
-      pattern: "*{nii.nii.gz}"
   - ch_freesurferseg:
       type: file
       description: |
@@ -42,6 +36,12 @@ input:
         parcellations into masks.
         Structure: [ val(meta), path(aparc_aseg), path(wm_parc) ]
       pattern: "*.mgz"
+  - ch_lesion:
+      type: file
+      description: |
+        The input channel containing a lesion mask file to correct the white matter mask. The lesion mask must be a binary mask.
+        Structure: [ val(meta), path(lesion) ]
+      pattern: "*{nii.nii.gz}"
   - ch_fs_license:
       type: file
       description: |
@@ -87,18 +87,24 @@ output:
         Channel containing CSF probability maps.
         Structure: [ val(meta), path(csf_map) ]
       pattern: "*.{nii,nii.gz}"
-  - aparc_aseg:
-      type: file
-      description: |
-        Channel containing the optional nifti cortical parcellation and segmentation volume from synthseg.
-        pattern: "*.{nii,nii.gz}"
-        Structure: [ val(meta), path(aparc_aseg) ]
   - seg:
       type: file
       description: |
         Channel containing the optional nifti segmentation volume from synthseg.
-        pattern: "*.{nii,nii.gz}"
         Structure: [ val(meta), path(seg) ]
+      pattern: "*.{nii,nii.gz}"
+  - aparc_aseg:
+      type: file
+      description: |
+        Channel containing the optional nifti cortical parcellation and segmentation volume from synthseg.
+        Structure: [ val(meta), path(aparc_aseg) ]
+      pattern: "*.{nii,nii.gz}"
+  - resample:
+      type: file
+      description: |
+        Channel containing the optional resampled images at 1mm.
+        Structure: [ val(meta), path(resample) ]
+      pattern: "*.{nii.nii.gz}"
   - volume:
       type: file
       description: |
