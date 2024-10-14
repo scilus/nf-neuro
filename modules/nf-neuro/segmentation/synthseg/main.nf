@@ -1,7 +1,6 @@
 process SEGMENTATION_SYNTHSEG {
     tag "$meta.id"
-    label 'process_single'
-    label 'process_high'
+    label 'process_medium'
 
     container "freesurfer/freesurfer:7.4.1"
 
