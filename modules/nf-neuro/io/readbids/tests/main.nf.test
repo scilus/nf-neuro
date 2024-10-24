@@ -30,11 +30,12 @@ nextflow_process {
             process {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
-                    test_data_directory ->
-                        file("\${test_data_directory}/i_bids", checkIfExists: true)
+                    test_data_directory -> [
+                        file("\${test_data_directory}/i_bids", checkIfExists: true),
+                        [],
+                        [],
+                    ]
                 }
-                input[1] = []
-                input[2] = []
                 """
             }
         }
