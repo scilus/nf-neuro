@@ -30,14 +30,14 @@
                 ]
             ],
             [
-                "versions.yml:md5,097efc37ca86414ed8d4836991b634b7"
+                "versions.yml:md5,0088e7190e395324acbb8fce5c474750"
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-05-08T23:46:42.749206"
+        "timestamp": "2024-10-24T19:38:16.835402429"
     },
     "tracking - localtracking - fa": {
         "content": [
@@ -70,13 +70,13 @@
                 ]
             ],
             [
-                "versions.yml:md5,097efc37ca86414ed8d4836991b634b7"
+                "versions.yml:md5,0088e7190e395324acbb8fce5c474750"
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-05-08T23:46:28.766414"
+        "timestamp": "2024-10-24T19:37:54.047881093"
     }
 }

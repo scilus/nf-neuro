@@ -39,14 +39,14 @@
                 ]
             ],
             [
-                "versions.yml:md5,6fa5c5e21149198626b41120de3947c3"
+                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-05-08T23:44:48.372791"
+        "timestamp": "2024-10-24T19:53:53.332859167"
     },
     "tracking - pfttracking - interface": {
         "content": [
@@ -79,7 +79,7 @@
                 ]
             ],
             [
-                "versions.yml:md5,6fa5c5e21149198626b41120de3947c3"
+                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
             ],
             [
                 [
@@ -92,10 +92,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-05-08T23:45:02.333851"
+        "timestamp": "2024-10-24T19:54:04.257171663"
     },
     "tracking - pfttracking - wm": {
         "content": [
@@ -137,13 +137,13 @@
                 ]
             ],
             [
-                "versions.yml:md5,6fa5c5e21149198626b41120de3947c3"
+                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-05-08T23:44:33.456248"
+        "timestamp": "2024-10-24T19:53:38.784232647"
     }
 }
