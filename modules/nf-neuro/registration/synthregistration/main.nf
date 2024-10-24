@@ -9,9 +9,8 @@ process REGISTRATION_SYNTHREGISTRATION {
     tuple val(meta), path(moving), path(fixed)
 
     output:
-    tuple val(meta), path("*__output_warped.nii.gz"), emit: warped_image
-    tuple val(meta), path("*__affine_warp.lta"), emit: affine_transform
-    tuple val(meta), path("*__deform_warp.nii.gz"), emit: deform_transform
+    tuple val(meta), path("*__output_warped.nii.gz")                   , emit: warped_image
+    tuple val(meta), path("*__{affine_warp.lta,deform_warp.nii.gz}")   , emit: transfo_image
     path "versions.yml"           , emit: versions
 
     when:

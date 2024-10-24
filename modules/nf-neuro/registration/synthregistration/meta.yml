@@ -37,20 +37,15 @@ output:
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
 
-  - affine_transform:
-      type: file
-      description: Affine transform for initialization
-      pattern: "*.{lta}"
-
-  - deform_transform:
-      type: file
-      description: Deform transformation
-      pattern: "*.{nii.gz}"
-
   - warped_image:
       type: file
       description: Warped image
       pattern: "*.{nii,.nii.gz}"
+
+  - transfo_image:
+      type: list
+      description: Tuple, Transformation files to warp images (lta file, nii.gz warp)
+      pattern: "*.{lta,nii,nii.gz}"
 
   - versions:
       type: file
