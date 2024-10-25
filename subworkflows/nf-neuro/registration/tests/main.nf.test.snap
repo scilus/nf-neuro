@@ -5,7 +5,7 @@
             "test_reference_registered.nii.gz",
             "test_forward_field.nii.gz",
             "test_backward_field.nii.gz",
-            "test_floating_segmentation.nii.gz:md5:header,d559b931014ef191f9af17abf1152a3c,data,85934f256bb314487d31e1405393f31f",
+            "test_floating_segmentation.nii.gz:md5:header,74ed7e917b9fde7b2aaba7f512cc1edf,data,e1ed38ea961180d3e4c03a56c1c7bc4c",
             "test_reference_segmentation.nii.gz",
             [
                 "versions.yml:md5,3f38c911476c605480c02e484fcf6e9f"
@@ -15,7 +15,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-12T13:16:40.170919866"
+        "timestamp": "2024-10-25T14:12:29.150266819"
     },
     "registration - antsRegistration": {
         "content": [

@@ -3,15 +3,15 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     label 'process_low'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'scil.usherbrooke.ca/containers/scilus_1.6.0.sif':
-        'scilus/scilus:1.6.0' }"
+        'scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
+        'scilus/scilus:2.0.2' }"
 
     input:
     tuple val(meta), path(image), path(reference), path(transform)
 
     output:
-    tuple val(meta), path("*__warped.nii.gz"), emit: warped_image
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*__warped.nii.gz")   , emit: warped_image
+    path "versions.yml"                         , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -19,7 +19,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = task.ext.suffix ?: "${task.ext.first_suffix}_warped" : "warped"
+    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_warped" : "warped"
 
     def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : ""
     def image_type = task.ext.image_type ? "-e " + task.ext.image_type : ""
@@ -48,7 +48,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = task.ext.suffix ?: "${task.ext.first_suffix}_warped" : "warped"
+    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_warped" : "warped"
 
     def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : ""
     def image_type = task.ext.image_type ? "-e " + task.ext.image_type : ""
