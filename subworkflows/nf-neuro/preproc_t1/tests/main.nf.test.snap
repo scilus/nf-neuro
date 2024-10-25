@@ -3,7 +3,7 @@
         "content": [
             "test_denoised.nii.gz:md5:header,9dc5bba881cdb4f3b3b58b20d006d114,data,2ef8a474437349ed365aed6bfa9e4f41",
             "test__image_n4.nii.gz:md5:header,fab880e51a5409298b94877a3c69c3d9,data,5d16ef7e8e31bf8e77c225df9a940f89",
-            "test__resampled.nii.gz:md5:header,ba56bf67f95a0353a1c8c916b9941664,data,5d16ef7e8e31bf8e77c225df9a940f89",
+            "test_resampled.nii.gz:md5:header,ba56bf67f95a0353a1c8c916b9941664,data,5d16ef7e8e31bf8e77c225df9a940f89",
             "test__bet_image.nii.gz:md5:header,79da6ee5e42ce49059a1d6a88fd38bdc,data,4df29fb64119840e66e7545fcb2c7a6a",
             "test__brain_mask.nii.gz:md5:header,86100a14ceb6518088609a1f677e0885,data,d308b05abcb3cbd03774486a42c647b2",
             [
@@ -23,20 +23,20 @@
                 "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                 "versions.yml:md5,9d515db259af59f33ccd14061fbc45d1",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
-                "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-29T23:18:49.778316"
+        "timestamp": "2024-10-24T18:16:56.928776"
     },
     "preproc_t1_option": {
         "content": [
             "test_denoised.nii.gz:md5:header,9dc5bba881cdb4f3b3b58b20d006d114,data,19e488aa93257a256b4fbf91c1fed25c",
             "test__image_n4.nii.gz:md5:header,fab880e51a5409298b94877a3c69c3d9,data,8762a19ca79073d501522c786071166c",
-            "test__resampled.nii.gz:md5:header,ba56bf67f95a0353a1c8c916b9941664,data,8762a19ca79073d501522c786071166c",
+            "test_resampled.nii.gz:md5:header,ba56bf67f95a0353a1c8c916b9941664,data,8762a19ca79073d501522c786071166c",
             "test__t1_bet.nii.gz:md5:header,7edd352b8d21871ff520685f25426d37,data,39485cf56f7f5b8488fb6d966138dac5",
             "test__t1_bet_mask.nii.gz:md5:header,83448ac1e189cc82bff23ca4f67ebc7c,data,07c0d1f8132bd853cb33dd4114ab5e94",
             [
@@ -56,20 +56,20 @@
                 "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
                 "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
-                "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-29T22:30:02.340948"
+        "timestamp": "2024-10-24T18:02:48.387787"
     },
     "preproc_t1_classic": {
         "content": [
             "test_denoised.nii.gz:md5:header,9dc5bba881cdb4f3b3b58b20d006d114,data,2ef8a474437349ed365aed6bfa9e4f41",
             "test__image_n4.nii.gz:md5:header,fab880e51a5409298b94877a3c69c3d9,data,5d16ef7e8e31bf8e77c225df9a940f89",
-            "test__resampled.nii.gz:md5:header,ba56bf67f95a0353a1c8c916b9941664,data,5d16ef7e8e31bf8e77c225df9a940f89",
+            "test_resampled.nii.gz:md5:header,ba56bf67f95a0353a1c8c916b9941664,data,5d16ef7e8e31bf8e77c225df9a940f89",
             "test__t1_bet.nii.gz:md5:header,7edd352b8d21871ff520685f25426d37,data,2a7080722359efac17193d4bac7a60f2",
             "test__t1_bet_mask.nii.gz:md5:header,83448ac1e189cc82bff23ca4f67ebc7c,data,d8965c8a469b8e19b27219a08ae43371",
             [
@@ -89,13 +89,13 @@
                 "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
                 "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
-                "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-29T22:11:22.559727"
+        "timestamp": "2024-10-24T17:30:56.874211"
     }
 }

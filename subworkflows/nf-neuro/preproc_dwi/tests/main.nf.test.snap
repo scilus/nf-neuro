@@ -13,29 +13,29 @@
             [
                 "versions.yml:md5,0280006ceecc575513278292734ffb27",
                 "versions.yml:md5,3340c4b5e56ca52f7342be3c9044eb47",
-                "versions.yml:md5,4d981a0200b8820dd789f135a9dd320f",
                 "versions.yml:md5,5dce7a8c0b0d6b91ef7826f88c86370e",
+                "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                 "versions.yml:md5,962f76092c8795ce5e6d768304e2d230",
                 "versions.yml:md5,b4c068383da080f871c90828b1de0082",
                 "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
-                "versions.yml:md5,d1ae2ca80502bf88c4b1c4a42fba6ced",
                 "versions.yml:md5,d3010f785c88ee5946806a8a758e7efb",
                 "versions.yml:md5,d68fe3399120f84f1add62181708780b",
+                "versions.yml:md5,ea5858879452a59bb355228ae7f38111",
                 "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
             ],
             "test_b0.nii.gz",
-            "test__resampled.nii.gz",
+            "test_resampled.nii.gz",
             "test__dwi_eddy_corrected.bvec",
             "test__image_boundingBox.pkl",
             "test__image_n4.nii.gz",
-            "test__resampled.nii.gz",
+            "test_resampled.nii.gz",
             "test__dwi_corrected.nii.gz"
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
+            "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-05T18:15:01.714505"
+        "timestamp": "2024-10-24T15:39:59.890109"
     },
     "preproc_dwi_rev_b0": {
         "content": [
@@ -51,28 +51,28 @@
             [
                 "versions.yml:md5,0280006ceecc575513278292734ffb27",
                 "versions.yml:md5,3340c4b5e56ca52f7342be3c9044eb47",
-                "versions.yml:md5,4d981a0200b8820dd789f135a9dd320f",
                 "versions.yml:md5,5dce7a8c0b0d6b91ef7826f88c86370e",
+                "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                 "versions.yml:md5,962f76092c8795ce5e6d768304e2d230",
                 "versions.yml:md5,b4c068383da080f871c90828b1de0082",
                 "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
-                "versions.yml:md5,d1ae2ca80502bf88c4b1c4a42fba6ced",
                 "versions.yml:md5,d3010f785c88ee5946806a8a758e7efb",
+                "versions.yml:md5,ea5858879452a59bb355228ae7f38111",
                 "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
             ],
             "test_b0.nii.gz",
-            "test__resampled.nii.gz",
+            "test_resampled.nii.gz",
             "test__dwi_eddy_corrected.bvec",
             "test__image_boundingBox.pkl",
             "test__image_n4.nii.gz",
-            "test__resampled.nii.gz",
+            "test_resampled.nii.gz",
             "test__dwi_corrected.nii.gz"
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
+            "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-05T18:10:40.247701"
+        "timestamp": "2024-10-24T15:35:59.573081"
     },
     "preproc_dwi_all_options": {
         "content": [
@@ -88,27 +88,27 @@
             [
                 "versions.yml:md5,0280006ceecc575513278292734ffb27",
                 "versions.yml:md5,3340c4b5e56ca52f7342be3c9044eb47",
-                "versions.yml:md5,4d981a0200b8820dd789f135a9dd320f",
                 "versions.yml:md5,5dce7a8c0b0d6b91ef7826f88c86370e",
+                "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                 "versions.yml:md5,962f76092c8795ce5e6d768304e2d230",
                 "versions.yml:md5,b4c068383da080f871c90828b1de0082",
                 "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
-                "versions.yml:md5,d1ae2ca80502bf88c4b1c4a42fba6ced",
                 "versions.yml:md5,d68fe3399120f84f1add62181708780b",
+                "versions.yml:md5,ea5858879452a59bb355228ae7f38111",
                 "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
             ],
             "test_b0.nii.gz",
-            "test__resampled.nii.gz",
+            "test_resampled.nii.gz",
             "test__dwi_eddy_corrected.bvec",
             "test__image_boundingBox.pkl",
             "test__image_n4.nii.gz",
-            "test__resampled.nii.gz",
+            "test_resampled.nii.gz",
             "test__dwi_corrected.nii.gz"
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
+            "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-05T18:20:22.568596"
+        "timestamp": "2024-10-24T15:44:27.839939"
     }
 }
