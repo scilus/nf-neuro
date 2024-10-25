@@ -26,7 +26,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,ff651c76f4ea493de0a06a202e9f9fb2"
+                        "test__t1_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
                     ]
                 ],
                 "1": [
@@ -38,8 +38,8 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,f896e4fef21f26c84bf834afd7fb5d55",
-                        "test__output0GenericAffine.mat:md5,043decee0d131e79a802e3dcc61c22f0"
+                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                     ]
                 ],
                 "3": [
@@ -48,8 +48,8 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,043decee0d131e79a802e3dcc61c22f0",
-                        "test__output1InverseWarp.nii.gz:md5,62d6287e60dd36ffd477e71061f23077"
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c",
+                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
                 "4": [
@@ -59,7 +59,7 @@
                     
                 ],
                 "6": [
-                    "versions.yml:md5,9c255f4c751382be7bf6fe6ffb0d635d"
+                    "versions.yml:md5,df4f87e4cf013e11f65c490298bc1249"
                 ],
                 "image_warped": [
                     [
@@ -67,7 +67,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,ff651c76f4ea493de0a06a202e9f9fb2"
+                        "test__t1_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
                     ]
                 ],
                 "ref_segmentation": [
@@ -85,8 +85,8 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,f896e4fef21f26c84bf834afd7fb5d55",
-                        "test__output0GenericAffine.mat:md5,043decee0d131e79a802e3dcc61c22f0"
+                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                     ]
                 ],
                 "transfo_trk": [
@@ -95,12 +95,12 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,043decee0d131e79a802e3dcc61c22f0",
-                        "test__output1InverseWarp.nii.gz:md5,62d6287e60dd36ffd477e71061f23077"
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c",
+                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,9c255f4c751382be7bf6fe6ffb0d635d"
+                    "versions.yml:md5,df4f87e4cf013e11f65c490298bc1249"
                 ]
             }
         ],
@@ -108,7 +108,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-12T13:09:01.767340059"
+        "timestamp": "2024-10-25T09:25:14.344251"
     },
     "registration - SyNQuick": {
         "content": [
@@ -119,7 +119,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__warped.nii.gz:md5,88442ab57066e1fb1e03f90d73cdfc42"
+                        "test__warped.nii.gz:md5,40010055cb124e9a5e61a2565f1f5db2"
                     ]
                 ],
                 "1": [
@@ -132,8 +132,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0Warp.nii.gz:md5,61436a721b29633474255640b5e44f7f",
-                            "test__output1GenericAffine.mat:md5,3946e4d33c15911a9a1d72374fdbe4df"
+                            "test__output0Warp.nii.gz:md5,790b8a076b1c146ffbb1d3ae614927d9",
+                            "test__output1GenericAffine.mat:md5,b8f7939863fdef61b97d93f2b6021e12"
                         ]
                     ]
                 ],
@@ -144,8 +144,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0InverseAffine.mat:md5,b30458b37b728d8ce97890b391ad9df9",
-                            "test__output1InverseWarp.nii.gz:md5,278d1774561435ff0a3ec239872b74e5"
+                            "test__output0InverseAffine.mat:md5,966aac28b5eda0fc6299672bfbeeb3ee",
+                            "test__output1InverseWarp.nii.gz:md5,f6c7df8d65a8e31af3250bf8be5aece9"
                         ]
                     ]
                 ],
@@ -156,7 +156,7 @@
                     
                 ],
                 "6": [
-                    "versions.yml:md5,96376b8bc28640eef565e7f1e258dbb2"
+                    "versions.yml:md5,9fe7f597ac6c76efff8851f9b672f17b"
                 ],
                 "image_warped": [
                     [
@@ -164,7 +164,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__warped.nii.gz:md5,88442ab57066e1fb1e03f90d73cdfc42"
+                        "test__warped.nii.gz:md5,40010055cb124e9a5e61a2565f1f5db2"
                     ]
                 ],
                 "ref_segmentation": [
@@ -183,8 +183,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0Warp.nii.gz:md5,61436a721b29633474255640b5e44f7f",
-                            "test__output1GenericAffine.mat:md5,3946e4d33c15911a9a1d72374fdbe4df"
+                            "test__output0Warp.nii.gz:md5,790b8a076b1c146ffbb1d3ae614927d9",
+                            "test__output1GenericAffine.mat:md5,b8f7939863fdef61b97d93f2b6021e12"
                         ]
                     ]
                 ],
@@ -195,13 +195,13 @@
                             "single_end": false
                         },
                         [
-                            "test__output0InverseAffine.mat:md5,b30458b37b728d8ce97890b391ad9df9",
-                            "test__output1InverseWarp.nii.gz:md5,278d1774561435ff0a3ec239872b74e5"
+                            "test__output0InverseAffine.mat:md5,966aac28b5eda0fc6299672bfbeeb3ee",
+                            "test__output1InverseWarp.nii.gz:md5,f6c7df8d65a8e31af3250bf8be5aece9"
                         ]
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,96376b8bc28640eef565e7f1e258dbb2"
+                    "versions.yml:md5,9fe7f597ac6c76efff8851f9b672f17b"
                 ]
             }
         ],
@@ -209,6 +209,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-12T13:09:11.665469033"
+        "timestamp": "2024-10-25T09:19:43.397585"
     }
 }
