@@ -44,11 +44,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(
-                    file(process.out.warped_image.get(0).get(1)).name,
-                    file(process.out.transfo_image.get(0).get(1).get(2)).name,
-                    process.out.versions
-                ).match() }
+                { assert snapshot(process.out).match() }
             )
         }
     }

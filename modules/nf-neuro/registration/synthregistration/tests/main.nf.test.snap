@@ -1,17 +1,61 @@
 {
     "registration - synthregistration": {
         "content": [
-            "test__output_warped.nii.gz",
-            "test__affine_warp.lta",
-            "test__deform_warp.nii.gz",
-            [
-                "versions.yml:md5,49fb9c85da9f696926d1ab46ef0968fb"
-            ]
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output_warped.nii.gz:md5,ba8f7124cb429607f2eb062f89c22a0c"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__affine_warp.lta:md5,7ba2bf2e4da06423a3d1c1cea74e7fb7",
+                            "test__deform_warp.nii.gz:md5,090c7c4dab08e7ae9993a1dac949d7d8"
+                        ]
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,49fb9c85da9f696926d1ab46ef0968fb"
+                ],
+                "transfo_image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__affine_warp.lta:md5,7ba2bf2e4da06423a3d1c1cea74e7fb7",
+                            "test__deform_warp.nii.gz:md5,090c7c4dab08e7ae9993a1dac949d7d8"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,49fb9c85da9f696926d1ab46ef0968fb"
+                ],
+                "warped_image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output_warped.nii.gz:md5,ba8f7124cb429607f2eb062f89c22a0c"
+                    ]
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-01T22:36:18.972035"
+        "timestamp": "2024-10-25T00:35:20.302247696"
     }
 }
