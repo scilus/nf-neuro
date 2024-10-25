@@ -44,8 +44,8 @@ output:
 
   - transfo_image:
       type: list
-      description: Tuple, Transformation files to warp images (lta file, nii.gz warp)
-      pattern: "*.{lta,nii,nii.gz}"
+      description: Tuple, Transformation files to warp images (nii.gz warp, lta file)
+      pattern: "*.{nii,nii.gz,lta}"
 
   - versions:
       type: file

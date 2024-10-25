@@ -10,7 +10,7 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     output:
     tuple val(meta), path("*__output_warped.nii.gz")                   , emit: warped_image
-    tuple val(meta), path("*__{affine_warp.lta,deform_warp.nii.gz}")   , emit: transfo_image
+    tuple val(meta), path("*__{deform,affine}_warp.{nii.gz,lta}")      , emit: transfo_image
     path "versions.yml"           , emit: versions
 
     when:
@@ -51,8 +51,8 @@ process REGISTRATION_SYNTHREGISTRATION {
     mri_synthmorph -h
 
     touch ${prefix}__output_warped.nii.gz
-    touch ${prefix}__affine_warp.lta
     touch ${prefix}__deform_warp.nii.gz
+    touch ${prefix}__affine_warp.lta
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
