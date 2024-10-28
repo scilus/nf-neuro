@@ -16,17 +16,17 @@ nextflow_workflow {
 
     tag "load_test_data"
 
-        setup {
-            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
-                script "../../load_test_data/main.nf"
-                process {
-                    """
-                    input[0] = Channel.from( [ "antsbet.zip" , "others.zip" ] )
-                    input[1] = "test.load-test-data"
-                    """
-                }
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "antsbet.zip" , "others.zip" ] )
+                input[1] = "test.load-test-data"
+                """
             }
         }
+    }
 
     test("preproc_t1_classic") {
         config "./nextflow.config"
@@ -51,7 +51,9 @@ nextflow_workflow {
                 input[2] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz"),
+                        [],
+                        []
                     ]}
                 input[3] = ch_split_test_data.others.map{
                     test_data_directory -> [
@@ -105,12 +107,14 @@ nextflow_workflow {
                 input[2] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz"),
+                        [],
+                        []
                     ]}
                 input[3] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_unaligned_brainmask.nii.gz")
+                        []
                     ]}
                 input[4] = ch_split_test_data.others.map{
                     test_data_directory -> [

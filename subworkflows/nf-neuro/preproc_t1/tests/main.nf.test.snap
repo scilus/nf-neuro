@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_denoised.nii.gz:md5,ba910fdd1c9cc8f3d1c98b24dde522ef"
+                        "test_denoised.nii.gz:md5,b6d25b37b1101fea5c77bbbc711757c3"
                     ]
                 ],
                 "1": [
@@ -17,7 +17,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,f9b1e5305c8c176c8ef72168b8a33f2d"
+                        "test__image_n4.nii.gz:md5,ef0d9af46aa1e330c5d7679ead500596"
                     ]
                 ],
                 "2": [
@@ -26,7 +26,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__resampled.nii.gz:md5,a16a9d32732752b40f699cea2fb046bd"
+                        "test__resampled.nii.gz:md5,88bae6bfeea1734111621b437e09548d"
                     ]
                 ],
                 "3": [
@@ -35,7 +35,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_bet.nii.gz:md5,f0a2be8bc64bb8b0311bb7022e177623"
+                        "test__t1_bet.nii.gz:md5,9c4a70e3c5bb12a1f6effa7ce10b80ba"
                     ]
                 ],
                 "4": [
@@ -44,7 +44,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_bet_mask.nii.gz:md5,bdafc62e0e2ab35d0d48e1021d0a82db"
+                        "test__t1_bet_mask.nii.gz:md5,f344d02bd995ee49f9c2fc30a2c290cb"
                     ]
                 ],
                 "5": [
@@ -53,7 +53,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_t1_cropped_bbox.pkl:md5,39a3444e23d7ea6478ef1213f88e7715"
+                        "test_t1_cropped_bbox.pkl:md5,4a0a6605c221749387797b0fe349a5af"
                     ]
                 ],
                 "6": [
@@ -62,7 +62,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_cropped.nii.gz:md5,02b2ca05a95c8494a85cda69ebe6d5e7"
+                        "test_cropped.nii.gz:md5,85a7f97211b74d4a793bed6d1c929d80"
                     ]
                 ],
                 "7": [
@@ -71,13 +71,13 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_t1_cropped.nii.gz:md5,593d0b155da379bb41e8557ea5f9b92e"
+                        "test_t1_cropped.nii.gz:md5,4f574c8f302835fc16821b38e355492d"
                     ]
                 ],
                 "8": [
-                    "versions.yml:md5,209daf2d60de195845dedbdf80c98afd",
-                    "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
-                    "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                    "versions.yml:md5,0d1d9b32a4f41b10a3233638afea9af0",
+                    "versions.yml:md5,37229cd5cee6f6788fbc9083d6618c61",
+                    "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                     "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                     "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                     "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
@@ -88,7 +88,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_t1_cropped_bbox.pkl:md5,39a3444e23d7ea6478ef1213f88e7715"
+                        "test_t1_cropped_bbox.pkl:md5,4a0a6605c221749387797b0fe349a5af"
                     ]
                 ],
                 "image_N4": [
@@ -97,7 +97,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,f9b1e5305c8c176c8ef72168b8a33f2d"
+                        "test__image_n4.nii.gz:md5,ef0d9af46aa1e330c5d7679ead500596"
                     ]
                 ],
                 "image_bet": [
@@ -106,7 +106,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_bet.nii.gz:md5,f0a2be8bc64bb8b0311bb7022e177623"
+                        "test__t1_bet.nii.gz:md5,9c4a70e3c5bb12a1f6effa7ce10b80ba"
                     ]
                 ],
                 "image_nlmeans": [
@@ -115,7 +115,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_denoised.nii.gz:md5,ba910fdd1c9cc8f3d1c98b24dde522ef"
+                        "test_denoised.nii.gz:md5,b6d25b37b1101fea5c77bbbc711757c3"
                     ]
                 ],
                 "image_resample": [
@@ -124,7 +124,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__resampled.nii.gz:md5,a16a9d32732752b40f699cea2fb046bd"
+                        "test__resampled.nii.gz:md5,88bae6bfeea1734111621b437e09548d"
                     ]
                 ],
                 "mask_bet": [
@@ -133,7 +133,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_bet_mask.nii.gz:md5,bdafc62e0e2ab35d0d48e1021d0a82db"
+                        "test__t1_bet_mask.nii.gz:md5,f344d02bd995ee49f9c2fc30a2c290cb"
                     ]
                 ],
                 "mask_final": [
@@ -142,7 +142,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_cropped.nii.gz:md5,02b2ca05a95c8494a85cda69ebe6d5e7"
+                        "test_cropped.nii.gz:md5,85a7f97211b74d4a793bed6d1c929d80"
                     ]
                 ],
                 "t1_final": [
@@ -151,13 +151,13 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_t1_cropped.nii.gz:md5,593d0b155da379bb41e8557ea5f9b92e"
+                        "test_t1_cropped.nii.gz:md5,4f574c8f302835fc16821b38e355492d"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,209daf2d60de195845dedbdf80c98afd",
-                    "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
-                    "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                    "versions.yml:md5,0d1d9b32a4f41b10a3233638afea9af0",
+                    "versions.yml:md5,37229cd5cee6f6788fbc9083d6618c61",
+                    "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                     "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                     "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                     "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
@@ -165,10 +165,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-05-10T19:57:38.341812"
+        "timestamp": "2024-10-28T16:26:28.337975773"
     },
     "preproc_t1_classic": {
         "content": [
@@ -206,7 +206,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_bet.nii.gz:md5,016f12c75e3543c27987a91eb2160a19"
+                        "test__t1_bet.nii.gz:md5,9c4a70e3c5bb12a1f6effa7ce10b80ba"
                     ]
                 ],
                 "4": [
@@ -215,7 +215,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_bet_mask.nii.gz:md5,cf0cc416ca8b352d3cba58d9132ab0da"
+                        "test__t1_bet_mask.nii.gz:md5,f344d02bd995ee49f9c2fc30a2c290cb"
                     ]
                 ],
                 "5": [
@@ -224,7 +224,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_t1_cropped_bbox.pkl:md5,5d9bd5d9c068031f34c34223b5892153"
+                        "test_t1_cropped_bbox.pkl:md5,4a0a6605c221749387797b0fe349a5af"
                     ]
                 ],
                 "6": [
@@ -233,7 +233,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_cropped.nii.gz:md5,aee59cb0bf2a4e14bfe116dc68be365b"
+                        "test_cropped.nii.gz:md5,85a7f97211b74d4a793bed6d1c929d80"
                     ]
                 ],
                 "7": [
@@ -242,13 +242,13 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_t1_cropped.nii.gz:md5,f4bea1286a90760eecf348dd9bffd2e6"
+                        "test_t1_cropped.nii.gz:md5,4f574c8f302835fc16821b38e355492d"
                     ]
                 ],
                 "8": [
-                    "versions.yml:md5,209daf2d60de195845dedbdf80c98afd",
-                    "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
-                    "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                    "versions.yml:md5,0d1d9b32a4f41b10a3233638afea9af0",
+                    "versions.yml:md5,37229cd5cee6f6788fbc9083d6618c61",
+                    "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                     "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                     "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                     "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
@@ -259,7 +259,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_t1_cropped_bbox.pkl:md5,5d9bd5d9c068031f34c34223b5892153"
+                        "test_t1_cropped_bbox.pkl:md5,4a0a6605c221749387797b0fe349a5af"
                     ]
                 ],
                 "image_N4": [
@@ -277,7 +277,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_bet.nii.gz:md5,016f12c75e3543c27987a91eb2160a19"
+                        "test__t1_bet.nii.gz:md5,9c4a70e3c5bb12a1f6effa7ce10b80ba"
                     ]
                 ],
                 "image_nlmeans": [
@@ -304,7 +304,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_bet_mask.nii.gz:md5,cf0cc416ca8b352d3cba58d9132ab0da"
+                        "test__t1_bet_mask.nii.gz:md5,f344d02bd995ee49f9c2fc30a2c290cb"
                     ]
                 ],
                 "mask_final": [
@@ -313,7 +313,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_cropped.nii.gz:md5,aee59cb0bf2a4e14bfe116dc68be365b"
+                        "test_cropped.nii.gz:md5,85a7f97211b74d4a793bed6d1c929d80"
                     ]
                 ],
                 "t1_final": [
@@ -322,13 +322,13 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_t1_cropped.nii.gz:md5,f4bea1286a90760eecf348dd9bffd2e6"
+                        "test_t1_cropped.nii.gz:md5,4f574c8f302835fc16821b38e355492d"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,209daf2d60de195845dedbdf80c98afd",
-                    "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
-                    "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                    "versions.yml:md5,0d1d9b32a4f41b10a3233638afea9af0",
+                    "versions.yml:md5,37229cd5cee6f6788fbc9083d6618c61",
+                    "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                     "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                     "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                     "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
@@ -336,9 +336,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-05-10T19:36:04.155481"
+        "timestamp": "2024-10-25T13:29:55.770048682"
     }
 }

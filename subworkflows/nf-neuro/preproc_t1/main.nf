@@ -11,7 +11,7 @@ workflow PREPROC_T1 {
     take:
         ch_image           // channel: [ val(meta), [ image ] ]
         ch_template        // channel: [ val(meta), [ template ] ]
-        ch_probability_map // channel: [ val(meta), [ probability_map ] ]
+        ch_probability_map // channel: [ val(meta), [ probability_map, mask, initial_affine ] ]
         ch_mask_nlmeans    // channel: [ val(meta), [ mask ] ]            , optional
         ch_ref_n4          // channel: [ val(meta), [ ref, ref_mask ] ]   , optional
         ch_ref_resample    // channel: [ val(meta), [ ref ] ]             , optional
@@ -36,7 +36,10 @@ workflow PREPROC_T1 {
         ch_versions = ch_versions.mix(IMAGE_RESAMPLE.out.versions.first())
 
         // ** Brain extraction ** //
-        ch_bet = IMAGE_RESAMPLE.out.image.join(ch_template).join(ch_probability_map)
+        ch_bet = IMAGE_RESAMPLE.out.image
+            .join(ch_template)
+            .join(ch_probability_map)
+
         BETCROP_ANTSBET ( ch_bet )
         ch_versions = ch_versions.mix(BETCROP_ANTSBET.out.versions.first())
 
@@ -46,7 +49,9 @@ workflow PREPROC_T1 {
         ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_T1.out.versions.first())
 
         // ** crop mask ** //
-        ch_crop_mask = BETCROP_ANTSBET.out.mask.join(BETCROP_CROPVOLUME_T1.out.bounding_box)
+        ch_crop_mask = BETCROP_ANTSBET.out.mask
+            .join(BETCROP_CROPVOLUME_T1.out.bounding_box)
+
         BETCROP_CROPVOLUME_MASK ( ch_crop_mask )
         ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_MASK.out.versions.first())
 
