@@ -25,6 +25,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
         with:
+          python-version: "3.11"
           cache: "pip"
       - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
         # FIXME Flip this off once we get to less than a couple hundred. Adding
@@ -139,6 +140,14 @@ jobs:
             path: modules/nf-neuro/registration/easyreg
           - runner: scilus-nf-neuro-bigmem-runners
             path: modules/nf-neuro/segmentation/synthseg
+          - runner: scilus-nf-neuro-bigmem-runners
+            path: modules/nf-neuro/registration/synthregistration
+          - runner: scilus-nf-neuro-bigmem-runners
+            path: subworkflows/nf-neuro/preproc_t1
+          - runner: scilus-nf-neuro-bigmem-runners
+            path: subworkflows/nf-neuro/registration
+          - runner: scilus-nf-neuro-bigmem-runners
+            path: subworkflows/nf-neuro/anatomical_segmentation
         exclude:
           - path: subworkflows/nf-neuro/load_test_data
     uses: ./.github/workflows/test_component.yml

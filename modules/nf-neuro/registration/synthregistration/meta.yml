@@ -1,0 +1,61 @@
+---
+name: "registration_synthregistration"
+description: Perform registration using SynthMorph from Freesurfer. Outputs transforms in Freesurfer format .lta for affine and .nii.gz (synthmorph also supports .mgz) for deform, both in RAS orientation. Conversion to other formats is done using lta_convert and mri_warp_convert respectively, which support a wide range of conversion formats and orientations, such as ANTs ans FSL. To convert the output of this module, use the registration/convert module successively to it. Note that tests using synthmorph are non-reproductible.
+keywords:
+  - Registration
+  - Brain imaging
+  - MRI
+  - Synthetic
+  - AI
+  - CNN
+tools:
+  - "Freesurfer":
+      description: "Freesurfer Synthmorph"
+      homepage: "https://martinos.org/malte/synthmorph/"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - moving:
+      type: file
+      description: Nifti volume moving for registration
+      pattern: "*.{nii,nii.gz}"
+
+  - fixed:
+      type: file
+      description: Nifti volume fixed for registration
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - affine_transform:
+      type: file
+      description: Affine transform for initialization
+      pattern: "*.{lta}"
+
+  - deform_transform:
+      type: file
+      description: Deform transformation
+      pattern: "*.{nii.gz}"
+
+  - warped_image:
+      type: file
+      description: Warped image
+      pattern: "*.{nii,.nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@anroy1"

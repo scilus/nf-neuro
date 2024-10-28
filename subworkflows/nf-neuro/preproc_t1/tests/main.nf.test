@@ -12,6 +12,7 @@ nextflow_workflow {
     tag "preproc/n4"
     tag "image/resample"
     tag "betcrop/antsbet"
+    tag "betcrop/synthbet"
     tag "betcrop/cropvolume"
 
     tag "load_test_data"
@@ -71,6 +72,11 @@ nextflow_workflow {
                         [ id:'test', single_end:false ],
                         []
                     ]}
+                input[6] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
                 """
             }
         }
@@ -78,7 +84,17 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    niftiMD5SUM(workflow.out.image_nlmeans.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_N4.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_resample.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_bet.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.mask_bet.get(0).get(1)),
+                    workflow.out.crop_box,
+                    niftiMD5SUM(workflow.out.mask_final.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.t1_final.get(0).get(1)),
+                    workflow.out.versions
+                ).match()}
             )
         }
     }
@@ -127,6 +143,11 @@ nextflow_workflow {
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/t1_unaligned.nii.gz")
                     ]}
+                input[6] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
                 """
             }
         }
@@ -134,7 +155,86 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    niftiMD5SUM(workflow.out.image_nlmeans.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_N4.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_resample.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_bet.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.mask_bet.get(0).get(1)),
+                    workflow.out.crop_box,
+                    niftiMD5SUM(workflow.out.mask_final.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.t1_final.get(0).get(1)),
+                    workflow.out.versions
+                ).match()}
+            )
+        }
+    }
+
+    test("preproc_t1_synthbet") {
+        config "./nextflow_synthbet.config"
+
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        antsbet: it.simpleName == "antsbet"
+                        others: it.simpleName == "others"
+                    }
+                input[0] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_unaligned.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[2] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[3] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[4] = ch_split_test_data.others.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        [],
+                        []
+                    ]}
+                input[5] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[6] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    niftiMD5SUM(workflow.out.image_nlmeans.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_N4.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_resample.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.image_bet.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.mask_bet.get(0).get(1)),
+                    workflow.out.crop_box,
+                    niftiMD5SUM(workflow.out.mask_final.get(0).get(1)),
+                    niftiMD5SUM(workflow.out.t1_final.get(0).get(1)),
+                    workflow.out.versions
+                ).match()}
             )
         }
     }

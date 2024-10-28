@@ -3,7 +3,6 @@ nextflow_workflow {
     name "Test Subworkflow ANATOMICAL_SEGMENTATION"
     script "../main.nf"
     workflow "ANATOMICAL_SEGMENTATION"
-    config "./nextflow.config"
 
     tag "subworkflows"
     tag "subworkflows_nfcore"
@@ -12,6 +11,7 @@ nextflow_workflow {
     tag "segmentation"
     tag "segmentation/fastseg"
     tag "segmentation/freesurferseg"
+    tag "segmentation/synthseg"
 
     tag "load_test_data"
 
@@ -20,7 +20,7 @@ nextflow_workflow {
                 script "../../load_test_data/main.nf"
                 process {
                     """
-                    input[0] = Channel.from( [ "T1w.zip", "freesurfer_nifti.zip" ] )
+                    input[0] = Channel.from( [ "T1w.zip", "freesurfer_nifti.zip", "freesurfer.zip" ] )
                     input[1] = "test.load-test-data"
                     """
                 }
@@ -28,22 +28,25 @@ nextflow_workflow {
         }
 
     test("anatomical_segmentation - fslfast") {
-
+        config "./nextflow.config"
         when {
             workflow {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         t1w: it.simpleName == "T1w"
-                        freesurfer: it.simpleName == "freesurfer_nifti"
+                        freesurfer_nifti: it.simpleName == "freesurfer_nifti"
+                        freesurfer: it.simpleName == "freesurfer"
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/T1w.nii.gz", checkIfExists: true),
-                        []
-                    ]}
-                input[1] = []
+                        file("\${test_data_directory}/T1w.nii.gz", checkIfExists: true)
+                    ]
+                }
+                input[1] = Channel.empty()
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
                 """
             }
         }
@@ -57,23 +60,26 @@ nextflow_workflow {
     }
 
     test("anatomical_segmentation - freesurferseg") {
-
+        config "./nextflow.config"
         when {
             workflow {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         t1w: it.simpleName == "T1w"
-                        freesurfer: it.simpleName == "freesurfer_nifti"
+                        freesurfer_nifti: it.simpleName == "freesurfer_nifti"
+                        freesurfer: it.simpleName == "freesurfer"
                     }
-                input[0] = []
-                input[1] = ch_split_test_data.freesurfer.map{
+                input[0] = Channel.empty()
+                input[1] = ch_split_test_data.freesurfer_nifti.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ], // meta map
                         file("\${test_data_directory}/aparc+aseg.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/wmparc.nii.gz", checkIfExists: true),
-                        []
-                    ]}
+                        file("\${test_data_directory}/wmparc.nii.gz", checkIfExists: true)
+                    ]
+                }
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
                 """
             }
         }
@@ -82,6 +88,90 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("anatomical_segmentation - both") {
+        config "./nextflow.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        t1w: it.simpleName == "T1w"
+                        freesurfer_nifti: it.simpleName == "freesurfer_nifti"
+                        freesurfer: it.simpleName == "freesurfer"
+                    }
+                input[0] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz", checkIfExists: true)
+                    ]
+                }
+                input[1] = ch_split_test_data.freesurfer_nifti.map{
+                    test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        file("\${test_data_directory}/aparc+aseg.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/wmparc.nii.gz", checkIfExists: true)
+                    ]
+                }
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("anatomical_segmentation - synthseg") {
+        config "./nextflow_synthseg.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        t1w: it.simpleName == "T1w"
+                        freesurfer_nifti: it.simpleName == "freesurfer_nifti"
+                        freesurfer: it.simpleName == "freesurfer"
+                    }
+                input[0] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz", checkIfExists: true)
+                    ]
+                }
+                input[1] = Channel.empty()
+                input[2] = Channel.empty()
+                input[3] = ch_split_test_data.freesurfer.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/license.txt", checkIfExists: true)
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    file(workflow.out.wm_mask.get(0).get(1)).name,
+                    file(workflow.out.gm_mask.get(0).get(1)).name,
+                    file(workflow.out.csf_mask.get(0).get(1)).name,
+                    file(workflow.out.wm_map.get(0).get(1)).name,
+                    file(workflow.out.gm_map.get(0).get(1)).name,
+                    file(workflow.out.csf_map.get(0).get(1)).name,
+                    file(workflow.out.seg.get(0).get(1)).name,
+                    workflow.out.versions
+                ).match()}
             )
         }
     }

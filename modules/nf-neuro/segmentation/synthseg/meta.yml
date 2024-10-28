@@ -56,9 +56,34 @@ output:
       description: Nifti CSF mask volume.
       pattern: "*.{nii,nii.gz}"
 
-  - gm_parc:
+  - wm_map:
       type: file
-      description: (optional) Nifti cortical parcellation volume.
+      description: Nifti WM map volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - gm_map:
+      type: file
+      description: Nifti GM map volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - csf_map:
+      type: file
+      description: Nifti CSF map volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - seg:
+      type: file
+      description: (optional) Nifti cortical segmentation volume.
+      pattern: "*.{nii,nii.gz}"
+
+  - aparc_aseg:
+      type: file
+      description: (optional) Nifti cortical parcellation volume and segmentation.
+      pattern: "*.{nii,nii.gz}"
+
+  - resample:
+      type: file
+      description: (optional) in order to return segmentations at 1mm resolution, the input images are internally resampled (except if they already are at 1mm). Use this optional flag to save the resampled images. This must be the same type as --i.
       pattern: "*.{nii,nii.gz}"
 
   - volume:
@@ -70,11 +95,6 @@ output:
       type: file
       description: (optional) Output CSV file with qc scores for all subjects.
       pattern: "*.csv"
-
-  - resample:
-      type: file
-      description: (optional) in order to return segmentations at 1mm resolution, the input images are internally resampled (except if they already are at 1mm). Use this optional flag to save the resampled images. This must be the same type as --i.
-      pattern: "*.{nii,nii.gz}"
 
   - versions:
       type: file
