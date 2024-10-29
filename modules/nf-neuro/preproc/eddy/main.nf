@@ -38,6 +38,7 @@ process PREPROC_EDDY {
     export OMP_NUM_THREADS=$task.cpus
     export OPENBLAS_NUM_THREADS=1
     export ANTS_RANDOM_SEED=7468
+    export MRTRIX_RNG_SEED=12345
 
     orig_bval=$bval
     # Concatenate DWIs
