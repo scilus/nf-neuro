@@ -21,6 +21,7 @@ workflow ANATOMICAL_SEGMENTATION {
         ch_versions = Channel.empty()
 
         if ( params.run_synthseg ) {
+            ch_fs_license.view()
             // ** Freesurfer synthseg segmentation ** //
             SEGMENTATION_SYNTHSEG (
                 ch_image
