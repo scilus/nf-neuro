@@ -1,16 +1,17 @@
 process REGISTRATION_SYNTHREGISTRATION {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_high'
 
     container "freesurfer/synthmorph:3"
     containerOptions "--entrypoint ''"
+    containerOptions "--entrypoint '' --env PYTHONPATH='/freesurfer/env/lib/python3.11/site-packages'"
 
     input:
     tuple val(meta), path(moving), path(fixed)
 
     output:
-    tuple val(meta), path("*__output_warped.nii.gz")                   , emit: warped_image
-    tuple val(meta), path("*__{deform,affine}_warp.{nii.gz,lta}")      , emit: transfo_image
+    tuple val(meta), path("*__output_warped.nii.gz")                                , emit: warped_image
+    tuple val(meta), path("*__deform_warp.nii.gz"), path("*__affine_warp.lta")      , emit: transfo_image
     path "versions.yml"           , emit: versions
 
     when:
