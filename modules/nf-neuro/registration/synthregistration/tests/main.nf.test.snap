@@ -1,57 +1,13 @@
 {
     "registration - synthregistration": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__output_warped.nii.gz:md5,6eb08c4036a7bd8ca7648490ef351211"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__deform_warp.nii.gz:md5,ae605c498eedb82aa27d9d316f9e8790",
-                        "test__affine_warp.lta:md5,86e977bba905112ce22d18fe265321f4"
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,49fb9c85da9f696926d1ab46ef0968fb"
-                ],
-                "transfo_image": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__deform_warp.nii.gz:md5,ae605c498eedb82aa27d9d316f9e8790",
-                        "test__affine_warp.lta:md5,86e977bba905112ce22d18fe265321f4"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,49fb9c85da9f696926d1ab46ef0968fb"
-                ],
-                "warped_image": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__output_warped.nii.gz:md5,6eb08c4036a7bd8ca7648490ef351211"
-                    ]
-                ]
-            }
+            "test__output_warped.nii.gz",
+            "test__deform_warp.nii.gz"
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-29T12:40:05.395421392"
+        "timestamp": "2024-10-29T16:10:34.586206022"
     }
 }
