@@ -1,5 +1,5 @@
 {
-    "eddy_full": {
+    "eddy": {
         "content": [
             "test__dwi_corrected.nii.gz",
             [
@@ -22,39 +22,7 @@
                 ]
             ],
             [
-                "versions.yml:md5,137e3ce0fd25e5b16de2d8cc5a5aefca"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
-        },
-        "timestamp": "2024-11-01T15:17:57.039667492"
-    },
-    "eddy_light": {
-        "content": [
-            "test__dwi_corrected.nii.gz",
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__bval_eddy:md5,8192e97b08e8032382397bb844b31892"
-                ]
-            ],
-            "test__dwi_eddy_corrected.bvec",
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__b0_bet_mask.nii.gz:md5,a1e4b4842cbdf57ab34d6803e64f8383"
-                ]
-            ],
-            [
-                "versions.yml:md5,137e3ce0fd25e5b16de2d8cc5a5aefca"
+                "versions.yml:md5,2162950d257422ffda17cc7ac676c81d"
             ]
         ],
         "meta": {
