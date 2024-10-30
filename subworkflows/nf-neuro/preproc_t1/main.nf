@@ -25,12 +25,20 @@ workflow PREPROC_T1 {
         ch_versions = Channel.empty()
 
         // ** Denoising ** //
-        ch_nlmeans = ch_image.join(ch_mask_nlmeans)
+        ch_nlmeans = ch_image
+            .join(ch_mask_nlmeans, remainder: true)
+            .map{ it[0..1] + [it[2] ?: []] }
+
         DENOISING_NLMEANS ( ch_nlmeans )
         ch_versions = ch_versions.mix(DENOISING_NLMEANS.out.versions.first())
 
         // ** N4 correction ** //
-        ch_N4 = DENOISING_NLMEANS.out.image.join(ch_ref_n4)
+        ch_N4 = DENOISING_NLMEANS.out.image
+            .join(ch_ref_n4, remainder: true)
+            .map{ it[0..1] + [it[2] ?: []] }
+            .join(ch_mask_nlmeans, remainder: true)
+            .map{ it[0..2] + [it[3] ?: []] }
+
         PREPROC_N4 ( ch_N4 )
         ch_versions = ch_versions.mix(PREPROC_N4.out.versions.first())
 
