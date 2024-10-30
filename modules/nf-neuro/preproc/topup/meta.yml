@@ -10,7 +10,7 @@ tools:
   - "FSL":
       description: "FSL Toolbox and Scilpy Toolbox"
       homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
-  - "Scilpy":
+  - "scilpy":
       description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
 

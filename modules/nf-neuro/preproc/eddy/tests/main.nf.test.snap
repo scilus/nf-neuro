@@ -8,7 +8,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__bval_eddy:md5,4c61c53078316c31b4d5daf446a3d6ac"
+                    "test__bval_eddy:md5,7995daabbd74fcf7c365a39a779f67e9"
                 ]
             ],
             "test__dwi_eddy_corrected.bvec",
@@ -18,17 +18,17 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__b0_bet_mask.nii.gz:md5,fc1f94e2a5e2cf5197d7fdc28a83ca28"
+                    "test__b0_bet_mask.nii.gz:md5,2dd16e0c664c910f1970b96056866fea"
                 ]
             ],
             [
-                "versions.yml:md5,2162950d257422ffda17cc7ac676c81d"
+                "versions.yml:md5,137e3ce0fd25e5b16de2d8cc5a5aefca"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.2"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-07-22T03:27:48.011429"
+        "timestamp": "2024-10-29T14:04:32.740507852"
     }
 }
