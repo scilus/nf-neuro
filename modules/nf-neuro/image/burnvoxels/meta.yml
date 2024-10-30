@@ -1,20 +1,20 @@
 name: "image_burnvoxels"
 description: |
-             The provided YAML snippet appears to be a description of a module that processes anatomical images using binary masks.
-             Here's a breakdown of what it does:
+  The provided YAML snippet appears to be a description of a module that processes anatomical images using binary masks.
+  Here's a breakdown of what it does:
 
-              1. **Burning Voxels**: The module takes binary masks and "burns" or imprints their voxels onto an anatomical image.
-              This means that the areas defined by the masks are marked or labeled on the anatomical image.
+  1. **Burning Voxels**: The module takes binary masks and "burns" or imprints their voxels onto an anatomical image.
+  This means that the areas defined by the masks are marked or labeled on the anatomical image.
 
-              2. **Output Images**: The module generates multiple output images:
-                - One image with all masks burned onto the anatomical image.
-                - Separate images for each mask burned onto the anatomical image. If there are N masks, there will be N images.
+  2. **Output Images**: The module generates multiple output images:
+    - One image with all masks burned onto the anatomical image.
+    - Separate images for each mask burned onto the anatomical image. If there are N masks, there will be N images.
 
-              3. **Label Values**: The burned voxels are assigned label values:
-                - The minimum label value is 25.
-                - Subsequent label values are incremented by a dynamically determined step based on the number of masks.
+  3. **Label Values**: The burned voxels are assigned label values:
+    - The minimum label value is 25.
+    - Subsequent label values are incremented by a dynamically determined step based on the number of masks.
 
-              In summary, this module processes an anatomical image by applying binary masks to it, generating multiple labeled images as output.
+  In summary, this module processes an anatomical image by applying binary masks to it, generating multiple labeled images as output.
 keywords:
   - Image Processing
   - Voxel Burning
