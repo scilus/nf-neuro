@@ -17,7 +17,7 @@ nextflow_process {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
                 process {
                     """
-                    input[0] = Channel.from( [ "others.zip" ] )
+                    input[0] = Channel.from( [ "T1w.zip", "b0.zip" ] )
                     input[1] = "test.load-test-data"
                     """
                 }
@@ -29,13 +29,26 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory
-                    .map{ test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_crop.nii.gz"),
-                        file("\${test_data_directory}/t1_resample.nii.gz"),
-                        []
-                    ]}
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        T1w: it.simpleName == "T1w"
+                        b0: it.simpleName == "b0"
+                    }
+                ch_T1w = ch_split_test_data.T1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]
+                }
+                ch_b0 = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz")
+                    ]
+                }
+                input[0] = ch_b0
+                    .join(ch_T1w)
+                    .map{ it + [[]] }
                 """
             }
         }
@@ -52,13 +65,26 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory
-                    .map{ test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_crop.nii.gz"),
-                        file("\${test_data_directory}/t1_resample.nii.gz"),
-                        []
-                    ]}
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        T1w: it.simpleName == "T1w"
+                        b0: it.simpleName == "b0"
+                    }
+                ch_T1w = ch_split_test_data.T1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]
+                }
+                ch_b0 = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz")
+                    ]
+                }
+                input[0] = ch_b0
+                    .join(ch_T1w)
+                    .map{ it + [[]] }
                 """
             }
         }
@@ -75,13 +101,26 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory
-                    .map{ test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_crop.nii.gz"),
-                        file("\${test_data_directory}/t1_resample.nii.gz"),
-                        []
-                    ]}
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        T1w: it.simpleName == "T1w"
+                        b0: it.simpleName == "b0"
+                    }
+                ch_T1w = ch_split_test_data.T1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz"),
+                        file("\${test_data_directory}/T1w_mask.nii.gz")
+                    ]
+                }
+                ch_b0 = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz")
+                    ]
+                }
+                input[0] = ch_b0
+                    .join(ch_T1w)
                 """
             }
         }
