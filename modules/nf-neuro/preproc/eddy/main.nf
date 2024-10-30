@@ -93,6 +93,7 @@ process PREPROC_EDDY {
     fi
 
     echo "--very_verbose $extra_args" >> eddy.sh
+    cat eddy.sh
     sh eddy.sh
     scil_volume_math.py lower_clip dwi_eddy_corrected.nii.gz 0 ${prefix}__dwi_corrected.nii.gz
 
