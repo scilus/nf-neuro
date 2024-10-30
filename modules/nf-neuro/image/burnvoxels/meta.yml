@@ -1,8 +1,5 @@
 name: "image_burnvoxels"
 description: |
-  The provided YAML snippet appears to be a description of a module that processes anatomical images using binary masks.
-  Here's a breakdown of what it does:
-
   1. **Burning Voxels**: The module takes binary masks and "burns" or imprints their voxels onto an anatomical image.
   This means that the areas defined by the masks are marked or labeled on the anatomical image.
 
