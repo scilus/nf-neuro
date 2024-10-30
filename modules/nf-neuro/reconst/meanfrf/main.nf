@@ -8,7 +8,7 @@ process RECONST_MEANFRF {
         'scilus/scilus:2.0.2' }"
 
     input:
-        tuple path(frf_list)
+        path(frf_list)
 
     output:
         path("mean_frf.txt")                            , emit: meanfrf
@@ -27,7 +27,7 @@ process RECONST_MEANFRF {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -39,7 +39,7 @@ process RECONST_MEANFRF {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
