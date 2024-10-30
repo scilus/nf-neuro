@@ -1,0 +1,75 @@
+nextflow_process {
+
+    name "Test Process BUNDLE_DENSITYMAP"
+    script "../main.nf"
+    process "BUNDLE_DENSITYMAP"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "bundle"
+    tag "bundle/densitymap"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "bundles.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("densitymap - map") {
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.trk")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("densitymap - mask") {
+
+        config "./nextflow_mask.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.trk")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+}
