@@ -26,10 +26,9 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__fodf.nii.gz:md5,c45f0391a462d358930809502dd2da15"
+                        "test__fodf.nii.gz:md5,4ff8f1081dec638bb70fe3a12e823612"
                     ]
                 ],
                 "1": [
@@ -38,35 +37,32 @@
                 "10": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_total.nii.gz:md5,9bac465d58b8662c3dce2c4937300a5a"
+                        "test__afd_total.nii.gz:md5,01a6fc27716a79cb57e1faed7ff8297b"
                     ]
                 ],
                 "11": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_sum.nii.gz:md5,a849e3eb8c67cc176e88daca01669eef"
+                        "test__afd_sum.nii.gz:md5,51303ca849b1eb26b9ccd0922f33cc6a"
                     ]
                 ],
                 "12": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__nufo.nii.gz:md5,711f0ee8d01e71166099ffdf4c684b5f"
+                        "test__nufo.nii.gz:md5,458bdae89a9918b2dfc13f154bde5e1b"
                     ]
                 ],
                 "13": [
                     
                 ],
                 "14": [
-                    "versions.yml:md5,8f5a73278d63aac3bf8073c5d0ef488b"
+                    "versions.yml:md5,f80e57f2c24a4a1fd403de1d132ec6e7"
                 ],
                 "2": [
                     
@@ -83,64 +79,57 @@
                 "6": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peaks.nii.gz:md5,fbc8af94bce991a6ebe3bfb837d39a52"
+                        "test__peaks.nii.gz:md5,e306caaad31fb77e6a068f8122651aef"
                     ]
                 ],
                 "7": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peak_values.nii.gz:md5,4fd4a44c18544413c0e9bb672e60f709"
+                        "test__peak_values.nii.gz:md5,d65563027b11d49a0335856b924309f2"
                     ]
                 ],
                 "8": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peak_indices.nii.gz:md5,d39ad843a7b86ac7042c44b87356e68b"
+                        "test__peak_indices.nii.gz:md5,44bb0df2cfac7efec9355b0533041f62"
                     ]
                 ],
                 "9": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_max.nii.gz:md5,96b7a2dbab6306ca053b45bfad21be55"
+                        "test__afd_max.nii.gz:md5,9dbb9a0ce187b41a2a102fa3d3ca8ab7"
                     ]
                 ],
                 "afd_max": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_max.nii.gz:md5,96b7a2dbab6306ca053b45bfad21be55"
+                        "test__afd_max.nii.gz:md5,9dbb9a0ce187b41a2a102fa3d3ca8ab7"
                     ]
                 ],
                 "afd_sum": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_sum.nii.gz:md5,a849e3eb8c67cc176e88daca01669eef"
+                        "test__afd_sum.nii.gz:md5,51303ca849b1eb26b9ccd0922f33cc6a"
                     ]
                 ],
                 "afd_total": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_total.nii.gz:md5,9bac465d58b8662c3dce2c4937300a5a"
+                        "test__afd_total.nii.gz:md5,01a6fc27716a79cb57e1faed7ff8297b"
                     ]
                 ],
                 "csf_fodf": [
@@ -149,10 +138,9 @@
                 "fodf": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__fodf.nii.gz:md5,c45f0391a462d358930809502dd2da15"
+                        "test__fodf.nii.gz:md5,4ff8f1081dec638bb70fe3a12e823612"
                     ]
                 ],
                 "gm_fodf": [
@@ -161,44 +149,40 @@
                 "nufo": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__nufo.nii.gz:md5,711f0ee8d01e71166099ffdf4c684b5f"
+                        "test__nufo.nii.gz:md5,458bdae89a9918b2dfc13f154bde5e1b"
                     ]
                 ],
                 "peak_indices": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peak_indices.nii.gz:md5,d39ad843a7b86ac7042c44b87356e68b"
+                        "test__peak_indices.nii.gz:md5,44bb0df2cfac7efec9355b0533041f62"
                     ]
                 ],
                 "peak_values": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peak_values.nii.gz:md5,4fd4a44c18544413c0e9bb672e60f709"
+                        "test__peak_values.nii.gz:md5,d65563027b11d49a0335856b924309f2"
                     ]
                 ],
                 "peaks": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peaks.nii.gz:md5,fbc8af94bce991a6ebe3bfb837d39a52"
+                        "test__peaks.nii.gz:md5,e306caaad31fb77e6a068f8122651aef"
                     ]
                 ],
                 "vent_mask": [
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,8f5a73278d63aac3bf8073c5d0ef488b"
+                    "versions.yml:md5,f80e57f2c24a4a1fd403de1d132ec6e7"
                 ],
                 "vf": [
                     
@@ -212,10 +196,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-05-01T19:21:03.487368"
+        "timestamp": "2024-10-30T18:24:51.004240051"
     },
     "reconst - fodf_no_metrics": {
         "content": [
@@ -223,10 +207,9 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__fodf.nii.gz:md5,c45f0391a462d358930809502dd2da15"
+                        "test__fodf.nii.gz:md5,4ff8f1081dec638bb70fe3a12e823612"
                     ]
                 ],
                 "1": [
@@ -245,7 +228,7 @@
                     
                 ],
                 "14": [
-                    "versions.yml:md5,8f5a73278d63aac3bf8073c5d0ef488b"
+                    "versions.yml:md5,f80e57f2c24a4a1fd403de1d132ec6e7"
                 ],
                 "2": [
                     
@@ -286,10 +269,9 @@
                 "fodf": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__fodf.nii.gz:md5,c45f0391a462d358930809502dd2da15"
+                        "test__fodf.nii.gz:md5,4ff8f1081dec638bb70fe3a12e823612"
                     ]
                 ],
                 "gm_fodf": [
@@ -311,7 +293,7 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,8f5a73278d63aac3bf8073c5d0ef488b"
+                    "versions.yml:md5,f80e57f2c24a4a1fd403de1d132ec6e7"
                 ],
                 "vf": [
                     
@@ -325,10 +307,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-05-01T20:22:29.171158"
+        "timestamp": "2024-10-30T18:26:49.04678007"
     },
     "reconst - fodf_with_shells": {
         "content": [
@@ -336,10 +318,9 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__fodf.nii.gz:md5,c45f0391a462d358930809502dd2da15"
+                        "test__fodf.nii.gz:md5,39a5a4a7f79ae7bfb408453887711fe2"
                     ]
                 ],
                 "1": [
@@ -348,35 +329,32 @@
                 "10": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_total.nii.gz:md5,9bac465d58b8662c3dce2c4937300a5a"
+                        "test__afd_total.nii.gz:md5,31edb24c528419fcb8f6f423479e8cd9"
                     ]
                 ],
                 "11": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_sum.nii.gz:md5,a849e3eb8c67cc176e88daca01669eef"
+                        "test__afd_sum.nii.gz:md5,7662527e52c86a99610bd87394b314e8"
                     ]
                 ],
                 "12": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__nufo.nii.gz:md5,711f0ee8d01e71166099ffdf4c684b5f"
+                        "test__nufo.nii.gz:md5,a8c3883e9dc99a661998d8cae6f08051"
                     ]
                 ],
                 "13": [
                     
                 ],
                 "14": [
-                    "versions.yml:md5,8f5a73278d63aac3bf8073c5d0ef488b"
+                    "versions.yml:md5,f80e57f2c24a4a1fd403de1d132ec6e7"
                 ],
                 "2": [
                     
@@ -393,64 +371,57 @@
                 "6": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peaks.nii.gz:md5,fbc8af94bce991a6ebe3bfb837d39a52"
+                        "test__peaks.nii.gz:md5,2d4fad6ba2729dacf805aa7d056a765e"
                     ]
                 ],
                 "7": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peak_values.nii.gz:md5,4fd4a44c18544413c0e9bb672e60f709"
+                        "test__peak_values.nii.gz:md5,5b614aae3e0b78c9ae9f7e4b85b157e3"
                     ]
                 ],
                 "8": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peak_indices.nii.gz:md5,d39ad843a7b86ac7042c44b87356e68b"
+                        "test__peak_indices.nii.gz:md5,632878be6b5e01ad45f93553d955beeb"
                     ]
                 ],
                 "9": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_max.nii.gz:md5,96b7a2dbab6306ca053b45bfad21be55"
+                        "test__afd_max.nii.gz:md5,61fb2106315ec2a20c4590b98d7e1a2c"
                     ]
                 ],
                 "afd_max": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_max.nii.gz:md5,96b7a2dbab6306ca053b45bfad21be55"
+                        "test__afd_max.nii.gz:md5,61fb2106315ec2a20c4590b98d7e1a2c"
                     ]
                 ],
                 "afd_sum": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_sum.nii.gz:md5,a849e3eb8c67cc176e88daca01669eef"
+                        "test__afd_sum.nii.gz:md5,7662527e52c86a99610bd87394b314e8"
                     ]
                 ],
                 "afd_total": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__afd_total.nii.gz:md5,9bac465d58b8662c3dce2c4937300a5a"
+                        "test__afd_total.nii.gz:md5,31edb24c528419fcb8f6f423479e8cd9"
                     ]
                 ],
                 "csf_fodf": [
@@ -459,10 +430,9 @@
                 "fodf": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__fodf.nii.gz:md5,c45f0391a462d358930809502dd2da15"
+                        "test__fodf.nii.gz:md5,39a5a4a7f79ae7bfb408453887711fe2"
                     ]
                 ],
                 "gm_fodf": [
@@ -471,44 +441,40 @@
                 "nufo": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__nufo.nii.gz:md5,711f0ee8d01e71166099ffdf4c684b5f"
+                        "test__nufo.nii.gz:md5,a8c3883e9dc99a661998d8cae6f08051"
                     ]
                 ],
                 "peak_indices": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peak_indices.nii.gz:md5,d39ad843a7b86ac7042c44b87356e68b"
+                        "test__peak_indices.nii.gz:md5,632878be6b5e01ad45f93553d955beeb"
                     ]
                 ],
                 "peak_values": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peak_values.nii.gz:md5,4fd4a44c18544413c0e9bb672e60f709"
+                        "test__peak_values.nii.gz:md5,5b614aae3e0b78c9ae9f7e4b85b157e3"
                     ]
                 ],
                 "peaks": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__peaks.nii.gz:md5,fbc8af94bce991a6ebe3bfb837d39a52"
+                        "test__peaks.nii.gz:md5,2d4fad6ba2729dacf805aa7d056a765e"
                     ]
                 ],
                 "vent_mask": [
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,8f5a73278d63aac3bf8073c5d0ef488b"
+                    "versions.yml:md5,f80e57f2c24a4a1fd403de1d132ec6e7"
                 ],
                 "vf": [
                     
@@ -522,10 +488,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-05-01T20:38:04.916377"
+        "timestamp": "2024-10-30T18:26:01.188172837"
     },
     "reconst - fodf_no_mask": {
         "content": [
