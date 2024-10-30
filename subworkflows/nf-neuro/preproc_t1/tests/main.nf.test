@@ -17,17 +17,17 @@ nextflow_workflow {
 
     tag "load_test_data"
 
-    setup {
-        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
-            script "../../load_test_data/main.nf"
-            process {
-                """
-                input[0] = Channel.from( [ "antsbet.zip" , "others.zip" ] )
-                input[1] = "test.load-test-data"
-                """
+        setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "antsbet.zip" , "T1w.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
             }
         }
-    }
 
     test("preproc_t1_classic") {
         config "./nextflow.config"
@@ -37,12 +37,12 @@ nextflow_workflow {
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         antsbet: it.simpleName == "antsbet"
-                        others: it.simpleName == "others"
+                        t1w: it.simpleName == "T1w"
                     }
-                input[0] = ch_split_test_data.antsbet.map{
+                input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_unaligned.nii.gz")
+                        file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[1] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
@@ -56,18 +56,18 @@ nextflow_workflow {
                         [],
                         []
                     ]}
-                input[3] = ch_split_test_data.others.map{
+                input[3] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         []
                     ]}
-                input[4] = ch_split_test_data.others.map{
+                input[4] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         [],
                         []
                     ]}
-                input[5] = ch_split_test_data.others.map{
+                input[5] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         []
@@ -108,40 +108,40 @@ nextflow_workflow {
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         antsbet: it.simpleName == "antsbet"
-                        others: it.simpleName == "others"
+                        t1w: it.simpleName == "T1w"
                     }
-                input[0] = ch_split_test_data.antsbet.map{
+                input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_unaligned.nii.gz")
+                        file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[1] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_template.nii.gz")
+                        []
                     ]}
                 input[2] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz"),
+                        []
+                    ]}
+                input[3] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/T1w_mask.nii.gz"),
                         [],
                         []
                     ]}
-                input[3] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[4] = ch_split_test_data.others.map{
+                input[4] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         [],
                         []
                     ]}
-                input[5] = ch_split_test_data.antsbet.map{
+                input[5] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_unaligned.nii.gz")
+                        file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[6] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
@@ -179,12 +179,12 @@ nextflow_workflow {
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         antsbet: it.simpleName == "antsbet"
-                        others: it.simpleName == "others"
+                        t1w: it.simpleName == "T1w"
                     }
-                input[0] = ch_split_test_data.antsbet.map{
+                input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_unaligned.nii.gz")
+                        file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[1] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
@@ -194,16 +194,16 @@ nextflow_workflow {
                 input[2] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        [],
-                        [],
                         []
                     ]}
                 input[3] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
+                        [],
+                        [],
                         []
                     ]}
-                input[4] = ch_split_test_data.others.map{
+                input[4] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         [],
