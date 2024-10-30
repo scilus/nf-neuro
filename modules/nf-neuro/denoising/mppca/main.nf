@@ -1,7 +1,7 @@
 
 process DENOISING_MPPCA {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
@@ -27,9 +27,9 @@ process DENOISING_MPPCA {
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
-    export MRTRIX_RNG_SEED=12345
+    export MRTRIX_RNG_SEED=112524
 
-    dwidenoise $dwi ${prefix}_dwi_denoised.nii.gz $extent ${args.join(" ")} -debug
+    dwidenoise $dwi ${prefix}_dwi_denoised.nii.gz $extent ${args.join(" ")}
     scil_volume_math.py lower_clip ${prefix}_dwi_denoised.nii.gz 0 \
         ${prefix}_dwi_denoised.nii.gz -f
 
@@ -46,7 +46,7 @@ process DENOISING_MPPCA {
 
     """
     dwidenoise -h
-    fslmaths -h
+    scil_volume_math.py -h
 
     touch ${prefix}_dwi_denoised.nii.gz
 
