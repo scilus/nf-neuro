@@ -36,7 +36,7 @@ process IMAGE_BURNVOXELS {
 
     for m in ${masks_list};
     do
-        mname=\${m%%_binary_mask.nii.gz}
+        mname=\${m%%.*}
         mname=\${mname##*__}
         scil_volume_math.py convert \${m} masks_burned/tmp_\${mname}_f32.nii.gz --data_type float32 -f
         mrcalc \${cnt} masks_burned/tmp_\${mname}_f32.nii.gz -multiply masks_burned/mask_\${mname}_\${cnt}.nii.gz -force

@@ -24,7 +24,7 @@ nextflow_process {
         }
     }
 
-    test("burnvoxels - one mask") {
+    test("burnvoxels - two masks") {
 
         when {
             process {
