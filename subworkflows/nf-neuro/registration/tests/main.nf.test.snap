@@ -4,14 +4,14 @@
             "test__output_warped.nii.gz",
             "test__deform_warp.nii.gz",
             [
-                "versions.yml:md5,ba070bfc14176dce912fcc24ed19d2cb"
+                "versions.yml:md5,8d0f503c670198b4448f5db719d089bc"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-29T15:01:19.376300473"
+        "timestamp": "2024-10-30T18:22:51.835424696"
     },
     "registration - easyreg": {
         "content": [

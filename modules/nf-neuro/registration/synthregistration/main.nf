@@ -3,7 +3,6 @@ process REGISTRATION_SYNTHREGISTRATION {
     label 'process_high'
 
     container "freesurfer/synthmorph:3"
-    containerOptions "--entrypoint ''"
     containerOptions "--entrypoint '' --env PYTHONPATH='/freesurfer/env/lib/python3.11/site-packages'"
 
     input:
@@ -40,7 +39,7 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: 7.4
+        Freesurfer: 7.4.1
     END_VERSIONS
     """
 
@@ -57,7 +56,7 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: 7.4
+        Freesurfer: 7.4.1
     END_VERSIONS
     """
 }

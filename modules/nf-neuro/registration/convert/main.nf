@@ -70,7 +70,7 @@ process REGISTRATION_CONVERT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: 7.4.1
+        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -87,7 +87,7 @@ process REGISTRATION_CONVERT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: 7.4.1
+        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 }
