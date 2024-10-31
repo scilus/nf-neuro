@@ -7,7 +7,7 @@ process TRACTOGRAM_DENSITYMAP {
         'scilus/scilus:2.0.2' }"
 
     input:
-    tuple val(meta), path(bundle)
+    tuple val(meta), path(tractogram)
 
     output:
     tuple val(meta), path("*__*.nii.gz"), emit: density_map
@@ -21,8 +21,8 @@ process TRACTOGRAM_DENSITYMAP {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def binary = task.ext.is_binary ? "--binary" : ""
     """
-    bname=\$(basename ${bundle} .trk)
-    scil_tractogram_compute_density_map.py $bundle ${prefix}__\${bname}.nii.gz ${binary}
+    bname=\$(basename ${tractogram} .trk)
+    scil_tractogram_compute_density_map.py $tractogram ${prefix}__\${bname}.nii.gz ${binary}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
