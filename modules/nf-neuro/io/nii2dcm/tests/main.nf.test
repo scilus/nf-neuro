@@ -1,0 +1,89 @@
+nextflow_process {
+
+    name "Test Process IO_NII2DCM"
+    script "../main.nf"
+    process "IO_NII2DCM"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "io"
+    tag "io/nii2dcm"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    config "./nextflow.config"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "b0.zip", "dicom.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("io - nii2dcm - no ref dicom") {
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        b0: it.simpleName == "b0"
+                        dicom: it.simpleName == "dicom"
+                    }
+                input[0] = ch_split_test_data.b0
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/b0.nii.gz"),
+                    []
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.dicom_directory.get(0).get(1) ==~ ".*/DICOM" }
+            )
+        }
+    }
+
+    test("io - nii2dcm - ref dicom") {
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        b0: it.simpleName == "b0"
+                        dicom: it.simpleName == "dicom"
+                    }
+                ch_b0 = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz"),
+                        []
+                    ]
+                }
+                ch_dcm = ch_split_test_data.dicom.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/IM_0001.dcm")
+                    ]
+                }
+                input[0] = ch_b0
+                    .join(ch_dcm)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.dicom_directory.get(0).get(1) ==~ ".*/DICOM" }
+            )
+        }
+    }
+}

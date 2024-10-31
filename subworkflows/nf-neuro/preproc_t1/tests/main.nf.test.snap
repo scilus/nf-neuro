@@ -18,12 +18,12 @@
             "test_cropped.nii.gz:md5:header,efab188f3700b5b29d4b4ef99cec1295,data,e551be653d402018fd73a4f708b1641e",
             "test_t1_cropped.nii.gz:md5:header,efab188f3700b5b29d4b4ef99cec1295,data,8a93b9d76ead7dae4af4792b9cf70479",
             [
-                "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
-                "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                "versions.yml:md5,37229cd5cee6f6788fbc9083d6618c61",
+                "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                 "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                 "versions.yml:md5,9d515db259af59f33ccd14061fbc45d1",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
-                "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740"
             ]
         ],
         "meta": {
@@ -55,8 +55,9 @@
                 "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
                 "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                 "versions.yml:md5,9d515db259af59f33ccd14061fbc45d1",
+                "versions.yml:md5,9d515db259af59f33ccd14061fbc45d1",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
-                "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740"
             ]
         ],
         "meta": {
@@ -84,12 +85,12 @@
             "test_cropped.nii.gz:md5:header,d7ba71fd79e9aa07cb0886b1ee751982,data,a589ac0f71e107b30f7aaa06e8945157",
             "test_t1_cropped.nii.gz:md5:header,13aad5ab6e60ed769564d568bd663ef9,data,5fd48921d0e5af13e816492362e8951e",
             [
-                "versions.yml:md5,209daf2d60de195845dedbdf80c98afd",
-                "versions.yml:md5,2c0a6f978891003ebdf35c1ba060aa90",
-                "versions.yml:md5,6aecd5fc2de479eaa81fb30b248c647c",
+                "versions.yml:md5,19aaa24cf046e49a4ad4ce5d507ea8aa",
+                "versions.yml:md5,37229cd5cee6f6788fbc9083d6618c61",
+                "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                 "versions.yml:md5,97b6b9457caf964b9f20549672f692f0",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
-                "versions.yml:md5,c6563545d67d7ab20ad849adcaafcb71"
+                "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740"
             ]
         ],
         "meta": {

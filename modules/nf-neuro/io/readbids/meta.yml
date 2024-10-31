@@ -6,7 +6,7 @@ keywords:
   - Input
   - Structure
 tools:
-  - "Scilpy":
+  - "scilpy":
       description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
 
@@ -16,15 +16,15 @@ input:
       description: Folder containing bids file
       pattern: "*"
 
-  - fsfolder:
+  - fs_folder:
       type: directory
       description: Folder containing fs file
       pattern: "*"
 
-  - bidsignore:
+  - bids_ignore:
       type: file
-      description: bidsignore file
-      pattern: "*.{bidsignore}"
+      description: bids_ignore file
+      pattern: "*.{bids_ignore}"
 
 output:
   - versions:

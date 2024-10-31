@@ -1,0 +1,2 @@
+image/burnvoxels:
+  - "modules/nf-neuro/image/burnvoxels/**"

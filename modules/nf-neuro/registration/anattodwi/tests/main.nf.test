@@ -19,7 +19,7 @@ nextflow_process {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
                 process {
                     """
-                    input[0] = Channel.from( [ "processing.zip" ] )
+                    input[0] = Channel.from( [ "T1w.zip", "b0.zip", "dti.zip" ] )
                     input[1] = "test.load-test-data"
                     """
                 }
@@ -30,13 +30,33 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory
-                    .map{ test_data_directory -> [
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        t1w: it.simpleName == "T1w"
+                        b0: it.simpleName == "b0"
+                        dti: it.simpleName == "dti"
+                    }
+                ch_t1w = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/mni_masked_2x2x2.nii.gz"),
-                        file("\${test_data_directory}/b0_mean.nii.gz"),
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]
+                }
+                ch_b0 = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/b0.nii.gz")
+                    ]
+                }
+                ch_fa = ch_split_test_data.dti.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
                         file("\${test_data_directory}/fa.nii.gz")
-                    ]}
+                    ]
+                }
+                input[0] = ch_t1w
+                    .join(ch_b0)
+                    .join(ch_fa)
                 """
             }
         }

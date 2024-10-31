@@ -52,7 +52,9 @@ nextflow_workflow {
                 input[2] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
-                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz"),
+                        [],
+                        []
                     ]}
                 input[3] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
@@ -195,6 +197,8 @@ nextflow_workflow {
                 input[3] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
+                        [],
+                        [],
                         []
                     ]}
                 input[4] = ch_split_test_data.t1w.map{

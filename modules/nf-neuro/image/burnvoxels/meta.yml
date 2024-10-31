@@ -1,0 +1,72 @@
+name: "image_burnvoxels"
+description: |
+  1. **Burning Voxels**: The module takes binary masks and "burns" or imprints their voxels onto an anatomical image.
+  This means that the areas defined by the masks are marked or labeled on the anatomical image.
+
+  2. **Output Images**: The module generates multiple output images:
+    - One image with all masks burned onto the anatomical image.
+    - Separate images for each mask burned onto the anatomical image. If there are N masks, there will be N images.
+
+  3. **Label Values**: The burned voxels are assigned label values:
+    - The minimum label value is 25.
+    - Subsequent label values are incremented by a dynamically determined step based on the number of masks.
+
+  In summary, this module processes an anatomical image by applying binary masks to it, generating multiple labeled images as output.
+keywords:
+  - Image Processing
+  - Voxel Burning
+  - Mask Application
+tools:
+  - "ANTs":
+      description: "Advanced Normalization Tools (ANTs) for image processing."
+      homepage: "http://stnava.github.io/ANTs/"
+  - "MRtrix3":
+      description: "MRtrix3 is a software package for various types of diffusion imaging data, including diffusion-weighted, diffusion-tensor, and q-ball imaging."
+      homepage: "https://www.mrtrix.org/"
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - masks:
+      type: list
+      description: List of binary masks to be burned onto the anatomical image.
+      pattern: "*.nii.gz"
+
+  - anat:
+      type: file
+      description: Anatomical image to burn the masks onto.
+      pattern: "*.nii.gz"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - all_masks_burned:
+      type: file
+      description: Anatomical image with all masks burned onto it.
+      pattern: "*.nii.gz"
+
+  - each_mask_burned:
+      type: list
+      description: Anatomical image with each mask burned onto it.
+      pattern: "*.nii.gz"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@GuillaumeTh"
+maintainers:
+  - "@GuillaumeTh"
