@@ -59,7 +59,7 @@ workflow BUNDLE_SEG {
 
         // ** Setting up Atlas reference channels. ** //
         if ( params.atlas_directory ) {
-            atlas_anat = Channel.fromPath("$atlas_directory/atlas/mni_masked.nii.gz.nii.gz")
+            atlas_anat = Channel.fromPath("$atlas_directory/atlas/mni_masked.nii.gz")
             atlas_config = Channel.fromPath("$atlas_directory/config/config_fss_1.json")
             atlas_average = Channel.fromPath("$atlas_directory/atlas/atlas/")
         }
