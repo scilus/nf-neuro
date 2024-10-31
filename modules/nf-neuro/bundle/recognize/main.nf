@@ -1,10 +1,10 @@
 process BUNDLE_RECOGNIZE {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_high'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.0.sif':
-        'scilus/scilus:2.0.0' }"
+        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
+        'scilus/scilus:2.0.2' }"
 
     input:
         tuple val(meta), path(tractograms), path(transform), path(config), path(directory)
