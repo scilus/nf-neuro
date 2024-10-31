@@ -257,11 +257,11 @@ nextflow_process {
                 """
             }
         }
-
         then {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
+                    file(process.out.fodf.get(0).get(1)).name,
                     file(process.out.wm_fodf.get(0).get(1)).name,
                     file(process.out.gm_fodf.get(0).get(1)).name,
                     file(process.out.csf_fodf.get(0).get(1)).name,
