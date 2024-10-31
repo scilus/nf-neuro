@@ -1,13 +1,13 @@
 nextflow_process {
 
-    name "Test Process BUNDLE_DENSITYMAP"
+    name "Test Process TRACTOGRAM_DENSITYMAP"
     script "../main.nf"
-    process "BUNDLE_DENSITYMAP"
+    process "TRACTOGRAM_DENSITYMAP"
 
     tag "modules"
     tag "modules_nfcore"
-    tag "bundle"
-    tag "bundle/densitymap"
+    tag "tractogram"
+    tag "tractogram/densitymap"
 
     tag "subworkflows"
     tag "subworkflows/load_test_data"

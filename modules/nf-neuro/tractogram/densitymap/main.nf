@@ -1,4 +1,4 @@
-process BUNDLE_DENSITYMAP {
+process TRACTOGRAM_DENSITYMAP {
     tag "$meta.id"
     label 'process_single'
 

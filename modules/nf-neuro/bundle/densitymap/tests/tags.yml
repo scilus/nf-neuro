@@ -1,2 +1,0 @@
-bundle/densitymap:
-  - "modules/nf-neuro/bundle/densitymap/**"
