@@ -1,4 +1,4 @@
-name: "IO_NII2DCM"
+name: "io_nii2dcm"
 description: Convert NIfTI files to DICOM format.
 keywords:
   - NIfTI

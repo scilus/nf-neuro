@@ -19,7 +19,7 @@ nextflow_process {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
                 process {
                     """
-                    input[0] = Channel.from( [ "b0.zip" ] )
+                    input[0] = Channel.from( [ "b0.zip", "dicom.zip" ] )
                     input[1] = "test.load-test-data"
                     """
                 }
@@ -30,7 +30,12 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        b0: it.simpleName == "b0"
+                        dicom: it.simpleName == "dicom"
+                    }
+                input[0] = ch_split_test_data.b0
                     .map{ test_data_directory -> [
                     [ id:'test', single_end:false ], // meta map
                     file("\${test_data_directory}/b0.nii.gz"),
@@ -47,4 +52,38 @@ nextflow_process {
         }
     }
 
+    test("io - nii2dcm - ref dicom") {
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        b0: it.simpleName == "b0"
+                        dicom: it.simpleName == "dicom"
+                    }
+                ch_b0 = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz"),
+                        []
+                    ]
+                }
+                ch_dcm = ch_split_test_data.dicom.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/IM_0001.dcm")
+                    ]
+                }
+                input[0] = ch_b0
+                    .join(ch_dcm)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.dicom_directory.get(0).get(1) ==~ ".*/DICOM" }
+            )
+        }
+    }
 }
