@@ -20,7 +20,7 @@ nextflow_process {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
                 process {
                     """
-                    input[0] = Channel.from( [ "antsbet.zip" ] )
+                    input[0] = Channel.from( [ "T1w.zip", "transform.zip", "antsbet.zip" ] )
                     input[1] = "test.load-test-data"
                     """
                 }
@@ -30,14 +30,41 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory.map{
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        t1: it.simpleName == "T1w"
+                        transform: it.simpleName == "transform"
+                        template: it.simpleName == "antsbet"
+                    }
+                ch_t1 = ch_split_test_data.t1.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
-                        file("\${test_data_directory}/t1_unaligned.nii.gz"),
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]
+                }
+                ch_template = ch_split_test_data.template.map{
+                    test_data_directory -> [
+                        [ id: 'test' ],
                         file("\${test_data_directory}/t1_template.nii.gz"),
                         file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
                     ]
                 }
+                ch_mask = ch_split_test_data.transform.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_to_bet_template_mask.nii.gz")
+                    ]
+                }
+                ch_transform = ch_split_test_data.transform.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_to_bet_template.mat")
+                    ]
+                }
+                input[0] = ch_t1
+                    .join(ch_template)
+                    .join(ch_mask)
+                    .join(ch_transform)
                 """
             }
         }

@@ -25,8 +25,8 @@ workflow ANATOMICAL_SEGMENTATION {
             SEGMENTATION_SYNTHSEG (
                 ch_image
                     .join(ch_lesion, remainder: true)
-                    .join(ch_fs_license, remainder: true)
-                    .map{ it[0..1] + [it[2] ?: []] + [it[3] ?: []] }
+                    .map{ it[0..1] + [it[2] ?: []] }
+                    .combine(ch_fs_license)
             )
             ch_versions = ch_versions.mix(SEGMENTATION_SYNTHSEG.out.versions.first())
 

@@ -5,8 +5,8 @@ process REGISTRATION_ANATTODWI {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_1.6.0.sif':
-        'scilus/scilus:1.6.0' }"
+        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
+        'scilus/scilus:2.0.2' }"
 
     input:
     tuple val(meta), path(t1), path(b0), path(metric)
@@ -57,7 +57,7 @@ process REGISTRATION_ANATTODWI {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: 2.4.3
+        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
     END_VERSIONS
     """
 
@@ -74,7 +74,7 @@ process REGISTRATION_ANATTODWI {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: 2.4.3
+        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
     END_VERSIONS
     """
 }

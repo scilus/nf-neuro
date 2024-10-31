@@ -1,14 +1,14 @@
 
 process REGISTRATION_ANTS {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_1.6.0.sif':
-        'scilus/scilus:1.6.0' }"
+        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
+        'scilus/scilus:2.0.2' }"
 
     input:
-    tuple val(meta), path(fixedimage), path(movingimage), path(mask)
+    tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
 
     output:
     tuple val(meta), path("*_warped.nii.gz")                                  , emit: image
@@ -39,7 +39,7 @@ process REGISTRATION_ANTS {
     if ( task.ext.collapse_output ) args += " -z " + task.ext.collapse_output
 
     """
-    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
+    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
@@ -62,7 +62,7 @@ process REGISTRATION_ANTS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: 2.4.3
+        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
     END_VERSIONS
     """
 
@@ -82,7 +82,7 @@ process REGISTRATION_ANTS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: 2.4.3
+        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
     END_VERSIONS
     """
 }

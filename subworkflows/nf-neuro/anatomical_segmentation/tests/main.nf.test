@@ -151,7 +151,6 @@ nextflow_workflow {
                 input[2] = Channel.empty()
                 input[3] = ch_split_test_data.freesurfer.map{
                     test_data_directory -> [
-                        [ id:'test' ],
                         file("\${test_data_directory}/license.txt", checkIfExists: true)
                     ]
                 }
