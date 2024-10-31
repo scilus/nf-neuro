@@ -30,7 +30,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,5336fac953810299feeb1a62e824ad35"
+                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
                 ],
                 "bbox": [
                     [
@@ -60,15 +60,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,5336fac953810299feeb1a62e824ad35"
+                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-04-29T22:26:45.898928"
+        "timestamp": "2024-10-29T11:39:49.11235624"
     },
     "betcrop - fslbetcrop - t1": {
         "content": [
@@ -101,7 +101,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,5336fac953810299feeb1a62e824ad35"
+                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
                 ],
                 "bbox": [
                     [
@@ -131,15 +131,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,5336fac953810299feeb1a62e824ad35"
+                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-04-24T15:44:11.896043"
+        "timestamp": "2024-10-29T11:40:06.612888953"
     },
     "betcrop - fslbetcrop - t1 - dilate": {
         "content": [
@@ -172,7 +172,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,5336fac953810299feeb1a62e824ad35"
+                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
                 ],
                 "bbox": [
                     [
@@ -202,14 +202,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,5336fac953810299feeb1a62e824ad35"
+                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "unknown"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-04-24T16:03:41.240199"
+        "timestamp": "2024-10-29T11:40:26.52204924"
     }
 }

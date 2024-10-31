@@ -1,0 +1,61 @@
+{
+    "burnvoxels - two masks": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__all.nii.gz:md5,7e8fe36daf0dfba28a5701c55e98a0ab"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__IFGWM_25.nii.gz:md5,d9654356d7f9c2b0eda5f69e8e71b9c4",
+                            "test__IFGWM_labels_map_325.nii.gz:md5,1169f8f2dba2ef2addaea6afd0ee82c2"
+                        ]
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,950062f43518f49bd79589bb79b16191"
+                ],
+                "all_masks_burned": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__all.nii.gz:md5,7e8fe36daf0dfba28a5701c55e98a0ab"
+                    ]
+                ],
+                "each_mask_burned": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__IFGWM_25.nii.gz:md5,d9654356d7f9c2b0eda5f69e8e71b9c4",
+                            "test__IFGWM_labels_map_325.nii.gz:md5,1169f8f2dba2ef2addaea6afd0ee82c2"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,950062f43518f49bd79589bb79b16191"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.0"
+        },
+        "timestamp": "2024-10-30T15:22:58.330309703"
+    }
+}
