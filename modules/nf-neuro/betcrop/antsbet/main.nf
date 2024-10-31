@@ -60,7 +60,7 @@ process BETCROP_ANTSBET {
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
-        ants: 2.4.3
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
     END_VERSIONS
     """
 }
