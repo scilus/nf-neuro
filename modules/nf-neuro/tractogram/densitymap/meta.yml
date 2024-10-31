@@ -17,7 +17,7 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
 
-  - bundle:
+  - tractogram:
       type: file
       description: Tractogram file for density map computation
       pattern: "*.trk"
