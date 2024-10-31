@@ -54,5 +54,6 @@
     "segmentation.zip": "ab51be6d142ad1a8e30ffb964447d010",
     "freesurfer_full.zip": "203e482426065326ff5920368d4d7908",
     "freesurfer_nifti.zip": "adb5ac4cf5c45040339e04e7c142e8c9",
-    "transform.zip": "148afd665ddbd2bb80493208480571a9"
+    "transform.zip": "148afd665ddbd2bb80493208480571a9",
+    "dicom.zip": "234913cbad53c19aa19aef9eda0a3839"
 }

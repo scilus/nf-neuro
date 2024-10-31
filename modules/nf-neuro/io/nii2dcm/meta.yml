@@ -1,0 +1,45 @@
+name: "io_nii2dcm"
+description: Convert NIfTI files to DICOM format.
+keywords:
+  - NIfTI
+  - DICOM
+  - Conversion
+
+tools:
+  - "MRtrix3":
+      description: "Toolbox for image processing, analysis and visualisation of dMRI."
+      homepage: "https://www.mrtrix.org/"
+  - "nii2dcm":
+      description: "A tool to convert NIfTI files to DICOM format."
+      homepage: "https://github.com/Onset-lab/nii2dcm"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - niftis:
+      type: list
+      description: NIfTI files to be converted to DICOM format
+      pattern: "*.{nii,nii.gz}"
+
+  - dicom:
+      type: file
+      description: Reference DICOM file (optional)
+      pattern: "*.dcm"
+
+output:
+  - dicom_directory:
+      type: directory
+      description: Directory containing the DICOM files
+      pattern: "DICOM/"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@GuillaumeTh"
