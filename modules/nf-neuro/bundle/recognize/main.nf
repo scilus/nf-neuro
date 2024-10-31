@@ -3,7 +3,7 @@ process BUNDLE_RECOGNIZE {
     label 'process_high'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.0.sif':
+        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
         'scilus/scilus:2.0.2' }"
 
     input:
