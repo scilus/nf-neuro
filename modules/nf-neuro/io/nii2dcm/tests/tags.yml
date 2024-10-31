@@ -1,0 +1,2 @@
+io/nii2dcm:
+  - "modules/nf-neuro/io/nii2dcm/**"
