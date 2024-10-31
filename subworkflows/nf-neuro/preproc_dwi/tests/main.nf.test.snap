@@ -15,7 +15,6 @@
                 "versions.yml:md5,0b8c908e52917b0b706fc9d1b4d6cd24",
                 "versions.yml:md5,0e680a0c6b56892e1a7ec7f85bb95322",
                 "versions.yml:md5,3340c4b5e56ca52f7342be3c9044eb47",
-                "versions.yml:md5,5dce7a8c0b0d6b91ef7826f88c86370e",
                 "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                 "versions.yml:md5,962f76092c8795ce5e6d768304e2d230",
                 "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
@@ -36,7 +35,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T15:39:59.890109"
+        "timestamp": "2024-10-31T12:43:32.386784931"
     },
     "preproc_dwi_rev_b0": {
         "content": [
@@ -54,7 +53,6 @@
                 "versions.yml:md5,0b8c908e52917b0b706fc9d1b4d6cd24",
                 "versions.yml:md5,0e680a0c6b56892e1a7ec7f85bb95322",
                 "versions.yml:md5,3340c4b5e56ca52f7342be3c9044eb47",
-                "versions.yml:md5,5dce7a8c0b0d6b91ef7826f88c86370e",
                 "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                 "versions.yml:md5,962f76092c8795ce5e6d768304e2d230",
                 "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
@@ -74,7 +72,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T15:35:59.573081"
+        "timestamp": "2024-10-31T12:40:17.633749216"
     },
     "preproc_dwi_all_options": {
         "content": [
@@ -92,7 +90,6 @@
                 "versions.yml:md5,0b8c908e52917b0b706fc9d1b4d6cd24",
                 "versions.yml:md5,0e680a0c6b56892e1a7ec7f85bb95322",
                 "versions.yml:md5,3340c4b5e56ca52f7342be3c9044eb47",
-                "versions.yml:md5,5dce7a8c0b0d6b91ef7826f88c86370e",
                 "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                 "versions.yml:md5,962f76092c8795ce5e6d768304e2d230",
                 "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
@@ -112,6 +109,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T15:44:27.839939"
+        "timestamp": "2024-10-31T12:47:02.710468968"
     }
 }
