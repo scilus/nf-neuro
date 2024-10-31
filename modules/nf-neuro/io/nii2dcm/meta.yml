@@ -6,7 +6,7 @@ keywords:
   - Conversion
 
 tools:
-  - "mrtrix":
+  - "MRtrix3":
       description: "Toolbox for image processing, analysis and visualisation of dMRI."
       homepage: "https://www.mrtrix.org/"
   - "nii2dcm":
