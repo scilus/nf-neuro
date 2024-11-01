@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+---
 name: "tractogram_densitymap"
 description: Compute density maps from tractograms
 keywords:
