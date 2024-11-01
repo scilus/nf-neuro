@@ -26,7 +26,7 @@ nextflow_process {
             }
         }
 
-    test("eddy") {
+    test("eddy_full") {
         when {
             process {
                 """
@@ -45,7 +45,39 @@ nextflow_process {
                 """
             }
         }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.dwi_corrected.get(0).get(1)).name,
+                    process.out.bval_corrected,
+                    file(process.out.bvec_corrected.get(0).get(1)).name,
+                    process.out.b0_mask,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
 
+    test("eddy_light") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true),
+                    [],
+                    [],
+                    [],
+                    file("\${test_data_directory}/sub-01__corrected_b0s.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/topup_results_fieldcoef.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/topup_results_movpar.txt", checkIfExists: true)]}
+                """
+            }
+        }
         then {
             assertAll(
                 { assert process.success },
