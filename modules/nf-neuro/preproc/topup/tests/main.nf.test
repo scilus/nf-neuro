@@ -26,7 +26,7 @@ nextflow_process {
             }
         }
 
-    test("topup") {
+    test("topup_full") {
         when {
             process {
                 """
@@ -45,7 +45,41 @@ nextflow_process {
                 """
             }
         }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.topup_corrected_b0s.get(0).get(1)).name,
+                    file(process.out.topup_fieldcoef.get(0).get(1)).name,
+                    file(process.out.topup_movpart.get(0).get(1)).name,
+                    file(process.out.rev_b0_warped.get(0).get(1)).name,
+                    process.out.rev_b0_mean,
+                    process.out.b0_mean,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
 
+    test("topup_light") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                    file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true),
+                    [],
+                    [],
+                    [],
+                    [],
+                    file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz", checkIfExists: true)]}
+                input[1] = []
+                """
+            }
+        }
         then {
             assertAll(
                 { assert process.success },

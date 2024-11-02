@@ -1,10 +1,10 @@
 process PREPROC_EDDY {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_high'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        "https://scil.usherbrooke.ca/containers/scilus_2.0.0.sif":
-        "scilus/scilus:2.0.0"}"
+        "https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif":
+        "scilus/scilus:2.0.2"}"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(rev_dwi), path(rev_bval), path(rev_bvec), path(corrected_b0s), path(topup_fieldcoef), path(topup_movpart)
@@ -34,8 +34,8 @@ process PREPROC_EDDY {
     def extra_args = task.ext.extra_args ?: ""
 
     """
-    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
-    export OMP_NUM_THREADS=1
+    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
+    export OMP_NUM_THREADS=$task.cpus
     export OPENBLAS_NUM_THREADS=1
     export ANTS_RANDOM_SEED=7468
 
@@ -62,7 +62,7 @@ process PREPROC_EDDY {
     # If topup has been run before
     if [[ -f "$topup_fieldcoef" ]]
     then
-        mrconvert $corrected_b0s b0_corrected.nii.gz -coord 3 0 -axes 0,1,2 -nthreads 1
+        mrconvert $corrected_b0s b0_corrected.nii.gz -coord 3 0 -axes 0,1,2 -nthreads $task.cpus
         bet b0_corrected.nii.gz ${prefix}__b0_bet.nii.gz -m -R\
             -f $bet_topup_before_eddy_f
 
@@ -80,7 +80,7 @@ process PREPROC_EDDY {
         bet ${prefix}__b0.nii.gz ${prefix}__b0_bet.nii.gz -m -R -f $bet_prelim_f
         scil_volume_math.py convert ${prefix}__b0_bet_mask.nii.gz ${prefix}__b0_bet_mask.nii.gz --data_type uint8 -f
         maskfilter ${prefix}__b0_bet_mask.nii.gz dilate ${prefix}__b0_bet_mask_dilated.nii.gz\
-            --npass $dilate_b0_mask_prelim_brain_extraction -nthreads 1
+            --npass $dilate_b0_mask_prelim_brain_extraction -nthreads $task.cpus
         scil_volume_math.py multiplication ${prefix}__b0.nii.gz ${prefix}__b0_bet_mask_dilated.nii.gz\
             ${prefix}__b0_bet.nii.gz --data_type float32 -f
 
@@ -93,7 +93,7 @@ process PREPROC_EDDY {
 
     echo "--very_verbose $extra_args" >> eddy.sh
     sh eddy.sh
-    scil_volume_math.py lower_threshold dwi_eddy_corrected.nii.gz 0 ${prefix}__dwi_corrected.nii.gz
+    scil_volume_math.py lower_clip dwi_eddy_corrected.nii.gz 0 ${prefix}__dwi_corrected.nii.gz
 
     if [[ \$number_rev_dwi -eq 0 ]]
     then
@@ -106,7 +106,7 @@ process PREPROC_EDDY {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.0
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
     END_VERSIONS
@@ -135,7 +135,7 @@ process PREPROC_EDDY {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.0
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
 

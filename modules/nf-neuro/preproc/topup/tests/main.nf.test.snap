@@ -1,5 +1,5 @@
 {
-    "topup": {
+    "topup_full": {
         "content": [
             "test__corrected_b0s.nii.gz",
             "topup_results_fieldcoef.nii.gz",
@@ -24,13 +24,47 @@
                 ]
             ],
             [
-                "versions.yml:md5,9e086ab052cde49b01096c3bc8f524c0"
+                "versions.yml:md5,87d6001e63fd82f49d6dd80ed032d4c0"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.2"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-07-22T03:44:06.877352"
+        "timestamp": "2024-11-01T16:21:18.752887499"
+    },
+    "topup_light": {
+        "content": [
+            "test__corrected_b0s.nii.gz",
+            "topup_results_fieldcoef.nii.gz",
+            "topup_results_movpar.txt",
+            "test__rev_b0_warped.nii.gz",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__rev_b0_mean.nii.gz:md5,a0c63d7a8a234d85eeb63045ae2a8f60"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__b0_mean.nii.gz:md5,91288914a80e7866ef8b08a363d617f9"
+                ]
+            ],
+            [
+                "versions.yml:md5,87d6001e63fd82f49d6dd80ed032d4c0"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-01T16:21:36.189599346"
     }
 }
