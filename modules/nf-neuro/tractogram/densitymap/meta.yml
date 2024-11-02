@@ -1,0 +1,45 @@
+---
+name: "tractogram_densitymap"
+description: Compute density maps from tractograms
+keywords:
+  - Diffusion MRI
+  - Tractogram
+  - Density Map
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - tractogram:
+      type: file
+      description: Tractogram file for density map computation
+      pattern: "*.trk"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - density_map:
+      type: file
+      description: Computed density map
+      pattern: "*.nii.gz"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@GuillaumeTh"
+maintainers:
+  - "@GuillaumeTh"

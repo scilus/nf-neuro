@@ -8,8 +8,8 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,043decee0d131e79a802e3dcc61c22f0",
-                        "test__output1InverseWarp.nii.gz:md5,62d6287e60dd36ffd477e71061f23077"
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c",
+                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
                 "1": [
@@ -18,8 +18,8 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,f896e4fef21f26c84bf834afd7fb5d55",
-                        "test__output0GenericAffine.mat:md5,043decee0d131e79a802e3dcc61c22f0"
+                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                     ]
                 ],
                 "2": [
@@ -28,11 +28,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,ff651c76f4ea493de0a06a202e9f9fb2"
+                        "test__t1_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,3b94092e010fc0f6bf505074a393ddcc"
+                    "versions.yml:md5,4c48209a8bd74e5b5194b799152df754"
                 ],
                 "t1_warped": [
                     [
@@ -40,7 +40,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,ff651c76f4ea493de0a06a202e9f9fb2"
+                        "test__t1_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
                     ]
                 ],
                 "transfo_image": [
@@ -49,8 +49,8 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,f896e4fef21f26c84bf834afd7fb5d55",
-                        "test__output0GenericAffine.mat:md5,043decee0d131e79a802e3dcc61c22f0"
+                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                     ]
                 ],
                 "transfo_trk": [
@@ -59,19 +59,19 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,043decee0d131e79a802e3dcc61c22f0",
-                        "test__output1InverseWarp.nii.gz:md5,62d6287e60dd36ffd477e71061f23077"
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c",
+                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3b94092e010fc0f6bf505074a393ddcc"
+                    "versions.yml:md5,4c48209a8bd74e5b5194b799152df754"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-05-01T18:20:24.065842"
+        "timestamp": "2024-10-25T15:05:47.707432102"
     }
 }

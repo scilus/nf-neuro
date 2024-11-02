@@ -1,0 +1,2 @@
+tractogram/densitymap:
+  - "modules/nf-neuro/tractogram/densitymap/**"

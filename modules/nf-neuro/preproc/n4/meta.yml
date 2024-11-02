@@ -7,7 +7,7 @@ keywords:
   - N4
   - bias field
 tools:
-  - "Scilpy":
+  - "scilpy":
       description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
 
