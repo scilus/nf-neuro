@@ -28,7 +28,7 @@ process DENOISING_NLMEANS {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    scil_denoising_nlmeans.py $image ${prefix}_denoised.nii.gz $ncoils ${args.join(" ")}
+    scil_denoising_nlmeans.py $image ${prefix}__denoised.nii.gz $ncoils ${args.join(" ")}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
