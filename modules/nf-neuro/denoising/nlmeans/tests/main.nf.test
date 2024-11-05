@@ -18,7 +18,7 @@ nextflow_process {
             script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
             process {
                 """
-                input[0] = Channel.from( [ "heavy.zip" ] )
+                input[0] = Channel.from( [ "raw_b0.zip", "raw_segmentation.zip" ] )
                 input[1] = "test.load-test-data"
                 """
             }
@@ -30,38 +30,25 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory.map{
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        b0: it.simpleName == "raw_b0"
+                        segmentation: it.simpleName == "raw_segmentation"
+                    }
+                ch_b0 = ch_split_test_data.b0.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
-                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
-                        []
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz")
                     ]
                 }
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert process.success },
-                { assert snapshot(process.out).match() }
-            )
-        }
-
-    }
-
-    test("denoising - nlmeans - withmask") {
-
-        when {
-            process {
-                """
-                input[0] = LOAD_DATA.out.test_data_directory.map{
+                ch_mask = ch_split_test_data.segmentation.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
-                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
-                        file("\${test_data_directory}/anat/anat_mask.nii.gz")
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/slices/axial.nii.gz")
                     ]
                 }
+                input[0] = ch_b0
+                    .join(ch_mask)
                 """
             }
         }

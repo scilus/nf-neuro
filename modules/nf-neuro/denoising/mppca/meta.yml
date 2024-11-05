@@ -12,9 +12,9 @@ tools:
   - "MRtrix3":
       description: "Toolbox for image processing, analysis and visualisation of dMRI."
       homepage: "https://mrtrix.readthedocs.io/en/latest/"
-  - "FSL":
-      description: "FSL Toolbox and Scilpy Toolbox"
-      homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
 
 input:
   - meta:
@@ -26,6 +26,11 @@ input:
   - dwi:
       type: file
       description: Nifti dwi file to denoise
+      pattern: "*.{nii,nii.gz}"
+
+  - mask:
+      type: file
+      description: Nifti mask file for the dwi, optional
       pattern: "*.{nii,nii.gz}"
 
 output:

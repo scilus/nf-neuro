@@ -5,68 +5,31 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test_denoised.nii.gz:md5,4a4eaa8956682b97589682c62c3226e5"
+                        "test__denoised.nii.gz:md5,4f679ca8c49a82ad566a814a819c6117"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,e5c9936e9d01b8503f706aecd0a39027"
+                    "versions.yml:md5,9336a0abe0f0c988b89f895943b0a153"
                 ],
                 "image": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test_denoised.nii.gz:md5,4a4eaa8956682b97589682c62c3226e5"
+                        "test__denoised.nii.gz:md5,4f679ca8c49a82ad566a814a819c6117"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,e5c9936e9d01b8503f706aecd0a39027"
+                    "versions.yml:md5,9336a0abe0f0c988b89f895943b0a153"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-04-23T21:07:32.369936"
-    },
-    "denoising - nlmeans - withmask": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_denoised.nii.gz:md5,a4925934f71fc40c2182e8c1d3bc6687"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,e5c9936e9d01b8503f706aecd0a39027"
-                ],
-                "image": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_denoised.nii.gz:md5,a4925934f71fc40c2182e8c1d3bc6687"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,e5c9936e9d01b8503f706aecd0a39027"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-04-23T21:09:03.715606"
+        "timestamp": "2024-11-05T18:28:29.498709866"
     }
 }

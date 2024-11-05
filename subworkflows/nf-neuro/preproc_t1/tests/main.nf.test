@@ -17,17 +17,17 @@ nextflow_workflow {
 
     tag "load_test_data"
 
-        setup {
-            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
-                script "../../load_test_data/main.nf"
-                process {
-                    """
-                    input[0] = Channel.from( [ "antsbet.zip" , "T1w.zip" ] )
-                    input[1] = "test.load-test-data"
-                    """
-                }
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "antsbet.zip" , "T1w.zip" ] )
+                input[1] = "test.load-test-data"
+                """
             }
         }
+    }
 
     test("preproc_t1_classic") {
         config "./nextflow.config"
