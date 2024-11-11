@@ -274,8 +274,8 @@ nextflow_process {
                     file(process.out.afd_total.get(0).get(1)).name,
                     file(process.out.afd_sum.get(0).get(1)).name,
                     file(process.out.nufo.get(0).get(1)).name,
-                    file(process.out.vent_mask.get(0).get(1)).name,
-                    file(process.out.versions.get(0).get(1)).name).match() }
+                    process.out.vent_mask,
+                    process.out.versions).match()}
             )
         }
 
