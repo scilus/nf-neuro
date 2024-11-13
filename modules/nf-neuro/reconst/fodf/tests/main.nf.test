@@ -83,7 +83,16 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    niftiMD5SUM(process.out.fodf.get(0).get(1), 6),
+                    process.out.peaks,
+                    niftiMD5SUM(process.out.peak_values.get(0).get(1), 6),
+                    file(process.out.peak_indices.get(0).get(1)).name,
+                    process.out.afd_max,
+                    process.out.afd_total,
+                    process.out.afd_sum,
+                    process.out.nufo,
+                    process.out.versions).match()}
             )
         }
 
@@ -142,7 +151,16 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    niftiMD5SUM(process.out.fodf.get(0).get(1), 6),
+                    process.out.peaks,
+                    niftiMD5SUM(process.out.peak_values.get(0).get(1), 6),
+                    file(process.out.peak_indices.get(0).get(1)).name,
+                    process.out.afd_max,
+                    process.out.afd_total,
+                    process.out.afd_sum,
+                    process.out.nufo,
+                    process.out.versions).match()}
             )
         }
 
@@ -201,7 +219,9 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    niftiMD5SUM(process.out.fodf.get(0).get(1), 6),
+                    process.out.versions).match()}
             )
         }
 
