@@ -97,7 +97,7 @@ jobs:
 
       - name: Fix nf-test launching jvm with too much memory
         run: |
-          sed -i 's/-Xmx10G//' $(which nf-test)
+          sed -i 's/-Xmx10g/-Xmx4g/' $(which nf-test)
 
       - name: Compute test run UID
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
