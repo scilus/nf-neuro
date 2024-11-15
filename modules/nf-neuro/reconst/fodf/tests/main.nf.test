@@ -88,9 +88,9 @@ nextflow_process {
                     file(process.out.peaks.get(0).get(1)).name,
                     niftiMD5SUM(process.out.peak_values.get(0).get(1), 6),
                     file(process.out.peak_indices.get(0).get(1)).name,
-                    niftiMD5SUM(process.out.afd_max.get(0).get(1), 6),
+                    process.out.afd_max,
                     process.out.afd_total,
-                    process.out.afd_sum,
+                    niftiMD5SUM(process.out.afd_sum.get(0).get(1), 6),
                     process.out.nufo,
                     process.out.versions).match()}
             )
@@ -156,9 +156,9 @@ nextflow_process {
                     file(process.out.peaks.get(0).get(1)).name,
                     niftiMD5SUM(process.out.peak_values.get(0).get(1), 6),
                     file(process.out.peak_indices.get(0).get(1)).name,
-                    niftiMD5SUM(process.out.afd_max.get(0).get(1), 6),
+                    process.out.afd_max,
                     process.out.afd_total,
-                    process.out.afd_sum,
+                    niftiMD5SUM(process.out.afd_sum.get(0).get(1), 6),
                     process.out.nufo,
                     process.out.versions).match()}
             )

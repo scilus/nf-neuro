@@ -38,7 +38,14 @@
             "test__peaks.nii.gz",
             "test__peak_values.nii.gz:md5:header,f55799c7ffe93b1148a313f0aade0f5f,data,2449c61f84ea3f605c1787e9d83338d1",
             "test__peak_indices.nii.gz",
-            "test__afd_max.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,e12b752beb43fa9e7f238ee4799bdfd8",
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test__afd_max.nii.gz:md5,9dbb9a0ce187b41a2a102fa3d3ca8ab7"
+                ]
+            ],
             [
                 [
                     {
@@ -47,14 +54,7 @@
                     "test__afd_total.nii.gz:md5,01a6fc27716a79cb57e1faed7ff8297b"
                 ]
             ],
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__afd_sum.nii.gz:md5,51303ca849b1eb26b9ccd0922f33cc6a"
-                ]
-            ],
+            "test__afd_sum.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,ee3aff13954be703a5cf4ab604c8eafa",
             [
                 [
                     {
@@ -71,7 +71,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-14T18:13:16.224103027"
+        "timestamp": "2024-11-14T20:46:21.956053982"
     },
     "reconst - fodf_no_metrics": {
         "content": [
@@ -92,7 +92,14 @@
             "test__peaks.nii.gz",
             "test__peak_values.nii.gz:md5:header,f55799c7ffe93b1148a313f0aade0f5f,data,59ed163b180b612419ec754b08da98eb",
             "test__peak_indices.nii.gz",
-            "test__afd_max.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,92589ae2cd489340eb1ba25771f8d053",
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test__afd_max.nii.gz:md5,61fb2106315ec2a20c4590b98d7e1a2c"
+                ]
+            ],
             [
                 [
                     {
@@ -101,14 +108,7 @@
                     "test__afd_total.nii.gz:md5,31edb24c528419fcb8f6f423479e8cd9"
                 ]
             ],
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__afd_sum.nii.gz:md5,7662527e52c86a99610bd87394b314e8"
-                ]
-            ],
+            "test__afd_sum.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,42a8407c3b6e9f743ed01e625c209c03",
             [
                 [
                     {
@@ -125,6 +125,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-14T18:14:00.521112716"
+        "timestamp": "2024-11-14T20:47:10.242722801"
     }
 }
