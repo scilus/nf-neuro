@@ -19,7 +19,7 @@ nextflow_process {
                 """
                 input[0] = Channel.from( [
                     "DWIss2000-dir60.zip",
-                    "DWIms1000-2000-dir32-60.zip" ,
+                    "DWIms1000-2000-dir10-10.zip",
                     "segmentation.zip",
                     "dti.zip",
                     "responses.zip"
@@ -107,7 +107,7 @@ nextflow_process {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
-                        msmt: it.simpleName == "DWIms1000-2000-dir32-60"
+                        msmt: it.simpleName == "DWIms1000-2000-dir10-10"
                         segmentation: it.simpleName == "segmentation"
                         dti: it.simpleName == "dti"
                         responses: it.simpleName == "responses"
@@ -236,7 +236,7 @@ nextflow_process {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
-                        msmt: it.simpleName == "DWIms1000-2000-dir32-60"
+                        msmt: it.simpleName == "DWIms1000-2000-dir10-10"
                         segmentation: it.simpleName == "segmentation"
                         dti: it.simpleName == "dti"
                         responses: it.simpleName == "responses"
