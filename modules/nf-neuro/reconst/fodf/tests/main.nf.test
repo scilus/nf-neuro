@@ -129,7 +129,7 @@ nextflow_process {
                 ch_metrics = ch_split_test_data.dti.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/fa.nii.gz") ,
                         file("\${test_data_directory}/md.nii.gz")
                     ]
                 }
