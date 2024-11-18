@@ -75,22 +75,33 @@ jobs:
       NXF_WORKDIR: /home/runner/_work
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
+      - uses: Wandalen/wretry.action@v3.7.2
         with:
-          python-version: "3.11"
-          cache: "pip"
-      - uses: actions/setup-java@2dfa2011c5b2a0f1489bf9e433881c92c1631f88 # v4.3.0
+          attempt_delay: 5000
+          action: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
+          with: |
+            python-version: "3.11"
+            cache: "pip"
+      - uses: Wandalen/wretry.action@v3.7.2
         with:
-          distribution: "temurin"
-          java-version: "17"
-      - uses: nf-core/setup-nextflow@561fcfc7146dcb12e3871909b635ab092a781f34 # v2.0.0
+          attempt_delay: 5000
+          action: actions/setup-java@2dfa2011c5b2a0f1489bf9e433881c92c1631f88 # v4.3.0
+          with: |
+            distribution: "temurin"
+            java-version: "17"
+      - uses: Wandalen/wretry.action@v3.7.2
         with:
-          version: ${{ inputs.nextflow_version }}
-      - uses: AlexVCaron/setup-nf-test@2c5a31b90b34d97abf155b57ee0f79c7f5aa118a
+          attempt_delay: 5000
+          action: nf-core/setup-nextflow@561fcfc7146dcb12e3871909b635ab092a781f34 # v2.0.0
+          with: |
+            version: ${{ inputs.nextflow_version }}
+      - uses: Wandalen/wretry.action@v3.7.2
+        with:
+          action: AlexVCaron/setup-nf-test@2c5a31b90b34d97abf155b57ee0f79c7f5aa118a
         # Used to make the action executable on our runners. Related to how the home
         # and work directories are set up from ephemeral disks. See nf-core/setup-nf-test/issues/6
-        with:
-          version: ${{ inputs.nf_test_version }}
+          with: |
+            version: ${{ inputs.nf_test_version }}
 
       - name: Install Python dependencies
         run: python -m pip install --upgrade pip pdiff cryptography

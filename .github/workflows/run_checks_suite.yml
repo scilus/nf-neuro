@@ -23,10 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
+      - uses: Wandalen/wretry.action@v3.7.2
         with:
-          python-version: "3.11"
-          cache: "pip"
+          attempt_delay: 5000
+          action: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
+          with: |
+            python-version: "3.11"
+            cache: "pip"
       - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
         # FIXME Flip this off once we get to less than a couple hundred. Adding
         # this so it will only run against changed files. It'll make it much
@@ -38,10 +41,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+      - uses: Wandalen/wretry.action@v3.7.2
         with:
-          node-version: "20"
-          cache: "npm"
+          attempt_delay: 5000
+          action: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+          with: |
+            node-version: "20"
+            cache: "npm"
 
       - name: Install Prettier
         run: npm ci
@@ -53,10 +59,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+      - uses: Wandalen/wretry.action@v3.7.2
         with:
-          node-version: "20"
-          cache: "npm"
+          attempt_delay: 5000
+          action: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+          with: |
+            node-version: "20"
+            cache: "npm"
 
       - name: Install editorconfig-checker
         run: npm ci
