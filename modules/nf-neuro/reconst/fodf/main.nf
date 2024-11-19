@@ -1,31 +1,31 @@
 
 process RECONST_FODF {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_high'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.0.sif':
-        'scilus/scilus:2.0.0' }"
+        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
+        'scilus/scilus:2.0.2' }"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(fa), path(md), path(wm_frf), path(gm_frf), path(csf_frf)
 
     output:
-        tuple val(meta), path("*fodf.nii.gz")           , emit: fodf, optional: true
-        tuple val(meta), path("*wm_fodf.nii.gz")        , emit: wm_fodf, optional: true
-        tuple val(meta), path("*gm_fodf.nii.gz")        , emit: gm_fodf, optional: true
-        tuple val(meta), path("*csf_fodf.nii.gz")       , emit: csf_fodf, optional: true
-        tuple val(meta), path("*vf.nii.gz")             , emit: vf, optional: true
-        tuple val(meta), path("*vf_rgb.nii.gz")         , emit: vf_rgb, optional: true
-        tuple val(meta), path("*peaks.nii.gz")          , emit: peaks, optional: true
-        tuple val(meta), path("*peak_values.nii.gz")    , emit: peak_values, optional: true
-        tuple val(meta), path("*peak_indices.nii.gz")   , emit: peak_indices, optional: true
-        tuple val(meta), path("*afd_max.nii.gz")        , emit: afd_max, optional: true
-        tuple val(meta), path("*afd_total.nii.gz")      , emit: afd_total, optional: true
-        tuple val(meta), path("*afd_sum.nii.gz")        , emit: afd_sum, optional: true
-        tuple val(meta), path("*nufo.nii.gz")           , emit: nufo, optional: true
-        tuple val(meta), path("*ventricles_mask.nii.gz"), emit: vent_mask, optional: true
-        path "versions.yml"                             , emit: versions
+        tuple val(meta), path("*__fodf.nii.gz")           , emit: fodf, optional: true
+        tuple val(meta), path("*__wm_fodf.nii.gz")        , emit: wm_fodf, optional: true
+        tuple val(meta), path("*__gm_fodf.nii.gz")        , emit: gm_fodf, optional: true
+        tuple val(meta), path("*__csf_fodf.nii.gz")       , emit: csf_fodf, optional: true
+        tuple val(meta), path("*__vf.nii.gz")             , emit: vf, optional: true
+        tuple val(meta), path("*__vf_rgb.nii.gz")         , emit: vf_rgb, optional: true
+        tuple val(meta), path("*__peaks.nii.gz")          , emit: peaks, optional: true
+        tuple val(meta), path("*__peak_values.nii.gz")    , emit: peak_values, optional: true
+        tuple val(meta), path("*__peak_indices.nii.gz")   , emit: peak_indices, optional: true
+        tuple val(meta), path("*__afd_max.nii.gz")        , emit: afd_max, optional: true
+        tuple val(meta), path("*__afd_total.nii.gz")      , emit: afd_total, optional: true
+        tuple val(meta), path("*__afd_sum.nii.gz")        , emit: afd_sum, optional: true
+        tuple val(meta), path("*__nufo.nii.gz")           , emit: nufo, optional: true
+        tuple val(meta), path("*__ventricles_mask.nii.gz"), emit: vent_mask, optional: true
+        path "versions.yml"                               , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -40,7 +40,7 @@ process RECONST_FODF {
     def sh_order = task.ext.sh_order ? "--sh_order " + task.ext.sh_order : ""
     def sh_basis = task.ext.sh_basis ? "--sh_basis " + task.ext.sh_basis : ""
     def set_method = task.ext.method ? task.ext.method : "ssst"
-    def processes = task.ext.processes ? "--processes " + task.ext.processes : ""
+    def processes = task.cpus > 1 ? "--processes " + task.cpus : ""
     def set_mask = mask ? "--mask $mask" : ""
     def relative_threshold = task.ext.relative_threshold ? "--rt " + task.ext.relative_threshold : ""
     def fodf_metrics_a_factor = task.ext.fodf_metrics_a_factor ? task.ext.fodf_metrics_a_factor : 2.0
@@ -122,13 +122,13 @@ process RECONST_FODF {
             $set_mask $sh_basis $absolute_peaks \
             $peaks $peak_values $peak_indices \
             $afd_max $afd_total \
-            $afd_sum $nufo \
+            $afd_sum $nufo $processes \
             $relative_threshold --not_all --at \${a_threshold}
     fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.0
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -159,7 +159,7 @@ process RECONST_FODF {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.0
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
