@@ -75,21 +75,27 @@ jobs:
       NXF_WORKDIR: /home/runner/_work
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - uses: Wandalen/wretry.action@v3.7.2
+
+      - name: Setup Python
+        uses: Wandalen/wretry.action@v3.7.2
         with:
           attempt_delay: 5000
           action: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
           with: |
             python-version: "3.11"
             cache: "pip"
-      - uses: Wandalen/wretry.action@v3.7.2
+
+      - name: Setup Java
+        uses: Wandalen/wretry.action@v3.7.2
         with:
           attempt_delay: 5000
           action: actions/setup-java@2dfa2011c5b2a0f1489bf9e433881c92c1631f88 # v4.3.0
           with: |
             distribution: "temurin"
             java-version: "17"
-      - uses: Wandalen/wretry.action@v3.7.2
+
+      - name: Setup nextflow
+        uses: Wandalen/wretry.action@v3.7.2
         with:
           attempt_delay: 5000
           action: nf-core/setup-nextflow@561fcfc7146dcb12e3871909b635ab092a781f34 # v2.0.0
