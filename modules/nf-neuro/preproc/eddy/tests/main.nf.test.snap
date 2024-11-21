@@ -1,0 +1,66 @@
+{
+    "eddy_full": {
+        "content": [
+            "test__dwi_corrected.nii.gz",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__dwi_eddy_corrected.bval:md5,4c61c53078316c31b4d5daf446a3d6ac"
+                ]
+            ],
+            "test__dwi_eddy_corrected.bvec",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__b0_bet_mask.nii.gz:md5,a1e4b4842cbdf57ab34d6803e64f8383"
+                ]
+            ],
+            [
+                "versions.yml:md5,137e3ce0fd25e5b16de2d8cc5a5aefca"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-21T19:52:21.761680879"
+    },
+    "eddy_light": {
+        "content": [
+            "test__dwi_corrected.nii.gz",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                ]
+            ],
+            "test__dwi_eddy_corrected.bvec",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__b0_bet_mask.nii.gz:md5,a1e4b4842cbdf57ab34d6803e64f8383"
+                ]
+            ],
+            [
+                "versions.yml:md5,137e3ce0fd25e5b16de2d8cc5a5aefca"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-21T19:53:14.315721034"
+    }
+}
