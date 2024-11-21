@@ -60,7 +60,7 @@ process PREPROC_N4 {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     N4BiasFieldCorrection -h
-    scil_dwi_apply_bias_field -h
+    scil_dwi_apply_bias_field.py -h
 
     touch ${prefix}__image_n4.nii.gz
 
