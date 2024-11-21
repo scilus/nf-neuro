@@ -2,7 +2,7 @@ process BETCROP_SYNTHBET {
     tag "$meta.id"
     label 'process_single'
 
-    container "freesurfer/synthstrip:latest"
+    container "freesurfer/freesurfer:7.4.1"
     containerOptions "--entrypoint ''"
 
     input:
@@ -33,7 +33,7 @@ process BETCROP_SYNTHBET {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        freesurfer: 7.4
+        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -48,7 +48,7 @@ process BETCROP_SYNTHBET {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        freesurfer: 7.4
+        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 }
