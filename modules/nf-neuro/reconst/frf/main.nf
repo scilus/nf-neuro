@@ -61,14 +61,14 @@ process RECONST_FRF {
 
         scil_dwi_extract_shell.py $dwi $bval $bvec $dti_shells \
                 dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells \
-                $dwi_shell_tolerance -f
+                $dwi_shell_tolerance -f -v
 
         scil_frf_ssst.py dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells ${prefix}__frf.txt \
-            $set_mask $fa $fa_min $nvox_min $roi_radius --b0_threshold $b0_thr_extract_b0
+            $set_mask $fa $fa_min $nvox_min $roi_radius --b0_threshold $b0_thr_extract_b0 -v
 
         if ( "$task.ext.set_frf" = true ); then
             scil_frf_set_diffusivities.py ${prefix}__frf.txt "${fix_frf}" \
-                ${prefix}__frf.txt -f
+                ${prefix}__frf.txt -f -v
         fi
 
     elif [ "$set_method" = "msmt" ]
@@ -76,21 +76,21 @@ process RECONST_FRF {
 
         scil_dwi_extract_shell.py $dwi $bval $bvec $fodf_shells \
             dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells \
-            $dwi_shell_tolerance -f
+            $dwi_shell_tolerance -f -v
 
         scil_frf_msmt.py dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells \
             ${prefix}__wm_frf.txt ${prefix}__gm_frf.txt ${prefix}__csf_frf.txt \
             $set_mask $set_wm_mask $set_gm_mask $set_csf_mask $fa_thr_wm $fa_thr_gm \
             $fa_thr_csf $md_thr_wm $md_thr_gm $md_thr_csf $nvox_min $roi_radius \
-            $dwi_shell_tolerance --dti_bval_limit $max_dti_shell_value
+            $dwi_shell_tolerance --dti_bval_limit $max_dti_shell_value -v
 
         if ( "$task.ext.set_frf" = true ); then
             scil_frf_set_diffusivities.py ${prefix}__wm_frf.txt "${fix_wm_frf}" \
-                ${prefix}__wm_frf.txt -f
+                ${prefix}__wm_frf.txt -f -v
             scil_frf_set_diffusivities.py ${prefix}__gm_frf.txt "${fix_gm_frf}" \
-                ${prefix}__gm_frf.txt -f
+                ${prefix}__gm_frf.txt -f -v
             scil_frf_set_diffusivities.py ${prefix}__csf_frf.txt "${fix_csf_frf}" \
-                ${prefix}__csf_frf.txt -f
+                ${prefix}__csf_frf.txt -f -v
         fi
 
     fi
