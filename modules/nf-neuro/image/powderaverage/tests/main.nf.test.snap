@@ -1,5 +1,5 @@
 {
-    "powderaverage - with mask": {
+    "powderaverage - with mask and shells": {
         "content": [
             {
                 "0": [
@@ -29,12 +29,12 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-07-26T12:43:21.971071"
+        "timestamp": "2024-11-22T17:09:05.483883967"
     },
-    "powderaverage - no mask": {
+    "powderaverage - no mask and no shell": {
         "content": [
             {
                 "0": [
@@ -43,7 +43,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_pwd_avg.nii.gz:md5,168d711e7b84fad327966ca3d49ede0f"
+                        "test_pwd_avg.nii.gz:md5,274a0826747914aa457c5a5363abffe5"
                     ]
                 ],
                 "1": [
@@ -55,7 +55,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_pwd_avg.nii.gz:md5,168d711e7b84fad327966ca3d49ede0f"
+                        "test_pwd_avg.nii.gz:md5,274a0826747914aa457c5a5363abffe5"
                     ]
                 ],
                 "versions": [
@@ -64,9 +64,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-07-25T14:32:47.643306"
+        "timestamp": "2024-11-22T17:09:00.254000809"
     }
 }
