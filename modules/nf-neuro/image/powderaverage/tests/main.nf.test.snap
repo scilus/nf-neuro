@@ -43,7 +43,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_pwd_avg.nii.gz:md5,274a0826747914aa457c5a5363abffe5"
+                        "test_pwd_avg.nii.gz:md5,168d711e7b84fad327966ca3d49ede0f"
                     ]
                 ],
                 "1": [
@@ -55,7 +55,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_pwd_avg.nii.gz:md5,274a0826747914aa457c5a5363abffe5"
+                        "test_pwd_avg.nii.gz:md5,168d711e7b84fad327966ca3d49ede0f"
                     ]
                 ],
                 "versions": [
@@ -67,6 +67,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-22T17:09:00.254000809"
+        "timestamp": "2024-11-22T19:45:06.796263708"
     }
 }

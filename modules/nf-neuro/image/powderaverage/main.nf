@@ -21,7 +21,7 @@ process IMAGE_POWDERAVERAGE {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     def b0_thr = task.ext.b0_thr ? "--b0_thr ${task.ext.b0_thr}" : ''
-    def shells = task.ext.shells ? "--shells ${task.ext.shells}" : "--shells \$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- $bval | awk -F' ' '{v=int(\$1)}{print v}' | uniq)"
+    def shells = task.ext.shells ? "--shells ${task.ext.shells}" : ''
     def shell_thr = task.ext.shell_thr ? "--shell_thr ${task.ext.shell_thr}" : ''
 
     if ( mask ) args += "--mask ${mask}"
@@ -32,7 +32,7 @@ process IMAGE_POWDERAVERAGE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -46,7 +46,7 @@ process IMAGE_POWDERAVERAGE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
