@@ -1,5 +1,3 @@
-
-
 process REGISTRATION_ANATTODWI {
     tag "$meta.id"
     label 'process_single'
@@ -57,7 +55,7 @@ process REGISTRATION_ANATTODWI {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -74,7 +72,7 @@ process REGISTRATION_ANATTODWI {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 }
