@@ -43,10 +43,10 @@ process BETCROP_CROPVOLUME {
 
     touch ${prefix}_${suffix}.nii.gz
 
-    if task.ext.output_bbox
-    do
+    if $task.ext.output_bbox;
+    then
         touch ${prefix}_${suffix}_bbox.pkl
-    done
+    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
