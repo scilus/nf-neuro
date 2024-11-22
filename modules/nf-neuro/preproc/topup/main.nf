@@ -75,6 +75,7 @@ process PREPROC_TOPUP {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def prefix_topup = task.ext.prefix_topup ? task.ext.prefix_topup : ""
 
     """
     scil_volume_math.py -h
