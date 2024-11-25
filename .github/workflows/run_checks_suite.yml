@@ -157,6 +157,8 @@ jobs:
           - runner: scilus-nf-neuro-bigmem-runners
             path: modules/nf-neuro/segmentation/synthseg
           - runner: scilus-nf-neuro-bigmem-runners
+            path: modules/nf-neuro/betcrop/synthbet
+          - runner: scilus-nf-neuro-bigmem-runners
             path: modules/nf-neuro/registration/synthregistration
           - runner: scilus-nf-neuro-bigmem-runners
             path: subworkflows/nf-neuro/preproc_t1
