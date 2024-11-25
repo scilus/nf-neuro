@@ -21,7 +21,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,f0a96d8fd7ca9d9935818dceaf91f457"
+                    "versions.yml:md5,c639461870ca534b5105f61d672f740f"
                 ],
                 "bet_image": [
                     [
@@ -42,14 +42,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,f0a96d8fd7ca9d9935818dceaf91f457"
+                    "versions.yml:md5,c639461870ca534b5105f61d672f740f"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-06-11T14:52:54.970673"
+        "timestamp": "2024-11-25T18:19:01.459548926"
     }
 }
