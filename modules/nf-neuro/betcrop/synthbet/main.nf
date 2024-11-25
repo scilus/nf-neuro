@@ -2,8 +2,7 @@ process BETCROP_SYNTHBET {
     tag "$meta.id"
     label 'process_single'
 
-container "freesurfer/freesurfer:7.4.1"
-    containerOptions "--entrypoint ''"
+    container "freesurfer/freesurfer:7.4.1"
 
     input:
     tuple val(meta), path(image), path(weights) /* optional, input = [] */
