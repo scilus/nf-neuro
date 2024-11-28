@@ -34,7 +34,7 @@ process RECONST_FRF {
     def dti_shells = task.ext.dti_shells ?: "\$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- $bval | awk -F' ' '{v=int(\$1)}{if(v<=$max_dti_shell_value|| v<=$b0_thr_extract_b0)print v}' | uniq)"
     def fodf_shells = task.ext.fodf_shells ? "0 " + task.ext.fodf_shells : "\$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- $bval | awk -F' ' '{v=int(\$1)}{if(v>=$min_fodf_shell_value|| v<=$b0_thr_extract_b0)print v}' | uniq)"
     def set_method = task.ext.method ? task.ext.method : "ssst"
-    def precision = task.ext.precision ? "--precision " + task.ext.precision : "ssst"
+    def precision = task.ext.precision ? "--precision " + task.ext.precision : ""
 
     def fa_thr_wm = task.ext.fa_thr_wm ? "--fa_thr_wm " + task.ext.fa_thr_wm : ""
     def fa_thr_gm = task.ext.fa_thr_gm ? "--fa_thr_gm " + task.ext.fa_thr_gm : ""
