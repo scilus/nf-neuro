@@ -14,7 +14,7 @@ keywords:
   - Local Model
   - Reconst
 tools:
-  - "Scilpy":
+  - "scilpy":
       description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
 
@@ -145,6 +145,11 @@ output:
       type: file
       description: Number of Fiber Orientation (NuFO) map.
       pattern: "*nufo.nii.gz"
+
+  - vent_mask:
+      type: file
+      description: Ventricule mask estimated from an MD and FA threshold.
+      pattern: "*ventricles_mask.nii.gz"
 
   - versions:
       type: file

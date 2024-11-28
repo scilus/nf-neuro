@@ -24,7 +24,9 @@ nextflow_process {
         }
     }
 
-    test("powderaverage - no mask") {
+    test("powderaverage - no mask and no shell") {
+
+        config "./nextflow_noshells.config"
 
         when {
             process {
@@ -49,9 +51,9 @@ nextflow_process {
         }
     }
 
-    test("powderaverage - with mask") {
+    test("powderaverage - with mask and shells") {
 
-        config "./nextflow.config"
+        config "./nextflow_shells.config"
 
         when {
             process {
