@@ -9,9 +9,9 @@ keywords:
   - convert
   - datatype
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
+  - "MRtrix3":
+      description: "MRtrix3 is a software package for various types of diffusion imaging data, including diffusion-weighted, diffusion-tensor, and q-ball imaging."
+      homepage: "https://www.mrtrix.org/"
 
 input:
   - meta:

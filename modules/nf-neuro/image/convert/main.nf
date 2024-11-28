@@ -2,9 +2,7 @@ process IMAGE_CONVERT {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "mrtrix3/mrtrix3:latest"
 
     input:
     tuple val(meta), path(image)
@@ -19,15 +17,15 @@ process IMAGE_CONVERT {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def datatype = task.ext.datatype ? "--data_type ${task.ext.datatype}" : '' // REQUIRED.
+    def datatype = task.ext.datatype ? "-datatype ${task.ext.datatype}" : '' // REQUIRED.
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_${task.ext.datatype}_converted" : "${task.ext.datatype}_converted"
 
     """
-    scil_volume_math.py convert $image ${prefix}_${suffix}.nii.gz $datatype
+    mrconvert $image ${prefix}_${suffix}.nii.gz $datatype -nthreads $task.cpus
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrconvert: \$(mrconvert -version 2>&1 | sed -n 's/== mrconvert \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """
 
@@ -41,7 +39,7 @@ process IMAGE_CONVERT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrconvert: \$(mrconvert -version 2>&1 | sed -n 's/== mrconvert \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """
 }
