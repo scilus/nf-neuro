@@ -6,7 +6,7 @@ process RECONST_FRF {
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        'scilus/scilus:dev' }"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(wm_mask), path(gm_mask), path(csf_mask)
@@ -64,11 +64,11 @@ process RECONST_FRF {
                 $dwi_shell_tolerance -f -v
 
         scil_frf_ssst.py dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells ${prefix}__frf.txt \
-            $set_mask $fa $fa_min $nvox_min $roi_radius --b0_threshold $b0_thr_extract_b0 -v
+            $set_mask $fa $fa_min $nvox_min $roi_radius --b0_threshold $b0_thr_extract_b0 --precision 4 -v
 
         if ( "$task.ext.set_frf" = true ); then
             scil_frf_set_diffusivities.py ${prefix}__frf.txt "${fix_frf}" \
-                ${prefix}__frf.txt -f -v
+                ${prefix}__frf.txt --precision 4 -f -v
         fi
 
     elif [ "$set_method" = "msmt" ]
@@ -82,15 +82,15 @@ process RECONST_FRF {
             ${prefix}__wm_frf.txt ${prefix}__gm_frf.txt ${prefix}__csf_frf.txt \
             $set_mask $set_wm_mask $set_gm_mask $set_csf_mask $fa_thr_wm $fa_thr_gm \
             $fa_thr_csf $md_thr_wm $md_thr_gm $md_thr_csf $nvox_min $roi_radius \
-            $dwi_shell_tolerance --dti_bval_limit $max_dti_shell_value -v
+            $dwi_shell_tolerance --dti_bval_limit $max_dti_shell_value --precision 4 -v
 
         if ( "$task.ext.set_frf" = true ); then
             scil_frf_set_diffusivities.py ${prefix}__wm_frf.txt "${fix_wm_frf}" \
-                ${prefix}__wm_frf.txt -f -v
+                ${prefix}__wm_frf.txt --precision 4 -f -v
             scil_frf_set_diffusivities.py ${prefix}__gm_frf.txt "${fix_gm_frf}" \
-                ${prefix}__gm_frf.txt -f -v
+                ${prefix}__gm_frf.txt --precision 4 -f -v
             scil_frf_set_diffusivities.py ${prefix}__csf_frf.txt "${fix_csf_frf}" \
-                ${prefix}__csf_frf.txt -f -v
+                ${prefix}__csf_frf.txt --precision 4 -f -v
         fi
 
     fi
