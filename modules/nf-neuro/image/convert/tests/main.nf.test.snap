@@ -1,4 +1,16 @@
 {
+    "versions": {
+        "content": [
+            [
+                "versions.yml:md5,a7c7bc13cd65656aa5c6c2f6abefb34f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-28T01:01:14.178138887"
+    },
     "Image convert - uint8": {
         "content": [
             {
