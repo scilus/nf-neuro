@@ -159,4 +159,33 @@ nextflow_process {
 
     }
 
+    test("image - resample - stub-run") {
+
+        options '-stub-run'
+
+        config "./nextflow_voxsize.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/fa.nii.gz"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
 }
