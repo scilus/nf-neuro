@@ -3,13 +3,13 @@
         "content": [
             "test__recon_all",
             [
-                "versions.yml:md5,12027dd965b94e4d68b7e8a630a04d00"
+                "versions.yml:md5,2a7185588fa8c664d53c4c08637285e6"
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-05-21T18:19:43.835172"
+        "timestamp": "2024-11-22T19:24:52.417991457"
     }
 }

@@ -30,7 +30,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.0"
         },
-        "timestamp": "2024-11-21T23:15:47.377340169"
+        "timestamp": "2024-11-25T18:23:03.990173398"
     },
     "preproc_t1_option": {
         "content": [
@@ -63,7 +63,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.0"
         },
-        "timestamp": "2024-11-21T23:15:14.678195702"
+        "timestamp": "2024-11-25T18:22:27.118657583"
     },
     "preproc_t1_classic": {
         "content": [

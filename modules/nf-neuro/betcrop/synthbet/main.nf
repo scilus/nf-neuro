@@ -3,7 +3,6 @@ process BETCROP_SYNTHBET {
     label 'process_single'
 
     container "freesurfer/freesurfer:7.4.1"
-    containerOptions "--entrypoint ''"
 
     input:
     tuple val(meta), path(image), path(weights) /* optional, input = [] */
