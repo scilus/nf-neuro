@@ -34,6 +34,7 @@ process RECONST_FRF {
     def dti_shells = task.ext.dti_shells ?: "\$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- $bval | awk -F' ' '{v=int(\$1)}{if(v<=$max_dti_shell_value|| v<=$b0_thr_extract_b0)print v}' | uniq)"
     def fodf_shells = task.ext.fodf_shells ? "0 " + task.ext.fodf_shells : "\$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- $bval | awk -F' ' '{v=int(\$1)}{if(v>=$min_fodf_shell_value|| v<=$b0_thr_extract_b0)print v}' | uniq)"
     def set_method = task.ext.method ? task.ext.method : "ssst"
+    def precision = task.ext.precision ? "--precision " + task.ext.precision : "ssst"
 
     def fa_thr_wm = task.ext.fa_thr_wm ? "--fa_thr_wm " + task.ext.fa_thr_wm : ""
     def fa_thr_gm = task.ext.fa_thr_gm ? "--fa_thr_gm " + task.ext.fa_thr_gm : ""
@@ -64,11 +65,11 @@ process RECONST_FRF {
                 $dwi_shell_tolerance -f -v
 
         scil_frf_ssst.py dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells ${prefix}__frf.txt \
-            $set_mask $fa $fa_min $nvox_min $roi_radius --b0_threshold $b0_thr_extract_b0 --precision 4 -v
+            $set_mask $fa $fa_min $nvox_min $roi_radius --b0_threshold $b0_thr_extract_b0 $precision -v
 
         if ( "$task.ext.set_frf" = true ); then
             scil_frf_set_diffusivities.py ${prefix}__frf.txt "${fix_frf}" \
-                ${prefix}__frf.txt --precision 4 -f -v
+                ${prefix}__frf.txt $precision -f -v
         fi
 
     elif [ "$set_method" = "msmt" ]
@@ -82,15 +83,15 @@ process RECONST_FRF {
             ${prefix}__wm_frf.txt ${prefix}__gm_frf.txt ${prefix}__csf_frf.txt \
             $set_mask $set_wm_mask $set_gm_mask $set_csf_mask $fa_thr_wm $fa_thr_gm \
             $fa_thr_csf $md_thr_wm $md_thr_gm $md_thr_csf $nvox_min $roi_radius \
-            $dwi_shell_tolerance --dti_bval_limit $max_dti_shell_value --precision 4 -v
+            $dwi_shell_tolerance --dti_bval_limit $max_dti_shell_value $precision -v
 
         if ( "$task.ext.set_frf" = true ); then
             scil_frf_set_diffusivities.py ${prefix}__wm_frf.txt "${fix_wm_frf}" \
-                ${prefix}__wm_frf.txt --precision 4 -f -v
+                ${prefix}__wm_frf.txt $precision -f -v
             scil_frf_set_diffusivities.py ${prefix}__gm_frf.txt "${fix_gm_frf}" \
-                ${prefix}__gm_frf.txt --precision 4 -f -v
+                ${prefix}__gm_frf.txt $precision -f -v
             scil_frf_set_diffusivities.py ${prefix}__csf_frf.txt "${fix_csf_frf}" \
-                ${prefix}__csf_frf.txt --precision 4 -f -v
+                ${prefix}__csf_frf.txt $precision -f -v
         fi
 
     fi
