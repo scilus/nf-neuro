@@ -1,4 +1,16 @@
 {
+    "image - resample - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,06181e25531a3ebdefdfd2e641a3d645"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-28T18:48:51.114688771"
+    },
     "image - resample - isomin": {
         "content": [
             {
@@ -113,7 +125,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_resampled.nii.gz:md5,6ffdabab138186db2dab6f98ea6e9ffb"
+                        "test_voxsize_resampled.nii.gz:md5,6ffdabab138186db2dab6f98ea6e9ffb"
                     ]
                 ],
                 "1": [
@@ -125,7 +137,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_resampled.nii.gz:md5,6ffdabab138186db2dab6f98ea6e9ffb"
+                        "test_voxsize_resampled.nii.gz:md5,6ffdabab138186db2dab6f98ea6e9ffb"
                     ]
                 ],
                 "versions": [
@@ -137,7 +149,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T15:29:55.01735"
+        "timestamp": "2024-11-28T18:31:36.84484801"
     },
     "image - resample - ref": {
         "content": [
