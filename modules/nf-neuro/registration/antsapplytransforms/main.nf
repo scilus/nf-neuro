@@ -7,7 +7,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
         'scilus/scilus:2.0.2' }"
 
     input:
-    tuple val(meta), path(image), path(reference), path(transform)
+    tuple val(meta), path(image), path(reference), path(warp), path(affine)
 
     output:
     tuple val(meta), path("*__warped.nii.gz")   , emit: warped_image
@@ -17,9 +17,8 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_warped" : "warped"
+    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "warped"
 
     def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : ""
     def image_type = task.ext.image_type ? "-e " + task.ext.image_type : ""
@@ -37,24 +36,20 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
                         -r $reference\
                         -o ${prefix}__${suffix}.nii.gz\
                         $interpolation\
-                        -t $transform\
+                        -t $warp $affine\
+                        $image_type\
+                        $default_val\
+                        $output_dtype
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_warped" : "warped"
-
-    def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : ""
-    def image_type = task.ext.image_type ? "-e " + task.ext.image_type : ""
-    def interpolation = task.ext.interpolation ? "-n " + task.ext.interpolation : ""
-    def output_dtype = task.ext.output_dtype ? "-u " + task.ext.output_dtype : ""
-    def default_val = task.ext.default_val ? "-f " + task.ext.default_val : ""
+    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "warped"
 
     """
     antsApplyTransforms -h
@@ -63,7 +58,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 }
