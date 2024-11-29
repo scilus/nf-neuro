@@ -80,7 +80,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__bval_eddy:md5,4c61c53078316c31b4d5daf446a3d6ac"
+                    "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
                 ]
             ],
             [
@@ -105,8 +105,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-01T12:52:20.01295441"
+        "timestamp": "2024-11-29T13:47:57.561745796"
     }
 }
