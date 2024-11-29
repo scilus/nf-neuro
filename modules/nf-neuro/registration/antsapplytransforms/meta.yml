@@ -27,10 +27,15 @@ input:
       description: Reference image for registration
       pattern: "*.{nii.nii.gz}"
 
-  - transform:
+  - warp:
       type: file
-      description: file or tuple of files, transformation file(s) to warp image or trk (*mat or [nii Warp, mat file]). If a rigid or affine transformation needs to be inverted before being applied, use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this module does not handles it.
-      pattern: "*.{nii,nii.gz,mat}"
+      description: Warp transformation file to warp image or trk.
+      pattern: "*.{nii,nii.gz}"
+
+  - affine:
+      type: file
+      description: Affine or rigig transformation file to warp image or trk (*mat). If a rigid or affine transformation needs to be inverted before being applied, use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this module does not handles it.
+      pattern: "*.mat"
 
 output:
   - meta:
