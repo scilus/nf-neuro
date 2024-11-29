@@ -52,7 +52,7 @@ process SEGMENTATION_FSRECONALL {
     # Finish
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        freesurfer: \$(recon-all -version)
+        freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -65,7 +65,7 @@ process SEGMENTATION_FSRECONALL {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        freesurfer: \$(recon-all -version)
+        freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 }

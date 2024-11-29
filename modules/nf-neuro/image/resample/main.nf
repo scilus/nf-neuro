@@ -19,7 +19,7 @@ process IMAGE_RESAMPLE {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = task.ext.suffix ? "${task.ext.first_suffix}_resampled" : "resampled"
+    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_resampled" : "resampled"
     def reference = "$ref" ? "--ref $ref" : ""
     def voxel_size = task.ext.voxel_size ? "--voxel_size " + task.ext.voxel_size : ""
     def volume_size = task.ext.volume_size ? "--volume_size " + task.ext.volume_size : ""
@@ -46,7 +46,7 @@ process IMAGE_RESAMPLE {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = task.ext.suffix ? "${task.ext.first_suffix}_resampled" : "resampled"
+    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_resampled" : "resampled"
     """
     scil_volume_resample.py -h
 
