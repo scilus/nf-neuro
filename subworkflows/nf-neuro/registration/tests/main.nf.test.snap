@@ -4,7 +4,7 @@
             "test__output_warped.nii.gz",
             "test__deform_warp.nii.gz",
             [
-                "versions.yml:md5,8d0f503c670198b4448f5db719d089bc"
+                "versions.yml:md5,1c783c1c2568810f4a9cc7dc7e2b850e"
             ]
         ],
         "meta": {
