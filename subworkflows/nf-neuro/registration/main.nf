@@ -1,16 +1,18 @@
 include { REGISTRATION_ANATTODWI  } from '../../../modules/nf-neuro/registration/anattodwi/main'
 include { REGISTRATION_ANTS   } from '../../../modules/nf-neuro/registration/ants/main'
 include { REGISTRATION_EASYREG   } from '../../../modules/nf-neuro/registration/easyreg/main'
+include { REGISTRATION_SYNTHREGISTRATION } from '../../../modules/nf-neuro/registration/synthregistration/main'
 
-params.run_easyreg = false
+params.run_easyreg      = false
+params.run_synthmorph   = false
 
 workflow REGISTRATION {
 
     // ** The subworkflow requires at least ch_image and ch_ref as inputs to ** //
     // ** properly perform the registration. Supplying a ch_metric will select ** //
     // ** the REGISTRATION_ANATTODWI module meanwhile NOT supplying a ch_metric ** //
-    // ** will select the REGISTRATION_ANTS (SyN or SyNQuick) module.Alternatively, ** //
-    // ** NOT supplying ch_metric and activating run_surgery flag with select REGISTRATION_EASYREG ** //
+    // ** will select the REGISTRATION_ANTS (SyN or SyNQuick) module. Alternatively, ** //
+    // ** NOT supplying ch_metric and activating alternative module flag with select REGISTRATION_EASYREG or REGISTRATION_SYNTHMORPH ** //
 
     take:
         ch_image                  // channel: [ val(meta), [ image ] ]
@@ -47,6 +49,23 @@ workflow REGISTRATION {
             out_segmentation = ch_segmentation.mix( REGISTRATION_EASYREG.out.flo_seg )
             out_ref_segmentation = ch_ref_segmentation.mix( REGISTRATION_EASYREG.out.ref_seg )
 
+        }
+
+        else if ( params.run_synthmorph ) {
+            // ** Set up input channel ** //
+            ch_register = ch_image.join(ch_ref)
+
+            // ** Registration using synthmorph ** //
+            REGISTRATION_SYNTHREGISTRATION ( ch_register )
+            ch_versions = ch_versions.mix(REGISTRATION_SYNTHREGISTRATION.out.versions.first())
+
+            // ** Setting outputs ** //
+            image_warped = REGISTRATION_SYNTHREGISTRATION.out.warped_image
+            transfo_image = REGISTRATION_SYNTHREGISTRATION.out.transfo_image
+            transfo_trk = Channel.empty()
+            ref_warped = Channel.empty()
+            out_segmentation = Channel.empty()
+            out_ref_segmentation = Channel.empty()
         }
 
         else {
