@@ -8,7 +8,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__bval_eddy:md5,4c61c53078316c31b4d5daf446a3d6ac"
+                    "test__dwi_eddy_corrected.bval:md5,4c61c53078316c31b4d5daf446a3d6ac"
                 ]
             ],
             "test__dwi_eddy_corrected.bvec",
@@ -29,7 +29,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-01T15:17:57.039667492"
+        "timestamp": "2024-11-21T19:52:21.761680879"
     },
     "eddy_light": {
         "content": [
@@ -40,7 +40,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__bval_eddy:md5,8192e97b08e8032382397bb844b31892"
+                    "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
                 ]
             ],
             "test__dwi_eddy_corrected.bvec",
@@ -61,6 +61,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-01T15:47:48.241855619"
+        "timestamp": "2024-11-21T19:53:14.315721034"
     }
 }

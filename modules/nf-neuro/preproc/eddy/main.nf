@@ -10,11 +10,11 @@ process PREPROC_EDDY {
         tuple val(meta), path(dwi), path(bval), path(bvec), path(rev_dwi), path(rev_bval), path(rev_bvec), path(corrected_b0s), path(topup_fieldcoef), path(topup_movpart)
 
     output:
-        tuple val(meta), path("*__dwi_corrected.nii.gz")   , emit: dwi_corrected
-        tuple val(meta), path("*__bval_eddy")              , emit: bval_corrected
-        tuple val(meta), path("*__dwi_eddy_corrected.bvec"), emit: bvec_corrected
-        tuple val(meta), path("*__b0_bet_mask.nii.gz")     , emit: b0_mask
-        path "versions.yml"                                , emit: versions
+        tuple val(meta), path("*__dwi_corrected.nii.gz")    , emit: dwi_corrected
+        tuple val(meta), path("*__dwi_eddy_corrected.bval") , emit: bval_corrected
+        tuple val(meta), path("*__dwi_eddy_corrected.bvec") , emit: bvec_corrected
+        tuple val(meta), path("*__b0_bet_mask.nii.gz")      , emit: b0_mask
+        path "versions.yml"                                 , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -38,6 +38,7 @@ process PREPROC_EDDY {
     export OMP_NUM_THREADS=$task.cpus
     export OPENBLAS_NUM_THREADS=1
     export ANTS_RANDOM_SEED=7468
+    export MRTRIX_RNG_SEED=12345
 
     orig_bval=$bval
     # Concatenate DWIs
@@ -98,9 +99,9 @@ process PREPROC_EDDY {
     if [[ \$number_rev_dwi -eq 0 ]]
     then
         mv dwi_eddy_corrected.eddy_rotated_bvecs ${prefix}__dwi_eddy_corrected.bvec
-        mv \${orig_bval} ${prefix}__bval_eddy
+        mv \${orig_bval} ${prefix}__dwi_eddy_corrected.bval
     else
-        scil_gradients_validate_correct_eddy.py dwi_eddy_corrected.eddy_rotated_bvecs \${bval} \${number_rev_dwi} ${prefix}__dwi_eddy_corrected.bvec ${prefix}__bval_eddy
+        scil_gradients_validate_correct_eddy.py dwi_eddy_corrected.eddy_rotated_bvecs \${bval} \${number_rev_dwi} ${prefix}__dwi_eddy_corrected.bvec ${prefix}__dwi_eddy_corrected.bval
     fi
 
 
@@ -128,7 +129,7 @@ process PREPROC_EDDY {
     scil_header_print_info.py -h
 
     touch ${prefix}__dwi_corrected.nii.gz
-    touch ${prefix}__bval_eddy
+    touch ${prefix}__dwi_eddy_corrected.bval
     touch ${prefix}__dwi_eddy_corrected.bvec
     touch ${prefix}__b0_bet_mask.nii.gz
 
