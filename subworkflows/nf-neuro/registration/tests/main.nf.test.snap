@@ -1,18 +1,4 @@
 {
-    "registration - synthregistration": {
-        "content": [
-            "test__output_warped.nii.gz",
-            "test__deform_warp.nii.gz",
-            [
-                "versions.yml:md5,1c783c1c2568810f4a9cc7dc7e2b850e"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
-        },
-        "timestamp": "2024-10-30T18:22:51.835424696"
-    },
     "registration - easyreg": {
         "content": [
             "test_floating_registered.nii.gz",
@@ -44,7 +30,7 @@
                     ]
                 ],
                 "1": [
-
+                    
                 ],
                 "2": [
                     [
@@ -67,10 +53,10 @@
                     ]
                 ],
                 "4": [
-
+                    
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
                     "versions.yml:md5,9c255f4c751382be7bf6fe6ffb0d635d"
@@ -85,13 +71,13 @@
                     ]
                 ],
                 "ref_segmentation": [
-
+                    
                 ],
                 "ref_warped": [
-
+                    
                 ],
                 "segmentation": [
-
+                    
                 ],
                 "transfo_image": [
                     [
@@ -137,7 +123,7 @@
                     ]
                 ],
                 "1": [
-
+                    
                 ],
                 "2": [
                     [
@@ -164,10 +150,10 @@
                     ]
                 ],
                 "4": [
-
+                    
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
                     "versions.yml:md5,9fe7f597ac6c76efff8851f9b672f17b"
@@ -182,13 +168,13 @@
                     ]
                 ],
                 "ref_segmentation": [
-
+                    
                 ],
                 "ref_warped": [
-
+                    
                 ],
                 "segmentation": [
-
+                    
                 ],
                 "transfo_image": [
                     [
@@ -223,6 +209,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-31T19:42:16.225779061"
+        "timestamp": "2024-10-25T09:19:43.397585"
     }
 }

@@ -2,15 +2,16 @@
     "registration - synthregistration": {
         "content": [
             "test__output_warped.nii.gz",
+            "test__affine_warp.lta",
             "test__deform_warp.nii.gz",
             [
-                "versions.yml:md5,34dacaa82c0a03ab111bdfe8f1d692f7"
+                "versions.yml:md5,49fb9c85da9f696926d1ab46ef0968fb"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T18:08:53.765658701"
+        "timestamp": "2024-10-01T22:36:18.972035"
     }
 }
