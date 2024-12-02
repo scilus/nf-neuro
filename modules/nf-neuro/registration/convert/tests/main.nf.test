@@ -41,8 +41,8 @@ nextflow_process {
                 ch_transforms = ch_split_test_data.transforms.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/fs_affine.lta"),
                         file("\${test_data_directory}/fs_deform.nii.gz"),
+                        []
                     ]
                 }
                 ch_reslice = ch_split_test_data.reslice.map{
@@ -50,6 +50,54 @@ nextflow_process {
                         [ id:'test' ],
                         file("\${test_data_directory}/t1_reslice.nii.gz"),
                         []
+                    ]
+                }
+                ch_freesurfer = ch_split_test_data.freesurfer.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/license.txt")
+                    ]
+                }
+                input[0] = ch_transforms
+                    .join(ch_reslice)
+                    .join(ch_freesurfer)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("registration - convert - affine") {
+
+        config "./nextflow_default.config"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        freesurfer: it.simpleName == "freesurfer"
+                        reslice: it.simpleName == "freesurfer_reslice"
+                        transforms: it.simpleName == "freesurfer_transforms"
+                    }
+                ch_transforms = ch_split_test_data.transforms.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/fs_deform.nii.gz"),
+                        file("\${test_data_directory}/fs_affine.lta")
+                    ]
+                }
+                ch_reslice = ch_split_test_data.reslice.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_reslice.nii.gz"),
+                        file("\${test_data_directory}/fa_reslice.nii.gz")
                     ]
                 }
                 ch_freesurfer = ch_split_test_data.freesurfer.map{
@@ -89,8 +137,8 @@ nextflow_process {
                 ch_transforms = ch_split_test_data.transforms.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/fs_affine.lta"),
-                        file("\${test_data_directory}/fs_deform.nii.gz")
+                        file("\${test_data_directory}/fs_deform.nii.gz"),
+                        file("\${test_data_directory}/fs_affine.lta")
                     ]
                 }
                 ch_reslice = ch_split_test_data.reslice.map{
@@ -137,8 +185,8 @@ nextflow_process {
                 ch_transforms = ch_split_test_data.transforms.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/fsl_affine.mat"),
-                        file("\${test_data_directory}/fsl_deform.nii.gz")
+                        file("\${test_data_directory}/fsl_deform.nii.gz"),
+                        file("\${test_data_directory}/fsl_affine.mat")
                     ]
                 }
                 ch_reslice = ch_split_test_data.reslice.map{
@@ -189,8 +237,8 @@ nextflow_process {
                 ch_transforms = ch_split_test_data.transforms.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/fsl_affine.mat"),
-                        file("\${test_data_directory}/fsl_deform.nii.gz")
+                        file("\${test_data_directory}/fsl_deform.nii.gz"),
+                        file("\${test_data_directory}/fsl_affine.mat")
                     ]
                 }
                 ch_reslice = ch_split_test_data.reslice.map{
@@ -237,8 +285,8 @@ nextflow_process {
                 ch_transforms = ch_split_test_data.transforms.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/ants_affine.txt"),
-                        file("\${test_data_directory}/ants_deform.nii.gz")
+                        file("\${test_data_directory}/ants_deform.nii.gz"),
+                        file("\${test_data_directory}/ants_affine.txt")
                     ]
                 }
                 ch_reslice = ch_split_test_data.reslice.map{
