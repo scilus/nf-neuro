@@ -19,23 +19,38 @@ workflow TOPUP_EDDY {
         ch_versions = Channel.empty()
 
         // ** Create channel for TOPUP ** //
+        // Input : [ meta, dwi, bval, bvec, b0 | [], rev-dwi | [], rev-bval | [], rev-bvec | [], rev-b0 | [] ]
+        //  - join [ meta, dwi, bval, bvec, b0 | null ]
+        //  - map  [ meta, dwi, bval, bvec, b0 | [] ]
+        //  - join [ meta, dwi, bval, bvec, b0 | [] ] + [ rev-dwi, rev-bval, rev-bvec ] | [ null ]
+        //  - map  [ meta, dwi, bval, bvec, b0 | [], rev-dwi | [], rev-bval | [], rev-bvec | [] ]
+        //  - join [ meta, dwi, bval, bvec, b0 | [], rev-dwi | [], rev-bval | [], rev-bvec | [], rev-b0 | null ]
+        //  - map  [ meta, dwi, bval, bvec, b0 | [], rev-dwi | [], rev-bval | [], rev-bvec | [], rev-b0 | [] ]
+        //
+        // Final filter ensures DWI comes with either a rev-dwi (index 5) or a rev-b0 (index 8)
         ch_topup = ch_dwi
             .join(ch_b0, remainder: true)
             .map{ it[0..3] + [it[4] ?: []] }
-
-        ch_topup = ch_topup
             .join(ch_rev_dwi, remainder: true)
             .map{ it[5] ? it : it[0..4] + [[], [], []] }
             .join(ch_rev_b0, remainder: true)
-            .branch{
-                with_topup: it[5] || it[8]
-            }
+            .map{ it[0..7] + [it[8] ?: []] }
+            .filter{ it[5] || it[8] }
 
         // ** RUN TOPUP ** //
-        PREPROC_TOPUP ( ch_topup.with_topup, ch_config_topup )
+        PREPROC_TOPUP ( ch_topup, ch_config_topup )
         ch_versions = ch_versions.mix(PREPROC_TOPUP.out.versions.first())
 
         // ** Create channel for EDDY ** //
+        // Input : [ meta, dwi, bval, bvec, rev-dwi | [], rev-bval | [], rev-bvec | [], b0 | [], coeffs | [], movpar | [] ]
+        //  - join [ meta, dwi, bval, bvec ] + [ rev-dwi, rev-bval, rev-bvec ] | [ null ]
+        //  - map  [ meta, dwi, bval, bvec, rev-dwi | [], rev-bval | [], rev-bvec | [] ]
+        //  - join [ meta, dwi, bval, bvec, rev-dwi | [], rev-bval | [], rev-bvec | [], b0 | null ]
+        //  - map  [ meta, dwi, bval, bvec, rev-dwi | [], rev-bval | [], rev-bvec | [], b0 | [] ]
+        //  - join [ meta, dwi, bval, bvec, rev-dwi | [], rev-bval | [], rev-bvec | [], b0 | [], coeffs | null ]
+        //  - map  [ meta, dwi, bval, bvec, rev-dwi | [], rev-bval | [], rev-bvec | [], b0 | [], coeffs | [] ]
+        //  - join [ meta, dwi, bval, bvec, rev-dwi | [], rev-bval | [], rev-bvec | [], b0 | [], coeffs | [], movpar | null ]
+        //  - map  [ meta, dwi, bval, bvec, rev-dwi | [], rev-bval | [], rev-bvec | [], b0 | [], coeffs | [], movpar | [] ]
         ch_eddy_input = ch_dwi
             .join(ch_rev_dwi, remainder: true)
             .map{ it[0..3] + [it[4] ? it[4..-1] : [], [], []] }
