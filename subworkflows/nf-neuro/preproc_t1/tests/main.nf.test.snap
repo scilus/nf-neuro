@@ -70,8 +70,8 @@
             "test__denoised.nii.gz:md5:header,a7ee0e819007aba98d14f7a145b550e6,data,2e21433e2bcd4de2a6b6167c6233cd40",
             "test__image_n4.nii.gz:md5:header,e7cfbd06624321d70cbd667a77315ba3,data,a81e98f32ed963c098ccb07486101898",
             "test_resampled.nii.gz:md5:header,7628a07204938d640c3530fa3d76d2b7,data,a81e98f32ed963c098ccb07486101898",
-            "test__t1_bet.nii.gz:md5:header,84eb3a5699de115c7f32b67d18479f4f,data,f8f5d5715026511032df083e27ee83dd",
-            "test__t1_bet_mask.nii.gz:md5:header,a8b3a7e58c811c1542529a73d1ab977d,data,a31e513e6fdf0ac788001c7da89e71bd",
+            "test__t1_bet.nii.gz:md5:header,84eb3a5699de115c7f32b67d18479f4f,data,350351a925b241d9d42a77607d1697b5",
+            "test__t1_bet_mask.nii.gz:md5:header,a8b3a7e58c811c1542529a73d1ab977d,data,12927a92f6e860429ed05cf9a0a2175e",
             [
                 [
                     {
@@ -81,8 +81,8 @@
                     "test_t1_cropped_bbox.pkl:md5,3ad48fac10852756283b88c31b02557d"
                 ]
             ],
-            "test_cropped.nii.gz:md5:header,8b4ac0737584269dd69d3fd81ddcbb48,data,9aac180400c21340109c501ce76e2934",
-            "test_t1_cropped.nii.gz:md5:header,45268f5e9fe9e298e96be4478871e6e8,data,8bb543d9aeec863298a20e9a56c95e56",
+            "test_cropped.nii.gz:md5:header,8b4ac0737584269dd69d3fd81ddcbb48,data,a36f9bb4d1bf28638abe4ff8b6fefcf0",
+            "test_t1_cropped.nii.gz:md5:header,45268f5e9fe9e298e96be4478871e6e8,data,9889db71508130cfa45c3e573d4d0242",
             [
                 "versions.yml:md5,19aaa24cf046e49a4ad4ce5d507ea8aa",
                 "versions.yml:md5,37229cd5cee6f6788fbc9083d6618c61",
@@ -96,6 +96,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-28T19:51:06.227182958"
+        "timestamp": "2024-12-02T16:49:45.574227522"
     }
 }
