@@ -43,19 +43,13 @@ workflow PREPROC_T1 {
         ch_versions = ch_versions.mix(PREPROC_N4.out.versions.first())
 
         // ** Resampling ** //
-        ch_resampling = PREPROC_N4.out.image
-            .join(ch_ref_resample, remainder: true)
-            .map{ it[0..1] + [it[2] ?: []] }
-
+        ch_resampling = PREPROC_N4.out.image.join(ch_ref_resample)
         IMAGE_RESAMPLE ( ch_resampling )
         ch_versions = ch_versions.mix(IMAGE_RESAMPLE.out.versions.first())
 
         // ** Brain extraction ** //
         if ( params.run_synthbet) {
-            ch_bet = IMAGE_RESAMPLE.out.image
-                .join(ch_weights, remainder: true)
-                .map{ it[0..1] + [it[2] ?: []] }
-
+            ch_bet = IMAGE_RESAMPLE.out.image.join(ch_weights)
             BETCROP_SYNTHBET ( ch_bet )
             ch_versions = ch_versions.mix(BETCROP_SYNTHBET.out.versions.first())
 
@@ -65,10 +59,7 @@ workflow PREPROC_T1 {
         }
 
         else {
-            ch_bet = IMAGE_RESAMPLE.out.image
-                .join(ch_template)
-                .join(ch_probability_map)
-
+            ch_bet = IMAGE_RESAMPLE.out.image.join(ch_template).join(ch_probability_map)
             BETCROP_ANTSBET ( ch_bet )
             ch_versions = ch_versions.mix(BETCROP_ANTSBET.out.versions.first())
 
@@ -77,16 +68,13 @@ workflow PREPROC_T1 {
             mask_bet = BETCROP_ANTSBET.out.mask
         }
 
-        // ** Crop image ** //
-        ch_crop = image_bet
-            .map{ it + [[]] }
-
+        // ** crop image ** //
+        ch_crop = image_bet.map{it + [[]]}
         BETCROP_CROPVOLUME_T1 ( ch_crop )
         ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_T1.out.versions.first())
 
-        // ** Crop mask ** //
-        ch_crop_mask = mask_bet
-            .join(BETCROP_CROPVOLUME_T1.out.bounding_box)
+        // ** crop mask ** //
+        ch_crop_mask = mask_bet.join(BETCROP_CROPVOLUME_T1.out.bounding_box)
 
         BETCROP_CROPVOLUME_MASK ( ch_crop_mask )
         ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_MASK.out.versions.first())
