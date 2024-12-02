@@ -75,10 +75,10 @@ workflow TOPUP_EDDY {
         ch_versions = ch_versions.mix(UTILS_EXTRACTB0.out.versions.first())
 
     emit:
-        dwi      = PREPROC_EDDY.out.dwi_corrected       // channel: [ val(meta), [ dwi_corrected ] ]
-        bval     = PREPROC_EDDY.out.bval_corrected      // channel: [ val(meta), [ bval_corrected ] ]
-        bvec     = PREPROC_EDDY.out.bvec_corrected      // channel: [ val(meta), [ bvec_corrected ] ]
-        b0       = UTILS_EXTRACTB0.out.b0               // channel: [ val(meta), [ b0 ] ]
-        b0_mask  = PREPROC_EDDY.out.b0_mask             // channel: [ val(meta), [ b0_mask ] ]
+        dwi      = PREPROC_EDDY.out.dwi_corrected       // channel: [ val(meta), dwi-corrected ]
+        bval     = PREPROC_EDDY.out.bval_corrected      // channel: [ val(meta), bval-corrected ]
+        bvec     = PREPROC_EDDY.out.bvec_corrected      // channel: [ val(meta), bvec-corrected ]
+        b0       = UTILS_EXTRACTB0.out.b0               // channel: [ val(meta), b0-corrected ]
+        b0_mask  = PREPROC_EDDY.out.b0_mask             // channel: [ val(meta), b0-mask ]
         versions = ch_versions                          // channel: [ versions.yml ]
 }
