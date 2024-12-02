@@ -41,7 +41,9 @@ nextflow_process {
                     file("\${test_data_directory}/sub-01_dir-PA_dwi.bvec", checkIfExists: true),
                     file("\${test_data_directory}/sub-01__corrected_b0s.nii.gz", checkIfExists: true),
                     file("\${test_data_directory}/topup_results_fieldcoef.nii.gz", checkIfExists: true),
-                    file("\${test_data_directory}/topup_results_movpar.txt", checkIfExists: true)]}
+                    file("\${test_data_directory}/topup_results_movpar.txt", checkIfExists: true)
+                    ]
+                }
                 """
             }
         }
