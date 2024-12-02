@@ -25,6 +25,9 @@ workflow PREPROC_T1 {
         ch_versions = Channel.empty()
 
         // ** Denoising ** //
+        // Input : [ meta, image, mask | [] ]
+        //  - join [ meta, image, mask | null ]
+        //  - map  [ meta, image, mask | [] ]
         ch_nlmeans = ch_image
             .join(ch_mask_nlmeans, remainder: true)
             .map{ it[0..1] + [it[2] ?: []] }
@@ -33,6 +36,11 @@ workflow PREPROC_T1 {
         ch_versions = ch_versions.mix(DENOISING_NLMEANS.out.versions.first())
 
         // ** N4 correction ** //
+        // Input : [ meta, image, reference | [], mask | [] ]
+        //  - join [ meta, image, reference | null ]
+        //  - map  [ meta, image, reference | [] ]
+        //  - join [ meta, image, reference | [], mask | null ]
+        //  - map  [ meta, image, reference | [], mask | [] ]
         ch_N4 = DENOISING_NLMEANS.out.image
             .join(ch_ref_n4, remainder: true)
             .map{ it[0..1] + [it[2] ?: []] }
@@ -43,6 +51,9 @@ workflow PREPROC_T1 {
         ch_versions = ch_versions.mix(PREPROC_N4.out.versions.first())
 
         // ** Resampling ** //
+        // Input : [ meta, image, reference | [] ]
+        //  - join [ meta, image, reference | null ]
+        //  - map  [ meta, image, reference | [] ]
         ch_resampling = PREPROC_N4.out.image
             .join(ch_ref_resample, remainder: true)
             .map{ it[0..1] + [it[2] ?: []] }
@@ -52,6 +63,10 @@ workflow PREPROC_T1 {
 
         // ** Brain extraction ** //
         if ( params.run_synthbet) {
+            // ** SYNTHBET ** //
+            // Input : [ meta, image, weights | [] ]
+            //  - join [ meta, image, weights | null ]
+            //  - map  [ meta, image, weights | [] ]
             ch_bet = IMAGE_RESAMPLE.out.image
                 .join(ch_weights, remainder: true)
                 .map{ it[0..1] + [it[2] ?: []] }
