@@ -6,11 +6,11 @@ process REGISTRATION_CONVERT {
     containerOptions "--env FSLOUTPUTTYPE='NIFTI_GZ'"
 
     input:
-    tuple val(meta), path(deform), path(affine), path(source), path(target), path(fs_license)
+    tuple val(meta), path(affine), path(deform), path(source), path(target), path(fs_license)
 
     output:
-    tuple val(meta), path("*out_deform_warp.{nii,nii.gz,mgz,m3z}") , emit: deform_transform
-    tuple val(meta), path("*out_affine_warp.{txt,lta,mat,dat}")    , emit: affine_transform, optional: true
+    tuple val(meta), path("*.{txt,lta,mat,dat}"), emit: affine_transform
+    tuple val(meta), path("*.{nii,nii.gz,mgz,m3z}"), emit: deform_transform
     path "versions.yml"           , emit: versions
 
     when:
@@ -40,20 +40,15 @@ process REGISTRATION_CONVERT {
 
     cp $fs_license \$FREESURFER_HOME/license.txt
 
-    if [[ -f "$affine" ]];
-    then
-        declare -A affine_dictionnary=( ["--outlta"]="lta" \
-                                        ["--outfsl"]="mat" \
-                                        ["--outmni"]="xfm" \
-                                        ["--outreg"]="dat" \
-                                        ["--outniftyreg"]="txt" \
-                                        ["--outitk"]="txt" \
-                                        ["--outvox"]="txt" )
+    declare -A affine_dictionnary=( ["--outlta"]="lta" \
+                                    ["--outfsl"]="mat" \
+                                    ["--outmni"]="xfm" \
+                                    ["--outreg"]="dat" \
+                                    ["--outniftyreg"]="txt" \
+                                    ["--outitk"]="txt" \
+                                    ["--outvox"]="txt" )
 
-        ext_affine=\${affine_dictionnary[${out_format_affine}]}
-
-        lta_convert ${invert} ${source_geometry_affine} ${target_geometry_affine} ${in_format_affine} ${out_format_affine} ${prefix}__out_affine_warp.\${ext_affine}
-    fi
+    ext_affine=\${affine_dictionnary[${out_format_affine}]}
 
     declare -A deform_dictionnary=( ["--outm3z"]="m3z" \
                                     ["--outfsl"]="nii.gz" \
@@ -64,13 +59,14 @@ process REGISTRATION_CONVERT {
 
     ext_deform=\${deform_dictionnary[${out_format_deform}]}
 
-    mri_warp_convert ${source_geometry_deform} ${downsample} ${in_format_deform} ${out_format_deform}  ${prefix}__out_deform_warp.\${ext_deform}
+    lta_convert ${invert} ${source_geometry_affine} ${target_geometry_affine} ${in_format_affine} ${out_format_affine} ${prefix}__affine_warp.\${ext_affine}
+    mri_warp_convert ${source_geometry_deform} ${downsample} ${in_format_deform} ${out_format_deform}  ${prefix}__deform_warp.\${ext_deform}
 
     rm \$FREESURFER_HOME/license.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        Freesurfer: 7.4.1
     END_VERSIONS
     """
 
@@ -82,12 +78,12 @@ process REGISTRATION_CONVERT {
     lta_convert -h
     mri_warp_convert -h
 
-    touch ${prefix}__deform_transform.nii.gz
     touch ${prefix}__affine_transform.txt
+    touch ${prefix}__deform_transform.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        Freesurfer: 7.4.1
     END_VERSIONS
     """
 }

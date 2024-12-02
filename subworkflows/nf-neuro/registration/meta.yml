@@ -7,7 +7,8 @@ description: |
       module calling AntsRegistration, with the metric as additional target.
   2)  if NO metric file is supplied, the subworkflow will use the REGISTRATION_ANTS module calling
       antsRegistrationSyN.sh or antsRegistrationSyNQuick.sh.
-  3)  alternatively, if an alternative model parameter is activated, the subworkflow will use the specified module
+  3)  alternatively, if the run_synth parameter is activated, the subworkflow will use the REGISTRATION_EASYREG module
+      calling mri_easyreg.
   This subworkflow outputs transformation files that can be used with the ANTSAPPLYTRANSFORMS module
   to warp any new image. Simply provide your moving image, reference image, and transformations files
   to the module to register a new image in the current space. Similar steps can be used to register
@@ -21,7 +22,6 @@ components:
   - registration/anattodwi
   - registration/ants
   - registration/easyreg
-  - registration/synthregistration
 input:
   - ch_image:
       type: file
