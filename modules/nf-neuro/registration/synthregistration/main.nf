@@ -39,7 +39,7 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Synthmoprh: 3
+        synthmoprh: 3
     END_VERSIONS
     """
 
@@ -56,7 +56,7 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: 7.4.1
+        synthmoprh: 3
     END_VERSIONS
     """
 }
