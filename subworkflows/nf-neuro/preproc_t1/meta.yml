@@ -8,9 +8,8 @@ description: |
   The resulting T1 is corrected, resampled, brain extracted and cropped.
   You can retrieve the file after each step if you don't want to run the entire subworkflow.
   The next steps would be to register the resulting T1-corrected image with the DWI-corrected image
-  with, for example, the REGISTRATION subworkflow. IMPORTANT : the module is only reproducible with
-  ANTs when BET is run using a single thread. For performance and reproducibility, use the other
-  available methods.
+  with, for example, the REGISTRATION subworkflow. IMPORTANT : the subworkflow is only reproducible
+  with when running ANTs BET using a single thread.
   -----------  Steps  -----------
   Denoising (nlmeans, scil).
     Used to remove the noise induced by the MRI acquisition,
@@ -23,7 +22,7 @@ description: |
     Resamples the T1 to an isotropic spatial resolution. The default is 1mm, a standard in humans which
     usually facilitate registration with corrected DWI images.
     This spatial resolution is modifiable in the configuration file.
-  Brain Extraction (bet, ANTs, freesurfer).
+  Brain Extraction (ANTs - default, freesurfer).
     Isolates the brain tissue voxels from the remaining image. Also creates a binary brain mask.
     This brain extraction is required for the T1 to DWI Registration. IMPORTANT : when using ANTs,
     brain extraction is reproducible only when run using a single thread.
@@ -58,13 +57,14 @@ input:
   - ch_template:
       type: file
       description: |
-        The input channel containing the anatomical template to perform BET.
+        The input channel containing the anatomical template for antsBET.
         Structure: [ val(meta), path(image) ]
       pattern: "*.{nii,nii.gz}"
   - ch_probability_map:
       type: file
       description: |
-        The input channel containing the brain probability mask, with intensity range 1 (definitely brain) to 0 (definitely background).
+        The input channel containing the brain probability mask for antsBET,
+        with intensity range 1 (definitely brain) to 0 (definitely background).
         Structure: [ val(meta), path(image) ]
       pattern: "*.{nii,nii.gz}"
   - ch_mask_nlmeans:
