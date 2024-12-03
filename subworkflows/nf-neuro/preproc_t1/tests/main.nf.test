@@ -88,11 +88,11 @@ nextflow_workflow {
                     niftiMD5SUM(workflow.out.image_nlmeans.get(0).get(1)),
                     niftiMD5SUM(workflow.out.image_N4.get(0).get(1)),
                     niftiMD5SUM(workflow.out.image_resample.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.image_bet.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.mask_bet.get(0).get(1)),
+                    file(workflow.out.image_bet.get(0).get(1)).name,
+                    file(workflow.out.mask_bet.get(0).get(1)).name,
                     workflow.out.crop_box,
-                    niftiMD5SUM(workflow.out.mask_final.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.t1_final.get(0).get(1)),
+                    file(workflow.out.mask_final.get(0).get(1)).name,
+                    file(workflow.out.t1_final.get(0).get(1)).name,
                     workflow.out.versions
                 ).match()}
             )
