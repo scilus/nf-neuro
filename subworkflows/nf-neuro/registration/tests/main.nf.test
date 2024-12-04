@@ -94,7 +94,7 @@ nextflow_workflow {
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/b0.nii.gz")
                     ]}
-                input[2] = []
+                input[2] = Channel.empty()
                 input[3] = Channel.empty()
                 input[4] = Channel.empty()
                 input[5] = Channel.empty()
