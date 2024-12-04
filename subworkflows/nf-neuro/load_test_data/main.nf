@@ -18,25 +18,36 @@ def fetch_archive ( name, destination, remote, database, data_identifiers ) {
 
     def cache_entry = file("$cache_location/$data_id")
     if ( !cache_entry.exists() ) {
-        def remote_entry = "${data_id[0..1]}/${data_id[2..-1]}"
-        file("$remote/$database/$remote_entry").copyTo(cache_entry)
+        try {
+            def remote_entry = "${data_id[0..1]}/${data_id[2..-1]}"
+            file("$remote/$database/$remote_entry").copyTo(cache_entry)
+        }
+        catch (Exception e) {
+            error "Failed to fetch test data archive: $name"
+            file("$remote/$database/$remote_entry").delete()
+        }
     }
 
     // Unzip all archive content to destination
     def content = new java.util.zip.ZipFile("$cache_entry")
-    content.entries().each{ entry ->
-        def local_target = file("$destination/${entry.getName()}")
-        if (entry.isDirectory()) {
-            local_target.mkdirs();
-        } else {
-            local_target.getParent().mkdirs();
-            file("$local_target").withOutputStream{
-                out -> out << content.getInputStream(entry)
+    try {
+        content.entries().each{ entry ->
+            def local_target = file("$destination/${entry.getName()}")
+            if (entry.isDirectory()) {
+                local_target.mkdirs();
+            } else {
+                local_target.getParent().mkdirs();
+                file("$local_target").withOutputStream{
+                    out -> out << content.getInputStream(entry)
+                }
             }
         }
-    }
 
-    return destination.resolve("${name.take(name.lastIndexOf('.'))}")
+        return destination.resolve("${name.take(name.lastIndexOf('.'))}")
+    }
+    finally {
+        content.close()
+    }
 }
 
 workflow LOAD_TEST_DATA {
