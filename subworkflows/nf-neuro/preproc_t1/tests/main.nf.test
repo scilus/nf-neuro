@@ -29,6 +29,53 @@ nextflow_workflow {
         }
     }
 
+    test("preproc_t1_antsbet_error") {
+        config "./nextflow.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        antsbet: it.simpleName == "antsbet"
+                        t1w: it.simpleName == "T1w"
+                    }
+                input[0] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]}
+                input[1] = Channel.empty()
+                input[2] = Channel.empty()
+                input[3] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[4] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        [],
+                        []
+                    ]}
+                input[5] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[6] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assert workflow.failed
+        }
+    }
+
     test("preproc_t1_antsbet") {
         config "./nextflow.config"
         when {
@@ -90,7 +137,7 @@ nextflow_workflow {
                     niftiMD5SUM(workflow.out.image_resample.get(0).get(1)),
                     file(workflow.out.image_bet.get(0).get(1)).name,
                     file(workflow.out.mask_bet.get(0).get(1)).name,
-                    workflow.out.crop_box,
+                    file(workflow.out.crop_box.get(0).get(1)).name,
                     file(workflow.out.mask_final.get(0).get(1)).name,
                     file(workflow.out.t1_final.get(0).get(1)).name,
                     workflow.out.versions

@@ -84,9 +84,13 @@ workflow PREPROC_T1 {
         }
 
         else {
+            // ** ANTSBET ** //
+            // The template and probability maps are mandatory if running antsBET. Since the
+            // error message from nextflow when they are absent is either non-informative or
+            // missing, we use ifEmpty to provide a more informative one.
             ch_bet = IMAGE_RESAMPLE.out.image
-                .join(ch_template)
-                .join(ch_probability_map)
+                .join(ch_template.ifEmpty{ error("ANTS BET needs a template") })
+                .join(ch_probability_map.ifEmpty{ error("ANTS BET needs a tissue probability map") })
 
             BETCROP_ANTSBET ( ch_bet )
             ch_versions = ch_versions.mix(BETCROP_ANTSBET.out.versions.first())
