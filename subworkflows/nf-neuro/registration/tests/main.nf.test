@@ -13,6 +13,7 @@ nextflow_workflow {
     tag "registration"
     tag "registration/ants"
     tag "registration/easyreg"
+    tag "registration/synthregistration"
 
     tag "load_test_data"
 
@@ -93,7 +94,7 @@ nextflow_workflow {
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/b0.nii.gz")
                     ]}
-                input[2] = []
+                input[2] = Channel.empty()
                 input[3] = Channel.empty()
                 input[4] = Channel.empty()
                 input[5] = Channel.empty()
@@ -150,6 +151,48 @@ nextflow_workflow {
                     file(workflow.out.transfo_trk.get(0).get(1)).name,
                     niftiMD5SUM(workflow.out.segmentation.get(0).get(1), 6),
                     file(workflow.out.ref_segmentation.get(0).get(1)).name,
+                    workflow.out.versions
+                ).match()}
+            )
+        }
+    }
+    test("registration - synthregistration") {
+        config "./nextflow_synthregistration.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        t1w: it.simpleName == "T1w"
+                        b0: it.simpleName == "b0"
+                        dti: it.simpleName == "dti"
+                    }
+                input[0] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]
+                }
+                input[1] = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz")
+                    ]
+                }
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    file(workflow.out.image_warped.get(0).get(1)).name,
+                    file(workflow.out.transfo_image.get(0).get(1)).name,
                     workflow.out.versions
                 ).match()}
             )
