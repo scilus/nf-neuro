@@ -1,15 +1,14 @@
 {
-    "name": "NF-NEURO development container",
+    "name": "prototyping",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
-            "NFTEST_VERSION": "0.9.0",
             "POETRY_VERSION": "1.8.*"
         }
     },
     "forwardPorts": [3000],
-    "onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
-    "updateContentCommand": "bash .devcontainer/updateContentCommand.sh",
+    "onCreateCommand": "bash .devcontainer/prototyping/onCreateCommand.sh",
+    "updateContentCommand": "bash .devcontainer/prototyping/updateContentCommand.sh",
     "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     "containerEnv": {
         "WORKSPACE": "${containerWorkspaceFolder}"
@@ -31,11 +30,6 @@
             "type": "volume"
         },
         {
-            "source": "nf-neuro-nf-test",
-            "target": "${containerWorkspaceFolder}/tests/.runs",
-            "type": "volume"
-        },
-        {
             "target": "/tmp",
             "type": "volume"
         },
@@ -52,21 +46,14 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "prettier.prettierPath": "/usr/lib/node_modules/prettier",
                 "python": {
                     "analysis.exclude": [
-                        "${containerWorkspaceFolder}/.dvc",
-                        "${containerWorkspaceFolder}/.pytest_cache",
-                        "${containerWorkspaceFolder}/.test_data",
                         "${containerWorkspaceFolder}/.vscode",
                         "${containerWorkspaceFolder}/.venv",
                         "**/__pycache__",
                         "${containerWorkspaceFolder}/.git"
                     ],
                     "analysis.ignore": [
-                        "${containerWorkspaceFolder}/.dvc",
-                        "${containerWorkspaceFolder}/.pytest_cache",
-                        "${containerWorkspaceFolder}/.test_data",
                         "${containerWorkspaceFolder}/.vscode",
                         "${containerWorkspaceFolder}/.venv",
                         "**/__pycache__",
