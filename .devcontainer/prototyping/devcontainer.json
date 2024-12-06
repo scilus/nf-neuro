@@ -1,5 +1,5 @@
 {
-    "name": "nf-neuro pipeline prototyping environment",
+    "name": "prototyping",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {

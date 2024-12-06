@@ -1,5 +1,5 @@
 {
-    "name": "NF-NEURO development container",
+    "name": "devops",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
