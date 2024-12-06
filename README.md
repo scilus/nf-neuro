@@ -11,24 +11,24 @@
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 ![Checks](https://github.com/scilus/nf-neuro/workflows/Merge%20to%20main%20checks/badge.svg)
 
-Welcome to the `nf-neuro` project ! A __Nextflow__ modules and workflows repository for neuroimaging
+Welcome to the `nf-neuro` project ! A **Nextflow** modules and workflows repository for neuroimaging
 maintained by the [SCIL team](https://scil-documentation.readthedocs.io/en/latest/). The
 primary focus of the library is to provide pre-built processes and processing sequences for
-__neuroimaging__, optimized for _Nextflow DSL2_, based on open-source
+**neuroimaging**, optimized for _Nextflow DSL2_, based on open-source
 technologies and made easily available to pipeline's developers through the `nf-core`
 framework.
 
 # WHY ? `nf-neuro`
 
-__Let's say you develop a pipeline for neuroimaging__. You want to make it the more _efficient,_
+**Let's say you develop a pipeline for neuroimaging**. You want to make it the more _efficient,_
 _reliable, reproducible_ and also be able to _evaluate it_ and _control the quality_ of its outputs.
-That's what `nf-neuro` provides to you, __all in one repository__, hosting __all dependencies__ you
+That's what `nf-neuro` provides to you, **all in one repository**, hosting **all dependencies** you
 need to start developing and analyzing.
 
 The only thing we ask of you is to develop in `Nextflow DSL2`. We use principle and standards
 closely aligned with [nf-core](), but we'll make you adapt to them slowly as you go (we still
 haven't finished complying to all of them ourselves). Using `nf-neuro` helps accelerate
-development in __neuroimaging__ and produces better research outcomes for all !
+development in **neuroimaging** and produces better research outcomes for all !
 
 ---
 
@@ -185,6 +185,7 @@ DENOSING_NLMEANS( input )
 
 > [!WARNING]
 > There are some exceptions here, due to limitations in current `nf-core` tools and standards.
+>
 > 1. some inputs could be associated to different channels. It's almost never the case, but it happens.
 >    We are working hard at changing the behavior of those modules, and at improving the metadata to
 >    help you better. For now, please refer to their implementation in the `modules/nf-neuro/`
@@ -201,7 +202,8 @@ DENOISING_NLMEANS.out.versions.first().view() // [ "versions.yml" ]
 
 > [!WARNING]
 > There are some exceptions here, due to limitations in current `nf-core` tools and standards.
-> 1. `meta` output __is not a channel__ but accompanies all files, produced by other channels.
+>
+> 1. `meta` output **is not a channel** but accompanies all files, produced by other channels.
 > 2. `versions` is a channel, but its output is not accompanied by `meta`
 > 3. Some other outputs are not accompanied by `meta` also. We are currently improving the metadata
 >    files to make it apparent. For now, please refer to their implementation in the `modules/nf-neuro/`
@@ -244,7 +246,7 @@ PREPROC_T1.out.versions.first().view()  // [ "versions.yml" ]
 
 ## Porting prototypes to `nf-` ready pipelines
 
-__SECTION TO COME__
+**SECTION TO COME**
 
 # Developing within `nf-neuro`
 
@@ -362,7 +364,7 @@ The tool can be omitted to run tests for all modules in a category.
 
 # Installing Prettier and editorconfig
 
-To install __Prettier__ and __editorconfig__ for the project, you need to have `node` and `npm` installed on your system to at least version 14. On Ubuntu, you can do it using snap :
+To install **Prettier** and **editorconfig** for the project, you need to have `node` and `npm` installed on your system to at least version 14. On Ubuntu, you can do it using snap :
 
 ```bash
 sudo snap install node --classic

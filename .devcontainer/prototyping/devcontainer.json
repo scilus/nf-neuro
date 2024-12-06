@@ -7,8 +7,8 @@
         }
     },
     "forwardPorts": [3000],
-    "onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
-    "updateContentCommand": "bash .devcontainer/updateContentCommand.sh",
+    "onCreateCommand": "bash .devcontainer/prototyping/onCreateCommand.sh",
+    "updateContentCommand": "bash .devcontainer/prototyping/updateContentCommand.sh",
     "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     "containerEnv": {
         "WORKSPACE": "${containerWorkspaceFolder}"
