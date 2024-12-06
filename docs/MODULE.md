@@ -29,11 +29,11 @@ nf-core modules create
 You will be prompted several times to configure the new module correctly. Refer
 to the following to ensure configuration abides with `nf-neuro` :
 
-- **Name of tool/subtool** : `category/tool` of the module you plan creating (e.g. denoising/nlmeans).
-- **Bioconda package** : select `no`.
-- **Github author** : use your Github handle, or `@scilus` if you prefer not being identified through nf-neuro.
-- **Resource label** : select `process_single` for now, for any tool (multiprocessing and acceleration will be delt with later).
-- **Meta map** : select `yes`.
+- __Name of tool/subtool__ : `category/tool` of the module you plan creating (e.g. denoising/nlmeans).
+- __Bioconda package__ : select `no`.
+- __Github author__ : use your Github handle, or `@scilus` if you prefer not being identified through nf-neuro.
+- __Resource label__ : select `process_single` for now, for any tool (multiprocessing and acceleration will be delt with later).
+- __Meta map__ : select `yes`.
 
 Alternatively, you can use the following command to supply nearly all information :
 
@@ -41,7 +41,7 @@ Alternatively, you can use the following command to supply nearly all informatio
 nf-core modules create --author @scilus --label process_single --meta <category>/<tool>
 ```
 
-You will still have to interact with the **bioconda** prompt, still select `no`.
+You will still have to interact with the __bioconda__ prompt, still select `no`.
 
 > [!NOTE]
 > Once used to the conventions, adding `--empty-template` to the command will disable
@@ -361,7 +361,7 @@ Available runner classes that superseed `default` :
 | scilus-nf-neuro-bigmem-runners | <ul><li>16Gb RAM</li></ul>              |
 
 > [!IMPORTANT]
-> Specialized runners are limited !!! They are allocated for hungry processes, such as **AI/ML** models and **large dataset studies**, don't abuse them. _The more they are requested for, the longer PR take to merge_, so don't ask for them for nothing, meaning be smart in designing your modules ! **PRs deemed not needing them will be automatically closed.**
+> Specialized runners are limited !!! They are allocated for hungry processes, such as __AI/ML__ models and __large dataset studies__, don't abuse them. _The more they are requested for, the longer PR take to merge_, so don't ask for them for nothing, meaning be smart in designing your modules ! __PRs deemed not needing them will be automatically closed.__
 
 ## Lint your code
 
@@ -419,7 +419,7 @@ process {
 }
 ```
 
-Doing so will affect **ALL** processes. To scope to a specific process, use the
+Doing so will affect __ALL__ processes. To scope to a specific process, use the
 [process selectors](https://www.nextflow.io/docs/latest/config.html#process-selectors)
 (`withName:` or `withLabel:`) :
 
@@ -443,12 +443,12 @@ process {
 ```
 
 > [!IMPORTANT]
-> Modules inherit **selectors**. Thus, a module renamed at import (`import {A as B}`)
+> Modules inherit __selectors__. Thus, a module renamed at import (`import {A as B}`)
 > will be affected both by the selection `withName: "A"` and `withName: "B"`. However,
 > parameters defined by `B` will have precedence on those define in `A`.
 
 > [!IMPORTANT]
-> The same stands for **selectors** defined on multiple levels, implicit (`withName: WORKFLOW_X*`)
+> The same stands for __selectors__ defined on multiple levels, implicit (`withName: WORKFLOW_X*`)
 > or explicit (`withName: WORKFLOW_Y:B`).
 
 # Test data infrastructure

@@ -38,7 +38,7 @@ The command will generate a new subworkflow template in the `./subworkflows/nf-n
 You can't select an empty template when you generate a new subworkflow, so the template is based on nf-core. You will need to replace some of their sections for your use case:
 
 - Remove the different comment lines.
-- Include your modules into your subworkflows (a subworkflow should include at least **two** modules). Remove the modules `{ SAMTOOLS_SORT}` and `{ SAMTOOLS_INDEX }` then includes yours with the good pathway:
+- Include your modules into your subworkflows (a subworkflow should include at least __two__ modules). Remove the modules `{ SAMTOOLS_SORT}` and `{ SAMTOOLS_INDEX }` then includes yours with the good pathway:
 
 ```
 include { <MODULES>	} from '../../../modules/nf-neuro/<category>/<tool>/main'
