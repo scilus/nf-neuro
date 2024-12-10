@@ -21,3 +21,7 @@ echo "source $XDG_CONFIG_HOME/nf-neuro/.env" >> ~/.bashrc
     echo "interpreter using pip"
     python3 -m pip install nf-core==$NFCORE_VERSION
 }
+
+# Initial setup for a pipeline prototyping environment
+#  - nf-core requires a .nf-core.yml file present, else it bugs out (issue nfcore/tools#3340)
+touch .nf-core.yml
