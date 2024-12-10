@@ -19,5 +19,3 @@ export DEVCONTAINER_CPU_LIMIT=$(grep -c ^processor /proc/cpuinfo)
 EOF
 
 unset maxmem
-
-poetry install --no-root
