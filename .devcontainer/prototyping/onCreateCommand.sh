@@ -13,13 +13,18 @@ echo "source $XDG_CONFIG_HOME/nf-neuro/.env" >> ~/.bashrc
     wget -N $NFNEURO_RAW_REPOSITORY/pyproject.toml \
             $NFNEURO_RAW_REPOSITORY/poetry.toml \
             $NFNEURO_RAW_REPOSITORY/poetry.lock
-
-    poetry install --no-root
 } || {
-    echo "Failed to download nf-neuro base project configuration."
-    echo "Installing nf-core version $NFCORE_VERSION in the current python"
-    echo "interpreter using pip"
-    python3 -m pip install nf-core==$NFCORE_VERSION
+    echo "Failed to download nf-neuro base project configuration. Creating requirements.txt for pip"
+    echo "nf-core==$NFCORE_VERSION" > requirements.txt
+}
+
+# Try to download VSCode settings from nf-neuro
+{
+    NFNEURO_RAW_REPOSITORY=https://raw.githubusercontent.com/scilus/nf-neuro/main
+    mkdir -p .vscode
+    wget -N -P .vscode $NFNEURO_RAW_REPOSITORY/.vscode/settings.json
+} || {
+    echo "Could not fetch default extension settings from nf-neuro"
 }
 
 # Initial setup for a pipeline prototyping environment
