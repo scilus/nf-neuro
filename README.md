@@ -30,6 +30,18 @@ closely aligned with [nf-core](), but we'll make you adapt to them slowly as you
 haven't finished complying to all of them ourselves). Using `nf-neuro` helps accelerate
 development in **neuroimaging** and produces better research outcomes for all !
 
+# Where do I start ?
+
+Well, it depends on what you want to do. If you want to :
+
+- Learn about the content of `nf-neuro`, go to the [discovery](#discovering-nf-neuro) section.
+- Use **modules** and **subworkflows** from `nf-neuro`, go to the
+ [prototyping](#prototyping-using-components-from-nf-neuro) section.
+- Fully **publish** your pipeline and **brand** it with `nf-neuro`, go to the
+  [porting prototypes](#porting-prototypes-to-nf--ready-pipelines) section.
+- Contribute new **modules** and **subworkflows** to the `nf-neuro` **library**, go to the
+  [contribution](#contributing-to-the-nf-neuro-project) section.
+
 ---
 
 - [WHY ? `nf-neuro`](#why--nf-neuro)
@@ -82,56 +94,12 @@ development in **neuroimaging** and produces better research outcomes for all !
 
 ---
 
-# Pipeline creation with `nf-neuro`
+# Discovering `nf-neuro`
 
-## Prototyping using components from `nf-neuro`
+To get information on `nf-neuro` components, you'll first need to install `python` and `nf-core`. We provide
+extensive guidelines to do it in [this guide](./docs/environment/PROTOTYPING.md).
 
-### Environment setup
-
-We highly recommend using the integrated `development container` designed to streamline your installation
-and support your development. To setup yourself, refer to [this section](./docs/DEVCONTAINER.md), then jump
-straight to the [next section](#using-components-from-nf-neuro).
-
-#### Dependencies :
-
-- Python &geq; 3.8, < 3.13
-- Docker &geq; 24 (we recommend using [Docker Desktop](https://www.docker.com/products/docker-desktop))
-- Java Runtime &geq; 11, &leq; 17
-  - On Ubuntu, install `openjdk-jre-<version>` packages
-- Nextflow &geq; 23.04.0
-
-> [!IMPORTANT]
-> Nextflow might not detect the right `Java virtual machine` by default, more so if
-> multiple versions of the runtime are installed. If so, you need to set the environment
-> variable `JAVA_HOME` to target the right one.
->
-> - Linux : look in `/usr/lib/jvm` for
->   a folder named `java-<version>-openjdk-<platform>` and use it as `JAVA_HOME`.
-> - MacOS : if the `Java jvm` is the preferential one, use `JAVA_HOME=$(/usr/libexec/java_home)`.
->   Else, look into `/Library/Java/JavaVirtualMachines` for the folder with the correct
->   runtime version (named `jdk<inner version>_1<runtime version>.jdk`) and use the
->   following : `/Library/Java/JavaVirtualMachines/jdk<inner version>_1<runtime version>.jdk/Contents/Home`.
-
-#### Configuration :
-
-Install `nf-core` in your `python` environment (we recommend using a `virtual environment`) :
-
-```bash
-PYTHON_VERSION=3.10
-virtualenv -p python${PYTHON_VERSION} venv && source venv/bin/activate
-pip install nf-core==2.14.1
-```
-
-Configure your current environment so `nf-core` commands have access to `nf-neuro` modules :
-
-```bash
-export NFCORE_MODULES_GIT_REMOTE=https://github.com/scilus/nf-neuro.git
-export NFCORE_MODULES_GIT_BRANCH=main
-export NFCORE_SUBWORKFLOWS_GIT_REMOTE=https://github.com/scilus/nf-neuro.git
-export NFCORE_SUBWORKFLOWS_GIT_BRANCH=main
-```
-
-### Using components from `nf-neuro`
+## Getting info on components from `nf-neuro`
 
 With your environment ready, you can list `nf-neuro` modules and subworkflows with :
 
@@ -146,6 +114,15 @@ To get more information on a module (say `denoising/nlmeans`) or a subworkflow (
 nf-core modules info denoising/nlmeans
 nf-core subworkflows info preproc_t1
 ```
+
+> [!NOTE]
+> Additionally, `VS Code` users can install the [nextflow extension](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow),
+> which contains a language server that helps you in real time when coding. It gives you useful tooltips on modules inputs and outputs, commands
+> to navigate between modules and workflows and highlights errors. For sure, you get all that for free if you use the `devcontainer` !
+
+> [!IMPORTANT]
+> The `nextflow language server` is a precious resource that will help you resolve most exceptions existing within the metadata
+> description of modules and workflows prescribed by `nf-core` and shown below. Thus, we highly recommend its use.
 
 You'll get a good description of the modules's or subworkflow's `behavior` and `dependencies`, as well as a
 thorough description of its `inputs` and `outputs`. To use them in your own pipeline, you need first to
@@ -168,7 +145,7 @@ nf-core subworkflows install preproc_t1
 > The installation procedure will provide you an `include` line to add to your pipeline's `main.nf`
 > file, which will import the module or subworkflow at runtime.
 
-#### Using the information from the `info` command
+### Using the information from the `info` command
 
 For a `module`, the list of `inputs` tell you the content to provide in `a single channel`, usually
 as a list of lists, each starting with a `meta`, a map `[:]` of metadata containing a mandatory `id` :
@@ -189,7 +166,7 @@ DENOSING_NLMEANS( input )
 > 1. some inputs could be associated to different channels. It's almost never the case, but it happens.
 >    We are working hard at changing the behavior of those modules, and at improving the metadata to
 >    help you better. For now, please refer to their implementation in the `modules/nf-neuro/`
->    directory as well, through the `main.nf` file.
+>    directory as well, through the `main.nf` file, or given by the `nextflow language server tooltips`.
 
 For the `module's` list of `outputs`, each corresponds to its own `named channel` :
 
@@ -244,113 +221,31 @@ PREPROC_T1.out.mask_final.view()        // [ [ [id: "sub-1"], "sub-1_t1_mask_cro
 PREPROC_T1.out.versions.first().view()  // [ "versions.yml" ]
 ```
 
-## Porting prototypes to `nf-` ready pipelines
+
+# Prototyping using components from `nf-neuro`
+
+> [!IMPORTANT]
+> First, follow the [prototyping guide](./docs/environment/PROTOTYPING.md) to setup your
+> `development environment` or check if your current one meets the requirements.
+
+## Here we can put what Anthony wrote !
+
+
+# Porting prototypes to `nf-` ready pipelines
 
 **SECTION TO COME**
 
-# Developing within `nf-neuro`
-
-The `nf-neuro` project requires some specific tools to be installed on your system so that the development environment runs correctly. You can [install them manually](#manual-configuration), but if you desire to streamline the process and start coding faster, we highly recommend using the [VS Code development container](./docs/DEVCONTAINER.md#development-environment) to get fully configured in a matter of minutes.
-
-## Manual configuration
-
-### Dependencies
-
-- Python &geq; 3.8, < 3.13
-- Docker &geq; 24 (we recommend using [Docker Desktop](https://www.docker.com/products/docker-desktop))
-- Java Runtime &geq; 11, &leq; 17
-  - On Ubuntu, install `openjdk-jre-<version>` packages
-- Nextflow &geq; 23.04.0
-- nf-test &geq; 0.9.0
-- Node &geq; 14, `Prettier` and `editorconfig` (see [below](#installing-prettier-and-editorconfig))
-
-> [!IMPORTANT]
-> Nextflow might not detect the right `Java virtual machine` by default, more so if
-> multiple versions of the runtime are installed. If so, you need to set the environment
-> variable `JAVA_HOME` to target the right one.
->
-> - Linux : look in `/usr/lib/jvm` for
->   a folder named `java-<version>-openjdk-<platform>` and use it as `JAVA_HOME`.
-> - MacOS : if the `Java jvm` is the preferential one, use `JAVA_HOME=$(/usr/libexec/java_home)`.
->   Else, look into `/Library/Java/JavaVirtualMachines` for the folder with the correct
->   runtime version (named `jdk<inner version>_1<runtime version>.jdk`) and use the
->   following : `/Library/Java/JavaVirtualMachines/jdk<inner version>_1<runtime version>.jdk/Contents/Home`.
-
-### Python environment
-
-The project uses _poetry_ to manage python dependencies. To install it using pipx,
-run the following commands :
-
-```bash
-pip install pipx
-pipx ensurepath
-pipx install poetry==1.8.-
-```
-
-> [!NOTE]
-> If the second command above fails, `pipx` cannot be found in the path. Prepend the
-> second command with `$(which python) -m` and rerun the whole block.
-
-> [!WARNING]
-> Poetry doesn't like when other python environments are activated around it. Make
-> sure to deactivate any before calling `poetry` commands.
-
-Once done, install the project with :
-
-```bash
-poetry install
-```
-
-### Loading the project's environment
-
-> [!IMPORTANT]
-> Make sure no python environment is activated before running commands !
-
-The project scripts and dependencies can be accessed using :
-
-```bash
-poetry shell
-```
-
-which will activate the project's python environment in the current shell.
-
-> [!NOTE]
-> You will know the poetry environment is activated by looking at your shell. The
-> input line should be prefixed by : `(nf-neuro-tools-py<version>)`, with `<version>`
-> being the actual Python version used in the environment.
-
-To exit the environment, simply enter the `exit` command in the shell.
-
-> [!IMPORTANT]
-> Do not use traditional deactivation (calling `deactivate`), since it does not relinquish
-> the environment gracefully, making it so you won't be able to reactivate it without
-> exiting the shell.
-
-### Global environment
-
-Set the following environment variables in your `.bashrc` (or whatever is the equivalent for your shell) :
-
-```bash
-export NFCORE_MODULES_GIT_REMOTE=https://github.com/scilus/nf-neuro.git
-export NFCORE_MODULES_GIT_BRANCH=main
-export NFCORE_SUBWORKFLOWS_GIT_REMOTE=https://github.com/scilus/nf-neuro.git
-export NFCORE_SUBWORKFLOWS_GIT_BRANCH=main
-```
-
-This will make it so the `nf-core` commands target the right repository by default. Else, you'll need to add `--git-remote` and `--branch` options to pretty much all commands relating to `modules` and `subworkflows`.
-
-### Working with VS Code
-
-The `nf-neuro` project curates a bundle of useful extensions for Visual Studio Code, the `nf-neuro-extensions` package. You can find it easily on the [extension
-marketplace](https://marketplace.visualstudio.com/items?itemName=nf-neuro.nf-neuro-extensionpack).
-
-## Configuration via the `devcontainer`
-
-Refer to [this section](./docs/DEVCONTAINER.md#development-environment).
-
 # Contributing to the `nf-neuro` project
 
-If you want to propose a new `module` to the repository, follow the guidelines in the [module creation](./docs/MODULE.md) documentation. The same goes for `subworkflows`, using [these guidelines](./docs/SUBWORKFLOWS.md) instead. We follow standards closely aligned with `nf-core`, with some exceptions on process atomicity and how test data is handled. Modules that don't abide to them won't be accepted and PR containing them will be closed automatically.
+> [!IMPORTANT]
+> First, follow the [devops guide](./docs/environment/DEVOPS.md) to setup your
+> `development environment` or check if your current one meets the requirements.
+
+`nf-neuro` accepts contribution of new **modules** and **subworkflows** to its library. You'll need first to
+[setup your environment](./docs/DEVOPS.md), for which we have devised clever ways to streamline the procedure.
+Then, depending on which kind of component you want to submit, you'll either need to follow the [module creation](./docs/MODULE.md)
+or the [subworkflow creation](./docs/SUBWORKFLOWS.md) guidelines. Components that don't abide to them won't be accepted
+and PR containing them will be closed automatically.
 
 # Running tests
 
@@ -361,26 +256,3 @@ nf-core modules test <category/tool>
 ```
 
 The tool can be omitted to run tests for all modules in a category.
-
-# Installing Prettier and editorconfig
-
-To install **Prettier** and **editorconfig** for the project, you need to have `node` and `npm` installed on your system to at least version 14. On Ubuntu, you can do it using snap :
-
-```bash
-sudo snap install node --classic
-```
-
-However, if you cannot install snap, or have another OS, refer to the [official documentation](https://nodejs.org/en/download/package-manager/) for the installation procedure.
-
-Under the current configuration for the _Development Container_, for this project, we use the following procedure, considering `${NODE_MAJOR}` is at least 14 for Prettier :
-
-```bash
-curl -fsSL https://deb.nodesource.com/setup_${NODE_MAJOR}.x | bash - &&\
-apt-get install -y nodejs
-
-npm install --save-dev --save-exact prettier
-npm install --save-dev --save-exact editorconfig-checker
-
-echo "function prettier() { npm exec prettier $@; }" >> ~/.bashrc
-echo "function editorconfig-checker() { npm exec editorconfig-checker $@; }" >> ~/.bashrc
-```
