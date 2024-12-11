@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.0.2] - 2024-12-10
+
+- Add `errorlens` to packages
+
 ## [1.0.1] - 2024-09-16
 
 - Upgrade extension list
