@@ -4,18 +4,18 @@
 your development. They provide `pre-installed` environments for you to start programming
 new `pipelines` or `nf-neuro components`.
 
-* [Using `nf-neuro` development containers](#using-nf-neuro-development-containers)
-  * [Requirements](#requirements)
-    * [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
-  * [Prototyping environment](#prototyping-environment)
-    * [Usage](#usage)
-      * [Available in the container](#available-in-the-container)
-      * [Available in the VS Code IDE through extensions](#available-in-the-vs-code-ide-through-extensions)
-  * [Production environment](#production-environment)
-  * [Development environment](#development-environment)
-    * [Usage](#usage-1)
-      * [Available in the container](#available-in-the-container-1)
-      * [Available in the VS Code IDE through extensions](#available-in-the-vs-code-ide-through-extensions-1)
+- [Using `nf-neuro` development containers](#using-nf-neuro-development-containers)
+  - [Requirements](#requirements)
+    - [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
+  - [Prototyping environment](#prototyping-environment)
+    - [Usage](#usage)
+      - [Available in the container](#available-in-the-container)
+      - [Available in the VS Code IDE through extensions](#available-in-the-vs-code-ide-through-extensions)
+  - [Production environment](#production-environment)
+  - [Development environment](#development-environment)
+    - [Usage](#usage-1)
+      - [Available in the container](#available-in-the-container-1)
+      - [Available in the VS Code IDE through extensions](#available-in-the-vs-code-ide-through-extensions-1)
 
 ## Requirements
 
@@ -51,23 +51,23 @@ for a few minutes and enjoy your fully configured development environment.
 
 #### Available in the container
 
-  - `nf-core` accessible through the terminal, which is configured to access `nf-neuro` modules and subworkflows
-  - `git`, `github-cli`
-  - `curl`, `wget`, `apt-get`
-  - `nextflow`, `docker`, `tmux`
+- `nf-core` accessible through the terminal, which is configured to access `nf-neuro` modules and subworkflows
+- `git`, `github-cli`
+- `curl`, `wget`, `apt-get`
+- `nextflow`, `docker`, `tmux`
 
 #### Available in the VS Code IDE through extensions
 
-  - Docker images and containers management
-  - Nextflow execution environemnt
-  - Python and C++ linting, building and debugging tools
-  - Github Pull Requests management
-  - Github flavored markdown previewing
-  - Neuroimaging data viewer
-  - Test Data introspection
-  - Resource monitoring
-  - Remote development
-  - Live sharing with collaborators
+- Docker images and containers management
+- Nextflow execution environemnt
+- Python and C++ linting, building and debugging tools
+- Github Pull Requests management
+- Github flavored markdown previewing
+- Neuroimaging data viewer
+- Test Data introspection
+- Resource monitoring
+- Remote development
+- Live sharing with collaborators
 
 ## Production environment
 
@@ -84,22 +84,22 @@ few minutes and enjoy your fully configured development environment.
 
 #### Available in the container
 
-  - `nf-neuro`, `nf-core` all accessible through the terminal, which is configured to load
-    the `poetry` environment in shells automatically
-  - `nf-neuro` configured as the main repository for all `nf-core` commands, using `NFCORE_-` environment variables
-  - `git`, `github-cli`
-  - `curl`, `wget`, `apt-get`
-  - `nextflow`, `nf-test`, `docker`, `tmux`
+- `nf-neuro`, `nf-core` all accessible through the terminal, which is configured to load
+  the `poetry` environment in shells automatically
+- `nf-neuro` configured as the main repository for all `nf-core` commands, using `NFCORE_-` environment variables
+- `git`, `github-cli`
+- `curl`, `wget`, `apt-get`
+- `nextflow`, `nf-test`, `docker`, `tmux`
 
 #### Available in the VS Code IDE through extensions
 
-  - Docker images and containers management
-  - Nextflow execution environemnt
-  - Python and C++ linting, building and debugging tools
-  - Github Pull Requests management
-  - Github flavored markdown previewing
-  - Neuroimaging data viewer
-  - Test Data introspection
-  - Resource monitoring
-  - Remote development
-  - Live sharing with collaborators
+- Docker images and containers management
+- Nextflow execution environemnt
+- Python and C++ linting, building and debugging tools
+- Github Pull Requests management
+- Github flavored markdown previewing
+- Neuroimaging data viewer
+- Test Data introspection
+- Resource monitoring
+- Remote development
+- Live sharing with collaborators

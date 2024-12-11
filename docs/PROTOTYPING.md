@@ -1,11 +1,11 @@
 # Prototyping using components from `nf-neuro`
 
-* [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
-  * [Environment configuration](#environment-configuration)
-  * [Basic prototype pipeline creation](#basic-prototype-pipeline-creation)
-    * [`main.nf`](#mainnf)
-      * [`main.nf` example](#mainnf-example)
-    * [`nextflow.config`](#nextflowconfig)
+- [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
+  - [Environment configuration](#environment-configuration)
+  - [Basic prototype pipeline creation](#basic-prototype-pipeline-creation)
+    - [`main.nf`](#mainnf)
+      - [`main.nf` example](#mainnf-example)
+    - [`nextflow.config`](#nextflowconfig)
 
 ## Environment configuration
 

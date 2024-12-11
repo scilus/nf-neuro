@@ -1,10 +1,10 @@
 # Basic environment setup
 
-* [Basic environment setup](#basic-environment-setup)
-  * [Development container](#development-container)
-  * [Manual installation](#manual-installation)
-    * [Dependencies](#dependencies)
-    * [Configuration](#configuration)
+- [Basic environment setup](#basic-environment-setup)
+  - [Development container](#development-container)
+  - [Manual installation](#manual-installation)
+    - [Dependencies](#dependencies)
+    - [Configuration](#configuration)
 
 ## Development container
 

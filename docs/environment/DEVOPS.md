@@ -1,14 +1,14 @@
 # Developing within `nf-neuro`
 
-* [Developing within `nf-neuro`](#developing-within-nf-neuro)
-  * [Development container](#development-container)
-  * [Manual installation](#manual-installation)
-    * [Dependencies](#dependencies)
-    * [Python environment](#python-environment)
-    * [Loading the project's environment](#loading-the-projects-environment)
-    * [Global environment](#global-environment)
-    * [Working with VS Code](#working-with-vs-code)
-* [Installing Prettier and editorconfig](#installing-prettier-and-editorconfig)
+- [Developing within `nf-neuro`](#developing-within-nf-neuro)
+  - [Development container](#development-container)
+  - [Manual installation](#manual-installation)
+    - [Dependencies](#dependencies)
+    - [Python environment](#python-environment)
+    - [Loading the project's environment](#loading-the-projects-environment)
+    - [Global environment](#global-environment)
+    - [Working with VS Code](#working-with-vs-code)
+- [Installing Prettier and editorconfig](#installing-prettier-and-editorconfig)
 
 ## Development container
 
