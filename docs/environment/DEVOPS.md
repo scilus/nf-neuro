@@ -2,6 +2,16 @@
 
 The `nf-neuro` project requires some specific tools to be installed on your system so that the development environment runs correctly. You can [install them manually](#manual-configuration), but if you desire to streamline the process and start coding faster, we highly recommend using the [VS Code development container](./docs/DEVCONTAINER.md#development-environment) to get fully configured in a matter of minutes.
 
+* [Developing within `nf-neuro`](#developing-within-nf-neuro)
+  * [Manual configuration](#manual-configuration)
+    * [Dependencies](#dependencies)
+    * [Python environment](#python-environment)
+    * [Loading the project's environment](#loading-the-projects-environment)
+    * [Global environment](#global-environment)
+    * [Working with VS Code](#working-with-vs-code)
+* [Installing Prettier and editorconfig](#installing-prettier-and-editorconfig)
+
+
 ## Manual configuration
 
 ### Dependencies

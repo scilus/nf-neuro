@@ -1,4 +1,4 @@
-## Prototyping environment setup
+# Prototyping environment setup
 
 > [!NOTE]
 > `Nextflow` chose [VS Code](https://code.visualstudio.com) as its main development IDE (with good reasons), give
@@ -10,7 +10,12 @@
 > and support your development through `VS Code`. To setup yourself, refer to [this section](./docs/DEVCONTAINER.md)
 > and skip the whole environment setup.
 
-### Dependencies :
+* [Prototyping environment setup](#prototyping-environment-setup)
+  * [Dependencies](#dependencies-)
+  * [Configuration](#configuration-)
+
+
+## Dependencies
 
 - Python &geq; 3.8, < 3.13
 - Docker &geq; 24 (we recommend using [Docker Desktop](https://www.docker.com/products/docker-desktop))
@@ -30,7 +35,7 @@
 >   runtime version (named `jdk<inner version>_1<runtime version>.jdk`) and use the
 >   following : `/Library/Java/JavaVirtualMachines/jdk<inner version>_1<runtime version>.jdk/Contents/Home`.
 
-### Configuration :
+## Configuration
 
 Install `nf-core` in your `python` environment (we recommend using a `virtual environment`) :
 

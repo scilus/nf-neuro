@@ -34,63 +34,25 @@ development in **neuroimaging** and produces better research outcomes for all !
 
 Well, it depends on what you want to do. If you want to :
 
-- Learn about the content of `nf-neuro`, go to the [discovery](#discovering-nf-neuro) section.
-- Use **modules** and **subworkflows** from `nf-neuro`, go to the
- [prototyping](#prototyping-using-components-from-nf-neuro) section.
-- Fully **publish** your pipeline and **brand** it with `nf-neuro`, go to the
-  [porting prototypes](#porting-prototypes-to-nf--ready-pipelines) section.
-- Contribute new **modules** and **subworkflows** to the `nf-neuro` **library**, go to the
+- **Learn about the modules and subworkflows** in `nf-neuro`, go to the [discovery](#discovering-nf-neuro) section.
+- **Create a new pipeline quickly**, using **modules** and **subworkflows** from `nf-neuro`, go to the
+ [prototyping](./docs/PROTOTYPING.md#basic-prototype-pipeline-creation) section.
+- **Create or publish a production pipeline** branded with `nf-neuro`, go to the
+  [porting prototypes](./docs/PRODUCTION.md#porting-prototypes-to-nf--ready-pipelines) section.
+- **Contribute new modules and subworkflows** to `nf-neuro`, go to the
   [contribution](#contributing-to-the-nf-neuro-project) section.
 
 ---
 
-- [WHY ? `nf-neuro`](#why--nf-neuro)
-- [Pipeline creation with `nf-neuro`](#pipeline-creation-with-nf-neuro)
-  - [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
-    - [Environment setup](#environment-setup)
-      - [Dependencies](#dependencies-)
-      - [Configuration](#configuration-)
-    - [Using components from `nf-neuro`](#using-components-from-nf-neuro)
-      - [Using the information from the `info` command](#using-the-information-from-the-info-command)
-  - [Porting prototypes to `nf-` ready pipelines](#porting-prototypes-to-nf--ready-pipelines)
-- [Developing with `nf-neuro`](#developing-with-nf-neuro)
-  - [Manual configuration](#manual-configuration)
-    - [Dependencies](#dependencies)
-    - [Python environment](#python-environment)
-    - [Loading the project's environment](#loading-the-projects-environment)
-    - [Global environment](#global-environment)
-    - [Working with VS Code](#working-with-vs-code)
-  - [Configuration via the `devcontainer`](#configuration-via-the-devcontainer)
-- [Contributing to the `nf-neuro` project](#contributing-to-the-nf-neuro-project)
-  - [Adding a new module to nf-neuro](./docs/MODULE.md#adding-a-new-module-to-nf-neuro)
-    - [Generate the template](./docs/MODULE.md#generate-the-template)
-    - [Edit the template](./docs/MODULE.md#edit-the-template)
-      - [Edit `main.nf`](./docs/MODULE.md#edit-mainnf)
-      - [Edit `environment.yml`](./docs/MODULE.md#edit-environmentyml)
-      - [Edit `meta.yml`](./docs/MODULE.md#edit-metayml)
-    - [Create test cases](./docs/MODULE.md#create-test-cases)
-      - [Edit `tests/main.nf.test`](./docs/MODULE.md#edit-testsmainnftest)
-      - [Edit `tests/nextflow.config`](./docs/MODULE.md#edit-testsnextflowconfig)
-    - [Generate tests snapshots](./docs/MODULE.md#generate-tests-snapshots)
-    - [Request for more test resources](./docs/MODULE.md#request-for-more-test-resources)
-    - [Lint your code](./docs/MODULE.md#lint-your-code)
-    - [Submit your PR](./docs/MODULE.md#submit-your-pr)
-  - [Defining optional input parameters](./docs/MODULE.md#defining-optional-input-parameters)
-  - [Test data infrastructure](./docs/MODULE.md#test-data-infrastructure)
-  - [Adding a new subworkflow to nf-neuro](./docs/SUBWORKFLOWS.md#adding-a-new-subworkflow-to-nf-neuro)
-    - [Generate the template](./docs/SUBWORKFLOWS.md#generate-the-template)
-    - [Edit the template](./docs/SUBWORKFLOWS.md#edit-the-template)
-      - [Edit `main.nf`](./docs/SUBWORKFLOWS.md#edit-mainnf)
-        - [Define your subworkflow inputs](./docs/SUBWORKFLOWS.md#define-your-subworkflow-inputs)
-        - [Fill the `main:` section](./docs/SUBWORKFLOWS.md#fill-the-main-section)
-        - [Define your Workflow outputs](./docs/SUBWORKFLOWS.md#define-your-workflow-outputs)
-      - [Edit `meta.yml`](./docs/SUBWORKFLOWS.md#edit-metayml)
-      - [Create test cases](./docs/SUBWORKFLOWS.md#create-test-cases)
-    - [Lint your code](./docs/SUBWORKFLOWS.md#lint-your-code)
-    - [Submit your PR](./docs/SUBWORKFLOWS.md#submit-your-pr)
-- [Running tests](#running-tests)
-- [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
-- [Installing Prettier and editorconfig](#installing-prettier-and-editorconfig)
+* [Discovering `nf-neuro`](#discovering-nf-neuro)
+  * [Getting info on components from `nf-neuro`](#getting-info-on-components-from-nf-neuro)
+    * [Using the information from the `info` command](#using-the-information-from-the-info-command)
+* [Pipeline creation with `nf-neuro`](#pipeline-creation-with-nf-neuro)
+  * [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
+  * [Porting prototypes to `nf-` ready pipelines](#porting-prototypes-to-nf--ready-pipelines)
+* [Contributing to the `nf-neuro` project](#contributing-to-the-nf-neuro-project)
+* [Running tests](#running-tests)
+
 
 ---
 
@@ -221,19 +183,12 @@ PREPROC_T1.out.mask_final.view()        // [ [ [id: "sub-1"], "sub-1_t1_mask_cro
 PREPROC_T1.out.versions.first().view()  // [ "versions.yml" ]
 ```
 
+# Pipeline creation with `nf-neuro`
 
-# Prototyping using components from `nf-neuro`
+## [Prototyping using components from `nf-neuro`](./docs/PROTOTYPING.md)
 
-> [!IMPORTANT]
-> First, follow the [prototyping guide](./docs/environment/PROTOTYPING.md) to setup your
-> `development environment` or check if your current one meets the requirements.
+## [Porting prototypes to `nf-` ready pipelines](./docs/PRODUCTION.md)
 
-## Here we can put what Anthony wrote !
-
-
-# Porting prototypes to `nf-` ready pipelines
-
-**SECTION TO COME**
 
 # Contributing to the `nf-neuro` project
 
