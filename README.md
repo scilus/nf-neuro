@@ -36,7 +36,7 @@ Well, it depends on what you want to do. If you want to :
 
 - **Learn about the modules and subworkflows** in `nf-neuro`, go to the [discovery](#discovering-nf-neuro) section.
 - **Create a new pipeline quickly**, using **modules** and **subworkflows** from `nf-neuro`, go to the
- [prototyping](./docs/PROTOTYPING.md#basic-prototype-pipeline-creation) section.
+  [prototyping](./docs/PROTOTYPING.md#basic-prototype-pipeline-creation) section.
 - **Create or publish a production pipeline** branded with `nf-neuro`, go to the
   [porting prototypes](./docs/PRODUCTION.md#porting-prototypes-to-nf--ready-pipelines) section.
 - **Contribute new modules and subworkflows** to `nf-neuro`, go to the
@@ -44,15 +44,14 @@ Well, it depends on what you want to do. If you want to :
 
 ---
 
-* [Discovering `nf-neuro`](#discovering-nf-neuro)
-  * [Getting info on components from `nf-neuro`](#getting-info-on-components-from-nf-neuro)
-    * [Using the information from the `info` command](#using-the-information-from-the-info-command)
-* [Pipeline creation with `nf-neuro`](#pipeline-creation-with-nf-neuro)
-  * [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
-  * [Porting prototypes to `nf-` ready pipelines](#porting-prototypes-to-nf--ready-pipelines)
-* [Contributing to the `nf-neuro` project](#contributing-to-the-nf-neuro-project)
-* [Running tests](#running-tests)
-
+- [Discovering `nf-neuro`](#discovering-nf-neuro)
+  - [Getting info on components from `nf-neuro`](#getting-info-on-components-from-nf-neuro)
+    - [Using the information from the `info` command](#using-the-information-from-the-info-command)
+- [Pipeline creation with `nf-neuro`](#pipeline-creation-with-nf-neuro)
+  - [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
+  - [Porting prototypes to `nf-` ready pipelines](#porting-prototypes-to-nf--ready-pipelines)
+- [Contributing to the `nf-neuro` project](#contributing-to-the-nf-neuro-project)
+- [Running tests](#running-tests)
 
 ---
 
@@ -188,7 +187,6 @@ PREPROC_T1.out.versions.first().view()  // [ "versions.yml" ]
 ## [Prototyping using components from `nf-neuro`](./docs/PROTOTYPING.md)
 
 ## [Porting prototypes to `nf-` ready pipelines](./docs/PRODUCTION.md)
-
 
 # Contributing to the `nf-neuro` project
 

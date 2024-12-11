@@ -1,8 +1,8 @@
 # Prototyping environment setup
 
 > [!NOTE]
-> `Nextflow` chose [VS Code](https://code.visualstudio.com) as its main development IDE (with good reasons), give
-> its extension capabilities, ease of use, great look (well, it counts) and openness. We highly recommend you to
+> Since `Nextflow` chose [VS Code](https://code.visualstudio.com) as its main development IDE (with good reasons), given
+> its extension capabilities, ease of use, great look (well, it counts) and openness, we highly recommend you to
 > use it to develop. Give it a try, we guarantee you'll adopt it eventually.
 
 > [!IMPORTANT]
@@ -10,10 +10,9 @@
 > and support your development through `VS Code`. To setup yourself, refer to [this section](./docs/DEVCONTAINER.md)
 > and skip the whole environment setup.
 
-* [Prototyping environment setup](#prototyping-environment-setup)
-  * [Dependencies](#dependencies-)
-  * [Configuration](#configuration-)
-
+- [Prototyping environment setup](#prototyping-environment-setup)
+  - [Dependencies](#dependencies-)
+  - [Configuration](#configuration-)
 
 ## Dependencies
 

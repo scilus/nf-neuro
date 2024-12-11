@@ -4,13 +4,12 @@
 your development. They provide `pre-installed` environments for you to start programming
 new `pipelines` or `nf-neuro components`.
 
-* [Using `nf-neuro` development containers](#using-nf-neuro-development-containers)
-  * [Requirements](#requirements)
-    * [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
-  * [Prototyping environment](#prototyping-environment)
-  * [Production environment](#production-environment)
-  * [Development environment](#development-environment)
-
+- [Using `nf-neuro` development containers](#using-nf-neuro-development-containers)
+  - [Requirements](#requirements)
+    - [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
+  - [Prototyping environment](#prototyping-environment)
+  - [Production environment](#production-environment)
+  - [Development environment](#development-environment)
 
 ## Requirements
 

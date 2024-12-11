@@ -4,20 +4,21 @@
 > First, follow the [prototyping guide](./docs/environment/PROTOTYPING.md) to setup your
 > `development environment` or check if your current one meets the requirements.
 
-* [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
-  * [Basic prototype pipeline creation](#basic-prototype-pipeline-creation)
-    * [`main.nf`](#mainnf)
-      * [`main.nf` example](#mainnf-example)
-    * [`nextflow.config`](#nextflowconfig)
-
+- [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
+  - [Basic prototype pipeline creation](#basic-prototype-pipeline-creation)
+    - [`main.nf`](#mainnf)
+      - [`main.nf` example](#mainnf-example)
+    - [`nextflow.config`](#nextflowconfig)
 
 ## Basic prototype pipeline creation
 
 To create a prototype pipeline (for personal use or testing), you will need to create a couple of files in addition to the `nf-neuro` modules/subworkflows. First, create those files at the root of your pipeline:
+
 ```
 nextflow.config
 main.nf
 ```
+
 The `nextflow.config` file will contain your parameters for your pipeline execution that can be supplied as arguments when calling the pipeline (ex: `nextflow run main.nf --argument1 true`). The `main.nf` file will contain your pipeline. Let's take a look at this one first.
 
 ### `main.nf`
@@ -70,11 +71,15 @@ data.t1.view() // Contains your anatomical data (T1 in this case): [meta, [t1]]
 ```
 
 Now, you can install the modules you want to include in your pipeline. Let's import the `denoising/nlmeans` module for T1 denoising. To do so, simply install it using the `nf-core modules install` command.
+
 ```bash
 nf-core modules install denoising/nlmeans
 ```
+
 To use it in your pipeline, you need to import it at the top of your `main.nf` file. You can do it using the `include { YOUR_NAME } from ../path/main.nf` statement. Then, you can add it to your pipeline and feed your inputs to it! To have a look at which files are required to run the module, use the `nf-core modules info <your/module>` command. A complete example (e.g., fetching the inputs, importing the module, and supplying the inputs to the modules) can be seen below:
+
 #### `main.nf` example
+
 ```nextflow
 include { DENOISING_NLMEANS } from './modules/nf-neuro/denoising/nlmeans/main.nf'
 workflow get_data {
@@ -127,6 +132,7 @@ NEXT_MODULE( ch_nextmodule )
 ### `nextflow.config`
 
 You now have a working `main.nf` file, but you did not specified any parameters to your pipeline yet. Let's do this using the `nextflow.config` file. First, you will want to define your publish directory options (where your files will be outputted). You can add those lines to the beginning of your `nextflow.config`:
+
 ```nextflow
 process {
   publishDir = {"${params.output_dir}/$meta.id/${task.process.replaceAll(':', '-')}"}
@@ -134,6 +140,7 @@ process {
 ```
 
 Once this is done, you might want to supply parameters for some of your modules that could be modified when calling the pipeline, you can add them under the `params` flag. To know which parameters are accepted in your modules, refer to the `main.nf` of the specific `nf-neuro` module. `denoising/nlmeans` takes 1 possible parameter: `number_of_coils`. By defining it as below, we will be able to modify its value during the pipeline call using `--number_of_coils 1`.
+
 ```nextflow
 params{
   input = false // This will be used to supply your input directory, using --input folder/
@@ -141,7 +148,9 @@ params{
   number_of_coils = 1
 }
 ```
+
 The last step is to bind your parameters to the specific module they are meant for. This can be done by explicitly stating the modules, and attaching the parameters to the appropriate `task.ext`. To do this, add those lines for each of your modules in your `nextflow.config`:
+
 ```nextflow
 withName: 'DENOISING_NLMEANS' {
   ext.number_of_coils = params.number_of_coils
@@ -149,6 +158,7 @@ withName: 'DENOISING_NLMEANS' {
 ```
 
 That's it! Your `nextflow.config` should look something like this:
+
 ```
 process {
   publishDir = {"${params.output_dir}/$sid/${task.process.replaceAll(':', '-')}"}
