@@ -7,6 +7,7 @@
         }
     },
     "forwardPorts": [3000],
+    "initializeCommand": "bash .devcontainer/prototyping/initializeCommand.sh",
     "onCreateCommand": "bash .devcontainer/prototyping/onCreateCommand.sh",
     "updateContentCommand": "bash .devcontainer/prototyping/updateContentCommand.sh",
     "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
@@ -25,7 +26,7 @@
     },
     "mounts": [
         {
-            "source": "nf-neuro-venv",
+            "source": "nf-proto-${devcontainerId}-venv",
             "target": "${containerWorkspaceFolder}/.venv",
             "type": "volume"
         },
@@ -34,7 +35,7 @@
             "type": "volume"
         },
         {
-            "source": "nf-neuro-profile",
+            "source": "nf-proto-${devcontainerId}-profile",
             "target": "/root",
             "type": "volume"
         },

@@ -1,14 +1,17 @@
 # Prototyping using components from `nf-neuro`
 
-> [!IMPORTANT]
-> First, follow the [prototyping guide](./docs/environment/PROTOTYPING.md) to setup your
-> `development environment` or check if your current one meets the requirements.
+* [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
+  * [Environment configuration](#environment-configuration)
+  * [Basic prototype pipeline creation](#basic-prototype-pipeline-creation)
+    * [`main.nf`](#mainnf)
+      * [`main.nf` example](#mainnf-example)
+    * [`nextflow.config`](#nextflowconfig)
 
-- [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
-  - [Basic prototype pipeline creation](#basic-prototype-pipeline-creation)
-    - [`main.nf`](#mainnf)
-      - [`main.nf` example](#mainnf-example)
-    - [`nextflow.config`](#nextflowconfig)
+## Environment configuration
+
+To get setup fast, we recommend using **VS Code** and the `development container`. Follow the
+[guide here](./environment/DEVCONTAINER.md#prototyping-environment) to do so. You can also use
+[those instructions](./environment/NFCORE.md#manual-installation) to setup yourself manually.
 
 ## Basic prototype pipeline creation
 
@@ -26,6 +29,8 @@ The `nextflow.config` file will contain your parameters for your pipeline execut
 As mentioned above, this file will be your main pipeline execution file, containing all the modules/subworkflows you want to run, and the channel definition between them. This is also where you will fetch your input files. This can be done using a workflow definition, here is an example for a basic usage:
 
 ```nextflow
+#!/usr/bin/env nextflow
+
 workflow get_data {
     main:
         if ( !params.input ) {
@@ -63,11 +68,14 @@ workflow get_data {
         rev = rev_channel
         t1 = t1_channel
 }
-// ** Now call your input workflow to fetch your files ** //
-data = get_data()
-data.dwi.view() // Contains your DWI data: [meta, [dwi, bval, bvec]]
-data.rev.view() // Contains your reverse B0 data: [meta, [rev]]
-data.t1.view() // Contains your anatomical data (T1 in this case): [meta, [t1]]
+
+workflow {
+    // ** Now call your input workflow to fetch your files ** //
+    data = get_data()
+    data.dwi.view() // Contains your DWI data: [meta, [dwi, bval, bvec]]
+    data.rev.view() // Contains your reverse B0 data: [meta, [rev]]
+    data.t1.view() // Contains your anatomical data (T1 in this case): [meta, [t1]]
+}
 ```
 
 Now, you can install the modules you want to include in your pipeline. Let's import the `denoising/nlmeans` module for T1 denoising. To do so, simply install it using the `nf-core modules install` command.
@@ -81,12 +89,15 @@ To use it in your pipeline, you need to import it at the top of your `main.nf` f
 #### `main.nf` example
 
 ```nextflow
+#!/usr/bin/env nextflow
+
 include { DENOISING_NLMEANS } from './modules/nf-neuro/denoising/nlmeans/main.nf'
+
 workflow get_data {
     main:
         if ( !params.input ) {
-            log.info "You must provide an input folder containing all images using:"
-            log.info "        --input=/path/to/[input_folder]             Input folder containing multiple subjects for tracking"
+            log.info "You must provide an input directory containing all images using:"
+            log.info "        --input=/path/to/./[input/dir]             Input folder containing your subjects' directories"
             log.info ""
             log.info "                               [Input]"
             log.info "                               ├-- S1"
@@ -107,7 +118,7 @@ workflow get_data {
         // ** Loading all files. ** //
         dwi_channel = Channel.fromFilePairs("$input/**/*dwi.{nii.gz,bval,bvec}", size: 3, flat: true)
             { it.parent.name }
-            .map{ sid, bvals, bvecs, dwi -> tuple(meta.id: sid, dwi, bvals, bvecs) } // Reordering the inputs.
+            .map{ sid, bvals, bvecs, dwi -> tuple([id: sid], dwi, bvals, bvecs) } // Reordering the inputs.
         rev_channel = Channel.fromFilePairs("$input/**/*revb0.nii.gz", size: 1, flat: true)
             { it.parent.name }
         anat_channel = Channel.fromFilePairs("$input/**/*t1.nii.gz", size: 1, flat: true)
@@ -117,16 +128,19 @@ workflow get_data {
         rev = rev_channel
         anat = anat_channel
 }
-inputs = get_data()
-// ** Create the input channel for nlmeans. Note that it also can take a mask as input, but it is not required, replacing it by an empty list here. ** //
-ch_denoising = inputs.t1
-  .map{ it + [[]] } // This add one empty list to the channel, since we do not have a mask.
-// ** Run DENOISING_NLMEANS ** //
-DENOISING_NLMEANS( ch_denoising )
-// ** You can then reuse the outputs and supply them to another module/subworkflow! ** //
-ch_nextmodule = DENOISING_NLMEANS.out.image
-  .join(ch_another_file)
-NEXT_MODULE( ch_nextmodule )
+
+workflow {
+  inputs = get_data()
+  // ** Create the input channel for nlmeans. Note that it also can take a mask as input, but it is not required, replacing it by an empty list here. ** //
+  ch_denoising = inputs.t1
+    .map{ it + [[]] } // This add one empty list to the channel, since we do not have a mask.
+  // ** Run DENOISING_NLMEANS ** //
+  DENOISING_NLMEANS( ch_denoising )
+  // ** You can then reuse the outputs and supply them to another module/subworkflow! ** //
+  ch_nextmodule = DENOISING_NLMEANS.out.image
+    .join(ch_another_file)
+  NEXT_MODULE( ch_nextmodule )
+}
 ```
 
 ### `nextflow.config`

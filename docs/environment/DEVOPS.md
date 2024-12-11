@@ -1,17 +1,20 @@
 # Developing within `nf-neuro`
 
-The `nf-neuro` project requires some specific tools to be installed on your system so that the development environment runs correctly. You can [install them manually](#manual-configuration), but if you desire to streamline the process and start coding faster, we highly recommend using the [VS Code development container](./docs/DEVCONTAINER.md#development-environment) to get fully configured in a matter of minutes.
+* [Developing within `nf-neuro`](#developing-within-nf-neuro)
+  * [Development container](#development-container)
+  * [Manual installation](#manual-installation)
+    * [Dependencies](#dependencies)
+    * [Python environment](#python-environment)
+    * [Loading the project's environment](#loading-the-projects-environment)
+    * [Global environment](#global-environment)
+    * [Working with VS Code](#working-with-vs-code)
+* [Installing Prettier and editorconfig](#installing-prettier-and-editorconfig)
 
-- [Developing within `nf-neuro`](#developing-within-nf-neuro)
-  - [Manual configuration](#manual-configuration)
-    - [Dependencies](#dependencies)
-    - [Python environment](#python-environment)
-    - [Loading the project's environment](#loading-the-projects-environment)
-    - [Global environment](#global-environment)
-    - [Working with VS Code](#working-with-vs-code)
-- [Installing Prettier and editorconfig](#installing-prettier-and-editorconfig)
+## Development container
 
-## Manual configuration
+A complete `development container` that setups you in a matter of minutes is [available here](./DEVCONTAINER.md#development-environment).
+
+## Manual installation
 
 ### Dependencies
 
@@ -43,7 +46,7 @@ run the following commands :
 ```bash
 pip install pipx
 pipx ensurepath
-pipx install poetry==1.8.-
+pipx install poetry==1.8.*
 ```
 
 > [!NOTE]
@@ -57,7 +60,7 @@ pipx install poetry==1.8.-
 Once done, install the project with :
 
 ```bash
-poetry install
+poetry install --no-root
 ```
 
 ### Loading the project's environment

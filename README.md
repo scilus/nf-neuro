@@ -36,9 +36,9 @@ Well, it depends on what you want to do. If you want to :
 
 - **Learn about the modules and subworkflows** in `nf-neuro`, go to the [discovery](#discovering-nf-neuro) section.
 - **Create a new pipeline quickly**, using **modules** and **subworkflows** from `nf-neuro`, go to the
-  [prototyping](./docs/PROTOTYPING.md#basic-prototype-pipeline-creation) section.
+  [prototyping](./docs/PROTOTYPING.md) section.
 - **Create or publish a production pipeline** branded with `nf-neuro`, go to the
-  [porting prototypes](./docs/PRODUCTION.md#porting-prototypes-to-nf--ready-pipelines) section.
+  [porting prototypes](./docs/PRODUCTION.md) section.
 - **Contribute new modules and subworkflows** to `nf-neuro`, go to the
   [contribution](#contributing-to-the-nf-neuro-project) section.
 
@@ -58,7 +58,7 @@ Well, it depends on what you want to do. If you want to :
 # Discovering `nf-neuro`
 
 To get information on `nf-neuro` components, you'll first need to install `python` and `nf-core`. We provide
-extensive guidelines to do it in [this guide](./docs/environment/PROTOTYPING.md).
+extensive guidelines to do it in [this guide](./docs/environment/NFCORE.md).
 
 ## Getting info on components from `nf-neuro`
 
