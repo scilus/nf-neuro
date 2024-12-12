@@ -1,0 +1,2 @@
+betcrop/cropvolume:
+  - "modules/nf-neuro/betcrop/cropvolume/**"
