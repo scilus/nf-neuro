@@ -38,7 +38,7 @@ process BETCROP_FSLBETCROP {
 
         bet ${prefix}__b0.nii.gz ${prefix}__image_bet.nii.gz -m -R $bet_f
         scil_volume_math.py convert ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
-        mrcalc $image ${prefix}__image_bet_mask.nii.gz -mult ${prefix}__image_bet.nii.gz -quiet -nthreads 1 -force
+        scil_volume_math.py multiplication $image ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet.nii.gz --data_type float32 -f
     else
         bet $image ${prefix}__image_bet.nii.gz -m -R $bet_f
         scil_volume_math.py convert ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
@@ -62,7 +62,6 @@ process BETCROP_FSLBETCROP {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
 
     END_VERSIONS
@@ -76,7 +75,6 @@ process BETCROP_FSLBETCROP {
     scil_dwi_extract_b0.py -h
     bet -h
     scil_volume_math.py -h
-    mrcalc -h
     scil_volume_crop.py -h
 
     touch ${prefix}__image_bet.nii.gz
@@ -86,7 +84,6 @@ process BETCROP_FSLBETCROP {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
     END_VERSIONS
     """
