@@ -44,8 +44,20 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.1"
         },
-        "timestamp": "2024-10-30T17:42:18.337235926"
+        "timestamp": "2024-12-12T09:39:00.302246"
+    },
+    "betcrop - antsbet - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,9fde1445bc10857db69e440781e58cb7"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-12-12T10:20:29.72452"
     }
 }
