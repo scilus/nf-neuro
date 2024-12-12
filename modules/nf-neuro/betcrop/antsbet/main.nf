@@ -51,7 +51,6 @@ process BETCROP_ANTSBET {
         """
     antsBrainExtraction.sh -h
     scil_volume_math.py -h
-    mrcalc -h
 
     touch ${prefix}__t1_bet.nii.gz
     touch ${prefix}__t1_bet_mask.nii.gz
