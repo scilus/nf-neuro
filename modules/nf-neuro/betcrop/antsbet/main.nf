@@ -34,7 +34,7 @@ process BETCROP_ANTSBET {
         -e $template -m $tissues_probabilities ${args.join(' ')}
     scil_volume_math.py convert bet/BrainExtractionMask.nii.gz \
         ${prefix}__t1_bet_mask.nii.gz --data_type uint8
-    scil_volume_math.py multiplication t1 ${prefix}__t1_bet_mask.nii.gz \
+    scil_volume_math.py multiplication $t1 ${prefix}__t1_bet_mask.nii.gz \
         ${prefix}__t1_bet.nii.gz --data_type float32
 
     cat <<-END_VERSIONS > versions.yml
