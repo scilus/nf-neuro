@@ -1,5 +1,5 @@
 {
-    "betcrop - cropvolume - outputbbox": {
+    "image - cropvolume": {
         "content": [
             {
                 "0": [
@@ -12,25 +12,13 @@
                     ]
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_cropped_bbox.pkl:md5,d6a03b61669b07683e8c4b21a613f16c"
-                    ]
+                    
                 ],
                 "2": [
-                    "versions.yml:md5,3b089d55a1116feffa69d739ced1d99f"
+                    "versions.yml:md5,c9f9039fc9103e716e831016a61807f9"
                 ],
                 "bounding_box": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_cropped_bbox.pkl:md5,d6a03b61669b07683e8c4b21a613f16c"
-                    ]
+                    
                 ],
                 "image": [
                     [
@@ -42,17 +30,17 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3b089d55a1116feffa69d739ced1d99f"
+                    "versions.yml:md5,c9f9039fc9103e716e831016a61807f9"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-10-28T19:30:09.320626173"
+        "timestamp": "2024-12-12T18:59:41.317523464"
     },
-    "betcrop - cropvolume": {
+    "image - cropvolume - outputbbox": {
         "content": [
             {
                 "0": [
@@ -65,13 +53,25 @@
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped_bbox.pkl:md5,d6a03b61669b07683e8c4b21a613f16c"
+                    ]
                 ],
                 "2": [
-                    "versions.yml:md5,3b089d55a1116feffa69d739ced1d99f"
+                    "versions.yml:md5,c9f9039fc9103e716e831016a61807f9"
                 ],
                 "bounding_box": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped_bbox.pkl:md5,d6a03b61669b07683e8c4b21a613f16c"
+                    ]
                 ],
                 "image": [
                     [
@@ -83,14 +83,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3b089d55a1116feffa69d739ced1d99f"
+                    "versions.yml:md5,c9f9039fc9103e716e831016a61807f9"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-10-28T19:30:00.033087617"
+        "timestamp": "2024-12-12T18:59:50.080977383"
     }
 }
