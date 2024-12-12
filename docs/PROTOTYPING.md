@@ -56,13 +56,13 @@ workflow get_data {
         // ** Loading all files. ** //
         dwi_channel = Channel.fromFilePairs("$input/**/*dwi.{nii.gz,bval,bvec}", size: 3, flat: true)
             { it.parent.name }
-            .map{ sid, bvals, bvecs, dwi -> tuple(meta.id: sid, dwi, bvals, bvecs) } // Reordering the inputs.
+            .map{ sid, bvals, bvecs, dwi -> [ [id: sid], dwi, bvals, bvecs ] } // Reordering the inputs.
         rev_channel = Channel.fromFilePairs("$input/**/*revb0.nii.gz", size: 1, flat: true)
             { it.parent.name }
-            .map{ sid, rev -> tuple(meta.id: sid, rev) }
+            .map{ sid, rev -> [ [id: sid], rev ] }
         t1_channel = Channel.fromFilePairs("$input/**/*t1.nii.gz", size: 1, flat: true)
             { it.parent.name }
-            .map{ sid, t1 -> tuple(meta.id: sid, t1) }
+            .map{ sid, t1 -> [ [id: sid], t1 ] }
     emit:
         dwi = dwi_channel
         rev = rev_channel
@@ -118,7 +118,7 @@ workflow get_data {
         // ** Loading all files. ** //
         dwi_channel = Channel.fromFilePairs("$input/**/*dwi.{nii.gz,bval,bvec}", size: 3, flat: true)
             { it.parent.name }
-            .map{ sid, bvals, bvecs, dwi -> tuple([id: sid], dwi, bvals, bvecs) } // Reordering the inputs.
+            .map{ sid, bvals, bvecs, dwi -> [ [id: sid], dwi, bvals, bvecs ] } // Reordering the inputs.
         rev_channel = Channel.fromFilePairs("$input/**/*revb0.nii.gz", size: 1, flat: true)
             { it.parent.name }
         anat_channel = Channel.fromFilePairs("$input/**/*t1.nii.gz", size: 1, flat: true)

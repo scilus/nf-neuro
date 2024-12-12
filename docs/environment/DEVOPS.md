@@ -1,13 +1,12 @@
-# Developing within `nf-neuro`
+# Developing within `nf-neuro`<!-- omit in toc -->
 
-- [Developing within `nf-neuro`](#developing-within-nf-neuro)
-  - [Development container](#development-container)
-  - [Manual installation](#manual-installation)
-    - [Dependencies](#dependencies)
-    - [Python environment](#python-environment)
-    - [Loading the project's environment](#loading-the-projects-environment)
-    - [Global environment](#global-environment)
-    - [Working with VS Code](#working-with-vs-code)
+- [Development container](#development-container)
+- [Manual installation](#manual-installation)
+  - [Dependencies](#dependencies)
+  - [Python environment](#python-environment)
+  - [Loading the project's environment](#loading-the-projects-environment)
+  - [Global environment](#global-environment)
+  - [Working with VS Code](#working-with-vs-code)
 - [Installing Prettier and editorconfig](#installing-prettier-and-editorconfig)
 
 ## Development container
@@ -106,7 +105,7 @@ This will make it so the `nf-core` commands target the right repository by defau
 The `nf-neuro` project curates a bundle of useful extensions for Visual Studio Code, the `nf-neuro-extensions` package. You can find it easily on the [extension
 marketplace](https://marketplace.visualstudio.com/items?itemName=nf-neuro.nf-neuro-extensionpack).
 
-# Installing Prettier and editorconfig
+## Installing Prettier and editorconfig
 
 To install **Prettier** and **editorconfig** for the project, you need to have `node` and `npm` installed on your system to at least version 14. On Ubuntu, you can do it using snap :
 

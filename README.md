@@ -18,7 +18,7 @@ primary focus of the library is to provide pre-built processes and processing se
 technologies and made easily available to pipeline's developers through the `nf-core`
 framework.
 
-# WHY ? `nf-neuro`
+# WHY ? `nf-neuro`<!-- omit in toc -->
 
 **Let's say you develop a pipeline for neuroimaging**. You want to make it the more _efficient,_
 _reliable, reproducible_ and also be able to _evaluate it_ and _control the quality_ of its outputs.
@@ -30,7 +30,7 @@ closely aligned with [nf-core](), but we'll make you adapt to them slowly as you
 haven't finished complying to all of them ourselves). Using `nf-neuro` helps accelerate
 development in **neuroimaging** and produces better research outcomes for all !
 
-# Where do I start ?
+# Where do I start ?<!-- omit in toc -->
 
 Well, it depends on what you want to do. If you want to :
 
@@ -46,7 +46,6 @@ Well, it depends on what you want to do. If you want to :
 
 - [Discovering `nf-neuro`](#discovering-nf-neuro)
   - [Getting info on components from `nf-neuro`](#getting-info-on-components-from-nf-neuro)
-    - [Using the information from the `info` command](#using-the-information-from-the-info-command)
 - [Pipeline creation with `nf-neuro`](#pipeline-creation-with-nf-neuro)
   - [Prototyping using components from `nf-neuro`](#prototyping-using-components-from-nf-neuro)
   - [Porting prototypes to `nf-` ready pipelines](#porting-prototypes-to-nf--ready-pipelines)
@@ -62,19 +61,45 @@ extensive guidelines to do it in [this guide](./docs/environment/NFCORE.md).
 
 ## Getting info on components from `nf-neuro`
 
-With your environment ready, you can list `nf-neuro` modules and subworkflows with :
+With your environment ready, you can list `nf-neuro` modules available with a simple command :
 
 ```bash
 nf-core modules list remote
+```
+
+<p align="center">
+  <img src="docs/images/cli/nfcore_modules_list.png" alt="nf-core modules list remote"/>
+</p> <!-- omit in toc -->
+
+The same goes for `subworkflows` :
+
+```bash
 nf-core subworkflows list remote
 ```
 
-To get more information on a module (say `denoising/nlmeans`) or a subworkflow (say `preproc_t1`), use :
+<p align="center">
+  <img src="docs/images/cli/nfcore_subworkflows_list.png" alt="nf-core subworkflows list remote"/>
+</p> <!-- omit in toc -->
+
+To get more information on a module (say `denoising/nlmeans`) use :
 
 ```bash
 nf-core modules info denoising/nlmeans
+```
+
+<p align="center">
+  <img src="docs/images/cli/nfcore_modules_info.png" alt="nf-core modules info"/>
+</p> <!-- omit in toc -->
+
+or for a subworkflow (say `preproc_t1`) :
+
+```bash
 nf-core subworkflows info preproc_t1
 ```
+
+<p align="center">
+  <img src="docs/images/cli/nfcore_subworkflows_info.png" alt="nf-core subworkflows info"/>
+</p> <!-- omit in toc -->
 
 > [!NOTE]
 > Additionally, `VS Code` users can install the [nextflow extension](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow),
@@ -86,101 +111,7 @@ nf-core subworkflows info preproc_t1
 > description of modules and workflows prescribed by `nf-core` and shown below. Thus, we highly recommend its use.
 
 You'll get a good description of the modules's or subworkflow's `behavior` and `dependencies`, as well as a
-thorough description of its `inputs` and `outputs`. To use them in your own pipeline, you need first to
-install them locally :
-
-```bash
-nf-core modules install denoising/nlmeans
-nf-core subworkflows install preproc_t1
-```
-
-> [!WARNING]
-> You need to be at the root of your `pipeline directory` when calling this command ! `nf-core` installs
-> locally to your pipeline's `modules` and `subworkflows`, not in a special hidden place !
-
-> [!NOTE]
-> On the first run of the `install` command, select `pipeline` as an install setup. The interactive prompt
-> will also ask you to create multiple files and directories. Say yes to everything !
-
-> [!IMPORTANT]
-> The installation procedure will provide you an `include` line to add to your pipeline's `main.nf`
-> file, which will import the module or subworkflow at runtime.
-
-### Using the information from the `info` command
-
-For a `module`, the list of `inputs` tell you the content to provide in `a single channel`, usually
-as a list of lists, each starting with a `meta`, a map `[:]` of metadata containing a mandatory `id` :
-
-```nextflow
-// Example for denoising/nlmeans
-input = Channel.of( [
-    [ [id: "sub-1"], file("image1.nii.gz"), file("mask1.nii.gz") ],
-    [ [id: "sub-2"], file("image2.nii.gz"), file("mask2.nii.gz") ]
-] )
-
-DENOSING_NLMEANS( input )
-```
-
-> [!WARNING]
-> There are some exceptions here, due to limitations in current `nf-core` tools and standards.
->
-> 1. some inputs could be associated to different channels. It's almost never the case, but it happens.
->    We are working hard at changing the behavior of those modules, and at improving the metadata to
->    help you better. For now, please refer to their implementation in the `modules/nf-neuro/`
->    directory as well, through the `main.nf` file, or given by the `nextflow language server tooltips`.
-
-For the `module's` list of `outputs`, each corresponds to its own `named channel` :
-
-```nextflow
-// Example for denoising/nlmeans
-DENOISING_NLMEANS.out.image.view()            // [ [ [id: "sub-1"], "sub-1_denoised.nii.gz" ],
-                                              //   [ [id: "sub-2"], "sub-2_denoised.nii.gz" ]  ]
-DENOISING_NLMEANS.out.versions.first().view() // [ "versions.yml" ]
-```
-
-> [!WARNING]
-> There are some exceptions here, due to limitations in current `nf-core` tools and standards.
->
-> 1. `meta` output **is not a channel** but accompanies all files, produced by other channels.
-> 2. `versions` is a channel, but its output is not accompanied by `meta`
-> 3. Some other outputs are not accompanied by `meta` also. We are currently improving the metadata
->    files to make it apparent. For now, please refer to their implementation in the `modules/nf-neuro/`
->    directory, through the `main.nf` file.
-
-For `subworkflows` there are no exceptions, nor differences between `inputs` and `outputs`; they are all
-`named channels`. Each comes with a `Structure` description, telling you the content to put in the `list of lists`.
-For `preproc_t1`, a simple example would be :
-
-```nextflow
-ch_image = Channel.of( [
-    [ [id: "sub-1"], file("image1.nii.gz") ],
-    [ [id: "sub-2"], file("image2.nii.gz") ]
-] )
-
-ch_template = Channel
-    .of( [ [id: "sub-1"], [id: "sub-2"] ] )
-    .combine( [ file("template.nii.gz") ] )
-    .view()   // [ [ [id: "sub-1"], "template.nii.gz" ],
-              //   [ [id: "sub-2"], "template.nii.gz" ]  ]
-
-ch_probability_map = Channel
-    .of( [ [id: "sub-1"], [id: "sub-2"] ] )
-    .combine( [ file("probmap.nii.gz") ] )
-    .view()   // [ [ [id: "sub-1"], "probmap.nii.gz" ],
-              //   [ [id: "sub-2"], "probmap.nii.gz" ]  ]
-
-PREPROC_T1(
-    ch_image
-    ch_template,
-    ch_probability_map
-)
-
-PREPROC_T1.out.t1_final.view()          // [ [ [id: "sub-1"], "sub-1_t1_cropped.nii.gz" ],
-                                        //   [ [id: "sub-2"], "sub-2_t1_cropped.nii.gz" ]  ]
-PREPROC_T1.out.mask_final.view()        // [ [ [id: "sub-1"], "sub-1_t1_mask_cropped.nii.gz" ],
-                                        //   [ [id: "sub-2"], "sub-2_t1_mask_cropped.nii.gz" ]  ]
-PREPROC_T1.out.versions.first().view()  // [ "versions.yml" ]
-```
+thorough description of its `inputs` and `outputs`.
 
 # Pipeline creation with `nf-neuro`
 

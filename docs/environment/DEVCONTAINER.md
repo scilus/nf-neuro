@@ -1,21 +1,20 @@
-# Using `nf-neuro` development containers
+# Using `nf-neuro` development containers<!-- omit in toc -->
 
 `nf-neuro` comes preloaded with a set of development containers destined at streamlining
 your development. They provide `pre-installed` environments for you to start programming
 new `pipelines` or `nf-neuro components`.
 
-- [Using `nf-neuro` development containers](#using-nf-neuro-development-containers)
-  - [Requirements](#requirements)
-    - [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
-  - [Prototyping environment](#prototyping-environment)
-    - [Usage](#usage)
-      - [Available in the container](#available-in-the-container)
-      - [Available in the VS Code IDE through extensions](#available-in-the-vs-code-ide-through-extensions)
-  - [Production environment](#production-environment)
-  - [Development environment](#development-environment)
-    - [Usage](#usage-1)
-      - [Available in the container](#available-in-the-container-1)
-      - [Available in the VS Code IDE through extensions](#available-in-the-vs-code-ide-through-extensions-1)
+- [Requirements](#requirements)
+  - [Configuring Docker for easy usage](#configuring-docker-for-easy-usage)
+- [Prototyping environment](#prototyping-environment)
+  - [Usage](#usage)
+    - [Available in the container](#available-in-the-container)
+    - [Available in the VS Code IDE through extensions](#available-in-the-vs-code-ide-through-extensions)
+- [Production environment](#production-environment)
+- [Development environment](#development-environment)
+  - [Usage](#usage-1)
+    - [Available in the container](#available-in-the-container-1)
+    - [Available in the VS Code IDE through extensions](#available-in-the-vs-code-ide-through-extensions-1)
 
 ## Requirements
 
