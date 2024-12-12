@@ -1,4 +1,16 @@
 {
+    "betcrop - synthbet - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,c639461870ca534b5105f61d672f740f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-12-12T10:54:37.644838"
+    },
     "betcrop - synthbet": {
         "content": [
             {
