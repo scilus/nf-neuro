@@ -4,8 +4,8 @@ include { PREPROC_N4 } from '../../../modules/nf-neuro/preproc/n4/main'
 include { IMAGE_RESAMPLE } from '../../../modules/nf-neuro/image/resample/main'
 include { BETCROP_ANTSBET } from '../../../modules/nf-neuro/betcrop/antsbet/main'
 include { BETCROP_SYNTHBET} from '../../../modules/nf-neuro/betcrop/synthbet/main'
-include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_T1 } from '../../../modules/nf-neuro/betcrop/cropvolume/main'
-include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_MASK } from '../../../modules/nf-neuro/betcrop/cropvolume/main'
+include { IMAGE_CROPVOLUME as IMAGE_CROPVOLUME_T1 } from '../../../modules/nf-neuro/image/cropvolume/main'
+include { IMAGE_CROPVOLUME as IMAGE_CROPVOLUME_MASK } from '../../../modules/nf-neuro/image/cropvolume/main'
 
 params.run_synthbet = false
 
@@ -104,24 +104,24 @@ workflow PREPROC_T1 {
         ch_crop = image_bet
             .map{ it + [[]] }
 
-        BETCROP_CROPVOLUME_T1 ( ch_crop )
-        ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_T1.out.versions.first())
+        IMAGE_CROPVOLUME_T1 ( ch_crop )
+        ch_versions = ch_versions.mix(IMAGE_CROPVOLUME_T1.out.versions.first())
 
         // ** Crop mask ** //
         ch_crop_mask = mask_bet
-            .join(BETCROP_CROPVOLUME_T1.out.bounding_box)
+            .join(IMAGE_CROPVOLUME_T1.out.bounding_box)
 
-        BETCROP_CROPVOLUME_MASK ( ch_crop_mask )
-        ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_MASK.out.versions.first())
+        IMAGE_CROPVOLUME_MASK ( ch_crop_mask )
+        ch_versions = ch_versions.mix(IMAGE_CROPVOLUME_MASK.out.versions.first())
 
     emit:
-        t1_final        = BETCROP_CROPVOLUME_T1.out.image           // channel: [ val(meta), t1-preprocessed ]
-        mask_final      = BETCROP_CROPVOLUME_MASK.out.image         // channel: [ val(meta), t1-mask ]
+        t1_final        = IMAGE_CROPVOLUME_T1.out.image           // channel: [ val(meta), t1-preprocessed ]
+        mask_final      = IMAGE_CROPVOLUME_MASK.out.image         // channel: [ val(meta), t1-mask ]
         image_nlmeans   = DENOISING_NLMEANS.out.image               // channel: [ val(meta), t1-after-denoise ]
         image_N4        = PREPROC_N4.out.image                      // channel: [ val(meta), t1-after-unbias ]
         image_resample  = IMAGE_RESAMPLE.out.image                  // channel: [ val(meta), t1-after-resample ]
         image_bet       = image_bet                                 // channel: [ val(meta), t1-after-bet ]
         mask_bet        = mask_bet                                  // channel: [ val(meta), intermediary-mask ]
-        crop_box        = BETCROP_CROPVOLUME_T1.out.bounding_box    // channel: [ val(meta), bounding-box ]
+        crop_box        = IMAGE_CROPVOLUME_T1.out.bounding_box    // channel: [ val(meta), bounding-box ]
         versions        = ch_versions                               // channel: [ versions.yml ]
 }
