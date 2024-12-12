@@ -51,6 +51,8 @@ nextflow_process {
 
     test("betcrop - synthbet - stub-run") {
 
+        options "-stub-run"
+
         setup {
             run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
