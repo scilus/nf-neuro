@@ -1,5 +1,5 @@
 {
-    "name": "NF-NEURO development container",
+    "name": "devops",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
@@ -8,8 +8,8 @@
         }
     },
     "forwardPorts": [3000],
-    "onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
-    "updateContentCommand": "bash .devcontainer/updateContentCommand.sh",
+    "onCreateCommand": "bash .devcontainer/devops/onCreateCommand.sh",
+    "updateContentCommand": "bash .devcontainer/devops/updateContentCommand.sh",
     "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     "containerEnv": {
         "WORKSPACE": "${containerWorkspaceFolder}"

@@ -1,0 +1,77 @@
+{
+    "name": "prototyping",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "POETRY_VERSION": "1.8.*"
+        }
+    },
+    "forwardPorts": [3000],
+    "initializeCommand": "bash .devcontainer/prototyping/initializeCommand.sh",
+    "onCreateCommand": "bash .devcontainer/prototyping/onCreateCommand.sh",
+    "updateContentCommand": "bash .devcontainer/prototyping/updateContentCommand.sh",
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "containerEnv": {
+        "WORKSPACE": "${containerWorkspaceFolder}"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {},
+        "ghcr.io/robsyme/features/nextflow:1": {},
+        "ghcr.io/devcontainers-contrib/features/curl-apt-get:1": {},
+        "ghcr.io/devcontainers-contrib/features/tmux-apt-get:1": {},
+        "ghcr.io/devcontainers-contrib/features/wget-apt-get:1": {}
+    },
+    "mounts": [
+        {
+            "source": "nf-proto-${devcontainerId}-venv",
+            "target": "${containerWorkspaceFolder}/.venv",
+            "type": "volume"
+        },
+        {
+            "target": "/tmp",
+            "type": "volume"
+        },
+        {
+            "source": "nf-proto-${devcontainerId}-profile",
+            "target": "/root",
+            "type": "volume"
+        },
+        {
+            "target": "/root/.vscode-server",
+            "type": "volume"
+        }
+    ],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python": {
+                    "analysis.exclude": [
+                        "${containerWorkspaceFolder}/.vscode",
+                        "${containerWorkspaceFolder}/.venv",
+                        "**/__pycache__",
+                        "${containerWorkspaceFolder}/.git"
+                    ],
+                    "analysis.ignore": [
+                        "${containerWorkspaceFolder}/.vscode",
+                        "${containerWorkspaceFolder}/.venv",
+                        "**/__pycache__",
+                        "${containerWorkspaceFolder}/.git"
+                    ],
+                    "createEnvironment.trigger": "off",
+                    "interpreter.infoVisibility": "always",
+                    "poetryPath": "/root/.local/bin/poetry",
+                    "defaultInterpreterPath": "${containerWorkspaceFolder}/.venv",
+                    "terminal.activateEnvironment": true,
+                    "terminal.activateEnvInCurrentTerminal": true,
+                    "terminal.focusAfterLaunch": true
+                }
+            },
+            "extensions": ["nf-neuro.nf-neuro-extensionpack"]
+        }
+    },
+    "init": true,
+    "privileged": true
+}

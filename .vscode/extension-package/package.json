@@ -7,10 +7,10 @@
         "url": "https://github.com/scilus/nf-neuro.git"
     },
     "icon": "icon.avif",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "nf-neuro",
     "engines": {
-        "vscode": "^1.84.0"
+        "vscode": "^1.95.0"
     },
     "categories": [
         "Extension Packs"
@@ -50,6 +50,7 @@
         "ryu1kn.annotator",
         "trond-snekvik.simple-rst",
         "twxs.cmake",
+        "usernamehw.errorlens",
         "yahyabatulu.vscode-markdown-alert",
         "yzhang.markdown-all-in-one"
     ]
