@@ -64,9 +64,11 @@ workflow BUNDLE_SEG {
             atlas_average = Channel.fromPath("$params.atlas_directory/atlas/atlas/", checkIfExists: true, relative: true)
         }
         else {
+            if ( !file("$workflow.workDir/atlas/mni_masked.nii.gz").exists() ) {
             fetch_bundleseg_atlas(  "https://zenodo.org/records/10103446/files/atlas.zip?download=1",
                                     "https://zenodo.org/records/10103446/files/config.zip?download=1",
                                     "${workflow.workDir}/")
+            }
             atlas_anat = Channel.fromPath("$workflow.workDir/atlas/mni_masked.nii.gz")
             atlas_config = Channel.fromPath("$workflow.workDir/config/config_fss_1.json")
             atlas_average = Channel.fromPath("$workflow.workDir/atlas/atlas/")
@@ -80,10 +82,17 @@ workflow BUNDLE_SEG {
         REGISTRATION_ANTS ( ch_register )
         ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions.first())
 
+        // ** Fetch only the .mat transformation file. ** //
+        ch_mat = REGISTRATION_ANTS.out.transfo_image
+            .flatten()
+            .toList()
+            .map{ [it[0], it[2]] }
+
         // ** Perform bundle recognition and segmentation ** //
-        ch_recognize_bundle =  ch_tractogram.join(REGISTRATION_ANTS.out.transfo_image)
-                                            .combine(atlas_config)
-                                            .combine(atlas_average)
+        ch_recognize_bundle = ch_tractogram
+            .join(ch_mat)
+            .combine(atlas_config)
+            .combine(atlas_average)
 
         BUNDLE_RECOGNIZE ( ch_recognize_bundle )
         ch_versions = ch_versions.mix(BUNDLE_RECOGNIZE.out.versions.first())

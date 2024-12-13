@@ -9,22 +9,27 @@
                             "single_end": false
                         },
                         [
-                            "test__AF_L_cleaned.trk:md5,b9a6567efffa206202f37c11afea2391",
-                            "test__CC_Fr_2_cleaned.trk:md5,ad18f4415d6d5baae1ec81359ccffecb",
-                            "test__CC_Pr_Po_cleaned.trk:md5,dca763cddc2decfa64baf452cc035b5a",
-                            "test__CG_R_An_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
-                            "test__CG_R_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
-                            "test__FPT_L_Brainstem_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
-                            "test__FPT_L_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
-                            "test__ILF_L_cleaned.trk:md5,00f9f6e33e59bfe8bbe3a5afd18b0f2e",
-                            "test__MCP_cleaned.trk:md5,ed86370180b35e125ae410aa3d520625",
-                            "test__OR_ML_L_cleaned.trk:md5,721b658ed8a4de104c4e7c207d4fe170",
+                            "test__AF_L_cleaned.trk:md5,028aad575b0191512638054aae48aedc",
+                            "test__AF_R_cleaned.trk:md5,36ad2f6bc0333de2c3047e19df9fd122",
+                            "test__CC_Fr_1_cleaned.trk:md5,122f7573437035e37581a6525a5f9ef0",
+                            "test__CC_Fr_2_cleaned.trk:md5,1aadd5139071a96e22e3fc1889396c03",
+                            "test__CC_Pa_cleaned.trk:md5,6c7fdf1f5f9cebb3160ac076657b7815",
+                            "test__CC_Pr_Po_cleaned.trk:md5,14a09e95cb82e5b720ac39ccf382e8a1",
+                            "test__FAT_R_cleaned.trk:md5,80749af923fd8d9f85f06c3fce80c680",
+                            "test__FPT_L_Brainstem_cleaned.trk:md5,8df02afad80747922b8fda408d2e87a8",
+                            "test__FPT_L_cleaned.trk:md5,6af39bbd85cc396d95c667734c4876e5",
+                            "test__FPT_R_Brainstem_cleaned.trk:md5,625c397e54e5fc45dd4266a8fadfafd0",
+                            "test__FPT_R_cleaned.trk:md5,625c397e54e5fc45dd4266a8fadfafd0",
+                            "test__ILF_L_cleaned.trk:md5,5a3e80fed89f3ac92c07544830d56fea",
+                            "test__ILF_R_cleaned.trk:md5,44bd133c97909ba344a0df98381f59b5",
+                            "test__MCP_cleaned.trk:md5,a1eaaedc048cf82d67569660a3afab70",
                             "test__POPT_R_Brainstem_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
                             "test__POPT_R_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
+                            "test__PYT_L_Brainstem_cleaned.trk:md5,a67f6be5ecf9a8e2211e997bc3c2b268",
                             "test__PYT_L_cleaned.trk:md5,ac9973ef987c34ecee0328004033ea46",
-                            "test__PYT_R_Brainstem_cleaned.trk:md5,28b4be34422e356030b6b081efca31d5",
-                            "test__PYT_R_cleaned.trk:md5,50f8127bbaab6f4b9fea790a7c11679d",
-                            "test__SLF_L_cleaned.trk:md5,3660a62ee7e0e413f7417e80c1842e60"
+                            "test__PYT_R_cleaned.trk:md5,2babf062dcc87252950ec47a72ab347c",
+                            "test__SLF_L_cleaned.trk:md5,55b5a7c7ae7a29043ca4ff43fa5ba9e6",
+                            "test__SLF_R_cleaned.trk:md5,83068144984abd0fd55936903c61016c"
                         ]
                     ]
                 ],
@@ -39,22 +44,27 @@
                             "single_end": false
                         },
                         [
-                            "test__AF_L_cleaned.trk:md5,b9a6567efffa206202f37c11afea2391",
-                            "test__CC_Fr_2_cleaned.trk:md5,ad18f4415d6d5baae1ec81359ccffecb",
-                            "test__CC_Pr_Po_cleaned.trk:md5,dca763cddc2decfa64baf452cc035b5a",
-                            "test__CG_R_An_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
-                            "test__CG_R_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
-                            "test__FPT_L_Brainstem_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
-                            "test__FPT_L_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
-                            "test__ILF_L_cleaned.trk:md5,00f9f6e33e59bfe8bbe3a5afd18b0f2e",
-                            "test__MCP_cleaned.trk:md5,ed86370180b35e125ae410aa3d520625",
-                            "test__OR_ML_L_cleaned.trk:md5,721b658ed8a4de104c4e7c207d4fe170",
+                            "test__AF_L_cleaned.trk:md5,028aad575b0191512638054aae48aedc",
+                            "test__AF_R_cleaned.trk:md5,36ad2f6bc0333de2c3047e19df9fd122",
+                            "test__CC_Fr_1_cleaned.trk:md5,122f7573437035e37581a6525a5f9ef0",
+                            "test__CC_Fr_2_cleaned.trk:md5,1aadd5139071a96e22e3fc1889396c03",
+                            "test__CC_Pa_cleaned.trk:md5,6c7fdf1f5f9cebb3160ac076657b7815",
+                            "test__CC_Pr_Po_cleaned.trk:md5,14a09e95cb82e5b720ac39ccf382e8a1",
+                            "test__FAT_R_cleaned.trk:md5,80749af923fd8d9f85f06c3fce80c680",
+                            "test__FPT_L_Brainstem_cleaned.trk:md5,8df02afad80747922b8fda408d2e87a8",
+                            "test__FPT_L_cleaned.trk:md5,6af39bbd85cc396d95c667734c4876e5",
+                            "test__FPT_R_Brainstem_cleaned.trk:md5,625c397e54e5fc45dd4266a8fadfafd0",
+                            "test__FPT_R_cleaned.trk:md5,625c397e54e5fc45dd4266a8fadfafd0",
+                            "test__ILF_L_cleaned.trk:md5,5a3e80fed89f3ac92c07544830d56fea",
+                            "test__ILF_R_cleaned.trk:md5,44bd133c97909ba344a0df98381f59b5",
+                            "test__MCP_cleaned.trk:md5,a1eaaedc048cf82d67569660a3afab70",
                             "test__POPT_R_Brainstem_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
                             "test__POPT_R_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
+                            "test__PYT_L_Brainstem_cleaned.trk:md5,a67f6be5ecf9a8e2211e997bc3c2b268",
                             "test__PYT_L_cleaned.trk:md5,ac9973ef987c34ecee0328004033ea46",
-                            "test__PYT_R_Brainstem_cleaned.trk:md5,28b4be34422e356030b6b081efca31d5",
-                            "test__PYT_R_cleaned.trk:md5,50f8127bbaab6f4b9fea790a7c11679d",
-                            "test__SLF_L_cleaned.trk:md5,3660a62ee7e0e413f7417e80c1842e60"
+                            "test__PYT_R_cleaned.trk:md5,2babf062dcc87252950ec47a72ab347c",
+                            "test__SLF_L_cleaned.trk:md5,55b5a7c7ae7a29043ca4ff43fa5ba9e6",
+                            "test__SLF_R_cleaned.trk:md5,83068144984abd0fd55936903c61016c"
                         ]
                     ]
                 ],
@@ -66,8 +76,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.1"
         },
-        "timestamp": "2024-10-24T20:26:57.178201"
+        "timestamp": "2024-12-13T11:51:35.634778"
     }
 }
