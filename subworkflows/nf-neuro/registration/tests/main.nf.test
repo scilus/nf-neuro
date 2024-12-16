@@ -7,13 +7,13 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_nfcore"
     tag "subworkflows/registration"
-
+/*
     tag "registration"
     tag "registration/anattodwi"
     tag "registration"
     tag "registration/ants"
     tag "registration/easyreg"
-    tag "registration/synthregistration"
+    tag "registration/synthregistration" */
 
     tag "load_test_data"
 

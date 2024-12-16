@@ -82,15 +82,9 @@ workflow BUNDLE_SEG {
         REGISTRATION_ANTS ( ch_register )
         ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions.first())
 
-        // ** Fetch only the .mat transformation file. ** //
-        ch_mat = REGISTRATION_ANTS.out.transfo_image
-            .flatten()
-            .toList()
-            .map{ [it[0], it[2]] }
-
         // ** Perform bundle recognition and segmentation ** //
         ch_recognize_bundle = ch_tractogram
-            .join(ch_mat)
+            .join(REGISTRATION_ANTS.out.affine)
             .combine(atlas_config)
             .combine(atlas_average)
 

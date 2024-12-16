@@ -66,7 +66,8 @@ workflow REGISTRATION {
 
             // ** Set outputs ** //
             image_warped = REGISTRATION_SYNTHREGISTRATION.out.warped_image
-            transfo_image = REGISTRATION_SYNTHREGISTRATION.out.transfo_image
+            transfo_image = REGISTRATION_SYNTHREGISTRATION.out.warp
+                .join(REGISTRATION_SYNTHREGISTRATION.out.affine)
             transfo_trk = Channel.empty()
             ref_warped = Channel.empty()
             out_segmentation = Channel.empty()
@@ -97,8 +98,10 @@ workflow REGISTRATION {
 
             // ** Set compulsory outputs ** //
             image_warped = REGISTRATION_ANATTODWI.out.t1_warped
-            transfo_image = REGISTRATION_ANATTODWI.out.transfo_image
-            transfo_trk = REGISTRATION_ANATTODWI.out.transfo_trk
+            transfo_image = REGISTRATION_ANATTODWI.out.warp
+                .join(REGISTRATION_ANATTODWI.out.affine)
+            transfo_trk = REGISTRATION_ANATTODWI.out.affine
+                .join(REGISTRATION_ANATTODWI.out.inverse_warp)
 
             // ** Registration using ANTS SYN SCRIPTS ** //
             // Registration using antsRegistrationSyN.sh or antsRegistrationSyNQuick.sh, has
@@ -116,8 +119,10 @@ workflow REGISTRATION {
 
             // ** Set compulsory outputs ** //
             image_warped = image_warped.mix(REGISTRATION_ANTS.out.image)
-            transfo_image = transfo_image.mix(REGISTRATION_ANTS.out.transfo_image)
-            transfo_trk = transfo_trk.mix(REGISTRATION_ANTS.out.transfo_trk)
+            transfo_image = transfo_image.mix(REGISTRATION_ANTS.out.warp)
+                .join(REGISTRATION_ANTS.out.affine)
+            transfo_trk = transfo_trk.mix(REGISTRATION_ANTS.out.inverse_affine)
+                .join(REGISTRATION_ANTS.out.inverse_warp)
 
             // **et optional outputs **//
             ref_warped = Channel.empty()
@@ -128,8 +133,8 @@ workflow REGISTRATION {
     emit:
         image_warped        = image_warped            // channel: [ val(meta), image ] ]
         ref_warped          = ref_warped              // channel: [ val(meta), ref ]
-        transfo_image       = transfo_image           // channel: [ val(meta), [ warp, <affine> ] ]
-        transfo_trk         = transfo_trk             // channel: [ val(meta), [ <inverse-affine>, inverse-warp ] ]
+        transfo_image       = transfo_image           // channel: [ val(meta), [ warp ], [ <affine> ] ]
+        transfo_trk         = transfo_trk             // channel: [ val(meta), [ <inverse-affine> ], [ inverse-warp ] ]
         segmentation        = out_segmentation        // channel: [ val(meta), segmentation ]
         ref_segmentation    = out_ref_segmentation    // channel: [ val(meta), ref-segmentation ]
         versions            = ch_versions             // channel: [ versions.yml ]
