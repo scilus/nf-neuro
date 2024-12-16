@@ -11,9 +11,10 @@ process REGISTRATION_SYNTHREGISTRATION {
     tuple val(meta), path(moving), path(fixed)
 
     output:
-    tuple val(meta), path("*__output_warped.nii.gz")                                , emit: warped_image
-    tuple val(meta), path("*__deform_warp.nii.gz"), path("*__affine_warp.lta")      , emit: transfo_image
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*__output_warped.nii.gz")        , emit: warped_image
+    tuple val(meta), path("*__deform_warp.nii.gz")          , emit: warp
+    tuple val(meta), path("*__affine_warp.lta")             , emit: affine
+    path "versions.yml"                                     , emit: versions
 
     when:
     task.ext.when == null || task.ext.when

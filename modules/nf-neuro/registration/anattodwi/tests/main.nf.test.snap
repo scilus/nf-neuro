@@ -8,8 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c",
-                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                     ]
                 ],
                 "1": [
@@ -18,8 +17,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
-                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
                     ]
                 ],
                 "2": [
@@ -28,11 +26,38 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
+                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
                 "3": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__t1_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
+                    ]
+                ],
+                "4": [
                     "versions.yml:md5,3b94092e010fc0f6bf505074a393ddcc"
+                ],
+                "affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                    ]
+                ],
+                "inverse_warp": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                    ]
                 ],
                 "t1_warped": [
                     [
@@ -43,35 +68,24 @@
                         "test__t1_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
                     ]
                 ],
-                "transfo_image": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
-                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
-                    ]
-                ],
-                "transfo_trk": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c",
-                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
-                    ]
-                ],
                 "versions": [
                     "versions.yml:md5,3b94092e010fc0f6bf505074a393ddcc"
+                ],
+                "warp": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
+                    ]
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-22T17:16:41.404087811"
+        "timestamp": "2024-12-16T17:41:00.965919497"
     }
 }
