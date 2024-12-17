@@ -1,12 +1,12 @@
 
 // PREPROCESSING
-include {   PREPROC_DWI                                               } from '../../../subworkflows/nf-neuro/preproc_dwi/main'
-include {   PREPROC_T1                                                } from '../../../subworkflows/nf-neuro/preproc_t1/main'
+include {   PREPROC_DWI                                               } from '../preproc_dwi/main'
+include {   PREPROC_T1                                                } from '../preproc_t1/main'
 include {   RECONST_DTIMETRICS as REGISTRATION_FA                     } from '../../../modules/nf-neuro/reconst/dtimetrics/main'
-include {   REGISTRATION as T1_REGISTRATION                           } from '../../../subworkflows/nf-neuro/registration/main'
+include {   REGISTRATION as T1_REGISTRATION                           } from '../registration/main'
 include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_WMPARC      } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
 include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_APARC_ASEG  } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
-include {   ANATOMICAL_SEGMENTATION                                   } from '../../../subworkflows/nf-neuro/anatomical_segmentation/main'
+include {   ANATOMICAL_SEGMENTATION                                   } from '../anatomical_segmentation/main'
 
 // RECONSTRUCTION
 include {   RECONST_FRF        } from '../../../modules/nf-neuro/reconst/frf/main'
@@ -32,10 +32,10 @@ def group_frf ( label, ch_frf ) {
 workflow TRACTOFLOW {
     take:
         ch_dwi              // channel : [required] meta, dwi, bval, bvec
+        ch_t1               // channel : [required] meta, t1
         ch_sbref            // channel : [optional] meta, sbref
         ch_rev_dwi          // channel : [optional] meta, rev_dwi, rev_bval, rev_bvec
         ch_rev_sbref        // channel : [optional] meta, rev_sbref
-        ch_t1               // channel : [required] meta, t1
         ch_wmparc           // channel : [optional] meta, wmparc
         ch_aparc_aseg       // channel : [optional] meta, aparc_aseg
         ch_topup_config     // channel : [optional] topup_config
@@ -157,10 +157,13 @@ workflow TRACTOFLOW {
         ch_versions = ch_versions.mix(RECONST_FRF.out.versions.first())
 
         /* Run fiber response aeraging over subjects */
+        ch_single_frf = RECONST_FRF.out.frf
+            .map{ it + [[], []] }
+
         ch_fiber_response = RECONST_FRF.out.wm_frf
             .join(RECONST_FRF.out.gm_frf)
             .join(RECONST_FRF.out.csf_frf)
-            .mix(RECONST_FRF.out.frf)
+            .mix(ch_single_frf)
 
         if ( params.fodf_use_average_frf ) {
             ch_single_frf = group_frf("ssst", RECONST_FRF.out.frf)
@@ -177,8 +180,21 @@ workflow TRACTOFLOW {
             RECONST_MEANFRF( ch_meanfrf )
             ch_versions = ch_versions.mix(RECONST_MEANFRF.out.versions.first())
 
-            ch_fiber_response = RECONST_FRF.out.map{ it[0] }
-                .combine( RECONST_MEANFRF.out.meanfrf )
+            ch_meanfrf = RECONST_MEANFRF.out.meanfrf
+                .map{ ["frf"] + it }
+                .branch{
+                    ssst: it[1] == "ssst"
+                    wm: it[1] == "wm"
+                    gm: it[1] == "gm"
+                    csf: it[1] == "csf"
+                }
+
+            ch_fiber_response = ch_meanfrf.wm.map{ [it[0], it[2]] }
+                .join(ch_meanfrf.gm.map{ [it[0], it[2]] })
+                .join(ch_meanfrf.csf.map{ [it[0], it[2]] })
+                .map{ it[1..-1] }
+                .mix(ch_meanfrf.ssst.map{ [it[1], [], []] })
+                .combine(RECONST_FRF.out.map{ it[0] })
         }
 
         //
