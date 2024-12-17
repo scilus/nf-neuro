@@ -4,30 +4,83 @@ nextflow_workflow {
 
     name "Test Subworkflow TRACTOFLOW"
     script "../main.nf"
+    config "../nextflow.config"
     workflow "TRACTOFLOW"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/tractoflow"
-    // TODO nf-core: Add tags for all modules used within this subworkflow. Example:
-    tag "samtools"
-    tag "samtools/sort"
-    tag "samtools/index"
 
+    tag "anatomical_segmentation"
+    tag "preproc_dwi"
+    tag "preproc_t1"
+    tag "registration"
+    tag "reconst/dtimetrics"
+    tag "reconst/frf"
+    tag "reconst/fodf"
+    tag "reconst/meanfrf"
+    tag "registration/antsapplytransforms"
+    tag "tracking/localtracking"
+    tag "tracking/pfttracking"
 
-    // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
-    test("sarscov2 - bam - single_end") {
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "antsbet.zip", "raw_DWIss1000-dir32.zip", "raw_T1w.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
 
+    test("tractoflow - no rev") {
         when {
+            params {
+                dwi_motion_and_eddy_filter_command_args = "--fep"
+                dwi_motion_and_eddy_filter_bet_f_threshold = 0.3
+                dwi_mask_final_bet_f_threshold = 0.3
+                fodf_pft_fit_seeding_n_seeds = 1
+                fodf_pft_fit_filter_n_particles = 4
+                fodf_local_fit_seeding_n_seeds = 1
+            }
             workflow {
                 """
-                // TODO nf-core: define inputs of the workflow here. Example:
-                input[0] = [ [ id:'test', single_end:false ], // meta map
-                        file(params.test_data['sarscov2']['illumina']['test_single_end_bam'], checkIfExists: true)
-                        ]
-                input[1] = [ [ id:'genome' ],
-                        file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
-                        ]
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "raw_DWIss1000-dir32"
+                        t1w: it.simpleName == "raw_T1w"
+                        template: it.simpleName == "antsbet"
+                    }
+                input[0] = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]}
+                input[1] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]}
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                input[6] = Channel.empty()
+                input[7] = Channel.empty()
+                input[8] = ch_split_test_data.template.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_template.nii.gz")
+                    ]}
+                input[9] = ch_split_test_data.template.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                    ]}
                 """
             }
         }
@@ -36,7 +89,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(workflow.out).match()}
-                //TODO nf-core: Add all required assertions to verify the test output.
             )
         }
     }

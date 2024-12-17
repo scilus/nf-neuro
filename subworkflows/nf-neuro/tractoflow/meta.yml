@@ -4,7 +4,10 @@ description: |
   This subworkflow implements the TractoFlow [1] pipeline. It can process raw diffusion and T1 weighted image to reduce
   acquisition biases, align anatomical and diffusion space, compute DTI and fODF metrics and generate whole brain
   tractograms.
-  ---------  Steps  --------------------
+  ----------  Configuration  ----------
+  - nextflow.config : contains an example configuration for the subworkflow. Includes :
+  - modules.config  : contains the bindings to the modules parameters and some defaults making it Tractoflow.
+  --------------  Steps  --------------
   PREPROCESS DWI (preproc_dwi, nf-neuro)
     Preprocess the DWI image including brain extraction, MP-PCA denoising, eddy current and motion correction, N4 bias
     correction, normalization and resampling.
@@ -53,6 +56,11 @@ input:
       description: |
         The input channel containing the DWI file, B-values and B-vectors in FSL format files.
         Structure: [ val(meta), path(dwi), path(bval), path(bvec) ]
+  - ch_t1:
+      type: file
+      description: |
+        The input channel containing the anatomical T1 weighted image.
+        Structure: [ val(meta), path(t1) ]
   - ch_sbref:
       type: file
       description: |
@@ -68,11 +76,6 @@ input:
       description: |
         (Optional) The input channel containing the reverse b0 file.
         Structure: [ val(meta), path(rev_b0) ]
-  - ch_t1:
-      type: file
-      description: |
-        The input channel containing the anatomical T1 weighted image.
-        Structure: [ val(meta), path(t1) ]
   - ch_aparc_aseg:
       type: file
       description: |
