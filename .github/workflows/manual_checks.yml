@@ -5,7 +5,6 @@ on:
       - created
       - edited
 
-
 jobs:
   checks:
     if: github.event.issue.pull_request && contains(github.event.comment.body, '@rerun-checks')
