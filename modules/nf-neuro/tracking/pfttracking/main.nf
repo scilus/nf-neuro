@@ -11,11 +11,10 @@ process TRACKING_PFTTRACKING {
         tuple val(meta), path(wm), path(gm), path(csf), path(fodf), path(fa)
 
     output:
-
         tuple val(meta), path("*__pft_tracking.trk")            , emit: trk
         tuple val(meta), path("*__pft_tracking_config.json")    , emit: config
-        tuple val(meta), path("*__map_include.nii.gz")          , emit: include
-        tuple val(meta), path("*__map_exclude.nii.gz")          , emit: exclude
+        tuple val(meta), path("*__map_include.nii.gz")          , emit: includes
+        tuple val(meta), path("*__map_exclude.nii.gz")          , emit: excludes
         tuple val(meta), path("*__pft_seeding_mask.nii.gz")     , emit: seeding
         path "versions.yml"                                     , emit: versions
 
