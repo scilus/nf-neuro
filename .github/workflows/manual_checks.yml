@@ -1,0 +1,17 @@
+name: Trigger checks manually
+on:
+  issue_comment:
+    types:
+      - created
+      - edited
+
+
+jobs:
+  checks:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '@rerun-checks')
+    # Cancel if a newer run is started
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+    uses: ./.github/workflows/run_checks_suite.yml
+    secrets: inherit
