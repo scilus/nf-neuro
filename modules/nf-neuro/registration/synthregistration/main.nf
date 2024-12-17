@@ -2,7 +2,7 @@ process REGISTRATION_SYNTHREGISTRATION {
     tag "$meta.id"
     label 'process_high'
 
-    container "freesurfer/synthmorph:3"
+    container "freesurfer/synthmorph:4"
     containerOptions {
         (workflow.containerEngine == 'docker') ? '--entrypoint "" --env PYTHONPATH="/freesurfer/env/lib/python3.11/site-packages"' : "--env PYTHONPATH='/freesurfer/env/lib/python3.11/site-packages'"
     }
@@ -20,7 +20,6 @@ process REGISTRATION_SYNTHREGISTRATION {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     def affine = task.ext.affine ? "-m " + task.ext.affine : "-m affine"
@@ -41,12 +40,11 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        synthmoprh: 3
+        synthmoprh: 4
     END_VERSIONS
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
@@ -58,7 +56,7 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        synthmoprh: 3
+        synthmoprh: 4
     END_VERSIONS
     """
 }
