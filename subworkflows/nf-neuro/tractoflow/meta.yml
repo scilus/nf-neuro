@@ -1,0 +1,344 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "tractoflow"
+description: |
+  This subworkflow implements the TractoFlow [1] pipeline. It can process raw diffusion and T1 weighted image to reduce
+  acquisition biases, align anatomical and diffusion space, compute DTI and fODF metrics and generate whole brain
+  tractograms.
+  ---------  Steps  --------------------
+  PREPROCESS DWI (preproc_dwi, nf-neuro)
+    Preprocess the DWI image including brain extraction, MP-PCA denoising, eddy current and motion correction, N4 bias
+    correction, normalization and resampling.
+  PREPROCESS T1 (preproc_t1, nf-neuro)
+    Preprocess the T1 image including brain extraction, NL-Means denoising, bias field correction and resampling.
+  T1 REGISTRATION (anatomical_registration, nf-neuro)
+    Register the T1 image to the DWI image, using the b0 and the FA map as target for the diffusion space.
+  SEGMENTATION (anatomical_segmentation, nf-neuro)
+    Segment the T1 image into white matter, gray matter and CSF, in diffusion space.
+  DTI FITTING (dipy)
+    Fit the diffusion tensor model on the preprocessed DWI image and extract relevant metrics.
+  FRF ESTIMATION (scilpy)
+    Estimate the Fiber Response Function (FRF) from the preprocessed DWI image.
+  FODF FITTING (dipy)
+    Fit the Fiber Orientation Distribution Function (fODF), using Single or Multi Shell, Single or Multi Tissues models,
+    on the preprocessed DWI image and extract relevant metrics.
+  PFT TRACKING (dipy)
+    Perform Particle Filtering Tractography (PFT) on the FODF to generate whole brain tractograms.
+  LOCAL TRACKING (dipy)
+    Perform Local Tracking on the FODF to generate whole brain tractograms.
+
+  [1] https://tractoflow-documentation.readthedocs.io
+keywords:
+  - diffusion
+  - MRI
+  - end-to-end
+  - tractography
+  - preprocessing
+  - fodf
+  - dti
+components:
+  - anatomical_segmentation
+  - preproc_dwi
+  - preproc_t1
+  - registration
+  - reconst/dtimetrics
+  - reconst/frf
+  - reconst/fodf
+  - reconst/meanfrf
+  - registration/antsapplytransforms
+  - tracking/localtracking
+  - tracking/pfttracking
+input:
+  - ch_dwi:
+      type: file
+      description: |
+        The input channel containing the DWI file, B-values and B-vectors in FSL format files.
+        Structure: [ val(meta), path(dwi), path(bval), path(bvec) ]
+  - ch_sbref:
+      type: file
+      description: |
+        (Optional) The input channel containing the single-band b0 reference for the DWI.
+        Structure: [ val(meta), path(rev_b0) ]
+  - ch_rev_dwi:
+      type: file
+      description: |
+        (Optional) The input channel containing the reverse DWI file, B-values and B-vectors in FSL format files.
+        Structure: [ val(meta), path(rev_dwi), path(bval), path(bvec) ]
+  - ch_rev_sbref:
+      type: file
+      description: |
+        (Optional) The input channel containing the reverse b0 file.
+        Structure: [ val(meta), path(rev_b0) ]
+  - ch_t1:
+      type: file
+      description: |
+        The input channel containing the anatomical T1 weighted image.
+        Structure: [ val(meta), path(t1) ]
+  - ch_aparc_aseg:
+      type: file
+      description: |
+        (Optional) The input channel containing freesurfer brain segmentation and gray matter parcellation (aparc+aseg).
+        Must be supplied with ch_wm_parc. When supplied, those are used to generate tissues masks and probability maps.
+        Structure: [ val(meta), path(aparc_aseg) ]
+  - ch_wm_parc:
+      type: file
+      description: |
+        (Optional) The input channel containing freesurfer white matter parcellations (wmparc). Must be supplied with
+        ch_aparc_aseg. When supplied, those are used to generate tissues masks and probability maps.
+        Structure: [ val(meta), path(wmparc) ]
+  - ch_topup_config:
+      type: file
+      description: |
+        (Optional) The input channel containing the config file for Topup. This input is optional.
+        See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files.
+        Structure: [ path(config_file) ]
+  - ch_bet_template:
+      type: file
+      description: |
+        (Optional) The input channel containing the anatomical template for antsBET.
+        Structure: [ val(meta), path(bet_template) ]
+  - ch_bet_probability_map:
+      type: file
+      description: |
+        (Optional) The input channel containing the brain probability mask for antsBET,
+        with intensity range 1 (definitely brain) to 0 (definitely background).
+        Structure: [ val(meta), path(probability_map) ]
+output:
+  - dwi:
+      type: file
+      description: |
+        Preprocessed DWI image.
+        Structure: [ val(meta), path(dwi), path(bval), path(bvec) ]
+  - t1:
+      type: file
+      description: |
+        T1 image warped to the DWI space.
+        Structure: [ val(meta), path(t1) ]
+  - wm_mask:
+      type: file
+      description: |
+        White matter mask.
+        Structure: [ val(meta), path(wm_mask) ]
+  - gm_mask:
+      type: file
+      description: |
+        Gray matter mask.
+        Structure: [ val(meta), path(gm_mask) ]
+  - csf_mask:
+      type: file
+      description: |
+        Cerebrospinal fluid mask.
+        Structure: [ val(meta), path(csf_mask) ]
+  - wm_map:
+      type: file
+      description: |
+        White matter probability map.
+        Structure: [ val(meta), path(wm_map) ]
+  - gm_map:
+      type: file
+      description: |
+        Gray matter probability map.
+        Structure: [ val(meta), path(gm_map) ]
+  - csf_map:
+      type: file
+      description: |
+        Cerebrospinal fluid probability map.
+        Structure: [ val(meta), path(csf_map) ]
+  - aparc_aseg:
+      type: file
+      description: |
+        (Optional) Freesurfer brain segmentation and gray matter parcellation (aparc+aseg) in diffusion space. Only
+        available if ch_aparc_aseg is provided in inputs.
+        Structure: [ val(meta), path(aparc_aseg) ]
+  - wmparc:
+      type: file
+      description: |
+        (Optional) Freesurfer white matter parcellations (wmparc) in diffusion space. Only available if ch_wm_parc
+        is provided in inputs.
+        Structure: [ val(meta), path(wmparc) ]
+  - anatomical_to_diffusion:
+      type: file
+      description: |
+        Transformation matrix from the anatomical space to the diffusion space.
+        Structure: [ val(meta), [<path(warp)>, path(affine)] ]
+  - diffusion_to_anatomical:
+      type: file
+      description: |
+        Transformation matrix from the diffusion space to the anatomical space.
+        Structure: [ val(meta), [path(affine), <path(warp)>] ]
+  - t1_native:
+      type: file
+      description: |
+        Preprocessed T1 in anatomical space.
+        Structure: [ val(meta), path(t1) ]
+  - dti_tensor:
+      type: file
+      description: |
+        4-D Diffusion tensor image, with 6 components in the last dimensions, ordered by FSL convention
+        (row-major : Dxx, Dxy, Dxz, Dyy, Dyz, Dzz).
+        Structure: [ val(meta), path(dti_tensor) ]
+  - dti_md:
+      type: file
+      description: |
+        Mean diffusivity map.
+        Structure: [ val(meta), path(dti_md) ]
+  - dti_rd:
+      type: file
+      description: |
+        Radial diffusivity map.
+        Structure: [ val(meta), path(dti_rd) ]
+  - dti_ad:
+      type: file
+      description: |
+        Axial diffusivity map.
+        Structure: [ val(meta), path(dti_ad) ]
+  - dti_fa:
+      type: file
+      description: |
+        Fractional anisotropy map.
+        Structure: [ val(meta), path(dti_fa) ]
+  - dti_rgb:
+      type: file
+      description: |
+        RGB map of the diffusion tensor.
+        Structure: [ val(meta), path(dti_rgb) ]
+  - dti_peaks:
+      type: file
+      description: |
+        Principal direction of the diffusion tensor.
+        Structure: [ val(meta), path(dti_peaks) ]
+  - dti_evecs:
+      type: file
+      description: |
+        Eigenvectors of the diffusion tensor, ordered by eigenvalue.
+        Structure: [ val(meta), path(dti_evecs) ]
+  - dti_evals:
+      type: file
+      description: |
+        Eigenvalues of the diffusion tensor.
+        Structure: [ val(meta), path(dti_evals) ]
+  - dti_residual:
+      type: file
+      description: |
+        Residuals of the diffusion tensor fitting.
+        Structure: [ val(meta), path(dti_residual) ]
+  - dti_ga:
+      type: file
+      description: |
+        Generalized anisotropy map.
+        Structure: [ val(meta), path(dti_ga) ]
+  - dti_mode:
+      type: file
+      description: |
+        Mode of the diffusion tensor.
+        Structure: [ val(meta), path(dti_mode) ]
+  - dti_norm:
+      type: file
+      description: |
+        Norm of the diffusion tensor.
+        Structure: [ val(meta), path(dti_norm) ]
+  - fiber_response:
+      type: file
+      description: |
+        Fiber Response Function (FRF) estimated from the DWI image.
+        If using Single Tissue
+            Structure: [ val(meta), path(fiber_response) ]
+        If using Multi Tissues
+            Structure: [ val(meta), path(wm_fiber_response), path(gm_fiber_response), path(csf_fiber_response) ]
+  - fodf:
+      type: file
+      description: |
+        Fiber Orientation Distribution Function (fODF) estimated from the DWI image.
+        If using Single Tissue
+            Structure: [ val(meta), path(fodf) ]
+        If using Multi Tissues
+            Structure: [ val(meta), path(wm_fodf), path(gm_fodf), path(csf_fodf) ]
+  - fodf_rgb:
+      type: file
+      description: |
+        RGB map of the fODF, normalized by volume fraction of WM.
+        Structure: [ val(meta), path(fodf_rgb) ]
+  - fodf_peaks:
+      type: file
+      description: |
+        Peaks of the fODF.
+        Structure: [ val(meta), path(fodf_peaks) ]
+  - afd_max:
+      type: file
+      description: |
+        Maximum Apparent Fiber Density (AFD) map.
+        Structure: [ val(meta), path(afd_max) ]
+  - afd_total:
+      type: file
+      description: |
+        Total Apparent Fiber Density (AFD) map.
+        Structure: [ val(meta), path(afd_total) ]
+  - afd_sum:
+      type: file
+      description: |
+        Sum of Apparent Fiber Density (AFD) map.
+        Structure: [ val(meta), path(afd_sum) ]
+  - nufo:
+      type: file
+      description: |
+        Number of Unique Fibers Orientations (NUFO) map.
+        Structure: [ val(meta), path(nufo) ]
+  - volume_fraction:
+      type: file
+      description: |
+        Tissues volume fraction map.
+        Structure: [ val(meta), path(volume_fraction) ]
+  - pft_tractogram:
+      type: file
+      description: |
+        Whole brain tractogram generated with Particle Filtering Tractography (PFT).
+        Structure: [ val(meta), path(pft_tractogram) ]
+  - pft_config:
+      type: file
+      description: |
+        Configuration file used for Particle Filtering Tractography (PFT).
+        Structure: [ val(meta), path(pft_config) ]
+  - pft_map_include:
+      type: file
+      description: |
+        Include map used for Particle Filtering Tractography (PFT).
+        Structure: [ val(meta), path(pft_map_include) ]
+  - pft_map_exclude:
+      type: file
+      description: |
+        Exclude map used for Particle Filtering Tractography (PFT).
+        Structure: [ val(meta), path(pft_map_exclude) ]
+  - pft_seeding_mask:
+      type: file
+      description: |
+        Seeding mask used for Particle Filtering Tractography (PFT).
+      Structure: [ val(meta), path(pft_seeding_mask) ]
+  - local_tractogram:
+      type: file
+      description: |
+        Whole brain tractogram generated with Local Tracking.
+        Structure: [ val(meta), path(local_tractogram) ]
+  - local_config:
+      type: file
+      description: |
+        Configuration file used for Local Tracking.
+        Structure: [ val(meta), path(local_config) ]
+  - local_seeding_mask:
+      type: file
+      description: |
+        Seeding mask used for Local Tracking.
+        Structure: [ val(meta), path(local_seeding_mask) ]
+  - local_tracking_mask:
+      type: file
+      description: |
+        Tracking mask used for Local Tracking.
+        Structure: [ val(meta), path(local_tracking_mask) ]
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@AlexVCaron"
+maintainers:
+  - "@AlexVCaron"

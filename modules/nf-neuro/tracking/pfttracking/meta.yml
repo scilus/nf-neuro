@@ -68,12 +68,12 @@ output:
       description: Json file containing tracking parameters.
       pattern: "*.{json}"
 
-  - include:
+  - includes:
       type: file
       description: Nifti probability map for tracking of ending the streamline and including it in the output.
       pattern: "*.{nii,nii.gz}"
 
-  - exclude:
+  - excludes:
       type: file
       description: Nifti probability map for tracking of ending the streamline and excluding it in the output.
       pattern: "*.{nii,nii.gz}"
