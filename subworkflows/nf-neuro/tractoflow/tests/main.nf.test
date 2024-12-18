@@ -8,7 +8,7 @@ nextflow_workflow {
     workflow "TRACTOFLOW"
 
     tag "subworkflows"
-    tag "subworkflows_nfneuro"
+    tag "subworkflows_nfcore"
     tag "subworkflows/tractoflow"
 
     tag "anatomical_segmentation"

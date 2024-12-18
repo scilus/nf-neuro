@@ -314,7 +314,7 @@ output:
       type: file
       description: |
         Seeding mask used for Particle Filtering Tractography (PFT).
-      Structure: [ val(meta), path(pft_seeding_mask) ]
+      Structure: [val(meta), path(pft_seeding_mask)]
   - local_tractogram:
       type: file
       description: |
