@@ -2,9 +2,7 @@ process IMAGE_APPLYMASK {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "mrtrix3/mrtrix3:latest"
 
     input:
         tuple val(meta), path(image), path(mask)
