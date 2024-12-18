@@ -62,5 +62,17 @@
             "nextflow": "24.04.4"
         },
         "timestamp": "2024-11-21T19:53:14.315721034"
+    },
+    "eddy - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,137e3ce0fd25e5b16de2d8cc5a5aefca"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-12-12T12:50:30.654366"
     }
 }

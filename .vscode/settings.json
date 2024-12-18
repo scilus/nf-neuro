@@ -19,5 +19,24 @@
     "testDataExplorer.dataserver": "scil.usherbrooke.ca",
     "testDataExplorer.serverdatalocation": "scil_test_data/dvc-store/files/md5",
     "testDataExplorer.localListingLocation": "tests/test_data.json",
-    "testDataExplorer.remoteListingLocation": "tests/test_data.json"
+    "testDataExplorer.remoteListingLocation": "tests/test_data.json",
+    "nextflow.files.exclude": [
+        ".git",
+        ".nf-test",
+        "work",
+        ".venv",
+        ".nextflow",
+        "node_modules",
+        ".tests/runs"
+    ],
+    "cSpell.ignorePaths": [
+        "package-lock.json",
+        "node_modules",
+        "vscode-extension",
+        ".git/",
+        ".vscode",
+        ".vscode-insiders",
+        ".venv",
+        "tests/.runs"
+    ]
 }

@@ -33,6 +33,18 @@
         },
         "timestamp": "2024-11-01T16:21:18.752887499"
     },
+    "topup - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,1e46217f093e27a6a26cd479f074296b"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-12-12T11:56:01.860981"
+    },
     "topup_light": {
         "content": [
             "test__corrected_b0s.nii.gz",

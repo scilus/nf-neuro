@@ -3,9 +3,7 @@ process DENOISING_MPPCA {
     tag "$meta.id"
     label 'process_medium'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "mrtrix3/mrtrix3:latest"
 
     input:
     tuple val(meta), path(dwi), path(mask)
@@ -30,13 +28,12 @@ process DENOISING_MPPCA {
     export MRTRIX_RNG_SEED=112524
 
     dwidenoise $dwi ${prefix}_dwi_denoised.nii.gz $extent ${args.join(" ")}
-    scil_volume_math.py lower_clip ${prefix}_dwi_denoised.nii.gz 0 \
-        ${prefix}_dwi_denoised.nii.gz -f
+    mrcalc ${prefix}_dwi_denoised.nii.gz 0 -gt ${prefix}_dwi_denoised.nii.gz 0 \
+        -if ${prefix}_dwi_denoised.nii.gz -force
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -46,14 +43,13 @@ process DENOISING_MPPCA {
 
     """
     dwidenoise -h
-    scil_volume_math.py -h
+    mrcalc -h
 
     touch ${prefix}_dwi_denoised.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
