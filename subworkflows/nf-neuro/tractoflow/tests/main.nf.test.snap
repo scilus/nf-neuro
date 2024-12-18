@@ -15,7 +15,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz:md5,8d02cdc310475e7d9f73ed7e61835f80"
+                        "test__t1_warped.nii.gz:md5,e1d5080a5280df16a719c39825ce5ba2"
                     ]
                 ],
                 "10": [
@@ -23,8 +23,8 @@
                         {
                             "id": "test"
                         },
-                        "test__output1Warp.nii.gz:md5,bab8ac8676cdca96f780eb1a93a254f2",
-                        "test__output0GenericAffine.mat:md5,a8749c8f3e24dc98fa2299acf8076a88"
+                        "test__output1Warp.nii.gz:md5,e4956aa73a6f497e5c316dfe24086fa9",
+                        "test__output0GenericAffine.mat:md5,7ce31e1314d3f591b07eb5844e6cc237"
                     ]
                 ],
                 "11": [
@@ -32,8 +32,8 @@
                         {
                             "id": "test"
                         },
-                        "test__output0GenericAffine.mat:md5,a8749c8f3e24dc98fa2299acf8076a88",
-                        "test__output1InverseWarp.nii.gz:md5,74060775a192a4d051ee0dc26e309e65"
+                        "test__output0GenericAffine.mat:md5,7ce31e1314d3f591b07eb5844e6cc237",
+                        "test__output1InverseWarp.nii.gz:md5,532398bd5366613c4ceb71f09227a343"
                     ]
                 ],
                 "12": [
@@ -41,7 +41,7 @@
                         {
                             "id": "test"
                         },
-                        "test_t1_cropped.nii.gz:md5,b31fd188e250502273f89c0c73c34628"
+                        "test_t1_cropped.nii.gz:md5,c804e09ae12b053d76e10a3d74e98fb6"
                     ]
                 ],
                 "13": [
@@ -105,7 +105,7 @@
                         {
                             "id": "test"
                         },
-                        "test__mask_wm.nii.gz:md5,82bf94c71fb31a2c73dd4ddc021b6d81"
+                        "test__mask_wm.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
                     ]
                 ],
                 "20": [
@@ -189,7 +189,7 @@
                         {
                             "id": "test"
                         },
-                        "test__mask_gm.nii.gz:md5,444e4c93ed39418f015cca8711c7f3fc"
+                        "test__mask_gm.nii.gz:md5,40756ebc4a82a284a170ad699e0a5e30"
                     ]
                 ],
                 "30": [
@@ -246,7 +246,7 @@
                         {
                             "id": "test"
                         },
-                        "test__pft_tracking.trk:md5,9234bb8361568b22baebd47d050fcedf"
+                        "test__pft_tracking.trk:md5,38b3f540d2f112d5bbf026416b3d27ec"
                     ]
                 ],
                 "39": [
@@ -262,7 +262,7 @@
                         {
                             "id": "test"
                         },
-                        "test__mask_csf.nii.gz:md5,356b9cae3adb8579e17a8679a27117d3"
+                        "test__mask_csf.nii.gz:md5,277db7da3c1ed92947c177edeb5eaa7d"
                     ]
                 ],
                 "40": [
@@ -270,7 +270,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_include.nii.gz:md5,f6ab6cb53316ab7d4672230e20aa0ea8"
+                        "test__map_include.nii.gz:md5,d9983cec6fe4dbc7becce71ffac237b8"
                     ]
                 ],
                 "41": [
@@ -278,7 +278,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_exclude.nii.gz:md5,b41e6b0f1c5697856cba3669746e7b4d"
+                        "test__map_exclude.nii.gz:md5,44839611fb77fd588e99b9afa0ae6b91"
                     ]
                 ],
                 "42": [
@@ -286,7 +286,7 @@
                         {
                             "id": "test"
                         },
-                        "test__pft_seeding_mask.nii.gz:md5,1a824035733bd230eb82fd79c8ab6cdc"
+                        "test__pft_seeding_mask.nii.gz:md5,3429293546e20469c84502394e37885d"
                     ]
                 ],
                 "43": [
@@ -294,7 +294,7 @@
                         {
                             "id": "test"
                         },
-                        "test__local_tracking.trk:md5,53432f584dcceeaa4b95874905e21224"
+                        "test__local_tracking.trk:md5,5bf9827570b27aa3eaf19f9d76bae764"
                     ]
                 ],
                 "44": [
@@ -310,7 +310,7 @@
                         {
                             "id": "test"
                         },
-                        "test__local_seeding_mask.nii.gz:md5,82bf94c71fb31a2c73dd4ddc021b6d81"
+                        "test__local_seeding_mask.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
                     ]
                 ],
                 "46": [
@@ -318,7 +318,7 @@
                         {
                             "id": "test"
                         },
-                        "test__local_tracking_mask.nii.gz:md5,82bf94c71fb31a2c73dd4ddc021b6d81"
+                        "test__local_tracking_mask.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
                     ]
                 ],
                 "47": [
@@ -350,7 +350,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_wm.nii.gz:md5,c1fa90c2f2687dc206ee681a3420c525"
+                        "test__map_wm.nii.gz:md5,cd10401b5feee8c2bc531b34612ac959"
                     ]
                 ],
                 "50": [
@@ -378,7 +378,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_gm.nii.gz:md5,2fcc377353a21f697878d8e45b2dc2c1"
+                        "test__map_gm.nii.gz:md5,9ea2161ff256ba6680db86c28624191a"
                     ]
                 ],
                 "7": [
@@ -386,7 +386,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_csf.nii.gz:md5,9c5cc395eeaffd3ec7a7f9baa07122cc"
+                        "test__map_csf.nii.gz:md5,68f53afcc61f09d70484665161415aa8"
                     ]
                 ],
                 "8": [
@@ -424,8 +424,8 @@
                         {
                             "id": "test"
                         },
-                        "test__output1Warp.nii.gz:md5,bab8ac8676cdca96f780eb1a93a254f2",
-                        "test__output0GenericAffine.mat:md5,a8749c8f3e24dc98fa2299acf8076a88"
+                        "test__output1Warp.nii.gz:md5,e4956aa73a6f497e5c316dfe24086fa9",
+                        "test__output0GenericAffine.mat:md5,7ce31e1314d3f591b07eb5844e6cc237"
                     ]
                 ],
                 "aparc_aseg": [
@@ -439,7 +439,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_csf.nii.gz:md5,9c5cc395eeaffd3ec7a7f9baa07122cc"
+                        "test__map_csf.nii.gz:md5,68f53afcc61f09d70484665161415aa8"
                     ]
                 ],
                 "csf_mask": [
@@ -447,7 +447,7 @@
                         {
                             "id": "test"
                         },
-                        "test__mask_csf.nii.gz:md5,356b9cae3adb8579e17a8679a27117d3"
+                        "test__mask_csf.nii.gz:md5,277db7da3c1ed92947c177edeb5eaa7d"
                     ]
                 ],
                 "diffusion_to_anatomical": [
@@ -455,8 +455,8 @@
                         {
                             "id": "test"
                         },
-                        "test__output0GenericAffine.mat:md5,a8749c8f3e24dc98fa2299acf8076a88",
-                        "test__output1InverseWarp.nii.gz:md5,74060775a192a4d051ee0dc26e309e65"
+                        "test__output0GenericAffine.mat:md5,7ce31e1314d3f591b07eb5844e6cc237",
+                        "test__output1InverseWarp.nii.gz:md5,532398bd5366613c4ceb71f09227a343"
                     ]
                 ],
                 "dti_ad": [
@@ -620,7 +620,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_gm.nii.gz:md5,2fcc377353a21f697878d8e45b2dc2c1"
+                        "test__map_gm.nii.gz:md5,9ea2161ff256ba6680db86c28624191a"
                     ]
                 ],
                 "gm_mask": [
@@ -628,7 +628,7 @@
                         {
                             "id": "test"
                         },
-                        "test__mask_gm.nii.gz:md5,444e4c93ed39418f015cca8711c7f3fc"
+                        "test__mask_gm.nii.gz:md5,40756ebc4a82a284a170ad699e0a5e30"
                     ]
                 ],
                 "local_config": [
@@ -644,7 +644,7 @@
                         {
                             "id": "test"
                         },
-                        "test__local_seeding_mask.nii.gz:md5,82bf94c71fb31a2c73dd4ddc021b6d81"
+                        "test__local_seeding_mask.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
                     ]
                 ],
                 "local_tracking_mask": [
@@ -652,7 +652,7 @@
                         {
                             "id": "test"
                         },
-                        "test__local_tracking_mask.nii.gz:md5,82bf94c71fb31a2c73dd4ddc021b6d81"
+                        "test__local_tracking_mask.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
                     ]
                 ],
                 "local_tractogram": [
@@ -660,7 +660,7 @@
                         {
                             "id": "test"
                         },
-                        "test__local_tracking.trk:md5,53432f584dcceeaa4b95874905e21224"
+                        "test__local_tracking.trk:md5,5bf9827570b27aa3eaf19f9d76bae764"
                     ]
                 ],
                 "nonphysical_voxels": [
@@ -692,7 +692,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_exclude.nii.gz:md5,b41e6b0f1c5697856cba3669746e7b4d"
+                        "test__map_exclude.nii.gz:md5,44839611fb77fd588e99b9afa0ae6b91"
                     ]
                 ],
                 "pft_map_include": [
@@ -700,7 +700,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_include.nii.gz:md5,f6ab6cb53316ab7d4672230e20aa0ea8"
+                        "test__map_include.nii.gz:md5,d9983cec6fe4dbc7becce71ffac237b8"
                     ]
                 ],
                 "pft_seeding_mask": [
@@ -708,7 +708,7 @@
                         {
                             "id": "test"
                         },
-                        "test__pft_seeding_mask.nii.gz:md5,1a824035733bd230eb82fd79c8ab6cdc"
+                        "test__pft_seeding_mask.nii.gz:md5,3429293546e20469c84502394e37885d"
                     ]
                 ],
                 "pft_tractogram": [
@@ -716,7 +716,7 @@
                         {
                             "id": "test"
                         },
-                        "test__pft_tracking.trk:md5,9234bb8361568b22baebd47d050fcedf"
+                        "test__pft_tracking.trk:md5,38b3f540d2f112d5bbf026416b3d27ec"
                     ]
                 ],
                 "pulsation_in_b0": [
@@ -740,7 +740,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz:md5,8d02cdc310475e7d9f73ed7e61835f80"
+                        "test__t1_warped.nii.gz:md5,e1d5080a5280df16a719c39825ce5ba2"
                     ]
                 ],
                 "t1_native": [
@@ -748,7 +748,7 @@
                         {
                             "id": "test"
                         },
-                        "test_t1_cropped.nii.gz:md5,b31fd188e250502273f89c0c73c34628"
+                        "test_t1_cropped.nii.gz:md5,c804e09ae12b053d76e10a3d74e98fb6"
                     ]
                 ],
                 "versions": [
@@ -774,7 +774,7 @@
                         {
                             "id": "test"
                         },
-                        "test__map_wm.nii.gz:md5,c1fa90c2f2687dc206ee681a3420c525"
+                        "test__map_wm.nii.gz:md5,cd10401b5feee8c2bc531b34612ac959"
                     ]
                 ],
                 "wm_mask": [
@@ -782,7 +782,7 @@
                         {
                             "id": "test"
                         },
-                        "test__mask_wm.nii.gz:md5,82bf94c71fb31a2c73dd4ddc021b6d81"
+                        "test__mask_wm.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
                     ]
                 ],
                 "wmparc": [
@@ -794,6 +794,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-17T19:37:33.475410485"
+        "timestamp": "2024-12-18T22:11:36.11074401"
     }
 }

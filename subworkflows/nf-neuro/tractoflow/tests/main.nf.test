@@ -39,9 +39,8 @@ nextflow_workflow {
     test("tractoflow - no rev") {
         when {
             params {
-                dwi_motion_and_eddy_filter_command_args = "--fep"
                 dwi_motion_and_eddy_filter_bet_f_threshold = 0.3
-                dwi_mask_final_bet_f_threshold = 0.3
+                dwi_mask_final_bet_f_threshold = 0.16
                 fodf_pft_fit_seeding_n_seeds = 1
                 fodf_pft_fit_filter_n_particles = 4
                 fodf_local_fit_seeding_n_seeds = 1

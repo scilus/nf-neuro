@@ -20,7 +20,6 @@ process PREPROC_EDDY {
     task.ext.when == null || task.ext.when
 
     script:
-    def eddy_options = task.ext.args ? "--eddy_options \"$task.ext.args\"" : ""
     def prefix = task.ext.prefix ?: "${meta.id}"
     def slice_drop_flag = task.ext.slice_drop_correction ? "--slice_drop_correction " : ""
     def bet_topup_before_eddy_f = task.ext.bet_topup_before_eddy_f ?: ""
@@ -74,7 +73,7 @@ process PREPROC_EDDY {
             --readout $readout --out_script --fix_seed\
             --n_reverse \${number_rev_dwi}\
             --lsr_resampling\
-            $slice_drop_flag $eddy_options
+            $slice_drop_flag
     else
         scil_dwi_extract_b0.py \${dwi} \${bval} \${bvec} ${prefix}__b0.nii.gz --mean\
             --b0_threshold $b0_thr_extract_b0 --skip_b0_check
@@ -89,7 +88,7 @@ process PREPROC_EDDY {
             --eddy_cmd $eddy_cmd --b0_thr $b0_thr_extract_b0\
             --encoding_direction $encoding\
             --readout $readout --out_script --fix_seed\
-            $slice_drop_flag $eddy_options
+            $slice_drop_flag
     fi
 
     echo "--very_verbose $extra_args" >> eddy.sh
