@@ -1,0 +1,24 @@
+{
+    "version": "0.2",
+    "dictionaryDefinitions": [
+        {
+            "name": "neuroscience",
+            "path": "docs/cspell/neuroscience.txt",
+            "addWords": true
+        }
+    ],
+    "dictionaries": [
+        "typescript",
+        "node",
+        "python",
+        "latex",
+        "bash",
+        "companies",
+        "softwareTerms",
+        "misc",
+        "en_US",
+        "en-gb",
+        "filetypes",
+        "neuroscience"
+    ]
+}

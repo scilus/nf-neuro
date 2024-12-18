@@ -1,4 +1,16 @@
 {
+    "betcrop - fslbetcrop - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,cc45ab23921525536874337c1c88e5cf"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-12-12T10:33:04.50811"
+    },
     "betcrop - fslbetcrop - dwi": {
         "content": [
             {
