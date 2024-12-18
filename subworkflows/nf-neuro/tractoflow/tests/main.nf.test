@@ -1,5 +1,4 @@
-// TODO nf-core: Once you have added the required tests, please run the following command to build this file:
-// nf-core subworkflows test tractoflow
+
 nextflow_workflow {
 
     name "Test Subworkflow TRACTOFLOW"
@@ -11,10 +10,12 @@ nextflow_workflow {
     tag "subworkflows_nfcore"
     tag "subworkflows/tractoflow"
 
-    tag "anatomical_segmentation"
-    tag "preproc_dwi"
-    tag "preproc_t1"
-    tag "registration"
+    tag "load_test_data"
+    tag "subworkflows/anatomical_segmentation"
+    tag "subworkflows/preproc_dwi"
+    tag "subworkflows/preproc_t1"
+    tag "subworkflows/registration"
+
     tag "reconst/dtimetrics"
     tag "reconst/frf"
     tag "reconst/fodf"
