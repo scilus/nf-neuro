@@ -29,6 +29,7 @@
 *metrics
 *morph*
 *mov*
+*neuro*
 *normalise
 *pack
 *par
@@ -64,11 +65,11 @@ fsl*
 gagnon*
 interp
 medde
+mkdirs
 mppca
 mrdegibbs
 mrtrix
 msmt
-neuro*
 nextflow
 nf*
 nifti
