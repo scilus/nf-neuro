@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "betcrop_cropvolume"
+name: "image_cropvolume"
 description: Crop empty planes around the data in a volume
 keywords:
   - nifti

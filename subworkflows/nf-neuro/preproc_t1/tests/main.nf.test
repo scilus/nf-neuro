@@ -13,7 +13,7 @@ nextflow_workflow {
     tag "image/resample"
     tag "betcrop/antsbet"
     tag "betcrop/synthbet"
-    tag "betcrop/cropvolume"
+    tag "image/cropvolume"
 
     tag "load_test_data"
 

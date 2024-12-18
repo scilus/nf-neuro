@@ -45,7 +45,7 @@ components:
   - image/resample
   - betcrop/antsbet
   - betcrop/synthbet
-  - betcrop/cropvolume
+  - image/cropvolume
 
 input:
   - ch_image:

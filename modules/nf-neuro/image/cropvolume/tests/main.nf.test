@@ -1,14 +1,14 @@
 nextflow_process {
 
-    name "Test Process BETCROP_CROPVOLUME"
+    name "Test Process IMAGE_CROPVOLUME"
     script "../main.nf"
-    process "BETCROP_CROPVOLUME"
+    process "IMAGE_CROPVOLUME"
     config "./nextflow.config"
 
     tag "modules"
     tag "modules_nfcore"
-    tag "betcrop"
-    tag "betcrop/cropvolume"
+    tag "image"
+    tag "image/cropvolume"
 
     tag "subworkflows"
     tag "subworkflows/load_test_data"
@@ -25,7 +25,7 @@ nextflow_process {
         }
     }
 
-    test("betcrop - cropvolume") {
+    test("image - cropvolume") {
 
         when {
             process {
@@ -50,7 +50,7 @@ nextflow_process {
 
     }
 
-    test("betcrop - cropvolume - outputbbox") {
+    test("image - cropvolume - outputbbox") {
 
         config "./nextflow_bbox.config"
 

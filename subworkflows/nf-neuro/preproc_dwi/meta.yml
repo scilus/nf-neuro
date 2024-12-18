@@ -45,7 +45,7 @@ keywords:
   - Normalization
   - Resampling
 components:
-  - betcrop/cropvolume
+  - image/cropvolume
   - betcrop/fslbetcrop
   - denoising/mppca
   - image/resample
