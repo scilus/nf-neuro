@@ -10,9 +10,6 @@ tools:
   - "scilpy":
       description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
-  - "MRtrix3":
-      description: "Toolbox for image processing, analysis and visualisation of dMRI."
-      homepage: "https://mrtrix.readthedocs.io/en/latest/"
   - "ants":
       description: "Advanced Normalization Tools."
       homepage: "https://github.com/ANTsX/ANTs"

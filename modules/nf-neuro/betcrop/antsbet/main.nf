@@ -34,12 +34,12 @@ process BETCROP_ANTSBET {
         -e $template -m $tissues_probabilities ${args.join(' ')}
     scil_volume_math.py convert bet/BrainExtractionMask.nii.gz \
         ${prefix}__t1_bet_mask.nii.gz --data_type uint8
-    mrcalc $t1 ${prefix}__t1_bet_mask.nii.gz -mult ${prefix}__t1_bet.nii.gz -nthreads $task.cpus
+    scil_volume_math.py multiplication $t1 ${prefix}__t1_bet_mask.nii.gz \
+        ${prefix}__t1_bet.nii.gz --data_type float32
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
     END_VERSIONS
     """
@@ -51,7 +51,6 @@ process BETCROP_ANTSBET {
         """
     antsBrainExtraction.sh -h
     scil_volume_math.py -h
-    mrcalc -h
 
     touch ${prefix}__t1_bet.nii.gz
     touch ${prefix}__t1_bet_mask.nii.gz
@@ -59,7 +58,6 @@ process BETCROP_ANTSBET {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
     END_VERSIONS
     """
