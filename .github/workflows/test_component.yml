@@ -65,7 +65,7 @@ jobs:
   nf-test:
     runs-on: ${{ inputs.runner }}
     container:
-      image: ubuntu:latest
+      image: ghcr.io/actions/actions-runner:latest
     name: test - ${{ inputs.paths }}
     if: inputs.paths != '' && inputs.profile != ''
     env:
