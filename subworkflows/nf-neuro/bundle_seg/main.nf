@@ -59,14 +59,16 @@ workflow BUNDLE_SEG {
 
         // ** Setting up Atlas reference channels. ** //
         if ( params.atlas_directory ) {
-            atlas_anat = Channel.fromPath("$atlas_directory/atlas/mni_masked.nii.gz")
-            atlas_config = Channel.fromPath("$atlas_directory/config/config_fss_1.json")
-            atlas_average = Channel.fromPath("$atlas_directory/atlas/atlas/")
+            atlas_anat = Channel.fromPath("$params.atlas_directory/atlas/mni_masked.nii.gz", checkIfExists: true, relative: true)
+            atlas_config = Channel.fromPath("$params.atlas_directory/config/config_fss_1.json", checkIfExists: true, relative: true)
+            atlas_average = Channel.fromPath("$params.atlas_directory/atlas/atlas/", checkIfExists: true, relative: true)
         }
         else {
+            if ( !file("$workflow.workDir/atlas/mni_masked.nii.gz").exists() ) {
             fetch_bundleseg_atlas(  "https://zenodo.org/records/10103446/files/atlas.zip?download=1",
                                     "https://zenodo.org/records/10103446/files/config.zip?download=1",
                                     "${workflow.workDir}/")
+            }
             atlas_anat = Channel.fromPath("$workflow.workDir/atlas/mni_masked.nii.gz")
             atlas_config = Channel.fromPath("$workflow.workDir/config/config_fss_1.json")
             atlas_average = Channel.fromPath("$workflow.workDir/atlas/atlas/")
@@ -81,9 +83,10 @@ workflow BUNDLE_SEG {
         ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions.first())
 
         // ** Perform bundle recognition and segmentation ** //
-        ch_recognize_bundle =  ch_tractogram.join(REGISTRATION_ANTS.out.transfo_image)
-                                            .combine(atlas_config)
-                                            .combine(atlas_average)
+        ch_recognize_bundle = ch_tractogram
+            .join(REGISTRATION_ANTS.out.affine)
+            .combine(atlas_config)
+            .combine(atlas_average)
 
         BUNDLE_RECOGNIZE ( ch_recognize_bundle )
         ch_versions = ch_versions.mix(BUNDLE_RECOGNIZE.out.versions.first())
