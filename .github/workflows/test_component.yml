@@ -65,7 +65,7 @@ jobs:
   nf-test:
     runs-on: ${{ inputs.runner }}
     container:
-      image: docker:dind-rootless
+      image: docker:dind
       options: --privileged
     name: test - ${{ inputs.paths }}
     if: inputs.paths != '' && inputs.profile != ''
