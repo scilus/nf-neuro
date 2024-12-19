@@ -3,24 +3,25 @@ process SEGMENTATION_FASTSURFER {
     label 'process_single'
 
     container "${ 'deepmi/fastsurfer:cpu-v2.2.0' }"
-
-    containerOptions '--entrypoint ""'
+    containerOptions {
+        (workflow.containerEngine == 'docker') ? '--entrypoint ""' : ''
+    }
 
     input:
         tuple val(meta), path(anat), path(fs_license)
 
     output:
-        tuple val(meta), path("*_fastsurfer")    , emit: fastsurferdirectory
-        path "versions.yml"                 , emit: versions
+        tuple val(meta), path("*_fastsurfer")       , emit: fastsurferdirectory
+        path "versions.yml"                         , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-        def prefix = task.ext.prefix ?: "${meta.id}"
-        def acq3T = task.ext.acq3T ? "--3T" : ""
-        def FASTSURFER_HOME = "/fastsurfer"
-        def SUBJECTS_DIR = "${prefix}_fastsurfer"
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    def acq3T = task.ext.acq3T ? "--3T" : ""
+    def FASTSURFER_HOME = "/fastsurfer"
+    def SUBJECTS_DIR = "${prefix}_fastsurfer"
     """
     mkdir ${prefix}_fastsurfer/
     $FASTSURFER_HOME/run_fastsurfer.sh  --allow_root \
@@ -38,14 +39,24 @@ process SEGMENTATION_FASTSURFER {
     """
 
     stub:
-        def prefix = task.ext.prefix ?: "${meta.id}"
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    def FASTSURFER_HOME = "/fastsurfer"
 
     """
-    $FASTSURFER_HOME/run_fastsurfer.sh --version
+    mkdir ${prefix}_fastsurfer/
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fastersurfer: 2.2.0+9f37d02
+        fastersurfer: \$($FASTSURFER_HOME/run_fastsurfer.sh --version)
     END_VERSIONS
+
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
+    }
+    trap 'handle_code' ERR
+
+    $FASTSURFER_HOME/run_fastsurfer.sh --version
     """
 }
