@@ -21,7 +21,7 @@ def locate_local_cache () {
             cache_location.mkdirs()
         }
         catch (Exception _e) {
-            error "Failed to create cache location: $cache_location"
+            error "Failed to create cache location: $cache_location | $_e"
         }
     }
 
@@ -73,7 +73,7 @@ def add_cache_entry ( name, manager ) {
     }
     catch (Exception _e) {
         manager.delete_entry(name)
-        error "Failed to fetch test data archive: $name | $_e"
+        error "Failed to download test archive: $name | $_e"
     }
 
     return cache_entry
@@ -102,7 +102,7 @@ def delete_cache_entry ( name, manager ) {
             cache_entry.delete()
         }
         catch (Exception _e) {
-            error "Failed to delete test data archive: $name"
+            error "Failed to delete cache entry for test archive: $name | $_e"
         }
     }
 }
@@ -136,12 +136,13 @@ def setup_cache () {
     return cache_manager
 }
 
+def unzip_test_archive ( archive, destination ) {
+    // Unzip the test data archive to the destination directory.
+    // Exception are not handled here, and are propagated to the caller.
 
-def fetch_archive ( name, destination, manager ) {
-    // Unzip all archive content to destination
     def content = null
     try {
-        content = new java.util.zip.ZipFile("${manager.get_entry(name)}")
+        content = new java.util.zip.ZipFile("$archive")
         content.entries().each{ entry ->
             def local_target = file("$destination/${entry.getName()}")
             if (entry.isDirectory()) {
@@ -154,13 +155,30 @@ def fetch_archive ( name, destination, manager ) {
             }
         }
         content.close()
-
-        return destination.resolve("${name.take(name.lastIndexOf('.'))}")
     }
     catch (Exception _e) {
         if (content) content.close()
-        manager.delete_entry(name)
-        error "Failed to extract test data archive: $name | $_e"
+        throw _e
+    }
+}
+
+def fetch_archive ( name, destination, manager ) {
+    // Unzip all archive content to destination
+    try {
+        unzip_test_archive(manager.get_entry(name), destination)
+
+        return destination.resolve("${name.take(name.lastIndexOf('.'))}")
+    }
+    catch (java.util.zip.ZipException _e) {
+        try {
+            manager.delete_entry(name)
+            unzip_test_archive(manager.get_entry(name), destination)
+
+            return destination.resolve("${name.take(name.lastIndexOf('.'))}")
+        }
+        catch (Exception _ee) {
+            error "Failed to fetch test archive: $name | $_ee"
+        }
     }
 }
 

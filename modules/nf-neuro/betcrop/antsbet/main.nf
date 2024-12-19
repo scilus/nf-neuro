@@ -45,14 +45,9 @@ process BETCROP_ANTSBET {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-        """
-    antsBrainExtraction.sh -h
-    scil_volume_math.py -h
-    mrcalc -h
-
+    """
     touch ${prefix}__t1_bet.nii.gz
     touch ${prefix}__t1_bet_mask.nii.gz
 
@@ -62,5 +57,16 @@ process BETCROP_ANTSBET {
         mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
     END_VERSIONS
+
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
+    }
+    trap 'handle_code' ERR
+
+    antsBrainExtraction.sh
+    scil_volume_math.py -h
+    mrcalc -h
     """
 }

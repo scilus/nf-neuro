@@ -1,51 +1,28 @@
 {
     "betcrop - antsbet": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__t1_bet.nii.gz:md5,bd666c4ce559eab93690131f8b2a9101"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__t1_bet_mask.nii.gz:md5,48c91d01a6c59d48e4ce84431d5e4971"
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,9fde1445bc10857db69e440781e58cb7"
-                ],
-                "mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__t1_bet_mask.nii.gz:md5,48c91d01a6c59d48e4ce84431d5e4971"
-                    ]
-                ],
-                "t1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__t1_bet.nii.gz:md5,bd666c4ce559eab93690131f8b2a9101"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,9fde1445bc10857db69e440781e58cb7"
-                ]
-            }
+            "test__t1_bet.nii.gz:md5:header,72167012fa8893d3c3531d5d1245b84a,data,e31b24e1dadf5b067211544fca1f3f01",
+            "test__t1_bet_mask.nii.gz:md5:header,f7389fe98c9a7e3a87c90b7ca05ea14a,data,1572808125554e50ff73fbe0e28037a9",
+            [
+                "versions.yml:md5,9fde1445bc10857db69e440781e58cb7"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.1"
         },
-        "timestamp": "2024-10-30T17:42:18.337235926"
+        "timestamp": "2024-12-17T20:31:09.4739"
+    },
+    "betcrop - antsbet - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,9fde1445bc10857db69e440781e58cb7"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-12-12T10:20:29.72452"
     }
 }
