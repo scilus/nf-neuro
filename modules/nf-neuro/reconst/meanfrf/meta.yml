@@ -15,6 +15,9 @@ tools:
       homepage: "https://github.com/scilus/scilpy.git"
 
 input:
+  - label:
+      type: string
+      description: Label for the output file, used as prefix.
   - frf_list:
       type: list
       description: List of individual Fiber Response Function (FRF) path.

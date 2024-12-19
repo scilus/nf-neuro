@@ -47,8 +47,8 @@ nextflow_process {
                 { assert snapshot(
                     file(process.out.trk.get(0).get(1)).name,
                     process.out.config,
-                    process.out.include,
-                    process.out.exclude,
+                    process.out.includes,
+                    process.out.excludes,
                     process.out.seeding,
                     process.out.versions).match() }
             )
@@ -78,8 +78,8 @@ nextflow_process {
                 { assert snapshot(
                     file(process.out.trk.get(0).get(1)).name,
                     process.out.config,
-                    process.out.include,
-                    process.out.exclude,
+                    process.out.includes,
+                    process.out.excludes,
                     process.out.seeding,
                     process.out.versions).match() }
             )
@@ -109,8 +109,8 @@ nextflow_process {
                 { assert snapshot(
                     file(process.out.trk.get(0).get(1)).name,
                     process.out.config,
-                    process.out.include,
-                    process.out.exclude,
+                    process.out.includes,
+                    process.out.excludes,
                     process.out.versions,
                     process.out.seeding).match() }
             )
