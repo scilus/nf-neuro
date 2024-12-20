@@ -57,13 +57,15 @@ on:
         default: "0.9.0"
 
 env:
-  NXF_SINGULARITY_CACHEDIR: /home/runner/.singularity_cache/.singularity
+  NXF_SINGULARITY_CACHEDIR: ${{ github.workspace }}/../.singularity_cache/.singularity
   NXF_SINGULARITY_LIBRARYDIR: ${{ github.workspace }}/.singularity
 
 run-name: Run nf-test on ${{ inputs.paths }}
 jobs:
   nf-test:
     runs-on: ${{ inputs.runner }}
+    container:
+      image: ghcr.io/actions/actions-runner:latest
     name: test - ${{ inputs.paths }}
     if: inputs.paths != '' && inputs.profile != ''
     env:
@@ -72,7 +74,7 @@ jobs:
       NFTEST_VERSION: "${{ inputs.nf_test_version }}"
       # nf-test directories need to be placed on an ephemeral disk accessible to docker.
       # In our case, it's only the _work workspace for security reasons
-      NXF_WORKDIR: /home/runner/_work
+      NXF_WORKDIR: "${{ github.workspace }}/.."
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 

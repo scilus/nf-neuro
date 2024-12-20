@@ -114,10 +114,28 @@ process PREPROC_EDDY {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+    touch ${prefix}__dwi_corrected.nii.gz
+    touch ${prefix}__dwi_eddy_corrected.bval
+    touch ${prefix}__dwi_eddy_corrected.bvec
+    touch ${prefix}__b0_bet_mask.nii.gz
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
+        fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
+    END_VERSIONS
+
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
+    }
+    trap 'handle_code' ERR
+
     scil_volume_math.py -h
     maskfilter -h
     bet -h
@@ -127,19 +145,5 @@ process PREPROC_EDDY {
     mrconvert -h
     scil_dwi_prepare_eddy_command.py -h
     scil_header_print_info.py -h
-
-    touch ${prefix}__dwi_corrected.nii.gz
-    touch ${prefix}__dwi_eddy_corrected.bval
-    touch ${prefix}__dwi_eddy_corrected.bvec
-    touch ${prefix}__b0_bet_mask.nii.gz
-
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
-        fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
-
-    END_VERSIONS
     """
 }
