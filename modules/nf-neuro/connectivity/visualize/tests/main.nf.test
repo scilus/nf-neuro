@@ -1,0 +1,50 @@
+// TODO nf-core: Once you have added the required tests, please run the following command to build this file:
+// nf-core modules test connectivity/visualize
+nextflow_process {
+
+    name "Test Process CONNECTIVITY_VISUALIZE"
+    script "../main.nf"
+    process "CONNECTIVITY_VISUALIZE"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "connectivity"
+    tag "connectivity/visualize"
+
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( ["connectivity.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("connectivity - visualisation ") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/*.npy", checkIfExists: true),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

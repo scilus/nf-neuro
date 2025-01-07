@@ -1,0 +1,2 @@
+connectivity/visualize:
+  - "modules/nf-neuro/connectivity/visualize/**"
