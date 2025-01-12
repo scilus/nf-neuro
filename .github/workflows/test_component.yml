@@ -142,7 +142,7 @@ jobs:
         run: |
           # use "docker_self_hosted" if it runs on self-hosted runner and inputs.profile=docker
           if [ "${{ inputs.profile }}" == "docker" ]; then
-            if [ "${{ inputs.runner }}" =~ *bigmem* ]; then
+            if [[ ${{ inputs.runner }} =~ .*bigmem.* ]]; then
               PROFILE="docker_self_hosted_bigmem"
             else
               PROFILE="docker_self_hosted"
