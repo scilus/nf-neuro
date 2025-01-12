@@ -64,8 +64,6 @@ run-name: Run nf-test on ${{ inputs.paths }}
 jobs:
   nf-test:
     runs-on: ${{ inputs.runner }}
-    container:
-      image: ghcr.io/actions/actions-runner:latest
     name: test - ${{ inputs.paths }}
     if: inputs.paths != '' && inputs.profile != ''
     env:
@@ -144,7 +142,11 @@ jobs:
         run: |
           # use "docker_self_hosted" if it runs on self-hosted runner and inputs.profile=docker
           if [ "${{ inputs.profile }}" == "docker" ]; then
-            PROFILE="docker_self_hosted"
+            if [[ ${{ inputs.runner }} =~ .*bigmem.* ]]; then
+              PROFILE="docker_self_hosted_bigmem"
+            else
+              PROFILE="docker_self_hosted"
+            fi
           else
             PROFILE=${{ inputs.profile }}
           fi
