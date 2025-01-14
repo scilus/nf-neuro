@@ -32,6 +32,10 @@ After running this command, you need to log out and log back in your terminal to
 > conflicts with `git`).
 
 - Copy the **devcontainer** definition path at `.devcontainer/prototyping` and its content inside your project
+  ```bash
+  mkdir -p <project_dir>/.devcontainer
+  cp -r .devcontainer/prototyping <project_dir>/.devcontainer/.
+  ```
   - the target path in your project should be `<project_dir>/.devcontainer/prototyping`
 - Open your project with **VS CODE**
   - create a new window with **File > New Window** or `ctrl+shift+N`, then use **File > Open Folder**.
