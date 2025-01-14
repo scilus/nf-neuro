@@ -10,7 +10,7 @@
 ## Environment configuration
 
 To get setup fast, we recommend using **VS Code** and the `development container`. Follow the
-[guide here](./environment/DEVCONTAINER.md#prototyping-environment) to do so. You can also use
+[guide here](./environment/devcontainers/PROTOTYPING.md) to do so. You can also use
 [those instructions](./environment/NFCORE.md#manual-installation) to setup yourself manually.
 
 ## Basic prototype pipeline creation
