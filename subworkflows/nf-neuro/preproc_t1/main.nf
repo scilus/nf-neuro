@@ -141,8 +141,8 @@ workflow PREPROC_T1 {
         }
         else{
             image_crop = image_bet
-            mask_crop = []
-            bbox = []
+            mask_crop = Channel.empty()
+            bbox = Channel.empty()
         }
 
     emit:
