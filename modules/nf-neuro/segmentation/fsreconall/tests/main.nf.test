@@ -80,4 +80,30 @@ nextflow_process {
 
     }
 
+    test("segmentation - fsreconall - stub-run") {
+        options "-stub-run"
+        when {
+            config "./nextflow_debug.config"
+
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/anat_image.nii.gz"),
+                        file("\${test_data_directory}/license.txt")
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
 }

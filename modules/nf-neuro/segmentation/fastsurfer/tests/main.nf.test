@@ -47,4 +47,27 @@ nextflow_process {
             )
         }
     }
+
+    test("segmentation - fastsurfer - stub-run") {
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/anat_image.nii.gz"),
+                        file("\${test_data_directory}/license.txt")
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
 }
