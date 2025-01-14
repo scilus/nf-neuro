@@ -3,7 +3,9 @@ process REGISTRATION_SYNTHREGISTRATION {
     label 'process_high'
 
     container "freesurfer/synthmorph:3"
-    containerOptions "--entrypoint '' --env PYTHONPATH='/freesurfer/env/lib/python3.11/site-packages'"
+    containerOptions {
+        (workflow.containerEngine == 'docker') ? '--entrypoint "" --env PYTHONPATH="/freesurfer/env/lib/python3.11/site-packages"' : "--env PYTHONPATH='/freesurfer/env/lib/python3.11/site-packages'"
+    }
 
     input:
     tuple val(meta), path(moving), path(fixed)
@@ -33,7 +35,6 @@ process REGISTRATION_SYNTHREGISTRATION {
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
-
     mri_synthmorph -j $task.cpus ${affine} -t ${prefix}__affine_warp.lta $moving $fixed
     mri_synthmorph -j $task.cpus ${warp} ${gpu} ${lambda} ${steps} ${extent} ${weight} -i ${prefix}__affine_warp.lta  -t ${prefix}__deform_warp.nii.gz -o ${prefix}__output_warped.nii.gz $moving $fixed
 
