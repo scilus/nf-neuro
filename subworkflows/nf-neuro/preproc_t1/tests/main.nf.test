@@ -278,8 +278,8 @@ nextflow_workflow {
         }
     }
 
-    test("preproc_t1_quick_bis") {
-        config "./nextflow_quick_bis.config"
+    test("preproc_t1_skip_all") {
+        config "./nextflow_skip_all.config"
 
         when {
             workflow {

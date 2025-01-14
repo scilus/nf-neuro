@@ -85,42 +85,38 @@ workflow PREPROC_T1 {
             image_resample = image_N4
         }
 
-        if ( params.run_bet ) {
-            // ** Brain extraction ** //
-            if ( params.run_synthbet ) {
-                // ** SYNTHBET ** //
-                // Result : [ meta, image, weights | [] ]
-                //  Steps :
-                //   - join [ meta, image, weights | null ]
-                //   - map  [ meta, image, weights | [] ]
-                ch_bet = image_resample
-                    .join(ch_weights, remainder: true)
-                    .map{ it[0..1] + [it[2] ?: []] }
+        if ( params.run_synthbet ) {
+            // ** SYNTHBET ** //
+            // Result : [ meta, image, weights | [] ]
+            //  Steps :
+            //   - join [ meta, image, weights | null ]
+            //   - map  [ meta, image, weights | [] ]
+            ch_bet = image_resample
+                .join(ch_weights, remainder: true)
+                .map{ it[0..1] + [it[2] ?: []] }
 
-                BETCROP_SYNTHBET ( ch_bet )
-                ch_versions = ch_versions.mix(BETCROP_SYNTHBET.out.versions.first())
+            BETCROP_SYNTHBET ( ch_bet )
+            ch_versions = ch_versions.mix(BETCROP_SYNTHBET.out.versions.first())
 
-                // ** Setting BET output ** //
-                image_bet = BETCROP_SYNTHBET.out.bet_image
-                mask_bet = BETCROP_SYNTHBET.out.brain_mask
-            }
+            // ** Setting BET output ** //
+            image_bet = BETCROP_SYNTHBET.out.bet_image
+            mask_bet = BETCROP_SYNTHBET.out.brain_mask
+        }
+        else if ( params.run_ants_bet ) {
+            // ** ANTSBET ** //
+            // The template and probability maps are mandatory if running antsBET. Since the
+            // error message from nextflow when they are absent is either non-informative or
+            // missing, we use ifEmpty to provide a more informative one.
+            ch_bet = image_resample
+                .join(ch_template.ifEmpty{ error("ANTS BET needs a template") })
+                .join(ch_probability_map.ifEmpty{ error("ANTS BET needs a tissue probability map") })
 
-            else {
-                // ** ANTSBET ** //
-                // The template and probability maps are mandatory if running antsBET. Since the
-                // error message from nextflow when they are absent is either non-informative or
-                // missing, we use ifEmpty to provide a more informative one.
-                ch_bet = image_resample
-                    .join(ch_template.ifEmpty{ error("ANTS BET needs a template") })
-                    .join(ch_probability_map.ifEmpty{ error("ANTS BET needs a tissue probability map") })
+            BETCROP_ANTSBET ( ch_bet )
+            ch_versions = ch_versions.mix(BETCROP_ANTSBET.out.versions.first())
 
-                BETCROP_ANTSBET ( ch_bet )
-                ch_versions = ch_versions.mix(BETCROP_ANTSBET.out.versions.first())
-
-                // ** Setting BET output ** //
-                image_bet = BETCROP_ANTSBET.out.t1
-                mask_bet = BETCROP_ANTSBET.out.mask
-            }
+            // ** Setting BET output ** //
+            image_bet = BETCROP_ANTSBET.out.t1
+            mask_bet = BETCROP_ANTSBET.out.mask
         }
         else{
             image_bet = image_resample
