@@ -25,4 +25,3 @@ After running this command, you need to log out and log back in your terminal to
 ## Usage
 
 SECTION TO COME
-

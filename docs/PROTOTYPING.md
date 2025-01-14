@@ -7,7 +7,6 @@
       - [`main.nf` example](#mainnf-example)
     - [`nextflow.config`](#nextflowconfig)
 
-
 First and foremost, if not already done, create a directory to host your project's files and navigate to it.
 
 ```bash
