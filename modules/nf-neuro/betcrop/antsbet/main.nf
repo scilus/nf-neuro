@@ -48,8 +48,6 @@ process BETCROP_ANTSBET {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    antsBrainExtraction.sh -h
-    scil_volume_math.py -h
 
     touch ${prefix}__t1_bet.nii.gz
     touch ${prefix}__t1_bet_mask.nii.gz
