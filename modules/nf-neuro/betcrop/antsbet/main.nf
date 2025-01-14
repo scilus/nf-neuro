@@ -45,10 +45,9 @@ process BETCROP_ANTSBET {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-        """
+    """
     antsBrainExtraction.sh -h
     scil_volume_math.py -h
 
@@ -60,5 +59,16 @@ process BETCROP_ANTSBET {
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
     END_VERSIONS
+
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
+    }
+    trap 'handle_code' ERR
+
+    antsBrainExtraction.sh
+    scil_volume_math.py -h
+    mrcalc -h
     """
 }
