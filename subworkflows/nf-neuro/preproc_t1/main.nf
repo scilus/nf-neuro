@@ -39,7 +39,6 @@ workflow PREPROC_T1 {
             ch_versions = ch_versions.mix(DENOISING_NLMEANS.out.versions.first())
             image_nlmeans = DENOISING_NLMEANS.out.image
         }
-
         else {
             image_nlmeans = ch_image
         }
@@ -62,7 +61,6 @@ workflow PREPROC_T1 {
             ch_versions = ch_versions.mix(PREPROC_N4.out.versions.first())
             image_N4 = PREPROC_N4.out.image
         }
-
         else {
             image_N4 = image_nlmeans
         }
