@@ -1,4 +1,133 @@
 {
+    "preproc_t1_quick": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__denoised.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__denoised.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_resampled.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_resampled.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "6": [
+                    
+                ],
+                "7": [
+                    
+                ],
+                "8": [
+                    "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
+                    "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
+                    "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
+                ],
+                "crop_box": [
+                    
+                ],
+                "image_N4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__denoised.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "image_bet": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_resampled.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "image_nlmeans": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__denoised.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "image_resample": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_resampled.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "mask_bet": [
+                    
+                ],
+                "mask_final": [
+                    
+                ],
+                "t1_final": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_cropped.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
+                    "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
+                    "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-14T10:02:29.972139887"
+    },
     "preproc_t1_synthbet": {
         "content": [
             "test__denoised.nii.gz:md5:header,a7ee0e819007aba98d14f7a145b550e6,data,2e21433e2bcd4de2a6b6167c6233cd40",
@@ -31,6 +160,131 @@
             "nextflow": "24.10.0"
         },
         "timestamp": "2024-11-25T18:23:03.990173398"
+    },
+    "preproc_t1_skip_all": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "6": [
+                    
+                ],
+                "7": [
+                    
+                ],
+                "8": [
+                    
+                ],
+                "crop_box": [
+                    
+                ],
+                "image_N4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "image_bet": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "image_nlmeans": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "image_resample": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "mask_bet": [
+                    
+                ],
+                "mask_final": [
+                    
+                ],
+                "t1_final": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "T1w.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
+                    ]
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-14T21:44:26.607236449"
     },
     "preproc_t1_antsbet": {
         "content": [
