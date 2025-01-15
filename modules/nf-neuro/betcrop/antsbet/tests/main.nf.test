@@ -14,7 +14,6 @@ nextflow_process {
     tag "subworkflows/load_test_data"
 
     test("betcrop - antsbet") {
-
         setup {
             run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
@@ -26,7 +25,6 @@ nextflow_process {
                 }
             }
         }
-
         when {
             process {
                 """
@@ -68,14 +66,76 @@ nextflow_process {
                 """
             }
         }
-
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    niftiMD5SUM(process.out.t1.get(0).get(1)),
+                    niftiMD5SUM(process.out.mask.get(0).get(1)),
+                    process.out.versions
+                ).match() }
             )
         }
-
     }
-
+    test("betcrop - antsbet - stub-run") {
+        options "-stub-run"
+        setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "T1w.zip", "transform.zip", "antsbet.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        t1: it.simpleName == "T1w"
+                        transform: it.simpleName == "transform"
+                        template: it.simpleName == "antsbet"
+                    }
+                ch_t1 = ch_split_test_data.t1.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]
+                }
+                ch_template = ch_split_test_data.template.map{
+                    test_data_directory -> [
+                        [ id: 'test' ],
+                        file("\${test_data_directory}/t1_template.nii.gz"),
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                    ]
+                }
+                ch_mask = ch_split_test_data.transform.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_to_bet_template_mask.nii.gz")
+                    ]
+                }
+                ch_transform = ch_split_test_data.transform.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_to_bet_template.mat")
+                    ]
+                }
+                input[0] = ch_t1
+                    .join(ch_template)
+                    .join(ch_mask)
+                    .join(ch_transform)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
 }

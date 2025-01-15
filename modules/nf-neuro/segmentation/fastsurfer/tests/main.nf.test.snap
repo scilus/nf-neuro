@@ -1,4 +1,16 @@
 {
+    "segmentation - fastsurfer - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,b263ce2ef1818492be3805ba8e49b50f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-12-12T13:38:50.551338"
+    },
     "segmentation - fastsurfer": {
         "content": [
             "test_fastsurfer",
