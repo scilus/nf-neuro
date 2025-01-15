@@ -11,12 +11,12 @@ process REGISTRATION_ANTS {
     tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
 
     output:
-    tuple val(meta), path("*_warped.nii.gz")                                  , emit: image
-    tuple val(meta), path("*__output0Warp.nii.gz")                            , emit: warp, optional:true
-    tuple val(meta), path("*__output1GenericAffine.mat")                            , emit: affine
-    tuple val(meta), path("*__output1InverseWarp.nii.gz")                     , emit: inverse_warp, optional: true
-    tuple val(meta), path("*__output0InverseAffine.mat")                     , emit: inverse_affine
-    path "versions.yml"                                                       , emit: versions
+    tuple val(meta), path("*_warped.nii.gz")                        , emit: image
+    tuple val(meta), path("*__output0Warp.nii.gz")                  , emit: warp, optional:true
+    tuple val(meta), path("*__output1GenericAffine.mat")            , emit: affine
+    tuple val(meta), path("*__output1InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
+    tuple val(meta), path("*__output0InverseAffine.mat")            , emit: inverse_affine
+    path "versions.yml"                                             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
