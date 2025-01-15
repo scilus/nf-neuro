@@ -297,11 +297,11 @@
             "test_cropped.nii.gz",
             "test_t1_cropped.nii.gz",
             [
-                "versions.yml:md5,19aaa24cf046e49a4ad4ce5d507ea8aa",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                 "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
                 "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
                 "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
+                "versions.yml:md5,da278daafbe3afa8454021e2716dd205",
                 "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
             ]
         ],
