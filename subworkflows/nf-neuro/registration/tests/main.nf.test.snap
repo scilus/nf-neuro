@@ -4,7 +4,7 @@
             "test__output_warped.nii.gz",
             "test__deform_warp.nii.gz",
             [
-                "versions.yml:md5,e53631849db3a32f2e25a0b67dac320a"
+                "versions.yml:md5,8a5fc770044eef3575fe68a3f7792976"
             ]
         ],
         "meta": {
@@ -44,19 +44,19 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
-                    
+
                 ],
                 "5": [
-                    
+
                 ],
                 "6": [
                     "versions.yml:md5,9c255f4c751382be7bf6fe6ffb0d635d"
@@ -71,19 +71,19 @@
                     ]
                 ],
                 "ref_segmentation": [
-                    
+
                 ],
                 "ref_warped": [
-                    
+
                 ],
                 "segmentation": [
-                    
+
                 ],
                 "transfo_image": [
-                    
+
                 ],
                 "transfo_trk": [
-                    
+
                 ],
                 "versions": [
                     "versions.yml:md5,9c255f4c751382be7bf6fe6ffb0d635d"
@@ -109,7 +109,7 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "2": [
                     [
@@ -132,10 +132,10 @@
                     ]
                 ],
                 "4": [
-                    
+
                 ],
                 "5": [
-                    
+
                 ],
                 "6": [
                     "versions.yml:md5,96376b8bc28640eef565e7f1e258dbb2"
@@ -150,13 +150,13 @@
                     ]
                 ],
                 "ref_segmentation": [
-                    
+
                 ],
                 "ref_warped": [
-                    
+
                 ],
                 "segmentation": [
-                    
+
                 ],
                 "transfo_image": [
                     [
