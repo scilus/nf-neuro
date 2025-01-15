@@ -5,7 +5,7 @@
             "test__deform_warp.nii.gz",
             "test__affine_warp.lta",
             [
-                "versions.yml:md5,6f946408922f25f1a8182d35615b6d7b"
+                "versions.yml:md5,8a5fc770044eef3575fe68a3f7792976"
             ]
         ],
         "meta": {
