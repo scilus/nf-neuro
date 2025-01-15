@@ -24,54 +24,72 @@ workflow PREPROC_T1 {
 
         ch_versions = Channel.empty()
 
-        // ** Denoising ** //
-        // Result : [ meta, image, mask | [] ]
-        //  Steps :
-        //   - join [ meta, image, mask | null ]
-        //   - map  [ meta, image, mask | [] ]
-        ch_nlmeans = ch_image
-            .join(ch_mask_nlmeans, remainder: true)
-            .map{ it[0..1] + [it[2] ?: []] }
+        if ( params.run_denoising ) {
 
-        DENOISING_NLMEANS ( ch_nlmeans )
-        ch_versions = ch_versions.mix(DENOISING_NLMEANS.out.versions.first())
+            // ** Denoising ** //
+            // Result : [ meta, image, mask | [] ]
+            //  Steps :
+            //   - join [ meta, image, mask | null ]
+            //   - map  [ meta, image, mask | [] ]
+            ch_nlmeans = ch_image
+                .join(ch_mask_nlmeans, remainder: true)
+                .map{ it[0..1] + [it[2] ?: []] }
 
-        // ** N4 correction ** //
-        // Result : [ meta, image, reference | [], mask | [] ]
-        //  Steps :
-        //   - join [ meta, image ] + [ reference, mask ] | [ reference, null ] | [ null ]
-        //   - map  [ meta, image, reference | [], mask | [] ]
-        //   - join [ meta, image, reference | [], mask | [], nlmeans-mask | null ]
-        //   - map  [ meta, image, reference | [], mask | [] ]
-        ch_N4 = DENOISING_NLMEANS.out.image
-            .join(ch_ref_n4, remainder: true)
-            .map{ it[0..1] + [it[2] ?: [], it[3] ?: []] }
-            .join(ch_mask_nlmeans, remainder: true)
-            .map{ it[0..2] + [it[3] ?: it[4] ?: []] }
+            DENOISING_NLMEANS ( ch_nlmeans )
+            ch_versions = ch_versions.mix(DENOISING_NLMEANS.out.versions.first())
+            image_nlmeans = DENOISING_NLMEANS.out.image
+        }
+        else {
+            image_nlmeans = ch_image
+        }
 
-        PREPROC_N4 ( ch_N4 )
-        ch_versions = ch_versions.mix(PREPROC_N4.out.versions.first())
+        if ( params.run_N4 ) {
+            // ** N4 correction ** //
+            // Result : [ meta, image, reference | [], mask | [] ]
+            //  Steps :
+            //   - join [ meta, image ] + [ reference, mask ] | [ reference, null ] | [ null ]
+            //   - map  [ meta, image, reference | [], mask | [] ]
+            //   - join [ meta, image, reference | [], mask | [], nlmeans-mask | null ]
+            //   - map  [ meta, image, reference | [], mask | [] ]
+            ch_N4 = image_nlmeans
+                .join(ch_ref_n4, remainder: true)
+                .map{ it[0..1] + [it[2] ?: [], it[3] ?: []] }
+                .join(ch_mask_nlmeans, remainder: true)
+                .map{ it[0..2] + [it[3] ?: it[4] ?: []] }
 
-        // ** Resampling ** //
-        // Result : [ meta, image, reference | [] ]
-        //  Steps :
-        //   - join [ meta, image, reference | null ]
-        //   - map  [ meta, image, reference | [] ]
-        ch_resampling = PREPROC_N4.out.image
-            .join(ch_ref_resample, remainder: true)
-            .map{ it[0..1] + [it[2] ?: []] }
+            PREPROC_N4 ( ch_N4 )
+            ch_versions = ch_versions.mix(PREPROC_N4.out.versions.first())
+            image_N4 = PREPROC_N4.out.image
+        }
+        else {
+            image_N4 = image_nlmeans
+        }
 
-        IMAGE_RESAMPLE ( ch_resampling )
-        ch_versions = ch_versions.mix(IMAGE_RESAMPLE.out.versions.first())
+        if ( params.run_resampling ) {
+            // ** Resampling ** //
+            // Result : [ meta, image, reference | [] ]
+            //  Steps :
+            //   - join [ meta, image, reference | null ]
+            //   - map  [ meta, image, reference | [] ]
+            ch_resampling = image_N4
+                .join(ch_ref_resample, remainder: true)
+                .map{ it[0..1] + [it[2] ?: []] }
 
-        // ** Brain extraction ** //
+            IMAGE_RESAMPLE ( ch_resampling )
+            ch_versions = ch_versions.mix(IMAGE_RESAMPLE.out.versions.first())
+            image_resample = IMAGE_RESAMPLE.out.image
+        }
+        else {
+            image_resample = image_N4
+        }
+
         if ( params.run_synthbet ) {
             // ** SYNTHBET ** //
             // Result : [ meta, image, weights | [] ]
             //  Steps :
             //   - join [ meta, image, weights | null ]
             //   - map  [ meta, image, weights | [] ]
-            ch_bet = IMAGE_RESAMPLE.out.image
+            ch_bet = image_resample
                 .join(ch_weights, remainder: true)
                 .map{ it[0..1] + [it[2] ?: []] }
 
@@ -82,13 +100,12 @@ workflow PREPROC_T1 {
             image_bet = BETCROP_SYNTHBET.out.bet_image
             mask_bet = BETCROP_SYNTHBET.out.brain_mask
         }
-
-        else {
+        else if ( params.run_ants_bet ) {
             // ** ANTSBET ** //
             // The template and probability maps are mandatory if running antsBET. Since the
             // error message from nextflow when they are absent is either non-informative or
             // missing, we use ifEmpty to provide a more informative one.
-            ch_bet = IMAGE_RESAMPLE.out.image
+            ch_bet = image_resample
                 .join(ch_template.ifEmpty{ error("ANTS BET needs a template") })
                 .join(ch_probability_map.ifEmpty{ error("ANTS BET needs a tissue probability map") })
 
@@ -99,29 +116,43 @@ workflow PREPROC_T1 {
             image_bet = BETCROP_ANTSBET.out.t1
             mask_bet = BETCROP_ANTSBET.out.mask
         }
+        else{
+            image_bet = image_resample
+            mask_bet = Channel.empty()
+        }
 
-        // ** Crop image ** //
-        ch_crop = image_bet
-            .map{ it + [[]] }
+        if ( params.run_crop ) {
+            // ** Crop image ** //
+            ch_crop = image_bet
+                .map{ it + [[]] }
 
-        IMAGE_CROPVOLUME_T1 ( ch_crop )
-        ch_versions = ch_versions.mix(IMAGE_CROPVOLUME_T1.out.versions.first())
+            IMAGE_CROPVOLUME_T1 ( ch_crop )
+            ch_versions = ch_versions.mix(IMAGE_CROPVOLUME_T1.out.versions.first())
+            image_crop = IMAGE_CROPVOLUME_T1.out.image
+            bbox = IMAGE_CROPVOLUME_T1.out.bounding_box
 
-        // ** Crop mask ** //
-        ch_crop_mask = mask_bet
-            .join(IMAGE_CROPVOLUME_T1.out.bounding_box)
+            // ** Crop mask ** //
+            ch_crop_mask = mask_bet
+                .join(IMAGE_CROPVOLUME_T1.out.bounding_box)
 
-        IMAGE_CROPVOLUME_MASK ( ch_crop_mask )
-        ch_versions = ch_versions.mix(IMAGE_CROPVOLUME_MASK.out.versions.first())
+            IMAGE_CROPVOLUME_MASK ( ch_crop_mask )
+            ch_versions = ch_versions.mix(IMAGE_CROPVOLUME_MASK.out.versions.first())
+            mask_crop = IMAGE_CROPVOLUME_MASK.out.image
+        }
+        else{
+            image_crop = image_bet
+            mask_crop = Channel.empty()
+            bbox = Channel.empty()
+        }
 
     emit:
-        t1_final        = IMAGE_CROPVOLUME_T1.out.image           // channel: [ val(meta), t1-preprocessed ]
-        mask_final      = IMAGE_CROPVOLUME_MASK.out.image         // channel: [ val(meta), t1-mask ]
-        image_nlmeans   = DENOISING_NLMEANS.out.image               // channel: [ val(meta), t1-after-denoise ]
-        image_N4        = PREPROC_N4.out.image                      // channel: [ val(meta), t1-after-unbias ]
-        image_resample  = IMAGE_RESAMPLE.out.image                  // channel: [ val(meta), t1-after-resample ]
-        image_bet       = image_bet                                 // channel: [ val(meta), t1-after-bet ]
-        mask_bet        = mask_bet                                  // channel: [ val(meta), intermediary-mask ]
-        crop_box        = IMAGE_CROPVOLUME_T1.out.bounding_box    // channel: [ val(meta), bounding-box ]
-        versions        = ch_versions                               // channel: [ versions.yml ]
+        t1_final        = image_crop                    // channel: [ val(meta), t1-preprocessed ]
+        mask_final      = mask_crop                     // channel: [ val(meta), t1-mask ]
+        image_nlmeans   = image_nlmeans                 // channel: [ val(meta), t1-after-denoise ]
+        image_N4        = image_N4                      // channel: [ val(meta), t1-after-unbias ]
+        image_resample  = image_resample                // channel: [ val(meta), t1-after-resample ]
+        image_bet       = image_bet                     // channel: [ val(meta), t1-after-bet ]
+        mask_bet        = mask_bet                      // channel: [ val(meta), intermediary-mask ]
+        crop_box        = bbox                          // channel: [ val(meta), bounding-box ]
+        versions        = ch_versions                   // channel: [ versions.yml ]
 }
