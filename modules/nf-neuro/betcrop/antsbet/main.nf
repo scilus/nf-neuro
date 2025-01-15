@@ -67,6 +67,6 @@ process BETCROP_ANTSBET {
 
     antsBrainExtraction.sh
     scil_volume_math.py -h
-    mrcalc -h
+
     """
 }
