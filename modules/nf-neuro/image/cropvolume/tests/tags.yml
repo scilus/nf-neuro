@@ -1,0 +1,2 @@
+image/cropvolume:
+  - "modules/nf-neuro/image/cropvolume/**"

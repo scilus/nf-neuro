@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "2": [
                     [
@@ -51,18 +51,18 @@
                     ]
                 ],
                 "6": [
-                    
+
                 ],
                 "7": [
-                    
+
                 ],
                 "8": [
-                    "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                     "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
+                    "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
                     "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
                 ],
                 "crop_box": [
-                    
+
                 ],
                 "image_N4": [
                     [
@@ -101,10 +101,10 @@
                     ]
                 ],
                 "mask_bet": [
-                    
+
                 ],
                 "mask_final": [
-                    
+
                 ],
                 "t1_final": [
                     [
@@ -116,8 +116,8 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                     "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
+                    "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
                     "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
                 ]
             }
@@ -148,10 +148,10 @@
             "test_t1_cropped.nii.gz:md5:header,efab188f3700b5b29d4b4ef99cec1295,data,8a93b9d76ead7dae4af4792b9cf70479",
             [
                 "versions.yml:md5,318cabe934be45528a25f52083d9c90d",
-                "versions.yml:md5,37229cd5cee6f6788fbc9083d6618c61",
-                "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                 "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
+                "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
+                "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
                 "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
             ]
         ],
@@ -174,7 +174,7 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "2": [
                     [
@@ -213,16 +213,16 @@
                     ]
                 ],
                 "6": [
-                    
+
                 ],
                 "7": [
-                    
+
                 ],
                 "8": [
-                    
+
                 ],
                 "crop_box": [
-                    
+
                 ],
                 "image_N4": [
                     [
@@ -261,10 +261,10 @@
                     ]
                 ],
                 "mask_bet": [
-                    
+
                 ],
                 "mask_final": [
-                    
+
                 ],
                 "t1_final": [
                     [
@@ -276,7 +276,7 @@
                     ]
                 ],
                 "versions": [
-                    
+
                 ]
             }
         ],
@@ -297,10 +297,10 @@
             "test_cropped.nii.gz",
             "test_t1_cropped.nii.gz",
             [
-                "versions.yml:md5,37229cd5cee6f6788fbc9083d6618c61",
-                "versions.yml:md5,657fbb224f260392e573b8511c4b798d",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                 "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
+                "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
+                "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
                 "versions.yml:md5,da278daafbe3afa8454021e2716dd205",
                 "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
             ]

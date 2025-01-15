@@ -4,8 +4,8 @@ include { PREPROC_N4 } from '../../../modules/nf-neuro/preproc/n4/main'
 include { IMAGE_RESAMPLE } from '../../../modules/nf-neuro/image/resample/main'
 include { BETCROP_ANTSBET } from '../../../modules/nf-neuro/betcrop/antsbet/main'
 include { BETCROP_SYNTHBET} from '../../../modules/nf-neuro/betcrop/synthbet/main'
-include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_T1 } from '../../../modules/nf-neuro/betcrop/cropvolume/main'
-include { BETCROP_CROPVOLUME as BETCROP_CROPVOLUME_MASK } from '../../../modules/nf-neuro/betcrop/cropvolume/main'
+include { IMAGE_CROPVOLUME as IMAGE_CROPVOLUME_T1 } from '../../../modules/nf-neuro/image/cropvolume/main'
+include { IMAGE_CROPVOLUME as IMAGE_CROPVOLUME_MASK } from '../../../modules/nf-neuro/image/cropvolume/main'
 
 params.run_synthbet = false
 
@@ -126,18 +126,18 @@ workflow PREPROC_T1 {
             ch_crop = image_bet
                 .map{ it + [[]] }
 
-            BETCROP_CROPVOLUME_T1 ( ch_crop )
-            ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_T1.out.versions.first())
-            image_crop = BETCROP_CROPVOLUME_T1.out.image
-            bbox = BETCROP_CROPVOLUME_T1.out.bounding_box
+            IMAGE_CROPVOLUME_T1 ( ch_crop )
+            ch_versions = ch_versions.mix(IMAGE_CROPVOLUME_T1.out.versions.first())
+            image_crop = IMAGE_CROPVOLUME_T1.out.image
+            bbox = IMAGE_CROPVOLUME_T1.out.bounding_box
 
             // ** Crop mask ** //
             ch_crop_mask = mask_bet
-                .join(BETCROP_CROPVOLUME_T1.out.bounding_box)
+                .join(IMAGE_CROPVOLUME_T1.out.bounding_box)
 
-            BETCROP_CROPVOLUME_MASK ( ch_crop_mask )
-            ch_versions = ch_versions.mix(BETCROP_CROPVOLUME_MASK.out.versions.first())
-            mask_crop = BETCROP_CROPVOLUME_MASK.out.image
+            IMAGE_CROPVOLUME_MASK ( ch_crop_mask )
+            ch_versions = ch_versions.mix(IMAGE_CROPVOLUME_MASK.out.versions.first())
+            mask_crop = IMAGE_CROPVOLUME_MASK.out.image
         }
         else{
             image_crop = image_bet
