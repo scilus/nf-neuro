@@ -1,5 +1,5 @@
 {
-    "tractogram - without option": {
+    "connectivity - decompose - without option": {
         "content": [
             {
                 "0": [
@@ -50,9 +50,21 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-01-07T10:26:25.366321119"
+        "timestamp": "2025-01-16T12:03:16.31875384"
     },
-    "tractogram - with all option": {
+    "connectivity - visualisation - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,ca6d20bf86c1e32c1bccea5813810f02"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-16T12:03:27.09566413"
+    },
+    "connectivity - decompose - with all option": {
         "content": [
             {
                 "0": [
@@ -103,6 +115,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-01-07T10:26:30.867673027"
+        "timestamp": "2025-01-16T12:03:21.738887954"
     }
 }

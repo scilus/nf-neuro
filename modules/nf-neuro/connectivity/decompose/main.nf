@@ -53,8 +53,6 @@ process CONNECTIVITY_DECOMPOSE {
     touch ${prefix}__decomposed.h5
     touch ${prefix}__labels_list.txt
 
-    scil_tractogram_math.py -h
-    scil_remove_invalid_streamlines.py -h
     scil_decompose_connectivity.py -h
 
     cat <<-END_VERSIONS > versions.yml

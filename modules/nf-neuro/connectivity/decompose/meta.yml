@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "connectivity_decompose"
 description: Divide a tractogram into its various connections using a brain parcellation(labels).
   The hdf5 output format allows to store other information required for connectivity, such as the associated labels.
@@ -40,9 +39,9 @@ output:
   - hdf5:
       type: file
       description: |
-        Output hdf5 file where each bundle is a group with key'LABEL1_LABEL2'
-        and each. The array_sequence format cannot be stored directly in a hdf5,
-        so each group is composed of 'data', 'offsets' and 'lengths' from the array
+        Output hdf5 file where each bundles is a group with key'LABEL1_LABEL2'.
+        The array_sequence format cannot be stored directly in a hdf5, so each
+        group is composed of 'data', 'offsets' and 'lengths' from the array
         sequence. The 'data' is stored in VOX/CORNER for simplicity and efficiency.
       pattern: "*__decomposed.h5"
 
