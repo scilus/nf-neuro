@@ -2,7 +2,7 @@ process REGISTRATION_SYNTHREGISTRATION {
     tag "$meta.id"
     label 'process_high'
 
-    container "freesurfer/synthmorph:3"
+    container "freesurfer/synthmorph:4"
     containerOptions {
         (workflow.containerEngine == 'docker') ? '--entrypoint "" --env PYTHONPATH="/freesurfer/env/lib/python3.11/site-packages"' : "--env PYTHONPATH='/freesurfer/env/lib/python3.11/site-packages'"
     }
@@ -11,15 +11,15 @@ process REGISTRATION_SYNTHREGISTRATION {
     tuple val(meta), path(moving), path(fixed)
 
     output:
-    tuple val(meta), path("*__output_warped.nii.gz")                                , emit: warped_image
-    tuple val(meta), path("*__deform_warp.nii.gz"), path("*__affine_warp.lta")      , emit: transfo_image
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*__output_warped.nii.gz")        , emit: warped_image
+    tuple val(meta), path("*__deform_warp.nii.gz")          , emit: warp
+    tuple val(meta), path("*__affine_warp.lta")             , emit: affine
+    path "versions.yml"                                     , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     def affine = task.ext.affine ? "-m " + task.ext.affine : "-m affine"
@@ -40,12 +40,11 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        synthmoprh: 3
+        synthmoprh: 4
     END_VERSIONS
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
@@ -57,7 +56,7 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        synthmoprh: 3
+        synthmoprh: 4
     END_VERSIONS
     """
 }

@@ -13,7 +13,7 @@ nextflow_workflow {
     tag "image/resample"
     tag "betcrop/antsbet"
     tag "betcrop/synthbet"
-    tag "betcrop/cropvolume"
+    tag "image/cropvolume"
 
     tag "load_test_data"
 
@@ -213,6 +213,128 @@ nextflow_workflow {
                     niftiMD5SUM(workflow.out.t1_final.get(0).get(1)),
                     workflow.out.versions
                 ).match()}
+            )
+        }
+    }
+
+    test("preproc_t1_quick") {
+        config "./nextflow_quick.config"
+
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        antsbet: it.simpleName == "antsbet"
+                        t1w: it.simpleName == "T1w"
+                    }
+                input[0] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[2] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[3] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        [],
+                        [],
+                        []
+                    ]}
+                input[4] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        [],
+                        []
+                    ]}
+                input[5] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[6] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("preproc_t1_skip_all") {
+        config "./nextflow_skip_all.config"
+
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        antsbet: it.simpleName == "antsbet"
+                        t1w: it.simpleName == "T1w"
+                    }
+                input[0] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[2] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[3] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        [],
+                        [],
+                        []
+                    ]}
+                input[4] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        [],
+                        []
+                    ]}
+                input[5] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                input[6] = ch_split_test_data.antsbet.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
