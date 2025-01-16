@@ -1,9 +1,8 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "connectivity_visualize"
 description: display a connectivity matrix and adjust the desired visualization.
 keywords:
-  - nifti
+  - numpy
   - connectivity
   - visualize
   - scilpy
@@ -19,9 +18,9 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
 
-  - matrix:
+  - matrices:
       type: file
-      description: Connectivity matrix.
+      description: List of connectivity matrices. the set of matrices is concatenated into a single matrix, but can also contain a single matrix.
       pattern: "*.npy"
 
   - atlas_labels:

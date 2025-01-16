@@ -7,7 +7,7 @@ process CONNECTIVITY_VISUALIZE {
         'scilus/scilus:2.0.2' }"
 
     input:
-    tuple val(meta), path(matrix), path (atlas_labels), path(labels_list)
+    tuple val(meta), path(matrices), path (atlas_labels), path(labels_list)
 
     output:
     tuple val(meta), path("*.png"), emit: figure
@@ -18,16 +18,21 @@ process CONNECTIVITY_VISUALIZE {
 
     script:
 
-    String matrix_list = matrix.join(", ").replace(',', '')
+    String matrices_list = matrices.join(", ").replace(',', '')
+    def name_axis = task.ext.name_axis ? "--name_axis " : ""
+    def display_legend = task.ext.display_legend ? "--display_legend " : ""
+    def exclude_zeros = task.ext.exclude_zeros ? "--exclude_zeros " : ""
+    def nb_bins = task.ext.nb_bins ? "--nb_bins " + task.ext.nb_bins : "--nb_bins 50"
+    def axis_text_size = task.ext.axis_text_size ? "--axis_text_size $task.ext.axis_text_size $task.ext.axis_text_size" : "--axis_text_size 5 5"
     def args = ""
     if (atlas_labels) args += [" --lookup_table $atlas_labels "]
-    if (labels_list) args += [" --labels_list $labels_list "]
+    if (labels_list) args += [" --name_axis "]
 
     """
-    for matrix in $matrix_list; do
+    for matrix in $matrices_list; do
         scil_viz_connectivity.py \$matrix \${matrix/.npy/_matrix.png} \
-            --name_axis --display_legend --histogram \${matrix/.npy/_histogram.png} \
-            --nb_bins 50 --exclude_zeros --axis_text_size 5 5 \
+            $name_axis $display_legend --histogram \${matrix/.npy/_histogram.png} \
+            $nb_bins $exclude_zeros $axis_text_size \
             $args
     done
 
@@ -38,9 +43,9 @@ process CONNECTIVITY_VISUALIZE {
     """
 
     stub:
-    matrix_list = matrix.join(", ").replace(',', '')
+    String  matrices_list = matrices.join(", ").replace(',', '')
     """
-    for metric in $matrix_list; do
+    for metric in $matrices_list; do
         base_name=\$(basename "\${metric}" .npy)
         touch "\${base_name}.png"
     done

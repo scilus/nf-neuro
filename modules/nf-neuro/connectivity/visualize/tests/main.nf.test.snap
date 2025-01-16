@@ -94,6 +94,18 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-01-07T11:38:42.542320238"
+        "timestamp": "2025-01-16T10:54:29.917241635"
+    },
+    "connectivity - visualisation - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-16T10:55:34.856253711"
     }
 }
