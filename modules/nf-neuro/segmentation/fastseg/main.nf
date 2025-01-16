@@ -54,9 +54,6 @@ process SEGMENTATION_FASTSEG {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    fast -h
-    scil_volume_math.py -h
-
     touch ${prefix}__mask_wm.nii.gz
     touch ${prefix}__mask_gm.nii.gz
     touch ${prefix}__mask_csf.nii.gz
@@ -69,5 +66,15 @@ process SEGMENTATION_FASTSEG {
         scilpy: 2.0.0
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
     END_VERSIONS
+
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
+    }
+    trap 'handle_code' ERR
+
+    fast -h
+    scil_volume_math.py -h
     """
 }

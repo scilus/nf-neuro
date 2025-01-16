@@ -1,7 +1,7 @@
 include { DENOISING_MPPCA as DENOISE_DWI } from '../../../modules/nf-neuro/denoising/mppca/main'
 include { DENOISING_MPPCA as DENOISE_REVDWI } from '../../../modules/nf-neuro/denoising/mppca/main'
 include { BETCROP_FSLBETCROP } from '../../../modules/nf-neuro/betcrop/fslbetcrop/main'
-include { BETCROP_CROPVOLUME } from '../../../modules/nf-neuro/betcrop/cropvolume/main'
+include { IMAGE_CROPVOLUME } from '../../../modules/nf-neuro/image/cropvolume/main'
 include { PREPROC_N4 as N4_DWI } from '../../../modules/nf-neuro/preproc/n4/main'
 include { PREPROC_NORMALIZE as NORMALIZE_DWI } from '../../../modules/nf-neuro/preproc/normalize/main'
 include { IMAGE_RESAMPLE as RESAMPLE_DWI } from '../../../modules/nf-neuro/image/resample/main'
@@ -78,12 +78,12 @@ workflow PREPROC_DWI {
         ch_crop_b0 = TOPUP_EDDY.out.b0
             .join(BETCROP_FSLBETCROP.out.bbox)
 
-        BETCROP_CROPVOLUME ( ch_crop_b0 )
-        ch_versions = ch_versions.mix(BETCROP_CROPVOLUME.out.versions.first())
+        IMAGE_CROPVOLUME ( ch_crop_b0 )
+        ch_versions = ch_versions.mix(IMAGE_CROPVOLUME.out.versions.first())
 
         // ** N4 DWI ** //
         ch_N4 = BETCROP_FSLBETCROP.out.image
-            .join(BETCROP_CROPVOLUME.out.image)
+            .join(IMAGE_CROPVOLUME.out.image)
             .join(BETCROP_FSLBETCROP.out.mask)
 
         N4_DWI ( ch_N4 )

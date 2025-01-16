@@ -11,10 +11,12 @@ process REGISTRATION_ANTS {
     tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
 
     output:
-    tuple val(meta), path("*_warped.nii.gz")                                  , emit: image
-    tuple val(meta), path("*__output{0Warp.nii.gz,1GenericAffine.mat}")       , emit: transfo_image
-    tuple val(meta), path("*__output{0,1}Inverse{Warp.nii.gz,Affine.mat}")    , emit: transfo_trk
-    path "versions.yml"                                                       , emit: versions
+    tuple val(meta), path("*_warped.nii.gz")                        , emit: image
+    tuple val(meta), path("*__output0Warp.nii.gz")                  , emit: warp, optional:true
+    tuple val(meta), path("*__output1GenericAffine.mat")            , emit: affine
+    tuple val(meta), path("*__output1InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
+    tuple val(meta), path("*__output0InverseAffine.mat")            , emit: inverse_affine
+    path "versions.yml"                                             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -62,7 +64,7 @@ process REGISTRATION_ANTS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -82,7 +84,7 @@ process REGISTRATION_ANTS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/'
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
     END_VERSIONS
     """
 }
