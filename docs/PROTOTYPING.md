@@ -27,10 +27,10 @@ files in your project's directory at the root :
 
 ```
 /path/to/[project]
-             |
-             ├-- nextflow.config
-             ├-- main.nf
-             └-- .nf-core.yml
+              |
+              ├-- nextflow.config
+              ├-- main.nf
+              └-- .nf-core.yml
 ```
 
 ### `nextflow.config`
