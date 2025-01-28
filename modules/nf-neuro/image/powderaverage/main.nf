@@ -8,6 +8,9 @@ process IMAGE_POWDERAVERAGE {
 
     input:
         tuple val(meta), path(dwi), path(bval), path(mask)
+        val b0_thr
+        val shells
+        val shell_thr
 
     output:
         tuple val(meta), path("*pwd_avg.nii.gz")    , emit: pwd_avg
@@ -20,15 +23,15 @@ process IMAGE_POWDERAVERAGE {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def b0_thr = task.ext.b0_thr ? "--b0_thr ${task.ext.b0_thr}" : ''
-    def shells = task.ext.shells ? "--shells ${task.ext.shells}" : ''
-    def shell_thr = task.ext.shell_thr ? "--shell_thr ${task.ext.shell_thr}" : ''
+    args += b0_thr ? "--b0_thr ${b0_thr} " : ''
+    args += shells ? "--shells ${shells} " : ''
+    args += shell_thr ? "--shell_thr ${shell_thr} " : ''
 
     if ( mask ) args += "--mask ${mask}"
 
     """
     scil_dwi_powder_average.py $dwi $bval ${prefix}_pwd_avg.nii.gz \
-        $b0_thr $shells $shell_thr $args
+        $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

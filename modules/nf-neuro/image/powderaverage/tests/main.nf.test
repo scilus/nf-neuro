@@ -39,6 +39,9 @@ nextflow_process {
                         []
                     ]
                 }
+                input[1] = params.b0_thr
+                input[2] = params.shells
+                input[3] = params.shell_thr
                 """
             }
         }
@@ -66,6 +69,9 @@ nextflow_process {
                         file("\${test_data_directory}/dwi/mask.nii.gz")
                     ]
                 }
+                input[1] = params.b0_thr
+                input[2] = params.shells
+                input[3] = params.shell_thr
                 """
             }
         }
