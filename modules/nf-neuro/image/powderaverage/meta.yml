@@ -34,21 +34,23 @@ input:
 
   - b0_thr:
       type: integer
-      description: Threshold to consider a volume as a b0.
-      pattern: 50
+      description: "Threshold to consider a volume as a b0. (default: 50)"
+      default: 50
 
   - shells:
       type: string
       description: |
-        List of b-values (shells) to include in powder average passed as a list.
+        "List of b-values (shells) to include in powder average passed as a list.
         If not specified, will include all volumes with a non-zero b-value.
+        (default: null)"
       pattern: "1000 2000"
 
   - shell_thr:
       type: integer
       description: |
-        Threshold to consider a volume as part of a shell (b-value +- threshold).
-      pattern: 50
+        "Threshold to consider a volume as part of a shell (b-value +- threshold).
+        (default: 50)"
+      default: 50
 
 output:
   - meta:
