@@ -59,6 +59,11 @@ output:
       description: Anatomical T1 warped to dwi space
       pattern: "*.{nii,nii.gz}"
 
+  - mqc:
+      type: file
+      description: .gif file containing quality control image for the registration process. Made for use in MultiQC report.
+      pattern: "*.gif"
+
   - versions:
       type: file
       description: File containing software versions
