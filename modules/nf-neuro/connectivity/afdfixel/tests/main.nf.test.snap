@@ -1,0 +1,84 @@
+{
+    "connectivity - afdfixel - no params": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_fixel.h5:md5,0af02e9f62d9112c941f2bacdebb7e64"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,d2ad834c51f57ac698ccfa530eb041a2"
+                ],
+                "hdf5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_fixel.h5:md5,0af02e9f62d9112c941f2bacdebb7e64"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,d2ad834c51f57ac698ccfa530eb041a2"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-29T23:22:39.925643"
+    },
+    "connectivity - afdfixel - with params": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_fixel.h5:md5,3e3fc635f787f12d31a201ed6fce3448"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,d2ad834c51f57ac698ccfa530eb041a2"
+                ],
+                "hdf5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__afd_fixel.h5:md5,3e3fc635f787f12d31a201ed6fce3448"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,d2ad834c51f57ac698ccfa530eb041a2"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-29T23:31:33.917729"
+    },
+    "connectivity - afdfixel - with stub": {
+        "content": [
+            [
+                "versions.yml:md5,d2ad834c51f57ac698ccfa530eb041a2"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-29T23:33:55.212985"
+    }
+}
