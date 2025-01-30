@@ -6,6 +6,7 @@ include {   RECONST_DTIMETRICS as REGISTRATION_FA                     } from '..
 include {   REGISTRATION as T1_REGISTRATION                           } from '../registration/main'
 include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_WMPARC      } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
 include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_APARC_ASEG  } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
+include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_LESION_MASK } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
 include {   ANATOMICAL_SEGMENTATION                                   } from '../anatomical_segmentation/main'
 
 // RECONSTRUCTION
@@ -41,6 +42,7 @@ workflow TRACTOFLOW {
         ch_topup_config     // channel : [optional] topup_config
         ch_bet_template     // channel : [optional] meta, bet_template
         ch_bet_probability  // channel : [optional] meta, bet_probability
+        ch_lesion_mask      // channel : [optional] meta, lesion_mask
     main:
 
         ch_versions = Channel.empty()
@@ -51,8 +53,10 @@ workflow TRACTOFLOW {
         // SUBWORKFLOW: Run PREPROC_DWI
         //
         PREPROC_DWI(
-            ch_dwi, ch_rev_dwi,
-            ch_sbref, ch_rev_sbref,
+            ch_dwi,
+            ch_rev_dwi,
+            ch_sbref,
+            ch_rev_sbref,
             ch_topup_config
         )
         ch_versions = ch_versions.mix(PREPROC_DWI.out.versions.first())
@@ -71,16 +75,19 @@ workflow TRACTOFLOW {
         )
         ch_versions = ch_versions.mix(PREPROC_T1.out.versions.first())
 
+        /* RECONSTRUCTION - PART I - doesn't need anatomy */
+
         //
-        // MODULE: Run RECONST/DTIMETRICS (REGISTRATION_FA)
+        // MODULE: Run RECONST/DTIMETRICS
         //
-        ch_registration_fa = PREPROC_DWI.out.dwi_resample
+        ch_dti_metrics = PREPROC_DWI.out.dwi_resample
             .join(PREPROC_DWI.out.bval)
             .join(PREPROC_DWI.out.bvec)
             .join(PREPROC_DWI.out.b0_mask)
 
-        REGISTRATION_FA( ch_registration_fa )
-        ch_versions = ch_versions.mix(REGISTRATION_FA.out.versions.first())
+        RECONST_DTIMETRICS( ch_dti_metrics )
+        ch_versions = ch_versions.mix(RECONST_DTIMETRICS.out.versions.first())
+
 
         //
         // SUBWORKFLOW: Run REGISTRATION
@@ -88,7 +95,7 @@ workflow TRACTOFLOW {
         T1_REGISTRATION(
             PREPROC_T1.out.t1_final,
             PREPROC_DWI.out.b0,
-            REGISTRATION_FA.out.fa,
+            RECONST_DTIMETRICS.out.fa,
             Channel.empty(),
             Channel.empty(),
             Channel.empty()
@@ -118,29 +125,27 @@ workflow TRACTOFLOW {
         ch_versions = ch_versions.mix(TRANSFORM_APARC_ASEG.out.versions.first())
 
         //
+        // Module: Run REGISTRATION_ANTSAPPLYTRANSFORMS (TRANSFORM_LESION_MASK)
+        TRANSFORM_LESION_MASK(
+            ch_lesion_mask
+                .join(PREPROC_DWI.out.b0)
+                .join(T1_REGISTRATION.out.transfo_image)
+        )
+        ch_versions = ch_versions.mix(TRANSFORM_LESION_MASK.out.versions.first())
+
+        //
         // SUBWORKFLOW: Run ANATOMICAL_SEGMENTATION
         //
         ANATOMICAL_SEGMENTATION(
             T1_REGISTRATION.out.image_warped,
             TRANSFORM_WMPARC.out.warped_image
                 .join(TRANSFORM_APARC_ASEG.out.warped_image),
-            Channel.empty(),
+            TRANSFORM_LESION_MASK.out.warped_image,
             Channel.empty()
         )
         ch_versions = ch_versions.mix(ANATOMICAL_SEGMENTATION.out.versions.first())
 
-        /* RECONSTRUCTION */
-
-        //
-        // MODULE: Run RECONST/DTIMETRICS
-        //
-        ch_dti_metrics = PREPROC_DWI.out.dwi_resample
-            .join(PREPROC_DWI.out.bval)
-            .join(PREPROC_DWI.out.bvec)
-            .join(PREPROC_DWI.out.b0_mask)
-
-        RECONST_DTIMETRICS( ch_dti_metrics )
-        ch_versions = ch_versions.mix(RECONST_DTIMETRICS.out.versions.first())
+        /* RECONSTRUCTION - PART II - needs anatomy */
 
         //
         // MODULE: Run RECONST/FRF
@@ -156,7 +161,7 @@ workflow TRACTOFLOW {
         RECONST_FRF( ch_reconst_frf )
         ch_versions = ch_versions.mix(RECONST_FRF.out.versions.first())
 
-        /* Run fiber response aeraging over subjects */
+        /* Run fiber response averaging over subjects */
         ch_single_frf = RECONST_FRF.out.frf
             .map{ it + [[], []] }
 

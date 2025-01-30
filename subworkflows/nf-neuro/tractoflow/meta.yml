@@ -1,4 +1,3 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
 name: "tractoflow"
 description: |
   This subworkflow implements the TractoFlow [1] pipeline. It can process raw diffusion and T1 weighted image to reduce
@@ -26,7 +25,7 @@ description: |
     on the preprocessed DWI image and extract relevant metrics.
   PFT TRACKING (dipy)
     Perform Particle Filtering Tractography (PFT) on the FODF to generate whole brain tractograms.
-  LOCAL TRACKING (dipy)
+  LOCAL TRACKING (dipy on CPU, scilpy on GPU)
     Perform Local Tracking on the FODF to generate whole brain tractograms.
 
   [1] https://tractoflow-documentation.readthedocs.io
@@ -105,6 +104,11 @@ input:
         (Optional) The input channel containing the brain probability mask for antsBET,
         with intensity range 1 (definitely brain) to 0 (definitely background).
         Structure: [ val(meta), path(probability_map) ]
+  - ch_lesion_mask:
+      type: file
+      description: |
+        (Optional) The input channel containing the lesion mask for segmentation.
+        Structure: [ val(meta), path(lesion_mask) ]
 output:
   - dwi:
       type: file
