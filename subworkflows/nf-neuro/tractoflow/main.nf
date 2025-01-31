@@ -218,22 +218,28 @@ workflow TRACTOFLOW {
         //
         // MODULE: Run TRACKING/PFTTRACKING
         //
-        ch_pft_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
-            .join(ANATOMICAL_SEGMENTATION.out.gm_mask)
-            .join(ANATOMICAL_SEGMENTATION.out.csf_mask)
-            .join(RECONST_FODF.out.fodf)
-            .join(RECONST_DTIMETRICS.out.fa)
-        TRACKING_PFTTRACKING( ch_pft_tracking )
-        ch_versions = ch_versions.mix(TRACKING_PFTTRACKING.out.versions.first())
+        ch_pft_tracking = Channel.empty()
+        if ( params.compute_pft ) {
+            ch_pft_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
+                .join(ANATOMICAL_SEGMENTATION.out.gm_mask)
+                .join(ANATOMICAL_SEGMENTATION.out.csf_mask)
+                .join(RECONST_FODF.out.fodf)
+                .join(RECONST_DTIMETRICS.out.fa)
+            TRACKING_PFTTRACKING( ch_pft_tracking )
+            ch_versions = ch_versions.mix(TRACKING_PFTTRACKING.out.versions.first())
+        }
 
         //
         // MODULE: Run TRACKING/LOCALTRACKING
         //
-        ch_local_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
-            .join(RECONST_FODF.out.fodf)
-            .join(RECONST_DTIMETRICS.out.fa)
-        TRACKING_LOCALTRACKING( ch_local_tracking )
-        ch_versions = ch_versions.mix(TRACKING_LOCALTRACKING.out.versions.first())
+        ch_local_tracking = Channel.empty()
+        if ( params.compute_local_tracking ) {
+            ch_local_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
+                .join(RECONST_FODF.out.fodf)
+                .join(RECONST_DTIMETRICS.out.fa)
+            TRACKING_LOCALTRACKING( ch_local_tracking )
+            ch_versions = ch_versions.mix(TRACKING_LOCALTRACKING.out.versions.first())
+        }
 
     emit:
 

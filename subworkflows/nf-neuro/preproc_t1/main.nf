@@ -24,7 +24,7 @@ workflow PREPROC_T1 {
 
         ch_versions = Channel.empty()
 
-        if ( params.run_denoising ) {
+        if ( params.preproc_t1_run_denoising ) {
 
             // ** Denoising ** //
             // Result : [ meta, image, mask | [] ]
@@ -43,7 +43,7 @@ workflow PREPROC_T1 {
             image_nlmeans = ch_image
         }
 
-        if ( params.run_N4 ) {
+        if ( params.preproc_t1_run_N4 ) {
             // ** N4 correction ** //
             // Result : [ meta, image, reference | [], mask | [] ]
             //  Steps :
@@ -65,7 +65,7 @@ workflow PREPROC_T1 {
             image_N4 = image_nlmeans
         }
 
-        if ( params.run_resampling ) {
+        if ( params.preproc_t1_run_resampling ) {
             // ** Resampling ** //
             // Result : [ meta, image, reference | [] ]
             //  Steps :
@@ -83,7 +83,7 @@ workflow PREPROC_T1 {
             image_resample = image_N4
         }
 
-        if ( params.run_synthbet ) {
+        if ( params.preproc_t1_run_synthbet ) {
             // ** SYNTHBET ** //
             // Result : [ meta, image, weights | [] ]
             //  Steps :
@@ -100,7 +100,7 @@ workflow PREPROC_T1 {
             image_bet = BETCROP_SYNTHBET.out.bet_image
             mask_bet = BETCROP_SYNTHBET.out.brain_mask
         }
-        else if ( params.run_ants_bet ) {
+        else if ( params.preproc_t1_run_ants_bet ) {
             // ** ANTSBET ** //
             // The template and probability maps are mandatory if running antsBET. Since the
             // error message from nextflow when they are absent is either non-informative or
@@ -122,7 +122,7 @@ workflow PREPROC_T1 {
             mask_bet = Channel.empty()
         }
 
-        if ( params.run_crop ) {
+        if ( params.preproc_t1_run_crop ) {
             // ** Crop image ** //
             ch_crop = image_bet
                 .map{ it + [[]] }
