@@ -239,6 +239,8 @@ workflow TRACTOFLOW {
 
         // IN DIFFUSION SPACE
         dwi                     = PREPROC_DWI.out.dwi_resample
+                                    .join(PREPROC_DWI.out.bval)
+                                    .join(PREPROC_DWI.out.bvec)
         t1                      = T1_REGISTRATION.out.image_warped
         wm_mask                 = ANATOMICAL_SEGMENTATION.out.wm_mask
         gm_mask                 = ANATOMICAL_SEGMENTATION.out.gm_mask
