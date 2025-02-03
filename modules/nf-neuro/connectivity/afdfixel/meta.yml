@@ -19,7 +19,7 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
 
-  - h5:
+  - hdf5:
       type: file
       description: HDF5 file containing decomposed connections.
       pattern: "*.h5"

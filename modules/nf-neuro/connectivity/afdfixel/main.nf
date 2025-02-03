@@ -5,7 +5,7 @@ process CONNECTIVITY_AFDFIXEL {
     container "${ 'scilus/scilus:latest' }"
 
     input:
-    tuple val(meta), path(h5), path(fodf)
+    tuple val(meta), path(hdf5), path(fodf)
 
     output:
     tuple val(meta), path("*afd_fixel.h5")      , emit: hdf5
@@ -21,7 +21,7 @@ process CONNECTIVITY_AFDFIXEL {
     def sh_basis = task.ext.sh_basis ? "--sh_basis $task.ext.sh_basis": ""
 
     """
-    scil_bundle_mean_fixel_afd_from_hdf5.py $h5 $fodf \
+    scil_bundle_mean_fixel_afd_from_hdf5.py $hdf5 $fodf \
         "${prefix}__afd_fixel.h5" \
         $length_weighting \
         $sh_basis \
