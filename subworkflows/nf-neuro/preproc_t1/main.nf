@@ -117,7 +117,7 @@ workflow PREPROC_T1 {
             image_bet = BETCROP_ANTSBET.out.t1
             mask_bet = BETCROP_ANTSBET.out.mask
         }
-        else{
+        else {
             image_bet = image_resample
             mask_bet = Channel.empty()
         }
@@ -140,7 +140,7 @@ workflow PREPROC_T1 {
             ch_versions = ch_versions.mix(IMAGE_CROPVOLUME_MASK.out.versions.first())
             mask_crop = IMAGE_CROPVOLUME_MASK.out.image
         }
-        else{
+        else {
             image_crop = image_bet
             mask_crop = Channel.empty()
             bbox = Channel.empty()
