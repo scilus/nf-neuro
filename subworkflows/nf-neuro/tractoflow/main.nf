@@ -80,7 +80,7 @@ workflow TRACTOFLOW {
         //
         // MODULE: Run RECONST/DTIMETRICS
         //
-        ch_dti_metrics = PREPROC_DWI.out.dwi_resample
+        ch_dti_metrics = PREPROC_DWI.out.dwi
             .join(PREPROC_DWI.out.bval)
             .join(PREPROC_DWI.out.bvec)
             .join(PREPROC_DWI.out.b0_mask)
@@ -150,7 +150,7 @@ workflow TRACTOFLOW {
         //
         // MODULE: Run RECONST/FRF
         //
-        ch_reconst_frf = PREPROC_DWI.out.dwi_resample
+        ch_reconst_frf = PREPROC_DWI.out.dwi
             .join(PREPROC_DWI.out.bval)
             .join(PREPROC_DWI.out.bvec)
             .join(PREPROC_DWI.out.b0_mask)
@@ -170,7 +170,7 @@ workflow TRACTOFLOW {
             .join(RECONST_FRF.out.csf_frf)
             .mix(ch_single_frf)
 
-        if ( params.fodf_use_average_frf ) {
+        if ( params.frf_average_from_data ) {
             ch_single_frf = group_frf("ssst", RECONST_FRF.out.frf)
 
             ch_wm_frf = group_frf("wm", RECONST_FRF.out.wm_frf)
@@ -205,7 +205,7 @@ workflow TRACTOFLOW {
         //
         // MODULE: Run RECONST/FODF
         //
-        ch_reconst_fodf = PREPROC_DWI.out.dwi_resample
+        ch_reconst_fodf = PREPROC_DWI.out.dwi
             .join(PREPROC_DWI.out.bval)
             .join(PREPROC_DWI.out.bvec)
             .join(PREPROC_DWI.out.b0_mask)
@@ -219,7 +219,7 @@ workflow TRACTOFLOW {
         // MODULE: Run TRACKING/PFTTRACKING
         //
         ch_pft_tracking = Channel.empty()
-        if ( params.compute_pft ) {
+        if ( params.run_pft ) {
             ch_pft_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
                 .join(ANATOMICAL_SEGMENTATION.out.gm_mask)
                 .join(ANATOMICAL_SEGMENTATION.out.csf_mask)
@@ -233,7 +233,7 @@ workflow TRACTOFLOW {
         // MODULE: Run TRACKING/LOCALTRACKING
         //
         ch_local_tracking = Channel.empty()
-        if ( params.compute_local_tracking ) {
+        if ( params.run_local_tracking ) {
             ch_local_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
                 .join(RECONST_FODF.out.fodf)
                 .join(RECONST_DTIMETRICS.out.fa)
@@ -244,7 +244,7 @@ workflow TRACTOFLOW {
     emit:
 
         // IN DIFFUSION SPACE
-        dwi                     = PREPROC_DWI.out.dwi_resample
+        dwi                     = PREPROC_DWI.out.dwi
                                     .join(PREPROC_DWI.out.bval)
                                     .join(PREPROC_DWI.out.bvec)
         t1                      = T1_REGISTRATION.out.image_warped

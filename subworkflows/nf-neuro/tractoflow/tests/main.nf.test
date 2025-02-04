@@ -39,11 +39,9 @@ nextflow_workflow {
     test("tractoflow - no rev") {
         when {
             params {
-                dwi_motion_and_eddy_filter_bet_f_threshold = 0.3
-                dwi_mask_final_bet_f_threshold = 0.16
-                fodf_pft_fit_seeding_n_seeds = 1
-                fodf_pft_fit_filter_n_particles = 4
-                fodf_local_fit_seeding_n_seeds = 1
+                pft_number_of_seeds = 1
+                pft_number_of_particles = 4
+                lt_number_of_seeds = 1
             }
             workflow {
                 """
@@ -81,6 +79,7 @@ nextflow_workflow {
                         [ id:'test' ],
                         file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
                     ]}
+                input[10] = Channel.empty()
                 """
             }
         }
