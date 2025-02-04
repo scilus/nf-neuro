@@ -1,0 +1,2 @@
+connectivity/afdfixel:
+  - "modules/nf-neuro/connectivity/afdfixel/**"

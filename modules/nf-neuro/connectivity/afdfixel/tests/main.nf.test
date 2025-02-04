@@ -1,0 +1,94 @@
+nextflow_process {
+
+    name "Test Process CONNECTIVITY_AFDFIXEL"
+    script "../main.nf"
+    process "CONNECTIVITY_AFDFIXEL"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "connectivity"
+    tag "connectivity/afdfixel"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "connectivity.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("connectivity - afdfixel - no params") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        file("\${test_data_directory}/decompose.h5"),
+                        file("\${test_data_directory}/fodf.nii.gz")
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("connectivity - afdfixel - with params") {
+        config "./nextflow.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        file("\${test_data_directory}/decompose.h5"),
+                        file("\${test_data_directory}/fodf.nii.gz")
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("connectivity - afdfixel - with stub") {
+        options "-stub"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        file("\${test_data_directory}/decompose.h5"),
+                        file("\${test_data_directory}/fodf.nii.gz")
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
+}
