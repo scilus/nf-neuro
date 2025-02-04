@@ -1,0 +1,120 @@
+{
+    "connectivity - decompose - without option": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__decomposed.h5:md5,90ff9ae7ceb1371349231f85b616874e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__labels_list.txt:md5,3b0332e02daabf31651a5a0d81ba830a"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,ca6d20bf86c1e32c1bccea5813810f02"
+                ],
+                "hdf5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__decomposed.h5:md5,90ff9ae7ceb1371349231f85b616874e"
+                    ]
+                ],
+                "labels_list": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__labels_list.txt:md5,3b0332e02daabf31651a5a0d81ba830a"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ca6d20bf86c1e32c1bccea5813810f02"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-16T12:03:16.31875384"
+    },
+    "connectivity - visualisation - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,ca6d20bf86c1e32c1bccea5813810f02"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-16T12:03:27.09566413"
+    },
+    "connectivity - decompose - with all option": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__decomposed.h5:md5,5660bb84f333b6586ed247c6b95f6a98"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__labels_list.txt:md5,3b0332e02daabf31651a5a0d81ba830a"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,ca6d20bf86c1e32c1bccea5813810f02"
+                ],
+                "hdf5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__decomposed.h5:md5,5660bb84f333b6586ed247c6b95f6a98"
+                    ]
+                ],
+                "labels_list": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__labels_list.txt:md5,3b0332e02daabf31651a5a0d81ba830a"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ca6d20bf86c1e32c1bccea5813810f02"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-16T12:03:21.738887954"
+    }
+}

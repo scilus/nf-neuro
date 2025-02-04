@@ -1,0 +1,61 @@
+---
+name: "connectivity_decompose"
+description: Divide a tractogram into its various connections using a brain parcellation(labels).
+  The hdf5 output format allows to store other information required for connectivity, such as the associated labels.
+keywords:
+  - nifti
+  - connectivity
+  - decompose
+  - scilpy
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - trk:
+      type: file
+      description: Tractogram to decompose.
+      pattern: "*.{trk, tck, vtk, fib, dpy}"
+
+  - labels:
+      type: file
+      description: brain parcellation. Labels must have 0 as background. Volumes must have isotropic voxels.
+      pattern: "*.nii.gz"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - hdf5:
+      type: file
+      description: |
+        Output hdf5 file where each bundles is a group with key'LABEL1_LABEL2'.
+        The array_sequence format cannot be stored directly in a hdf5, so each
+        group is composed of 'data', 'offsets' and 'lengths' from the array
+        sequence. The 'data' is stored in VOX/CORNER for simplicity and efficiency.
+      pattern: "*__decomposed.h5"
+
+  - labels_list:
+      type: file
+      description: Save the labels list as text file.
+      pattern: "*__labels_list.txt"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@ThoumyreStanislas"
+maintainers:
+  - "@ThoumyreStanislas"

@@ -1,0 +1,93 @@
+nextflow_process {
+
+    name "Test Process CONNECTIVITY_DECOMPOSE"
+    script "../main.nf"
+    process "CONNECTIVITY_DECOMPOSE"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "connectivity"
+    tag "connectivity/decompose"
+
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "connectivity.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("connectivity - decompose - without option") {
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.trk", checkIfExists: true),
+                        file("\${test_data_directory}/endpoints_atlas.nii.gz", checkIfExists: true)
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+        test("connectivity - decompose - with all option") {
+        config "./nextflow.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.trk", checkIfExists: true),
+                        file("\${test_data_directory}/endpoints_atlas.nii.gz", checkIfExists: true)
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+        test("connectivity - visualisation - stub-run") {
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.trk", checkIfExists: true),
+                        file("\${test_data_directory}/endpoints_atlas.nii.gz", checkIfExists: true)
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
+}
