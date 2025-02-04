@@ -119,10 +119,12 @@ workflow REGISTRATION {
 
             // ** Set compulsory outputs ** //
             image_warped = image_warped.mix(REGISTRATION_ANTS.out.image)
-            transfo_image = transfo_image.mix(REGISTRATION_ANTS.out.warp)
+            transfo_image = REGISTRATION_ANTS.out.warp
                 .join(REGISTRATION_ANTS.out.affine)
-            transfo_trk = transfo_trk.mix(REGISTRATION_ANTS.out.inverse_affine)
+                .mix(transfo_image)
+            transfo_trk = REGISTRATION_ANTS.out.inverse_affine
                 .join(REGISTRATION_ANTS.out.inverse_warp)
+                .mix(transfo_trk)
 
             // **et optional outputs **//
             ref_warped = Channel.empty()
