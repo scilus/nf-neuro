@@ -1,0 +1,111 @@
+{
+    "connectivity - visualisation ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "afd_max_histogram.png:md5,43912780c2ac709b631fc39d95d464e8",
+                            "afd_max_matrix.png:md5,89adc0462e5f6ee412110994e6e6b3eb",
+                            "len_histogram.png:md5,117651740e19ee3c536c9a4bea6babfb",
+                            "len_matrix.png:md5,e2098003d452ce2ba9db2c265d8516e9",
+                            "mask_histogram.png:md5,073e208a8a327baa5bbf721e66e337d4",
+                            "mask_matrix.png:md5,ec19ecce53d485ca983bf17bc87b56c7",
+                            "pval_histogram.png:md5,892ebc7b367db2ac1bd970f638043904",
+                            "pval_matrix.png:md5,2b8e9a9f8833110d7a2f9d612ae6f2be",
+                            "sc_add_10_histogram.png:md5,265a9399387c856977eae1ea3f83516a",
+                            "sc_add_10_matrix.png:md5,07e322fd583f9b8235c50363d7aba9e0",
+                            "sc_histogram.png:md5,7baccf0dc5a650bea2aecd19d3867653",
+                            "sc_lower_threshold_histogram.png:md5,cd4368e81ef4f9f128a444a7897d0c1e",
+                            "sc_lower_threshold_matrix.png:md5,748d5a2a15159896775ebb7aa71a3fd5",
+                            "sc_masked_histogram.png:md5,2a0163a153ee2b3174138ba4505ec6fb",
+                            "sc_masked_matrix.png:md5,1b52240fc505e2e002c65b9e4f0ce777",
+                            "sc_matrix.png:md5,db388963daf62fae2ef1d8be58c9cad8",
+                            "sc_norm_histogram.png:md5,bfc9fa64063f6a8797f3bb49d2bfcbfd",
+                            "sc_norm_matrix.png:md5,67ef585c7559edb6e7c88ca50304db4f",
+                            "sc_norm_vol_histogram.png:md5,1eb857ea304f82fe73bc3a6416ade1d1",
+                            "sc_norm_vol_matrix.png:md5,572daf7d844699f96cc1519458491f3b",
+                            "sc_normalize_histogram.png:md5,dbc8741adf4dd3a597199c36a9ed197d",
+                            "sc_normalize_matrix.png:md5,2bc762a0e4861d726bbec1372b124763",
+                            "sc_reo_fake_histogram.png:md5,1f2efba6ff6a949f6bdc9b07e3d0952b",
+                            "sc_reo_fake_matrix.png:md5,2d8e4abada02b7d096e38888a2ea2a09",
+                            "sc_thr_histogram.png:md5,cd4368e81ef4f9f128a444a7897d0c1e",
+                            "sc_thr_matrix.png:md5,748d5a2a15159896775ebb7aa71a3fd5",
+                            "sim_histogram.png:md5,e82b14b3fbb8184e53265a05fe247fd0",
+                            "sim_matrix.png:md5,e42c85fbd2211738bb38882305122c9a",
+                            "vol_histogram.png:md5,5b60e61f931294416a22ad3a7d8848ca",
+                            "vol_matrix.png:md5,85ddd42c1562adaf38aee0cc32334039"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+                ],
+                "figure": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "afd_max_histogram.png:md5,43912780c2ac709b631fc39d95d464e8",
+                            "afd_max_matrix.png:md5,89adc0462e5f6ee412110994e6e6b3eb",
+                            "len_histogram.png:md5,117651740e19ee3c536c9a4bea6babfb",
+                            "len_matrix.png:md5,e2098003d452ce2ba9db2c265d8516e9",
+                            "mask_histogram.png:md5,073e208a8a327baa5bbf721e66e337d4",
+                            "mask_matrix.png:md5,ec19ecce53d485ca983bf17bc87b56c7",
+                            "pval_histogram.png:md5,892ebc7b367db2ac1bd970f638043904",
+                            "pval_matrix.png:md5,2b8e9a9f8833110d7a2f9d612ae6f2be",
+                            "sc_add_10_histogram.png:md5,265a9399387c856977eae1ea3f83516a",
+                            "sc_add_10_matrix.png:md5,07e322fd583f9b8235c50363d7aba9e0",
+                            "sc_histogram.png:md5,7baccf0dc5a650bea2aecd19d3867653",
+                            "sc_lower_threshold_histogram.png:md5,cd4368e81ef4f9f128a444a7897d0c1e",
+                            "sc_lower_threshold_matrix.png:md5,748d5a2a15159896775ebb7aa71a3fd5",
+                            "sc_masked_histogram.png:md5,2a0163a153ee2b3174138ba4505ec6fb",
+                            "sc_masked_matrix.png:md5,1b52240fc505e2e002c65b9e4f0ce777",
+                            "sc_matrix.png:md5,db388963daf62fae2ef1d8be58c9cad8",
+                            "sc_norm_histogram.png:md5,bfc9fa64063f6a8797f3bb49d2bfcbfd",
+                            "sc_norm_matrix.png:md5,67ef585c7559edb6e7c88ca50304db4f",
+                            "sc_norm_vol_histogram.png:md5,1eb857ea304f82fe73bc3a6416ade1d1",
+                            "sc_norm_vol_matrix.png:md5,572daf7d844699f96cc1519458491f3b",
+                            "sc_normalize_histogram.png:md5,dbc8741adf4dd3a597199c36a9ed197d",
+                            "sc_normalize_matrix.png:md5,2bc762a0e4861d726bbec1372b124763",
+                            "sc_reo_fake_histogram.png:md5,1f2efba6ff6a949f6bdc9b07e3d0952b",
+                            "sc_reo_fake_matrix.png:md5,2d8e4abada02b7d096e38888a2ea2a09",
+                            "sc_thr_histogram.png:md5,cd4368e81ef4f9f128a444a7897d0c1e",
+                            "sc_thr_matrix.png:md5,748d5a2a15159896775ebb7aa71a3fd5",
+                            "sim_histogram.png:md5,e82b14b3fbb8184e53265a05fe247fd0",
+                            "sim_matrix.png:md5,e42c85fbd2211738bb38882305122c9a",
+                            "vol_histogram.png:md5,5b60e61f931294416a22ad3a7d8848ca",
+                            "vol_matrix.png:md5,85ddd42c1562adaf38aee0cc32334039"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-16T10:54:29.917241635"
+    },
+    "connectivity - visualisation - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-01-16T10:55:34.856253711"
+    }
+}

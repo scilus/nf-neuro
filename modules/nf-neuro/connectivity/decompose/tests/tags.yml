@@ -1,0 +1,2 @@
+connectivity/decompose:
+  - "modules/nf-neuro/connectivity/decompose/**"

@@ -1,0 +1,56 @@
+---
+name: "connectivity_visualize"
+description: display a connectivity matrix and adjust the desired visualization.
+keywords:
+  - numpy
+  - connectivity
+  - visualize
+  - scilpy
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - matrices:
+      type: file
+      description: List of connectivity matrices. the set of matrices is concatenated into a single matrix, but can also contain a single matrix.
+      pattern: "*.npy"
+
+  - atlas_labels:
+      type: file
+      description: Lookup table with the label number as keys and the name as values
+      pattern: "*.json"
+
+  - labels_list:
+      type: file
+      description: List saved by the decomposition script, must contain labels rather than coordinates.
+      pattern: "*.txt"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - figure:
+      type: file
+      description: Output filename for the connectivity matrix figure.
+      pattern: "*.png"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@ThoumyreStanislas"
+maintainers:
+  - "@ThoumyreStanislas"
