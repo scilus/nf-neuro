@@ -92,13 +92,13 @@ nextflow_workflow {
                                                                                                     // IN DIFFUSION SPACE
                         file(workflow.out.dwi.get(0).get(1)).name,                                  //  dwi
                         workflow.out.dwi.get(0).get(2),                                             //  bval
-                        workflow.out.t1,                                                            //  t1
-                        workflow.out.wm_mask,                                                       //  wm_mask
-                        workflow.out.gm_mask,                                                       //  gm_mask
-                        workflow.out.csf_mask,                                                      //  csf_mask
-                        workflow.out.wm_map,                                                        //  wm_map
-                        workflow.out.gm_map,                                                        //  gm_map
-                        workflow.out.csf_map,                                                       //  csf_map
+                        niftiMD5SUM(workflow.out.t1.get(0).get(1), 6),                                            //  t1
+                        file(workflow.out.wm_mask.get(0).get(1)).name,                              //  wm_mask
+                        file(workflow.out.gm_mask.get(0).get(1)).name,                              //  gm_mask
+                        file(workflow.out.csf_mask.get(0).get(1)).name,                             //  csf_mask
+                        niftiMD5SUM(workflow.out.wm_map.get(0).get(1), 6),                                        //  wm_map
+                        niftiMD5SUM(workflow.out.gm_map.get(0).get(1), 6),                                        //  gm_map
+                        niftiMD5SUM(workflow.out.csf_map.get(0).get(1), 6),                                       //  csf_map
                                                                                                     // REGISTRATION
                                                                                                     //  anatomical_to_diffusion
                         file(workflow.out.anatomical_to_diffusion.get(0).get(1)).name,              //   warp (or affine)
@@ -109,7 +109,7 @@ nextflow_workflow {
                         workflow.out.diffusion_to_anatomical.get(0).get(2)
                             ? file(workflow.out.diffusion_to_anatomical.get(0).get(2)).name : "",   //   warp
                                                                                                     // IN ANATOMICAL SPACE
-                        workflow.out.t1_native,                                                     //  t1_native
+                        niftiMD5SUM(workflow.out.t1_native.get(0).get(1), 6),                                     //  t1_native
                                                                                                     // DTI
                         file(workflow.out.dti_tensor.get(0).get(1)).name,                           //  dti_tensor
                         file(workflow.out.dti_md.get(0).get(1)).name,                               //  dti_md

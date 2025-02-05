@@ -7,7 +7,7 @@ include { BETCROP_SYNTHBET} from '../../../modules/nf-neuro/betcrop/synthbet/mai
 include { IMAGE_CROPVOLUME as IMAGE_CROPVOLUME_T1 } from '../../../modules/nf-neuro/image/cropvolume/main'
 include { IMAGE_CROPVOLUME as IMAGE_CROPVOLUME_MASK } from '../../../modules/nf-neuro/image/cropvolume/main'
 
-params.run_synthbet = false
+params.preproc_t1_run_synthbet = false
 
 workflow PREPROC_T1 {
 

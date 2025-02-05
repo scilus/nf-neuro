@@ -3,74 +3,18 @@
         "content": [
             "test_dwi_resampled.nii.gz",
             "test__dwi_eddy_corrected.bval:md5,7995daabbd74fcf7c365a39a779f67e9",
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__t1_warped.nii.gz:md5,2c45bed9d9220a80967cdeac0efd1e28"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__mask_wm.nii.gz:md5,edad006e834fadbbe62288454db72469"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__mask_gm.nii.gz:md5,35d98f4f2feb6e836235972e3b2d1773"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__mask_csf.nii.gz:md5,9c87db6a264c0429c6dcfd4edea3cecf"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__map_wm.nii.gz:md5,3e285cc809429b0bb8a000e2b35c3450"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__map_gm.nii.gz:md5,99eac4894f97b62f271bd34002312e0b"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__map_csf.nii.gz:md5,73478989060ad3e82182b2e8592a1800"
-                ]
-            ],
+            "test__t1_warped.nii.gz:md5:header,d2a363d9e3bf479b3de9c43bb9b01a9a,data,2a09d695ea5221cfb105f348160b6a80",
+            "test__mask_wm.nii.gz",
+            "test__mask_gm.nii.gz",
+            "test__mask_csf.nii.gz",
+            "test__map_wm.nii.gz:md5:header,0630106f07411dd339881fb6bdd14513,data,32459f265e651d35f064af81eb4c6faf",
+            "test__map_gm.nii.gz:md5:header,0630106f07411dd339881fb6bdd14513,data,3142214ae1504ec39d8b4fbb59e937dd",
+            "test__map_csf.nii.gz:md5:header,0630106f07411dd339881fb6bdd14513,data,b4e0850d36cd2ff247b442125272b497",
             "test__output1Warp.nii.gz",
             "test__output0GenericAffine.mat",
             "test__output0GenericAffine.mat",
             "test__output1InverseWarp.nii.gz",
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test_t1_cropped.nii.gz:md5,0c326b4932d5293346ad8e5d798eca59"
-                ]
-            ],
+            "test_t1_cropped.nii.gz:md5:header,795498ca22df615577062e938b8fb038,data,4e1317bcb7673835f33c7684c17c96fe",
             "test__tensor.nii.gz",
             "test__md.nii.gz",
             "test__rd.nii.gz",
@@ -120,6 +64,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-05T15:59:58.286705989"
+        "timestamp": "2025-02-05T19:09:05.077057892"
     }
 }
