@@ -8,10 +8,10 @@ process RECONST_MEANFRF {
         'scilus/scilus:2.0.2' }"
 
     input:
-        tuple val(label), path(frf_list)
+        tuple val(prefix), path(frf_list)
 
     output:
-        tuple val(label), path("*mean_frf.txt")         , emit: meanfrf
+        tuple val(prefix), path("*mean_frf.txt")         , emit: meanfrf
         path "versions.yml"                             , emit: versions
 
     when:
@@ -23,7 +23,7 @@ process RECONST_MEANFRF {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    scil_frf_mean.py $frf_list ${label}_mean_frf.txt
+    scil_frf_mean.py $frf_list ${prefix}_mean_frf.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -35,7 +35,7 @@ process RECONST_MEANFRF {
     """
     scil_frf_mean.py -h
 
-    touch ${label}_mean_frf.txt
+    touch ${prefix}_mean_frf.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

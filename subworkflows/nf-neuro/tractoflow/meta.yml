@@ -4,8 +4,10 @@ description: |
   acquisition biases, align anatomical and diffusion space, compute DTI and fODF metrics and generate whole brain
   tractograms.
   ----------  Configuration  ----------
-  - nextflow.config : contains an example configuration for the subworkflow. Includes :
-  - modules.config  : contains the bindings to the modules parameters and some defaults making it Tractoflow.
+  - nextflow.config : contains an example configuration for the subworkflow.
+        └── modules.config : contains the bindings to the modules parameters and some defaults making it Tractoflow.
+
+    i.e: nextflow.config import modules.config
   --------------  Steps  --------------
   PREPROCESS DWI (preproc_dwi, nf-neuro)
     Preprocess the DWI image including brain extraction, MP-PCA denoising, eddy current and motion correction, N4 bias

@@ -118,6 +118,7 @@ workflow PREPROC_DWI {
         ch_versions = ch_versions.mix(IMAGE_CROPVOLUME.out.versions.first())
 
         ch_dwi_preproc = BETCROP_FSLBETCROP.out.image
+        ch_dwi_n4 = Channel.empty()
         if (params.preproc_dwi_run_N4) {
             // ** N4 DWI ** //
             ch_N4 = ch_dwi_preproc
@@ -128,6 +129,7 @@ workflow PREPROC_DWI {
             ch_versions = ch_versions.mix(N4_DWI.out.versions.first())
 
             ch_dwi_preproc = N4_DWI.out.image
+            ch_dwi_n4 = N4_DWI.out.image
         }
 
         // ** Normalize DWI ** //
@@ -139,7 +141,7 @@ workflow PREPROC_DWI {
         NORMALIZE_DWI ( ch_normalize )
         ch_versions = ch_versions.mix(NORMALIZE_DWI.out.versions.first())
 
-        ch_dwi_resampled = NORMALIZE_DWI.out.dwi
+        ch_dwi_preproc = NORMALIZE_DWI.out.dwi
         if (params.preproc_dwi_run_resampling) {
             // ** Resample DWI ** //
             ch_resample_dwi = NORMALIZE_DWI.out.dwi
@@ -148,11 +150,11 @@ workflow PREPROC_DWI {
             RESAMPLE_DWI ( ch_resample_dwi )
             ch_versions = ch_versions.mix(RESAMPLE_DWI.out.versions.first())
 
-            ch_dwi_resampled = RESAMPLE_DWI.out.image
+            ch_dwi_preproc = RESAMPLE_DWI.out.image
         }
 
         // ** Extract b0 ** //
-        ch_dwi_extract_b0 = ch_dwi_resampled
+        ch_dwi_extract_b0 = ch_dwi_preproc
             .join(TOPUP_EDDY.out.bval)
             .join(TOPUP_EDDY.out.bvec)
 
@@ -167,13 +169,13 @@ workflow PREPROC_DWI {
         ch_versions = ch_versions.mix(RESAMPLE_MASK.out.versions.first())
 
     emit:
-        dwi                 = ch_dwi_resampled              // channel: [ val(meta), dwi-resampled ]
+        dwi                 = ch_dwi_preproc                // channel: [ val(meta), dwi-preproc ]
         bval                = TOPUP_EDDY.out.bval           // channel: [ val(meta), bval-corrected ]
         bvec                = TOPUP_EDDY.out.bvec           // channel: [ val(meta), bvec-corrected ]
-        b0                  = EXTRACTB0_RESAMPLE.out.b0     // channel: [ val(meta), b0-resampled ]
+        b0                  = EXTRACTB0_RESAMPLE.out.b0     // channel: [ val(meta), b0-preproc ]
         b0_mask             = RESAMPLE_MASK.out.image       // channel: [ val(meta), b0-mask ]
         dwi_bounding_box    = BETCROP_FSLBETCROP.out.bbox   // channel: [ val(meta), dwi-bounding-box ]
         dwi_topup_eddy      = TOPUP_EDDY.out.dwi            // channel: [ val(meta), dwi-after-topup-eddy ]
-        dwi_n4              = ch_dwi_preproc                // channel: [ val(meta), dwi-after-n4 ]
+        dwi_n4              = ch_dwi_n4                     // channel: [ val(meta), dwi-after-n4 ]
         versions            = ch_versions                   // channel: [ versions.yml ]
 }
