@@ -8,7 +8,7 @@
                     {
                         "id": "test"
                     },
-                    "test__t1_warped.nii.gz:md5,01b68fe786587ac29aa203f788dda2fb"
+                    "test__t1_warped.nii.gz:md5,2c45bed9d9220a80967cdeac0efd1e28"
                 ]
             ],
             [
@@ -16,7 +16,7 @@
                     {
                         "id": "test"
                     },
-                    "test__mask_wm.nii.gz:md5,aa5376aac59b564be171f60bc356709d"
+                    "test__mask_wm.nii.gz:md5,edad006e834fadbbe62288454db72469"
                 ]
             ],
             [
@@ -24,7 +24,7 @@
                     {
                         "id": "test"
                     },
-                    "test__mask_gm.nii.gz:md5,12c47573c8553debce06fb2dcc86f9d7"
+                    "test__mask_gm.nii.gz:md5,35d98f4f2feb6e836235972e3b2d1773"
                 ]
             ],
             [
@@ -32,7 +32,7 @@
                     {
                         "id": "test"
                     },
-                    "test__mask_csf.nii.gz:md5,9446b92c900eb0488eca0aed16a26749"
+                    "test__mask_csf.nii.gz:md5,9c87db6a264c0429c6dcfd4edea3cecf"
                 ]
             ],
             [
@@ -40,7 +40,7 @@
                     {
                         "id": "test"
                     },
-                    "test__map_wm.nii.gz:md5,93c2e3d8f2e518a00b3c542bdaf07c74"
+                    "test__map_wm.nii.gz:md5,3e285cc809429b0bb8a000e2b35c3450"
                 ]
             ],
             [
@@ -48,7 +48,7 @@
                     {
                         "id": "test"
                     },
-                    "test__map_gm.nii.gz:md5,0c5209ce2fb3c2302dd6852deed5b0d2"
+                    "test__map_gm.nii.gz:md5,99eac4894f97b62f271bd34002312e0b"
                 ]
             ],
             [
@@ -56,7 +56,7 @@
                     {
                         "id": "test"
                     },
-                    "test__map_csf.nii.gz:md5,ecae9078d35b72f1a3926b130fc0facc"
+                    "test__map_csf.nii.gz:md5,73478989060ad3e82182b2e8592a1800"
                 ]
             ],
             "test__output1Warp.nii.gz",
@@ -68,7 +68,7 @@
                     {
                         "id": "test"
                     },
-                    "test_t1_resampled.nii.gz:md5,e60bd789efb63e6477e061b6d2c98a71"
+                    "test_t1_cropped.nii.gz:md5,0c326b4932d5293346ad8e5d798eca59"
                 ]
             ],
             "test__tensor.nii.gz",
@@ -120,6 +120,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-05T06:22:08.784601033"
+        "timestamp": "2025-02-05T15:59:58.286705989"
     }
 }
