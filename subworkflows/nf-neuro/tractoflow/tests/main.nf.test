@@ -99,8 +99,6 @@ nextflow_workflow {
                         workflow.out.wm_map,                                                        //  wm_map
                         workflow.out.gm_map,                                                        //  gm_map
                         workflow.out.csf_map,                                                       //  csf_map
-                        workflow.out.aparc_aseg,                                                    //  aparc_aseg
-                        workflow.out.wmparc,                                                        //  wmparc
                                                                                                     // REGISTRATION
                                                                                                     //  anatomical_to_diffusion
                         file(workflow.out.anatomical_to_diffusion.get(0).get(1)).name,              //   warp (or affine)
@@ -129,16 +127,11 @@ nextflow_workflow {
                                                                                                     // FODF
                         file(workflow.out.fiber_response.get(0).get(1)).name,                       //  fiber_response
                         file(workflow.out.fodf.get(0).get(1)).name,                                 //  fodf
-                        file(workflow.out.wm_fodf.get(0).get(1)).name,                              //  wm_fodf
-                        file(workflow.out.gm_fodf.get(0).get(1)).name,                              //  gm_fodf
-                        file(workflow.out.csf_fodf.get(0).get(1)).name,                             //  csf_fodf
-                        file(workflow.out.fodf_rgb.get(0).get(1)).name,                             //  fodf_rgb
                         file(workflow.out.fodf_peaks.get(0).get(1)).name,                           //  fodf_peaks
                         file(workflow.out.afd_max.get(0).get(1)).name,                              //  afd_max
                         file(workflow.out.afd_total.get(0).get(1)).name,                            //  afd_total
                         file(workflow.out.afd_sum.get(0).get(1)).name,                              //  afd_sum
                         file(workflow.out.nufo.get(0).get(1)).name,                                 //  nufo
-                        file(workflow.out.volume_fraction.get(0).get(1)).name,                      //  volume_fraction
                                                                                                     // TRACKING
                         file(workflow.out.pft_tractogram.get(0).get(1)).name,                       //  pft_tractogram
                         file(workflow.out.pft_config.get(0).get(1)).name,                           //  pft_config

@@ -1,799 +1,125 @@
 {
     "tractoflow - no rev": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_dwi_resampled.nii.gz:md5,3d8779e5101b197fd92dd945565d851f"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__t1_warped.nii.gz:md5,e1d5080a5280df16a719c39825ce5ba2"
-                    ]
-                ],
-                "10": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1Warp.nii.gz:md5,e4956aa73a6f497e5c316dfe24086fa9",
-                        "test__output0GenericAffine.mat:md5,7ce31e1314d3f591b07eb5844e6cc237"
-                    ]
-                ],
-                "11": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0GenericAffine.mat:md5,7ce31e1314d3f591b07eb5844e6cc237",
-                        "test__output1InverseWarp.nii.gz:md5,532398bd5366613c4ceb71f09227a343"
-                    ]
-                ],
-                "12": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_t1_cropped.nii.gz:md5,c804e09ae12b053d76e10a3d74e98fb6"
-                    ]
-                ],
-                "13": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__tensor.nii.gz:md5,95fd3907a77ce0c574565aeedbfa1c52"
-                    ]
-                ],
-                "14": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__md.nii.gz:md5,24d0595b94f5d542cb6e8d2c85cbf25c"
-                    ]
-                ],
-                "15": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__rd.nii.gz:md5,9e033f66a81dd647f2ecf0cea9280b5b"
-                    ]
-                ],
-                "16": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__ad.nii.gz:md5,b5ac66cd3c342fc6d980a8e6638ad6f8"
-                    ]
-                ],
-                "17": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__fa.nii.gz:md5,1d203db40024b73bf27682bbc42eff1e"
-                    ]
-                ],
-                "18": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__rgb.nii.gz:md5,4490a8af5b74391f478328a834f0dd8a"
-                    ]
-                ],
-                "19": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__evecs_v1.nii.gz:md5,7f2dfc6fba419292d3f3593cc202daaa"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_wm.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
-                    ]
-                ],
-                "20": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__evecs.nii.gz:md5,67a0f7d10826b3d037d21af4eb456f90"
-                    ]
-                ],
-                "21": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__evals.nii.gz:md5,101d1bff0ad58097b21b9046518d95fc"
-                    ]
-                ],
-                "22": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__residual.nii.gz:md5,cadd5788dcb17affd05dade1abb92757"
-                    ]
-                ],
-                "23": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__ga.nii.gz:md5,7abb9e724461564606362d4a81a84395"
-                    ]
-                ],
-                "24": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mode.nii.gz:md5,dfbe791ad347c16ce7ed65db1d93b865"
-                    ]
-                ],
-                "25": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__norm.nii.gz:md5,f4537da45643154b5c0996685afa7dd0"
-                    ]
-                ],
-                "26": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__frf.txt:md5,ae32847306f1b957eb901d6a8d76319d",
-                        [
-                            
-                        ],
-                        [
-                            
-                        ]
-                    ]
-                ],
-                "27": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__fodf.nii.gz:md5,e823e114c12c7c4de0f740c99c547b35"
-                    ]
-                ],
-                "28": [
-                    
-                ],
-                "29": [
-                    
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_gm.nii.gz:md5,40756ebc4a82a284a170ad699e0a5e30"
-                    ]
-                ],
-                "30": [
-                    
-                ],
-                "31": [
-                    
-                ],
-                "32": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__peaks.nii.gz:md5,e197f30f3430b39882cbff5c9caf0560"
-                    ]
-                ],
-                "33": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__afd_max.nii.gz:md5,62ce35b700dcd14d00b7c5de83511d27"
-                    ]
-                ],
-                "34": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__afd_total.nii.gz:md5,2f64fbc96ccc362b28558e9028954add"
-                    ]
-                ],
-                "35": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__afd_sum.nii.gz:md5,8b48d85226eacf23312f78b0f020061f"
-                    ]
-                ],
-                "36": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__nufo.nii.gz:md5,44807a84f5cc0b91b905547e6fb65bd6"
-                    ]
-                ],
-                "37": [
-                    
-                ],
-                "38": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pft_tracking.trk:md5,38b3f540d2f112d5bbf026416b3d27ec"
-                    ]
-                ],
-                "39": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pft_tracking_config.json:md5,073be2c69ef937dcd7b4eb4ddfab909d"
-                    ]
-                ],
-                "4": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_csf.nii.gz:md5,277db7da3c1ed92947c177edeb5eaa7d"
-                    ]
-                ],
-                "40": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_include.nii.gz:md5,d9983cec6fe4dbc7becce71ffac237b8"
-                    ]
-                ],
-                "41": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_exclude.nii.gz:md5,44839611fb77fd588e99b9afa0ae6b91"
-                    ]
-                ],
-                "42": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pft_seeding_mask.nii.gz:md5,3429293546e20469c84502394e37885d"
-                    ]
-                ],
-                "43": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__local_tracking.trk:md5,5bf9827570b27aa3eaf19f9d76bae764"
-                    ]
-                ],
-                "44": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__local_tracking_config.json:md5,70f34bd8a84d74a8936819110f061a80"
-                    ]
-                ],
-                "45": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__local_seeding_mask.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
-                    ]
-                ],
-                "46": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__local_tracking_mask.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
-                    ]
-                ],
-                "47": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__nonphysical.nii.gz:md5,5672d29065a2b4b0a61b288fbc029112"
-                    ]
-                ],
-                "48": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pulsation_std_dwi.nii.gz:md5,9772a7d01c772746211d5a1177579dd4"
-                    ]
-                ],
-                "49": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pulsation_std_b0.nii.gz:md5,c00a83d69aad893df30751e6cd985ce8"
-                    ]
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_wm.nii.gz:md5,cd10401b5feee8c2bc531b34612ac959"
-                    ]
-                ],
-                "50": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__residual_residuals_stats.png:md5,d397a2e91dc563a6ef8563fbc5cb1fd0"
-                    ]
-                ],
-                "51": [
-                    "versions.yml:md5,268ca1c37e99d151cafe2c4fef31ecf4",
-                    "versions.yml:md5,329641acd94a1eb6e65ef73b738b9165",
-                    "versions.yml:md5,4a7c801d46bade11523003b6bd06f8ed",
-                    "versions.yml:md5,647b63809e635c82552cf53178bf73be",
-                    "versions.yml:md5,9e058d5e2eaf4cf239570ca80d20207f",
-                    "versions.yml:md5,aaab00d1fa7d070cc7ee67fd768416b8",
-                    "versions.yml:md5,b24101ff33659eb50c457e4118442a6c",
-                    "versions.yml:md5,da10c87dbb2ad07aa8bbf89a0c172a60",
-                    "versions.yml:md5,e092829f98d53bda1802d1cda0cb017f",
-                    "versions.yml:md5,fc6a2d3923b6ecd60b833ce5f09f8877"
-                ],
-                "6": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_gm.nii.gz:md5,9ea2161ff256ba6680db86c28624191a"
-                    ]
-                ],
-                "7": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_csf.nii.gz:md5,68f53afcc61f09d70484665161415aa8"
-                    ]
-                ],
-                "8": [
-                    
-                ],
-                "9": [
-                    
-                ],
-                "afd_max": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__afd_max.nii.gz:md5,62ce35b700dcd14d00b7c5de83511d27"
-                    ]
-                ],
-                "afd_sum": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__afd_sum.nii.gz:md5,8b48d85226eacf23312f78b0f020061f"
-                    ]
-                ],
-                "afd_total": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__afd_total.nii.gz:md5,2f64fbc96ccc362b28558e9028954add"
-                    ]
-                ],
-                "anatomical_to_diffusion": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1Warp.nii.gz:md5,e4956aa73a6f497e5c316dfe24086fa9",
-                        "test__output0GenericAffine.mat:md5,7ce31e1314d3f591b07eb5844e6cc237"
-                    ]
-                ],
-                "aparc_aseg": [
-                    
-                ],
-                "csf_fodf": [
-                    
-                ],
-                "csf_map": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_csf.nii.gz:md5,68f53afcc61f09d70484665161415aa8"
-                    ]
-                ],
-                "csf_mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_csf.nii.gz:md5,277db7da3c1ed92947c177edeb5eaa7d"
-                    ]
-                ],
-                "diffusion_to_anatomical": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0GenericAffine.mat:md5,7ce31e1314d3f591b07eb5844e6cc237",
-                        "test__output1InverseWarp.nii.gz:md5,532398bd5366613c4ceb71f09227a343"
-                    ]
-                ],
-                "dti_ad": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__ad.nii.gz:md5,b5ac66cd3c342fc6d980a8e6638ad6f8"
-                    ]
-                ],
-                "dti_evals": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__evals.nii.gz:md5,101d1bff0ad58097b21b9046518d95fc"
-                    ]
-                ],
-                "dti_evecs": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__evecs.nii.gz:md5,67a0f7d10826b3d037d21af4eb456f90"
-                    ]
-                ],
-                "dti_fa": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__fa.nii.gz:md5,1d203db40024b73bf27682bbc42eff1e"
-                    ]
-                ],
-                "dti_ga": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__ga.nii.gz:md5,7abb9e724461564606362d4a81a84395"
-                    ]
-                ],
-                "dti_md": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__md.nii.gz:md5,24d0595b94f5d542cb6e8d2c85cbf25c"
-                    ]
-                ],
-                "dti_mode": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mode.nii.gz:md5,dfbe791ad347c16ce7ed65db1d93b865"
-                    ]
-                ],
-                "dti_norm": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__norm.nii.gz:md5,f4537da45643154b5c0996685afa7dd0"
-                    ]
-                ],
-                "dti_peaks": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__evecs_v1.nii.gz:md5,7f2dfc6fba419292d3f3593cc202daaa"
-                    ]
-                ],
-                "dti_rd": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__rd.nii.gz:md5,9e033f66a81dd647f2ecf0cea9280b5b"
-                    ]
-                ],
-                "dti_residual": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__residual.nii.gz:md5,cadd5788dcb17affd05dade1abb92757"
-                    ]
-                ],
-                "dti_residual_stats": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__residual_residuals_stats.png:md5,d397a2e91dc563a6ef8563fbc5cb1fd0"
-                    ]
-                ],
-                "dti_rgb": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__rgb.nii.gz:md5,4490a8af5b74391f478328a834f0dd8a"
-                    ]
-                ],
-                "dti_tensor": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__tensor.nii.gz:md5,95fd3907a77ce0c574565aeedbfa1c52"
-                    ]
-                ],
-                "dwi": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_dwi_resampled.nii.gz:md5,3d8779e5101b197fd92dd945565d851f"
-                    ]
-                ],
-                "fiber_response": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__frf.txt:md5,ae32847306f1b957eb901d6a8d76319d",
-                        [
-                            
-                        ],
-                        [
-                            
-                        ]
-                    ]
-                ],
-                "fodf": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__fodf.nii.gz:md5,e823e114c12c7c4de0f740c99c547b35"
-                    ]
-                ],
-                "fodf_peaks": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__peaks.nii.gz:md5,e197f30f3430b39882cbff5c9caf0560"
-                    ]
-                ],
-                "fodf_rgb": [
-                    
-                ],
-                "gm_fodf": [
-                    
-                ],
-                "gm_map": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_gm.nii.gz:md5,9ea2161ff256ba6680db86c28624191a"
-                    ]
-                ],
-                "gm_mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_gm.nii.gz:md5,40756ebc4a82a284a170ad699e0a5e30"
-                    ]
-                ],
-                "local_config": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__local_tracking_config.json:md5,70f34bd8a84d74a8936819110f061a80"
-                    ]
-                ],
-                "local_seeding_mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__local_seeding_mask.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
-                    ]
-                ],
-                "local_tracking_mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__local_tracking_mask.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
-                    ]
-                ],
-                "local_tractogram": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__local_tracking.trk:md5,5bf9827570b27aa3eaf19f9d76bae764"
-                    ]
-                ],
-                "nonphysical_voxels": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__nonphysical.nii.gz:md5,5672d29065a2b4b0a61b288fbc029112"
-                    ]
-                ],
-                "nufo": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__nufo.nii.gz:md5,44807a84f5cc0b91b905547e6fb65bd6"
-                    ]
-                ],
-                "pft_config": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pft_tracking_config.json:md5,073be2c69ef937dcd7b4eb4ddfab909d"
-                    ]
-                ],
-                "pft_map_exclude": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_exclude.nii.gz:md5,44839611fb77fd588e99b9afa0ae6b91"
-                    ]
-                ],
-                "pft_map_include": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_include.nii.gz:md5,d9983cec6fe4dbc7becce71ffac237b8"
-                    ]
-                ],
-                "pft_seeding_mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pft_seeding_mask.nii.gz:md5,3429293546e20469c84502394e37885d"
-                    ]
-                ],
-                "pft_tractogram": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pft_tracking.trk:md5,38b3f540d2f112d5bbf026416b3d27ec"
-                    ]
-                ],
-                "pulsation_in_b0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pulsation_std_b0.nii.gz:md5,c00a83d69aad893df30751e6cd985ce8"
-                    ]
-                ],
-                "pulsation_in_dwi": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__pulsation_std_dwi.nii.gz:md5,9772a7d01c772746211d5a1177579dd4"
-                    ]
-                ],
-                "t1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__t1_warped.nii.gz:md5,e1d5080a5280df16a719c39825ce5ba2"
-                    ]
-                ],
-                "t1_native": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_t1_cropped.nii.gz:md5,c804e09ae12b053d76e10a3d74e98fb6"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,268ca1c37e99d151cafe2c4fef31ecf4",
-                    "versions.yml:md5,329641acd94a1eb6e65ef73b738b9165",
-                    "versions.yml:md5,4a7c801d46bade11523003b6bd06f8ed",
-                    "versions.yml:md5,647b63809e635c82552cf53178bf73be",
-                    "versions.yml:md5,9e058d5e2eaf4cf239570ca80d20207f",
-                    "versions.yml:md5,aaab00d1fa7d070cc7ee67fd768416b8",
-                    "versions.yml:md5,b24101ff33659eb50c457e4118442a6c",
-                    "versions.yml:md5,da10c87dbb2ad07aa8bbf89a0c172a60",
-                    "versions.yml:md5,e092829f98d53bda1802d1cda0cb017f",
-                    "versions.yml:md5,fc6a2d3923b6ecd60b833ce5f09f8877"
-                ],
-                "volume_fraction": [
-                    
-                ],
-                "wm_fodf": [
-                    
-                ],
-                "wm_map": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__map_wm.nii.gz:md5,cd10401b5feee8c2bc531b34612ac959"
-                    ]
-                ],
-                "wm_mask": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__mask_wm.nii.gz:md5,d99f87e8fe4b713f85b8156bb00cb165"
-                    ]
-                ],
-                "wmparc": [
-                    
+            "test_dwi_resampled.nii.gz",
+            "test__dwi_eddy_corrected.bval:md5,7995daabbd74fcf7c365a39a779f67e9",
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test__t1_warped.nii.gz:md5,01b68fe786587ac29aa203f788dda2fb"
                 ]
-            }
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test__mask_wm.nii.gz:md5,aa5376aac59b564be171f60bc356709d"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test__mask_gm.nii.gz:md5,12c47573c8553debce06fb2dcc86f9d7"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test__mask_csf.nii.gz:md5,9446b92c900eb0488eca0aed16a26749"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test__map_wm.nii.gz:md5,93c2e3d8f2e518a00b3c542bdaf07c74"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test__map_gm.nii.gz:md5,0c5209ce2fb3c2302dd6852deed5b0d2"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test__map_csf.nii.gz:md5,ecae9078d35b72f1a3926b130fc0facc"
+                ]
+            ],
+            "test__output1Warp.nii.gz",
+            "test__output0GenericAffine.mat",
+            "test__output0GenericAffine.mat",
+            "test__output1InverseWarp.nii.gz",
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test_t1_resampled.nii.gz:md5,e60bd789efb63e6477e061b6d2c98a71"
+                ]
+            ],
+            "test__tensor.nii.gz",
+            "test__md.nii.gz",
+            "test__rd.nii.gz",
+            "test__ad.nii.gz",
+            "test__fa.nii.gz",
+            "test__rgb.nii.gz",
+            "test__evecs_v1.nii.gz",
+            "test__evecs.nii.gz",
+            "test__evals.nii.gz",
+            "test__residual.nii.gz",
+            "test__ga.nii.gz",
+            "test__mode.nii.gz",
+            "test__norm.nii.gz",
+            "test__frf.txt",
+            "test__fodf.nii.gz",
+            "test__peaks.nii.gz",
+            "test__afd_max.nii.gz",
+            "test__afd_total.nii.gz",
+            "test__afd_sum.nii.gz",
+            "test__nufo.nii.gz",
+            "test__pft_tracking.trk",
+            "test__pft_tracking_config.json",
+            "test__map_include.nii.gz",
+            "test__map_exclude.nii.gz",
+            "test__pft_seeding_mask.nii.gz",
+            "test__local_tracking.trk",
+            "test__local_tracking_config.json",
+            "test__local_seeding_mask.nii.gz",
+            "test__local_tracking_mask.nii.gz",
+            "test__nonphysical.nii.gz",
+            "test__pulsation_std_dwi.nii.gz",
+            "test__pulsation_std_b0.nii.gz",
+            "test__residual_residuals_stats.png",
+            [
+                "versions.yml:md5,29eb4791c0e509ddbfa054f7d864e119",
+                "versions.yml:md5,329641acd94a1eb6e65ef73b738b9165",
+                "versions.yml:md5,4a7c801d46bade11523003b6bd06f8ed",
+                "versions.yml:md5,647b63809e635c82552cf53178bf73be",
+                "versions.yml:md5,9e058d5e2eaf4cf239570ca80d20207f",
+                "versions.yml:md5,aaab00d1fa7d070cc7ee67fd768416b8",
+                "versions.yml:md5,da10c87dbb2ad07aa8bbf89a0c172a60",
+                "versions.yml:md5,e092829f98d53bda1802d1cda0cb017f",
+                "versions.yml:md5,fc6a2d3923b6ecd60b833ce5f09f8877"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-12-18T22:11:36.11074401"
+        "timestamp": "2025-02-05T06:22:08.784601033"
     }
 }
