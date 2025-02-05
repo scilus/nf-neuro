@@ -13,6 +13,7 @@ nextflow_workflow {
     tag "preproc/topup"
     tag "preproc/eddy"
     tag "utils/extractb0"
+    tag "betcrop/fslbetcrop"
 
     tag "load_test_data"
 

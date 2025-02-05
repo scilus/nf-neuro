@@ -12,6 +12,7 @@ nextflow_workflow {
     tag "image/cropvolume"
     tag "betcrop/fslbetcrop"
     tag "denoising/mppca"
+    tag "preproc/gibbs"
     tag "image/resample"
     tag "preproc/n4"
     tag "preproc/normalize"
