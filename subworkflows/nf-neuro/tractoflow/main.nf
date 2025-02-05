@@ -312,4 +312,3 @@ workflow TRACTOFLOW {
 
         versions                = ch_versions                 // channel: [ path(versions.yml) ]
 }
-
