@@ -16,12 +16,12 @@ description: |
     - B-vectors for the rev_dwi (rev_bvec)
     - Reverse b0 image (rev_b0)
   Metadata (within the meta):
-    - Subject ID
-    - Session ID
-    - Run ID
-    - DWI Phase Encoding Direction
-    - DWI Total Readout Time
-    - Reverse DWI Phase Encoding Direction
+    - Subject ID (id)
+    - Session ID (ses)
+    - Run ID (run)
+    - DWI Total Readout Time (dwi_tr)
+    - DWI Phase Encoding Direction (dwi_phase)
+    - Reverse DWI Phase Encoding Direction (dwi_revphase)
 
   **Note**: This subworkflow is meant to be an example of how to use the
   IO_READBIDS module. It can be modified to fit the user's needs.

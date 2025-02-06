@@ -23,7 +23,7 @@ workflow IO_BIDS {
     ch_files = IO_READBIDS.out.bidsstructure
         .flatMap{ layout ->
             def json = new groovy.json.JsonSlurper().parseText(layout.getText())
-            json.collect { item ->
+            return json.collect { item ->
                 // ** Collecting the subject's ID ** //
                 def sid = "sub-" + item.subject
 
@@ -34,9 +34,9 @@ workflow IO_BIDS {
                 def run = item.run ? "run-" + item.run : ""
 
                 // ** Collecting TotalReadoutTime, PhaseEncodingDirection ** //
-                def tr = item.TotalReadoutTime ?: ""
-                def phase = item.DWIPhaseEncodingDirection ?: ""
-                def revphase = item.rev_DWIPhaseEncodingDirection ?: ""
+                def dwi_tr = item.TotalReadoutTime ?: ""
+                def dwi_phase = item.DWIPhaseEncodingDirection ?: ""
+                def dwi_revphase = item.rev_DWIPhaseEncodingDirection ?: ""
 
                 // ** Validating there is not missing data ** //
                 item.each { _key, value ->
@@ -52,7 +52,8 @@ workflow IO_BIDS {
 
                 // ** Collecting the files ** //
                 return [
-                    [id: sid, session: ses, run: run, tr: tr, phase: phase, revphase: revphase],
+                    [id: sid, session: ses, run: run, dwi_tr: dwi_tr,
+                    dwi_phase: dwi_phase, dwi_revphase: dwi_revphase],
                     item.t1 ? file(item.t1) : [],
                     item.wmparc ? file(item.wmparc) : [],
                     item.aparc_aseg ? file(item.aparc_aseg) : [],
