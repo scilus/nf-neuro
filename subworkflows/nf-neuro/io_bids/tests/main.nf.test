@@ -1,0 +1,78 @@
+nextflow_workflow {
+
+    name "Test Subworkflow IO_BIDS"
+    script "../main.nf"
+    workflow "IO_BIDS"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/io_bids"
+    tag "subworkflows/load_test_data"
+
+    tag "io"
+    tag "io/readbids"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "bids.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("Read BIDS directory - without .bidsignore") {
+
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        file("\${test_data_directory}/i_bids/")
+                    ]
+                }
+                input[1] = Channel.from( [] )
+                input[2] = Channel.from( [] )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("Read BIDS directory - with .bidsignore") {
+
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        file("\${test_data_directory}/i_bids/")
+                    ]
+                }
+                input[1] = Channel.from( [] )
+                input[2] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        file("\${test_data_directory}/i_bids/.bidsignore")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+}

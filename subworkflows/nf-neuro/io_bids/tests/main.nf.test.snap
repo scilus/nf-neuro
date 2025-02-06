@@ -1,0 +1,108 @@
+{
+    "Read BIDS directory - with .bidsignore": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    
+                ],
+                "ch_aparc_aseg": [
+                    
+                ],
+                "ch_dwi_bval_bvec": [
+                    
+                ],
+                "ch_rev_b0": [
+                    
+                ],
+                "ch_rev_dwi_bval_bvec": [
+                    
+                ],
+                "ch_t1": [
+                    
+                ],
+                "ch_wmparc": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-05T21:37:09.32917"
+    },
+    "Read BIDS directory - without .bidsignore": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    
+                ],
+                "ch_aparc_aseg": [
+                    
+                ],
+                "ch_dwi_bval_bvec": [
+                    
+                ],
+                "ch_rev_b0": [
+                    
+                ],
+                "ch_rev_dwi_bval_bvec": [
+                    
+                ],
+                "ch_t1": [
+                    
+                ],
+                "ch_wmparc": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-05T21:37:06.012742"
+    }
+}
