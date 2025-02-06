@@ -4,13 +4,16 @@ nextflow_workflow {
     script "../main.nf"
     workflow "IO_BIDS"
 
+    config "./nextflow.config"
+
     tag "subworkflows"
     tag "subworkflows_nfcore"
     tag "subworkflows/io_bids"
-    tag "subworkflows/load_test_data"
 
     tag "io"
     tag "io/readbids"
+
+    tag "load_test_data"
 
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
@@ -31,11 +34,11 @@ nextflow_workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        file("\${test_data_directory}/i_bids/")
+                        file("\${test_data_directory}/i_bids", checkIfExists: true)
                     ]
                 }
-                input[1] = Channel.from( [] )
-                input[2] = Channel.from( [] )
+                input[1] = []
+                input[2] = []
                 """
             }
         }
@@ -55,10 +58,10 @@ nextflow_workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        file("\${test_data_directory}/i_bids/")
+                        file("\${test_data_directory}/i_bids", checkIfExists: true)
                     ]
                 }
-                input[1] = Channel.from( [] )
+                input[1] = []
                 input[2] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
                         file("\${test_data_directory}/i_bids/.bidsignore")
