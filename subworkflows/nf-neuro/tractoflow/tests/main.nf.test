@@ -93,13 +93,13 @@ nextflow_workflow {
                         file(workflow.out.dwi.get(0).get(1)).name,                                  //  dwi
                         workflow.out.dwi.get(0).get(2),                                             //  bval
                         workflow.out.dwi.get(0).get(3),                                             //  bvec
-                        niftiMD5SUM(workflow.out.t1.get(0).get(1), 2),                              //  t1
+                        file(workflow.out.t1.get(0).get(1)).name,                                   //  t1
                         file(workflow.out.wm_mask.get(0).get(1)).name,                              //  wm_mask
                         file(workflow.out.gm_mask.get(0).get(1)).name,                              //  gm_mask
                         file(workflow.out.csf_mask.get(0).get(1)).name,                             //  csf_mask
-                        niftiMD5SUM(workflow.out.wm_map.get(0).get(1), 2),                          //  wm_map
-                        niftiMD5SUM(workflow.out.gm_map.get(0).get(1), 2),                          //  gm_map
-                        niftiMD5SUM(workflow.out.csf_map.get(0).get(1), 2),                         //  csf_map
+                        file(workflow.out.wm_map.get(0).get(1)).name,                               //  wm_map
+                        file(workflow.out.gm_map.get(0).get(1)).name,                               //  gm_map
+                        file(workflow.out.csf_map.get(0).get(1)).name,                              //  csf_map
                                                                                                     // REGISTRATION
                                                                                                     //  anatomical_to_diffusion
                         file(workflow.out.anatomical_to_diffusion.get(0).get(1)).name,              //   warp (or affine)
@@ -110,7 +110,7 @@ nextflow_workflow {
                         workflow.out.diffusion_to_anatomical.get(0).get(2)
                             ? file(workflow.out.diffusion_to_anatomical.get(0).get(2)).name : "",   //   warp
                                                                                                     // IN ANATOMICAL SPACE
-                        niftiMD5SUM(workflow.out.t1_native.get(0).get(1), 2),                       //  t1_native
+                        file(workflow.out.t1_native.get(0).get(1)).name,                            //  t1_native
                                                                                                     // DTI
                         file(workflow.out.dti_tensor.get(0).get(1)).name,                           //  dti_tensor
                         file(workflow.out.dti_md.get(0).get(1)).name,                               //  dti_md
