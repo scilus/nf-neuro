@@ -12,6 +12,7 @@ nextflow_workflow {
     tag "image/cropvolume"
     tag "betcrop/fslbetcrop"
     tag "denoising/mppca"
+    tag "preproc/gibbs"
     tag "image/resample"
     tag "preproc/n4"
     tag "preproc/normalize"
@@ -67,7 +68,7 @@ nextflow_workflow {
                     file(workflow.out.bvec.get(0).get(1)).name,
                     file(workflow.out.dwi_bounding_box.get(0).get(1)).name,
                     file(workflow.out.dwi_n4.get(0).get(1)).name,
-                    file(workflow.out.dwi_resample.get(0).get(1)).name,
+                    file(workflow.out.dwi.get(0).get(1)).name,
                     file(workflow.out.dwi_topup_eddy.get(0).get(1)).name).match() }
             )
         }
@@ -110,7 +111,7 @@ nextflow_workflow {
                     file(workflow.out.bvec.get(0).get(1)).name,
                     file(workflow.out.dwi_bounding_box.get(0).get(1)).name,
                     file(workflow.out.dwi_n4.get(0).get(1)).name,
-                    file(workflow.out.dwi_resample.get(0).get(1)).name,
+                    file(workflow.out.dwi.get(0).get(1)).name,
                     file(workflow.out.dwi_topup_eddy.get(0).get(1)).name).match() }
             )
         }
@@ -162,7 +163,7 @@ nextflow_workflow {
                     file(workflow.out.bvec.get(0).get(1)).name,
                     file(workflow.out.dwi_bounding_box.get(0).get(1)).name,
                     file(workflow.out.dwi_n4.get(0).get(1)).name,
-                    file(workflow.out.dwi_resample.get(0).get(1)).name,
+                    file(workflow.out.dwi.get(0).get(1)).name,
                     file(workflow.out.dwi_topup_eddy.get(0).get(1)).name).match() }
             )
         }

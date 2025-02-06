@@ -26,7 +26,7 @@ process PREPROC_TOPUP {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     def prefix_topup = task.ext.prefix_topup ? task.ext.prefix_topup : ""
-    def config_topup = config_topup ?: task.ext.default_config_topup
+    config_topup = config_topup ?: task.ext.default_config_topup
     def encoding = task.ext.encoding ? task.ext.encoding : ""
     def readout = task.ext.readout ? task.ext.readout : ""
     def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ? task.ext.b0_thr_extract_b0 : ""

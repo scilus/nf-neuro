@@ -20,7 +20,6 @@ process PREPROC_EDDY {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def slice_drop_flag = task.ext.slice_drop_correction ? "--slice_drop_correction " : ""
     def bet_topup_before_eddy_f = task.ext.bet_topup_before_eddy_f ?: ""

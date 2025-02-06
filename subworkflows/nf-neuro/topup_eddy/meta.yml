@@ -21,6 +21,7 @@ components:
   - preproc/topup
   - preproc/eddy
   - utils/extractb0
+  - betcrop/fslbetcrop
 input:
   - meta:
       type: map

@@ -52,6 +52,7 @@ components:
   - preproc/n4
   - preproc/normalize
   - utils/extractb0
+  - preproc/gibbs
   - topup_eddy
 input:
   - ch_dwi:

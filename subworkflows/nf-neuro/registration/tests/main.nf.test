@@ -193,6 +193,7 @@ nextflow_workflow {
                 { assert snapshot(
                     file(workflow.out.image_warped.get(0).get(1)).name,
                     file(workflow.out.transfo_image.get(0).get(1)).name,
+                    file(workflow.out.transfo_image.get(0).get(2)).name,
                     workflow.out.versions
                 ).match()}
             )

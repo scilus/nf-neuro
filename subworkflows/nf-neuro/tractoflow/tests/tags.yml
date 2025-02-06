@@ -1,0 +1,2 @@
+subworkflows/tractoflow:
+  - subworkflows/nf-neuro/tractoflow/**
