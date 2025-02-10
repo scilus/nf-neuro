@@ -116,7 +116,9 @@ def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
 
-    for subworkflow in [p for p in Path(args.subworkflows_dir).iterdir() if p.is_dir()]:
+    for subworkflow in [p for p in Path(args.subworkflows_dir).iterdir()
+                                if p.is_dir()]:
+
         with open(subworkflow.joinpath("meta.yml").resolve(), 'r') as meta:
             md_data = convert_subworkflow_to_md(yaml.safe_load(meta))
             # Write the final markdown file.
