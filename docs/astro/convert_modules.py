@@ -126,12 +126,13 @@ def main():
     args = parser.parse_args()
 
     for category in [p for p in Path(args.modules_dir).iterdir() if p.is_dir()]:
+        output_dir = Path(args.output_dir).joinpath(category.name)
+        output_dir.mkdir(parents=True, exist_ok=True)
         for module in [p for p in category.iterdir() if p.is_dir()]:
             with open(module.joinpath('meta.yml').resolve(), 'r') as meta:
                 md_data = convert_module_to_md(yaml.safe_load(meta))
                 # Write the final markdown file.
-                output_path = Path(args.output_dir).joinpath(
-                    f"{category.name}_{module.name}.md")
+                output_path = output_dir.joinpath(f"{module.name}.md")
                 output_path.write_text(md_data)
 
 
