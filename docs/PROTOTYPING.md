@@ -7,26 +7,35 @@
       - [`main.nf` example](#mainnf-example)
     - [`nextflow.config`](#nextflowconfig)
 
+First and foremost, if not already done, create a directory to host your project's files and navigate to it.
+
+```bash
+mkdir -p path/to/project
+cd path/to/project
+```
+
 ## Environment configuration
 
 To get setup fast, we recommend using **VS Code** and the `development container`. Follow the
-[guide here](./environment/DEVCONTAINER.md#prototyping-environment) to do so. You can also use
+[guide here](./environment/devcontainers/PROTOTYPING.md) to do so. You can also use
 [those instructions](./environment/NFCORE.md#manual-installation) to setup yourself manually.
 
 ## Basic prototype pipeline creation
 
-To create a prototype pipeline (for personal use or testing), you need first to create a few files, that
-you can keep empty for now :
+To create a prototype pipeline (for personal use or testing), you need first to create a few empty
+files in your project's directory at the root :
 
 ```
-nextflow.config
-main.nf
-.nf-core.yml
+/path/to/[project]
+              |
+              ├-- nextflow.config
+              ├-- main.nf
+              └-- .nf-core.yml
 ```
 
 ### `nextflow.config`
 
-The `nextflow.config` file contains **parameters** that users can change when calling you pipeline
+The `nextflow.config` file contains **parameters** that users can change when calling your pipeline
 (prefixed with `params.`) and default configurations for execution. Here is an example of a basic
 `nextflow.config` file :
 
@@ -40,6 +49,11 @@ docker.runOptions = '-u $(id -u):$(id -g)'
 
 The parameters defined with `params.` can be changed at execution by another `nextflow.config` file or
 by supplying them as arguments when calling the pipeline using `nextflow run` :
+
+> [!IMPORTANT]
+> If using a version of `nextflow` prior to `22.03.0-edge` (or `22.04.0` if using only stable releases),
+> you need to add `-dsl2` to the `nextflow run` command to enable the DSL2 syntax in which your
+> pipeline and `nf-neuro` are written.
 
 ```bash
 nextflow run main.nf --input /path/to/input --output /path/to/output
@@ -59,21 +73,20 @@ workflow get_data {
         if ( !params.input ) {
             log.info "You must provide an input directory containing all images using:"
             log.info ""
-            log.info "        --input=/path/to/[input]             Input directory containing your subjects"
-            log.info ""
-            log.info "                         [input]"
-            log.info "                           ├-- S1"
-            log.info "                           |   ├-- *dwi.nii.gz"
-            log.info "                           |   ├-- *dwi.bval"
-            log.info "                           |   ├-- *dwi.bvec"
-            log.info "                           |   ├-- *revb0.nii.gz"
-            log.info "                           |   └-- *t1.nii.gz"
-            log.info "                           └-- S2"
-            log.info "                                ├-- *dwi.nii.gz"
-            log.info "                                ├-- *bval"
-            log.info "                                ├-- *bvec"
-            log.info "                                ├-- *revb0.nii.gz"
-            log.info "                                └-- *t1.nii.gz"
+            log.info "    --input=/path/to/[input]   Input directory containing your subjects"
+            log.info "                        |"
+            log.info "                        ├-- S1"
+            log.info "                        |    ├-- *dwi.nii.gz"
+            log.info "                        |    ├-- *dwi.bval"
+            log.info "                        |    ├-- *dwi.bvec"
+            log.info "                        |    ├-- *revb0.nii.gz"
+            log.info "                        |    └-- *t1.nii.gz"
+            log.info "                        └-- S2"
+            log.info "                             ├-- *dwi.nii.gz"
+            log.info "                             ├-- *bval"
+            log.info "                             ├-- *bvec"
+            log.info "                             ├-- *revb0.nii.gz"
+            log.info "                             └-- *t1.nii.gz"
             log.info ""
             error "Please resubmit your command with the previous file structure."
         }
@@ -104,11 +117,22 @@ workflow {
 ```
 
 Now, you can install the modules you want to include in your pipeline. Let's import the `denoising/nlmeans` module
-for T1 denoising. To do so, simply install it using the `nf-core modules install` command.
+for T1 denoising. To do so, first open a terminal using the **VS Code** interface, either using the main menu
+`Terminal > New Terminal` or the shortcut ``ctrl+shit+` ``. Then, use the `nf-core modules install` command.
 
 ```bash
 nf-core modules install denoising/nlmeans
 ```
+
+> [!NOTE]
+> On a first run of the commands, you may get prompted to configure some aspects of `nf-core`. You can accept every
+> prompt you see.
+
+> [!IMPORTANT]
+> If you get an error telling `nf-core` command doesn't exists, then `poetry` has failed to load in the terminal
+> correctly. First, close your terminal, open a new one and try again. If the tool still cannot be found, try the
+> command `poetry shell`, then running `nf-core modules install` again. If this does not solve the problem, [open an
+> issue](https://github.com/scilus/nf-neuro/issues/new?template=bug_report.md) on the `nf-neuro` repository.
 
 To use it in your pipeline, you need to import it at the top of your `main.nf` file. You can do it using the
 `include { DENOISING_NLMEANS } from ./modules/nf-neuro/denoising/nlmeans/main.nf` statement. Once done, you can
@@ -129,25 +153,24 @@ workflow get_data {
         if ( !params.input ) {
             log.info "You must provide an input directory containing all images using:"
             log.info ""
-            log.info "        --input=/path/to/[input]             Input directory containing your subjects"
-            log.info ""
-            log.info "                         [input]"
-            log.info "                           ├-- S1"
-            log.info "                           |   ├-- *dwi.nii.gz"
-            log.info "                           |   ├-- *dwi.bval"
-            log.info "                           |   ├-- *dwi.bvec"
-            log.info "                           |   ├-- *revb0.nii.gz"
-            log.info "                           |   └-- *t1.nii.gz"
-            log.info "                           └-- S2"
-            log.info "                                ├-- *dwi.nii.gz"
-            log.info "                                ├-- *bval"
-            log.info "                                ├-- *bvec"
-            log.info "                                ├-- *revb0.nii.gz"
-            log.info "                                └-- *t1.nii.gz"
+            log.info "    --input=/path/to/[input]   Input directory containing your subjects"
+            log.info "                        |"
+            log.info "                        ├-- S1"
+            log.info "                        |    ├-- *dwi.nii.gz"
+            log.info "                        |    ├-- *dwi.bval"
+            log.info "                        |    ├-- *dwi.bvec"
+            log.info "                        |    ├-- *revb0.nii.gz"
+            log.info "                        |    └-- *t1.nii.gz"
+            log.info "                        └-- S2"
+            log.info "                             ├-- *dwi.nii.gz"
+            log.info "                             ├-- *bval"
+            log.info "                             ├-- *bvec"
+            log.info "                             ├-- *revb0.nii.gz"
+            log.info "                             └-- *t1.nii.gz"
             log.info ""
             error "Please resubmit your command with the previous file structure."
         }
-        }
+
         input = file(params.input)
         // ** Loading all files. ** //
         dwi_channel = Channel.fromFilePairs("$input/**/*dwi.{nii.gz,bval,bvec}", size: 3, flat: true)
@@ -180,7 +203,7 @@ workflow {
     // ** You can then reuse the outputs and supply them to another module/subworkflow! ** //
     //ch_nextmodule = DENOISING_NLMEANS.out.image
     //  .join(ch_another_file)
-  // NEXT_MODULE( ch_nextmodule )
+    // NEXT_MODULE( ch_nextmodule )
 }
 ```
 
@@ -214,8 +237,10 @@ The last step is to bind your parameters to the specific module they are meant f
 links the `ext.` parameter to the `params.` parameter :
 
 ```nextflow
-withName: 'DENOISING_NLMEANS' {
-  ext.number_of_coils = params.number_of_coils
+process {
+    withName: 'DENOISING_NLMEANS' {
+        ext.number_of_coils = params.number_of_coils
+    }
 }
 ```
 
@@ -225,17 +250,17 @@ That's it! Your `nextflow.config` should look something like this:
 params.input      = false
 params.output     = 'output'
 
+params.number_of_coils = 1
+
 docker.enabled    = true
 docker.runOptions = '-u $(id -u):$(id -g)'
 
 process {
     publishDir = { "${params.output}/$meta.id/${task.process.replaceAll(':', '-')}" }
-}
 
-params.number_of_coils = 1
-
-withName: 'DENOISING_NLMEANS' {
-    ext.number_of_coils = params.number_of_coils
+    withName: 'DENOISING_NLMEANS' {
+        ext.number_of_coils = params.number_of_coils
+    }
 }
 ```
 
