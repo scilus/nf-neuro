@@ -4,7 +4,7 @@ process REGISTRATION_ANATTODWI {
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        'scilus/scilus:latest' }"
 
     input:
     tuple val(meta), path(t1), path(b0), path(metric)
@@ -14,6 +14,7 @@ process REGISTRATION_ANATTODWI {
     tuple val(meta), path("*1Warp.nii.gz")                                      , emit: warp
     tuple val(meta), path("*1InverseWarp.nii.gz")                               , emit: inverse_warp
     tuple val(meta), path("*t1_warped.nii.gz")                                  , emit: t1_warped
+    tuple val(meta), path("*registration_mqc.gif")                              , emit: mqc
     path "versions.yml"                                                         , emit: versions
 
     when:
@@ -21,10 +22,9 @@ process REGISTRATION_ANATTODWI {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def cpus = task.ext.cpus ? "$task.ext.cpus" : "1"
 
     """
-    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.ext.cpus
+    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
     export ANTS_RANDOM_SEED=1234
@@ -53,10 +53,45 @@ process REGISTRATION_ANATTODWI {
     mv output1InverseWarp.nii.gz ${prefix}__output1InverseWarp.nii.gz
     mv output1Warp.nii.gz ${prefix}__output1Warp.nii.gz
 
+    ### ** QC ** ###
+    size=\$(mrinfo ${prefix}__t1_warped.nii.gz -size)
+    ### ** Axial ** ###
+    mid_slice=\$(echo \$size | awk '{print int((\$3 + 1) / 2)}')
+
+    scil_viz_volume_screenshot.py ${prefix}__t1_warped.nii.gz warped_ax.png \
+        --slices \$mid_slice --axis axial
+    scil_viz_volume_screenshot.py $b0 b0_ax.png \
+        --slices \$mid_slice --axis axial
+
+    ### ** Sagittal ** ###
+    mid_slice=\$(echo \$size | awk '{print int(((\$1 + 1) / 2) + 10)}')
+
+    scil_viz_volume_screenshot.py ${prefix}__t1_warped.nii.gz warped_sag.png \
+        --slices \$mid_slice --axis sagittal
+    scil_viz_volume_screenshot.py $b0 b0_sag.png \
+        --slices \$mid_slice --axis sagittal
+
+    ### ** Coronal ** ###
+    mid_slice=\$(echo \$size | awk '{print int((\$2 + 1) / 2)}')
+
+    scil_viz_volume_screenshot.py ${prefix}__t1_warped.nii.gz warped_cor.png \
+        --slices \$mid_slice --axis coronal
+    scil_viz_volume_screenshot.py $b0 b0_cor.png \
+        --slices \$mid_slice --axis coronal
+
+    ### ** Creating mosaics ** ###
+    convert b0*.png +append mosaic_b0.png
+    convert warped*.png +append mosaic_warped.png
+
+    ### ** Final gif file ** ###
+    convert -resize 50% -delay 60 -loop 0 mosaic*.png ${prefix}__registration_mqc.gif
+    rm *.png  # remove intermediate files
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
+        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
     """
 
@@ -74,6 +109,8 @@ process REGISTRATION_ANATTODWI {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
+        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
     """
 }
