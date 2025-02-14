@@ -5,11 +5,19 @@ workflow IO_BIDS {
     take:
     bids_folder         // channel: [ path(bids_folder) ]
     fs_folder           // channel: [ path(fs_folder) ]
-    bidsignore         // channel: [ path(bids_ignore) ]
+    bidsignore          // channel: [ path(bids_ignore) ]
 
     main:
 
     ch_versions = Channel.empty()
+
+    // ** Sanity check to ensure channels are single-item ** //
+    BIDS_FOLDER_SANITY_CHECK = bids_folder.collect().map { folders ->
+        if (folders.size() > 1) {
+            error "ERROR: You must supply only a single BIDS folder."
+        }
+        return folders[0]
+    }
 
     // ** Fetching the BIDS data as a json file ** //
     IO_READBIDS (

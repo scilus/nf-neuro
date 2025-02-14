@@ -24,7 +24,8 @@ description: |
     - Reverse DWI Phase Encoding Direction (dwi_revphase)
 
   **Note**: This subworkflow is meant to be an example of how to use the
-  IO_READBIDS module. It can be modified to fit the user's needs.
+  IO_READBIDS module. It only supports a single BIDS folder as an input.
+  It can be modified to fit the user's needs.
 
 keywords:
   - IO
@@ -38,7 +39,7 @@ input:
   - bids_folder:
       type: directory
       description: |
-        Path to the BIDS directory.
+        Path to the BIDS directory. (You must supply only a single BIDS directory)
         Structure: [ path(bids_folder) ]
   - fs_folder:
       type: directory
