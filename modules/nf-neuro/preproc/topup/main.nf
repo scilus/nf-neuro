@@ -3,8 +3,8 @@ process PREPROC_TOPUP {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        "https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif":
-        "scilus/scilus:2.0.2"}"
+        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
+        "scilus/scilus:latest"}"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(b0), path(rev_dwi), path(rev_bval), path(rev_bvec), path(rev_b0)
@@ -17,6 +17,7 @@ process PREPROC_TOPUP {
         tuple val(meta), path("*__rev_b0_warped.nii.gz"), emit: rev_b0_warped
         tuple val(meta), path("*__rev_b0_mean.nii.gz")  , emit: rev_b0_mean
         tuple val(meta), path("*__b0_mean.nii.gz")      , emit: b0_mean
+        tuple val(meta), path("*_mqc.gif")              , emit: mqc
         path "versions.yml"                             , emit: versions
 
     when:
@@ -30,6 +31,7 @@ process PREPROC_TOPUP {
     def encoding = task.ext.encoding ? task.ext.encoding : ""
     def readout = task.ext.readout ? task.ext.readout : ""
     def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ? task.ext.b0_thr_extract_b0 : ""
+    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
@@ -62,6 +64,43 @@ process PREPROC_TOPUP {
         --out_script
     sh topup.sh
     cp corrected_b0s.nii.gz ${prefix}__corrected_b0s.nii.gz
+
+    # QC
+    if $run_qc;
+    then
+        extract_dim=\$(mrinfo ${prefix}__b0_mean.nii.gz -size)
+        read coronal_dim axial_dim sagittal_dim <<< "\${extract_dim}"
+
+        # Get the middle slice
+        coronal_dim=\$((coronal_dim / 2))
+        axial_dim=\$((axial_dim / 2))
+        sagittal_dim=\$((sagittal_dim / 2))
+
+        fslsplit ${prefix}__corrected_b0s.nii.gz ${prefix}__ -t
+        for image in b0_mean rev_b0_mean v0000 v0001;
+        do
+            viz_params="--display_slice_number --display_lr --size 256 256"
+            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim}
+            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim}
+            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim}
+
+            if image == "b0_mean" || image == "rev_b0_mean";
+            then
+                title="Before"
+            else
+                title="After"
+            fi
+
+            convert +append ${prefix}__\${image}_coronal.png \
+                    ${prefix}__\${image}_axial.png  \
+                    ${prefix}__\${image}_sagittal.png \
+                    ${prefix}__\${image}.png \
+                    -annotate "\${title}" -fill white
+        done
+
+        convert -delay 20 -loop 0 ${prefix}__b0_mean.png ${prefix}__vol0000.png ${prefix}__b0_mean.png b0_before_after_mqc.gif
+        convert -delay 20 -loop 0 ${prefix}__rev_b0_mean.png ${prefix}__vol0001.png ${prefix}__rev_b0_mean.png rev_b0_before_after_mqc.gif
+    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
