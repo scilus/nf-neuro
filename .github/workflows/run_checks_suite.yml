@@ -83,6 +83,7 @@ jobs:
   nf-test-changes:
     name: compute - changes
     runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
     outputs:
       paths: ${{ steps.changes.outputs.components }}
       modules: ${{ steps.components.outputs.modules }}
