@@ -17,7 +17,8 @@ process PREPROC_TOPUP {
         tuple val(meta), path("*__rev_b0_warped.nii.gz"), emit: rev_b0_warped
         tuple val(meta), path("*__rev_b0_mean.nii.gz")  , emit: rev_b0_mean
         tuple val(meta), path("*__b0_mean.nii.gz")      , emit: b0_mean
-        tuple val(meta), path("*_mqc.gif")              , emit: mqc
+        tuple val(meta), path("*__b0_mqc.gif")          , emit: b0_corrected_mqc
+        tuple val(meta), path("*__rev_b0_mqc.gif")      , emit: revb0_corrected_mqc
         path "versions.yml"                             , emit: versions
 
     when:
@@ -69,37 +70,43 @@ process PREPROC_TOPUP {
     if $run_qc;
     then
         extract_dim=\$(mrinfo ${prefix}__b0_mean.nii.gz -size)
-        read coronal_dim axial_dim sagittal_dim <<< "\${extract_dim}"
+        read sagittal_dim axial_dim coronal_dim <<< "\${extract_dim}"
 
         # Get the middle slice
-        coronal_dim=\$((coronal_dim / 2))
-        axial_dim=\$((axial_dim / 2))
-        sagittal_dim=\$((sagittal_dim / 2))
+        coronal_dim=\$((\$coronal_dim / 2))
+        axial_dim=\$((\$axial_dim / 2))
+        sagittal_dim=\$((\$sagittal_dim / 2))
 
         fslsplit ${prefix}__corrected_b0s.nii.gz ${prefix}__ -t
-        for image in b0_mean rev_b0_mean v0000 v0001;
+        for image in b0_mean rev_b0_mean 0000 0001;
         do
             viz_params="--display_slice_number --display_lr --size 256 256"
-            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim}
-            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim}
-            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim}
+            scil_volume_math.py normalize_max ${prefix}__\${image}.nii.gz ${prefix}__\${image}_norm.nii.gz
+            scil_viz_volume_screenshot.py ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
+            scil_viz_volume_screenshot.py ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
+            scil_viz_volume_screenshot.py ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
 
-            if image == "b0_mean" || image == "rev_b0_mean";
+            if [ \$image == "b0_mean" ] || [ \$image == "rev_b0_mean" ];
             then
                 title="Before"
             else
                 title="After"
             fi
 
-            convert +append ${prefix}__\${image}_coronal.png \
-                    ${prefix}__\${image}_axial.png  \
-                    ${prefix}__\${image}_sagittal.png \
-                    ${prefix}__\${image}.png \
-                    -annotate "\${title}" -fill white
+            convert +append ${prefix}__\${image}_coronal_slice_\${coronal_dim}.png \
+                    ${prefix}__\${image}_axial_slice_\${axial_dim}.png  \
+                    ${prefix}__\${image}_sagittal_slice_\${sagittal_dim}.png \
+                    ${prefix}__\${image}.png
+            convert -annotate +20+230 "\${title}" -fill white -pointsize 30 ${prefix}__\${image}.png ${prefix}__\${image}.png
         done
 
-        convert -delay 20 -loop 0 ${prefix}__b0_mean.png ${prefix}__vol0000.png ${prefix}__b0_mean.png b0_before_after_mqc.gif
-        convert -delay 20 -loop 0 ${prefix}__rev_b0_mean.png ${prefix}__vol0001.png ${prefix}__rev_b0_mean.png rev_b0_before_after_mqc.gif
+        convert -delay 10 -loop 0 -morph 10 \
+                ${prefix}__b0_mean.png ${prefix}__0000.png ${prefix}__b0_mean.png \
+                ${prefix}__b0_mqc.gif
+
+        convert  -delay 10 -loop 0 -morph 10 \
+                ${prefix}__rev_b0_mean.png ${prefix}__0001.png ${prefix}__rev_b0_mean.png \
+                ${prefix}__rev_b0_mqc.gif
     fi
 
     cat <<-END_VERSIONS > versions.yml
@@ -120,6 +127,8 @@ process PREPROC_TOPUP {
     touch ${prefix}__rev_b0_warped.nii.gz
     touch ${prefix}__rev_b0_mean.nii.gz
     touch ${prefix}__b0_mean.nii.gz
+    touch ${prefix}__rev_b0_mqc.gif
+    touch ${prefix}__b0_mqc.gif
     touch ${prefix_topup}_fieldcoef.nii.gz
     touch ${prefix_topup}_movpar.txt
 

@@ -41,9 +41,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.1"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-12-12T11:56:01.860981"
+        "timestamp": "2025-02-19T21:09:56.799633936"
     },
     "topup_light": {
         "content": [
