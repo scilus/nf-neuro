@@ -20,16 +20,15 @@ custom_content:
 
 custom_data:
   topup_qc:
-    file_format: 'gif'
-    section_name: 'Topup QC'
+    file_format: "gif"
+    section_name: "Topup QC"
     description: |
       This section contains QC images for TOPUP correction. You can check the quality of the correction by looking at the frontal lobe or the cerebellum/spinal cord area.
-    plot_type: 'image'
+    plot_type: "image"
 
 sp:
   topup_qc:
-    fn: '*mqc.gif'
-
+    fn: "*mqc.gif"
 
 export_plots: true
 
