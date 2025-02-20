@@ -269,5 +269,17 @@
             "nextflow": "24.10.2"
         },
         "timestamp": "2024-12-16T17:28:54.754431506"
+    },
+    "registration - ants - stub": {
+        "content": [
+            [
+                "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-03T14:45:05.628303"
     }
 }
