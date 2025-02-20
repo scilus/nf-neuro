@@ -18,7 +18,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__b0_bet_mask.nii.gz:md5,a1e4b4842cbdf57ab34d6803e64f8383"
+                    "test__b0_bet_mask.nii.gz:md5,3e6bf62a42cb7f1f2c8e0d3024fb9fcb"
                 ]
             ],
             [
@@ -27,9 +27,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-11-21T19:52:21.761680879"
+        "timestamp": "2025-02-19T23:28:41.731330661"
     },
     "eddy_light": {
         "content": [
@@ -50,7 +50,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__b0_bet_mask.nii.gz:md5,a1e4b4842cbdf57ab34d6803e64f8383"
+                    "test__b0_bet_mask.nii.gz:md5,3e6bf62a42cb7f1f2c8e0d3024fb9fcb"
                 ]
             ],
             [
@@ -59,9 +59,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-11-21T19:53:14.315721034"
+        "timestamp": "2025-02-19T23:29:53.144343053"
     },
     "eddy - stub-run": {
         "content": [
@@ -71,8 +71,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.1"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-12-12T12:50:30.654366"
+        "timestamp": "2025-02-19T22:55:31.519921647"
     }
 }
