@@ -44,7 +44,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__registration_mqc.gif:md5,74a7cf404c443726487683c23bd926c0"
+                        "test_registration_anattodwi_mqc.gif:md5,74a7cf404c443726487683c23bd926c0"
                     ]
                 ],
                 "5": [
@@ -74,7 +74,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__registration_mqc.gif:md5,74a7cf404c443726487683c23bd926c0"
+                        "test_registration_anattodwi_mqc.gif:md5,74a7cf404c443726487683c23bd926c0"
                     ]
                 ],
                 "t1_warped": [
@@ -104,7 +104,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-20T14:03:03.584487"
+        "timestamp": "2025-02-20T14:29:24.221135"
     },
     "registration - anattodwi -stub-run": {
         "content": [

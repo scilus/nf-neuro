@@ -14,7 +14,7 @@ process REGISTRATION_ANATTODWI {
     tuple val(meta), path("*1Warp.nii.gz")                                      , emit: warp
     tuple val(meta), path("*1InverseWarp.nii.gz")                               , emit: inverse_warp
     tuple val(meta), path("*t1_warped.nii.gz")                                  , emit: t1_warped
-    tuple val(meta), path("*registration_mqc.gif")                              , emit: mqc, optional: true
+    tuple val(meta), path("*_registration_anattodwi_mqc.gif")                   , emit: mqc, optional: true
     path "versions.yml"                                                         , emit: versions
 
     when:
@@ -99,7 +99,7 @@ process REGISTRATION_ANATTODWI {
         # Create GIF.
         convert -delay 10 -loop 0 -morph 10 \
             t1_warped_mosaic.png b0_mosaic.png t1_warped_mosaic.png \
-            ${prefix}__registration_mqc.gif
+            ${prefix}_registration_anattodwi_mqc.gif
 
         # Clean up.
         rm t1_warped_mosaic.png b0_mosaic.png
@@ -123,7 +123,7 @@ process REGISTRATION_ANATTODWI {
     touch ${prefix}__output0GenericAffine.mat
     touch ${prefix}__output1InverseWarp.nii.gz
     touch ${prefix}__output1Warp.nii.gz
-    touch ${prefix}__registration_mqc.gif
+    touch ${prefix}__registration_anattodwi_mqc.gif
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
