@@ -15,16 +15,17 @@ custom_content:
     - eddy_qc
 
 custom_data:
-  topup_qc:
+  eddy_qc:
     file_format: "gif"
     section_name: "EDDY QC"
     description: |
-      This section contains QC images for EDDY correction. You can check the quality of the correction by looking at the frontal lobe or the cerebellum/spinal cord area.
+      This section contains QC images for EDDY correction, which is used to correct distortions and motion artifacts. The animation shows a before-and-after comparison of the correction. To assess the quality of the correction, focus on areas prone to distortions, such as the frontal lobe and the cerebellum/spinal cord region. Look for reduced geometric warping, improved alignment with anatomical boundaries, and correction of eddy-current-induced displacements. Additionally, ensure that no new artifacts or excessive blurring are introduced in the corrected images.
+
     plot_type: "image"
 
 sp:
-  topup_qc:
-    fn: "*mqc.gif"
+  eddy_qc:
+    fn: "*_dwi_eddy_mqc.gif"
 
 export_plots: true
 
