@@ -55,6 +55,8 @@ nextflow_process {
                     file(process.out.rev_b0_warped.get(0).get(1)).name,
                     process.out.rev_b0_mean,
                     process.out.b0_mean,
+                    process.out.b0_corrected_mqc,
+                    process.out.rev_b0_corrected_mqc,
                     process.out.versions
                 ).match() }
             )
@@ -90,6 +92,8 @@ nextflow_process {
                     file(process.out.rev_b0_warped.get(0).get(1)).name,
                     process.out.rev_b0_mean,
                     process.out.b0_mean,
+                    process.out.b0_corrected_mqc,
+                    process.out.rev_b0_corrected_mqc,
                     process.out.versions
                 ).match() }
             )
