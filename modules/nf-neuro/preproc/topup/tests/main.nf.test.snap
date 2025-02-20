@@ -24,14 +24,32 @@
                 ]
             ],
             [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__b0_mqc.gif:md5,83867dac34379765f1f71f19083c3433"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__rev_b0_mqc.gif:md5,f796a35b411d2766a32085cfe6226f1c"
+                ]
+            ],
+            [
                 "versions.yml:md5,87d6001e63fd82f49d6dd80ed032d4c0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-11-01T16:21:18.752887499"
+        "timestamp": "2025-02-20T15:29:13.330692533"
     },
     "topup - stub-run": {
         "content": [
@@ -70,13 +88,31 @@
                 ]
             ],
             [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__b0_mqc.gif:md5,7a54ab392c3f0f7f3cb67fffc92470bf"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__rev_b0_mqc.gif:md5,872392bbd6eeab8651c63969d207ccf6"
+                ]
+            ],
+            [
                 "versions.yml:md5,87d6001e63fd82f49d6dd80ed032d4c0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-11-01T16:21:36.189599346"
+        "timestamp": "2025-02-20T15:30:04.258537847"
     }
 }
