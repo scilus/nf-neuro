@@ -14,7 +14,7 @@ process REGISTRATION_ANATTODWI {
     tuple val(meta), path("*1Warp.nii.gz")                                      , emit: warp
     tuple val(meta), path("*1InverseWarp.nii.gz")                               , emit: inverse_warp
     tuple val(meta), path("*t1_warped.nii.gz")                                  , emit: t1_warped
-    tuple val(meta), path("*registration_mqc.gif")                              , emit: mqc
+    tuple val(meta), path("*registration_mqc.gif")                              , emit: mqc, optional: true
     path "versions.yml"                                                         , emit: versions
 
     when:
@@ -22,6 +22,8 @@ process REGISTRATION_ANATTODWI {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
+
+    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
@@ -54,38 +56,54 @@ process REGISTRATION_ANATTODWI {
     mv output1Warp.nii.gz ${prefix}__output1Warp.nii.gz
 
     ### ** QC ** ###
-    size=\$(mrinfo ${prefix}__t1_warped.nii.gz -size)
-    ### ** Axial ** ###
-    mid_slice=\$(echo \$size | awk '{print int((\$3 + 1) / 2)}')
+    if $run_qc;
+    then
+        # Extract dimensions.
+        dim=\$(mrinfo ${prefix}__t1_warped.nii.gz -size)
+        read sagittal_dim coronal_dim axial_dim <<< "\${dim}"
 
-    scil_viz_volume_screenshot.py ${prefix}__t1_warped.nii.gz warped_ax.png \
-        --slices \$mid_slice --axis axial
-    scil_viz_volume_screenshot.py $b0 b0_ax.png \
-        --slices \$mid_slice --axis axial
+        # Get middle slices.
+        coronal_mid=\$((\$coronal_dim / 2))
+        sagittal_mid=\$((\$sagittal_dim / 2))
+        axial_mid=\$((\$axial_dim / 2))
 
-    ### ** Sagittal ** ###
-    mid_slice=\$(echo \$size | awk '{print int(((\$1 + 1) / 2) + 10)}')
+        # Set viz params.
+        viz_params="--display_slice_number --display_lr --size 256 256"
 
-    scil_viz_volume_screenshot.py ${prefix}__t1_warped.nii.gz warped_sag.png \
-        --slices \$mid_slice --axis sagittal
-    scil_viz_volume_screenshot.py $b0 b0_sag.png \
-        --slices \$mid_slice --axis sagittal
+        # Iterate over images.
+        for image in t1_warped b0;
+        do
+            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+                --slices \$coronal_mid --axis coronal \$viz_params
+            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+                --slices \$sagittal_mid --axis sagittal \$viz_params
+            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+                --slices \$axial_mid --axis axial \$viz_params
 
-    ### ** Coronal ** ###
-    mid_slice=\$(echo \$size | awk '{print int((\$2 + 1) / 2)}')
+            if [ \$image != b0 ];
+            then
+                title="Warped T1"
+            else
+                title="Reference B0"
+            fi
 
-    scil_viz_volume_screenshot.py ${prefix}__t1_warped.nii.gz warped_cor.png \
-        --slices \$mid_slice --axis coronal
-    scil_viz_volume_screenshot.py $b0 b0_cor.png \
-        --slices \$mid_slice --axis coronal
+            convert +append \${image}_coronal*.png \${image}_axial*.png \
+                \${image}_sagittal*.png \${image}_mosaic.png
+            convert -annotate +20+230 "\${title}" -fill white -pointsize 30 \
+                \${image}_mosaic.png \${image}_mosaic.png
 
-    ### ** Creating mosaics ** ###
-    convert b0*.png +append mosaic_b0.png
-    convert warped*.png +append mosaic_warped.png
+            # Clean up.
+            rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
+        done
 
-    ### ** Final gif file ** ###
-    convert -resize 50% -delay 60 -loop 0 mosaic*.png ${prefix}__registration_mqc.gif
-    rm *.png  # remove intermediate files
+        # Create GIF.
+        convert -delay 10 -loop 0 -morph 10 \
+            t1_warped_mosaic.png b0_mosaic.png t1_warped_mosaic.png \
+            ${prefix}__registration_mqc.gif
+
+        # Clean up.
+        rm t1_warped_mosaic.png b0_mosaic.png
+    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -105,6 +123,7 @@ process REGISTRATION_ANATTODWI {
     touch ${prefix}__output0GenericAffine.mat
     touch ${prefix}__output1InverseWarp.nii.gz
     touch ${prefix}__output1Warp.nii.gz
+    touch ${prefix}__registration_mqc.gif
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
