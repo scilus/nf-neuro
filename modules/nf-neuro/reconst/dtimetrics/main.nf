@@ -51,6 +51,7 @@ process RECONST_DTIMETRICS {
     def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ?: 10
     def b0_threshold = task.ext.b0_thr_extract_b0 ? "--b0_threshold $task.ext.b0_thr_extract_b0" : ""
     def dti_shells = task.ext.dti_shells ?: "\$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- $bval | awk -F' ' '{v=int(\$1)}{if(v<=$max_dti_shell_value|| v<=$b0_thr_extract_b0)print v}' | uniq)"
+    def run_qc = task.ext.run_qc ?: false
 
     if ( b0mask ) args += " --mask $b0mask"
     if ( task.ext.ad ) args += " --ad ${prefix}__ad.nii.gz"
@@ -68,7 +69,6 @@ process RECONST_DTIMETRICS {
     if ( task.ext.pulsation ) args += " --pulsation ${prefix}__pulsation.nii.gz"
     if ( task.ext.residual ) args += " --residual ${prefix}__residual.nii.gz"
 
-
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
@@ -80,6 +80,42 @@ process RECONST_DTIMETRICS {
 
     scil_dti_metrics.py dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells \
         --not_all $args $b0_threshold -f
+
+    if [ "$run_qc" = true ] && [ "$args" != ''];
+    then
+        nii_files=$(echo $args | awk '{skip = 0;
+            for (i = 1; i <= NF; i++) {
+                if (\$i == "--mask") { skip = 1; continue; }
+                if (\$i == "--evecs") { skip = 1; continue; }
+                if (\$i == "--evals") { skip = 1; continue; }
+                if (skip == 1) { skip = 0; continue; }
+                if (\$i ~ /\.nii\.gz$/) print \$i;
+                }}')
+
+        # Viz 3D images + RGB
+        for image in $\nii_files;
+        do
+            image=\${image/${prefix}__/}
+            image=\${image/.nii.gz/}
+            viz_params="--display_slice_number --display_lr --size 256 256"
+            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
+            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
+            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
+
+            convert +append ${prefix}__\${image}_coronal_slice_\${coronal_dim}.png \
+                    ${prefix}__\${image}_axial_slice_\${axial_dim}.png  \
+                    ${prefix}__\${image}_sagittal_slice_\${sagittal_dim}.png
+
+            convert -annotate +20+230 "\${image}" -fill white -pointsize 30 ${prefix}__\${image}.png ${prefix}__\${image}.png
+        done
+
+        # Viz peaks
+        # TODO
+
+        rm -rf *slice*
+        convert +append *png ${prefix}__dti_mqc.png
+    fi
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -122,10 +158,12 @@ process RECONST_DTIMETRICS {
     touch ${prefix}__residual_q3_residuals.npy
     touch ${prefix}__residual_residuals_stats.png
     touch ${prefix}__residual_std_residuals.npy
+    touch ${prefix}__dti_mqc.png
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """
 }
