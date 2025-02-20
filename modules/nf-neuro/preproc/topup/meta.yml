@@ -128,15 +128,10 @@ output:
       description: Nifti volume - b0 mean
       pattern: "*__b0_mean.nii.gz"
 
-  - b0_topup_mqc:
+  - mqc:
       type: file
-      description: .gif file containing quality control image for the topup process. Made for use in MultiQC report.
-      pattern: "*__b0_topup_mqc.gif"
-
-  - rev_b0_topup_mqc:
-      type: file
-      description: .gif file containing quality control image for the topup process. Made for use in MultiQC report.
-      pattern: "*_rev_topup_mqc.gif"
+      description: .gif file containing quality control image for the topup process (Comparison with dwi and rev_dwi). Made for use in MultiQC report.
+      pattern: "*_b0_topup_mqc.gif"
 
   - versions:
       type: file
