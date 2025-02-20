@@ -17,8 +17,8 @@ process PREPROC_TOPUP {
         tuple val(meta), path("*__rev_b0_warped.nii.gz"), emit: rev_b0_warped
         tuple val(meta), path("*__rev_b0_mean.nii.gz")  , emit: rev_b0_mean
         tuple val(meta), path("*__b0_mean.nii.gz")      , emit: b0_mean
-        tuple val(meta), path("*__b0_mqc.gif")          , emit: b0_corrected_mqc
-        tuple val(meta), path("*__rev_b0_mqc.gif")      , emit: revb0_corrected_mqc
+        tuple val(meta), path("*__b0_mqc.gif")          , emit: b0_corrected_mqc   , optional: true
+        tuple val(meta), path("*__rev_b0_mqc.gif")      , emit: rev_b0_corrected_mqc, optional: true
         path "versions.yml"                             , emit: versions
 
     when:
