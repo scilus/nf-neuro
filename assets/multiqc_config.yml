@@ -19,13 +19,13 @@ custom_data:
     file_format: "gif"
     section_name: "Topup QC"
     description: |
-      "This section contains QC images for TOPUP correction, which is used to correct susceptibility-induced distortions by leveraging pairs of images acquired with opposite phase-encoding directions. The animation shows a before-and-after comparison of the correction. To assess the quality of the correction, focus on regions most affected by susceptibility distortions, such as the frontal lobe and the cerebellum/spinal cord area. Look for improved alignment of anatomical structures, reduced stretching or compression, and better symmetry between the corrected images. Additionally, ensure that the correction does not introduce new artifacts or excessive blurring.
+      This section contains QC images for TOPUP correction, which is used to correct susceptibility-induced distortions by leveraging pairs of images acquired with opposite phase-encoding directions. The animation shows a before-and-after comparison of the correction. To assess the quality of the correction, focus on regions most affected by susceptibility distortions, such as the frontal lobe and the cerebellum/spinal cord area. Look for improved alignment of anatomical structures, reduced stretching or compression, and better symmetry between the corrected images. Additionally, ensure that the correction does not introduce new artifacts or excessive blurring.
 
     plot_type: "image"
 
 sp:
   topup_qc:
-    fn: "*_b0_mqc.gif"
+    fn: "*_b0_topup_mqc.gif"
 
 export_plots: true
 

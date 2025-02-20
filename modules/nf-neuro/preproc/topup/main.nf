@@ -17,8 +17,8 @@ process PREPROC_TOPUP {
         tuple val(meta), path("*__rev_b0_warped.nii.gz"), emit: rev_b0_warped
         tuple val(meta), path("*__rev_b0_mean.nii.gz")  , emit: rev_b0_mean
         tuple val(meta), path("*__b0_mean.nii.gz")      , emit: b0_mean
-        tuple val(meta), path("*__b0_mqc.gif")          , emit: b0_corrected_mqc   , optional: true
-        tuple val(meta), path("*__rev_b0_mqc.gif")      , emit: rev_b0_corrected_mqc, optional: true
+        tuple val(meta), path("*__b0_topup_mqc.gif")    , emit: b0_topup_mqc   , optional: true
+        tuple val(meta), path("*__rev_b0_topup_mqc.gif"), emit: rev_b0_topup_mqc, optional: true
         path "versions.yml"                             , emit: versions
 
     when:
@@ -102,12 +102,15 @@ process PREPROC_TOPUP {
 
         convert -delay 10 -loop 0 -morph 10 \
                 ${prefix}__b0_mean.png ${prefix}__0000.png ${prefix}__b0_mean.png \
-                ${prefix}__b0_mqc.gif
+                ${prefix}__b0_topup_mqc.gif
 
         convert  -delay 10 -loop 0 -morph 10 \
                 ${prefix}__rev_b0_mean.png ${prefix}__0001.png ${prefix}__rev_b0_mean.png \
-                ${prefix}__rev_b0_mqc.gif
+                ${prefix}__rev_b0_topup_mqc.gif
     fi
+
+    rm -rf *png
+    rm -rf *norm*
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -127,8 +130,8 @@ process PREPROC_TOPUP {
     touch ${prefix}__rev_b0_warped.nii.gz
     touch ${prefix}__rev_b0_mean.nii.gz
     touch ${prefix}__b0_mean.nii.gz
-    touch ${prefix}__rev_b0_mqc.gif
-    touch ${prefix}__b0_mqc.gif
+    touch ${prefix}__rev_b0_topup_mqc.gif
+    touch ${prefix}__b0_topup_mqc.gif
     touch ${prefix_topup}_fieldcoef.nii.gz
     touch ${prefix_topup}_movpar.txt
 

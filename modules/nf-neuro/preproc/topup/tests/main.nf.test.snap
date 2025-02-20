@@ -23,24 +23,8 @@
                     "test__b0_mean.nii.gz:md5,f50e652bcdd1d45f7a4c592df7eb851a"
                 ]
             ],
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__b0_mqc.gif:md5,83867dac34379765f1f71f19083c3433"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__rev_b0_mqc.gif:md5,f796a35b411d2766a32085cfe6226f1c"
-                ]
-            ],
+            null,
+            null,
             [
                 "versions.yml:md5,87d6001e63fd82f49d6dd80ed032d4c0"
             ]
@@ -49,7 +33,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-20T15:29:13.330692533"
+        "timestamp": "2025-02-20T19:27:33.264960406"
     },
     "topup - stub-run": {
         "content": [
@@ -87,24 +71,8 @@
                     "test__b0_mean.nii.gz:md5,91288914a80e7866ef8b08a363d617f9"
                 ]
             ],
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__b0_mqc.gif:md5,7a54ab392c3f0f7f3cb67fffc92470bf"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__rev_b0_mqc.gif:md5,872392bbd6eeab8651c63969d207ccf6"
-                ]
-            ],
+            null,
+            null,
             [
                 "versions.yml:md5,87d6001e63fd82f49d6dd80ed032d4c0"
             ]
@@ -113,6 +81,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-20T15:30:04.258537847"
+        "timestamp": "2025-02-20T19:28:20.482368717"
     }
 }

@@ -76,15 +76,18 @@ args:
       type: string
       description: Encoding direction of the forward DWI.
       pattern: "x, y or z"
+      default: "y"
   - readout:
       type: float
       description: Total readout time from the DICOM metadata.
+      default: 0.062
   - b0_thr_extract_b0:
       type: int
       description: Threshold under which b-values are considered to be b0s.
+      default: 10
   - run_qc:
       type: boolean
-      description: Run quality control
+      description: Run quality control.
       default: true
 
 output:
@@ -125,19 +128,19 @@ output:
       description: Nifti volume - b0 mean
       pattern: "*__b0_mean.nii.gz"
 
-  - b0_corrected_mqc:
+  - b0_topup_mqc:
       type: file
       description: .gif file containing quality control image for the topup process. Made for use in MultiQC report.
-      pattern: "*_mqc.gif"
+      pattern: "*__b0_topup_mqc.gif"
 
-  - rev_b0_corrected_mqc:
+  - rev_b0_topup_mqc:
       type: file
       description: .gif file containing quality control image for the topup process. Made for use in MultiQC report.
-      pattern: "*.gif"
+      pattern: "*_rev_topup_mqc.gif"
 
   - versions:
       type: file
-      description: File containing software versions
+      description: File containing software versions.
       pattern: "versions.yml"
 
 authors:
