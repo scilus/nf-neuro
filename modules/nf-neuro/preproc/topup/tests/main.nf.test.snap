@@ -23,8 +23,18 @@
                     "test__b0_mean.nii.gz:md5,f50e652bcdd1d45f7a4c592df7eb851a"
                 ]
             ],
-            null,
-            null,
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    [
+                        "test__b0_topup_mqc.gif:md5,83867dac34379765f1f71f19083c3433",
+                        "test__rev_b0_topup_mqc.gif:md5,f796a35b411d2766a32085cfe6226f1c"
+                    ]
+                ]
+            ],
             [
                 "versions.yml:md5,94e2c9feaffa49fdd4fd59ac95fd251f"
             ]
@@ -33,7 +43,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-20T19:57:29.179940417"
+        "timestamp": "2025-02-21T21:00:30.721391496"
     },
     "topup - stub-run": {
         "content": [
@@ -49,31 +59,66 @@
     },
     "topup_light": {
         "content": [
-            "test__corrected_b0s.nii.gz",
+            "test1__corrected_b0s.nii.gz",
             "topup_results_fieldcoef.nii.gz",
             "topup_results_movpar.txt",
-            "test__rev_b0_warped.nii.gz",
+            "test1__rev_b0_warped.nii.gz",
             [
                 [
                     {
-                        "id": "test",
+                        "id": "test1",
                         "single_end": false
                     },
-                    "test__rev_b0_mean.nii.gz:md5,a0c63d7a8a234d85eeb63045ae2a8f60"
+                    "test1__rev_b0_mean.nii.gz:md5,a0c63d7a8a234d85eeb63045ae2a8f60"
+                ],
+                [
+                    {
+                        "id": "test2",
+                        "single_end": false
+                    },
+                    "test2__rev_b0_mean.nii.gz:md5,a0c63d7a8a234d85eeb63045ae2a8f60"
                 ]
             ],
             [
                 [
                     {
-                        "id": "test",
+                        "id": "test1",
                         "single_end": false
                     },
-                    "test__b0_mean.nii.gz:md5,91288914a80e7866ef8b08a363d617f9"
+                    "test1__b0_mean.nii.gz:md5,91288914a80e7866ef8b08a363d617f9"
+                ],
+                [
+                    {
+                        "id": "test2",
+                        "single_end": false
+                    },
+                    "test2__b0_mean.nii.gz:md5,91288914a80e7866ef8b08a363d617f9"
                 ]
             ],
-            null,
-            null,
             [
+                [
+                    {
+                        "id": "test1",
+                        "single_end": false
+                    },
+                    [
+                        "test1__b0_topup_mqc.gif:md5,7a54ab392c3f0f7f3cb67fffc92470bf",
+                        "test1__rev_b0_topup_mqc.gif:md5,872392bbd6eeab8651c63969d207ccf6"
+                    ]
+                ],
+                [
+                    {
+                        "id": "test2",
+                        "single_end": false
+                    },
+                    [
+                        "test2__b0_topup_mqc.gif:md5,7a54ab392c3f0f7f3cb67fffc92470bf",
+                        "test2__rev_b0_topup_mqc.gif:md5,872392bbd6eeab8651c63969d207ccf6"
+                    ]
+                ]
+            ],
+            [
+                "versions.yml:md5,94e2c9feaffa49fdd4fd59ac95fd251f",
                 "versions.yml:md5,94e2c9feaffa49fdd4fd59ac95fd251f"
             ]
         ],
@@ -81,6 +126,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-20T19:58:45.337386998"
+        "timestamp": "2025-02-21T21:01:28.279372414"
     }
 }

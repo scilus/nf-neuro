@@ -75,7 +75,7 @@ args:
   - encoding:
       type: string
       description: Encoding direction of the forward DWI.
-      pattern: "x, y or z"
+      choices: "x, y or z"
       default: "y"
   - readout:
       type: float

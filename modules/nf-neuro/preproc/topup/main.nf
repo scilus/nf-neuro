@@ -8,7 +8,7 @@ process PREPROC_TOPUP {
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(b0), path(rev_dwi), path(rev_bval), path(rev_bvec), path(rev_b0)
-        val(config_topup)
+        val config_topup
 
     output:
         tuple val(meta), path("*__corrected_b0s.nii.gz"), emit: topup_corrected_b0s
