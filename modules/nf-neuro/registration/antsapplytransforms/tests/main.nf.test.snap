@@ -3,47 +3,41 @@
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__b0__warped.nii.gz:md5,3ae49aacab66fb2378da92155453b1be"
-                    ]
+                    
                 ],
                 "1": [
-                    "versions.yml:md5,180609e91d7d492cd7db9b09f47f055d"
+                    
+                ],
+                "2": [
+                    
+                ],
+                "mqc": [
+                    
                 ],
                 "versions": [
-                    "versions.yml:md5,180609e91d7d492cd7db9b09f47f055d"
+                    
                 ],
                 "warped_image": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__b0__warped.nii.gz:md5,3ae49aacab66fb2378da92155453b1be"
-                    ]
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-11-28T20:21:53.029255208"
+        "timestamp": "2025-02-18T16:07:55.08677869"
     },
     "registration - antsapplytransforms - stub-run": {
         "content": [
             [
-                "versions.yml:md5,180609e91d7d492cd7db9b09f47f055d"
+                "versions.yml:md5,3414a40c02551052589b50e4eb35a3da"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-11-28T20:21:57.642570655"
+        "timestamp": "2025-02-19T15:07:03.606104624"
     }
 }

@@ -4,8 +4,8 @@ process REGISTRATION_ANTS {
     label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
+        "scilus/scilus:latest"}"
 
     input:
     tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
@@ -16,6 +16,7 @@ process REGISTRATION_ANTS {
     tuple val(meta), path("*__output1GenericAffine.mat")            , emit: affine
     tuple val(meta), path("*__output1InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
     tuple val(meta), path("*__output0InverseAffine.mat")            , emit: inverse_affine
+    tuple val(meta), path("*__registration_mqc.gif")                , emit: mqc, optional: true
     path "versions.yml"                                             , emit: versions
 
     when:
@@ -28,6 +29,7 @@ process REGISTRATION_ANTS {
     def dimension = task.ext.dimension ? "-d " + task.ext.dimension : "-d 3"
     def transform = task.ext.transform ? task.ext.transform : "s"
     def seed = task.ext.random_seed ? " -e " + task.ext.random_seed : "-e 1234"
+    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
     if ( task.ext.threads ) args += "-n " + task.ext.threads
     if ( task.ext.initial_transform ) args += " -i " + task.ext.initial_transform
@@ -61,10 +63,48 @@ process REGISTRATION_ANTS {
 
     mv output.mat ${prefix}__output0InverseAffine.mat
 
+    ### ** QC ** ###
+    if $run_qc;
+    then
+        extract_dim=\$(mrinfo ${prefix}__warped.nii.gz -size)
+        read coronal_dim axial_dim sagittal_dim <<< "\${extract_dim}"
+
+        # Get the middle slice
+        axial_dim=\$((axial_dim / 2))
+        sagittal_dim=\$((sagittal_dim / 2))
+        coronal_dim=\$((coronal_dim / 2))
+
+        ### ** Axial ** ###
+        scil_viz_volume_screenshot.py ${prefix}__warped.nii.gz warped_ax.png \
+            --slices axial_dim --axis axial
+        scil_viz_volume_screenshot.py $fixedimage  ref_ax.png \
+            --slices axial_dim --axis axial
+
+        ### ** Sagittal ** ###
+        scil_viz_volume_screenshot.py ${prefix}__warped.nii.gz warped_sag.png \
+            --slices sagittal_dim --axis sagittal
+        scil_viz_volume_screenshot.py $fixedimage  ref_sag.png \
+            --slices sagittal_dim --axis sagittal
+
+        ### ** Coronal ** ###
+        scil_viz_volume_screenshot.py ${prefix}__warped.nii.gz warped_cor.png \
+            --slices coronal_dim --axis coronal
+        scil_viz_volume_screenshot.py $fixedimage  ref_cor.png \
+            --slices coronal_dim --axis coronal
+
+        ### ** Creating mosaics ** ###
+        convert ref*.png +append mosaic_ref.png
+        convert warped*.png +append mosaic_warped.png
+
+        ### ** Final gif file ** ###
+        convert -resize 50% -delay 60 -loop 0 mosaic*.png ${prefix}__ants_registration_mqc.gif
+        rm *.png  # remove intermediate files
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
+        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
     """
 
@@ -82,6 +122,8 @@ process REGISTRATION_ANTS {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
+        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
 
     function handle_code () {

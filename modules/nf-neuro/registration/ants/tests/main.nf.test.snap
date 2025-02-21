@@ -3,261 +3,149 @@
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__warped.nii.gz:md5,4382217c04988eb01ed8f99916d7631c"
-                    ]
+                    
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0Warp.nii.gz:md5,6fee747df2c30bb48cf2b6897b5d3e17"
-                    ]
+                    
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1GenericAffine.mat:md5,8e987eb08cc568478c37ae79a8824f8b"
-                    ]
+                    
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1InverseWarp.nii.gz:md5,1608837de13478dff81fe51ac1720d28"
-                    ]
+                    
                 ],
                 "4": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0InverseAffine.mat:md5,d342d5f1c35a53cadcdf2d49a25f5ce8"
-                    ]
+                    
                 ],
                 "5": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    
+                ],
+                "6": [
+                    
                 ],
                 "affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1GenericAffine.mat:md5,8e987eb08cc568478c37ae79a8824f8b"
-                    ]
+                    
                 ],
                 "image": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__warped.nii.gz:md5,4382217c04988eb01ed8f99916d7631c"
-                    ]
+                    
                 ],
                 "inverse_affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0InverseAffine.mat:md5,d342d5f1c35a53cadcdf2d49a25f5ce8"
-                    ]
+                    
                 ],
                 "inverse_warp": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1InverseWarp.nii.gz:md5,1608837de13478dff81fe51ac1720d28"
-                    ]
+                    
+                ],
+                "mqc": [
+                    
                 ],
                 "versions": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    
                 ],
                 "warp": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0Warp.nii.gz:md5,6fee747df2c30bb48cf2b6897b5d3e17"
-                    ]
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-16T17:28:39.126053758"
+        "timestamp": "2025-02-18T16:24:14.450880992"
     },
     "registration - ants - quick": {
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__warped.nii.gz:md5,81358dd2f3223f567f4101e61490ae0f"
-                    ]
+                    
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0Warp.nii.gz:md5,24e6f53eaa3e4476bb627c374bc809ca"
-                    ]
+                    
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1GenericAffine.mat:md5,48c8479a403e0c0ec29c69d37bb4c91a"
-                    ]
+                    
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1InverseWarp.nii.gz:md5,24e6f53eaa3e4476bb627c374bc809ca"
-                    ]
+                    
                 ],
                 "4": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0InverseAffine.mat:md5,25d0b8a83a922f2e4e89c6a86258af15"
-                    ]
+                    
                 ],
                 "5": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    
+                ],
+                "6": [
+                    
                 ],
                 "affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1GenericAffine.mat:md5,48c8479a403e0c0ec29c69d37bb4c91a"
-                    ]
+                    
                 ],
                 "image": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__warped.nii.gz:md5,81358dd2f3223f567f4101e61490ae0f"
-                    ]
+                    
                 ],
                 "inverse_affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0InverseAffine.mat:md5,25d0b8a83a922f2e4e89c6a86258af15"
-                    ]
+                    
                 ],
                 "inverse_warp": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1InverseWarp.nii.gz:md5,24e6f53eaa3e4476bb627c374bc809ca"
-                    ]
+                    
+                ],
+                "mqc": [
+                    
                 ],
                 "versions": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    
                 ],
                 "warp": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0Warp.nii.gz:md5,24e6f53eaa3e4476bb627c374bc809ca"
-                    ]
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-16T17:28:48.93660183"
+        "timestamp": "2025-02-18T16:24:22.755988068"
     },
     "registration - ants - options": {
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__warped.nii.gz:md5,7cb6839d4af18d9d37a1bd9d07c8c57b"
-                    ]
+                    
                 ],
                 "1": [
                     
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1GenericAffine.mat:md5,c3a48d19c815206de2b140f505969317"
-                    ]
+                    
                 ],
                 "3": [
                     
                 ],
                 "4": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0InverseAffine.mat:md5,f473c1e548be1540cbf757202ffd5984"
-                    ]
+                    
                 ],
                 "5": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    
+                ],
+                "6": [
+                    
                 ],
                 "affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output1GenericAffine.mat:md5,c3a48d19c815206de2b140f505969317"
-                    ]
+                    
                 ],
                 "image": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__warped.nii.gz:md5,7cb6839d4af18d9d37a1bd9d07c8c57b"
-                    ]
+                    
                 ],
                 "inverse_affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__output0InverseAffine.mat:md5,f473c1e548be1540cbf757202ffd5984"
-                    ]
+                    
                 ],
                 "inverse_warp": [
                     
                 ],
+                "mqc": [
+                    
+                ],
                 "versions": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    
                 ],
                 "warp": [
                     
@@ -266,20 +154,20 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-16T17:28:54.754431506"
+        "timestamp": "2025-02-18T16:24:27.353554271"
     },
     "registration - ants - stub": {
         "content": [
             [
-                "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
+            "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-03T14:45:05.628303"
+        "timestamp": "2025-02-18T16:24:31.022464885"
     }
 }
