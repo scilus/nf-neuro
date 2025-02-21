@@ -30,7 +30,7 @@ args:
   - readout:
       type: float
       description: Readout time to add in metadata.
-      default: null
+      default: 0.062
   - clean_bids:
       type: boolean
       description: |

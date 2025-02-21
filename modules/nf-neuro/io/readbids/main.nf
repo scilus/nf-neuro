@@ -21,7 +21,7 @@ process IO_READBIDS {
     script:
     fs_folder = fs_folder ? "--fs $fs_folder" : ''
     bids_ignore = bids_ignore ? "--bids_ignore $bids_ignore" : ''
-    def readout = task.ext.readout ? "--readout " + task.ext.readout : ''
+    def readout = task.ext.readout ? "--readout " + task.ext.readout : "--readout 0.062"
     def clean_flag = task.ext.clean_bids ? "--clean " : ''
 
     """
