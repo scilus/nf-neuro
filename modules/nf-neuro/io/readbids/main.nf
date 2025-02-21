@@ -6,7 +6,9 @@ process IO_READBIDS {
         'scilus/scilus:2.0.2' }"
 
     input:
-        tuple path(bids_folder), path(fs_folder), path(bids_ignore)
+        path(bids_folder)
+        path(fs_folder)
+        path(bids_ignore)
 
     output:
         path("tractoflow_bids_struct.json")             , emit: bidsstructure
@@ -17,9 +19,8 @@ process IO_READBIDS {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
-    def fs_folder = fs_folder ? "--fs $fs_folder" : ''
-    def bids_ignore = bids_ignore ? "--bids_ignore $bids_ignore" : ''
+    fs_folder = fs_folder ? "--fs $fs_folder" : ''
+    bids_ignore = bids_ignore ? "--bids_ignore $bids_ignore" : ''
     def readout = task.ext.readout ? "--readout " + task.ext.readout : ''
     def clean_flag = task.ext.clean_bids ? "--clean " : ''
 
@@ -39,7 +40,6 @@ process IO_READBIDS {
 
 
     stub:
-    def args = task.ext.args ?: ''
     """
     scil_bids_validate.py -h
 
