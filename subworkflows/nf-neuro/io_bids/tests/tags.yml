@@ -1,0 +1,2 @@
+subworkflows/io_bids:
+  - subworkflows/nf-neuro/io_bids/**

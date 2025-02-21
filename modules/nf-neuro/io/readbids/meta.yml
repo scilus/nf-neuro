@@ -26,6 +26,18 @@ input:
       description: bids_ignore file
       pattern: "*.{bids_ignore}"
 
+args:
+  - readout:
+      type: float
+      description: Readout time to add in metadata.
+      default: 0.062
+  - clean_bids:
+      type: boolean
+      description: |
+        If set to true, will remove participants with missing files
+        from the final BIDS layout.
+      default: false
+
 output:
   - versions:
       type: file

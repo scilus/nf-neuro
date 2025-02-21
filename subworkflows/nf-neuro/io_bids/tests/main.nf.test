@@ -1,0 +1,106 @@
+nextflow_workflow {
+
+    name "Test Subworkflow IO_BIDS"
+    script "../main.nf"
+    workflow "IO_BIDS"
+
+    config "./nextflow.config"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/io_bids"
+
+    tag "io"
+    tag "io/readbids"
+
+    tag "load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "bids.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("Read BIDS directory - without .bidsignore") {
+
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        file("\${test_data_directory}/i_bids", checkIfExists: true)
+                    ]
+                }
+                input[1] = Channel.empty()
+                input[2] = Channel.empty()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("Read BIDS directory - with .bidsignore") {
+
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        file("\${test_data_directory}/i_bids", checkIfExists: true)
+                    ]
+                }
+                input[1] = Channel.empty()
+                input[2] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        file("\${test_data_directory}/i_bids/.bidsignore")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("Read BIDS directory - with 2 folder - invalid") {
+
+        when {
+            workflow {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        file("\${test_data_directory}/i_bids", checkIfExists: true),
+                        file("\${test_data_directory}/i_bids", checkIfExists: true)
+                    ]
+                }
+                input[1] = Channel.empty()
+                input[2] = Channel.empty()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.failed },
+                { assert workflow.stdout.contains("ERROR: You must supply only a single BIDS folder.") }
+            )
+        }
+    }
+}
