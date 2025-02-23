@@ -39,7 +39,16 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,3b94092e010fc0f6bf505074a393ddcc"
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_registration_anattodwi_mqc.gif:md5,74a7cf404c443726487683c23bd926c0"
+                    ]
+                ],
+                "5": [
+                    "versions.yml:md5,f368bc76bf8d1f1a68caea3597b0c65b"
                 ],
                 "affine": [
                     [
@@ -59,6 +68,15 @@
                         "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_registration_anattodwi_mqc.gif:md5,74a7cf404c443726487683c23bd926c0"
+                    ]
+                ],
                 "t1_warped": [
                     [
                         {
@@ -69,7 +87,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3b94092e010fc0f6bf505074a393ddcc"
+                    "versions.yml:md5,f368bc76bf8d1f1a68caea3597b0c65b"
                 ],
                 "warp": [
                     [
@@ -83,9 +101,21 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-16T17:41:00.965919497"
+        "timestamp": "2025-02-20T14:58:42.372471"
+    },
+    "registration - anattodwi -stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,f368bc76bf8d1f1a68caea3597b0c65b"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-20T14:58:49.169195"
     }
 }
