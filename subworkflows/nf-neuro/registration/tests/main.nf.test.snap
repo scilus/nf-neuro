@@ -45,7 +45,7 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "2": [
                     [
@@ -68,13 +68,13 @@
                     ]
                 ],
                 "4": [
-                    
+
                 ],
                 "5": [
-                    
+
                 ],
                 "6": [
-                    "versions.yml:md5,9c255f4c751382be7bf6fe6ffb0d635d"
+                    "versions.yml:md5,04d2203fd83e0422e103384bee7a1696"
                 ],
                 "image_warped": [
                     [
@@ -86,13 +86,13 @@
                     ]
                 ],
                 "ref_segmentation": [
-                    
+
                 ],
                 "ref_warped": [
-                    
+
                 ],
                 "segmentation": [
-                    
+
                 ],
                 "transfo_image": [
                     [
@@ -115,7 +115,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,9c255f4c751382be7bf6fe6ffb0d635d"
+                    "versions.yml:md5,04d2203fd83e0422e103384bee7a1696"
                 ]
             }
         ],
@@ -138,7 +138,7 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "2": [
                     [
@@ -161,10 +161,10 @@
                     ]
                 ],
                 "4": [
-                    
+
                 ],
                 "5": [
-                    
+
                 ],
                 "6": [
                     "versions.yml:md5,b39c35bdc0e79c6a3595616e01e37a72"
@@ -179,13 +179,13 @@
                     ]
                 ],
                 "ref_segmentation": [
-                    
+
                 ],
                 "ref_warped": [
-                    
+
                 ],
                 "segmentation": [
-                    
+
                 ],
                 "transfo_image": [
                     [
