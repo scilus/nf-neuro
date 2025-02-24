@@ -67,8 +67,8 @@ process REGISTRATION_ANTS {
     if $run_qc;
     then
         mv $fixedimage fixedimage.nii.gz
-        extract_dim=\$(mrinfo ${prefix}__warped.nii.gz -size)
-        read sagittal_dim axial_dim coronal_dim <<< "\${extract_dim}"
+        extract_dim=\$(mrinfo fixedimage.nii.gz -size)
+        read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
 
         # Get the middle slice
         coronal_dim=\$((\$coronal_dim / 2))
