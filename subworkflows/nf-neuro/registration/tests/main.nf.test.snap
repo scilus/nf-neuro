@@ -20,7 +20,7 @@
             "test_reference_registered.nii.gz",
             "test_forward_field.nii.gz",
             "test_backward_field.nii.gz",
-            "test_floating_segmentation.nii.gz:md5:header,74ed7e917b9fde7b2aaba7f512cc1edf,data,b5bacf72cc918f4a7789b6a0fea8f8d2",
+            "test_floating_segmentation.nii.gz:md5:header,74ed7e917b9fde7b2aaba7f512cc1edf,data,e1ed38ea961180d3e4c03a56c1c7bc4c",
             "test_reference_segmentation.nii.gz",
             [
                 "versions.yml:md5,3f38c911476c605480c02e484fcf6e9f"
