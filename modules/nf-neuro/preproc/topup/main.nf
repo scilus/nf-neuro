@@ -3,12 +3,12 @@ process PREPROC_TOPUP {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        "https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif":
-        "scilus/scilus:2.0.2"}"
+        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
+        "scilus/scilus:latest"}"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(b0), path(rev_dwi), path(rev_bval), path(rev_bvec), path(rev_b0)
-        val(config_topup)
+        val config_topup
 
     output:
         tuple val(meta), path("*__corrected_b0s.nii.gz"), emit: topup_corrected_b0s
@@ -17,6 +17,7 @@ process PREPROC_TOPUP {
         tuple val(meta), path("*__rev_b0_warped.nii.gz"), emit: rev_b0_warped
         tuple val(meta), path("*__rev_b0_mean.nii.gz")  , emit: rev_b0_mean
         tuple val(meta), path("*__b0_mean.nii.gz")      , emit: b0_mean
+        tuple val(meta), path("*_b0_topup_mqc.gif")     , emit: mqc   , optional: true
         path "versions.yml"                             , emit: versions
 
     when:
@@ -30,6 +31,7 @@ process PREPROC_TOPUP {
     def encoding = task.ext.encoding ? task.ext.encoding : ""
     def readout = task.ext.readout ? task.ext.readout : ""
     def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ? task.ext.b0_thr_extract_b0 : ""
+    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
@@ -63,12 +65,59 @@ process PREPROC_TOPUP {
     sh topup.sh
     cp corrected_b0s.nii.gz ${prefix}__corrected_b0s.nii.gz
 
+    # QC
+    if $run_qc;
+    then
+        extract_dim=\$(mrinfo ${prefix}__b0_mean.nii.gz -size)
+        read sagittal_dim axial_dim coronal_dim <<< "\${extract_dim}"
+
+        # Get the middle slice
+        coronal_dim=\$((\$coronal_dim / 2))
+        axial_dim=\$((\$axial_dim / 2))
+        sagittal_dim=\$((\$sagittal_dim / 2))
+
+        fslsplit ${prefix}__corrected_b0s.nii.gz ${prefix}__ -t
+        for image in b0_mean rev_b0_mean 0000 0001;
+        do
+            viz_params="--display_slice_number --display_lr --size 256 256"
+            scil_volume_math.py normalize_max ${prefix}__\${image}.nii.gz ${prefix}__\${image}_norm.nii.gz
+            scil_viz_volume_screenshot.py ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
+            scil_viz_volume_screenshot.py ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
+            scil_viz_volume_screenshot.py ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
+
+            if [ \$image == "b0_mean" ] || [ \$image == "rev_b0_mean" ];
+            then
+                title="Before"
+            else
+                title="After"
+            fi
+
+            convert +append ${prefix}__\${image}_coronal_slice_\${coronal_dim}.png \
+                    ${prefix}__\${image}_axial_slice_\${axial_dim}.png  \
+                    ${prefix}__\${image}_sagittal_slice_\${sagittal_dim}.png \
+                    ${prefix}__\${image}.png
+            convert -annotate +20+230 "\${title}" -fill white -pointsize 30 ${prefix}__\${image}.png ${prefix}__\${image}.png
+        done
+
+        convert -delay 10 -loop 0 -morph 10 \
+                ${prefix}__b0_mean.png ${prefix}__0000.png ${prefix}__b0_mean.png \
+                ${prefix}__b0_topup_mqc.gif
+
+        convert  -delay 10 -loop 0 -morph 10 \
+                ${prefix}__rev_b0_mean.png ${prefix}__0001.png ${prefix}__rev_b0_mean.png \
+                ${prefix}__rev_b0_topup_mqc.gif
+    fi
+
+    rm -rf *png
+    rm -rf *norm*
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         antsRegistration: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
-
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
+        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
     """
 
@@ -81,6 +130,8 @@ process PREPROC_TOPUP {
     touch ${prefix}__rev_b0_warped.nii.gz
     touch ${prefix}__rev_b0_mean.nii.gz
     touch ${prefix}__b0_mean.nii.gz
+    touch ${prefix}__rev_b0_topup_mqc.gif
+    touch ${prefix}__b0_topup_mqc.gif
     touch ${prefix_topup}_fieldcoef.nii.gz
     touch ${prefix_topup}_movpar.txt
 
@@ -89,6 +140,8 @@ process PREPROC_TOPUP {
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         antsRegistration: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
+        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
 
     function handle_code () {

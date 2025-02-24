@@ -6,6 +6,7 @@ keywords:
   - DWI
   - distorsion
   - topup
+
 tools:
   - "ANTs":
       description: "Advanced Normalization Tools (ANTs) for image processing."
@@ -70,6 +71,25 @@ input:
       description: topup config file. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
       pattern: "*cnf"
 
+args:
+  - encoding:
+      type: string
+      description: Encoding direction of the forward DWI.
+      choices: "x, y or z"
+      default: "y"
+  - readout:
+      type: float
+      description: Total readout time from the DICOM metadata.
+      default: 0.062
+  - b0_thr_extract_b0:
+      type: int
+      description: Threshold under which b-values are considered to be b0s.
+      default: 10
+  - run_qc:
+      type: boolean
+      description: Run quality control.
+      default: true
+
 output:
   #Only when we have meta
   - meta:
@@ -108,9 +128,14 @@ output:
       description: Nifti volume - b0 mean
       pattern: "*__b0_mean.nii.gz"
 
+  - mqc:
+      type: file
+      description: .gif file containing quality control image for the topup process (Comparison with dwi and rev_dwi). Made for use in MultiQC report.
+      pattern: "*_b0_topup_mqc.gif"
+
   - versions:
       type: file
-      description: File containing software versions
+      description: File containing software versions.
       pattern: "versions.yml"
 
 authors:

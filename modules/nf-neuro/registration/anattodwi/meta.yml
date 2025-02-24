@@ -15,6 +15,12 @@ tools:
       documentation: "http://stnava.github.io/ANTsDoc/"
       doi: "10.1016/j.neuroimage.2010.09.025"
 
+args:
+  - run_qc:
+      type: boolean
+      description: "Run quality control for the registration process"
+      default: false
+
 input:
   - meta:
       type: map
@@ -58,6 +64,11 @@ output:
       type: file
       description: Anatomical T1 warped to dwi space
       pattern: "*.{nii,nii.gz}"
+
+  - mqc:
+      type: file
+      description: .gif file containing quality control image for the registration process. Made for use in MultiQC report.
+      pattern: "*.gif"
 
   - versions:
       type: file
