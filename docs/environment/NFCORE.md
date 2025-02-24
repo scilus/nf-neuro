@@ -7,7 +7,7 @@
 
 ## Development container
 
-A lightweight `development container` that setups you in a matter of minutes is [available here](./DEVCONTAINER.md#prototyping-environment).
+A lightweight `development container` that setups you in a matter of minutes is [available here](./devcontainers/PROTOTYPING.md).
 
 ## Manual installation
 

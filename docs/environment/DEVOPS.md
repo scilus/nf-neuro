@@ -11,7 +11,7 @@
 
 ## Development container
 
-A complete `development container` that setups you in a matter of minutes is [available here](./DEVCONTAINER.md#development-environment).
+A complete `development container` that setups you in a matter of minutes is [available here](./devcontainers/DEVOPS.md).
 
 ## Manual installation
 
