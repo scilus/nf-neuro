@@ -32,6 +32,7 @@ custom_data:
       improved alignment with anatomical boundaries, and correction of
       eddy-current-induced displacements. Additionally, ensure that no new
       artifacts or excessive blurring are introduced in the corrected images.
+    plot_type: "image"
 
   topup_qc:
     file_format: "gif"
