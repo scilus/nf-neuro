@@ -34,7 +34,7 @@ input:
 
   - affine:
       type: file
-      description: Affine or rigig transformation file to warp image or trk (*mat). If a rigid or affine transformation needs to be inverted before being applied, use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this module does not handles it.
+      description: Affine or rigid transformation file to warp image or trk (*mat). If a rigid or affine transformation needs to be inverted before being applied, use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this module does not handles it.
       pattern: "*.mat"
 
 output:
@@ -48,6 +48,11 @@ output:
       type: file
       description: Warped image
       pattern: "*.{nii.nii.gz}"
+
+  - mqc:
+      type: file
+      description: .gif file containing quality control image for the registration process. Made for use in MultiQC report.
+      pattern: "*.gif"
 
   - versions:
       type: file
