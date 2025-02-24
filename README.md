@@ -41,4 +41,3 @@ Check out [our documentation](https://scilus.github.io/nf-neuro/) ! You will fin
 Then, depending on which kind of component you want to submit, you'll either need to follow the [module creation](https://scilus.github.io/nf-neuro/guides/create-your-module/template/)
 or the [subworkflow creation](https://scilus.github.io/nf-neuro/guides/subworkflows/) guidelines. Components that don't abide to them won't be accepted
 and PR containing them will be closed automatically.
-
