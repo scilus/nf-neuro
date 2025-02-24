@@ -68,7 +68,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
                 --slices \$axial_dim --axis axial \$viz_params
             if [ \$image != reference ];
             then
-                title="Warped T1"
+                title="Transformed"
             else
                 title="Reference"
             fi
