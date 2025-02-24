@@ -9,13 +9,16 @@ report_section_order:
     order: -850
   "anattodwi_qc":
     order: -650
-  software_versions:
+  "topup_qc":
+    order: -450
+   software_versions:
     order: -1000
 
 custom_content:
   order:
     - eddy_qc
     - anattodwi_qc
+    - topup_qc
 
 custom_data:
   eddy_qc:
@@ -30,6 +33,21 @@ custom_data:
       improved alignment with anatomical boundaries, and correction of
       eddy-current-induced displacements. Additionally, ensure that no new
       artifacts or excessive blurring are introduced in the corrected images.
+    plot_type: "image"
+
+  topup_qc:
+    file_format: "gif"
+    section_name: "Topup QC"
+    description: |
+      This section contains QC images for TOPUP correction, which is used to correct
+      susceptibility-induced distortions by leveraging pairs of images acquired with
+      opposite phase-encoding directions. The animation shows a before-and-after
+      comparison of the correction. To assess the quality of the correction, focus
+      on regions most affected by susceptibility distortions, such as the frontal lobe
+      and the cerebellum/spinal cord area. Look for improved alignment of anatomical
+      structures, reduced stretching or compression, and better symmetry between the
+      corrected images. Additionally, ensure that the correction does not introduce
+      new artifacts or excessive blurring.
     plot_type: "image"
 
   anattodwi_qc:
@@ -49,6 +67,8 @@ custom_data:
     plot_type: "image"
 
 sp:
+  topup_qc:
+    fn: "*_b0_topup_mqc.gif"
   anattodwi_qc:
     fn: "*_registration_anattodwi_mqc.gif"
   eddy_qc:
