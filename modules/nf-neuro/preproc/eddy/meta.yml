@@ -90,11 +90,11 @@ args:
       type: string
       description: Encoding direction of the forward DWI.
       default: "y"
-      pattern: "x, y or z"
+      choices: "x, y or z"
   - readout:
       type: float
       description: Total readout time from the DICOM metadata.
-      default: "0.062"
+      default: 0.062
   - dilate_b0_mask_prelim_brain_extraction:
       type: int
       description: Number of times to repeatedly apply the filter.
@@ -114,7 +114,7 @@ args:
   - run_qc:
       type: boolean
       description: Run QC for Eddy.
-      default: true
+      default: false
 
 output:
   #Only when we have meta
