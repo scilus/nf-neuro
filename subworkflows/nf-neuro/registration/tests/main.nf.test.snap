@@ -129,16 +129,36 @@
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__warped.nii.gz:md5,f7e262c9c75c651a9057d3082c2a69ad"
+                    ]
                 ],
                 "1": [
                     
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output0Warp.nii.gz:md5,964cf7e60171214164f280452f1ae6e0",
+                        "test__output1GenericAffine.mat:md5,bfd589d2b237a20bbeef0656ecd64e14"
+                    ]
                 ],
                 "3": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output0InverseAffine.mat:md5,235417a8c7eee8ab7bde320b9e48d2f1",
+                        "test__output1InverseWarp.nii.gz:md5,fac9af1885f5e1cce39fcf06fca93dfc"
+                    ]
                 ],
                 "4": [
                     
@@ -147,10 +167,16 @@
                     
                 ],
                 "6": [
-                    
+                    "versions.yml:md5,b39c35bdc0e79c6a3595616e01e37a72"
                 ],
                 "image_warped": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__warped.nii.gz:md5,f7e262c9c75c651a9057d3082c2a69ad"
+                    ]
                 ],
                 "ref_segmentation": [
                     
@@ -162,13 +188,27 @@
                     
                 ],
                 "transfo_image": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output0Warp.nii.gz:md5,964cf7e60171214164f280452f1ae6e0",
+                        "test__output1GenericAffine.mat:md5,bfd589d2b237a20bbeef0656ecd64e14"
+                    ]
                 ],
                 "transfo_trk": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output0InverseAffine.mat:md5,235417a8c7eee8ab7bde320b9e48d2f1",
+                        "test__output1InverseWarp.nii.gz:md5,fac9af1885f5e1cce39fcf06fca93dfc"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,b39c35bdc0e79c6a3595616e01e37a72"
                 ]
             }
         ],
@@ -176,6 +216,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-18T16:27:20.269760753"
+        "timestamp": "2025-02-24T07:57:27.223538265"
     }
 }

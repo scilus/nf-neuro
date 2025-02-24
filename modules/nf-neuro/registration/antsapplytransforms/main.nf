@@ -46,41 +46,46 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     ### ** QC ** ###
     if $run_qc;
     then
+        mv $reference reference.nii.gz
         extract_dim=\$(mrinfo ${prefix}__${suffix}.nii.gz -size)
-        read coronal_dim axial_dim sagittal_dim <<< "\${extract_dim}"
+        read sagittal_dim axial_dim coronal_dim <<< "\${extract_dim}"
 
         # Get the middle slice
-        axial_dim=\$((axial_dim / 2))
-        sagittal_dim=\$((sagittal_dim / 2))
-        coronal_dim=\$((coronal_dim / 2))
+        coronal_dim=\$((\$coronal_dim / 2))
+        axial_dim=\$((\$axial_dim / 2))
+        sagittal_dim=\$((\$sagittal_dim / 2))
 
-        ### ** Axial ** ###
-        scil_viz_volume_screenshot.py ${prefix}__${suffix}.nii.gz warped_ax.png \
-            --slices axial_dim --axis axial
-        scil_viz_volume_screenshot.py $reference  ref_ax.png \
-            --slices axial_dim --axis axial
-
-        ### ** Sagittal ** ###
-        scil_viz_volume_screenshot.py ${prefix}__${suffix}.nii.gz warped_sag.png \
-            --slices sagittal_dim --axis sagittal
-        scil_viz_volume_screenshot.py $reference  ref_sag.png \
-            --slices sagittal_dim --axis sagittal
-
-        ### ** Coronal ** ###
-        scil_viz_volume_screenshot.py ${prefix}__${suffix}.nii.gz warped_cor.png \
-            --slices coronal_dim --axis coronal
-        scil_viz_volume_screenshot.py $reference  ref_cor.png \
-            --slices coronal_dim --axis coronal
-
-        ### ** Creating mosaics ** ###
-        convert ref*.png +append mosaic_ref.png
-        convert warped*.png +append mosaic_warped.png
-
-        ### ** Final gif file ** ###
-        convert -resize 50% -delay 60 -loop 0 mosaic*.png ${prefix}__${suffix}_ants_apply__registration_mqc.gif
-        ### remove intermediate files
-        rm *.png
-
+        # Set viz params.
+        viz_params="--display_slice_number --display_lr --size 256 256"
+        # Iterate over images.
+        for image in reference warped;
+        do
+            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+                --slices \$coronal_dim --axis coronal \$viz_params
+            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+                --slices \$sagittal_dim --axis sagittal \$viz_params
+            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+                --slices \$axial_dim --axis axial \$viz_params
+            if [ \$image != reference ];
+            then
+                title="Warped T1"
+            else
+                title="Reference"
+            fi
+            convert +append \${image}_coronal*.png \${image}_axial*.png \
+                \${image}_sagittal*.png \${image}_mosaic.png
+            convert -annotate +20+230 "\${title}" -fill white -pointsize 30 \
+                \${image}_mosaic.png \${image}_mosaic.png
+            # Clean up.
+            rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
+        done
+        # Create GIF.
+        convert -delay 10 -loop 0 -morph 10 \
+            warped_mosaic.png reference_mosaic.png warped_mosaic.png \
+            ${prefix}_registration_antsapplytransforms_mqc.gif
+        # Clean up.
+        rm *_mosaic.png
+    fi
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
