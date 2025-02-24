@@ -69,6 +69,53 @@ input:
       description: Text file - topup movpart
       pattern: "*__movpar.txt"
 
+args:
+  - slice_drop_flag:
+      type: boolean
+      description: "If set, will activate eddy's outlier correction, which includes slice drop correction."
+      default: false
+  - bet_topup_before_eddy_f:
+      type: float
+      description: Fractional intensity threshold for BET before running topup
+      default: 0.16
+  - prefix_topup:
+      type: string
+      description: Prefix for the topup output.
+      default: "topup_results"
+  - b0_thr_extract_b0:
+      type: int
+      description: Threshold under which b-values are considered to be b0s.
+      default: 10
+  - encoding:
+      type: string
+      description: Encoding direction of the forward DWI.
+      default: "y"
+      choices: "x, y or z"
+  - readout:
+      type: float
+      description: Total readout time from the DICOM metadata.
+      default: 0.062
+  - dilate_b0_mask_prelim_brain_extraction:
+      type: int
+      description: Number of times to repeatedly apply the filter.
+      default: 5
+  - eddy_cmd:
+      type: string
+      description: Command to run Eddy.
+      default: "eddy_cpu"
+  - bet_prelim_f:
+      type: float
+      description: Fractional intensity threshold for BET if TOPUP has not been run.
+      default: 0.16
+  - extra_args:
+      type: string
+      description: Extra arguments for Eddy.
+      default: ""
+  - run_qc:
+      type: boolean
+      description: Run QC for Eddy.
+      default: false
+
 output:
   #Only when we have meta
   - meta:
@@ -96,6 +143,15 @@ output:
       type: file
       description: Nifti volume - Mask for b0 corrected
       pattern: "*__b0_bet_mask.nii.gz"
+
+  - dwi_eddy_mqc:
+      type: file
+      description: .gif file containing quality control image for the eddy process. Made for use in MultiQC report.
+      pattern: "*_dwi_eddy_mqc.gif"
+  - rev_dwi_eddy_mqc:
+      type: file
+      description: .gif file containing quality control image for the eddy process for the rev_dwi. Made for use in MultiQC report.
+      pattern: "*_rev_dwi_eddy_mqc.gif"
 
   - versions:
       type: file
