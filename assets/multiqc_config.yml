@@ -5,20 +5,20 @@ report_comment: >
 report_section_order:
   "pipeline_name":
     order: -1001
-  "anattodwi_qc":
-    order: -800
   "topup_qc":
-    order: -600
+    order: -800
   "eddy_qc":
+    order: -600
+  "anattodwi_qc":
     order: -400
   software_versions:
     order: -1000
 
 custom_content:
   order:
-    - anattodwi_qc
     - topup_qc
     - eddy_qc
+    - anattodwi_qc
 custom_data:
   eddy_qc:
     file_format: "gif"
