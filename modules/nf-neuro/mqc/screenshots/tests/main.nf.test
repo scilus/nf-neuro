@@ -9,6 +9,9 @@ nextflow_process {
     tag "mqc"
     tag "mqc/screenshots"
 
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
