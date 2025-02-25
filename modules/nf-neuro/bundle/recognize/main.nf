@@ -11,8 +11,8 @@ process BUNDLE_RECOGNIZE {
 
     output:
     tuple val(meta), path("*_cleaned.trk")            , emit: bundles
-    tuple val(meta), path("*_bundles_mosaic_mqc.png")     , emit: mqc
-    tuple val(meta), path("*_bundles_stats_mqc.json")     , emit: global_mqc
+    tuple val(meta), path("*_bundles_mosaic_mqc.png")     , emit: mqc, optional: true
+    tuple val(meta), path("*_bundles_stats_mqc.json")     , emit: global_mqc, optional: true
     path "versions.yml"                               , emit: versions
 
     when:
