@@ -55,16 +55,16 @@
                 "versions.yml:md5,4a7c801d46bade11523003b6bd06f8ed",
                 "versions.yml:md5,647b63809e635c82552cf53178bf73be",
                 "versions.yml:md5,9e058d5e2eaf4cf239570ca80d20207f",
+                "versions.yml:md5,9ec2ceb761ab4faf9c19e46d7aa201c9",
                 "versions.yml:md5,aaab00d1fa7d070cc7ee67fd768416b8",
                 "versions.yml:md5,da10c87dbb2ad07aa8bbf89a0c172a60",
-                "versions.yml:md5,e092829f98d53bda1802d1cda0cb017f",
-                "versions.yml:md5,fc6a2d3923b6ecd60b833ce5f09f8877"
+                "versions.yml:md5,e092829f98d53bda1802d1cda0cb017f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-06T03:39:50.463608725"
+        "timestamp": "2025-02-25T19:28:43.492108426"
     }
 }
