@@ -1,9 +1,8 @@
 ---
 name: "mqc_screenshots"
-description:
-  generates quality control (QC) screenshots for warped and reference MRI volumes.
-  It extracts middle slices (sagittal, coronal, and axial views) from both volumes,
-  creates annotated mosaics, and combines them into an animated GIF for quick visual comparison.
+description: generates quality control (QC) screenshots for warped and reference MRI volumes.
+  It extracts middle slices (sagittal, coronal, and axial views) from both volumes,creates
+  annotated mosaics, and combines them into an animated GIF for quick visual comparison.
 keywords:
   - mqc
   - Visualisation
@@ -55,4 +54,3 @@ output:
 
 authors:
   - "@ThoumyreStanislas"
-
