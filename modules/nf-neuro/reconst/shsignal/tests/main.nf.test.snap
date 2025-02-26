@@ -1,0 +1,47 @@
+{
+    "fit single shell signal": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_sh.nii.gz:md5,01c93893687d56d54637429b480b6c49"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,173eabd26e11dab936f8e29ee3f01d8c"
+                ],
+                "sh_signal": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_sh.nii.gz:md5,01c93893687d56d54637429b480b6c49"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,173eabd26e11dab936f8e29ee3f01d8c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-26T21:45:28.308690064"
+    },
+    "fit sh - stub": {
+        "content": [
+            [
+                "versions.yml:md5,173eabd26e11dab936f8e29ee3f01d8c"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-26T21:48:34.631443809"
+    }
+}
