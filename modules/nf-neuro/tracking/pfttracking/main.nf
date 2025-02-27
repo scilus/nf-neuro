@@ -17,7 +17,7 @@ process TRACKING_PFTTRACKING {
         tuple val(meta), path("*__map_exclude.nii.gz")          , emit: excludes
         tuple val(meta), path("*__pft_seeding_mask.nii.gz")     , emit: seeding
         tuple val(meta), path("*__pft_tracking_mqc.png")        , emit: mqc, optional: true
-        tuple val(meta), path("*__pft_tracking_stats.png")      , emit: global_mqc, optional: true
+        tuple val(meta), path("*__pft_tracking_stats.json")      , emit: global_mqc, optional: true
         path "versions.yml"                                     , emit: versions
 
     when:

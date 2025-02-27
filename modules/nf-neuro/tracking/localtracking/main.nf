@@ -15,7 +15,7 @@ process TRACKING_LOCALTRACKING {
     tuple val(meta), path("*__local_seeding_mask.nii.gz"), emit: seedmask
     tuple val(meta), path("*__local_tracking_mask.nii.gz"), emit: trackmask
     tuple val(meta), path("*__local_tracking_mqc.png"), emit: mqc, optional: true
-    tuple val(meta), path("*__local_tracking_stats.png"), emit: global_mqc, optional: true
+    tuple val(meta), path("*__local_tracking_stats.json"), emit: global_mqc, optional: true
     path "versions.yml"           , emit: versions
 
     when:

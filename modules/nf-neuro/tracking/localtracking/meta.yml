@@ -67,7 +67,7 @@ output:
   - global_mqc:
       type: file
       description: JSON file containing basic measurements of whole tractogram. Made for use in MultiQC report.
-      pattern: "*local_tracking_stats.png"
+      pattern: "*local_tracking_stats.json"
 
   - versions:
       type: file
