@@ -39,9 +39,11 @@ nextflow_workflow {
     test("tractoflow - no rev") {
         when {
             params {
-                pft_number_of_seeds = 1
+                pft_seeding_strategy = "nt"
+                pft_number_of_seeds = 4000
                 pft_number_of_particles = 4
-                lt_number_of_seeds = 1
+                lt_seeding_strategy = "nt"
+                lt_number_of_seeds = 4000
             }
             workflow {
                 """
