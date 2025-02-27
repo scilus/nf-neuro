@@ -1,0 +1,148 @@
+// TODO nf-core: Once you have added the required tests, please run the following command to build this file:
+// nf-core modules test reconst/qball
+nextflow_process {
+
+    name "Test Process RECONST_QBALL"
+    script "../main.nf"
+    process "RECONST_QBALL"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "reconst"
+    tag "reconst/qball"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [
+                    "DWIss2000-dir60.zip",
+                    "DWIms1000-2000-dir10-10.zip",
+                    "segmentation.zip",
+                    "responses.zip"
+                ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+    test("reconst - qball") {
+        config "./nextflow_msmt.config"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        ssst: it.simpleName == "DWIss2000-dir60"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                ch_dwi = ch_split_test_data.ssst.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/brainmask.nii.gz")
+                    ]
+                }
+                input[0] = ch_dwi
+                    .join(ch_mask)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("reconst - qball_gfa") {
+        config "./nextflow_light"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        ssst: it.simpleName == "DWIss2000-dir60"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                ch_dwi = ch_split_test_data.ssst.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        []
+                    ]
+                }
+                input[0] = ch_dwi
+                    .join(ch_mask)
+                """
+            }
+            then {
+                assertAll(
+                    { assert process.success },
+                    { assert snapshot(process.out).match() }
+                )
+            }
+
+        }
+    }
+
+test("reconst - stub-run") {
+        options "-stub-run"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        ssst: it.simpleName == "DWIss2000-dir60"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                ch_dwi = ch_split_test_data.ssst.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/brainmask.nii.gz")
+                    ]
+                }
+                input[0] = ch_dwi
+                    .join(ch_mask)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+}

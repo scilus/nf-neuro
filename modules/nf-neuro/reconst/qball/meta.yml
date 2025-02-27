@@ -1,0 +1,81 @@
+---
+name: "reconst_qball"
+description: Compute the Constant Solid Angle (CSA) or Analytical Q-ball model,
+  the generalized fractional anisotropy (GFA) and the peaks of the model.
+keywords:
+  - Qball
+  - example
+  - Reconst
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: Nifti DWI volume to reconstruct FODF from.
+      pattern: "*.{nii,nii.gz}"
+
+  - bval:
+      type: file
+      description: B-values in FSL format.
+      pattern: "*.bval"
+
+  - bvec:
+      type: file
+      description: B-vectors in FSL format.
+      pattern: "*.bvec"
+
+  - mask:
+      type: file
+      description: B0 mask.
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - gfa :
+      type: file
+      description: Generalized Fractional Anisotropy map.
+      pattern: "*gfa.nii.gz"
+
+  - peaks:
+      type: file
+      description: peaks map.
+      pattern: "*peaks.nii.gz"
+
+  - peak_indices:
+      type: file
+      description: peak_indices map.
+      pattern: "*peak_indices.nii.gz"
+
+  - sh:
+      type: file
+      description: sh map.
+      pattern: "*sh.nii.gz"
+
+  - nufo:
+      type: file
+      description: Number of Fiber Orientation (NuFO) map.
+      pattern: "*nufo.nii.gz"
+
+  - a_power:
+      type: file
+      description: a_power map.
+      pattern: "*a_power.nii.gz"
+
+authors:
+  - "@EliseCos"
+maintainers:
+  - "@EliseCos"
