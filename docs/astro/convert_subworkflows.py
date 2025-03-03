@@ -96,7 +96,7 @@ def convert_subworkflow_to_md(yaml_data):
     final_md += f"title: {yaml_data['name']}\n"
     final_md += "---\n\n"
 
-    final_md += f"## Module: {yaml_data['name']}\n\n{yaml_data['description']}\n\n"
+    final_md += f"## Subworkflow: {yaml_data['name']}\n\n{yaml_data['description']}\n\n"
     final_md += f"### Inputs\n\n{inputs}\n"
     if params != "":
         final_md += f"### Parameters\n\n{params}\n"
