@@ -12,7 +12,6 @@
             ],
             [
                 "versions.yml:md5,0280006ceecc575513278292734ffb27",
-                "versions.yml:md5,0494fbf74bc9c16d2b30cb45b3bba66b",
                 "versions.yml:md5,0b8c908e52917b0b706fc9d1b4d6cd24",
                 "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
                 "versions.yml:md5,4d9548c7486e8dbb65af71f143ed331c",
@@ -20,6 +19,7 @@
                 "versions.yml:md5,662ea558da42564a0f6140473132bcb4",
                 "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                 "versions.yml:md5,9ed0cfbbfa39c46a53dbe911a68cbc88",
+                "versions.yml:md5,be7d5bfaf3bf493f62efa98e274cc01d",
                 "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
                 "versions.yml:md5,ea5858879452a59bb355228ae7f38111",
                 "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
@@ -33,10 +33,10 @@
             "test__dwi_corrected.nii.gz"
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-05T15:39:49.311209011"
+        "timestamp": "2025-02-28T08:50:35.321464"
     },
     "preproc_dwi_rev_b0": {
         "content": [
@@ -51,12 +51,12 @@
             ],
             [
                 "versions.yml:md5,0280006ceecc575513278292734ffb27",
-                "versions.yml:md5,0494fbf74bc9c16d2b30cb45b3bba66b",
                 "versions.yml:md5,0b8c908e52917b0b706fc9d1b4d6cd24",
                 "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
                 "versions.yml:md5,571265e710ca29198e69be22c0f970d5",
                 "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                 "versions.yml:md5,9ed0cfbbfa39c46a53dbe911a68cbc88",
+                "versions.yml:md5,be7d5bfaf3bf493f62efa98e274cc01d",
                 "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
                 "versions.yml:md5,ea5858879452a59bb355228ae7f38111",
                 "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
@@ -70,10 +70,10 @@
             "test__dwi_corrected.nii.gz"
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-05T15:35:06.695089436"
+        "timestamp": "2025-02-28T08:47:25.557731"
     },
     "preproc_dwi_all_options": {
         "content": [
@@ -88,7 +88,6 @@
             ],
             [
                 "versions.yml:md5,0280006ceecc575513278292734ffb27",
-                "versions.yml:md5,0494fbf74bc9c16d2b30cb45b3bba66b",
                 "versions.yml:md5,0b8c908e52917b0b706fc9d1b4d6cd24",
                 "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
                 "versions.yml:md5,4d9548c7486e8dbb65af71f143ed331c",
@@ -96,6 +95,7 @@
                 "versions.yml:md5,662ea558da42564a0f6140473132bcb4",
                 "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                 "versions.yml:md5,9ed0cfbbfa39c46a53dbe911a68cbc88",
+                "versions.yml:md5,be7d5bfaf3bf493f62efa98e274cc01d",
                 "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
                 "versions.yml:md5,ea5858879452a59bb355228ae7f38111",
                 "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
@@ -109,9 +109,9 @@
             "test__dwi_corrected.nii.gz"
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-05T15:43:09.050637899"
+        "timestamp": "2025-02-28T08:53:44.242823"
     }
 }
