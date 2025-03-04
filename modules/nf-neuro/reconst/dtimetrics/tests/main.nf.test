@@ -84,6 +84,7 @@ nextflow_process {
                     process.out.residual_q3_residuals,
                     process.out.residual_residuals_stats,
                     process.out.residual_std_residuals,
+                    file(process.out.mqc.get(0).get(1)).name,
                     process.out.versions
                 ).match() }
             )

@@ -83,6 +83,7 @@
                     "test__residual_std_residuals.npy:md5,0d41ba9ad5d2ac4543f957a1d84c187f"
                 ]
             ],
+            "test__dti_mqc.png",
             [
                 "versions.yml:md5,609a8b62c7dc862692683ec5860ba677"
             ]
@@ -91,6 +92,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-03-03T18:40:14.232573173"
+        "timestamp": "2025-03-04T20:18:25.931127752"
     }
 }

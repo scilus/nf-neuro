@@ -126,7 +126,7 @@ process RECONST_DTIMETRICS {
         done
 
         rm -rf *slice*
-        convert +append *png ${prefix}__dti_mqc.png
+        convert -append *png ${prefix}__dti_mqc.png
         mv ${prefix}__residual_residuals_stats.png_bk ${prefix}__residual_residuals_stats.png
     fi
 
