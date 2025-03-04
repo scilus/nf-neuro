@@ -3,8 +3,8 @@ process PREPROC_EDDY {
     label 'process_high'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
+        "scilus/scilus:latest"}"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(rev_dwi), path(rev_bval), path(rev_bvec), path(corrected_b0s), path(topup_fieldcoef), path(topup_movpart)
@@ -14,6 +14,8 @@ process PREPROC_EDDY {
         tuple val(meta), path("*__dwi_eddy_corrected.bval") , emit: bval_corrected
         tuple val(meta), path("*__dwi_eddy_corrected.bvec") , emit: bvec_corrected
         tuple val(meta), path("*__b0_bet_mask.nii.gz")      , emit: b0_mask
+        tuple val(meta), path("*__dwi_eddy_mqc.gif")        , emit: dwi_eddy_mqc, optional:true
+        tuple val(meta), path("*__rev_dwi_eddy_mqc.gif")    , emit: rev_dwi_eddy_mqc, optional:true
         path "versions.yml"                                 , emit: versions
 
     when:
@@ -31,6 +33,7 @@ process PREPROC_EDDY {
     def eddy_cmd = task.ext.eddy_cmd ? task.ext.eddy_cmd : "eddy_cpu"
     def bet_prelim_f = task.ext.bet_prelim_f ? task.ext.bet_prelim_f : ""
     def extra_args = task.ext.extra_args ?: ""
+    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
@@ -103,12 +106,71 @@ process PREPROC_EDDY {
         scil_gradients_validate_correct_eddy.py dwi_eddy_corrected.eddy_rotated_bvecs \${bval} \${number_rev_dwi} ${prefix}__dwi_eddy_corrected.bvec ${prefix}__dwi_eddy_corrected.bval
     fi
 
+    if $run_qc;
+    then
+        extract_dim=\$(mrinfo ${dwi} -size)
+        read sagittal_dim coronal_dim axial_dim fourth_dim <<< "\${extract_dim}"
+
+        # Get the middle slice
+        coronal_dim=\$((\$coronal_dim / 2))
+        axial_dim=\$((\$axial_dim / 2))
+        sagittal_dim=\$((\$sagittal_dim / 2))
+
+        viz_params="--display_slice_number --display_lr --size 256 256"
+        rev_dwi=""
+        if [[ -f "$rev_dwi" ]];
+        then
+            scil_dwi_powder_average.py ${rev_dwi} ${prefix}__dwi_eddy_corrected.bval ${prefix}__rev_dwi_powder_average.nii.gz
+            scil_volume_math.py normalize_max ${prefix}__rev_dwi_powder_average.nii.gz ${prefix}__rev_dwi_powder_average_norm.nii.gz
+            rev_dwi="rev_dwi"
+        fi
+        scil_dwi_powder_average.py ${dwi} ${prefix}__dwi_eddy_corrected.bval ${prefix}__dwi_powder_average.nii.gz
+        scil_dwi_powder_average.py ${prefix}__dwi_corrected.nii.gz ${prefix}__dwi_eddy_corrected.bval ${prefix}__dwi_corrected_powder_average.nii.gz
+        scil_volume_math.py normalize_max ${prefix}__dwi_powder_average.nii.gz ${prefix}__dwi_powder_average_norm.nii.gz
+        scil_volume_math.py normalize_max ${prefix}__dwi_corrected_powder_average.nii.gz ${prefix}__dwi_corrected_powder_average_norm.nii.gz
+
+        for image in dwi_corrected dwi \${rev_dwi}
+        do
+            scil_viz_volume_screenshot.py ${prefix}__\${image}_powder_average_norm.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
+            scil_viz_volume_screenshot.py ${prefix}__\${image}_powder_average_norm.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
+            scil_viz_volume_screenshot.py ${prefix}__\${image}_powder_average_norm.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
+
+            if [ \$image == "dwi_corrected" ] || [ \$image == "rev_dwi" ]
+            then
+                title="After"
+            else
+                title="Before"
+            fi
+
+            convert +append ${prefix}__\${image}_coronal_slice_\${coronal_dim}.png \
+                    ${prefix}__\${image}_axial_slice_\${axial_dim}.png  \
+                    ${prefix}__\${image}_sagittal_slice_\${sagittal_dim}.png \
+                    ${prefix}__\${image}.png
+
+            convert -annotate +20+230 "\${title}" -fill white -pointsize 30 ${prefix}__\${image}.png ${prefix}__\${image}.png
+        done
+
+        if [[ -f "$rev_dwi" ]];
+        then
+            convert -delay 10 -loop 0 -morph 10 \
+                ${prefix}__rev_dwi.png ${prefix}__dwi_corrected.png ${prefix}__rev_dwi.png \
+                ${prefix}__rev_dwi_eddy_mqc.gif
+        fi
+
+        convert -delay 10 -loop 0 -morph 10 \
+                ${prefix}__dwi.png ${prefix}__dwi_corrected.png ${prefix}__dwi.png \
+                ${prefix}__dwi_eddy_mqc.gif
+
+        rm -rf *png
+        rm -rf *powder_average*
+    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
+        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
     """
 
@@ -117,6 +179,8 @@ process PREPROC_EDDY {
 
     """
     touch ${prefix}__dwi_corrected.nii.gz
+    touch ${prefix}__dwi_eddy_mqc.gif
+    touch ${prefix}__rev_dwi_eddy_mqc.gif
     touch ${prefix}__dwi_eddy_corrected.bval
     touch ${prefix}__dwi_eddy_corrected.bvec
     touch ${prefix}__b0_bet_mask.nii.gz
@@ -126,6 +190,7 @@ process PREPROC_EDDY {
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
+        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
 
     function handle_code () {
@@ -144,5 +209,7 @@ process PREPROC_EDDY {
     mrconvert -h
     scil_dwi_prepare_eddy_command.py -h
     scil_header_print_info.py -h
+    scil_viz_volume_screenshot -h
+    convert
     """
 }
