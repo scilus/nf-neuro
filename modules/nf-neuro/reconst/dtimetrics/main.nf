@@ -84,6 +84,8 @@ process RECONST_DTIMETRICS {
 
     if [ "$run_qc" = true ] && [ "$args" != '' ];
     then
+        mv ${prefix}__residual_residuals_stats.png ${prefix}__residual_residuals_stats.png_bk
+        
         nii_files=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(fa|ad|rd|md|rgb|residual)\$/) print \$(i+1)}')
 
         # Viz 3D images + RGB
@@ -125,9 +127,9 @@ process RECONST_DTIMETRICS {
 
         rm -rf *slice*
         convert +append *png ${prefix}__dti_mqc.png
+        mv ${prefix}__residual_residuals_stats.png_bk ${prefix}__residual_residuals_stats.png 
     fi
-
-
+    
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
