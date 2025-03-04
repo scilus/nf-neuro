@@ -18,6 +18,7 @@ workflow TOPUP_EDDY {
 
     main:
         ch_versions = Channel.empty()
+        ch_multiqc_files = Channel.empty()
 
         ch_topup_fieldcoeff = Channel.empty()
         ch_topup_movpart = Channel.empty()
@@ -46,6 +47,7 @@ workflow TOPUP_EDDY {
             // ** RUN TOPUP ** //
             PREPROC_TOPUP ( ch_topup, ch_config_topup )
             ch_versions = ch_versions.mix(PREPROC_TOPUP.out.versions.first())
+            ch_multiqc_files = ch_multiqc_files.mix(PREPROC_TOPUP.out.mqc)
 
             ch_topup_fieldcoeff = PREPROC_TOPUP.out.topup_fieldcoef
             ch_topup_movpart = PREPROC_TOPUP.out.topup_movpart
@@ -78,6 +80,8 @@ workflow TOPUP_EDDY {
             // ** RUN EDDY **//
             PREPROC_EDDY ( ch_eddy_input )
             ch_versions = ch_versions.mix(PREPROC_EDDY.out.versions.first())
+            ch_multiqc_files = ch_multiqc_files.mix(PREPROC_EDDY.out.dwi_eddy_mqc)
+            ch_multiqc_files = ch_multiqc_files.mix(PREPROC_EDDY.out.rev_dwi_eddy_mqc)
 
             ch_dwi_extract_b0 = PREPROC_EDDY.out.dwi_corrected
                 .join(PREPROC_EDDY.out.bval_corrected)
@@ -113,5 +117,6 @@ workflow TOPUP_EDDY {
         bvec     = ch_output_dwi.bvec   // channel: [ val(meta), bvec-corrected ]
         b0       = ch_b0_corrected      // channel: [ val(meta), b0-corrected ]
         b0_mask  = ch_b0_mask           // channel: [ val(meta), b0-mask ]
+        mqc      = ch_multiqc_files     // channel: [ val(meta), mqc ]
         versions = ch_versions          // channel: [ versions.yml ]
 }
