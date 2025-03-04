@@ -134,6 +134,12 @@ output:
         Channel containing DWI after denoised, corrected for susceptibility and/or eddy currents and motion, cropped and normalized (N4).
         Structure: [ val(meta), path(dwi) ]
       pattern: "*_normalized.{nii,nii.gz}"
+  - mqc:
+      type: file
+      description: |
+        Channel containing the quality control images for MultiQC.
+        Structure: [ val(meta), path(mqc) ]
+      pattern: "*_mqc.{gif,png}"
   - versions:
       type: file
       description: |
