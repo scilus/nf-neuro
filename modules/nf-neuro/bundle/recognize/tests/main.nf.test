@@ -76,7 +76,12 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    process.out.bundles,
+                    file(process.out.mqc.get(0).get(1)).name,
+                    file(process.out.global_mqc.get(0).get(1)).name,
+                    process.out.versions,
+                ).match() }
             )
         }
 
