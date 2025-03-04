@@ -50,6 +50,16 @@ output:
       description: Segmented and cleaned bundles
       pattern: "*.trk"
 
+  - mqc:
+      type: file
+      description: PNG file containing quality control image for all bundles. Made for use in MultiQC report.
+      pattern: "*_bundles_mosaic_mqc.png"
+
+  - global_mqc:
+      type: file
+      description: JSON file containing basic measurements of all bundles. Made for use in MultiQC report.
+      pattern: "*_bundles_stats_mqc.json"
+
   - versions:
       type: file
       description: File containing software versions
