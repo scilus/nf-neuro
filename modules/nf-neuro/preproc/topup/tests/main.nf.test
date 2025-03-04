@@ -41,7 +41,7 @@ nextflow_process {
                     file("\${test_data_directory}/sub-01_dir-PA_dwi.bval", checkIfExists: true),
                     file("\${test_data_directory}/sub-01_dir-PA_dwi.bvec", checkIfExists: true),
                     file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz", checkIfExists: true)]}
-                input[1] = []
+                input[1] = Channel.value('')
                 """
             }
         }
@@ -55,6 +55,8 @@ nextflow_process {
                     file(process.out.rev_b0_warped.get(0).get(1)).name,
                     process.out.rev_b0_mean,
                     process.out.b0_mean,
+                    file(process.out.mqc.get(0).get(1).get(0)).name,
+                    file(process.out.mqc.get(0).get(1).get(1)).name,
                     process.out.versions
                 ).match() }
             )
@@ -65,24 +67,45 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory
-                    .map{ test_data_directory -> [
-                    [ id:'test', single_end:false ], // meta map
-                    file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
-                    file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
-                    file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true),
-                    [],
-                    [],
-                    [],
-                    [],
-                    file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz", checkIfExists: true)]}
-                input[1] = []
+                input[0] = LOAD_DATA.out.test_data_directory.flatMap { test_data_directory ->
+                        [
+                            [
+                                [ id:'test1', single_end:false ],
+                                file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                                file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                                file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true),
+                                [],
+                                [],
+                                [],
+                                [],
+                                file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz", checkIfExists: true)
+                            ],
+                            [
+                                [ id:'test2', single_end:false ],
+                                file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz", checkIfExists: true),
+                                file("\${test_data_directory}/sub-01_dir-AP_dwi.bval", checkIfExists: true),
+                                file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec", checkIfExists: true),
+                                [],
+                                [],
+                                [],
+                                [],
+                                file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz", checkIfExists: true)
+                            ]
+                        ]
+                    }
+                input[1] = Channel.value('')
                 """
             }
         }
         then {
             assertAll(
                 { assert process.success },
+                { assert process.out.topup_corrected_b0s.size() == 2 },
+                { assert process.out.topup_fieldcoef.size() == 2 },
+                { assert process.out.topup_movpart.size() == 2 },
+                { assert process.out.rev_b0_warped.size() == 2 },
+                { assert process.out.rev_b0_mean.size() == 2 },
+                { assert process.out.b0_mean.size() == 2 },
                 { assert snapshot(
                     file(process.out.topup_corrected_b0s.get(0).get(1)).name,
                     file(process.out.topup_fieldcoef.get(0).get(1)).name,
@@ -90,6 +113,8 @@ nextflow_process {
                     file(process.out.rev_b0_warped.get(0).get(1)).name,
                     process.out.rev_b0_mean,
                     process.out.b0_mean,
+                    file(process.out.mqc.get(0).get(1).get(0)).name,
+                    file(process.out.mqc.get(0).get(1).get(1)).name,
                     process.out.versions
                 ).match() }
             )
@@ -112,7 +137,7 @@ nextflow_process {
                     file("\${test_data_directory}/sub-01_dir-PA_dwi.bval", checkIfExists: true),
                     file("\${test_data_directory}/sub-01_dir-PA_dwi.bvec", checkIfExists: true),
                     file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz", checkIfExists: true)]}
-                input[1] = []
+                input[1] = Channel.value('')
                 """
             }
         }

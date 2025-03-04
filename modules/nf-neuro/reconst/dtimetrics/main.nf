@@ -4,8 +4,8 @@ process RECONST_DTIMETRICS {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        'https://scil.usherbrooke.ca/containers/scilus_latest.sif':
+        'scilus/scilus:latest' }"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(b0mask)
@@ -38,6 +38,7 @@ process RECONST_DTIMETRICS {
         tuple val(meta), path("*__residual_q3_residuals.npy")      , emit: residual_q3_residuals, optional: true
         tuple val(meta), path("*__residual_residuals_stats.png")   , emit: residual_residuals_stats, optional: true
         tuple val(meta), path("*__residual_std_residuals.npy")     , emit: residual_std_residuals, optional: true
+        tuple val(meta), path("*__dti_mqc.png")                    , emit: mqc   , optional: true
         path "versions.yml"                                        , emit: versions
 
     when:
@@ -81,20 +82,32 @@ process RECONST_DTIMETRICS {
     scil_dti_metrics.py dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells \
         --not_all $args $b0_threshold -f
 
-    if [ "$run_qc" = true ] && [ "$args" != ''];
+    if [ "$run_qc" = true ] && [ "$args" != '' ];
     then
-        nii_files=$(echo $args | awk '{skip = 0;
-            for (i = 1; i <= NF; i++) {
-                if (\$i == "--mask") { skip = 1; continue; }
-                if (\$i == "--evecs") { skip = 1; continue; }
-                if (\$i == "--evals") { skip = 1; continue; }
-                if (skip == 1) { skip = 0; continue; }
-                if (\$i ~ /\.nii\.gz$/) print \$i;
-                }}')
+        nii_files=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(fa|ad|rd|md|rgb|residual)\$/) print \$(i+1)}')
 
         # Viz 3D images + RGB
-        for image in $\nii_files;
+        for image in \${nii_files};
         do
+            dim=\$(mrinfo \${image} -ndim)
+            extract_dim=\$(mrinfo \${image} -size)
+            if [ "\$dim" == 3 ];
+            then
+                read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
+            elif [ "\$dim" == 4 ];
+            then
+                read sagittal_dim coronal_dim axial_dim forth_dim <<< "\${extract_dim}"
+            fi
+
+            # Get the middle slice
+            coronal_dim=\$((\$coronal_dim / 2))
+            axial_dim=\$((\$axial_dim / 2))
+            sagittal_dim=\$((\$sagittal_dim / 2))
+
+            echo \$coronal_dim
+            echo \$axial_dim
+            echo \$sagittal_dim
+
             image=\${image/${prefix}__/}
             image=\${image/.nii.gz/}
             viz_params="--display_slice_number --display_lr --size 256 256"
@@ -104,13 +117,11 @@ process RECONST_DTIMETRICS {
 
             convert +append ${prefix}__\${image}_coronal_slice_\${coronal_dim}.png \
                     ${prefix}__\${image}_axial_slice_\${axial_dim}.png  \
-                    ${prefix}__\${image}_sagittal_slice_\${sagittal_dim}.png
+                    ${prefix}__\${image}_sagittal_slice_\${sagittal_dim}.png \
+                    ${prefix}__\${image}.png
 
             convert -annotate +20+230 "\${image}" -fill white -pointsize 30 ${prefix}__\${image}.png ${prefix}__\${image}.png
         done
-
-        # Viz peaks
-        # TODO
 
         rm -rf *slice*
         convert +append *png ${prefix}__dti_mqc.png
@@ -124,7 +135,6 @@ process RECONST_DTIMETRICS {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """

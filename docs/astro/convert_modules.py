@@ -76,14 +76,18 @@ def convert_module_to_md(yaml_data):
 
     # Table for params.
     try:
-        params = "|  | Type | Description | Default |\n"
-        params += "|-------|------|-------------|---------|\n"
-        for param in yaml_data['parameters']:
+        params = "|  | Type | Description | Choices | Default |\n"
+        params += "|-------|------|-------------|---------|---------|\n"
+        for param in yaml_data['args']:
             name = next(iter(param))
             param_type = param[name]['type'].replace("\n", " ")
             description = param[name]['description'].replace("\n", " ")
+            try:
+                choices = param[name]['choices'].replace("\n", " ")
+            except KeyError:
+                choices = ""
             default = param[name]['default']
-            params += f"| {name} | {param_type} | {description} | {default} |\n"
+            params += f"| {name} | {param_type} | {description} | {choices} | {default} |\n"
     except KeyError:
         params = ""
 
@@ -108,7 +112,7 @@ def convert_module_to_md(yaml_data):
     final_md += f"## Module: {module_name}\n\n{yaml_data['description']}\n\n"
     final_md += f"### Inputs\n\n{inputs}\n"
     if params != "":
-        final_md += f"### Parameters\n\n{params}\n"
+        final_md += f"### Arguments\n\n{params}\n"
     final_md += f"### Outputs\n\n{outputs}\n"
     final_md += f"### Tools\n\n{tools}\n"
     final_md += f"### Keywords\n\n{keywords}\n"

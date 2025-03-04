@@ -48,7 +48,7 @@
                     {
                         "id": "test"
                     },
-                    "test__residual_mean_residuals.npy:md5,8a3c812ebbfc15b5242918d287659bf0"
+                    "test__residual_mean_residuals.npy:md5,5429f2a46c9b14efa47278c7cdb32b3c"
                 ]
             ],
             [
@@ -80,7 +80,7 @@
                     {
                         "id": "test"
                     },
-                    "test__residual_std_residuals.npy:md5,15fac15e7543f321a7d3a451e45563c5"
+                    "test__residual_std_residuals.npy:md5,0d41ba9ad5d2ac4543f957a1d84c187f"
                 ]
             ],
             [
@@ -88,9 +88,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-08-30T20:12:52.390001"
+        "timestamp": "2025-03-03T18:40:14.232573173"
     }
 }
