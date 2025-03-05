@@ -1,6 +1,6 @@
 ---
-name: "stats_imageinroi"
-description: Module to Compute the statistics (mean, std) of scalar maps, which can represent diffusion metrics, in ROIs or labels.
+name: "stats_metricsinroi"
+description: Module to compute statistics (mean, std) of scalar maps (metrics), which can represent diffusion metrics, in ROIs or labels.
 keywords:
   - nifti
   - volume
@@ -19,14 +19,14 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
 
-  - images:
-      type: files
-      description: Metrics
+  - metrics:
+      type: file
+      description: Metrics volume(s) in Nifti
       pattern: "*.{nii,nii.gz}"
 
   - rois:
-      type: files
-      description: ROI volume in Nifti
+      type: file
+      description: ROI or Label volume(s) in Nifti
       pattern: "*.{nii,nii.gz}"
 
   - rois_lut:

@@ -1,13 +1,13 @@
 nextflow_process {
 
-    name "Test Process STATS_IMAGEINROI"
+    name "Test Process STATS_METRICSINROI"
     script "../main.nf"
-    process "STATS_IMAGEINROI"
+    process "STATS_METRICSINROI"
 
     tag "modules"
     tag "modules_nfcore"
     tag "stats"
-    tag "stats/imageinroi"
+    tag "stats/metricsinroi"
 
     tag "subworkflows"
     tag "subworkflows/load_test_data"
