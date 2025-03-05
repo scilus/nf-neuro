@@ -5,7 +5,7 @@ nextflow_process {
     process "PREPROC_NORMALIZE"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "preproc"
     tag "preproc/normalize"
 
