@@ -5,7 +5,7 @@ nextflow_process {
     process "BUNDLE_STATS"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "bundle"
     tag "bundle/stats"
 
