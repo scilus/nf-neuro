@@ -10,9 +10,9 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     tuple val(meta), path(image), path(reference), path(warp), path(affine)
 
     output:
-    tuple val(meta), path("*__warped.nii.gz")       , emit: warped_image
-    tuple val(meta), path("*__registration_mqc.gif"), emit: mqc, optional: true
-    path "versions.yml"                             , emit: versions
+    tuple val(meta), path("*__warped.nii.gz")                           , emit: warped_image
+    tuple val(meta), path("*_registration_antsapplytransforms_mqc.gif") , emit: mqc, optional: true
+    path "versions.yml"                                                 , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -20,6 +20,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "warped"
+    def suffix_qc = task.ext.suffix_qc ? "${task.ext.first_suffix}" : "T1_to_DWI"
 
     def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : ""
     def image_type = task.ext.image_type ? "-e " + task.ext.image_type : ""
@@ -82,7 +83,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
         # Create GIF.
         convert -delay 10 -loop 0 -morph 10 \
             warped_mosaic.png reference_mosaic.png warped_mosaic.png \
-            ${prefix}_registration_antsapplytransforms_mqc.gif
+            ${prefix}_${suffix_qc}_registration_antsapplytransforms_mqc.gif
         # Clean up.
         rm *_mosaic.png
     fi

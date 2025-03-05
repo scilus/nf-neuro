@@ -16,7 +16,7 @@ process REGISTRATION_ANTS {
     tuple val(meta), path("*__output1GenericAffine.mat")            , emit: affine
     tuple val(meta), path("*__output1InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
     tuple val(meta), path("*__output0InverseAffine.mat")            , emit: inverse_affine
-    tuple val(meta), path("*__registration_mqc.gif")                , emit: mqc, optional: true
+    tuple val(meta), path("*_registration_ants_mqc.gif")            , emit: mqc, optional: true
     path "versions.yml"                                             , emit: versions
 
     when:
@@ -25,6 +25,7 @@ process REGISTRATION_ANTS {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def suffix_qc = task.ext.suffix_qc ? "${task.ext.first_suffix}" : "T1_to_DWI"
     def ants = task.ext.quick ? "antsRegistrationSyNQuick.sh " :  "antsRegistrationSyN.sh "
     def dimension = task.ext.dimension ? "-d " + task.ext.dimension : "-d 3"
     def transform = task.ext.transform ? task.ext.transform : "s"
@@ -102,7 +103,7 @@ process REGISTRATION_ANTS {
         # Create GIF.
         convert -delay 10 -loop 0 -morph 10 \
             warped_mosaic.png fixedimage_mosaic.png warped_mosaic.png \
-            ${prefix}_registration_ants_mqc.gif
+            ${prefix}_${suffix_qc}_registration_ants_mqc.gif
         # Clean up.
         rm *_mosaic.png
     fi
