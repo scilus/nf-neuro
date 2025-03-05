@@ -5,7 +5,7 @@ nextflow_process {
     process "IO_NII2DCM"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "io"
     tag "io/nii2dcm"
 
