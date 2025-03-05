@@ -16,7 +16,7 @@ nextflow_workflow {
     tag "subworkflows/preproc_t1"
     tag "subworkflows/registration"
 
-    tag "reconst/dtimetrics"
+    // tag "reconst/dtimetrics"
     tag "reconst/frf"
     tag "reconst/fodf"
     tag "reconst/meanfrf"

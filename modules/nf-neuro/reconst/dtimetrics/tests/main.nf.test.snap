@@ -1,16 +1,28 @@
 {
+    "reconst - stub-run dtimetrics": {
+        "content": [
+            [
+                "versions.yml:md5,c7a6b86e604d3b25340611cec27c758a"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-03-05T20:49:41.358186502"
+    },
     "reconst - dtimetrics_with_b0mask": {
         "content": [
             "test__fa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,cd80bf54bc8529c97cb042d49c50d4fc",
             [
-                "versions.yml:md5,609a8b62c7dc862692683ec5860ba677"
+                "versions.yml:md5,76869f1b7075822c64ec0ff67408144a"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-08-30T19:56:40.272861"
+        "timestamp": "2025-03-05T20:49:29.990128956"
     },
     "reconst - dtimetrics": {
         "content": [
@@ -83,15 +95,15 @@
                     "test__residual_std_residuals.npy:md5,0d41ba9ad5d2ac4543f957a1d84c187f"
                 ]
             ],
-            "test__dti_mqc.png",
+            "test__dti_mqc.png:md5,9703e19ff15cf35ee8d6b5b8830fc913",
             [
-                "versions.yml:md5,609a8b62c7dc862692683ec5860ba677"
+                "versions.yml:md5,76869f1b7075822c64ec0ff67408144a"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-03-04T20:18:25.931127752"
+        "timestamp": "2025-03-05T20:49:06.500589229"
     }
 }

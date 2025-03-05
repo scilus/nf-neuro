@@ -73,8 +73,14 @@ custom_data:
     file_format: "gif"
     section_name: "DTI QC"
     description: |
-      This section contains QC images for DTI reconstruction, which is used to validate the derivatives metrics from the DTI reconstruction.
-
+      This section contains QC images for diffusion tensor imaging
+      (DTI) metric maps, including fractional anisotropy (FA), mean diffusivity (MD),
+      RGB FA. To assess the quality of the DTI metrics, ensure that FA highlights major
+      white matter tracts with expected high values (e.g., corpus callosum,
+      corticospinal tract) and that MD, RGB FA values follow known
+      anatomical distributions. Take a special look at the residuals to see if the
+      DTI fit reflects the raw DWI signal (High values mean poor DTI fitting, normal for
+      the ventricles but not for corpus callosum)
 sp:
   topup_qc:
     fn: "*_b0_topup_mqc.gif"

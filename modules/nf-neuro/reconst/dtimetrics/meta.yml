@@ -58,7 +58,7 @@ args:
   - dti_shells:
       type: string
       description: "List of b-values to use for the DTI computation."
-      default: "0,1000"
+      default: "0 1000"
   - b0mask:
       type: boolean
       description: "Use the b0 mask to mask the input image."
