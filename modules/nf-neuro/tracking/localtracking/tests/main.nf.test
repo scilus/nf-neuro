@@ -5,7 +5,7 @@ nextflow_process {
     process "TRACKING_LOCALTRACKING"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "tracking"
     tag "tracking/localtracking"
 
