@@ -4,7 +4,7 @@ process SEGMENTATION_FASTSURFER {
 
     container "${ 'deepmi/fastsurfer:cpu-v2.4.2' }"
     containerOptions {
-        (workflow.containerEngine == 'docker') ? '--entrypoint ""' : ''
+        (workflow.containerEngine == 'docker') ? '--entrypoint "" --user $(id -u):$(id -g)' : ''
     }
 
     input:
