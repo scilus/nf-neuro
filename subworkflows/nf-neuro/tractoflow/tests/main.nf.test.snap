@@ -3,7 +3,7 @@
         "content": [
             "test_dwi_resampled.nii.gz",
             "test__dwi_eddy_corrected.bval:md5,7995daabbd74fcf7c365a39a779f67e9",
-            "test__dwi_eddy_corrected.bvec:md5,9c026dff36fb234cb1b00bc5a229182d",
+            "test__dwi_eddy_corrected.bvec:md5,c6b66cb6479dd2b510080c0eec60d7bc",
             "test__t1_warped.nii.gz",
             "test__mask_wm.nii.gz",
             "test__mask_gm.nii.gz",
