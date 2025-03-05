@@ -12,13 +12,25 @@
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_b0_registration_antsapplytransforms_mqc.gif:md5,2e97314c320a27e4271c960c50895dfb"
+                    ]
                 ],
                 "2": [
                     "versions.yml:md5,3414a40c02551052589b50e4eb35a3da"
                 ],
                 "mqc": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_b0_registration_antsapplytransforms_mqc.gif:md5,2e97314c320a27e4271c960c50895dfb"
+                    ]
                 ],
                 "versions": [
                     "versions.yml:md5,3414a40c02551052589b50e4eb35a3da"
@@ -38,7 +50,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-23T17:44:33.199562691"
+        "timestamp": "2025-03-05T09:09:49.707336582"
     },
     "registration - antsapplytransforms - stub-run": {
         "content": [
