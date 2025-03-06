@@ -25,7 +25,7 @@ process REGISTRATION_ANTS {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix_qc = task.ext.suffix_qc ? "${task.ext.first_suffix}" : "T1_to_DWI"
+    def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
     def ants = task.ext.quick ? "antsRegistrationSyNQuick.sh " :  "antsRegistrationSyN.sh "
     def dimension = task.ext.dimension ? "-d " + task.ext.dimension : "-d 3"
     def transform = task.ext.transform ? task.ext.transform : "s"

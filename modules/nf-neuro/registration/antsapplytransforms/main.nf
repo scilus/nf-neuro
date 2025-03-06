@@ -20,7 +20,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "warped"
-    def suffix_qc = task.ext.suffix_qc ? "${task.ext.first_suffix}" : "T1_to_DWI"
+    def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
 
     def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : ""
     def image_type = task.ext.image_type ? "-e " + task.ext.image_type : ""

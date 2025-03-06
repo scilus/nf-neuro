@@ -150,7 +150,7 @@
                         {
                             "id": "test"
                         },
-                        "test_null_registration_ants_mqc.gif:md5,ebf58acb9c3f3b9bc8c5a08105d4ceff"
+                        "test_T1_to_DWI_registration_ants_mqc.gif:md5,ebf58acb9c3f3b9bc8c5a08105d4ceff"
                     ]
                 ],
                 "6": [
@@ -193,7 +193,7 @@
                         {
                             "id": "test"
                         },
-                        "test_null_registration_ants_mqc.gif:md5,ebf58acb9c3f3b9bc8c5a08105d4ceff"
+                        "test_T1_to_DWI_registration_ants_mqc.gif:md5,ebf58acb9c3f3b9bc8c5a08105d4ceff"
                     ]
                 ],
                 "versions": [
@@ -213,7 +213,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-03-05T08:46:48.18737067"
+        "timestamp": "2025-03-06T16:44:46.474693596"
     },
     "registration - ants - options": {
         "content": [
@@ -253,7 +253,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_DWI_registration_ants_mqc.gif:md5,23a92899290210c2fed8dbd9ed6b946b"
+                        "test__registration_ants_mqc.gif:md5,23a92899290210c2fed8dbd9ed6b946b"
                     ]
                 ],
                 "6": [
@@ -291,7 +291,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_DWI_registration_ants_mqc.gif:md5,23a92899290210c2fed8dbd9ed6b946b"
+                        "test__registration_ants_mqc.gif:md5,23a92899290210c2fed8dbd9ed6b946b"
                     ]
                 ],
                 "versions": [
@@ -306,7 +306,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-03-05T08:47:03.277751587"
+        "timestamp": "2025-03-06T16:44:58.966002773"
     },
     "registration - ants - stub": {
         "content": [
