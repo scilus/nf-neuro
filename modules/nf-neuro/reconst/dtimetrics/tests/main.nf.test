@@ -58,6 +58,7 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     niftiMD5SUM(process.out.ad.get(0).get(1), 6),
+                    file(process.out.mqc.get(0).get(1)).name,
                     file(process.out.evecs.get(0).get(1)).name,
                     file(process.out.evecs_v1.get(0).get(1)).name,
                     file(process.out.evecs_v2.get(0).get(1)).name,
@@ -84,7 +85,6 @@ nextflow_process {
                     process.out.residual_q3_residuals,
                     process.out.residual_residuals_stats,
                     process.out.residual_std_residuals,
-                    file(process.out.mqc.get(0).get(1)).name,
                     process.out.versions
                 ).match() }
             )
