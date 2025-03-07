@@ -28,9 +28,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-10-25T14:12:29.150266819"
+        "timestamp": "2025-03-06T16:52:24.923573494"
     },
     "registration - antsRegistration": {
         "content": [
@@ -167,7 +167,7 @@
 
                 ],
                 "6": [
-                    "versions.yml:md5,96376b8bc28640eef565e7f1e258dbb2"
+                    "versions.yml:md5,b39c35bdc0e79c6a3595616e01e37a72"
                 ],
                 "image_warped": [
                     [
@@ -208,14 +208,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,96376b8bc28640eef565e7f1e258dbb2"
+                    "versions.yml:md5,b39c35bdc0e79c6a3595616e01e37a72"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-16T17:32:06.600864666"
+        "timestamp": "2025-02-24T07:57:27.223538265"
     }
 }
