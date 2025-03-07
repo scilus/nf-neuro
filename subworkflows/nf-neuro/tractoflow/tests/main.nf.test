@@ -94,7 +94,7 @@ nextflow_workflow {
                                                                                                     // IN DIFFUSION SPACE
                         file(workflow.out.dwi.get(0).get(1)).name,                                  //  dwi
                         workflow.out.dwi.get(0).get(2),                                             //  bval
-                        workflow.out.dwi.get(0).get(3),                                             //  bvec
+                        file(workflow.out.dwi.get(0).get(3)).name,                                  //  bvec
                         file(workflow.out.t1.get(0).get(1)).name,                                   //  t1
                         file(workflow.out.wm_mask.get(0).get(1)).name,                              //  wm_mask
                         file(workflow.out.gm_mask.get(0).get(1)).name,                              //  gm_mask
