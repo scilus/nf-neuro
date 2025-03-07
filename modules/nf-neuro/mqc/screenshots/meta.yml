@@ -1,0 +1,56 @@
+---
+name: "mqc_screenshots"
+description: generates quality control (QC) screenshots for warped and reference MRI volumes.
+  It extracts middle slices (sagittal, coronal, and axial views) from both volumes,creates
+  annotated mosaics, and combines them into an animated GIF for quick visual comparison.
+keywords:
+  - mqc
+  - Visualisation
+  - gif
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+  - "MRtrix3":
+      description: "MRtrix3 is a software package for various types of diffusion imaging data, including diffusion-weighted, diffusion-tensor, and q-ball imaging."
+      homepage: "https://www.mrtrix.org/"
+  - "imagemagick":
+      description: "ImageMagick is a free, open-source software suite, used for editing and manipulating digital images."
+      homepage: "https://imagemagick.org/index.php"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - warped:
+      type: file
+      description: Warped image that has undergone spatial transformation, typically for alignment with the reference image.
+      pattern: "*.{nii,nii.gz}"
+
+  - reference:
+      type: file
+      description: reference image serves as the baseline image for comparison with the warped volume.
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - mqc_screenshots:
+      type: file
+      description: .gif file containing quality control image for visually compares the warped and reference MRI volumes using middle-slice mosaics.
+      pattern: "*_screenshots_merged_mqc.gif"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@ThoumyreStanislas"
