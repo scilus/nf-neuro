@@ -1,0 +1,111 @@
+nextflow_process {
+
+    name "Test Process RECONST_SHSIGNAL"
+    script "../main.nf"
+    process "RECONST_SHSIGNAL"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "reconst"
+    tag "reconst/shsignal"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "DWIss1000-dir32.zip", "segmentation.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("fit single shell signal") {
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+
+                ch_dwi = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/brainmask.nii.gz")
+                    ]
+                }
+                input[0] = ch_dwi
+                    .join(ch_mask)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.sh_signal.get(0).get(1), 6),
+                    process.out.versions
+                ).match() }
+            )
+        }
+
+    }
+
+    test("fit sh - stub") {
+
+        options "-stub-run"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+
+                ch_dwi = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/brainmask.nii.gz")
+                    ]
+                }
+                input[0] = ch_dwi
+                    .join(ch_mask)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
+}
