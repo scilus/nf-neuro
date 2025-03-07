@@ -41,16 +41,19 @@ args:
   - dwi_shell_tolerance:
       type: int
       description: Volumes with b-values that differ by this tolerance are considered of same weighting.
+      default: 20
   - b0_thr_extract_b0:
       type: int
       description: Volumes with b-values up to this threshold are considered b0 (unweighted).
       default: 10
   - shell_to_fit:
       type: int
-      description: Only use volumes with this b-value.
+      description: Only use volumes with this b-value. Required if input is multi-shell.
+      default: null
   - sh_order:
       type: int
       description: Truncate spherical harmonics coefficients to this order.
+      default: 4
   - sh_basis:
       type: string
       description: |
@@ -59,9 +62,11 @@ args:
           - tournier07
           - descoteaux07_legacy
           - tournier07_legacy
+      default: "descoteaux07_legacy"
   - smoothing:
-      type: int
+      type: float
       description: Regularization coefficient used for the spherical harmonics fit.
+      default: 0.006
   - attenuation_only:
       type: boolean
       description: If enabled, divide the weighted volumes by the b0 before fitting.
