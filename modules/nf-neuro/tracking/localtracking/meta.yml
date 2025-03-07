@@ -59,6 +59,16 @@ output:
       description: Nifti tracking mask
       pattern: "*.{nii,nii.gz}"
 
+  - mqc:
+      type: file
+      description: PNG file containing quality control image for tracking. Made for use in MultiQC report.
+      pattern: "*local_tracking_mqc.png"
+
+  - global_mqc:
+      type: file
+      description: JSON file containing basic measurements of whole tractogram. Made for use in MultiQC report.
+      pattern: "*local_tracking_stats.json"
+
   - versions:
       type: file
       description: File containing software versions

@@ -2,7 +2,6 @@
 // PREPROCESSING
 include {   PREPROC_DWI                                               } from '../preproc_dwi/main'
 include {   PREPROC_T1                                                } from '../preproc_t1/main'
-include {   RECONST_DTIMETRICS as REGISTRATION_FA                     } from '../../../modules/nf-neuro/reconst/dtimetrics/main'
 include {   REGISTRATION as T1_REGISTRATION                           } from '../registration/main'
 include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_WMPARC      } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
 include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_APARC_ASEG  } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
