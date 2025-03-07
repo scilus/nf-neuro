@@ -2,9 +2,9 @@ process SEGMENTATION_FASTSURFER {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ 'deepmi/fastsurfer:cpu-v2.2.0' }"
+    container "${ 'deepmi/fastsurfer:cpu-v2.4.2' }"
     containerOptions {
-        (workflow.containerEngine == 'docker') ? '--entrypoint ""' : ''
+        (workflow.containerEngine == 'docker') ? '--entrypoint "" --user $(id -u):$(id -g)' : ''
     }
 
     input:
@@ -20,8 +20,14 @@ process SEGMENTATION_FASTSURFER {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def acq3T = task.ext.acq3T ? "--3T" : ""
+    def cerebnet = task.ext.cerebnet ? "" : "--no_cereb"
+    def hypvinn = task.ext.hypvinn ? "" : "--no_hypothal"
+    def seg_only = task.ext.seg_only ? "--seg_only" : ""
+
     def FASTSURFER_HOME = "/fastsurfer"
     def SUBJECTS_DIR = "${prefix}_fastsurfer"
+
+
     """
     mkdir ${prefix}_fastsurfer/
     $FASTSURFER_HOME/run_fastsurfer.sh  --allow_root \
@@ -29,8 +35,12 @@ process SEGMENTATION_FASTSURFER {
                                         --fs_license \$(realpath $fs_license) \
                                         --t1 \$(realpath ${anat}) \
                                         --sid ${prefix} \
-                                        --seg_only --py python3 \
-                                        ${acq3T}
+                                        --threads $task.cpus \
+                                        --py python3 \
+                                        $cerebnet \
+                                        $hypvinn \
+                                        $seg_only \
+                                        $acq3T
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -43,11 +53,17 @@ process SEGMENTATION_FASTSURFER {
     def FASTSURFER_HOME = "/fastsurfer"
 
     """
-    mkdir ${prefix}_fastsurfer/
+    mkdir -p ${prefix}__fastsurfer/${prefix}/mri/transforms \
+        ${prefix}__fastsurfer/${prefix}/label/ \
+        ${prefix}__fastsurfer/${prefix}/surf/ \
+        ${prefix}__fastsurfer/${prefix}/stats/ \
+        ${prefix}__fastsurfer/${prefix}/scripts/ \
+        ${prefix}__fastsurfer/${prefix}/tmp/ \
+        ${prefix}__fastsurfer/${prefix}/touch/
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fastersurfer: \$($FASTSURFER_HOME/run_fastsurfer.sh --version)
+        fastsurfer: \$($FASTSURFER_HOME/run_fastsurfer.sh --version)
     END_VERSIONS
 
     function handle_code () {

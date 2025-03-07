@@ -28,6 +28,26 @@ input:
       description: The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html. Optional. If you have already set your license as prescribed by Freesurfer (copied to a .license file in your $FREESURFER_HOME), this is not required.
       pattern: "*.txt"
 
+args:
+  - acq3T:
+      type: boolean
+      description: "Use this flag if the input T1w image was acquired at 3T."
+      default: false
+  - cerebnet:
+      type: boolean
+      description: "Use this flag to enable cerebellum sub-segmentation with CerebNet."
+      default: false
+  - hypvinn:
+      type: boolean
+      description: "Use this flag to enable hypothalamus sub-segmentation with HypVinn."
+      default: false
+  - seg_only:
+      type: boolean
+      description: |
+        Use this flag to only run the segmentation part of FastSurfer. If false, will also
+        run the surface reconstruction part (recon-surf).
+      default: true
+
 output:
   - meta:
       type: map

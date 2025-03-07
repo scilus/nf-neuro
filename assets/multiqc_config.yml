@@ -11,6 +11,8 @@ report_section_order:
     order: -600
   "anattodwi_qc":
     order: -400
+  "dti_qc":
+    order: -200
   software_versions:
     order: -1000
 
@@ -19,6 +21,8 @@ custom_content:
     - topup_qc
     - eddy_qc
     - anattodwi_qc
+    - dti_qc
+
 custom_data:
   eddy_qc:
     file_format: "gif"
@@ -65,6 +69,18 @@ custom_data:
       consider flagging this specific subject for further review.
     plot_type: "image"
 
+  dti_qc:
+    file_format: "gif"
+    section_name: "DTI QC"
+    description: |
+      This section contains QC images for diffusion tensor imaging
+      (DTI) metric maps, including fractional anisotropy (FA), mean diffusivity (MD),
+      RGB FA. To assess the quality of the DTI metrics, ensure that FA highlights major
+      white matter tracts with expected high values (e.g., corpus callosum,
+      corticospinal tract) and that MD, RGB FA values follow known
+      anatomical distributions. Take a special look at the residuals to see if the
+      DTI fit reflects the raw DWI signal (High values mean poor DTI fitting, normal for
+      the ventricles but not for corpus callosum)
 sp:
   topup_qc:
     fn: "*_b0_topup_mqc.gif"
@@ -72,6 +88,8 @@ sp:
     fn: "*_registration_anattodwi_mqc.gif"
   eddy_qc:
     fn: "*_dwi_eddy_mqc.gif"
+  dti_qc:
+    fn: "*_dti_mqc.png"
 
 export_plots: true
 
