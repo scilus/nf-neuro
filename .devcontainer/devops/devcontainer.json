@@ -41,16 +41,16 @@
             "type": "volume"
         },
         {
-            "target": "/tmp",
-            "type": "volume"
-        },
-        {
-            "source": "nf-neuro-profile",
-            "target": "/root",
+            "source": "nf-neuro-bash-history",
+            "target": "/commandhistory",
             "type": "volume"
         },
         {
             "target": "/root/.vscode-server",
+            "type": "volume"
+        },
+        {
+            "target": "/tmp",
             "type": "volume"
         }
     ],
