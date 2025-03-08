@@ -80,7 +80,7 @@ output:
         Channel containing the image transformation files. This channel contains the necessary transformation
         files (warp and affine) to perform the anatomical -> dwi space registration. Those files could be
         used in the future to bring anatomical labels into DWI space for connectomics.
-        Structure: [ val(meta), [ path(warp), <path(affine)> ] ]
+        Structure: [ val(meta), [ path(warp), path(affine) ] ]
       pattern: "*.{nii,nii.gz,mat}"
   - transfo_trk:
       type: file
@@ -88,7 +88,7 @@ output:
         Channel containing the tractogram transformation files. This channel contains the necessary transformation
         files (inverseAffine, inverseWarp) to perform the dwi -> anatomical space registration. Those files could
         be used to register tractograms or bundle in the subject's anatomical space.
-        Structure: [ val(meta), [ <path(inverseAffine)>, path(inverseWarp) ]
+        Structure: [ val(meta), [ path(inverseAffine), path(inverseWarp) ]
       pattern: "*.{nii,nii.gz,mat}"
   - ref_warped:
       type: file

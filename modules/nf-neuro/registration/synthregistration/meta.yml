@@ -40,7 +40,7 @@ output:
   - warped_image:
       type: file
       description: Warped image
-      pattern: "*.{nii,.nii.gz}"
+      pattern: "*.{nii,nii.gz}"
 
   - transfo_image:
       type: list
