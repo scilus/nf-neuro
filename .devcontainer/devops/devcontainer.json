@@ -19,7 +19,10 @@
     "features": {
         "ghcr.io/devcontainers/features/git:1": {},
         "ghcr.io/devcontainers/features/github-cli:1": {},
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "dockerDashComposeVersion": "none",
+            "installDockerComposeSwitch": false
+        },
         "ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {},
         "ghcr.io/robsyme/features/nextflow:1": {},
         "ghcr.io/devcontainers-contrib/features/curl-apt-get:1": {},
@@ -38,16 +41,16 @@
             "type": "volume"
         },
         {
-            "target": "/tmp",
-            "type": "volume"
-        },
-        {
-            "source": "nf-neuro-profile",
-            "target": "/root",
+            "source": "nf-neuro-bash-history",
+            "target": "/commandhistory",
             "type": "volume"
         },
         {
             "target": "/root/.vscode-server",
+            "type": "volume"
+        },
+        {
+            "target": "/tmp",
             "type": "volume"
         }
     ],
