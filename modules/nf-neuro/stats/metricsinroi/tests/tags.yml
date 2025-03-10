@@ -1,0 +1,2 @@
+stats/metricsinroi:
+  - "modules/nf-neuro/stats/metricsinroi/**"
