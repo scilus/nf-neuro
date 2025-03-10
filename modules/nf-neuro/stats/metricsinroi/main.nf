@@ -19,7 +19,7 @@ process STATS_METRICSINROI {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_stats" : "stats"
-    def bin = task.ext.voxel_size ? "--bin " : ""
+    def bin = task.ext.bin ? "--bin " : ""
     def normalize_weights = task.ext.volume_size ? "--normalize_weights " + task.ext.volume_size : ""
     def use_label = task.ext.use_label ? true : false
     """
@@ -29,7 +29,7 @@ process STATS_METRICSINROI {
 
     if $use_label;
     then
-        if [[ -f "$rois_lut" ]];
+        if [[ ! -f "$rois_lut" ]];
         then
             echo "ROI LUT is missing. Will fail."
         fi

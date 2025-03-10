@@ -1,4 +1,16 @@
 {
+    "stats - metrics in roi -stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-10T19:14:09.944680636"
+    },
     "stats - metrics in ROI": {
         "content": [
             {
@@ -12,7 +24,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,81a5337e74a88f32373c19c2dc4df665"
+                    "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
                 ],
                 "mqc": [
                     [
@@ -24,15 +36,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,81a5337e74a88f32373c19c2dc4df665"
+                    "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-05T19:47:20.930266206"
+        "timestamp": "2025-03-10T19:13:49.199187037"
     },
     "stats - metrics in Label": {
         "content": [
@@ -47,7 +59,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,81a5337e74a88f32373c19c2dc4df665"
+                    "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
                 ],
                 "mqc": [
                     [
@@ -59,26 +71,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,81a5337e74a88f32373c19c2dc4df665"
+                    "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-05T19:47:31.37502728"
-    },
-    "stats - metrics in roi -stub-run": {
-        "content": [
-            [
-                "versions.yml:md5,81a5337e74a88f32373c19c2dc4df665"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
-        },
-        "timestamp": "2025-03-05T20:04:33.487772482"
+        "timestamp": "2025-03-10T19:13:56.753945019"
     }
 }

@@ -16,6 +16,8 @@ process TRACKING_PFTTRACKING {
         tuple val(meta), path("*__map_include.nii.gz")          , emit: includes
         tuple val(meta), path("*__map_exclude.nii.gz")          , emit: excludes
         tuple val(meta), path("*__pft_seeding_mask.nii.gz")     , emit: seeding
+        tuple val(meta), path("*__pft_tracking_mqc.png")        , emit: mqc, optional: true
+        tuple val(meta), path("*__pft_tracking_stats.json")      , emit: global_mqc, optional: true
         path "versions.yml"                                     , emit: versions
 
     when:
@@ -43,6 +45,8 @@ process TRACKING_PFTTRACKING {
     def pft_front = task.ext.pft_front ? "--forward "  + task.ext.pft_front : ""
     def basis = task.ext.basis ? "--sh_basis "  + task.ext.basis : ""
 
+    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
+
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
@@ -53,29 +57,31 @@ process TRACKING_PFTTRACKING {
         --exclude ${prefix}__map_exclude.nii.gz \
         --interface ${prefix}__interface.nii.gz -f
 
+    cp $wm tmp_anat_qc.nii.gz
+
     if [ "${pft_seeding_mask}" == "wm" ]; then
-        scil_volume_math.py convert $wm ${prefix}__mask_wm.nii.gz \
+        scil_volume_math.py convert $wm ${prefix}__pft_seeding_mask.nii.gz \
             --data_type uint8 -f
-        scil_volume_math.py union ${prefix}__mask_wm.nii.gz \
-            ${prefix}__interface.nii.gz ${prefix}__pft_seeding_mask.nii.gz\
+        scil_volume_math.py union ${prefix}__pft_seeding_mask.nii.gz \
+            ${prefix}__interface.nii.gz ${prefix}__pft_seeding_mask.nii.gz \
             --data_type uint8 -f
 
     elif [ "${pft_seeding_mask}" == "interface" ]; then
         cp ${prefix}__interface.nii.gz ${prefix}__pft_seeding_mask.nii.gz
 
     elif [ "${pft_seeding_mask}" == "fa" ]; then
-        mrcalc $fa $pft_fa_threshold -ge ${prefix}__pft_seeding_mask.nii.gz\
+        mrcalc $fa $pft_fa_threshold -ge ${prefix}__pft_seeding_mask.nii.gz \
             -datatype uint8 -force
     fi
 
     scil_tracking_pft.py $fodf ${prefix}__pft_seeding_mask.nii.gz \
-        ${prefix}__map_include.nii.gz ${prefix}__map_exclude.nii.gz tmp.trk\
+        ${prefix}__map_include.nii.gz ${prefix}__map_exclude.nii.gz tmp.trk \
         $pft_algo $pft_seeding_type $pft_nbr_seeds \
-        $pft_random_seed $pft_step $pft_theta\
-        $pft_sfthres $pft_sfthres_init $pft_min_len $pft_max_len\
+        $pft_random_seed $pft_step $pft_theta \
+        $pft_sfthres $pft_sfthres_init $pft_min_len $pft_max_len \
         $pft_particles $pft_back $pft_front $compress $basis -f
 
-    scil_tractogram_remove_invalid.py tmp.trk ${prefix}__pft_tracking.trk\
+    scil_tractogram_remove_invalid.py tmp.trk ${prefix}__pft_tracking.trk \
         --remove_single_point -f
 
     cat <<-TRACKING_INFO > ${prefix}__pft_tracking_config.json
@@ -97,6 +103,14 @@ process TRACKING_PFTTRACKING {
     "forward": $task.ext.pft_front,
     "sh_basis": "${task.ext.basis}"}
     TRACKING_INFO
+
+    if $run_qc;
+    then
+        scil_viz_bundle_screenshot_mosaic.py tmp_anat_qc.nii.gz ${prefix}__pft_tracking.trk\
+            ${prefix}__pft_tracking_mqc.png --opacity_background 1 --light_screenshot
+        scil_tractogram_print_info.py ${prefix}__pft_tracking.trk >> ${prefix}__pft_tracking_stats.json
+    fi
+    rm -f tmp_anat_qc.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -120,6 +134,8 @@ process TRACKING_PFTTRACKING {
     touch ${prefix}__pft_seeding_mask.nii.gz
     touch ${prefix}__pft_tracking.trk
     touch ${prefix}__pft_tracking_config.json
+    touch ${prefix}__pft_tracking_mqc.png
+    touch ${prefix}__pft_tracking_stats.json
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

@@ -59,6 +59,11 @@ output:
       description: Tuple, Transformation files to warp trk (nii InverseWarp, mat file)
       pattern: "*.{nii,nii.gz,mat}"
 
+  - mqc:
+      type: file
+      description: .gif file containing quality control image for the registration process. Made for use in MultiQC report.
+      pattern: "*.gif"
+
   - versions:
       type: file
       description: File containing software versions
