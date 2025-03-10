@@ -1,0 +1,115 @@
+{
+    "reconst - stub-run": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__gfa.nii.gz"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__peaks.nii.gz"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__peak_indices.nii.gz"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__sh.nii.gz"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__nufo.nii.gz"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__a_power.nii.gz"
+                    ]
+                ],
+                "6": [
+                    "versions.yml:md5,ed8e825c5eccf94551ba3af620020a94"
+                ],
+                "a_power": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__a_power.nii.gz"
+                    ]
+                ],
+                "gfa": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__gfa.nii.gz"
+                    ]
+                ],
+                "nufo": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__nufo.nii.gz"
+                    ]
+                ],
+                "peak_indices": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__peak_indices.nii.gz"
+                    ]
+                ],
+                "peaks": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__peaks.nii.gz"
+                    ]
+                ],
+                "sh": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspaces/nf-neuro/tests/.runs/tests/738f74515d0739ddd47874c7107fec42/work/1c/69722101bf73f201b5518371bb0ecc/test__sh.nii.gz"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ed8e825c5eccf94551ba3af620020a94"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-02-27T14:46:54.341368697"
+    }
+}
