@@ -1,0 +1,107 @@
+{
+    "mqc - stub-run": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_screenshots_merged_mqc.gif:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,93fa32d6ca38c03b1a1e7ef0574fd336"
+                ],
+                "mqc_screenshots": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_screenshots_merged_mqc.gif:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,93fa32d6ca38c03b1a1e7ef0574fd336"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-25T09:46:57.512695423"
+    },
+    "mqc - option": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_T1_to_mask_screenshots_merged_mqc.gif:md5,c889120c9d0dbbba53d71e64ec68e06e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,93fa32d6ca38c03b1a1e7ef0574fd336"
+                ],
+                "mqc_screenshots": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_T1_to_mask_screenshots_merged_mqc.gif:md5,c889120c9d0dbbba53d71e64ec68e06e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,93fa32d6ca38c03b1a1e7ef0574fd336"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-03-11T13:44:06.355497148"
+    },
+    "mqc - classic": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__screenshots_merged_mqc.gif:md5,a497338c8b1577c61a424eb778da7897"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,93fa32d6ca38c03b1a1e7ef0574fd336"
+                ],
+                "mqc_screenshots": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__screenshots_merged_mqc.gif:md5,a497338c8b1577c61a424eb778da7897"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,93fa32d6ca38c03b1a1e7ef0574fd336"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-03-11T13:43:55.774873485"
+    }
+}
