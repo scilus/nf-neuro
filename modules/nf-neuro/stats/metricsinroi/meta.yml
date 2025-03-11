@@ -1,0 +1,75 @@
+---
+name: "stats_metricsinroi"
+description: Module to compute statistics (mean, std) of scalar maps (metrics), which can represent diffusion metrics, in ROIs or labels.
+keywords:
+  - nifti
+  - volume
+  - scilpy
+  - stats
+  - rois
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+  - metrics:
+      type: file
+      description: Metrics volume(s) in Nifti
+      pattern: "*.{nii,nii.gz}"
+  - rois:
+      type: file
+      description: ROI or Label volume(s) in Nifti
+      pattern: "*.{nii,nii.gz}"
+  - rois_lut:
+      type: file
+      description: LUT file corresponding to labels, used to name the regions of interest
+      pattern: "*.{nii,nii.gz}"
+
+args:
+  - suffix:
+      type: string
+      description: It will add an extra string before "_stats.json"
+      default: ""
+  - bin:
+      type: boolean
+      description: |
+        If set, will consider every value of the mask higherthan 0 to be
+        part of the mask (equivalent weighting for every voxel).
+        It will be used if use_label is false.
+      default: false
+  - normalize_weights:
+      type: boolean
+      description: |
+        If set, the weights will be normalized to the [0,1] range.
+        It will be used if use_label is false.
+      default: false
+  - use_label:
+      type: boolean
+      description: If set, rois image will be considered as a label image with multiple indices.
+      default: false
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - mqc:
+      type: file
+      description: JSON file containing mean/std per pair of roi/metrics or label/metrics
+      pattern: "*__stats.json"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@arnaudbore"
