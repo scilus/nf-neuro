@@ -1,6 +1,6 @@
 ---
 name: "mqc_screenshots"
-description: generates quality control (QC) screenshots for warped and reference MRI volumes.
+description: generates quality control (QC) screenshots for for two images by comparing one to the other.
   It extracts middle slices (sagittal, coronal, and axial views) from both volumes,creates
   annotated mosaics, and combines them into an animated GIF for quick visual comparison.
 keywords:
@@ -34,6 +34,24 @@ input:
       type: file
       description: reference image serves as the baseline image for comparison with the warped volume.
       pattern: "*.{nii,nii.gz}"
+
+args:
+- title_image1:
+      type: string
+      description: name given to the first image
+
+- title_image2:
+      type: string
+      description: name given to the second image
+
+- suffix_qc:
+      type: string
+      description: suffix given to final image
+
+- fourth_dim:
+      type: boolean
+      default: false
+      description: set to true if your input volumes contain a fourth dimension
 
 output:
   - meta:

@@ -7,7 +7,7 @@ process MQC_SCREENSHOTS {
         "scilus/scilus:latest"}"
 
     input:
-    tuple val(meta), path(warped), path(reference)
+    tuple val(meta), path(image1), path(image2)
 
     output:
     tuple val(meta), path("*_screenshots_merged_mqc.gif"), emit: mqc_screenshots
@@ -17,18 +17,17 @@ process MQC_SCREENSHOTS {
     task.ext.when == null || task.ext.when
 
     script:
-    def fourth_dim = task.ext.fourth_dim ? task.ext.fourth_dim : false
-    def title_warped = task.ext.title_warped ? task.ext.title_warped : "Warped T1"
-    def title_ref = task.ext.title_ref ? task.ext.title_ref : "Reference"
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def title_image1 = task.ext.title_image1 ? task.ext.title_image1 : "image1"
+    def title_image2 = task.ext.title_image2 ? task.ext.title_image2 : "image2"
+    def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
+    def fourth_dim = task.ext.fourth_dim ? task.ext.fourth_dim : false
+
 
 
     """
-    mv $reference reference.nii.gz
-    mv $warped warped.nii.gz
-
     # Get the middle slice.
-    extract_dim=\$(mrinfo reference.nii.gz -size)
+    extract_dim=\$(mrinfo $image2 -size)
     if $fourth_dim
     then
         read sagittal_dim coronal_dim axial_dim fourth_dim <<< "\${extract_dim}"
@@ -42,34 +41,35 @@ process MQC_SCREENSHOTS {
     # Set viz params.
     viz_params="--display_slice_number --display_lr --size 256 256"
 
-    # Iterate over images.
-    for image in reference warped;
+    for image in $image1 $image2;
     do
-        scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+        basename=\$(basename \$image .nii.gz)
+        scil_viz_volume_screenshot.py \$image \${basename}_coronal.png \
             --slices \$coronal_dim --axis coronal \$viz_params
-        scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+        scil_viz_volume_screenshot.py \$image \${basename}_sagittal.png \
             --slices \$sagittal_dim --axis sagittal \$viz_params
-        scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+        scil_viz_volume_screenshot.py \$image \${basename}_axial.png \
             --slices \$axial_dim --axis axial \$viz_params
-        if [ \$image = reference ];
+        if [ \$image = $image1 ];
         then
-            title="$title_ref"
+            title="$title_image1"
         else
-            title="$title_warped"
+            title="$title_image2"
         fi
-        convert +append \${image}_coronal*.png \${image}_axial*.png \
-            \${image}_sagittal*.png \${image}_mosaic.png
+        convert +append \${basename}_coronal*.png \${basename}_axial*.png \
+            \${basename}_sagittal*.png \${basename}_mosaic.png
         convert -annotate +20+230 "\${title}" -fill white -pointsize 30 \
-            \${image}_mosaic.png \${image}_mosaic.png
-
+            \${basename}_mosaic.png \${basename}_mosaic.png
         # Clean up.
-        rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
+        rm \${basename}_coronal*.png \${basename}_sagittal*.png \${basename}_axial*.png
     done
 
     # Create GIF.
+    image1=\$(basename $image1 .nii.gz)
+    image2=\$(basename $image2 .nii.gz)
     convert -delay 10 -loop 0 -morph 10 \
-        warped_mosaic.png reference_mosaic.png warped_mosaic.png \
-        ${prefix}_screenshots_merged_mqc.gif
+        \${image1}_mosaic.png \${image2}_mosaic.png \
+        ${prefix}_${suffix_qc}_screenshots_merged_mqc.gif
 
     # Clean up.
     rm *_mosaic.png
