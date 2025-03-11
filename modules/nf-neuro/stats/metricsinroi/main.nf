@@ -20,7 +20,7 @@ process STATS_METRICSINROI {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_stats" : "stats"
     def bin = task.ext.bin ? "--bin " : ""
-    def normalize_weights = task.ext.volume_size ? "--normalize_weights " + task.ext.volume_size : ""
+    def normalize_weights = task.ext.normalize_weights ? "--normalize_weights " : ""
     def use_label = task.ext.use_label ? true : false
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
