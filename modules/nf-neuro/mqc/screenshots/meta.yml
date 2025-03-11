@@ -25,30 +25,30 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
 
-  - warped:
+  - image1:
       type: file
-      description: Warped image that has undergone spatial transformation, typically for alignment with the reference image.
+      description: first image to be analysed, typically for alignment with the seconde image.
       pattern: "*.{nii,nii.gz}"
 
-  - reference:
+  - image2:
       type: file
-      description: reference image serves as the baseline image for comparison with the warped volume.
+      description: seconde image to be analysed.
       pattern: "*.{nii,nii.gz}"
 
 args:
-- title_image1:
+  - title_image1:
       type: string
       description: name given to the first image
 
-- title_image2:
+  - title_image2:
       type: string
       description: name given to the second image
 
-- suffix_qc:
+  - suffix_qc:
       type: string
       description: suffix given to final image
 
-- fourth_dim:
+  - fourth_dim:
       type: boolean
       default: false
       description: set to true if your input volumes contain a fourth dimension
