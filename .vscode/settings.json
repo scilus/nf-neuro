@@ -27,7 +27,7 @@
         ".venv",
         ".nextflow",
         "node_modules",
-        ".tests/runs"
+        "tests/.runs"
     ],
     "cSpell.ignorePaths": [
         "package-lock.json",
@@ -38,5 +38,7 @@
         ".vscode-insiders",
         ".venv",
         "tests/.runs"
-    ]
+    ],
+    "nextflow.formatting.harshilAlignment": true,
+    "nextflow.debug": true
 }
