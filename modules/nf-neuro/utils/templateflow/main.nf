@@ -6,61 +6,31 @@ process UTILS_TEMPLATEFLOW {
     container "${ 'community.wave.seqera.io/library/pip_templateflow:2f726c524c63271e' }"
 
     input:
-        tuple val(template), val(resolution), val(suffix)
+        tuple val(template)
 
     output:
-    path("*.nii.gz")              , emit: templates
-    path "versions.yml"           , emit: versions
+        path("tpl-${template}")             , emit: folder
+        path("${template}_metadata.json")   , emit: metadata
+        path("${template}_citations.bib")   , emit: citations
+        path "versions.yml"                 , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def metadata = task.ext.metadata ?: false
-    def citations = task.ext.citations ?: false
-
-    """
-    #!/usr/bin/env python
-    import os
-
-    import templateflow as tf
-
-    # Set up the templateflow home folder in work directory.
-    os.environ['TEMPLATEFLOW_HOME'] = os.path($workDir)
-    tf.conf.setup_home(force=True)
-
-    # Fetch the specified template.
-    str(tf.api.get($template, resolution=$resolution, suffix='$suffix'))
-
-    if $metadata:
-        # Fetch the metadata for the specified template.
-        metadata = get_metadata($template)
-
-        # Convert into .txt file.
-        with open('metadata.txt', 'w') as f:
-            f.write(metadata)
-
-    if $citations:
-        # Fetch citations.
-        citations = get_citations($template, bibtex=True)
-
-        # Convert into .bib file.
-        with open('citations.bib', 'w') as f:
-            f.write(citations)
-
-    # Write versions.yml file.
-    
-
-    """
+    template 'templateflow.py'
 
     stub:
 
     """
-    touch ${prefix}.bam
+    mkdir tpl-${template}
+    touch ${template}_metadata.json
+    touch ${template}_citations.bib
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        utils: \$(samtools --version |& sed '1!d ; s/samtools //')
+        templateflow: \$(python3 -c 'import templateflow; print(templateflow.__version__)')
+        python: \$(python3 -c 'import platform; print(platform.python_version())')
     END_VERSIONS
     """
 }
