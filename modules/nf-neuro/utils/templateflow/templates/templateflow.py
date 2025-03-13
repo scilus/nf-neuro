@@ -38,6 +38,10 @@ def format_yaml_like(data: dict, indent: int = 0) -> str:
 # Set up templateflow home folder in work directory.
 tf.conf.setup_home(force=True)
 
+# Assert that the template is available.
+tpls = tf.api.templates()
+assert '${template}' in tpls, "Template ${template} not found in %s." % tpls
+
 # Fetch the specified template.
 tf.api.get('${template}')
 metadata = tf.api.get_metadata('${template}')

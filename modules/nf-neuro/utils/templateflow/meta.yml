@@ -21,6 +21,7 @@ input:
         TemplateFlow template name.
         e.g. `MNI152NLin2009cAsym`
         Refer to the TemplateFlow documentation for available templates.
+        https://www.templateflow.org/browse/
 
 output:
   - folder:

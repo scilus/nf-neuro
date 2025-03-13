@@ -25,6 +25,21 @@ nextflow_process {
             )
         }
     }
+    test("templateflow - not available") {
+        when {
+            process {
+                """
+                input[0] = ['nf-neuro']
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.failed }
+            )
+        }
+    }
     test("sarscov2 - bam - stub") {
         options "-stub"
         when {
