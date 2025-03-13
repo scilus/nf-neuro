@@ -63,9 +63,9 @@ with open("${template}_citations.bib", "w+") as f:
 # This is to make files from the template directly accessible
 # within channels.
 print("You asked for ${template} at resolution: ${res} \
-       for cohort: ${cohort}. Trying to find them...")
+        for cohort: ${cohort}. Trying to find them...")
 for suffix in ["T1w", "T2w", "desc-brain_mask", "label-CSF_probseg",
-               "label-GM_probseg", "label-WM_probseg"]:
+                "label-GM_probseg", "label-WM_probseg"]:
     if '${cohort}' != "":
         path = glob.glob(
             "tpl-${template}/${cohort}/*${template}*${res}*%s.nii.gz" % suffix
@@ -80,10 +80,10 @@ for suffix in ["T1w", "T2w", "desc-brain_mask", "label-CSF_probseg",
         # will be in the output channels. Using print() because it is not
         # an error.
         print("Unable to find %s for ${template} at resolution: ${res} \
-               for cohort: ${cohort}. Please validate it exists in the \
-               templateflow directory. Otherwise, the template folder \
-               will still be accessible in the process output \
-               channels." % suffix)
+                for cohort: ${cohort}. Please validate it exists in the \
+                templateflow directory. Otherwise, the template folder \
+                will still be accessible in the process output \
+                channels." % suffix)
     else:
         filename = os.path.basename(path[0])
         shutil.copy(
