@@ -9,9 +9,9 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-03-12T15:33:40.270227"
+        "timestamp": "2025-03-12T20:14:30.123614"
     },
-    "templateflow - MNI152NLin6Asym - T1w": {
+    "templateflow - MNIPediatricAsym - T1w": {
         "content": [
             {
                 "0": [
@@ -248,6 +248,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-03-12T15:44:02.384628"
+        "timestamp": "2025-03-12T20:13:58.781889"
     }
 }
