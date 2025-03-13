@@ -12,7 +12,7 @@ tools:
         TemplateFlow is a modular, version-controlled resource that
         allows researchers to use templates "off-the-shelf".
       homepage: "https://www.templateflow.org/"
-      doi: "https://doi.org/10.1038/s41592-022-01681-2"
+      doi: "10.1038/s41592-022-01681-2"
 
 input:
   - template:
