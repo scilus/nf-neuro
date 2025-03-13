@@ -4,6 +4,4 @@ channels:
 - conda-forge
 - bioconda
 dependencies:
-- pip
-- pip:
-  - templateflow==24.2.2
+- conda-forge::templateflow

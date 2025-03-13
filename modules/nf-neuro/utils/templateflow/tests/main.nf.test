@@ -9,7 +9,7 @@ nextflow_process {
     tag "utils"
     tag "utils/templateflow"
 
-    test("templateflow - MNI152NLin6Asym - T1w") {
+    test("templateflow - MNIPediatricAsym - T1w") {
         when {
             process {
                 """
@@ -30,9 +30,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = [
-                    'test'
-                ]
+                input[0] = ['test']
                 """
             }
         }
