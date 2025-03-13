@@ -13,7 +13,23 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = ['MNIPediatricAsym']
+                input[0] = ['MNIPediatricAsym', 2, 6]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+    test("templateflow - MNI152NLin2009aAsym") {
+        when {
+            process {
+                """
+                input[0] = ['MNI152NLin2009aAsym', 1, []]
                 """
             }
         }
@@ -40,7 +56,7 @@ nextflow_process {
             )
         }
     }
-    test("sarscov2 - bam - stub") {
+    test("templateflow - stub") {
         options "-stub"
         when {
             process {
