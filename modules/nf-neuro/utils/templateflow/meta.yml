@@ -22,6 +22,18 @@ input:
         e.g. `MNI152NLin2009cAsym`
         Refer to the TemplateFlow documentation for available templates.
         https://www.templateflow.org/browse/
+  - res:
+      type: integer
+      description: |
+        Resolution of the template. This is optional, but will be used to
+        fetch the template at the specified resolution and make it
+        accessible in the output channels.
+  - cohort:
+      type: integer
+      description: |
+        Cohort of the template. This is optional, but will be used to fetch
+        the template for the specified cohort and make it accessible in the
+        output channels.
 
 output:
   - folder:
@@ -29,6 +41,30 @@ output:
       description: |
         Directory containing the requested template, with all available
         resolutions and masks/maps.
+  - T1w:
+      type: file
+      description: |
+        T1w image of the requested template.
+  - T2w:
+      type: file
+      description: |
+        T2w image of the requested template.
+  - brain_mask:
+      type: file
+      description: |
+        Brain mask of the requested template.
+  - label_CSF:
+      type: file
+      description: |
+        CSF probability map of the requested template.
+  - label_GM:
+      type: file
+      description: |
+        GM probability map of the requested template.
+  - label_WM:
+      type: file
+      description: |
+        WM probability map of the requested template.
   - metadata:
       type: file
       description: |
