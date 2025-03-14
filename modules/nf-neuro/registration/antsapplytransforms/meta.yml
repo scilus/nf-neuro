@@ -1,47 +1,16 @@
----
-name: "registration_antsapplytransforms"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
+name: registration_antsapplytransforms
 description: register image from transform
 keywords:
   - MRI
   - registration
   - medical imaging
 tools:
-  - "ANTs":
-      description: "perform registration using transform as input"
-      homepage: "https://antsx.github.io/ANTsRCore/reference/antsApplyTransforms.html"
+  - ANTs:
+      description: perform registration using transform as input
+      homepage: https://antsx.github.io/ANTsRCore/reference/antsApplyTransforms.html
 
-input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-      mandatory: true
-
-  - image:
-      type: file
-      description: Input image to register
-      pattern: "*.{nii.nii.gz}"
-      mandatory: true
-
-  - reference:
-      type: file
-      description: Reference image for registration
-      pattern: "*.{nii.nii.gz}"
-      mandatory: true
-
-  - warp:
-      type: file
-      description: Warp transformation file to warp image or trk.
-      pattern: "*.{nii,nii.gz}"
-      mandatory: true
-
-  - affine:
-      type: file
-      description: Affine or rigid transformation file to warp image or trk (*mat). If a rigid or affine transformation needs to be inverted before being applied, use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this module does not handles it.
-      pattern: "*.mat"
-      mandatory: true
-
+      identifier: ""
 args:
   - prefix:
       type: string
@@ -96,28 +65,64 @@ args:
         Whether to run quality control for the registration process.
         e.g. `true` to generate a quality control image, `false` to skip it.
       default: false
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
 
+    - image:
+        type: file
+        description: Input image to register
+        pattern: "*.{nii.nii.gz}"
+
+    - reference:
+        type: file
+        description: Reference image for registration
+        pattern: "*.{nii.nii.gz}"
+
+    - warp:
+        type: file
+        description: Warp transformation file to warp image or trk.
+        pattern: "*.{nii,nii.gz}"
+
+    - affine:
+        type: file
+        description: Affine or rigig transformation file to warp image or trk (*mat).
+          If a rigid or affine transformation needs to be inverted before being applied,
+          use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this
+          module does not handles it.
+        pattern: "*.mat"
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
   - warped_image:
-      type: file
-      description: Warped image
-      pattern: "*.{nii.nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
 
+      - "*__warped.nii.gz":
+          type: file
+          description: Warped image.
+          pattern: "*__warped.{nii.nii.gz}"
   - mqc:
-      type: file
-      description: .gif file containing quality control image for the registration process. Made for use in MultiQC report.
-      pattern: "*.gif"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
 
+      - "*_registration_antsapplytransforms_mqc.gif":
+          type: file
+          description: |
+            .gif file containing quality control image for the registration process.
+            Made for use in MultiQC report.
+          pattern: "*_registration_antsapplytransforms_mqc.gif"
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 authors:
   - "@scilus"

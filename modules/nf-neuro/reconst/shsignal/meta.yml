@@ -11,47 +11,52 @@ tools:
       homepage: "https://github.com/scilus/scilpy.git"
 
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
 
-  - dwi:
-      type: file
-      description: Nifti DWI volume used to extract DTI metrics.
-      pattern: "*.{nii,nii.gz}"
+    - dwi:
+        type: file
+        description: Nifti DWI volume used to extract DTI metrics.
+        pattern: "*.{nii,nii.gz}"
 
-  - bval:
-      type: file
-      description: B-values in FSL format.
-      pattern: "*.bval"
+    - bval:
+        type: file
+        description: B-values in FSL format.
+        pattern: "*.bval"
 
-  - bvec:
-      type: file
-      description: B-vectors in FSL format.
-      pattern: "*.bvec"
+    - bvec:
+        type: file
+        description: B-vectors in FSL format.
+        pattern: "*.bvec"
 
-  - mask:
-      type: file
-      description: Nifti volume file used to mask the input image.
-      pattern: "*.{nii,nii.gz}"
+    - mask:
+        type: file
+        description: Nifti volume file used to mask the input image.
+        pattern: "*.{nii,nii.gz}"
+
+    - ue:
+        type: integer
+        description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
+        pattern: "remove-me"
 
 args:
   - dwi_shell_tolerance:
-      type: int
+      type: integer
       description: Volumes with b-values that differ by this tolerance are considered of same weighting.
       default: 20
   - b0_thr_extract_b0:
-      type: int
+      type: integer
       description: Volumes with b-values up to this threshold are considered b0 (unweighted).
       default: 10
   - shell_to_fit:
-      type: int
+      type: integer
       description: Only use volumes with this b-value. Required if input is multi-shell.
       default: null
   - sh_order:
-      type: int
+      type: integer
       description: Truncate spherical harmonics coefficients to this order.
       default: 4
   - sh_basis:
@@ -73,21 +78,22 @@ args:
       default: false
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
   - sh_signal:
-      type: file
-      description: Output filename for the SH coefficients.
-      pattern: "*__dwi_sh.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*__dwi_sh.nii.gz":
+          type: file
+          description: Output filename for the SH coefficients.
+          pattern: "*__dwi_sh.{nii,nii.gz}"
 
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
+      - "versions.yml":
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 
 authors:
   - "@AlexVCaron"
