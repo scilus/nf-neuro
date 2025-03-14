@@ -34,15 +34,21 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    antsApplyTransforms $dimensionality\
-                        -i $image\
-                        -r $reference\
-                        -o ${prefix}__${suffix}.nii.gz\
-                        $interpolation\
-                        -t $warp $affine\
-                        $image_type\
-                        $default_val\
-                        $output_dtype
+    for image in $image;
+        do \
+        ext=\${image#*.}
+        bname=\$(basename \${image} .\${ext})
+
+        antsApplyTransforms $dimensionality\
+                            -i \$image\
+                            -r $reference\
+                            -o ${prefix}__\${bname}${suffix}.nii.gz\
+                            $interpolation\
+                            -t $warp $affine\
+                            $image_type\
+                            $default_val\
+                            $output_dtype
+    done
 
     ### ** QC ** ###
     if $run_qc;
@@ -102,7 +108,13 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     """
     antsApplyTransforms -h
 
-    touch ${prefix}__${suffix}.nii.gz
+    for image in $image;
+        do \
+        ext=\${image#*.}
+        bname=\$(basename \${image} .\${ext})
+
+        touch ${prefix}__\${bname}${suffix}.nii.gz
+    done
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
