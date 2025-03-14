@@ -25,30 +25,5 @@
             "nextflow": "24.10.5"
         },
         "timestamp": "2025-03-14T15:31:19.350796"
-    },
-    "output to template MNI152NLin2009cAsym with local folder": {
-        "content": [
-            {
-                "0": [
-                    "versions.yml:md5,214a62b6a7f693787e80f094f0ae495f",
-                    "versions.yml:md5,29c5499c53451b27652c9eb978a79e76",
-                    "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
-                    "versions.yml:md5,b180b92a88347fe68d25e2c8066322f1",
-                    "versions.yml:md5,f2ea58858948cffdef12700a1c4ba053"
-                ],
-                "versions": [
-                    "versions.yml:md5,214a62b6a7f693787e80f094f0ae495f",
-                    "versions.yml:md5,29c5499c53451b27652c9eb978a79e76",
-                    "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
-                    "versions.yml:md5,b180b92a88347fe68d25e2c8066322f1",
-                    "versions.yml:md5,f2ea58858948cffdef12700a1c4ba053"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-03-14T15:27:04.810463"
     }
 }
