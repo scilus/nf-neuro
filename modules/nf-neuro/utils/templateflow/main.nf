@@ -24,7 +24,7 @@ process UTILS_TEMPLATEFLOW {
     task.ext.when == null || task.ext.when
 
     script:
-    res = res ? "res-${res}" : ""
+    res = res ? "res-*${res}" : ""
     cohort = cohort ? "cohort-${cohort}" : ""
 
     template 'templateflow.py'
