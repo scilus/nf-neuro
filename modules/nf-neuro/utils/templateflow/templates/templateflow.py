@@ -67,12 +67,14 @@ print("You asked for ${template} at resolution: ${res} \
 for suffix in ["T1w", "T2w", "desc-brain_mask", "label-CSF_probseg",
                 "label-GM_probseg", "label-WM_probseg"]:
     if '${cohort}' != "":
+        print("here with cohort")
         path = glob.glob(
-            "tpl-${template}/${cohort}/*${template}*${res}*%s.nii.gz" % suffix
+            "tpl-${template}/${cohort}/*${template}*${res}_%s.nii.gz" % suffix
         )
     else:
+        print("Good")
         path = glob.glob(
-            "tpl-${template}/*${template}*${res}*%s.nii.gz" % suffix
+            "tpl-${template}/*${template}*${res}_%s.nii.gz" % suffix
         )
     if len(path) == 0:
         # In some cases for some templates, it would not catch any files
