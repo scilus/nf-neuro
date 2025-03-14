@@ -21,12 +21,12 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** or default to $outdir/../templateflow)                     ** //
     if ( !file("${params.templateflow_home}/tpl-${params.template}").exists() ) {
         log.info("Template ${params.template} not found in " +
-                 "${params.templateflow_home}. Will be downloaded." +
-                 "If you do not have access to the internet while running" +
-                 "this pipeline, please download the template manually" +
-                 "and provide the location using --templateflow_home.")
+                "${params.templateflow_home}. Will be downloaded." +
+                "If you do not have access to the internet while running" +
+                "this pipeline, please download the template manually" +
+                "and provide the location using --templateflow_home.")
         log.info("${params.template} will be downloaded at resolution " +
-                 "${params.templateflow_res} from cohort ${params.templateflow_cohort}.")
+                "${params.templateflow_res} from cohort ${params.templateflow_cohort}.")
 
         UTILS_TEMPLATEFLOW (
             [
@@ -44,7 +44,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     } else {
          // ** If the template exists, we will not download it again. ** //
         log.info("Template ${params.template} found in " +
-                 "${params.templateflow_home}. Will be used.")
+                "${params.templateflow_home}. Will be used.")
 
         // ** Load the files from the templateflow directory ** //
         def path = "${params.templateflow_home}/tpl-${params.template}/"
