@@ -1,44 +1,45 @@
----
-name: "tractogram_densitymap"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: tractogram_densitymap
 description: Compute density maps from tractograms
 keywords:
   - Diffusion MRI
   - Tractogram
   - Density Map
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
 
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
 
-  - tractogram:
-      type: file
-      description: Tractogram file for density map computation
-      pattern: "*.trk"
+    - tractogram:
+        type: file
+        description: Tractogram file for density map computation
+        pattern: "*.trk"
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
   - density_map:
-      type: file
-      description: Computed density map
-      pattern: "*.nii.gz"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__*.nii.gz":
+          type: file
+          description: Computed density map
+          pattern: "*__*.nii.gz"
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 authors:
   - "@GuillaumeTh"
 maintainers:
