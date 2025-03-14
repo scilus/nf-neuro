@@ -42,7 +42,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
         ch_t2w_tpl = UTILS_TEMPLATEFLOW.out.T2w
 
     } else {
-         // ** If the template exists, we will not download it again. ** //
+        // ** If the template exists, we will not download it again. ** //
         log.info("Template ${params.template} found in " +
                 "${params.templateflow_home}. Will be used.")
 
