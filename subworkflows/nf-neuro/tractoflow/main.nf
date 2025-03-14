@@ -2,7 +2,6 @@
 // PREPROCESSING
 include {   PREPROC_DWI                                               } from '../preproc_dwi/main'
 include {   PREPROC_T1                                                } from '../preproc_t1/main'
-include {   RECONST_DTIMETRICS as REGISTRATION_FA                     } from '../../../modules/nf-neuro/reconst/dtimetrics/main'
 include {   REGISTRATION as T1_REGISTRATION                           } from '../registration/main'
 include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_WMPARC      } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
 include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_APARC_ASEG  } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
@@ -220,13 +219,19 @@ workflow TRACTOFLOW {
         //
         ch_pft_tracking = Channel.empty()
         if ( params.run_pft ) {
-            ch_pft_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
+            ch_input_pft_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
                 .join(ANATOMICAL_SEGMENTATION.out.gm_mask)
                 .join(ANATOMICAL_SEGMENTATION.out.csf_mask)
                 .join(RECONST_FODF.out.fodf)
                 .join(RECONST_DTIMETRICS.out.fa)
-            TRACKING_PFTTRACKING( ch_pft_tracking )
+            TRACKING_PFTTRACKING( ch_input_pft_tracking )
             ch_versions = ch_versions.mix(TRACKING_PFTTRACKING.out.versions.first())
+
+            ch_pft_tracking = TRACKING_PFTTRACKING.out.trk
+                .join(TRACKING_PFTTRACKING.out.config)
+                .join(TRACKING_PFTTRACKING.out.includes)
+                .join(TRACKING_PFTTRACKING.out.excludes)
+                .join(TRACKING_PFTTRACKING.out.seeding)
         }
 
         //
@@ -234,11 +239,16 @@ workflow TRACTOFLOW {
         //
         ch_local_tracking = Channel.empty()
         if ( params.run_local_tracking ) {
-            ch_local_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
+            ch_input_local_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
                 .join(RECONST_FODF.out.fodf)
                 .join(RECONST_DTIMETRICS.out.fa)
-            TRACKING_LOCALTRACKING( ch_local_tracking )
+            TRACKING_LOCALTRACKING( ch_input_local_tracking )
             ch_versions = ch_versions.mix(TRACKING_LOCALTRACKING.out.versions.first())
+
+            ch_local_tracking = TRACKING_LOCALTRACKING.out.trk
+                .join(TRACKING_LOCALTRACKING.out.config)
+                .join(TRACKING_LOCALTRACKING.out.seedmask)
+                .join(TRACKING_LOCALTRACKING.out.trackmask)
         }
 
     emit:
@@ -294,15 +304,15 @@ workflow TRACTOFLOW {
         volume_fraction         = RECONST_FODF.out.vf
 
         // TRACKING
-        pft_tractogram          = TRACKING_PFTTRACKING.out.trk
-        pft_config              = TRACKING_PFTTRACKING.out.config
-        pft_map_include         = TRACKING_PFTTRACKING.out.includes
-        pft_map_exclude         = TRACKING_PFTTRACKING.out.excludes
-        pft_seeding_mask        = TRACKING_PFTTRACKING.out.seeding
-        local_tractogram        = TRACKING_LOCALTRACKING.out.trk
-        local_config            = TRACKING_LOCALTRACKING.out.config
-        local_seeding_mask      = TRACKING_LOCALTRACKING.out.seedmask
-        local_tracking_mask     = TRACKING_LOCALTRACKING.out.trackmask
+        pft_tractogram          = ch_pft_tracking.map{ [it[0], it[1]] }
+        pft_config              = ch_pft_tracking.map{ [it[0], it[2]] }
+        pft_map_include         = ch_pft_tracking.map{ [it[0], it[3]] }
+        pft_map_exclude         = ch_pft_tracking.map{ [it[0], it[4]] }
+        pft_seeding_mask        = ch_pft_tracking.map{ [it[0], it[5]] }
+        local_tractogram        = ch_local_tracking.map{ [it[0], it[1]] }
+        local_config            = ch_local_tracking.map{ [it[0], it[2]] }
+        local_seeding_mask      = ch_local_tracking.map{ [it[0], it[3]] }
+        local_tracking_mask     = ch_local_tracking.map{ [it[0], it[4]] }
 
         // QC
         nonphysical_voxels      = RECONST_DTIMETRICS.out.nonphysical

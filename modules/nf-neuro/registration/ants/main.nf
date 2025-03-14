@@ -4,8 +4,8 @@ process REGISTRATION_ANTS {
     label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
+        "scilus/scilus:latest"}"
 
     input:
     tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
@@ -16,6 +16,7 @@ process REGISTRATION_ANTS {
     tuple val(meta), path("*__output1GenericAffine.mat")            , emit: affine
     tuple val(meta), path("*__output1InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
     tuple val(meta), path("*__output0InverseAffine.mat")            , emit: inverse_affine
+    tuple val(meta), path("*_registration_ants_mqc.gif")            , emit: mqc, optional: true
     path "versions.yml"                                             , emit: versions
 
     when:
@@ -24,10 +25,12 @@ process REGISTRATION_ANTS {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
     def ants = task.ext.quick ? "antsRegistrationSyNQuick.sh " :  "antsRegistrationSyN.sh "
     def dimension = task.ext.dimension ? "-d " + task.ext.dimension : "-d 3"
     def transform = task.ext.transform ? task.ext.transform : "s"
     def seed = task.ext.random_seed ? " -e " + task.ext.random_seed : "-e 1234"
+    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
     if ( task.ext.threads ) args += "-n " + task.ext.threads
     if ( task.ext.initial_transform ) args += " -i " + task.ext.initial_transform
@@ -61,10 +64,55 @@ process REGISTRATION_ANTS {
 
     mv output.mat ${prefix}__output0InverseAffine.mat
 
+    ### ** QC ** ###
+    if $run_qc;
+    then
+        mv $fixedimage fixedimage.nii.gz
+        extract_dim=\$(mrinfo fixedimage.nii.gz -size)
+        read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
+
+        # Get the middle slice
+        coronal_dim=\$((\$coronal_dim / 2))
+        axial_dim=\$((\$axial_dim / 2))
+        sagittal_dim=\$((\$sagittal_dim / 2))
+
+        # Set viz params.
+        viz_params="--display_slice_number --display_lr --size 256 256"
+        # Iterate over images.
+        for image in fixedimage warped;
+        do
+            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+                --slices \$coronal_dim --axis coronal \$viz_params
+            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+                --slices \$sagittal_dim --axis sagittal \$viz_params
+            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+                --slices \$axial_dim --axis axial \$viz_params
+            if [ \$image != fixedimage ];
+            then
+                title="T1 Warped"
+            else
+                title="fixedimage"
+            fi
+            convert +append \${image}_coronal*.png \${image}_axial*.png \
+                \${image}_sagittal*.png \${image}_mosaic.png
+            convert -annotate +20+230 "\${title}" -fill white -pointsize 30 \
+                \${image}_mosaic.png \${image}_mosaic.png
+            # Clean up.
+            rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
+        done
+        # Create GIF.
+        convert -delay 10 -loop 0 -morph 10 \
+            warped_mosaic.png fixedimage_mosaic.png warped_mosaic.png \
+            ${prefix}_${suffix_qc}_registration_ants_mqc.gif
+        # Clean up.
+        rm *_mosaic.png
+    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
+        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
     """
 
@@ -82,6 +130,8 @@ process REGISTRATION_ANTS {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
+        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
 
     function handle_code () {

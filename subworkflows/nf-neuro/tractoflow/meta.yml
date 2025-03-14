@@ -168,12 +168,12 @@ output:
       type: file
       description: |
         Transformation matrix from the anatomical space to the diffusion space.
-        Structure: [ val(meta), [<path(warp)>, path(affine)] ]
+        Structure: [ val(meta), [path(warp), path(affine)] ]
   - diffusion_to_anatomical:
       type: file
       description: |
         Transformation matrix from the diffusion space to the anatomical space.
-        Structure: [ val(meta), [path(affine), <path(warp)>] ]
+        Structure: [ val(meta), [path(affine), path(warp)] ]
   - t1_native:
       type: file
       description: |

@@ -58,6 +58,7 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     niftiMD5SUM(process.out.ad.get(0).get(1), 6),
+                    file(process.out.mqc.get(0).get(1)).name,
                     file(process.out.evecs.get(0).get(1)).name,
                     file(process.out.evecs_v1.get(0).get(1)).name,
                     file(process.out.evecs_v2.get(0).get(1)).name,
@@ -119,6 +120,36 @@ nextflow_process {
                     niftiMD5SUM(process.out.fa.get(0).get(1), 6),
                     process.out.versions
                 ).match() }
+            )
+        }
+    }
+
+    test("reconst - stub-run dtimetrics") {
+        options "-stub-run"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                input[0] = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
     }

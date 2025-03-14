@@ -1,0 +1,2 @@
+reconst/shsignal:
+  - "modules/nf-neuro/reconst/shsignal/**"

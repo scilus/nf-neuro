@@ -35,12 +35,12 @@ input:
   - bval:
       type: file
       description: Text file containing b-values
-      pattern: "*.{.bval}"
+      pattern: "*.bval"
 
   - bvec:
       type: file
       description: Text file containing b-vectors
-      pattern: "*.{.bvec}"
+      pattern: "*.bvec"
 
 output:
   - meta:

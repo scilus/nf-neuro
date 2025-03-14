@@ -43,7 +43,10 @@
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    
+                ],
+                "6": [
+                    "versions.yml:md5,2c26609651ebb851765327617e7aec96"
                 ],
                 "affine": [
                     [
@@ -77,8 +80,11 @@
                         "test__output1InverseWarp.nii.gz:md5,1608837de13478dff81fe51ac1720d28"
                     ]
                 ],
+                "mqc": [
+                    
+                ],
                 "versions": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    "versions.yml:md5,2c26609651ebb851765327617e7aec96"
                 ],
                 "warp": [
                     [
@@ -92,9 +98,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-16T17:28:39.126053758"
+        "timestamp": "2025-02-24T07:52:30.173552689"
     },
     "registration - ants - quick": {
         "content": [
@@ -140,7 +146,15 @@
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_DWI_registration_ants_mqc.gif:md5,ebf58acb9c3f3b9bc8c5a08105d4ceff"
+                    ]
+                ],
+                "6": [
+                    "versions.yml:md5,2c26609651ebb851765327617e7aec96"
                 ],
                 "affine": [
                     [
@@ -174,8 +188,16 @@
                         "test__output1InverseWarp.nii.gz:md5,24e6f53eaa3e4476bb627c374bc809ca"
                     ]
                 ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_DWI_registration_ants_mqc.gif:md5,ebf58acb9c3f3b9bc8c5a08105d4ceff"
+                    ]
+                ],
                 "versions": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    "versions.yml:md5,2c26609651ebb851765327617e7aec96"
                 ],
                 "warp": [
                     [
@@ -189,9 +211,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-16T17:28:48.93660183"
+        "timestamp": "2025-03-06T16:44:46.474693596"
     },
     "registration - ants - options": {
         "content": [
@@ -227,7 +249,15 @@
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__registration_ants_mqc.gif:md5,23a92899290210c2fed8dbd9ed6b946b"
+                    ]
+                ],
+                "6": [
+                    "versions.yml:md5,2c26609651ebb851765327617e7aec96"
                 ],
                 "affine": [
                     [
@@ -256,8 +286,16 @@
                 "inverse_warp": [
                     
                 ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__registration_ants_mqc.gif:md5,23a92899290210c2fed8dbd9ed6b946b"
+                    ]
+                ],
                 "versions": [
-                    "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                    "versions.yml:md5,2c26609651ebb851765327617e7aec96"
                 ],
                 "warp": [
                     
@@ -266,20 +304,20 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-16T17:28:54.754431506"
+        "timestamp": "2025-03-06T16:44:58.966002773"
     },
     "registration - ants - stub": {
         "content": [
             [
-                "versions.yml:md5,e1ac7994c0f0169d932e94c6e97a4894"
+                "versions.yml:md5,2c26609651ebb851765327617e7aec96"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
+            "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-03T14:45:05.628303"
+        "timestamp": "2025-02-24T07:52:56.165561569"
     }
 }

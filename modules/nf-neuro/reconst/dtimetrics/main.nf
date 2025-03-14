@@ -4,8 +4,8 @@ process RECONST_DTIMETRICS {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        'https://scil.usherbrooke.ca/containers/scilus_latest.sif':
+        'scilus/scilus:latest' }"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(b0mask)
@@ -38,6 +38,7 @@ process RECONST_DTIMETRICS {
         tuple val(meta), path("*__residual_q3_residuals.npy")      , emit: residual_q3_residuals, optional: true
         tuple val(meta), path("*__residual_residuals_stats.png")   , emit: residual_residuals_stats, optional: true
         tuple val(meta), path("*__residual_std_residuals.npy")     , emit: residual_std_residuals, optional: true
+        tuple val(meta), path("*__dti_mqc.png")                    , emit: mqc   , optional: true
         path "versions.yml"                                        , emit: versions
 
     when:
@@ -50,7 +51,8 @@ process RECONST_DTIMETRICS {
     def max_dti_shell_value = task.ext.max_dti_shell_value ?: 1500
     def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ?: 10
     def b0_threshold = task.ext.b0_thr_extract_b0 ? "--b0_threshold $task.ext.b0_thr_extract_b0" : ""
-    def dti_shells = task.ext.dti_shells ?: "\$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- $bval | awk -F' ' '{v=int(\$1)}{if(v<=$max_dti_shell_value|| v<=$b0_thr_extract_b0)print v}' | uniq)"
+    def dti_shells = task.ext.dti_shells ?: "\$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- $bval | awk -F' ' '{v=int(\$1)}{if(v<=$max_dti_shell_value|| v<=$b0_thr_extract_b0)print v}' | sort | uniq)"
+    def run_qc = task.ext.run_qc ?: false
 
     if ( b0mask ) args += " --mask $b0mask"
     if ( task.ext.ad ) args += " --ad ${prefix}__ad.nii.gz"
@@ -68,7 +70,6 @@ process RECONST_DTIMETRICS {
     if ( task.ext.pulsation ) args += " --pulsation ${prefix}__pulsation.nii.gz"
     if ( task.ext.residual ) args += " --residual ${prefix}__residual.nii.gz"
 
-
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
@@ -81,14 +82,63 @@ process RECONST_DTIMETRICS {
     scil_dti_metrics.py dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells \
         --not_all $args $b0_threshold -f
 
+    if [ "$run_qc" = true ] && [ "$args" != '' ];
+    then
+        mv ${prefix}__residual_residuals_stats.png ${prefix}__residual_residuals_stats.png_bk
+
+        nii_files=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(fa|ad|rd|md|rgb|residual)\$/) print \$(i+1)}')
+
+        # Viz 3D images + RGB
+        for image in \${nii_files};
+        do
+            dim=\$(mrinfo \${image} -ndim)
+            extract_dim=\$(mrinfo \${image} -size)
+            if [ "\$dim" == 3 ];
+            then
+                read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
+            elif [ "\$dim" == 4 ];
+            then
+                read sagittal_dim coronal_dim axial_dim forth_dim <<< "\${extract_dim}"
+            fi
+
+            # Get the middle slice
+            coronal_dim=\$((\$coronal_dim / 2))
+            axial_dim=\$((\$axial_dim / 2))
+            sagittal_dim=\$((\$sagittal_dim / 2))
+
+            echo \$coronal_dim
+            echo \$axial_dim
+            echo \$sagittal_dim
+
+            image=\${image/${prefix}__/}
+            image=\${image/.nii.gz/}
+            viz_params="--display_slice_number --display_lr --size 256 256"
+            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
+            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
+            scil_viz_volume_screenshot.py ${prefix}__\${image}.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
+
+            convert +append ${prefix}__\${image}_coronal_slice_\${coronal_dim}.png \
+                    ${prefix}__\${image}_axial_slice_\${axial_dim}.png  \
+                    ${prefix}__\${image}_sagittal_slice_\${sagittal_dim}.png \
+                    ${prefix}__\${image}.png
+
+            convert -annotate +20+230 "\${image}" -fill white -pointsize 30 ${prefix}__\${image}.png ${prefix}__\${image}.png
+        done
+
+        rm -rf *slice*
+        convert -append *png ${prefix}__dti_mqc.png
+        mv ${prefix}__residual_residuals_stats.png_bk ${prefix}__residual_residuals_stats.png
+    fi
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
+        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
@@ -122,10 +172,12 @@ process RECONST_DTIMETRICS {
     touch ${prefix}__residual_q3_residuals.npy
     touch ${prefix}__residual_residuals_stats.png
     touch ${prefix}__residual_std_residuals.npy
+    touch ${prefix}__dti_mqc.png
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """
 }

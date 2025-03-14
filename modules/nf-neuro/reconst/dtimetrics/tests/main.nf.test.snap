@@ -1,20 +1,33 @@
 {
+    "reconst - stub-run dtimetrics": {
+        "content": [
+            [
+                "versions.yml:md5,c7a6b86e604d3b25340611cec27c758a"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-03-06T15:57:03.763217558"
+    },
     "reconst - dtimetrics_with_b0mask": {
         "content": [
             "test__fa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,cd80bf54bc8529c97cb042d49c50d4fc",
             [
-                "versions.yml:md5,609a8b62c7dc862692683ec5860ba677"
+                "versions.yml:md5,76869f1b7075822c64ec0ff67408144a"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-08-30T19:56:40.272861"
+        "timestamp": "2025-03-06T15:56:54.731216819"
     },
     "reconst - dtimetrics": {
         "content": [
             "test__ad.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,a4f053c9d65bed0062f7778818c555b4",
+            "test__dti_mqc.png",
             "test__evecs.nii.gz",
             "test__evecs_v1.nii.gz",
             "test__evecs_v2.nii.gz",
@@ -48,7 +61,7 @@
                     {
                         "id": "test"
                     },
-                    "test__residual_mean_residuals.npy:md5,8a3c812ebbfc15b5242918d287659bf0"
+                    "test__residual_mean_residuals.npy:md5,5429f2a46c9b14efa47278c7cdb32b3c"
                 ]
             ],
             [
@@ -80,17 +93,17 @@
                     {
                         "id": "test"
                     },
-                    "test__residual_std_residuals.npy:md5,15fac15e7543f321a7d3a451e45563c5"
+                    "test__residual_std_residuals.npy:md5,0d41ba9ad5d2ac4543f957a1d84c187f"
                 ]
             ],
             [
-                "versions.yml:md5,609a8b62c7dc862692683ec5860ba677"
+                "versions.yml:md5,76869f1b7075822c64ec0ff67408144a"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-08-30T20:12:52.390001"
+        "timestamp": "2025-03-06T15:56:33.450256049"
     }
 }

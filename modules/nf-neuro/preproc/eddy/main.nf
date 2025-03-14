@@ -94,7 +94,7 @@ process PREPROC_EDDY {
             $slice_drop_flag
     fi
 
-    echo "--very_verbose $extra_args" >> eddy.sh
+    echo "--very_verbose $extra_args --nthr=$task.cpus" >> eddy.sh
     sh eddy.sh
     scil_volume_math.py lower_clip dwi_eddy_corrected.nii.gz 0 ${prefix}__dwi_corrected.nii.gz
 

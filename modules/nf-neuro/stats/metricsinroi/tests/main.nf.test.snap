@@ -1,0 +1,84 @@
+{
+    "stats - metrics in roi -stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-10T19:14:09.944680636"
+    },
+    "stats - metrics in ROI": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__stats.json:md5,7291461646d32ae71f7a248655783f32"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__stats.json:md5,7291461646d32ae71f7a248655783f32"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-10T19:13:49.199187037"
+    },
+    "stats - metrics in Label": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__stats.json:md5,5bf37c68f8201323fe9d468cf271c4d8"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__stats.json:md5,5bf37c68f8201323fe9d468cf271c4d8"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,5efdd346ca47d57640b7e52970de2287"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-10T19:13:56.753945019"
+    }
+}
