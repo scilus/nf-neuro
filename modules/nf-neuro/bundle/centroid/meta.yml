@@ -1,5 +1,5 @@
----
-name: "bundle_centroid"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: bundle_centroid
 description: |
   Compute bundles' centroids or resample existing centroids.
 keywords:
@@ -7,24 +7,26 @@ keywords:
   - Centroids
   - Streamlines
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
 
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
 
-  - bundles:
-      type: file
-      description: |
-        List of bundles to compute centroids for. If this input is supplied,
-        the module will compute centroids.
-      pattern: "*.trk"
-      mandatory: true
+    - bundles:
+        type: file
+        description: |
+          List of bundles to compute centroids for. If this input is supplied,
+          the module will compute centroids.
+        pattern: "*.trk"
+        mandatory: true
 
 args:
   - nb_points:
@@ -34,22 +36,22 @@ args:
       default: 5
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
   - centroids:
-      type: file
-      description: |
-        Computed centroids.
-      pattern: "*.trk"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+
+      - "*_centroid_*.trk":
+          type: file
+          description: Computed centroids.
+          pattern: "*_centroid_*.trk"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 
 authors:
   - "@gagnonanthony"

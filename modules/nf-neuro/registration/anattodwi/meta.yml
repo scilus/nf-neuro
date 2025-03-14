@@ -1,6 +1,5 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "registration_anattodwi"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: registration_anattodwi
 description: Anatomical image registration on a diffusion image.
 keywords:
   - nifti
@@ -9,71 +8,93 @@ keywords:
   - dwi
 
 tools:
-  - "antsRegistration":
-      description: "ANTs (Advanced Normalization Tools) open-source software package for image registration and segmentation"
-      homepage: "https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Linux-and-Mac-OS"
-      documentation: "http://stnava.github.io/ANTsDoc/"
-      doi: "10.1016/j.neuroimage.2010.09.025"
+  - antsRegistration:
+      description: ANTs (Advanced Normalization Tools) open-source software package
+        for image registration and segmentation
+      homepage: https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Linux-and-Mac-OS
+      documentation: http://stnava.github.io/ANTsDoc/
+      doi: 10.1016/j.neuroimage.2010.09.025
 
-args:
-  - run_qc:
-      type: boolean
-      description: "Run quality control for the registration process"
-      default: false
-
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
 
-  - t1:
-      type: file
-      description: Nifti image file to register on dwi
-      pattern: "*.{nii,nii.gz}"
+    - t1:
+        type: file
+        description: Nifti image file to register on dwi
+        pattern: "*.{nii,nii.gz}"
 
-  - b0:
-      type: file
-      description: Nifti image file - b0
-      pattern: "*.{nii,nii.gz}"
+    - b0:
+        type: file
+        description: Nifti image file - b0
+        pattern: "*.{nii,nii.gz}"
 
-  - metric:
-      type: file
-      description: Nifti image file metric used to register (fa)
-      pattern: "*.{nii,nii.gz}"
+    - metric:
+        type: file
+        description: Nifti image file metric used to register (fa)
+        pattern: "*.{nii,nii.gz}"
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - transfo_trk:
-      type: list
-      description: Tuple, Transformation files to warp tractogram/streamlines (mat file, nii InverseWarp)
-      pattern: "*.{mat,nii,nii.gz}"
-
-  - transfo_image:
-      type: list
-      description: Tuple, Transformation files to warp images (nii Warp, mat file)
-      pattern: "*.{nii,nii.gz,mat}"
-
+  - affine:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*0GenericAffine.mat":
+          type: file
+          description: Affine transformation matrix.
+          pattern: "*0GenericAffine.mat"
+  - warp:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*1Warp.nii.gz":
+          type: file
+          description: Warp field.
+          pattern: "*1Warp.{nii,nii.gz}"
+  - inverse_warp:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*1InverseWarp.nii.gz":
+          type: file
+          description: Inverse warp field.
+          pattern: "*1InverseWarp.{nii,nii.gz}"
   - t1_warped:
-      type: file
-      description: Anatomical T1 warped to dwi space
-      pattern: "*.{nii,nii.gz}"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*t1_warped.nii.gz":
+          type: file
+          description: Anatomical T1 warped to dwi space.
+          pattern: "*t1_warped.{nii,nii.gz}"
   - mqc:
-      type: file
-      description: .gif file containing quality control image for the registration process. Made for use in MultiQC report.
-      pattern: "*.gif"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_registration_anattodwi_mqc.gif":
+          type: file
+          description: |
+            .gif file containing quality control image for the
+            registration process. For use in MultiQC report.
+          pattern: "*_registration_anattodwi_mqc.gif"
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 authors:
   - "@medde"

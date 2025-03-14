@@ -1,112 +1,111 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
-name: "reconst_ihmt"
-description: Compute myelin indices maps from the MT and ihMT images.
-  Please refer to https://github.com/scilus/scilpy/blob/2ced08f4d70cef1d7e4b089872f7593bf5b2833a/scripts/scil_mti_maps_ihMT.py
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: reconst_ihmt
+description: Compute myelin indices maps from the MT and ihMT images. Please refer
+  to
+  https://github.com/scilus/scilpy/blob/2ced08f4d70cef1d7e4b089872f7593bf5b2833a/scripts/scil_mti_maps_ihMT.py
   to understand input format.
 keywords:
   - magnetization transfer imaging
   - inhomogeneous magnetization transfer
   - myelin
 tools:
-  - "Scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
+  - Scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
 
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - altpn:
-      type: list
-      description: List of files (path to all echoes) corresponding to the
-        alternation of positive and negative frequency saturation pulse.
-      pattern: "*atlpn*.{nii,nii.gz}"
-
-  - altnp:
-      type: list
-      description: List of files (path to all echoes) corresponding to the
-        alternation of negative and positive frequency saturation pulse.
-      pattern: "*altnp*.{nii,nii.gz}"
-
-  - pos:
-      type: list
-      description: List of files (path to all echoes) corresponding to the
-        positive frequency saturation pulse.
-      pattern: "*pos*.{nii,nii.gz}"
-
-  - neg:
-      type: list
-      description: List of files (path to all echoes) corresponding to the
-        negative frequency saturation pulse.
-      pattern: "*neg*.{nii,nii.gz}"
-
-  - mtoff_pd:
-      type: list
-      description: List of files (path to all echoes) corresponding to the
-        predominant PD (proton density) weighting images with no saturation pulse.
-      pattern: "*mtoff_pd*.{nii,nii.gz}"
-
-  - mtoff_t1:
-      type: list
-      description: List of files (path to all echoes) corresponding to the
-        predominant T1 weighting images with no saturation pulse.
-      pattern: "*mtoff_t1*.{nii,nii.gz}"
-
-  - jsons:
-      type: list
-      description: List of json files for acquisition parameters extraction
-        in the case of a Philips acquisition, otherwise use acq_params. Should
-        be a json file for the mtoff_pd and mtoff_t1 files, in that order.
-      pattern: "*.json"
-
-  - acq_params:
-      type: list
-      description: List of values for acquisition parameters extraction. Should
-        be in that order; flip angle of mtoff_pd, flip angle of mtoff_t1, TR of
-        mtoff_pd, TR of mtoff_t1 (where TR = repetition time).
-
-  - mask:
-      type: file
-      description: Nifti brain mask.
-      pattern: "*mask.{nii,nii.gz}"
-
-  - b1:
-      type: file
-      description: Nifti file containing a coregistered B1 map.
-      pattern: "*b1*.{nii,nii.gz}"
-
-  - b1_fit:
-      type: list
-      description: List of files for the model based B1 correction method.
-      pattern: "*fitValues*.mat"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - altpn:
+        type: list
+        description: List of files (path to all echoes) corresponding to the alternation
+          of positive and negative frequency saturation pulse.
+        pattern: "*atlpn*.{nii,nii.gz}"
+    - altnp:
+        type: list
+        description: List of files (path to all echoes) corresponding to the alternation
+          of negative and positive frequency saturation pulse.
+        pattern: "*altnp*.{nii,nii.gz}"
+    - pos:
+        type: list
+        description: List of files (path to all echoes) corresponding to the positive
+          frequency saturation pulse.
+        pattern: "*pos*.{nii,nii.gz}"
+    - neg:
+        type: list
+        description: List of files (path to all echoes) corresponding to the negative
+          frequency saturation pulse.
+        pattern: "*neg*.{nii,nii.gz}"
+    - mtoff_pd:
+        type: list
+        description: List of files (path to all echoes) corresponding to the predominant
+          PD (proton density) weighting images with no saturation pulse.
+        pattern: "*mtoff_pd*.{nii,nii.gz}"
+  - - mtoff_t1:
+        type: list
+        description: List of files (path to all echoes) corresponding to the predominant
+          T1 weighting images with no saturation pulse.
+        pattern: "*mtoff_t1*.{nii,nii.gz}"
+    - mask:
+        type: file
+        description: Nifti brain mask.
+        pattern: "*mask.{nii,nii.gz}"
+    - jsons:
+        type: list
+        description: List of json files for acquisition parameters extraction in the
+          case of a Philips acquisition, otherwise use acq_params. Should be a json
+          file for the mtoff_pd and mtoff_t1 files, in that order.
+        pattern: "*.json"
+    - acq_params:
+        type: list
+        description: List of values for acquisition parameters extraction. Should be
+          in that order; flip angle of mtoff_pd, flip angle of mtoff_t1, TR of mtoff_pd,
+          TR of mtoff_t1 (where TR = repetition time).
+    - b1:
+        type: file
+        description: Nifti file containing a coregistered B1 map.
+        pattern: "*b1*.{nii,nii.gz}"
+    - b1_fit:
+        type: list
+        description: List of files for the model based B1 correction method.
+        pattern: "*fitValues*.mat"
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
   - ihmt_maps:
-      type: directory
-      description: Folder containing ihMT maps in native space.
-        (MTR and ihMTR, plus MTsat and ihMTsat if mtoff_t1 was given)
-      pattern: "ihMT_native_maps"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - ihMT_native_maps:
+          type: directory
+          description: Folder containing ihMT maps in native space. (MTR and ihMTR, plus
+            MTsat and ihMTsat if mtoff_t1 was given)
+          pattern: ihMT_native_maps
 
   - comp_maps:
-      type: directory
-      description: Folder containing complementary maps.
-        (intermediate files, B1 correction files, if extended option given)
-      pattern: "Complementary_maps"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - Complementary_maps:
+          type: directory
+          description: Folder containing complementary maps. (intermediate files, B1 correction
+            files, if extended option given)
+          pattern: Complementary_maps
+
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 
 authors:
   - "@karanphil"

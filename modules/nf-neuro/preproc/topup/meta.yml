@@ -13,69 +13,63 @@ keywords:
   - topup
 
 tools:
-  - "ANTs":
-      description: "Advanced Normalization Tools (ANTs) for image processing."
-      homepage: "http://stnava.github.io/ANTs/"
-  - "FSL":
-      description: "FSL Toolbox and Scilpy Toolbox"
-      homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
+  - ANTs:
+      description: Advanced Normalization Tools (ANTs) for image processing.
+      homepage: http://stnava.github.io/ANTs/
+      identifier: ""
+  - FSL:
+      description: FSL Toolbox and Scilpy Toolbox
+      homepage: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
+      identifier: ""
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
 
+      identifier: ""
 input:
   # Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - dwi:
-      type: file
-      description: DWI Nifti image
-      pattern: "*.{nii,nii.gz}"
-
-  - bval:
-      type: file
-      description: B-values in FSL format [DWI].
-      pattern: "*.bval"
-
-  - bvec:
-      type: file
-      description: B-values in FSL format [DWI].
-      pattern: "*.bvec"
-
-  - b0:
-      type: file
-      description: b0 [DWI].
-      pattern: "*.bvec"
-
-  - rev_dwi:
-      type: file
-      description: DWI Nifti image [rev-DWI].
-      pattern: "*.{nii,nii.gz}"
-
-  - rev_bval:
-      type: file
-      description: B-values in FSL format [rev-DWI].
-      pattern: "*.bval"
-
-  - rev_bvec:
-      type: file
-      description: B-vectors in FSL format [rev-DWI].
-      pattern: "*.bvec"
-
-  - rev_b0:
-      type: file
-      description: Reversed b0 [rev-DWI].
-      pattern: "*.{nii,nii.gz}"
-
-  - config_topup:
-      type: file
-      description: topup config file. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
-      pattern: "*cnf"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - dwi:
+        type: file
+        description: DWI Nifti image
+        pattern: "*.{nii,nii.gz}"
+    - bval:
+        type: file
+        description: B-values in FSL format [DWI].
+        pattern: "*.bval"
+    - bvec:
+        type: file
+        description: B-values in FSL format [DWI].
+        pattern: "*.bvec"
+    - b0:
+        type: file
+        description: b0 [DWI].
+        pattern: "*.bvec"
+    - rev_dwi:
+        type: file
+        description: DWI Nifti image [rev-DWI].
+        pattern: "*.{nii,nii.gz}"
+    - rev_bval:
+        type: file
+        description: B-values in FSL format [rev-DWI].
+        pattern: "*.bval"
+    - rev_bvec:
+        type: file
+        description: B-vectors in FSL format [rev-DWI].
+        pattern: "*.bvec"
+    - rev_b0:
+        type: file
+        description: Reversed b0 [rev-DWI].
+        pattern: "*.{nii,nii.gz}"
+  - - config_topup:
+        type: file
+        description: topup config file. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
+        pattern: "*cnf"
 args:
   - encoding:
       type: string
@@ -87,7 +81,7 @@ args:
       description: Total readout time from the DICOM metadata.
       default: 0.062
   - b0_thr_extract_b0:
-      type: int
+      type: integer
       description: Threshold under which b-values are considered to be b0s.
       default: 10
   - prefix_topup:
@@ -102,54 +96,83 @@ args:
       type: boolean
       description: Run quality control.
       default: true
-
 output:
-  #Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
   - topup_corrected_b0s:
-      type: file
-      description: Nifti volume - b0 corrected
-      pattern: "*__corrected_b0s.nii.gz"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__corrected_b0s.nii.gz":
+          type: file
+          description: Nifti volume - b0 corrected
+          pattern: "*__corrected_b0s.nii.gz"
   - topup_fieldcoef:
-      type: file
-      description: Nifti volume - topup field to correct for distorsion
-      pattern: "*_fieldcoef.nii.gz"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_fieldcoef.nii.gz":
+          type: file
+          description: Nifti volume - topup field to correct for distorsion
+          pattern: "*_fieldcoef.nii.gz"
   - topup_movpart:
-      type: file
-      description: Text file - topup movpart
-      pattern: "*__movpar.txt"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_movpar.txt":
+          type: file
+          description: Text file - topup movpart
+          pattern: "*_movpar.txt"
   - rev_b0_warped:
-      type: file
-      description: Nifti volume - rev b0 warped on b0
-      pattern: "*__rev_b0_warped.nii.gz"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__rev_b0_warped.nii.gz":
+          type: file
+          description: Nifti volume - rev b0 warped on b0
+          pattern: "*__rev_b0_warped.nii.gz"
   - rev_b0_mean:
-      type: file
-      description: Nifti volume - rev b0 mean
-      pattern: "*__rev_b0_mean.nii.gz"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__rev_b0_mean.nii.gz":
+          type: file
+          description: Nifti volume - rev b0 mean
+          pattern: "*__rev_b0_mean.nii.gz"
   - b0_mean:
-      type: file
-      description: Nifti volume - b0 mean
-      pattern: "*__b0_mean.nii.gz"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__b0_mean.nii.gz":
+          type: file
+          description: Nifti volume - b0 mean
+          pattern: "*__b0_mean.nii.gz"
   - mqc:
-      type: file
-      description: .gif file containing quality control image for the topup process (Comparison with dwi and rev_dwi). Made for use in MultiQC report.
-      pattern: "*_b0_topup_mqc.gif"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_b0_topup_mqc.gif":
+          type: file
+          description: |
+            .gif file containing quality control image for the topup process
+            (Comparison with dwi and rev_dwi). Made for use in MultiQC report.
+          pattern: "*_b0_topup_mqc.gif"
   - versions:
-      type: file
-      description: File containing software versions.
-      pattern: "versions.yml"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions.
+          pattern: versions.yml
 authors:
   - "@arnaudbore"

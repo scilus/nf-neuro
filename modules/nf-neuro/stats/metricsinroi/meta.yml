@@ -13,23 +13,23 @@ tools:
       homepage: "https://github.com/scilus/scilpy.git"
 
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-  - metrics:
-      type: file
-      description: Metrics volume(s) in Nifti
-      pattern: "*.{nii,nii.gz}"
-  - rois:
-      type: file
-      description: ROI or Label volume(s) in Nifti
-      pattern: "*.{nii,nii.gz}"
-  - rois_lut:
-      type: file
-      description: LUT file corresponding to labels, used to name the regions of interest
-      pattern: "*.{nii,nii.gz}"
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - metrics:
+        type: file
+        description: Metrics volume(s) in Nifti
+        pattern: "*.{nii,nii.gz}"
+    - rois:
+        type: file
+        description: ROI or Label volume(s) in Nifti
+        pattern: "*.{nii,nii.gz}"
+    - rois_lut:
+        type: file
+        description: LUT file corresponding to labels, used to name the regions of interest
+        pattern: "*.{nii,nii.gz}"
 
 args:
   - suffix:
@@ -55,21 +55,22 @@ args:
       default: false
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
   - mqc:
-      type: file
-      description: JSON file containing mean/std per pair of roi/metrics or label/metrics
-      pattern: "*__stats.json"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_stats.json":
+          type: file
+          description: JSON file containing mean/std per pair of roi/metrics or label/metrics
+          pattern: "*_stats.json"
 
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 
 authors:
   - "@arnaudbore"

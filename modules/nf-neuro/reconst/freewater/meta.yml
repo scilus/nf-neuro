@@ -1,96 +1,129 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
-name: "reconst_freewater"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: reconst_freewater
 description: Run freewater modelling pipeline using AMICO from DWI data.
 keywords:
   - Diffusion MRI
   - Freewater
   - Microstructure modeling
 tools:
-  - "Scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-  - "Freewater":
-      description: "Free water elimination and mapping from diffusion MRI."
-      doi: "10.1002/mrm.22055"
-  - "AMICO":
-      description: "Accelerated Microstructure Imaging via Convex Optimization."
-      homepage: "https://github.com/daducci/AMICO"
-      doi: "10.1016/j.neuroimage.2014.10.026"
+  - Scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+  - Freewater:
+      description: Free water elimination and mapping from diffusion MRI.
+      doi: 10.1002/mrm.22055
+  - AMICO:
+      description: Accelerated Microstructure Imaging via Convex Optimization.
+      homepage: https://github.com/daducci/AMICO
+      doi: 10.1016/j.neuroimage.2014.10.026
 
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
 
-  - dwi:
-      type: file
-      description: Nifti DWI file acquired with a freewater compatible protocol (single-shell or multi-shell).
-      pattern: "*.{nii,nii.gz}"
+    - dwi:
+        type: file
+        description: Nifti DWI file acquired with a freewater compatible protocol (single-shell
+          or multi-shell).
+        pattern: "*.{nii,nii.gz}"
 
-  - bval:
-      type: file
-      description: B-values in FSL format.
-      pattern: "*.bval"
+    - bval:
+        type: file
+        description: B-values in FSL format.
+        pattern: "*.bval"
 
-  - bvec:
-      type: file
-      description: B-vectors in FSL format.
-      pattern: "*.bvec"
+    - bvec:
+        type: file
+        description: B-vectors in FSL format.
+        pattern: "*.bvec"
 
-  - mask:
-      type: file
-      description: Nifti brain mask.
-      pattern: "*mask.{nii,nii.gz}"
+    - mask:
+        type: file
+        description: Nifti brain mask.
+        pattern: "*mask.{nii,nii.gz}"
 
-  - kernels:
-      type: directory
-      description: Folder containg kernels.
-      pattern: "kernels"
+    - kernels:
+        type: directory
+        description: Folder containg kernels.
+        pattern: kernels
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
   - dwi_fw_corrected:
-      type: file
-      description: Nifti file freewater corrected DWI.
-      pattern: "*__dwi_fw_corrected.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__dwi_fw_corrected.nii.gz":
+          type: file
+          description: Nifti file freewater corrected DWI.
+          pattern: "*__dwi_fw_corrected.{nii,nii.gz}"
 
   - dir:
-      type: file
-      description: Nifti file main direction.
-      pattern: "*__FIT_dir.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__FIT_dir.nii.gz":
+          type: file
+          description: Nifti file main direction.
+          pattern: "*__FIT_dir.{nii,nii.gz}"
 
   - fibervolume:
-      type: file
-      description: Nifti file for fiber volume.
-      pattern: "*__FIT_fibervolume.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__FIT_FiberVolume.nii.gz":
+          type: file
+          description: Nifti file for fiber volume.
+          pattern: "*__FIT_FiberVolume.{nii,nii.gz}"
 
   - fw:
-      type: file
-      description: Nifti file for freewater (isotropic volume).
-      pattern: "*__FIT_FW.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__FIT_FW.nii.gz":
+          type: file
+          description: Nifti file for freewater (isotropic volume).
+          pattern: "*__FIT_FW.{nii,nii.gz}"
 
   - nrmse:
-      type: file
-      description: Nifti file for nrmse.
-      pattern: "*__FIT_nrmse.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__FIT_nrmse.nii.gz":
+          type: file
+          description: Nifti file for nrmse.
+          pattern: "*__FIT_nrmse.{nii,nii.gz}"
 
   - kernels:
-      type: directory
-      description: Folder containing kernels.
-      pattern: "kernels"
+      - kernels:
+          type: directory
+          description: Folder containing kernels.
+          pattern: kernels
 
   - versions:
-      type: file
-      description: File containing software versions.
-      pattern: "versions.yml"
+      - versions.yml:
+          type: file
+          description: File containing software versions.
+          pattern: versions.yml
 
 authors:
   - "@karanphil"

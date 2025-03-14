@@ -8,7 +8,7 @@ process CONNECTIVITY_AFDFIXEL {
     tuple val(meta), path(hdf5), path(fodf)
 
     output:
-    tuple val(meta), path("*afd_fixel.h5")      , emit: hdf5
+    tuple val(meta), path("*__afd_fixel.h5")    , emit: hdf5
     path "versions.yml"                         , emit: versions
 
     when:

@@ -1,74 +1,76 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "preproc_eddy"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: preproc_eddy
 description: Apply Eddy (and Topup if already run)
 keywords:
   - distorsion correction
   - preproc
   - eddy
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-  - "MRtrix3":
-      description: "Toolbox for image processing, analysis and visualisation of dMRI."
-      homepage: "https://mrtrix.readthedocs.io/en/latest/"
-  - "FSL":
-      description: "FSL Toolbox and Scilpy Toolbox"
-      homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+  - MRtrix3:
+      description: Toolbox for image processing, analysis and visualisation of dMRI.
+      homepage: https://mrtrix.readthedocs.io/en/latest/
+      identifier: ""
+  - FSL:
+      description: FSL Toolbox and Scilpy Toolbox
+      homepage: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
+      identifier: ""
 input:
   # Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
 
-  - dwi:
-      type: file
-      description: DWI Nifti image
-      pattern: "*.{nii,nii.gz}"
+    - dwi:
+        type: file
+        description: DWI Nifti image
+        pattern: "*.{nii,nii.gz}"
 
-  - bval:
-      type: file
-      description: B-values in FSL format [DWI].
-      pattern: "*.bval"
+    - bval:
+        type: file
+        description: B-values in FSL format [DWI].
+        pattern: "*.bval"
 
-  - bvec:
-      type: file
-      description: B-values in FSL format [DWI].
-      pattern: "*.bvec"
+    - bvec:
+        type: file
+        description: B-values in FSL format [DWI].
+        pattern: "*.bvec"
 
-  - rev_dwi:
-      type: file
-      description: DWI Nifti image [rev-DWI].
-      pattern: "*.{nii,nii.gz}"
+    - rev_dwi:
+        type: file
+        description: DWI Nifti image [rev-DWI].
+        pattern: "*.{nii,nii.gz}"
 
-  - rev_bval:
-      type: file
-      description: B-values in FSL format [rev-DWI].
-      pattern: "*.bval"
+    - rev_bval:
+        type: file
+        description: B-values in FSL format [rev-DWI].
+        pattern: "*.bval"
 
-  - rev_bvec:
-      type: file
-      description: B-vectors in FSL format [rev-DWI].
-      pattern: "*.bvec"
+    - rev_bvec:
+        type: file
+        description: B-vectors in FSL format [rev-DWI].
+        pattern: "*.bvec"
 
-  - corrected_b0s:
-      type: file
-      description: Nifti volume b0 corrected
-      pattern: "*__corrected_b0s.nii.gz"
+    - corrected_b0s:
+        type: file
+        description: Nifti volume b0 corrected
+        pattern: "*__corrected_b0s.nii.gz"
 
-  - topup_fieldcoef:
-      type: file
-      description: Nifti volume - topup field to correct for distorsion
-      pattern: "*_fieldcoef.nii.gz"
+    - topup_fieldcoef:
+        type: file
+        description: Nifti volume - topup field to correct for distorsion
+        pattern: "*_fieldcoef.nii.gz"
 
-  - topup_movpart:
-      type: file
-      description: Text file - topup movpart
-      pattern: "*__movpar.txt"
-
+    - topup_movpart:
+        type: file
+        description: Text file - topup movpart
+        pattern: "*__movpar.txt"
 args:
   - slice_drop_flag:
       type: boolean
@@ -83,7 +85,7 @@ args:
       description: Prefix for the topup output.
       default: "topup_results"
   - b0_thr_extract_b0:
-      type: int
+      type: integer
       description: Threshold under which b-values are considered to be b0s.
       default: 10
   - encoding:
@@ -96,7 +98,7 @@ args:
       description: Total readout time from the DICOM metadata.
       default: 0.062
   - dilate_b0_mask_prelim_brain_extraction:
-      type: int
+      type: integer
       description: Number of times to repeatedly apply the filter.
       default: 5
   - eddy_cmd:
@@ -115,48 +117,79 @@ args:
       type: boolean
       description: Run QC for Eddy.
       default: false
-
 output:
-  #Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
   - dwi_corrected:
-      type: file
-      description: Nifti volume - DWI corrected
-      pattern: "*__dwi_corrected.nii.gz"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__dwi_corrected.nii.gz":
+          type: file
+          description: Nifti volume - DWI corrected.
+          pattern: "*__dwi_corrected.nii.gz"
   - bval_corrected:
-      type: file
-      description: B-values corrected in FSL format
-      pattern: "*__bval_eddy"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__dwi_eddy_corrected.bval":
+          type: file
+          description: B-values corrected in FSL format
+          pattern: "*__dwi_eddy_corrected.bval"
+      - _corrected:
+          type: integer
+          description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
+          pattern: "remove-me"
   - bvec_corrected:
-      type: file
-      description: B-vectors corrected in FSL format
-      pattern: "*__dwi_eddy_corrected.bvec"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__dwi_eddy_corrected.bvec":
+          type: file
+          description: B-vectors corrected in FSL format
+          pattern: "*__dwi_eddy_corrected.bvec"
   - b0_mask:
-      type: file
-      description: Nifti volume - Mask for b0 corrected
-      pattern: "*__b0_bet_mask.nii.gz"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__b0_bet_mask.nii.gz":
+          type: file
+          description: Nifti volume - Mask for b0 corrected
+          pattern: "*__b0_bet_mask.nii.gz"
   - dwi_eddy_mqc:
-      type: file
-      description: .gif file containing quality control image for the eddy process. Made for use in MultiQC report.
-      pattern: "*_dwi_eddy_mqc.gif"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__dwi_eddy_mqc.gif":
+          type: file
+          description: |
+            .gif file containing quality control image for the eddy process.
+            Made for use in MultiQC report.
+          pattern: "*_dwi_eddy_mqc.gif"
   - rev_dwi_eddy_mqc:
-      type: file
-      description: .gif file containing quality control image for the eddy process for the rev_dwi. Made for use in MultiQC report.
-      pattern: "*_rev_dwi_eddy_mqc.gif"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__rev_dwi_eddy_mqc.gif":
+          type: file
+          description: |
+            .gif file containing quality control image for the eddy process
+            for the rev_dwi. Made for use in MultiQC report.
+          pattern: "*_rev_dwi_eddy_mqc.gif"
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 authors:
   - "@arnaudbore"

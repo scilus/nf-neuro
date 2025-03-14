@@ -1,5 +1,5 @@
----
-name: "betcrop_antsbet"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: betcrop_antsbet
 description: Perform Brain extraction using antsBrainExtraction.sh on T1 image.
 keywords:
   - T1
@@ -7,77 +7,89 @@ keywords:
   - ants
   - scilpy
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-  - "ants":
-      description: "Advanced Normalization Tools."
-      homepage: "https://github.com/ANTsX/ANTs"
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+  - ants:
+      description: Advanced Normalization Tools.
+      homepage: https://github.com/ANTsX/ANTs
 
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
 
-  - t1:
-      type: file
-      description: Nifti t1 volume to perform BET.
-      pattern: "*.{nii,nii.gz}"
-      mandatory: true
+    - t1:
+        type: file
+        description: Nifti t1 volume to perform BET.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
 
-  - template:
-      type: file
-      description: Nifti Anatomical template to perform BET.
-      pattern: "*.{nii,nii.gz}"
-      mandatory: true
+    - template:
+        type: file
+        description: Nifti Anatomical template to perform BET.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
 
-  - tissues_probabilities:
-      type: file
-      description: |
-        Brain probability mask (in template space), with intensity
-        range 1 (definitely brain) to 0 (definitely background).
-      pattern: "*.{nii,nii.gz}"
-      mandatory: true
+    - tissues_probabilities:
+        type: file
+        description: |
+          Brain probability mask (in template space), with intensity
+          range 1 (definitely brain) to 0 (definitely background).
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
 
-  - mask:
-      type: file
-      description: |
-        Brain mask (in template space) used to restrict metric
-        computation when performing registration.
-      pattern: "*.{nii,nii.gz}"
-      mandatory: false
+    - mask:
+        type: file
+        description: |
+          Brain mask (in template space) used to restrict metric
+          computation when performing registration.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
 
-  - initial_affine:
-      type: file
-      description: |
-        Affine transform from T1w space to DWI space, used as
-        initialization for registration algorithms.
-      pattern: "*.{mat/txt}"
-      mandatory: false
+    - initial_affine:
+        type: file
+        description: |
+          Affine transform from T1w space to DWI space, used as
+          initialization for registration algorithms.
+        pattern: "*.{mat/txt}"
+        mandatory: false
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
   - t1:
-      type: file
-      description: Nifti T1 volume brain-extracted.
-      pattern: "*t1_bet.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*t1_bet.nii.gz":
+          type: file
+          description: Nifti T1 volume brain-extracted.
+          pattern: "*t1_bet.{nii,nii.gz}"
 
   - mask:
-      type: file
-      description: T1 mask brain-extracted and cropped.
-      pattern: "*t1_bet_mask.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*t1_bet_mask.nii.gz":
+          type: file
+          description: T1 mask brain-extracted and cropped.
+          pattern: "*t1_bet_mask.{nii,nii.gz}"
 
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 
 authors:
   - "@ThoumyreStanislas"

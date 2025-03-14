@@ -1,4 +1,5 @@
-name: "io_nii2dcm"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: io_nii2dcm
 description: Convert NIfTI files to DICOM format.
 keywords:
   - NIfTI
@@ -6,40 +7,47 @@ keywords:
   - Conversion
 
 tools:
-  - "MRtrix3":
-      description: "Toolbox for image processing, analysis and visualisation of dMRI."
-      homepage: "https://www.mrtrix.org/"
-  - "nii2dcm":
-      description: "A tool to convert NIfTI files to DICOM format."
-      homepage: "https://github.com/Onset-lab/nii2dcm"
+  - MRtrix3:
+      description: Toolbox for image processing, analysis and visualisation of dMRI.
+      homepage: https://www.mrtrix.org/
+      identifier: ""
+  - nii2dcm:
+      description: A tool to convert NIfTI files to DICOM format.
+      homepage: https://github.com/Onset-lab/nii2dcm
 
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
 
-  - niftis:
-      type: list
-      description: NIfTI files to be converted to DICOM format
-      pattern: "*.{nii,nii.gz}"
+    - niftis:
+        type: list
+        description: NIfTI files to be converted to DICOM format
+        pattern: "*.{nii,nii.gz}"
 
-  - dicom:
-      type: file
-      description: Reference DICOM file (optional)
-      pattern: "*.dcm"
+    - dicom:
+        type: file
+        description: Reference DICOM file (optional)
+        pattern: "*.dcm"
 
 output:
   - dicom_directory:
-      type: directory
-      description: Directory containing the DICOM files
-      pattern: "DICOM/"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - DICOM/:
+          type: directory
+          description: Directory containing the DICOM files
+          pattern: DICOM/
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 authors:
   - "@GuillaumeTh"

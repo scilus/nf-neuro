@@ -8,14 +8,14 @@ process REGISTRATION_ANTS {
         "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
 
     input:
-    tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
+    tuple val(meta), path(fixedimage), path(movingimage), path(mask) /* optional, input = [] */
 
     output:
     tuple val(meta), path("*_warped.nii.gz")                        , emit: image
-    tuple val(meta), path("*__output0Warp.nii.gz")                  , emit: warp, optional:true
-    tuple val(meta), path("*__output1GenericAffine.mat")            , emit: affine
-    tuple val(meta), path("*__output1InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
-    tuple val(meta), path("*__output0InverseAffine.mat")            , emit: inverse_affine
+    tuple val(meta), path("*__output0GenericAffine.mat")             , emit: affine
+    tuple val(meta), path("*__output1InverseAffine.mat")            , emit: inverse_affine
+    tuple val(meta), path("*__output1Warp.nii.gz")                  , emit: warp, optional:true
+    tuple val(meta), path("*__output0InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
     tuple val(meta), path("*_registration_ants_mqc.gif")            , emit: mqc, optional: true
     path "versions.yml"                                             , emit: versions
 
@@ -51,18 +51,17 @@ process REGISTRATION_ANTS {
     $ants $dimension -f $fixedimage -m $movingimage -o output -t $transform $args $seed
 
     mv outputWarped.nii.gz ${prefix}__warped.nii.gz
-    mv output0GenericAffine.mat ${prefix}__output1GenericAffine.mat
+    mv output0GenericAffine.mat ${prefix}__output0GenericAffine.mat
 
     if [ $transform != "t" ] && [ $transform != "r" ] && [ $transform != "a" ];
     then
-        mv output1InverseWarp.nii.gz ${prefix}__output1InverseWarp.nii.gz
-        mv output1Warp.nii.gz ${prefix}__output0Warp.nii.gz
+        mv output1InverseWarp.nii.gz ${prefix}__output0InverseWarp.nii.gz
+        mv output1Warp.nii.gz ${prefix}__output1Warp.nii.gz
     fi
 
-    antsApplyTransforms -d 3 -i $fixedimage -r $movingimage -o Linear[output.mat]\
-                        -t [${prefix}__output1GenericAffine.mat,1]
-
-    mv output.mat ${prefix}__output0InverseAffine.mat
+    antsApplyTransforms -d 3 -i $fixedimage -r $movingimage \
+                        -o Linear[${prefix}__output1InverseAffine.mat] \
+                        -t [${prefix}__output0GenericAffine.mat,1]
 
     ### ** QC ** ###
     if $run_qc;

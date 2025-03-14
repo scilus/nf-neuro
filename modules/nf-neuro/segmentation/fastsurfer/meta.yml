@@ -1,5 +1,5 @@
----
-name: "segmentation_fastsurfer"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: segmentation_fastsurfer
 description: write your description here
 keywords:
   - segmentation
@@ -7,26 +7,31 @@ keywords:
   - deepmi
 
 tools:
-  - "Fastsurfer":
-      description: "The FastSurfer pipeline consists of two main parts for segmentation and surface reconstruction."
-      homepage: "https://github.com/Deep-MI/FastSurfer"
+  - Fastsurfer:
+      description: The FastSurfer pipeline consists of two main parts for segmentation
+        and surface reconstruction.
+      homepage: https://github.com/Deep-MI/FastSurfer
 
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
 
-  - anat:
-      type: file
-      description: An anatomy (ex, .nii.gz).
-      pattern: "*.{nii,nii.gz,mgz}"
+    - anat:
+        type: file
+        description: An anatomy (ex, .nii.gz).
+        pattern: "*.{nii,nii.gz,mgz}"
 
-  - fs_license:
-      type: file
-      description: The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html. Optional. If you have already set your license as prescribed by Freesurfer (copied to a .license file in your $FREESURFER_HOME), this is not required.
-      pattern: "*.txt"
+    - fs_license:
+        type: file
+        description:
+          The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html.
+          Optional. If you have already set your license as prescribed by Freesurfer
+          (copied to a .license file in your $FREESURFER_HOME), this is not required.
+        pattern: "*.txt"
 
 args:
   - acq3T:
@@ -49,22 +54,21 @@ args:
       default: true
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
   - fastsurferdirectory:
-      type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_fastsurfer":
+          type: directory
+          description: Fastsurfer segmentation outputs.
+          pattern: "*_fastsurfer"
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 authors:
   - "@arnaudbore"
 maintainers:

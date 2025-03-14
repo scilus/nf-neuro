@@ -1,96 +1,128 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "reconst_noddi"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: reconst_noddi
 description: Run NODDI modelling pipeline using AMICO from DWI data.
 keywords:
   - Diffusion MRI
   - NODDI
   - Microstructure modeling
 tools:
-  - "Scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-  - "NODDI":
-      description: "Method to compute neurite orientation dispersion and density imaging."
-      doi: "10.1016/j.neuroimage.2012.03.072"
-  - "AMICO":
-      description: "Accelerated Microstructure Imaging via Convex Optimization."
-      homepage: "https://github.com/daducci/AMICO"
-      doi: "10.1016/j.neuroimage.2014.10.026"
+  - Scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+  - NODDI:
+      description: Method to compute neurite orientation dispersion and density imaging.
+      doi: 10.1016/j.neuroimage.2012.03.072
+  - AMICO:
+      description: Accelerated Microstructure Imaging via Convex Optimization.
+      homepage: https://github.com/daducci/AMICO
+      doi: 10.1016/j.neuroimage.2014.10.026
 
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
 
-  - dwi:
-      type: file
-      description: Nifti DWI file acquired with a NODDI compatible protocol (multi-shell).
-      pattern: "*.{nii,nii.gz}"
+    - dwi:
+        type: file
+        description: Nifti DWI file acquired with a NODDI compatible protocol (multi-shell).
+        pattern: "*.{nii,nii.gz}"
 
-  - bval:
-      type: file
-      description: B-values in FSL format.
-      pattern: "*.bval"
+    - bval:
+        type: file
+        description: B-values in FSL format.
+        pattern: "*.bval"
 
-  - bvec:
-      type: file
-      description: B-vectors in FSL format.
-      pattern: "*.bvec"
+    - bvec:
+        type: file
+        description: B-vectors in FSL format.
+        pattern: "*.bvec"
 
-  - mask:
-      type: file
-      description: Nifti brain mask.
-      pattern: "*mask.{nii,nii.gz}"
+    - mask:
+        type: file
+        description: Nifti brain mask.
+        pattern: "*mask.{nii,nii.gz}"
 
-  - kernels:
-      type: directory
-      description: Folder containg kernels.
-      pattern: "kernels"
+    - kernels:
+        type: directory
+        description: Folder containg kernels.
+        pattern: kernels
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
   - dir:
-      type: file
-      description: Nifti file main direction.
-      pattern: "*__fit_dir.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__fit_dir.nii.gz":
+          type: file
+          description: Nifti file main direction.
+          pattern: "*__fit_dir.{nii,nii.gz}"
 
   - fwf:
-      type: file
-      description: Nifti file for Free Water Fraction.
-      pattern: "*__fit_FWF.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__fit_FWF.nii.gz":
+          type: file
+          description: Nifti file for Free Water Fraction.
+          pattern: "*__fit_FWF.{nii,nii.gz}"
 
   - ndi:
-      type: file
-      description: Nifti file for Neurite Density Index
-      pattern: "*__fit_NDI.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__fit_NDI.nii.gz":
+          type: file
+          description: Nifti file for Neurite Density Index
+          pattern: "*__fit_NDI.{nii,nii.gz}"
 
   - ecvf:
-      type: file
-      description: Nifti file for Extra-Compartment Volume Fraction.
-      pattern: "*__fit_ECVF.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__fit_ECVF.nii.gz":
+          type: file
+          description: Nifti file for Extra-Compartment Volume Fraction.
+          pattern: "*__fit_ECVF.{nii,nii.gz}"
 
   - odi:
-      type: file
-      description: Nifti file for Orientation Dispersion Index.
-      pattern: "*__fit_ODI.{nii,nii.gz}"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+
+      - "*__fit_ODI.nii.gz":
+          type: file
+          description: Nifti file for Orientation Dispersion Index.
+          pattern: "*__fit_ODI.{nii,nii.gz}"
 
   - kernels:
-      type: directory
-      description: Folder containing kernels.
-      pattern: "kernels"
+      - kernels:
+          type: directory
+          description: Folder containing kernels.
+          pattern: kernels
 
   - versions:
-      type: file
-      description: File containing software versions.
-      pattern: "versions.yml"
+      - versions.yml:
+          type: file
+          description: File containing software versions.
+          pattern: versions.yml
 
 authors:
   - "@Manonedde"
