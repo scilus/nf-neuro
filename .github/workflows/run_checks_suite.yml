@@ -80,7 +80,7 @@ jobs:
       - name: Run ECLint check
         run: npx editorconfig-checker -exclude README.md $(git ls-files | grep -v test)
 
-  nf-test-changes:
+  lint-changes:
     name: compute - changes
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
@@ -95,7 +95,7 @@ jobs:
 
       - name: List nf-test files
         id: changes
-        uses: adamrtalbot/detect-nf-test-changes@7c8be3ffd0d6538312b363c8c949dbbf5f26c3dd # v0.0.4
+        uses: adamrtalbot/detect-nf-test-changes@de3c3c8e113031b4f15a3c1104b5f135e8346997 # v0.0.6
         with:
           head: ${{ github.sha }}
           base: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
@@ -112,14 +112,47 @@ jobs:
           echo ${{ steps.components.outputs.modules }}
           echo ${{ steps.components.outputs.subworkflows }}
 
+  nf-test-changes:
+    name: compute - changes
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
+    outputs:
+      paths: ${{ steps.changes.outputs.components }}
+      modules: ${{ steps.components.outputs.modules }}
+      subworkflows: ${{ steps.components.outputs.subworkflows }}
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: List nf-test files
+        id: changes
+        uses: adamrtalbot/detect-nf-test-changes@de3c3c8e113031b4f15a3c1104b5f135e8346997 # v0.0.6
+        with:
+          head: ${{ github.sha }}
+          base: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
+          n_parents: 2
+          ignored: "*meta.yml"
+
+      - name: Separate modules and subworkflows
+        id: components
+        run: |
+          echo modules=$(echo '${{ steps.changes.outputs.components }}' | jq -c '. | map(select(contains("modules"))) | map(gsub("modules/nf-neuro/"; ""))') >> $GITHUB_OUTPUT
+          echo subworkflows=$(echo '${{ steps.changes.outputs.components }}' | jq '. | map(select(contains("subworkflows"))) | map(gsub("subworkflows/nf-neuro/"; ""))') >> $GITHUB_OUTPUT
+
+      - name: debug
+        run: |
+          echo ${{ steps.components.outputs.modules }}
+          echo ${{ steps.components.outputs.subworkflows }}
+
   lint-modules:
     name: lint - modules
-    needs: [nf-test-changes]
-    if: ${{ (needs.nf-test-changes.outputs.modules != '[]') }}
+    needs: [lint-changes]
+    if: ${{ (needs.lint-changes.outputs.modules != '[]') }}
     strategy:
       fail-fast: false
       matrix:
-        module: ["${{ fromJson(needs.nf-test-changes.outputs.modules) }}"]
+        module: ["${{ fromJson(needs.lint-changes.outputs.modules) }}"]
     uses: ./.github/workflows/lint_component.yml
     with:
       type: "module"
@@ -129,12 +162,12 @@ jobs:
 
   lint-subworkflows:
     name: lint - subworkflows
-    needs: [nf-test-changes]
-    if: ${{ ( needs.nf-test-changes.outputs.subworkflows != '[]') }}
+    needs: [lint-changes]
+    if: ${{ ( needs.lint-changes.outputs.subworkflows != '[]') }}
     strategy:
       fail-fast: false
       matrix:
-        subworkflow: ["${{ fromJson(needs.nf-test-changes.outputs.subworkflows) }}"]
+        subworkflow: ["${{ fromJson(needs.lint-changes.outputs.subworkflows) }}"]
     uses: ./.github/workflows/lint_component.yml
     with:
       type: "subworkflow"
@@ -197,7 +230,7 @@ jobs:
   confirm-pass:
     name: status
     runs-on: ubuntu-latest
-    needs: [prettier, editorconfig, nf-test-changes, lint-modules, lint-subworkflows, nf-test, upload-reports]
+    needs: [prettier, editorconfig, nf-test-changes, lint-changes, lint-modules, lint-subworkflows, nf-test, upload-reports]
     if: ${{ !cancelled() }}
     steps:
       - name: All tests ok
