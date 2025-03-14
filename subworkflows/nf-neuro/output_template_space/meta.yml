@@ -1,0 +1,59 @@
+name: "output_template_space"
+description: |
+  This subworkflow is used to output files in a specific template space.
+  It leverages the `templateflow` template repository to fetch the requested
+  template and its associated files, then register the input files to the
+  requested template space.
+
+  The subworkflow relies on three parameters to be set:
+
+    - params.template: the template to use (e.g., 'MNI152NLin2009cAsym')
+    - params.templateflow_home: the path to the templateflow home directory.
+      will be used to store the templateflow templates or to fetch them if
+      they were already downloaded.
+    - params.template_res: the resolution of the template (e.g., 1)
+    - params.template_cohort: the cohort of the template (e.g., 1)
+
+  An example of how to set the module's ext.args can be find in the
+  `test/nextflow.config` file.
+keywords:
+  - template
+  - TemplateFlow
+  - registration
+components:
+  - registration/ants
+  - registration/antsapplytransforms
+  - registration/tractogram
+  - betcrop/fslbetcrop
+  - utils/templateflow
+input:
+  - ch_anat:
+      type: file
+      description: |
+        Channel containing the anatomical image to use to compute the
+        registration into template space.
+        Structure: [ val(meta), path(anat) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_nifti_files:
+      type: file
+      description: |
+        Channel containing the NIfTI files to register into the template space.
+        Structure: [ val(meta), [path(nifti1), path(nifti2), path(nifti3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_trk_files:
+      type: file
+      description: |
+        Channel containing the TRK files to register into the template space.
+        Structure: [ val(meta), [path(trk1), path(trk2), path(trk3), ...] ]
+      pattern: "*.trk"
+output:
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"
