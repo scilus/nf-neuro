@@ -73,7 +73,6 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** run BET by default (bit painful, but necessary)    ** //
     ch_bet_tpl_t1w = ch_t1w_tpl
         | map{ t1w -> [ [id: "template"], t1w, [], [] ] }
-        | view()
 
     BET_T1W ( ch_bet_tpl_t1w )
     ch_versions = ch_versions.mix(BET_T1W.out.versions)
@@ -94,7 +93,6 @@ workflow OUTPUT_TEMPLATE_SPACE {
     ch_registration = ch_anat
         | combine(params.use_template_t2w ? ch_t2w_tpl : ch_t1w_tpl)
         | map{ meta, anat, tpl -> tuple(meta, anat, tpl, []) }
-        | view()
 
     REGISTRATION_ANTS ( ch_registration )
     ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions)
@@ -108,7 +106,6 @@ workflow OUTPUT_TEMPLATE_SPACE {
         | join(REGISTRATION_ANTS.out.image)
         | join(REGISTRATION_ANTS.out.warp)
         | join(REGISTRATION_ANTS.out.affine)
-        | view()
 
     REGISTRATION_ANTSAPPLYTRANSFORMS ( ch_files_to_transform )
     ch_versions = ch_versions.mix(REGISTRATION_ANTSAPPLYTRANSFORMS.out.versions)
@@ -121,7 +118,6 @@ workflow OUTPUT_TEMPLATE_SPACE {
         | map{ meta, trk, image, warp, affine ->
             tuple(meta, image, affine, trk, [], warp)
         }
-        | view()
 
     REGISTRATION_TRACTOGRAM ( ch_tractograms_to_transform )
     ch_versions = ch_versions.mix(REGISTRATION_TRACTOGRAM.out.versions)
