@@ -48,51 +48,52 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
                             $image_type\
                             $default_val\
                             $output_dtype
+
+        ### ** QC ** ###
+        if $run_qc;
+        then
+            mv $reference reference.nii.gz
+            extract_dim=\$(mrinfo ${prefix}__\${bname}${suffix}.nii.gz -size)
+            read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
+
+            # Get the middle slice
+            coronal_dim=\$((\$coronal_dim / 2))
+            axial_dim=\$((\$axial_dim / 2))
+            sagittal_dim=\$((\$sagittal_dim / 2))
+
+            # Set viz params.
+            viz_params="--display_slice_number --display_lr --size 256 256"
+            # Iterate over images.
+            for image in reference \${bname}${suffix};
+            do
+                scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+                    --slices \$coronal_dim --axis coronal \$viz_params
+                scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+                    --slices \$sagittal_dim --axis sagittal \$viz_params
+                scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+                    --slices \$axial_dim --axis axial \$viz_params
+                if [ \$image != reference ];
+                then
+                    title="Transformed"
+                else
+                    title="Reference"
+                fi
+                convert +append \${image}_coronal*.png \${image}_axial*.png \
+                    \${image}_sagittal*.png \${image}_mosaic.png
+                convert -annotate +20+230 "\${title}" -fill white -pointsize 30 \
+                    \${image}_mosaic.png \${image}_mosaic.png
+                # Clean up.
+                rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
+            done
+            # Create GIF.
+            convert -delay 10 -loop 0 -morph 10 \
+                \${bname}${suffix}_mosaic.png reference_mosaic.png \${bname}${suffix}_mosaic.png \
+                ${prefix}_\${bname}${suffix_qc}_registration_antsapplytransforms_mqc.gif
+            # Clean up.
+            rm *_mosaic.png
+        fi
     done
 
-    ### ** QC ** ###
-    if $run_qc;
-    then
-        mv $reference reference.nii.gz
-        extract_dim=\$(mrinfo ${prefix}__${suffix}.nii.gz -size)
-        read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
-
-        # Get the middle slice
-        coronal_dim=\$((\$coronal_dim / 2))
-        axial_dim=\$((\$axial_dim / 2))
-        sagittal_dim=\$((\$sagittal_dim / 2))
-
-        # Set viz params.
-        viz_params="--display_slice_number --display_lr --size 256 256"
-        # Iterate over images.
-        for image in reference warped;
-        do
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
-                --slices \$coronal_dim --axis coronal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
-                --slices \$sagittal_dim --axis sagittal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
-                --slices \$axial_dim --axis axial \$viz_params
-            if [ \$image != reference ];
-            then
-                title="Transformed"
-            else
-                title="Reference"
-            fi
-            convert +append \${image}_coronal*.png \${image}_axial*.png \
-                \${image}_sagittal*.png \${image}_mosaic.png
-            convert -annotate +20+230 "\${title}" -fill white -pointsize 30 \
-                \${image}_mosaic.png \${image}_mosaic.png
-            # Clean up.
-            rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
-        done
-        # Create GIF.
-        convert -delay 10 -loop 0 -morph 10 \
-            warped_mosaic.png reference_mosaic.png warped_mosaic.png \
-            ${prefix}_${suffix_qc}_registration_antsapplytransforms_mqc.gif
-        # Clean up.
-        rm *_mosaic.png
-    fi
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
