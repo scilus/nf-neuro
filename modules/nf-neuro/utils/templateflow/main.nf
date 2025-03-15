@@ -44,8 +44,8 @@ process UTILS_TEMPLATEFLOW {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        templateflow: \$(python3 -c 'import templateflow; print(templateflow.__version__)')
-        python: \$(python3 -c 'import platform; print(platform.python_version())')
+        templateflow: \$(python -c 'import os; os.environ["TEMPLATEFLOW_HOME"] = os.path.join(os.getcwd()); import templateflow; print(templateflow.__version__)')
+        python: \$(python -c 'import platform; print(platform.python_version())')
     END_VERSIONS
     """
 }
