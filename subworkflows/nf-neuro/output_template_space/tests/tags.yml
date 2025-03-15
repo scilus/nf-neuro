@@ -1,0 +1,2 @@
+subworkflows/output_template_space:
+  - subworkflows/nf-neuro/output_template_space/**
