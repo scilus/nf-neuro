@@ -35,6 +35,12 @@ process UTILS_TEMPLATEFLOW {
     mkdir tpl-${template}
     touch ${template}_metadata.json
     touch ${template}_citations.bib
+    touch ${template}_T1w.nii.gz
+    touch ${template}_T2w.nii.gz
+    touch ${template}_desc-brain_mask.nii.gz
+    touch ${template}_label-CSF_probseg.nii.gz
+    touch ${template}_label-GM_probseg.nii.gz
+    touch ${template}_label-WM_probseg.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
