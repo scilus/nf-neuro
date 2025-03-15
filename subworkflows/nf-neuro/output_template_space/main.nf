@@ -104,7 +104,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** Need to unpack the files and apply the transformation to each one ** //
     ch_files_to_transform = ch_nifti_files
         | join(REGISTRATION_ANTS.out.image)
-        | join(REGISTRATION_ANTS.out.warp)
+        | join(REGISTRATION_ANTS.out.inverse_warp)
         | join(REGISTRATION_ANTS.out.affine)
 
     REGISTRATION_ANTSAPPLYTRANSFORMS ( ch_files_to_transform )
@@ -113,7 +113,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** Apply the transformation to the tractograms ** //
     ch_tractograms_to_transform = ch_trk_files
         | join(REGISTRATION_ANTS.out.image)
-        | join(REGISTRATION_ANTS.out.warp)
+        | join(REGISTRATION_ANTS.out.inverse_warp)
         | join(REGISTRATION_ANTS.out.affine)
         | map{ meta, trk, image, warp, affine ->
             tuple(meta, image, affine, trk, [], warp)
