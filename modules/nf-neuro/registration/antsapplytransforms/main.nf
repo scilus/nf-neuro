@@ -104,7 +104,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "warped"
+    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "__warped"
 
     """
     antsApplyTransforms -h
