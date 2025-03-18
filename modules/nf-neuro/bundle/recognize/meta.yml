@@ -21,22 +21,45 @@ input:
 
   - tractograms:
       type: file
-      description: Tractogram file(s) for bundle extraction
+      description: Tractogram file(s) for bundle extraction [Mandatory]
       pattern: "*.trk"
 
   - transform:
       type: file
-      description: Transform matrix bringing the atlas to native space
+      description: Transform matrix bringing the atlas to native space [Mandatory]
       pattern: "*.mat"
 
   - config:
       type: file
-      description: Bundle atlas configuration file
+      description: Bundle atlas configuration file [Mandatory]
       pattern: "*.json"
 
   - directory:
       type: directory
-      description: Directory containing the reference atlas
+      description: Directory containing the reference atlas [Mandatory]
+
+args:
+  - minimal_vote_ratio:
+      type: float
+      description: "Streamlines will only be considered for saving if recognized often enough. 
+                    The ratio is a value between 0 and 1."
+      default: 0.5
+  - seed:
+      type: int
+      description: "Random number generator seed."
+      default: 0
+  - rbx_processes:
+      type: int
+      description: "Number of process used."
+      default: 0
+  - outlier_alpha:
+      type: float
+      description: "Percent of the length of the tree that clusters of individual streamlines will be pruned."
+      default: 0.6
+  - run_qc:
+      type: boolean
+      description: "Generate MultiQC outputs."
+      default: "false"
 
 output:
   - meta:
