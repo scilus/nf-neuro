@@ -50,11 +50,11 @@ workflow OUTPUT_TEMPLATE_SPACE {
         def path = "${params.templateflow_home}/tpl-${params.template}/"
         if ( params.templateflow_cohort ) {
             ch_t1w_tpl = Channel.fromPath(
-                "${path}/${params.templateflow_cohort}/*res-*${params.templateflow_res}_T1w.nii.gz",
+                "${path}/cohort-${params.templateflow_cohort}/*res-*${params.templateflow_res}_T1w.nii.gz",
                 checkIfExists: false
             )
             ch_t2w_tpl = Channel.fromPath(
-                "${path}/${params.templateflow_cohort}/*res-*${params.templateflow_res}_T2w.nii.gz",
+                "${path}/cohort-${params.templateflow_cohort}/*res-*${params.templateflow_res}_T2w.nii.gz",
                 checkIfExists: false
             )
         } else {
