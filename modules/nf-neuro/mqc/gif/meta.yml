@@ -1,8 +1,9 @@
 ---
 name: "mqc_gif"
-description: generates quality control (QC) screenshots for for two images by comparing one to the other.
-  It extracts middle slices (sagittal, coronal, and axial views) from both volumes,creates
-  annotated mosaics, and combines them into an animated GIF for quick visual comparison.
+description: generates quality control (QC) screenshots between two MRI volumes or,
+ if you give only one input, runs through all the images in a volume in 4d.
+ It extracts the central sections (sagittal, coronal and axial) of the volumes,
+ creates annotated mosaics and combines them into an animated GIF for rapid visual comparison.
 keywords:
   - mqc
   - Visualisation
@@ -27,7 +28,8 @@ input:
 
   - image1:
       type: file
-      description: first image to be analysed, typically for alignment with the seconde image.
+      description: first image to be analysed, either to be compared with the second,
+       or to be analysed across the whole set of images, in which case you need to be in 4d.
       pattern: "*.{nii,nii.gz}"
 
   - image2:
@@ -48,11 +50,6 @@ args:
       type: string
       description: suffix given to final image
 
-  - fourth_dim:
-      type: boolean
-      default: false
-      description: set to true if your input volumes contain a fourth dimension
-
 output:
   - meta:
       type: map
@@ -62,7 +59,7 @@ output:
 
   - mqc_screenshots:
       type: file
-      description: .gif file containing quality control image for visually compares the warped and reference MRI volumes using middle-slice mosaics.
+      description: .gif file containing quality control image for visually compares MRI volumes using middle-slice mosaics.
       pattern: "*_screenshots_merged_mqc.gif"
 
   - versions:
