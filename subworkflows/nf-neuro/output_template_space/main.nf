@@ -92,7 +92,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** Register the subject to the template space ** //
     ch_registration = ch_anat
         | combine(params.use_template_t2w ? ch_t2w_tpl : ch_t1w_tpl)
-        | map{ meta, anat, tpl -> tuple(meta, anat, tpl, []) }
+        | map{ meta, anat, tpl -> tuple(meta, tpl, anat, []) }
 
     REGISTRATION_ANTS ( ch_registration )
     ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions)
