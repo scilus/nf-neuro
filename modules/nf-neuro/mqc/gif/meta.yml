@@ -1,5 +1,5 @@
 ---
-name: "mqc_screenshots"
+name: "mqc_gif"
 description: generates quality control (QC) screenshots for for two images by comparing one to the other.
   It extracts middle slices (sagittal, coronal, and axial views) from both volumes,creates
   annotated mosaics, and combines them into an animated GIF for quick visual comparison.
