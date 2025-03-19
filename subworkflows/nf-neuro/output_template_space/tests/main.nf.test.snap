@@ -1,0 +1,46 @@
+{
+    "output to template MNI152NLin2009aAsym - stub": {
+        "content": [
+            [
+                "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
+                "versions.yml:md5,a166b69e9dc7963b29c7a5944fbbf72a",
+                "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
+                "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf",
+                "versions.yml:md5,d4da7406446940901e5757ec63bf3d8f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-15T07:57:57.657078"
+    },
+    "output to template MNI152NLin2009aAsym": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
+                    "versions.yml:md5,29c5499c53451b27652c9eb978a79e76",
+                    "versions.yml:md5,75c8524f95824b358ede7fe52dfa35e6",
+                    "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
+                    "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf",
+                    "versions.yml:md5,b180b92a88347fe68d25e2c8066322f1"
+                ],
+                "versions": [
+                    "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
+                    "versions.yml:md5,29c5499c53451b27652c9eb978a79e76",
+                    "versions.yml:md5,75c8524f95824b358ede7fe52dfa35e6",
+                    "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
+                    "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf",
+                    "versions.yml:md5,b180b92a88347fe68d25e2c8066322f1"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-14T18:25:11.135609"
+    }
+}

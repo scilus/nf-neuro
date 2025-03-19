@@ -1,0 +1,165 @@
+nextflow_workflow {
+
+    name "Test Subworkflow OUTPUT_TEMPLATE_SPACE"
+    script "../main.nf"
+    workflow "OUTPUT_TEMPLATE_SPACE"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/output_template_space"
+
+    tag "registration"
+    tag "registration/ants"
+    tag "registration/antsapplytransforms"
+    tag "registration/tractogram"
+    tag "betcrop"
+    tag "betcrop/fslbetcrop"
+    tag "utils"
+    tag "utils/templateflow"
+    tag "load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "tractometry.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    } /* Commented since we do not have local data on runners
+    test("output to template MNI152NLin2009cAsym with local folder") {
+        config "./nextflow_local.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        tractometry: it.simpleName == "tractometry"
+                    }
+                input[0] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        file("\${test_data_directory}/mni_masked.nii.gz")
+                    ]
+                }
+                input[1] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/IFGWM.nii.gz"),
+                            file("\${test_data_directory}/IFGWM_labels_map.nii.gz")
+                        ]
+                    ]
+                }
+                input[2] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/IFGWM.trk"),
+                            file("\${test_data_directory}/IFGWM_color.trk"),
+                            file("\${test_data_directory}/IFGWM_uni.trk")
+                        ]
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    } */
+    test("output to template MNI152NLin2009aAsym") {
+        config "./nextflow.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        tractometry: it.simpleName == "tractometry"
+                    }
+                input[0] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        file("\${test_data_directory}/mni_masked.nii.gz")
+                    ]
+                }
+                input[1] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/IFGWM.nii.gz"),
+                            file("\${test_data_directory}/IFGWM_labels_map.nii.gz")
+                        ]
+                    ]
+                }
+                input[2] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/IFGWM.trk"),
+                            file("\${test_data_directory}/IFGWM_color.trk"),
+                            file("\${test_data_directory}/IFGWM_uni.trk")
+                        ]
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+    test("output to template MNI152NLin2009aAsym - stub") {
+        config "./nextflow.config"
+        options "-stub-run"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        tractometry: it.simpleName == "tractometry"
+                    }
+                input[0] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        file("\${test_data_directory}/mni_masked.nii.gz")
+                    ]
+                }
+                input[1] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/IFGWM.nii.gz"),
+                            file("\${test_data_directory}/IFGWM_labels_map.nii.gz")
+                        ]
+                    ]
+                }
+                input[2] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/IFGWM.trk"),
+                            file("\${test_data_directory}/IFGWM_color.trk"),
+                            file("\${test_data_directory}/IFGWM_uni.trk")
+                        ]
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out.versions).match()}
+            )
+        }
+    }
+}
