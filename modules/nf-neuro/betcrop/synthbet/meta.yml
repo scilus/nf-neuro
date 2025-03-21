@@ -39,13 +39,13 @@ args:
       description: Mask border threshold in mm.
       default: 1
   - nocsf:
-    type: boolean
-    description: Exclude CSF from brain border
-    default: false
+      type: boolean
+      description: Exclude CSF from brain border
+      default: false
   - model:
-    type: string
-    description: Alternative model
-    default: None
+      type: string
+      description: Alternative model
+      default: None
 
 output:
   - meta:
