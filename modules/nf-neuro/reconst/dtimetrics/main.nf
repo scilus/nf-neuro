@@ -84,7 +84,10 @@ process RECONST_DTIMETRICS {
 
     if [ "$run_qc" = true ] && [ "$args" != '' ];
     then
-        mv ${prefix}__residual_residuals_stats.png ${prefix}__residual_residuals_stats.png_bk
+        if [ -f ${prefix}__residual_residuals_stats.png ];
+        then
+            mv ${prefix}__residual_residuals_stats.png ${prefix}__residual_residuals_stats.png_bk
+        fi
 
         nii_files=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(fa|ad|rd|md|rgb|residual)\$/) print \$(i+1)}')
 
@@ -127,7 +130,10 @@ process RECONST_DTIMETRICS {
 
         rm -rf *slice*
         convert -append *png ${prefix}__dti_mqc.png
-        mv ${prefix}__residual_residuals_stats.png_bk ${prefix}__residual_residuals_stats.png
+        if [ -f ${prefix}__residual_residuals_stats.png_bk ];
+        then
+            mv ${prefix}__residual_residuals_stats.png_bk ${prefix}__residual_residuals_stats.png
+        fi
     fi
 
     cat <<-END_VERSIONS > versions.yml
