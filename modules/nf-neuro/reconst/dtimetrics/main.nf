@@ -82,6 +82,12 @@ process RECONST_DTIMETRICS {
     scil_dti_metrics.py dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells \
         --not_all $args $b0_threshold -f
 
+    ransac_metrics=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(ad|rd|md)\$/) print \$(i+1)}')
+    for metrics in \${ransac_metrics};
+    do
+        scil_volume_remove_outliers_ransac.py \${metrics} \${metrics} -f;
+    done
+
     if [ "$run_qc" = true ] && [ "$args" != '' ];
     then
         if [ -f ${prefix}__residual_residuals_stats.png ];
@@ -150,6 +156,7 @@ process RECONST_DTIMETRICS {
     """
     scil_dwi_extract_shell.py -h
     scil_dti_metrics.py -h
+    scil_volume_remove_outliers_ransac.py -h
 
     touch ${prefix}__ad.nii.gz
     touch ${prefix}__evecs.nii.gz
