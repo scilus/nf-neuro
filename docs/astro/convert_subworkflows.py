@@ -68,6 +68,8 @@ def convert_subworkflow_to_md(yaml_data):
                 mandatory = str(input[name]['mandatory']).replace("\n", " ").lower()
             except KeyError:
                 mandatory = ""
+        else:
+            mandatory = "true"
 
         inputs += f"| {name} | {input_type} | {description} | {mandatory} | {pattern} |\n"
 
@@ -108,7 +110,7 @@ def convert_subworkflow_to_md(yaml_data):
         final_md += f"### Parameters\n\n{params}\n"
     final_md += f"### Outputs\n\n{outputs}\n"
     final_md += f"### Components\n\n{components}\n"
-    # final_md += f"### Keywords\n\n{keywords}\n"
+    #final_md += f"### Keywords\n\n{keywords}\n"
     final_md += f"### Authors\n\n{', '.join(yaml_data['authors'])}\n\n"
     try:  # If no maintainers, then do not add the section.
         final_md += f"## Maintainers\n\n{', '.join(yaml_data['maintainers'])}\n\n"
