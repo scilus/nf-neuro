@@ -17,26 +17,26 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
-
   - dwi:
       type: file
       description: Nifti DWI volume used to extract DTI metrics.
       pattern: "*.{nii,nii.gz}"
-
+      mandatory: true
   - bval:
       type: file
       description: B-values in FSL format.
       pattern: "*.bval"
-
+      mandatory: true
   - bvec:
       type: file
       description: B-vectors in FSL format.
       pattern: "*.bvec"
-
+      mandatory: true
   - b0mask:
       type: file
       description: Nifti b0 volume file used to mask the input image.
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
 
 args:
   - dwi_shell_tolerance:

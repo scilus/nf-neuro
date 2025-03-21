@@ -21,11 +21,13 @@ input:
       type: file
       description: Nifti image volume to perform BET.
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - weights:
       type: file
       description: Alternative model weights
       pattern: "*.pt"
+      mandatory: false
 
 output:
   - meta:

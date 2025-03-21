@@ -23,11 +23,19 @@ input:
       type: file
       description: Nifti image file to denoise
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - mask:
       type: file
       description: Nifti image file used to mask the input image
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
+
+args:
+  - ncoils:
+      type: int
+      description: Number of coils used for the acquisition
+      default: 1
 
 output:
   - meta:
