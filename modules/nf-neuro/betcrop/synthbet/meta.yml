@@ -44,7 +44,9 @@ args:
       default: false
   - model:
       type: string
-      description: Alternative model
+      description: |
+        Alternative model weights
+        (see [https://surfer.nmr.mgh.harvard.edu/docs/synthstrip/](https://surfer.nmr.mgh.harvard.edu/docs/synthstrip/) for a list of available models.
       default: None
 
 output:
@@ -53,17 +55,14 @@ output:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
-
   - bet_image:
       type: file
       description: Nifti brain-extracted volume.
       pattern: "*__bet_image.{nii,nii.gz}"
-
   - brain_mask:
       type: file
       description: Brain-extracted image mask .
       pattern: "*__brain_mask.{nii,nii.gz}"
-
   - versions:
       type: file
       description: File containing software versions

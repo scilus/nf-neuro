@@ -21,6 +21,15 @@ input:
       type: file
       description: Flatten list of trk files containing bundles to be colored.
       pattern: "*.trk"
+      mandatory: true
+
+args:
+  - colors:
+      type: string
+      description: |
+        List of colors to be used for coloring for each bundle.
+        Example: ext.colors = ["bundle_0":"0xd9bd09", "bundle_1":"0xcc0000"]
+      default: None
 
 output:
   - meta:

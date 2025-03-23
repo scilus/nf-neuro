@@ -41,7 +41,6 @@ args:
         By default, the command will select the smallest
         isotropic patch size that exceeds the number of DW
         images in the input data
-      default: 3
 
 output:
   - meta:

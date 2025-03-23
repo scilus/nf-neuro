@@ -92,7 +92,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_volume.json:md5,f2cf5bbf678b0d364f26120ad10900ae"
+                        "test_volume.json:md5,9093e9ccfc7b47dd0fdfc6abde6a5c8e"
                     ]
                 ],
                 "5": [
@@ -236,7 +236,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_volume.json:md5,f2cf5bbf678b0d364f26120ad10900ae"
+                        "test_volume.json:md5,9093e9ccfc7b47dd0fdfc6abde6a5c8e"
                     ]
                 ],
                 "volume_lesions": [
@@ -269,10 +269,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2024-09-03T15:23:58.700174"
+        "timestamp": "2025-03-23T00:14:02.06640155"
     },
     "bundle - stats": {
         "content": [
@@ -355,7 +355,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_volume.json:md5,f2cf5bbf678b0d364f26120ad10900ae"
+                        "test_volume.json:md5,9093e9ccfc7b47dd0fdfc6abde6a5c8e"
                     ]
                 ],
                 "5": [
@@ -463,7 +463,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_volume.json:md5,f2cf5bbf678b0d364f26120ad10900ae"
+                        "test_volume.json:md5,9093e9ccfc7b47dd0fdfc6abde6a5c8e"
                     ]
                 ],
                 "volume_lesions": [
@@ -484,10 +484,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2024-09-03T15:23:19.265407"
+        "timestamp": "2025-03-23T00:13:25.144048993"
     },
     "bundle - stats - light": {
         "content": [

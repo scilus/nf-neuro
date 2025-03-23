@@ -31,7 +31,6 @@ process BUNDLE_STATS {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def density_weighting = task.ext.density_weighting ? "--density_weighting" : ""
     def normalize_weights = task.ext.normalize_weights ? "--normalize_weights" : "--bin"
@@ -191,7 +190,6 @@ process BUNDLE_STATS {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """

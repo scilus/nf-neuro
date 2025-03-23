@@ -48,7 +48,7 @@ process BUNDLE_UNIFORMIZE {
     """
 
     stub:
-    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
     """
     scil_bundle_uniformize_endpoints.py -h
 

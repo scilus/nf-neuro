@@ -10,6 +10,7 @@ tools:
   - "scilpy":
       description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
+
 input:
   - meta:
       type: map
@@ -21,11 +22,29 @@ input:
       type: file
       description: List of trk files of the bundles
       pattern: "*.{trk}"
+      mandatory: true
 
   - centroids:
       type: file
       description: List of trk files of the centroids
       pattern: "*.{trk}"
+      mandatory: true
+
+args:
+  - nb_points:
+      type: int
+      description: Number of divisions for the bundles.
+      default: Number of points of the centroid
+
+  - colormap:
+      type: string
+      description: Select the colormap for colored trk (data_per_point).
+      default: "jet"
+
+  - new_labelling:
+      type: boolean
+      description: Use the new labelling method (multi-centroids).
+      default: False
 
 output:
   - meta:

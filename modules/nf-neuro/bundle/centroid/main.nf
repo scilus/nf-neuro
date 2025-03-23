@@ -47,7 +47,7 @@ process BUNDLE_CENTROID {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-
+    def nb_points = task.ext.nb_points ?: 5
     """
     scil_bundle_compute_centroid.py -h
     scil_bundle_uniformize_endpoints.py -h
@@ -56,7 +56,7 @@ process BUNDLE_CENTROID {
         do \
         ext=\${bundle#*.}
         bname=\$(basename \${bundle} .\${ext})
-        touch ${prefix}__\${bname}${suffix}.\${ext}
+        touch ${prefix}__\${bname}_centroid_${nb_points}.\${ext}
     done
 
     cat <<-END_VERSIONS > versions.yml
