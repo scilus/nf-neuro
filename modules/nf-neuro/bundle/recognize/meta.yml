@@ -62,7 +62,7 @@ args:
 
   - outlier_alpha:
       type: float
-      description: Percent of the length of the tree that clusters of individual streamlines will be pruned. [0.6]
+      description: Percent of the length of the tree that clusters of individual streamlines will be pruned.
       default: 0.6
 
 output:

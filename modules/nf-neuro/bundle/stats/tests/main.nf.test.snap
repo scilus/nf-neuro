@@ -350,13 +350,7 @@
                     ]
                 ],
                 "4": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_volume.json:md5,9093e9ccfc7b47dd0fdfc6abde6a5c8e"
-                    ]
+                    
                 ],
                 "5": [
                     
@@ -458,13 +452,7 @@
                     "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
                 ],
                 "volume": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_volume.json:md5,9093e9ccfc7b47dd0fdfc6abde6a5c8e"
-                    ]
+                    
                 ],
                 "volume_lesions": [
                     
@@ -487,7 +475,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-23T00:13:25.144048993"
+        "timestamp": "2025-03-24T00:59:26.250777022"
     },
     "bundle - stats - light": {
         "content": [
