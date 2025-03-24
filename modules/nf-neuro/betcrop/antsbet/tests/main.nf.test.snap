@@ -1,17 +1,17 @@
 {
     "betcrop - antsbet": {
         "content": [
-            "test__t1_bet.nii.gz:md5:header,e7cfbd06624321d70cbd667a77315ba3,data,381da559c1f38a2526f58b741eb0f7fc",
-            "test__t1_bet_mask.nii.gz:md5:header,f7389fe98c9a7e3a87c90b7ca05ea14a,data,1572808125554e50ff73fbe0e28037a9",
+            "test__t1_bet.nii.gz",
+            "test__t1_bet_mask.nii.gz",
             [
                 "versions.yml:md5,bb378e913d4002d0b644d3277892ae20"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2025-01-15T16:55:54.33351491"
+        "timestamp": "2025-03-24T17:47:54.836534884"
     },
     "betcrop - antsbet - stub-run": {
         "content": [
