@@ -3,8 +3,8 @@ process BUNDLE_RECOGNIZE {
     label 'process_high'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        'https://scil.usherbrooke.ca/containers/scilus_latest.sif':
+        'scilus/scilus:latest' }"
 
     input:
         tuple val(meta), path(tractograms), path(transform), path(config), path(directory)
@@ -22,11 +22,11 @@ process BUNDLE_RECOGNIZE {
     // additional script arguments
     def minimal_vote_ratio = task.ext.minimal_vote_ratio ? "--minimal_vote_ratio " + task.ext.minimal_vote_ratio : ""
     def seed = task.ext.seed ? "--seed " + task.ext.seed : ""
-    def rbx_processes = task.ext.rbx_processes ? "--processes " + task.ext.rbx_processes : "--processes 1"
+    def rbx_processes = task.ext.processes ? "--processes " + task.ext.processes : "--processes 1"
     def outlier_alpha = task.ext.outlier_alpha ? "--alpha " + task.ext.outlier_alpha : ""
     """
     mkdir recobundles/
-    scil_tractogram_segment_bundles.py ${tractograms} ${config} ${directory}/ ${transform} --inverse --out_dir recobundles/ \
+    scil_tractogram_segment_with_bundleseg.py ${tractograms} ${config} ${directory}/ ${transform} --inverse --out_dir recobundles/ \
         -v DEBUG $minimal_vote_ratio $seed $rbx_processes
 
     for bundle_file in recobundles/*.trk; do
@@ -37,14 +37,14 @@ process BUNDLE_RECOGNIZE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.0
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    scil_tractogram_segment_bundles.py -h
+    scil_tractogram_segment_with_bundleseg.py -h
     scil_bundle_reject_outliers.py -h
 
     # dummy output for single bundle
@@ -52,7 +52,7 @@ process BUNDLE_RECOGNIZE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.0
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

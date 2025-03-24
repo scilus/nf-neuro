@@ -30,16 +30,47 @@ input:
       type: file
       description: Nifti image volume to perform BET + crop.
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - bval:
       type: file
       description: B-values in FSL format.
       pattern: "*.bval"
+      madatory: true
 
   - bvec:
       type: file
       description: B-vectors in FSL format.
       pattern: "*.bvec"
+      mandatory: true
+
+args:
+  - b0_thr:
+      type: float
+      description: Threshold under which b-values are considered to be b0s.
+      default: 20
+
+  - bet_f:
+      type: float
+      description: |
+        Fractional intensity threshold (0->1).
+        Smaller values give larger brain outline estimates"
+      default: 0.5
+
+  - size_dil:
+      type: int
+      description: "Size of dilation for the mask (in voxels)."
+      default: None
+
+  - crop:
+      type: boolean
+      description: "Crop the output images."
+      default: true
+
+  - dilate:
+      type: boolean
+      description: "Dilate the mask."
+      default: true
 
 output:
   - meta:

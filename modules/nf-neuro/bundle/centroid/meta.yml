@@ -24,6 +24,14 @@ input:
         List of bundles to compute centroids for. If this input is supplied,
         the module will compute centroids.
       pattern: "*.trk"
+      mandatory: true
+
+args:
+  - nb_points:
+      type: int
+      description: |
+        Number of points to resample the centroids to.
+      default: 5
 
 output:
   - meta:

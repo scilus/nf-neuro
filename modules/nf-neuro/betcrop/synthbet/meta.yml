@@ -21,11 +21,36 @@ input:
       type: file
       description: Nifti image volume to perform BET.
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - weights:
       type: file
       description: Alternative model weights
       pattern: "*.pt"
+      mandatory: false
+
+args:
+  - gpu:
+      type: boolean
+      description: Use GPU for synthstrip
+      default: false
+
+  - border:
+      type: int
+      description: Mask border threshold in mm.
+      default: 1
+
+  - nocsf:
+      type: boolean
+      description: Exclude CSF from brain border
+      default: false
+
+  - model:
+      type: string
+      description: |
+        Alternative model weights
+        (see [https://surfer.nmr.mgh.harvard.edu/docs/synthstrip/](https://surfer.nmr.mgh.harvard.edu/docs/synthstrip/) for a list of available models.
+      default: None
 
 output:
   - meta:

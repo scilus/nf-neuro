@@ -1,8 +1,3 @@
-import org.apache.commons.io.FileUtils
-import java.nio.file.Files
-import java.nio.file.Paths
-import java.util.zip.ZipFile
-
 include { REGISTRATION_ANTS                 } from '../../../modules/nf-neuro/registration/ants/main'
 include { BUNDLE_RECOGNIZE                  } from '../../../modules/nf-neuro/bundle/recognize/main'
 
@@ -16,33 +11,33 @@ def fetch_bundleseg_atlas(atlasUrl, configUrl, dest) {
         new URL(configUrl).withInputStream { from -> out << from; }
     }
 
-    def atlasFile = new ZipFile("$dest/atlas.zip")
+    def atlasFile = new java.util.zip.ZipFile("$dest/atlas.zip")
     atlasFile.entries().each { it ->
-        def path = Paths.get("$dest/atlas/" + it.name)
+        def path = java.nio.file.Paths.get("$dest/atlas/" + it.name)
         if(it.directory){
-            Files.createDirectories(path)
+            java.nio.file.Files.createDirectories(path)
         }
         else {
             def parentDir = path.getParent()
-            if (!Files.exists(parentDir)) {
-                Files.createDirectories(parentDir)
+            if (!java.nio.file.Files.exists(parentDir)) {
+                java.nio.file.Files.createDirectories(parentDir)
             }
-            Files.copy(atlasFile.getInputStream(it), path)
+            java.nio.file.Files.copy(atlasFile.getInputStream(it), path)
         }
     }
 
-    def configFile = new ZipFile("$dest/config.zip")
+    def configFile = new java.util.zip.ZipFile("$dest/config.zip")
     configFile.entries().each { it ->
-        def path = Paths.get("$dest/config/" + it.name)
+        def path = java.nio.file.Paths.get("$dest/config/" + it.name)
         if(it.directory){
-            Files.createDirectories(path)
+            java.nio.file.Files.createDirectories(path)
         }
         else {
             def parentDir = path.getParent()
-            if (!Files.exists(parentDir)) {
-                Files.createDirectories(parentDir)
+            if (!java.nio.file.Files.exists(parentDir)) {
+                java.nio.file.Files.createDirectories(parentDir)
             }
-            Files.copy(configFile.getInputStream(it), path)
+            java.nio.file.Files.copy(configFile.getInputStream(it), path)
         }
     }
 }

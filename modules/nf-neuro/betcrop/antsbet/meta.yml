@@ -25,11 +25,13 @@ input:
       type: file
       description: Nifti t1 volume to perform BET.
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - template:
       type: file
       description: Nifti Anatomical template to perform BET.
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - tissues_probabilities:
       type: file
@@ -37,6 +39,7 @@ input:
         Brain probability mask (in template space), with intensity
         range 1 (definitely brain) to 0 (definitely background).
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - mask:
       type: file
@@ -44,13 +47,15 @@ input:
         Brain mask (in template space) used to restrict metric
         computation when performing registration.
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
 
   - initial_affine:
       type: file
       description: |
         Affine transform from T1w space to DWI space, used as
-        initialization for registration algorithms
+        initialization for registration algorithms.
       pattern: "*.{mat/txt}"
+      mandatory: false
 
 output:
   - meta:
