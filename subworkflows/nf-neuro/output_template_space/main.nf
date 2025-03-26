@@ -78,7 +78,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     ch_versions = ch_versions.mix(BET_T1W.out.versions)
     // ** Strip the template from the meta field so we can combine it ** //
     ch_t1w_tpl = BET_T1W.out.image
-        | map{ meta, image -> image }
+        | map{ _meta, image -> image }
 
     ch_bet_tpl_t2w = ch_t2w_tpl
         | map{ t2w -> [ [id: "template"], t2w, [], [] ] }
@@ -87,7 +87,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     ch_versions = ch_versions.mix(BET_T2W.out.versions)
     // ** Strip the template from the meta field so we can combine it ** //
     ch_t2w_tpl = BET_T2W.out.image
-        | map{ meta, image -> image }
+        | map{ _meta, image -> image }
 
     // ** Register the subject to the template space ** //
     ch_registration = ch_anat
@@ -123,6 +123,10 @@ workflow OUTPUT_TEMPLATE_SPACE {
     ch_versions = ch_versions.mix(REGISTRATION_TRACTOGRAM.out.versions)
 
     emit:
-        versions = ch_versions                     // channel: [ versions.yml ]
+        ch_t1w_tpl                  = BET_T1W.out.image         // channel: [ tpl-T1w ]
+        ch_t2w_tpl                  = BET_T2W.out.image         // channel: [ tpl-T2w ]
+        ch_warped_nifti_files       = REGISTRATION_ANTSAPPLYTRANSFORMS.out.warped_image  // channel: [ val(meta), [ warped_image ] ]
+        ch_warped_trk_files         = REGISTRATION_TRACTOGRAM.out.warped_tractogram       // channel: [ val(meta), [ warped_tractogram ] ]
+        versions                    = ch_versions               // channel: [ versions.yml ]
 }
 
