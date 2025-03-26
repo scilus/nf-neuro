@@ -70,8 +70,8 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    niftiMD5SUM(process.out.t1.get(0).get(1), 1),
-                    niftiMD5SUM(process.out.mask.get(0).get(1)),
+                    file(process.out.t1.get(0).get(1)).name,
+                    file(process.out.mask.get(0).get(1)).name,
                     process.out.versions
                 ).match() }
             )

@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
 name: "bundle_fixelafd"
 description: USE scilpy to compute mean apparent fiber density (AFD) and mean radial radial fODF (radfODF) maps along a bundle.
 keywords:
@@ -22,11 +21,13 @@ input:
       type: list
       description: "List of bundles in .trk format."
       pattern: "*.trk"
+      mandatory: true
 
   - fodf:
       type: file
       description: "fODF file to extract fixel measurements from."
       pattern: "*.nii.gz"
+      mandatory: true
 
 output:
   - meta:

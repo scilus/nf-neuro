@@ -25,6 +25,8 @@ process BETCROP_FSLBETCROP {
     def b0_thr = task.ext.b0_thr ? "--b0_threshold " + task.ext.b0_thr : ""
     def bet_f = task.ext.bet_f ? "-f " + task.ext.bet_f : ""
     def size_dil = task.ext.size_dil ? task.ext.size_dil : ""
+    def crop = task.ext.crop ? task.ext.crop : true
+    def dilate = task.ext.dilate ? task.ext.dilate : true
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
@@ -44,7 +46,7 @@ process BETCROP_FSLBETCROP {
         scil_volume_math.py convert ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
     fi
 
-    if [ "$task.ext.crop" = "true" ];
+    if [ "$crop" = "true" ];
     then
         scil_volume_crop.py ${prefix}__image_bet.nii.gz ${prefix}__image_bet.nii.gz -f \
             --output_bbox ${prefix}__image_boundingBox.pkl
@@ -54,7 +56,7 @@ process BETCROP_FSLBETCROP {
             --data_type uint8 -f
     fi
 
-    if [ "$task.ext.dilate" = "true" ];
+    if [ "$dilate" = "true" ];
     then
         scil_volume_math.py dilation ${prefix}__image_bet_mask.nii.gz $size_dil ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
     fi
@@ -70,7 +72,6 @@ process BETCROP_FSLBETCROP {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-
     """
     touch ${prefix}__image_bet.nii.gz
     touch ${prefix}__image_bet_mask.nii.gz

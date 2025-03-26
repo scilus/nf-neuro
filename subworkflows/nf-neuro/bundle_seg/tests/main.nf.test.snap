@@ -29,8 +29,8 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,94e5ea77581b6f43f79c3e7e4fc03030",
-                    "versions.yml:md5,e63f6133bb2e78ce211054111993be59"
+                    "versions.yml:md5,5ab498390fc1f2d08a8bd6ed0f1cd4e4",
+                    "versions.yml:md5,94e5ea77581b6f43f79c3e7e4fc03030"
                 ],
                 "bundles": [
                     [
@@ -59,15 +59,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,94e5ea77581b6f43f79c3e7e4fc03030",
-                    "versions.yml:md5,e63f6133bb2e78ce211054111993be59"
+                    "versions.yml:md5,5ab498390fc1f2d08a8bd6ed0f1cd4e4",
+                    "versions.yml:md5,94e5ea77581b6f43f79c3e7e4fc03030"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2025-02-24T07:55:28.428152717"
+        "timestamp": "2025-03-24T01:06:36.35126247"
     }
 }

@@ -6,28 +6,41 @@ description: |
   The aim of the workflow is to carry out the first stages of pre-processing, through denoising,
   N4 correction, resampling and brain extraction, right up to the cropping stage.
   The resulting T1 is corrected, resampled, brain extracted and cropped.
+
   You can retrieve the file after each step if you don't want to run the entire subworkflow.
   The next steps would be to register the resulting T1-corrected image with the DWI-corrected image
   with, for example, the REGISTRATION subworkflow. IMPORTANT : the subworkflow is only reproducible
   with when running ANTs BET using a single thread.
+
   -----------  Steps  -----------
-  Denoising (nlmeans, scil).
+
+  1. Denoising (nlmeans, scil).
     Used to remove the noise induced by the MRI acquisition,
     enhance the signal to noise ratio and improve the image quality and following metrics.
     The denoising is performed in the original spatial resolution and uses the nlmeans method.
-  N4 Image Intensities Bias Correction (N4BiasFieldCorrection, ANTs).
+
+
+  2. N4 Image Intensities Bias Correction (N4BiasFieldCorrection, ANTs).
     Used to normalize the image intensities and reduce biases (e.g. signal loss with distance in
     multi-channel head coils), while preserving contrasts between tissues.
-  Resample (DIPY).
+
+
+  3. Resample (DIPY).
     Resamples the T1 to an isotropic spatial resolution. The default is 1mm, a standard in humans which
     usually facilitate registration with corrected DWI images.
     This spatial resolution is modifiable in the configuration file.
-  Brain Extraction (ANTs - default, freesurfer).
+
+
+  4. Brain Extraction (ANTs - default, freesurfer).
     Isolates the brain tissue voxels from the remaining image. Also creates a binary brain mask.
     This brain extraction is required for the T1 to DWI Registration. IMPORTANT : when using ANTs,
     brain extraction is reproducible only when run using a single thread.
+
+
   Cropping (scil).
     Crops the empty planes around the brain to optimize the next processing steps.
+
+
   Subworkflow based on Tractoflow : https://www.sciencedirect.com/science/article/pii/S105381192030375X?via%3Dihub
 
 keywords:
@@ -54,12 +67,14 @@ input:
         The input channel containing the anatomical image.
         Structure: [ val(meta), path(image) ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
   - ch_template:
       type: file
       description: |
         The input channel containing the anatomical template for antsBET.
         Structure: [ val(meta), path(image) ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
   - ch_probability_map:
       type: file
       description: |
@@ -67,30 +82,35 @@ input:
         with intensity range 1 (definitely brain) to 0 (definitely background).
         Structure: [ val(meta), path(image) ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
   - ch_mask_nlmeans:
       type: file
       description: |
         The input channel containing the brain mask for the nlmeans denoising. Optional
         Structure: [ val(meta), path(mask) ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
   - ch_ref_n4:
       type: file
       description: |
         The input channel containing the reference and the reference mask for the n4 correction. Optional
         Structure: [ val(meta), path(ref), path(mask_ref) ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
   - ch_ref_resample:
       type: file
       description: |
         The input channel containing the reference for the resampling. Optional
         Structure: [ val(meta), path(ref) ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
   - ch_weights:
       type: file
       description: |
         The input channel containing an alternative model weights for synthbet. Optional
         Structure: [ val(meta), path (weights)]
       pattern: "*.pt"
+      mandatory: false
 output:
   - image_nlmeans:
       type: file

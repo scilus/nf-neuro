@@ -82,9 +82,18 @@ process RECONST_DTIMETRICS {
     scil_dti_metrics.py dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells \
         --not_all $args $b0_threshold -f
 
+    ransac_metrics=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(ad|rd|md)\$/) print \$(i+1)}')
+    for metrics in \${ransac_metrics};
+    do
+        scil_volume_remove_outliers_ransac.py \${metrics} \${metrics} -f;
+    done
+
     if [ "$run_qc" = true ] && [ "$args" != '' ];
     then
-        mv ${prefix}__residual_residuals_stats.png ${prefix}__residual_residuals_stats.png_bk
+        if [ -f ${prefix}__residual_residuals_stats.png ];
+        then
+            mv ${prefix}__residual_residuals_stats.png ${prefix}__residual_residuals_stats.png_bk
+        fi
 
         nii_files=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(fa|ad|rd|md|rgb|residual)\$/) print \$(i+1)}')
 
@@ -127,7 +136,10 @@ process RECONST_DTIMETRICS {
 
         rm -rf *slice*
         convert -append *png ${prefix}__dti_mqc.png
-        mv ${prefix}__residual_residuals_stats.png_bk ${prefix}__residual_residuals_stats.png
+        if [ -f ${prefix}__residual_residuals_stats.png_bk ];
+        then
+            mv ${prefix}__residual_residuals_stats.png_bk ${prefix}__residual_residuals_stats.png
+        fi
     fi
 
     cat <<-END_VERSIONS > versions.yml
@@ -144,6 +156,7 @@ process RECONST_DTIMETRICS {
     """
     scil_dwi_extract_shell.py -h
     scil_dti_metrics.py -h
+    scil_volume_remove_outliers_ransac.py -h
 
     touch ${prefix}__ad.nii.gz
     touch ${prefix}__evecs.nii.gz

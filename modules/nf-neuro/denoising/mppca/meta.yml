@@ -19,16 +19,28 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
+      mandatory: true
 
   - dwi:
       type: file
       description: Nifti dwi file to denoise
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - mask:
       type: file
-      description: Nifti mask file for the dwi, optional
+      description: Nifti mask file for the dwi
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
+
+args:
+  - extent:
+      type: int
+      description: |
+        Set the patch size of the denoising filter.
+        By default, the command will select the smallest
+        isotropic patch size that exceeds the number of DW
+        images in the input data
 
 output:
   - meta:

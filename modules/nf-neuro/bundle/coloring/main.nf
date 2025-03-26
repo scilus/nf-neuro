@@ -1,5 +1,3 @@
-import groovy.json.JsonOutput
-
 process BUNDLE_COLORING {
     tag "$meta.id"
     label 'process_single'
@@ -19,8 +17,7 @@ process BUNDLE_COLORING {
     task.ext.when == null || task.ext.when
 
     script:
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    def json_str = JsonOutput.toJson(task.ext.colors)
+    def json_str = groovy.json.JsonOutput.toJson(task.ext.colors)
     String bundles_list = bundles.join(", ").replace(',', '')
 
     """
@@ -35,8 +32,7 @@ process BUNDLE_COLORING {
     """
 
     stub:
-    def prefix = task.ext.prefix ?: "${meta.id}"
-
+    String bundles_list = bundles.join(", ").replace(',', '')
     """
     for bundle in $bundles_list; do
         bname=\$(basename \$bundle .\${ext})

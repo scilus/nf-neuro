@@ -62,8 +62,8 @@ def convert_module_to_md(yaml_data):
         tools += f"| {name} | {description} | {homepage} | {doi} |\n"
 
     # Table for inputs.
-    inputs = "|  | Type | Description | Pattern |\n"
-    inputs += "|-------|------|-------------|---------|\n"
+    inputs = "|  | Type | Description | Mandatory | Pattern |\n"
+    inputs += "|-------|------|-------------|---------|---------|\n"
     for input in yaml_data['input']:
         name = next(iter(input))
         input_type = input[name]['type'].replace("\n", " ")
@@ -72,7 +72,15 @@ def convert_module_to_md(yaml_data):
             pattern = input[name]['pattern'].replace("\n", " ")
         except KeyError:
             pattern = ""
-        inputs += f"| {name} | {input_type} | {description} | {pattern} |\n"
+        if name != "meta":
+            try:
+                mandatory = str(input[name]['mandatory']).replace("\n", " ").lower()
+            except KeyError:
+                mandatory = ""
+        else:
+            mandatory = "true"
+
+        inputs += f"| {name} | {input_type} | {description} | {mandatory} | {pattern} |\n"
 
     # Table for params.
     try:
@@ -115,7 +123,7 @@ def convert_module_to_md(yaml_data):
         final_md += f"### Arguments\n\n{params}\n"
     final_md += f"### Outputs\n\n{outputs}\n"
     final_md += f"### Tools\n\n{tools}\n"
-    final_md += f"### Keywords\n\n{keywords}\n"
+    # final_md += f"### Keywords\n\n{keywords}\n"
     final_md += f"### Authors\n\n{', '.join(yaml_data['authors'])}\n\n"
     try:  # If no maintainers, then do not add the section.
         final_md += f"## Maintainers\n\n{', '.join(yaml_data['maintainers'])}\n\n"

@@ -41,13 +41,13 @@ process BUNDLE_CENTROID {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-
+    def nb_points = task.ext.nb_points ?: 5
     """
     scil_bundle_compute_centroid.py -h
     scil_bundle_uniformize_endpoints.py -h
@@ -56,12 +56,12 @@ process BUNDLE_CENTROID {
         do \
         ext=\${bundle#*.}
         bname=\$(basename \${bundle} .\${ext})
-        touch ${prefix}__\${bname}${suffix}.\${ext}
+        touch ${prefix}__\${bname}_centroid_${nb_points}.\${ext}
     done
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
