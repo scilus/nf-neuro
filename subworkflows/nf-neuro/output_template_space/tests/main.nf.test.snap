@@ -20,12 +20,90 @@
         "content": [
             {
                 "0": [
+                    [
+                        {
+                            "id": "template"
+                        },
+                        "template__image_bet.nii.gz:md5,ec3b6882c6e0bd5b491b19611765d373"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "template"
+                        },
+                        "template__image_bet.nii.gz:md5,a1a4ec8418a4bfc7b9076818c912f822"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test__IFGWM__warped.nii.gz:md5,8f212727877c53dc9107a3a30de69642",
+                            "test__IFGWM_labels_map__warped.nii.gz:md5,75cde38295934a33ef137a7d1ee07442"
+                        ]
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test__IFGWM.trk:md5,56a3c56105412f846605ad78c41c229b",
+                            "test__IFGWM_color.trk:md5,56a3c56105412f846605ad78c41c229b",
+                            "test__IFGWM_uni.trk:md5,575086afebf02e9a3afa61112b79a588"
+                        ]
+                    ]
+                ],
+                "4": [
                     "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
                     "versions.yml:md5,29c5499c53451b27652c9eb978a79e76",
                     "versions.yml:md5,75c8524f95824b358ede7fe52dfa35e6",
                     "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
                     "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf",
                     "versions.yml:md5,b180b92a88347fe68d25e2c8066322f1"
+                ],
+                "ch_t1w_tpl": [
+                    [
+                        {
+                            "id": "template"
+                        },
+                        "template__image_bet.nii.gz:md5,ec3b6882c6e0bd5b491b19611765d373"
+                    ]
+                ],
+                "ch_t2w_tpl": [
+                    [
+                        {
+                            "id": "template"
+                        },
+                        "template__image_bet.nii.gz:md5,a1a4ec8418a4bfc7b9076818c912f822"
+                    ]
+                ],
+                "ch_warped_nifti_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test__IFGWM__warped.nii.gz:md5,8f212727877c53dc9107a3a30de69642",
+                            "test__IFGWM_labels_map__warped.nii.gz:md5,75cde38295934a33ef137a7d1ee07442"
+                        ]
+                    ]
+                ],
+                "ch_warped_trk_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test__IFGWM.trk:md5,56a3c56105412f846605ad78c41c229b",
+                            "test__IFGWM_color.trk:md5,56a3c56105412f846605ad78c41c229b",
+                            "test__IFGWM_uni.trk:md5,575086afebf02e9a3afa61112b79a588"
+                        ]
+                    ]
                 ],
                 "versions": [
                     "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
@@ -41,6 +119,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-14T18:25:11.135609"
+        "timestamp": "2025-03-26T13:52:26.892137"
     }
 }
