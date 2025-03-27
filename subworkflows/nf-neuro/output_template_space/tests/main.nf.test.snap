@@ -1,39 +1,12 @@
 {
-    "output to template MNI152NLin2009aAsym - stub": {
-        "content": [
-            [
-                "versions.yml:md5,08c023826481c9130c3914096cda7f63",
-                "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
-                "versions.yml:md5,a166b69e9dc7963b29c7a5944fbbf72a",
-                "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
-                "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf",
-                "versions.yml:md5,d4da7406446940901e5757ec63bf3d8f"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-03-15T07:57:57.657078"
-    },
-    "output to template MNI152NLin2009aAsym": {
+    "output to template MNI152NLin2009aAsym - with brain mask": {
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "template"
-                        },
-                        "template__image_bet.nii.gz:md5,ec3b6882c6e0bd5b491b19611765d373"
-                    ]
+                    "template__image_bet.nii.gz:md5,1f9066e239a741d7be7b2019b93d9c07"
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "template"
-                        },
-                        "template__image_bet.nii.gz:md5,a1a4ec8418a4bfc7b9076818c912f822"
-                    ]
+                    "template__image_bet.nii.gz:md5,9f194f26d8342fbc3d083695c22b23bc"
                 ],
                 "2": [
                     [
@@ -41,8 +14,8 @@
                             "id": "test"
                         },
                         [
-                            "test__IFGWM__warped.nii.gz:md5,8f212727877c53dc9107a3a30de69642",
-                            "test__IFGWM_labels_map__warped.nii.gz:md5,75cde38295934a33ef137a7d1ee07442"
+                            "test__IFGWM__warped.nii.gz:md5,f3995a7cc149ebd31f03f3dcdf26d6fe",
+                            "test__IFGWM_labels_map__warped.nii.gz:md5,4af53e66986112dcc70f301f757ace73"
                         ]
                     ]
                 ],
@@ -52,9 +25,9 @@
                             "id": "test"
                         },
                         [
-                            "test__IFGWM.trk:md5,56a3c56105412f846605ad78c41c229b",
-                            "test__IFGWM_color.trk:md5,56a3c56105412f846605ad78c41c229b",
-                            "test__IFGWM_uni.trk:md5,575086afebf02e9a3afa61112b79a588"
+                            "test__IFGWM.trk:md5,3a08fd1751c837d33994229ac834a2af",
+                            "test__IFGWM_color.trk:md5,3a08fd1751c837d33994229ac834a2af",
+                            "test__IFGWM_uni.trk:md5,87477b8fbd5228599655a257cdb06479"
                         ]
                     ]
                 ],
@@ -67,20 +40,10 @@
                     "versions.yml:md5,b180b92a88347fe68d25e2c8066322f1"
                 ],
                 "ch_t1w_tpl": [
-                    [
-                        {
-                            "id": "template"
-                        },
-                        "template__image_bet.nii.gz:md5,ec3b6882c6e0bd5b491b19611765d373"
-                    ]
+                    "template__image_bet.nii.gz:md5,1f9066e239a741d7be7b2019b93d9c07"
                 ],
                 "ch_t2w_tpl": [
-                    [
-                        {
-                            "id": "template"
-                        },
-                        "template__image_bet.nii.gz:md5,a1a4ec8418a4bfc7b9076818c912f822"
-                    ]
+                    "template__image_bet.nii.gz:md5,9f194f26d8342fbc3d083695c22b23bc"
                 ],
                 "ch_warped_nifti_files": [
                     [
@@ -88,8 +51,8 @@
                             "id": "test"
                         },
                         [
-                            "test__IFGWM__warped.nii.gz:md5,8f212727877c53dc9107a3a30de69642",
-                            "test__IFGWM_labels_map__warped.nii.gz:md5,75cde38295934a33ef137a7d1ee07442"
+                            "test__IFGWM__warped.nii.gz:md5,f3995a7cc149ebd31f03f3dcdf26d6fe",
+                            "test__IFGWM_labels_map__warped.nii.gz:md5,4af53e66986112dcc70f301f757ace73"
                         ]
                     ]
                 ],
@@ -99,9 +62,9 @@
                             "id": "test"
                         },
                         [
-                            "test__IFGWM.trk:md5,56a3c56105412f846605ad78c41c229b",
-                            "test__IFGWM_color.trk:md5,56a3c56105412f846605ad78c41c229b",
-                            "test__IFGWM_uni.trk:md5,575086afebf02e9a3afa61112b79a588"
+                            "test__IFGWM.trk:md5,3a08fd1751c837d33994229ac834a2af",
+                            "test__IFGWM_color.trk:md5,3a08fd1751c837d33994229ac834a2af",
+                            "test__IFGWM_uni.trk:md5,87477b8fbd5228599655a257cdb06479"
                         ]
                     ]
                 ],
@@ -119,6 +82,23 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-26T13:52:26.892137"
+        "timestamp": "2025-03-27T13:08:31.133444"
+    },
+    "output to template MNI152NLin2009aAsym - stub": {
+        "content": [
+            [
+                "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
+                "versions.yml:md5,a166b69e9dc7963b29c7a5944fbbf72a",
+                "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
+                "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf",
+                "versions.yml:md5,d4da7406446940901e5757ec63bf3d8f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-27T11:25:15.322213"
     }
 }
