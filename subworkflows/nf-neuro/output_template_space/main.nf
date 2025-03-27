@@ -87,7 +87,6 @@ workflow OUTPUT_TEMPLATE_SPACE {
 
     // ** If the template has a brain mask, we will use it ** //
     if ( ! ch_brain_mask.FALSE ) {
-        log.info("Detected brain mask.")
         ch_bet_tpl_t1w = ch_t1w_tpl
             | combine(ch_brain_mask)
             | map{ t1w, mask -> [ [id: "template"], t1w, mask ] }
@@ -167,6 +166,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     emit:
         ch_t1w_tpl                  = ch_t1w_tpl                                        // channel: [ tpl-T1w ]
         ch_t2w_tpl                  = ch_t2w_tpl                                        // channel: [ tpl-T2w ]
+        ch_registered_anat          = REGISTRATION_ANTS.out.image                       // channel: [ val(meta), [ image ] ]
         ch_warped_nifti_files       = REGISTRATION_ANTSAPPLYTRANSFORMS.out.warped_image // channel: [ val(meta), [ warped_image ] ]
         ch_warped_trk_files         = REGISTRATION_TRACTOGRAM.out.warped_tractogram     // channel: [ val(meta), [ warped_tractogram ] ]
         versions                    = ch_versions                                       // channel: [ versions.yml ]

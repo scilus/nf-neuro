@@ -47,6 +47,36 @@ input:
         Structure: [ val(meta), [path(trk1), path(trk2), path(trk3), ...] ]
       pattern: "*.trk"
 output:
+  - ch_t1w_tpl:
+      type: file
+      description: |
+        Channel containing the T1w template.
+        Structure: [ path(t1w) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_t2w_tpl:
+      type: file
+      description: |
+        Channel containing the T2w template.
+        Structure: [ path(t2w) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_registered_anat:
+      type: file
+      description: |
+        Channel containing the registered anatomical image into the template space.
+        Structure: [ val(meta), path(anat) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_registered_nifti_files:
+      type: file
+      description: |
+        Channel containing the registered NIfTI files into the template space.
+        Structure: [ val(meta), [path(nifti1), path(nifti2), path(nifti3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_registered_trk_files:
+      type: file
+      description: |
+        Channel containing the registered TRK files into the template space.
+        Structure: [ val(meta), [path(trk1), path(trk2), path(trk3), ...] ]
+      pattern: "*.trk"
   - versions:
       type: file
       description: |
