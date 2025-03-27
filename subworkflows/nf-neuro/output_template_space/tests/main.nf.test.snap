@@ -3,20 +3,17 @@
         "content": [
             {
                 "0": [
-                    "template__image_bet.nii.gz:md5,1f9066e239a741d7be7b2019b93d9c07"
+                    "template__image_bet.nii.gz:md5,01c9075c8bf0c0f177660e0235dd6dec"
                 ],
                 "1": [
-                    "template__image_bet.nii.gz:md5,9f194f26d8342fbc3d083695c22b23bc"
+                    "template__image_bet.nii.gz:md5,a86fa91b93732a6a8bb0ef7ee8c6f758"
                 ],
                 "2": [
                     [
                         {
                             "id": "test"
                         },
-                        [
-                            "test__IFGWM__warped.nii.gz:md5,f3995a7cc149ebd31f03f3dcdf26d6fe",
-                            "test__IFGWM_labels_map__warped.nii.gz:md5,4af53e66986112dcc70f301f757ace73"
-                        ]
+                        "test__warped.nii.gz:md5,b99092deb15615bc97ea03eacccff930"
                     ]
                 ],
                 "3": [
@@ -25,13 +22,24 @@
                             "id": "test"
                         },
                         [
-                            "test__IFGWM.trk:md5,3a08fd1751c837d33994229ac834a2af",
-                            "test__IFGWM_color.trk:md5,3a08fd1751c837d33994229ac834a2af",
-                            "test__IFGWM_uni.trk:md5,87477b8fbd5228599655a257cdb06479"
+                            "test__IFGWM__warped.nii.gz:md5,0dd7bd06c7e8bbd8a98ae1543291656c",
+                            "test__IFGWM_labels_map__warped.nii.gz:md5,c0d246d9122612c368ad8188726b9aac"
                         ]
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test__IFGWM.trk:md5,33348cef01be731c98628826e0a57649",
+                            "test__IFGWM_color.trk:md5,33348cef01be731c98628826e0a57649",
+                            "test__IFGWM_uni.trk:md5,a0af47ad2847103505ebfb13c14b1d7d"
+                        ]
+                    ]
+                ],
+                "5": [
                     "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
                     "versions.yml:md5,29c5499c53451b27652c9eb978a79e76",
                     "versions.yml:md5,75c8524f95824b358ede7fe52dfa35e6",
@@ -39,11 +47,19 @@
                     "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf",
                     "versions.yml:md5,b180b92a88347fe68d25e2c8066322f1"
                 ],
+                "ch_registered_anat": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__warped.nii.gz:md5,b99092deb15615bc97ea03eacccff930"
+                    ]
+                ],
                 "ch_t1w_tpl": [
-                    "template__image_bet.nii.gz:md5,1f9066e239a741d7be7b2019b93d9c07"
+                    "template__image_bet.nii.gz:md5,01c9075c8bf0c0f177660e0235dd6dec"
                 ],
                 "ch_t2w_tpl": [
-                    "template__image_bet.nii.gz:md5,9f194f26d8342fbc3d083695c22b23bc"
+                    "template__image_bet.nii.gz:md5,a86fa91b93732a6a8bb0ef7ee8c6f758"
                 ],
                 "ch_warped_nifti_files": [
                     [
@@ -51,8 +67,8 @@
                             "id": "test"
                         },
                         [
-                            "test__IFGWM__warped.nii.gz:md5,f3995a7cc149ebd31f03f3dcdf26d6fe",
-                            "test__IFGWM_labels_map__warped.nii.gz:md5,4af53e66986112dcc70f301f757ace73"
+                            "test__IFGWM__warped.nii.gz:md5,0dd7bd06c7e8bbd8a98ae1543291656c",
+                            "test__IFGWM_labels_map__warped.nii.gz:md5,c0d246d9122612c368ad8188726b9aac"
                         ]
                     ]
                 ],
@@ -62,9 +78,9 @@
                             "id": "test"
                         },
                         [
-                            "test__IFGWM.trk:md5,3a08fd1751c837d33994229ac834a2af",
-                            "test__IFGWM_color.trk:md5,3a08fd1751c837d33994229ac834a2af",
-                            "test__IFGWM_uni.trk:md5,87477b8fbd5228599655a257cdb06479"
+                            "test__IFGWM.trk:md5,33348cef01be731c98628826e0a57649",
+                            "test__IFGWM_color.trk:md5,33348cef01be731c98628826e0a57649",
+                            "test__IFGWM_uni.trk:md5,a0af47ad2847103505ebfb13c14b1d7d"
                         ]
                     ]
                 ],
@@ -82,7 +98,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-27T13:08:31.133444"
+        "timestamp": "2025-03-27T15:00:17.090921"
     },
     "output to template MNI152NLin2009aAsym - stub": {
         "content": [
