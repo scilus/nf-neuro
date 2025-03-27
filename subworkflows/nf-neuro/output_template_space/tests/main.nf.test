@@ -73,7 +73,7 @@ nextflow_workflow {
             )
         }
     } */
-    test("output to template MNI152NLin2009aAsym") {
+    test("output to template MNI152NLin2009aAsym - with brain mask") {
         config "./nextflow.config"
         when {
             workflow {
