@@ -24,6 +24,7 @@ components:
   - registration/ants
   - registration/antsapplytransforms
   - registration/tractogram
+  - image/applymask
   - betcrop/fslbetcrop
   - utils/templateflow
 input:
