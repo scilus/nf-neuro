@@ -19,10 +19,8 @@ process TRACTOGRAM_MATH {
 
     script:
     assert task.ext.operation in ['difference', 'intersection', 'union',
-                                  'concatenate', 'lazy_concatenate'] : "Invalid " +
-                                  "operation: ${task.ext.operation}. " +
-                                  "Must be one of [difference, intersection, " +
-                                  "union, concatenate, lazy_concatenate]"
+        'concatenate', 'lazy_concatenate'] : "Invalid operation: ${task.ext.operation}. " +
+        "Must be one of [difference, intersection, union, concatenate, lazy_concatenate]"
 
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.suffix ?: ""

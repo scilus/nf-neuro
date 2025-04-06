@@ -13,7 +13,6 @@ description: |
   - Difference: Compute the difference between two tractograms.
   - Lazy Concatenate: Concatenate multiple tractograms without loading them into memory.
 
-
 keywords:
   - tractogram
   - math
