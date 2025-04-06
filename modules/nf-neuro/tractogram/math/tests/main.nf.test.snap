@@ -1,0 +1,47 @@
+{
+    "tractogram - concatenate": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__concatenate.trk:md5,7e468b734cd1fc43815901ff21f134f1"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,12d292a1c0bde8562492d74965688168"
+                ],
+                "trk": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__concatenate.trk:md5,7e468b734cd1fc43815901ff21f134f1"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,12d292a1c0bde8562492d74965688168"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-04-06T10:06:42.064179"
+    },
+    "tractogram - stub": {
+        "content": [
+            [
+                "versions.yml:md5,12d292a1c0bde8562492d74965688168"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-04-06T10:14:24.555604"
+    }
+}

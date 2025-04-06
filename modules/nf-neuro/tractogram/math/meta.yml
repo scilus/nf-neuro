@@ -1,0 +1,65 @@
+---
+name: "tractogram_math"
+description: |
+  This module performs mathematical operations on tractograms.
+  It can be used to concatenate multiple tractograms into a single file,
+  compute the union of multiple tractograms, or perform other operations.
+  The available operations are:
+
+
+  - Concatenate: Combine multiple tractograms into a single file.
+  - Union: Compute the union of multiple tractograms.
+  - Intersection: Compute the intersection of multiple tractograms.
+  - Difference: Compute the difference between two tractograms.
+  - Lazy Concatenate: Concatenate multiple tractograms without loading them into memory.
+
+
+keywords:
+  - tractogram
+  - math
+  - concatenate
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - trks:
+      type: file
+      description: |
+        List of tractograms to perform the operation on.
+        e.g. `[ path(trk1), path(trk2), path(trk3), ...]`
+      pattern: "*.trk"
+  - reference:
+      type: file
+      description: |
+        Reference tractogram to use for the operation.
+        e.g. `[ path(reference) ]`
+      pattern: "*.{nii,nii.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - trk:
+      type: file
+      description: |
+        Resulting tractogram after the operation.
+        e.g. `[ path(trk) ]`
+      pattern: "*.trk"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"

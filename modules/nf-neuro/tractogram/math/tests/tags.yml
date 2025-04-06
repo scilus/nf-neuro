@@ -1,0 +1,2 @@
+tractogram/math:
+  - "modules/nf-neuro/tractogram/math/**"
