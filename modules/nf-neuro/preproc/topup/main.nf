@@ -26,12 +26,12 @@ process PREPROC_TOPUP {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def prefix_topup = task.ext.prefix_topup ? task.ext.prefix_topup : ""
+    def prefix_topup = task.ext.prefix_topup ?: ""
     config_topup = config_topup ?: task.ext.default_config_topup
-    def encoding = task.ext.encoding ? task.ext.encoding : ""
-    def readout = task.ext.readout ? task.ext.readout : ""
-    def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ? task.ext.b0_thr_extract_b0 : ""
-    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
+    def encoding = task.ext.encoding ?: ""
+    def readout = task.ext.readout ?: ""
+    def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ?: ""
+    def run_qc = task.ext.run_qc
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
