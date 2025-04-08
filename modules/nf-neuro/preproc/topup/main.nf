@@ -1,6 +1,6 @@
 process PREPROC_TOPUP {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
@@ -62,6 +62,7 @@ process PREPROC_TOPUP {
         --encoding_direction $encoding\
         --readout $readout --out_prefix $prefix_topup\
         --out_script
+    echo "\$(cat topup.sh) --nthr=$task.cpus" > topup.sh
     sh topup.sh
     cp corrected_b0s.nii.gz ${prefix}__corrected_b0s.nii.gz
 
