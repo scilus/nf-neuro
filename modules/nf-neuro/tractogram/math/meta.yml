@@ -80,7 +80,7 @@ args:
       type: string
       description: |
         Save the streamline indices to the supplied json file. The string in
-        this argument will be used as the prefix of the output `json` file.
+        this argument will be used as the prefix of the output `.json` file.
   - save_empty:
       type: boolean
       description: |
