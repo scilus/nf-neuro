@@ -30,22 +30,22 @@ workflow TRACTOMETRY_FLOW {
     BUNDLE_FIXELAFD ( ch_fixel )
     ch_versions = ch_versions.mix(BUNDLE_FIXELAFD.out.versions.first())
     ch_fixelafd = BUNDLE_FIXELAFD.out.fixel_afd
-    ch_metrics = ch_metrics.mix(ch_fixelafd)
+    ch_metrics = ch_metrics.join(ch_fixelafd)
 
-    // Creation of two channels based on the contents of ch_centroids
     ch_centroids_present = ch_centroids.filter { it != null }
-    ch_centroids_missing = ch_centroids.ifEmpty { Channel.of(true) }
 
     // TRACTOGRAM_RESAMPLE if ch_centroids has content
-    TRACTOGRAM_RESAMPLE(ch_centroids_present)
-    ch_versions = ch_versions.mix(TRACTOGRAM_RESAMPLE.out.versions.first())
-    ch_centroids_cleaned = TRACTOGRAM_RESAMPLE.out.tractograms
-
+    if (ch_centroids_present) {
+        TRACTOGRAM_RESAMPLE(ch_centroids_present)
+        ch_versions = ch_versions.mix(TRACTOGRAM_RESAMPLE.out.versions.first())
+        ch_centroids_cleaned = TRACTOGRAM_RESAMPLE.out.tractograms
+    }
     // BUNDLE_CENTROID if ch_centroids is empty
-    BUNDLE_CENTROID(ch_bundle_cleaned)
-        .when(ch_centroids_missing)
-    ch_centroids_cleaned = BUNDLE_CENTROID.out.centroids
-    ch_versions = ch_versions.mix(BUNDLE_CENTROID.out.versions.first())
+    else {
+        BUNDLE_CENTROID(ch_bundle_cleaned)
+        ch_centroids_cleaned = BUNDLE_CENTROID.out.centroids
+        ch_versions = ch_versions.mix(BUNDLE_CENTROID.out.versions.first())
+    }
 
     ch_label_map = ch_bundle_cleaned.join( ch_centroids_cleaned )
 
