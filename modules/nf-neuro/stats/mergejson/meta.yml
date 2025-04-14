@@ -43,8 +43,8 @@ args:
   - average_last_layer:
       type: boolean
       description: |
-       If set, will average all entries (scalar) at the lowest layers,
-       but instead of creating a list it creates a mean/std level.
+        If set, will average all entries (scalar) at the lowest layers,
+        but instead of creating a list it creates a mean/std level.
       default: false
 
   - recursive:
@@ -55,9 +55,9 @@ args:
   - no_list:
       type: boolean
       description: |
-       If set, will merge all entries at the top level, if there is a
-       conflict the lowest level will be extended with the new values
-       (if list) or added (if value).
+        If set, will merge all entries at the top level, if there is a
+        conflict the lowest level will be extended with the new values
+        (if list) or added (if value).
       default: false
 
   - stats_over_population:
