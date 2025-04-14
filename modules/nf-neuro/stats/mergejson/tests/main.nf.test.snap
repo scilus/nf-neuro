@@ -2,27 +2,27 @@
     "stats - merge json -stub-run": {
         "content": [
             [
-                "versions.yml:md5,c6dee3793a6235dcccc54fe0cd20b41a"
+                "versions.yml:md5,9f44096be0a4505b34f7472dd568b283"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-14T10:57:09.459772383"
+        "timestamp": "2025-04-14T13:37:43.482600088"
     },
     "stats - length": {
         "content": [
             "length_stats.json:md5,de69902deee6b5da29aa811381c4a2e4",
             "length_stats.xlsx",
             [
-                "versions.yml:md5,c6dee3793a6235dcccc54fe0cd20b41a"
+                "versions.yml:md5,9f44096be0a4505b34f7472dd568b283"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-14T10:59:43.134624521"
+        "timestamp": "2025-04-14T13:37:35.99474551"
     }
 }
