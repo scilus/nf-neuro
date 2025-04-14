@@ -11,9 +11,9 @@ process STATS_MERGEJSON {
     tuple val(meta), path(jsons)
 
     output:
-    tuple path("*_stats.json")  , emit: json
-    tuple path("*_stats.xlsx")  , emit: xlsx
-    path "versions.yml"         , emit: versions
+    path("*_stats.json")  , emit: json
+    path("*_stats.xlsx")  , emit: xlsx
+    path "versions.yml"   , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
