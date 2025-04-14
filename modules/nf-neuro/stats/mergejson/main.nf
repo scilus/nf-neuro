@@ -11,6 +11,7 @@ process STATS_MERGEJSON {
     tuple val(meta), path(jsons)
 
     output:
+    val(meta)             , emit: meta
     path("*_stats.json")  , emit: json
     path("*_stats.xlsx")  , emit: xlsx
     path "versions.yml"   , emit: versions
