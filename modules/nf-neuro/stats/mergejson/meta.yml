@@ -66,6 +66,12 @@ args:
       default: false
 
 output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
   - json:
       type: file
       description: json containing all merged jsons.
