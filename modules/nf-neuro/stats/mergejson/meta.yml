@@ -1,6 +1,6 @@
 ---
 name: "stats_mergejson"
-description:  Allows you to fuse JSON with different merging possibilities.
+description: Allows you to fuse JSON with different merging possibilities.
 keywords:
   - scilpy
   - stats
