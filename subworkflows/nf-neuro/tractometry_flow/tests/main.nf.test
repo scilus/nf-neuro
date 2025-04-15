@@ -23,35 +23,139 @@ nextflow_workflow {
             script "../../load_test_data/main.nf"
             process {
                 """
-                input[0] = Channel.from( [ "bundles.zip" ] )
+                input[0] = Channel.from( [ "WB-segmentation.zip" , "WB-diffusion.zip" , "WB-tractogram.zip" ] )
                 input[1] = "test.load-test-data"
                 """
             }
         }
     }
 
-    // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
-    test("sarscov2 - bam - single_end") {
-
+    test("tractometry_with_centroids") {
+        config "./nextflow.config"
         when {
             workflow {
                 """
-                // TODO nf-core: define inputs of the workflow here. Example:
-                input[0] = [ [ id:'test', single_end:false ], // meta map
-                        file(params.test_data['sarscov2']['illumina']['test_single_end_bam'], checkIfExists: true)
-                        ]
-                input[1] = [ [ id:'genome' ],
-                        file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
-                        ]
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        segmentation: it.simpleName == "WB-segmentation"
+                        diffusion: it.simpleName == "WB-diffusion"
+                        tractogram: it.simpleName == "WB-tractogram"
+                    }
+                input[0] = ch_split_test_data.tractogram.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/bundles/AF_L.trk")
+                    ]}
+                input[1] = ch_split_test_data.tractogram.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/centroids/*.trk")
+                    ]}
+                input[2] = ch_split_test_data.diffusion.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dti/ad.nii.gz"),
+                        file("\${test_data_directory}/dti/fa.nii.gz"),
+                        file("\${test_data_directory}/dti/md.nii.gz"),
+                        file("\${test_data_directory}/dti/rd.nii.gz")
+                    ]}
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
                 """
             }
         }
-
         then {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(workflow.out).match()}
-                //TODO nf-core: Add all required assertions to verify the test output.
+            )
+        }
+    }
+
+    test("tractometry_without_centroid") {
+        config "./nextflow.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        segmentation: it.simpleName == "WB-segmentation"
+                        diffusion: it.simpleName == "WB-diffusion"
+                        tractogram: it.simpleName == "WB-tractogram"
+                    }
+                input[0] = ch_split_test_data.tractogram.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/bundles/*.trk")
+                    ]}
+                input[1] = Channel.empty()
+                input[2] = ch_split_test_data.diffusion.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dti/ad.nii.gz"),
+                        file("\${test_data_directory}/dti/fa.nii.gz"),
+                        file("\${test_data_directory}/dti/md.nii.gz"),
+                        file("\${test_data_directory}/dti/rd.nii.gz")
+                    ]}
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("tractometry_with_centroids_lesion_fodf") {
+        config "./nextflow.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        segmentation: it.simpleName == "WB-segmentation"
+                        diffusion: it.simpleName == "WB-diffusion"
+                        tractogram: it.simpleName == "WB-tractogram"
+                    }
+                input[0] = ch_split_test_data.tractogram.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/bundles/*.trk")
+                    ]}
+                input[1] = ch_split_test_data.tractogram.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/centroids/*.trk")
+                    ]}
+                input[2] = ch_split_test_data.diffusion.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dti/ad.nii.gz"),
+                        file("\${test_data_directory}/dti/fa.nii.gz"),
+                        file("\${test_data_directory}/dti/md.nii.gz"),
+                        file("\${test_data_directory}/dti/rd.nii.gz")
+                    ]}
+                input[3] = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/brainmask/brainmask.nii.gz")
+                    ]}
+                input[4] = ch_split_test_data.diffusion.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/fodf/fodf.nii.gz")
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
             )
         }
     }

@@ -1,0 +1,371 @@
+{
+    "tractometry_with_centroids": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "/tmp/test.load-test-data10080552637195118563/WB-tractogram/bundles/AF_L.trk"
+                    ]
+                ],
+                "1": [
+                    
+                ],
+                "10": [
+                    
+                ],
+                "11": [
+                    
+                ],
+                "12": [
+                    
+                ],
+                "13": [
+                    
+                ],
+                "14": [
+                    
+                ],
+                "15": [
+                    
+                ],
+                "16": [
+                    
+                ],
+                "17": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    
+                ],
+                "7": [
+                    
+                ],
+                "8": [
+                    
+                ],
+                "9": [
+                    
+                ],
+                "bb": [
+                    
+                ],
+                "ch_bundles": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "/tmp/test.load-test-data10080552637195118563/WB-tractogram/bundles/AF_L.trk"
+                    ]
+                ],
+                "endpoints_head": [
+                    
+                ],
+                "endpoints_tail": [
+                    
+                ],
+                "lesion_map": [
+                    
+                ],
+                "stat_endpoints_metric": [
+                    
+                ],
+                "stat_endpoints_raw": [
+                    
+                ],
+                "stat_length": [
+                    
+                ],
+                "stat_lesion_stats": [
+                    
+                ],
+                "stat_mean_std": [
+                    
+                ],
+                "stat_mean_std_per_point": [
+                    
+                ],
+                "stat_streamline_count": [
+                    
+                ],
+                "stat_streamline_count_lesions": [
+                    
+                ],
+                "stat_volume": [
+                    
+                ],
+                "stat_volume_lesions": [
+                    
+                ],
+                "stat_volume_per_labels": [
+                    
+                ],
+                "stat_volume_per_labels_lesions": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-04-15T16:18:54.376152029"
+    },
+    "tractometry_without_centroid": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "10": [
+                    
+                ],
+                "11": [
+                    
+                ],
+                "12": [
+                    
+                ],
+                "13": [
+                    
+                ],
+                "14": [
+                    
+                ],
+                "15": [
+                    
+                ],
+                "16": [
+                    
+                ],
+                "17": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    
+                ],
+                "7": [
+                    
+                ],
+                "8": [
+                    
+                ],
+                "9": [
+                    
+                ],
+                "bb": [
+                    
+                ],
+                "ch_bundles": [
+                    
+                ],
+                "endpoints_head": [
+                    
+                ],
+                "endpoints_tail": [
+                    
+                ],
+                "lesion_map": [
+                    
+                ],
+                "stat_endpoints_metric": [
+                    
+                ],
+                "stat_endpoints_raw": [
+                    
+                ],
+                "stat_length": [
+                    
+                ],
+                "stat_lesion_stats": [
+                    
+                ],
+                "stat_mean_std": [
+                    
+                ],
+                "stat_mean_std_per_point": [
+                    
+                ],
+                "stat_streamline_count": [
+                    
+                ],
+                "stat_streamline_count_lesions": [
+                    
+                ],
+                "stat_volume": [
+                    
+                ],
+                "stat_volume_lesions": [
+                    
+                ],
+                "stat_volume_per_labels": [
+                    
+                ],
+                "stat_volume_per_labels_lesions": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-04-15T16:13:07.838101309"
+    },
+    "tractometry_with_centroids_lesion_fodf": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "10": [
+                    
+                ],
+                "11": [
+                    
+                ],
+                "12": [
+                    
+                ],
+                "13": [
+                    
+                ],
+                "14": [
+                    
+                ],
+                "15": [
+                    
+                ],
+                "16": [
+                    
+                ],
+                "17": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    
+                ],
+                "7": [
+                    
+                ],
+                "8": [
+                    
+                ],
+                "9": [
+                    
+                ],
+                "bb": [
+                    
+                ],
+                "ch_bundles": [
+                    
+                ],
+                "endpoints_head": [
+                    
+                ],
+                "endpoints_tail": [
+                    
+                ],
+                "lesion_map": [
+                    
+                ],
+                "stat_endpoints_metric": [
+                    
+                ],
+                "stat_endpoints_raw": [
+                    
+                ],
+                "stat_length": [
+                    
+                ],
+                "stat_lesion_stats": [
+                    
+                ],
+                "stat_mean_std": [
+                    
+                ],
+                "stat_mean_std_per_point": [
+                    
+                ],
+                "stat_streamline_count": [
+                    
+                ],
+                "stat_streamline_count_lesions": [
+                    
+                ],
+                "stat_volume": [
+                    
+                ],
+                "stat_volume_lesions": [
+                    
+                ],
+                "stat_volume_per_labels": [
+                    
+                ],
+                "stat_volume_per_labels_lesions": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-04-15T16:13:13.15348297"
+    }
+}

@@ -124,6 +124,8 @@ workflow TRACTOMETRY_FLOW {
 
 
     emit:
+        ch_bundles
+        bb = ch_bundle_cleaned
         stat_length
         stat_endpoints_raw
         stat_endpoints_metric
