@@ -2,7 +2,9 @@ process BETCROP_SYNTHBET {
     tag "$meta.id"
     label 'process_single'
 
-    container "freesurfer/freesurfer:7.4.1"
+    container "${ task.ext.gpu ?
+        "freesurfer/synthstrip:1.7-gpu" :
+        "freesurfer/synthstrip:1.7"}"
 
     input:
     tuple val(meta), path(image), path(weights) /* optional, input = [] */
@@ -19,16 +21,13 @@ process BETCROP_SYNTHBET {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     def gpu = task.ext.gpu ? "--gpu" : ""
+    def cpu = "--threads $task.cpus"
     def border = task.ext.border ? "-b " + task.ext.border : ""
     def nocsf = task.ext.nocsf ? "--no-csf" : ""
     def model = "$weights" ? "--model $weights" : ""
 
     """
-    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
-    export OMP_NUM_THREADS=1
-    export OPENBLAS_NUM_THREADS=1
-
-    mri_synthstrip -i $image --out ${prefix}__bet_image.nii.gz --mask ${prefix}__brain_mask.nii.gz $gpu $border $nocsf $model
+    mri_synthstrip -i $image --out ${prefix}__bet_image.nii.gz --mask ${prefix}__brain_mask.nii.gz $gpu $cpu $border $nocsf $model
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
