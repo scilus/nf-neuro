@@ -31,7 +31,7 @@ process BETCROP_SYNTHBET {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        synthstrip: 1.7
     END_VERSIONS
     """
 
@@ -44,7 +44,7 @@ process BETCROP_SYNTHBET {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        synthstrip: 1.7
     END_VERSIONS
 
     function handle_code () {
