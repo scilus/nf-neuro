@@ -16,16 +16,14 @@ tools:
   - ANTs:
       description: Advanced Normalization Tools (ANTs) for image processing.
       homepage: http://stnava.github.io/ANTs/
-      identifier: ""
+      identifier: "10.1038/s41598-021-87564-6"
   - FSL:
-      description: FSL Toolbox and Scilpy Toolbox
+      description: FSL Toolbox
       homepage: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
-      identifier: ""
+      identifier: 10.1016/j.neuroimage.2011.09.015
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
       identifier: ""
 input:
   # Only when we have meta
