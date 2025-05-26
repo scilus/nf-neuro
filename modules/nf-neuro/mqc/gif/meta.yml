@@ -9,15 +9,20 @@ keywords:
   - Visualisation
   - gif
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-  - "MRtrix3":
-      description: "MRtrix3 is a software package for various types of diffusion imaging data, including diffusion-weighted, diffusion-tensor, and q-ball imaging."
-      homepage: "https://www.mrtrix.org/"
-  - "imagemagick":
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+  - MRtrix3:
+      description: |
+        MRtrix3 is a software package for various types of diffusion imaging
+        data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
+      homepage: https://www.mrtrix.org/
+      identifier: 10.1016/j.neuroimage.2019.116137
+  - imagemagick:
       description: "ImageMagick is a free, open-source software suite, used for editing and manipulating digital images."
       homepage: "https://imagemagick.org/index.php"
+      identifier: ""
 
 input:
   - meta:

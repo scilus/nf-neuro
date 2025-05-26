@@ -8,14 +8,12 @@ keywords:
   - Tissues
 tools:
   - FSL:
-      description: FSL Toolbox and Scilpy Toolbox
+      description: FSL Toolbox
       homepage: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
-      identifier: ""
-  - Scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+      identifier: 10.1016/j.neuroimage.2011.09.015
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
       identifier: ""
 input:
   - - meta:

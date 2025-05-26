@@ -3,20 +3,18 @@ name: betcrop_antsbet
 description: Perform Brain extraction using antsBrainExtraction.sh on T1 image.
 keywords:
   - T1
-  - BET
-  - ants
-  - scilpy
+  - mask
+  - brain
+  - extraction
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
-  - ants:
-      description: Advanced Normalization Tools.
-      homepage: https://github.com/ANTsX/ANTs
-
-      identifier: ""
+  - ANTs:
+      description: Advanced Normalization Tools (ANTs) for image processing.
+      homepage: http://stnava.github.io/ANTs/
+      identifier: "10.1038/s41598-021-87564-6"
 input:
   - - meta:
         type: map

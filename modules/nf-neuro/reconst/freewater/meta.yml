@@ -7,10 +7,10 @@ keywords:
   - Freewater
   - Microstructure modeling
 tools:
-  - Scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
   - Freewater:
       description: Free water elimination and mapping from diffusion MRI.
       doi: 10.1002/mrm.22055

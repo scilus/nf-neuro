@@ -6,11 +6,9 @@ keywords:
   - extract
   - b0
 tools:
-  - Scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
       identifier: ""
 input:
   # Only when we have meta

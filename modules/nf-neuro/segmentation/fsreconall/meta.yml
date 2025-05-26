@@ -3,16 +3,17 @@ name: segmentation_fsreconall
 description: "Performs Freesurfer's recon-all script to segment your anatomy (probably
   a T1) into labels, surfaces, and much more. See the full documentation here: https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all."
 keywords:
-  - FreeSurfer
+  - neural network
+  - Artificial intelligence
+  - machine learning
   - Segmentation
   - Tissues
 tools:
   - Freesurfer:
-      description: An open source neuroimaging toolkit for processing, analyzing, and
-        visualizing human brain MR images.
+      description: |
+        Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
       homepage: https://surfer.nmr.mgh.harvard.edu/
-
-      identifier: ""
+      identifier: 10.1016/j.neuroimage.2012.01.021
 input:
   - - meta:
         type: map

@@ -11,7 +11,6 @@ tools:
       description: The FastSurfer pipeline consists of two main parts for segmentation
         and surface reconstruction.
       homepage: https://github.com/Deep-MI/FastSurfer
-
       identifier: ""
 input:
   - - meta:

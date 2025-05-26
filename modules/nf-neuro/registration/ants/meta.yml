@@ -4,15 +4,14 @@ description: Image registration with antsRegistrationSyN or antsRegistrationSyNQ
 keywords:
   - nifti
   - registration
-  - antsRegistrationSyN
-  - antsRegistrationSyNQuick
+  - SyN
+  - SyNQuick
   - trk
 tools:
-  - ants:
-      description: Advanced Normalization Tools.
-      homepage: https://github.com/ANTsX/ANTs
-
-      identifier: ""
+  - ANTs:
+      description: Advanced Normalization Tools (ANTs) for image processing.
+      homepage: http://stnava.github.io/ANTs/
+      identifier: "10.1038/s41598-021-87564-6"
 input:
   # Only when we have meta
   - - meta:

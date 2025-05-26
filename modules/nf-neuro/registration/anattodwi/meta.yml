@@ -8,14 +8,10 @@ keywords:
   - dwi
 
 tools:
-  - antsRegistration:
-      description: ANTs (Advanced Normalization Tools) open-source software package
-        for image registration and segmentation
-      homepage: https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Linux-and-Mac-OS
-      documentation: http://stnava.github.io/ANTsDoc/
-      doi: 10.1016/j.neuroimage.2010.09.025
-
-      identifier: ""
+  - ANTs:
+      description: Advanced Normalization Tools (ANTs) for image processing.
+      homepage: http://stnava.github.io/ANTs/
+      identifier: "10.1038/s41598-021-87564-6"
 input:
   - - meta:
         type: map

@@ -7,10 +7,10 @@ keywords:
   - NODDI
   - Microstructure modeling
 tools:
-  - Scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
   - NODDI:
       description: Method to compute neurite orientation dispersion and density imaging.
       doi: 10.1016/j.neuroimage.2012.03.072

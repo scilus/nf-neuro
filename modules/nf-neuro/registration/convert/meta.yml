@@ -10,12 +10,10 @@ keywords:
   - Conversion
 tools:
   - Freesurfer:
-      description: Freesurfer lta_convert (affine conversion) and mri_warp_convert (deform)
-        tools for transform conversion
+      description: |
+        Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
       homepage: https://surfer.nmr.mgh.harvard.edu/
-      documentation: https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferWiki
-
-      identifier: ""
+      identifier: 10.1016/j.neuroimage.2012.01.021
 input:
   - - meta:
         type: map
