@@ -81,7 +81,7 @@ jobs:
         run: npx editorconfig-checker -exclude README.md $(git ls-files | grep -v test)
 
   lint-changes:
-    name: compute - changes
+    name: lint - changes
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
     outputs:
@@ -113,7 +113,7 @@ jobs:
           echo ${{ steps.components.outputs.subworkflows }}
 
   nf-test-changes:
-    name: compute - changes
+    name: test - changes
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
     outputs:
