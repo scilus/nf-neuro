@@ -230,7 +230,8 @@ jobs:
   confirm-pass:
     name: status
     runs-on: ubuntu-latest
-    needs: [prettier, editorconfig, nf-test-changes, lint-changes, lint-modules, lint-subworkflows, nf-test, upload-reports]
+    needs:
+      [prettier, editorconfig, nf-test-changes, lint-changes, lint-modules, lint-subworkflows, nf-test, upload-reports]
     if: ${{ !cancelled() }}
     steps:
       - name: All tests ok
