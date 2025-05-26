@@ -4,20 +4,19 @@ description: Performs Brain Tissues Segmentation using the FreeSurfer aparc and 
   output files.  Optionally, a binary mask of lesion can be add to correct the white
   matter mask.
 keywords:
-  - FreeSurfer
   - Segmentation
   - Tissues
 tools:
-  - Scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
   - MRtrix3:
-      description: Toolbox for image processing, analysis and visualisation of dMRI.
-      homepage: https://mrtrix.readthedocs.io/en/latest/
-
-      identifier: ""
+      description: |
+        MRtrix3 is a software package for various types of diffusion imaging
+        data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
+      homepage: https://www.mrtrix.org/
+      identifier: 10.1016/j.neuroimage.2019.116137
 input:
   - - meta:
         type: map

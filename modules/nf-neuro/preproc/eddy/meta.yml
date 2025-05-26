@@ -7,18 +7,19 @@ keywords:
   - eddy
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
   - MRtrix3:
-      description: Toolbox for image processing, analysis and visualisation of dMRI.
-      homepage: https://mrtrix.readthedocs.io/en/latest/
-      identifier: ""
+      description: |
+        MRtrix3 is a software package for various types of diffusion imaging
+        data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
+      homepage: https://www.mrtrix.org/
+      identifier: 10.1016/j.neuroimage.2019.116137
   - FSL:
-      description: FSL Toolbox and Scilpy Toolbox
+      description: FSL Toolbox
       homepage: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
-      identifier: ""
+      identifier: 10.1016/j.neuroimage.2011.09.015
 input:
   # Only when we have meta
   - - meta:
