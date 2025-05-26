@@ -57,7 +57,7 @@ tools:
   - scilpy:
       description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-      identifier: ""
+
 input:
   - - meta:
         type: map
@@ -77,7 +77,7 @@ input:
           the same dimension than bundle file and have datatype in int. If you have
           multiple bundles, it must have the same numbers of sections.
         pattern: "*.nii.gz"
-      mandatory: true
+        mandatory: true
 
     - metrics:
         type: file

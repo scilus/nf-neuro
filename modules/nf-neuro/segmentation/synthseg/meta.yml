@@ -15,7 +15,7 @@ tools:
       description: |
         Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
       homepage: https://surfer.nmr.mgh.harvard.edu/
-      identifier: 10.1016/j.neuroimage.2012.01.021
+      doi: 10.1016/j.neuroimage.2012.01.021
 input:
   - - meta:
         type: map
