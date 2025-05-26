@@ -214,7 +214,7 @@ output:
       - "*__pft_tracking_stats.json":
           type: file
           description: |
-            	JSON file containing basic measurements of whole tractogram.
+              JSON file containing basic measurements of whole tractogram.
               Made for use in MultiQC report.
           pattern: "*__pft_tracking_stats.json"
   - versions:

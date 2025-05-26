@@ -95,17 +95,17 @@ args:
 
 output:
   - trk:
-    - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'sample1', single_end:false ]`
-    - "*.trk":
-        type: file
-        description: |
-          Resulting tractogram after the operation.
-          e.g. `[ path(trk) ]`
-        pattern: "*.trk"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.trk":
+          type: file
+          description: |
+            Resulting tractogram after the operation.
+            e.g. `[ path(trk) ]`
+          pattern: "*.trk"
 
   - versions:
       - versions.yml:

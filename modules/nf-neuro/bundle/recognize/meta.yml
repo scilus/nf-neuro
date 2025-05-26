@@ -12,7 +12,6 @@ tools:
         toolbox.
       homepage: https://github.com/scilus/scilpy.git
 
-
 input:
   - - meta:
         type: map
