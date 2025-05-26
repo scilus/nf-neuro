@@ -68,28 +68,28 @@ args:
 
 output:
   - json:
-    - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'sample1', single_end:false ]`
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
 
-    - "*_stats.json":
-        type: file
-        description: json containing all merged jsons.
-        pattern: "*_stats.json"
+      - "*_stats.json":
+          type: file
+          description: json containing all merged jsons.
+          pattern: "*_stats.json"
 
   - xlsx:
-    - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'sample1', single_end:false ]`
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
 
-    - "*_stats.xlsx":
-        type: file
-        description: xlsx containing all merged jsons.
-        pattern: "*_stats.xlsx"
+      - "*_stats.xlsx":
+          type: file
+          description: xlsx containing all merged jsons.
+          pattern: "*_stats.xlsx"
 
   - versions:
       - versions.yml:
