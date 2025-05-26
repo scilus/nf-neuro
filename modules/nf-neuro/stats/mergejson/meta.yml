@@ -11,18 +11,19 @@ tools:
   - scilpy:
       description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-      identifier: ""
-input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
 
-  - jsons:
-      type: file
-      description: set of json to merge together.
-      pattern: "*.json"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+
+    - jsons:
+        type: file
+        description: set of json to merge together.
+        pattern: "*.json"
+        mandatory: true
 
 args:
   - prefix:
@@ -66,26 +67,35 @@ args:
       default: false
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
   - json:
-      type: file
-      description: json containing all merged jsons.
-      pattern: "*_stats.json"
+    - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+
+    - "*_stats.json":
+        type: file
+        description: json containing all merged jsons.
+        pattern: "*_stats.json"
 
   - xlsx:
-      type: file
-      description: xlsx containing all merged jsons.
-      pattern: "*_stats.xlsx"
+    - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+
+    - "*_stats.xlsx":
+        type: file
+        description: xlsx containing all merged jsons.
+        pattern: "*_stats.xlsx"
 
   - versions:
-      type: file
-      description: File containing software versions.
-      pattern: "versions.yml"
+      - versions.yml:
+          type: file
+          description: File containing software versions.
+          pattern: versions.yml
 
 authors:
   - "@ThoumyreStanislas"

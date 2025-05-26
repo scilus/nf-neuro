@@ -21,27 +21,27 @@ tools:
   - scilpy:
       description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-      identifier: ""
+
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-  - trks:
-      type: file
-      description: |
-        List of tractograms to perform the operation on.
-        e.g. `[ path(trk1), path(trk2), path(trk3), ...]`
-      pattern: "*.trk"
-      mandatory: true
-  - reference:
-      type: file
-      description: |
-        Reference tractogram to use for the operation.
-        e.g. `[ path(reference) ]`
-      pattern: "*.{nii,nii.gz}"
-      mandatory: false
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - trks:
+        type: file
+        description: |
+          List of tractograms to perform the operation on.
+          e.g. `[ path(trk1), path(trk2), path(trk3), ...]`
+        pattern: "*.trk"
+        mandatory: true
+    - reference:
+        type: file
+        description: |
+          Reference tractogram to use for the operation.
+          e.g. `[ path(reference) ]`
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
 
 args:
   - operation:
@@ -94,21 +94,24 @@ args:
       default: false
 
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
   - trk:
-      type: file
-      description: |
-        Resulting tractogram after the operation.
-        e.g. `[ path(trk) ]`
-      pattern: "*.trk"
+    - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - "*.trk":
+        type: file
+        description: |
+          Resulting tractogram after the operation.
+          e.g. `[ path(trk) ]`
+        pattern: "*.trk"
+
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: versions.yml
 
 authors:
   - "@gagnonanthony"

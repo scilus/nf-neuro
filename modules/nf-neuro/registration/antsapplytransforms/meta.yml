@@ -9,7 +9,7 @@ tools:
   - ANTs:
       description: perform registration using transform as input
       homepage: https://antsx.github.io/ANTsRCore/reference/antsApplyTransforms.html
-      identifier: ""
+
 input:
   - - meta:
         type: map

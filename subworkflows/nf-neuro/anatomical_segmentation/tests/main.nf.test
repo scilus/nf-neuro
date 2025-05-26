@@ -5,7 +5,7 @@ nextflow_workflow {
     workflow "ANATOMICAL_SEGMENTATION"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/anatomical_segmentation"
 
     tag "segmentation"
