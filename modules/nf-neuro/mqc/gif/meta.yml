@@ -23,7 +23,6 @@ tools:
       description: "ImageMagick is a free, open-source software suite, used for editing and manipulating digital images."
       homepage: "https://imagemagick.org/index.php"
 
-
 input:
   - - meta:
         type: map
@@ -60,16 +59,16 @@ args:
 
 output:
   - mqc_screenshots:
-    - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'sample1', single_end:false ]`
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
 
-    - "*_screenshots_merged_mqc.gif":
-        type: file
-        description: .gif file containing quality control image for visually compares MRI volumes using middle-slice mosaics.
-        pattern: "*_screenshots_merged_mqc.gif"
+      - "*_screenshots_merged_mqc.gif":
+          type: file
+          description: .gif file containing quality control image for visually compares MRI volumes using middle-slice mosaics.
+          pattern: "*_screenshots_merged_mqc.gif"
 
   - versions:
       - versions.yml:
