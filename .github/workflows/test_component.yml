@@ -89,7 +89,7 @@ jobs:
         uses: Wandalen/wretry.action@v3.7.2
         with:
           attempt_delay: 5000
-          action: actions/setup-java@2dfa2011c5b2a0f1489bf9e433881c92c1631f88 # v4.3.0
+          action: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
           with: |
             distribution: "temurin"
             java-version: "17"
@@ -101,9 +101,7 @@ jobs:
           action: nf-core/setup-nextflow@561fcfc7146dcb12e3871909b635ab092a781f34 # v2.0.0
           with: |
             version: ${{ inputs.nextflow_version }}
-      - uses: AlexVCaron/setup-nf-test@2c5a31b90b34d97abf155b57ee0f79c7f5aa118a
-        # Used to make the action executable on our runners. Related to how the home
-        # and work directories are set up from ephemeral disks. See nf-core/setup-nf-test/issues/6
+      - uses: nf-core/setup-nf-test@fbd9d701dd1f41a38b151a737a0f12e97f3c4c56 # v1.3.5
         with:
           version: ${{ inputs.nf_test_version }}
 
