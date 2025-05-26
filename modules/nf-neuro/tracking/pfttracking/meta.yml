@@ -13,11 +13,11 @@ tools:
       description: DIPY is the paragon 3D/4D+ imaging library in Python.
       homepage: https://dipy.org
       doi: 10.1016/j.neuroimage.2014.04.074
-      identifier: ""
+
   - scilpy:
       description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-      identifier: ""
+
 input:
   - - meta:
         type: map

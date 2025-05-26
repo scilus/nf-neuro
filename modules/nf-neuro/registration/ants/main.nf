@@ -121,10 +121,10 @@ process REGISTRATION_ANTS {
 
     """
     touch ${prefix}__t1_warped.nii.gz
-    touch ${prefix}__output1GenericAffine.mat
-    touch ${prefix}__output0InverseAffine.mat
-    touch ${prefix}__output1InverseWarp.nii.gz
-    touch ${prefix}__output0Warp.nii.gz
+    touch ${prefix}__output0GenericAffine.mat
+    touch ${prefix}__output1InverseAffine.mat
+    touch ${prefix}__output0InverseWarp.nii.gz
+    touch ${prefix}__output1Warp.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

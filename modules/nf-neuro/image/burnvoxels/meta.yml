@@ -21,17 +21,17 @@ tools:
   - ANTs:
       description: Advanced Normalization Tools (ANTs) for image processing.
       homepage: http://stnava.github.io/ANTs/
-      identifier: "10.1038/s41598-021-87564-6"
+      doi: "10.1038/s41598-021-87564-6"
   - MRtrix3:
       description: |
         MRtrix3 is a software package for various types of diffusion imaging
         data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
       homepage: https://www.mrtrix.org/
-      identifier: 10.1016/j.neuroimage.2019.116137
+      doi: 10.1016/j.neuroimage.2019.116137
   - scilpy:
       description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-      identifier: ""
+
 input:
   - - meta:
         type: map
