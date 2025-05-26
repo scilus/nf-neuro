@@ -5,18 +5,17 @@ description: Perform Brain Tissues Segmentation using Freesurfer synthseg on a T
   mask. Note that tests using synthseg are non-reproductible.
 keywords:
   - Segmentation
-  - Freesurfer
   - Tissues
   - Synthetic
-  - AI
-  - CNN
+  - neural network
+  - Artificial intelligence
+  - machine learning
 tools:
   - Freesurfer:
-      description: An open source neuroimaging toolkit for processing, analyzing, and
-        visualizing human brain MR images.
+      description: |
+        Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
       homepage: https://surfer.nmr.mgh.harvard.edu/
-
-      identifier: ""
+      identifier: 10.1016/j.neuroimage.2012.01.021
 input:
   - - meta:
         type: map
