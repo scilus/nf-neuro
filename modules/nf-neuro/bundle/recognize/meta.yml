@@ -12,7 +12,7 @@ tools:
         toolbox.
       homepage: https://github.com/scilus/scilpy.git
 
-      identifier: ""
+
 input:
   - - meta:
         type: map
@@ -41,7 +41,7 @@ input:
     - directory:
         type: directory
         description: Directory containing the reference atlas
-      mandatory: true
+        mandatory: true
 
 args:
   - minimal_vote_ratio:

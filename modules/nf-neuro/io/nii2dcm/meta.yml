@@ -12,11 +12,11 @@ tools:
         MRtrix3 is a software package for various types of diffusion imaging
         data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
       homepage: https://www.mrtrix.org/
-      identifier: 10.1016/j.neuroimage.2019.116137
+      doi: 10.1016/j.neuroimage.2019.116137
   - nii2dcm:
       description: A tool to convert NIfTI files to DICOM format.
       homepage: https://github.com/Onset-lab/nii2dcm
-      identifier: ""
+
 input:
   - - meta:
         type: map

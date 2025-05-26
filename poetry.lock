@@ -876,13 +876,13 @@ files = [
 
 [[package]]
 name = "nf-core"
-version = "3.2.0"
+version = "3.2.1"
 description = "Helper tools for use with nf-core Nextflow pipelines."
 optional = false
 python-versions = "<4,>=3.8"
 files = [
-    {file = "nf_core-3.2.0-py3-none-any.whl", hash = "sha256:754d65faa20c6ed36c3b41e8d386930fec10715bd8d14e02e9c88c6dfb816745"},
-    {file = "nf_core-3.2.0.tar.gz", hash = "sha256:d5c2e2fceb6a1115321bc960993c3ec95d263dce5ce488a363e445677e6debe3"},
+    {file = "nf_core-3.2.1-py3-none-any.whl", hash = "sha256:be41f467946e7370b5229ba0e6806f4a88161b082c2eaf838256ba93252f263c"},
+    {file = "nf_core-3.2.1.tar.gz", hash = "sha256:a9d703036d4a3bcd8857b4e3d8d4b3ae7e32435bed0bdedb2974a3817b844a5d"},
 ]
 
 [package.dependencies]
