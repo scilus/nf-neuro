@@ -23,9 +23,7 @@ process PREPROC_N4 {
     def bspline_knot_per_voxel = task.ext.bspline_knot_per_voxel ? "$task.ext.bspline_knot_per_voxel" : "1"
     def shrink_factor = task.ext.shrink_factor ? "$task.ext.shrink_factor" : "1"
     """
-    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
-    export OMP_NUM_THREADS=1
-    export OPENBLAS_NUM_THREADS=1
+    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
     export ANTS_RANDOM_SEED=1234
 
     if [[ -f "$ref" ]]

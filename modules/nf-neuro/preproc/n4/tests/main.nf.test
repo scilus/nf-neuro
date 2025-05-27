@@ -2,6 +2,7 @@ nextflow_process {
 
     name "Test Process PREPROC_N4"
     script "../main.nf"
+    config "./nextflow.config"
     process "PREPROC_N4"
 
     tag "modules"
