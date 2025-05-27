@@ -1,104 +1,119 @@
 {
-    "topup_eddy_rev_b0": {
+    "topup_eddy - AP DWI | PA sbref": {
         "content": [
             [
+                "test_b0.nii.gz",
                 [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__b0_bet_mask.nii.gz:md5,1b45aae94d5bb093dca6ca4a71a8bf97"
-                ]
-            ],
-            [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__b0_bet_mask.nii.gz:md5,1b45aae94d5bb093dca6ca4a71a8bf97"
+                    ]
+                ],
                 [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                    ]
+                ],
+                "test__dwi_eddy_corrected.bvec",
+                "test__dwi_corrected.nii.gz",
+                [
+                    
+                ],
+                [
+                    "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
+                    "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
                 ]
-            ],
-            [
-                "versions.yml:md5,16c27f9c0f1fd6e8f290fdd07827c2df",
-                "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
-            ],
-            "test__dwi_corrected.nii.gz",
-            "test__dwi_eddy_corrected.bvec",
-            "test_b0.nii.gz"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-02-23T19:09:04.311390187"
+        "timestamp": "2025-05-27T15:40:50.697506991"
     },
-    "eddy": {
+    "topup_eddy - ONLY Eddy - AP DWI | PA sbref": {
         "content": [
             [
+                "test_b0.nii.gz",
                 [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__b0_bet_mask.nii.gz:md5,1b45aae94d5bb093dca6ca4a71a8bf97"
-                ]
-            ],
-            [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__b0_bet_mask.nii.gz:md5,1b45aae94d5bb093dca6ca4a71a8bf97"
+                    ]
+                ],
                 [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                    ]
+                ],
+                "test__dwi_eddy_corrected.bvec",
+                "test__dwi_corrected.nii.gz",
+                [
+                    
+                ],
+                [
+                    "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
+                    "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
                 ]
-            ],
-            [
-                "versions.yml:md5,16c27f9c0f1fd6e8f290fdd07827c2df",
-                "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
-            ],
-            "test__dwi_corrected.nii.gz",
-            "test__dwi_eddy_corrected.bvec",
-            "test_b0.nii.gz"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-02-23T19:08:20.174366099"
+        "timestamp": "2025-05-27T15:39:38.131810054"
     },
-    "topup_eddy_rev_dwi": {
+    "topup_eddy - AP DWI+sbref | PA DWI+sbref": {
         "content": [
             [
+                "test_b0.nii.gz",
                 [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__b0_bet_mask.nii.gz:md5,1b45aae94d5bb093dca6ca4a71a8bf97"
-                ]
-            ],
-            [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__b0_bet_mask.nii.gz:md5,1b45aae94d5bb093dca6ca4a71a8bf97"
+                    ]
+                ],
                 [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                    ]
+                ],
+                "test__dwi_eddy_corrected.bvec",
+                "test__dwi_corrected.nii.gz",
+                [
+                    
+                ],
+                [
+                    "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
+                    "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
                 ]
-            ],
-            [
-                "versions.yml:md5,16c27f9c0f1fd6e8f290fdd07827c2df",
-                "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
-            ],
-            "test__dwi_corrected.nii.gz",
-            "test__dwi_eddy_corrected.bvec",
-            "test_b0.nii.gz"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-02-23T19:09:48.530536539"
+        "timestamp": "2025-05-27T15:41:59.669335969"
     }
 }

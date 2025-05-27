@@ -26,7 +26,7 @@ nextflow_process {
             }
         }
 
-    test("topup_full") {
+    test("topup - AP DWI+sbref | PA DWI+sbref") {
         when {
             process {
                 """
@@ -63,7 +63,7 @@ nextflow_process {
         }
     }
 
-    test("topup_light") {
+    test("topup - AP DWI | PA sbref") {
         when {
             process {
                 """
