@@ -25,21 +25,17 @@ nextflow_process {
         }
     }
 
-    test("image - dilation") {
+    test("image - lower_threshold") {
+        config "./nextflow.config"
         when {
             process {
                 """
-                    ch_split_test_data = LOAD_DATA.out.test_data_directory
-                    .branch{
-                        image: it.simpleName == "antsbet.zip"
-                    }
-
-                    input[0] = ch_split_test_data.map{
-                        test_data_directory -> [
-                            [ id:'test', single_end:false ],
-                            file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
-                        ]
-                    }
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                    ]
+                }
                 """
             }
         }
@@ -58,17 +54,12 @@ nextflow_process {
         when {
             process {
                 """
-                    ch_split_test_data = LOAD_DATA.out.test_data_directory
-                    .branch{
-                        image: it.simpleName == "antsbet"
-                    }
-
-                    input[0] = ch_split_test_data.map{
-                        test_data_directory -> [
-                            [ id:'test', single_end:false ],
-                            file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
-                        ]
-                    }
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                    ]
+                }
                 """
             }
         }
