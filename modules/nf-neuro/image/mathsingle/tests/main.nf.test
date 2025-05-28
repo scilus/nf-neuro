@@ -9,6 +9,7 @@ nextflow_process {
     tag "modules_nfcore"
     tag "image"
     tag "image/mathsingle"
+
     tag "subworkflows"
     tag "subworkflows/load_test_data"
 
@@ -24,17 +25,21 @@ nextflow_process {
         }
     }
 
-    test("example - simple") {
-        config "./nextflow.config"
+    test("image - dilation") {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map    -> your meta
-                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz") // -> your image file.
-                    ]
-                }
+                    ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        image: it.simpleName == "antsbet"
+                    }
+
+                    input[0] = ch_split_test_data.map{
+                        test_data_directory -> [
+                            [ id:'test', ],
+                            file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                        ]
+                    }
                 """
             }
         }
@@ -53,12 +58,17 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map    -> your meta
-                        file("\${test_data_directory}/image.nii.gz") // -> your image file.
-                    ]
-                }
+                    ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        image: it.simpleName == "antsbet"
+                    }
+
+                    input[0] = ch_split_test_data.map{
+                        test_data_directory -> [
+                            [ id:'test', ],
+                            file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                        ]
+                    }
                 """
             }
         }

@@ -45,18 +45,22 @@ args:
       type: string
       description: Prefix for the output image file
       default: "${meta.id}"
+
   - suffix:
       type: string
       description: Suffix for the output image file
       default: "output"
+
   - value:
       type: string
       description: Value to use for the mathematical operation (e.g., threshold, clip, etc.)
       default: ""
+
   - data_type:
       type: string
       description: Data type for the output image (e.g., float32, int16, etc.)
       default: "float32"
+
   - exclude_background:
       type: boolean
       description: Whether to exclude the background from the operation

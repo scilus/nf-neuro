@@ -1,4 +1,4 @@
-process IMAGE_MATH_SINGLE {
+process IMAGE_MATHSINGLE {
     tag "$meta.id"
     label 'process_single'
 
@@ -10,7 +10,8 @@ process IMAGE_MATH_SINGLE {
         tuple val(meta), path(image)
 
     output:
-        tuple val(meta), path("*.nii.gz"), emit: image
+        tuple val(meta), path("*.nii.gz")        , emit: image
+        path "versions.yml"                      , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
