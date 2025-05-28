@@ -40,7 +40,7 @@ process IMAGE_MATHSINGLE {
     scil_volume_math.py ${task.ext.operation} $image $value \
         ${prefix}__${suffix}.nii.gz --data_type $data_type $exclude_background
 
-        cat <<-END_VERSIONS > versions.yml
+    cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS

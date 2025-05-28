@@ -31,12 +31,12 @@ nextflow_process {
                 """
                     ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
-                        image: it.simpleName == "antsbet"
+                        image: it.simpleName == "antsbet.zip"
                     }
 
                     input[0] = ch_split_test_data.map{
                         test_data_directory -> [
-                            [ id:'test', ],
+                            [ id:'test', single_end:false ],
                             file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
                         ]
                     }
@@ -52,8 +52,8 @@ nextflow_process {
     }
 
 
-    test("example - stub") {
-        options "-stub"y
+    test("image - stub") {
+        options "-stub"
         config "./nextflow.config"
         when {
             process {
@@ -65,7 +65,7 @@ nextflow_process {
 
                     input[0] = ch_split_test_data.map{
                         test_data_directory -> [
-                            [ id:'test', ],
+                            [ id:'test', single_end:false ],
                             file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
                         ]
                     }
