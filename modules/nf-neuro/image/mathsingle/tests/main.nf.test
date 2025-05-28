@@ -27,6 +27,7 @@ nextflow_process {
 
     test("image - lower_threshold") {
         config "./nextflow.config"
+
         when {
             process {
                 """
@@ -47,10 +48,10 @@ nextflow_process {
         }
     }
 
-
     test("image - stub") {
-        options "-stub"
+        options "-stub-run"
         config "./nextflow.config"
+
         when {
             process {
                 """
@@ -71,3 +72,5 @@ nextflow_process {
         }
     }
 }
+
+
