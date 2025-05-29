@@ -1,18 +1,22 @@
-include { UTILS_TEMPLATEFLOW                    } from '../../../modules/nf-neuro/utils/templateflow/main.nf'
-include { IMAGE_APPLYMASK as MASK_T1W           } from '../../../modules/nf-neuro/image/applymask/main.nf'
-include { IMAGE_APPLYMASK as MASK_T2W           } from '../../../modules/nf-neuro/image/applymask/main.nf'
-include { BETCROP_FSLBETCROP as BET_T1W         } from '../../../modules/nf-neuro/betcrop/fslbetcrop/main.nf'
-include { BETCROP_FSLBETCROP as BET_T2W         } from '../../../modules/nf-neuro/betcrop/fslbetcrop/main.nf'
-include { REGISTRATION_ANTS                     } from '../../../modules/nf-neuro/registration/ants/main.nf'
-include { REGISTRATION_ANTSAPPLYTRANSFORMS      } from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
-include { REGISTRATION_TRACTOGRAM               } from '../../../modules/nf-neuro/registration/tractogram/main.nf'
+include { UTILS_TEMPLATEFLOW                            } from '../../../modules/nf-neuro/utils/templateflow/main.nf'
+include { IMAGE_APPLYMASK as MASK_T1W                   } from '../../../modules/nf-neuro/image/applymask/main.nf'
+include { IMAGE_APPLYMASK as MASK_T2W                   } from '../../../modules/nf-neuro/image/applymask/main.nf'
+include { BETCROP_FSLBETCROP as BET_T1W                 } from '../../../modules/nf-neuro/betcrop/fslbetcrop/main.nf'
+include { BETCROP_FSLBETCROP as BET_T2W                 } from '../../../modules/nf-neuro/betcrop/fslbetcrop/main.nf'
+include { REGISTRATION_ANTS                             } from '../../../modules/nf-neuro/registration/ants/main.nf'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARPIMAGES} from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARPMASK  } from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARPLABELS} from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
+include { REGISTRATION_TRACTOGRAM                       } from '../../../modules/nf-neuro/registration/tractogram/main.nf'
 
 workflow OUTPUT_TEMPLATE_SPACE {
 
     take:
-        ch_anat // channel: [ val(meta), [ anat ] ]
-        ch_nifti_files // channel: [ val(meta), [ nifti_files ] ]
-        ch_trk_files // channel: [ val(meta), [ trk_files ] ]
+        ch_anat                     // channel: [ val(meta), [ anat ] ]
+        ch_nifti_files              // channel: [ val(meta), [ nifti_files ] ]
+        ch_mask_files               // channel: [ val(meta), [ mask_files ] ]
+        ch_labels_files             // channel: [ val(meta), [ labels_files ] ]
+        ch_trk_files                // channel: [ val(meta), [ trk_files ] ]
 
     main:
 
@@ -148,8 +152,24 @@ workflow OUTPUT_TEMPLATE_SPACE {
         | join(REGISTRATION_ANTS.out.warp)
         | join(REGISTRATION_ANTS.out.affine)
 
-    REGISTRATION_ANTSAPPLYTRANSFORMS ( ch_files_to_transform )
-    ch_versions = ch_versions.mix(REGISTRATION_ANTSAPPLYTRANSFORMS.out.versions)
+    WARPIMAGES ( ch_files_to_transform )
+    ch_versions = ch_versions.mix(WARPIMAGES.out.versions)
+
+    // ** Same process for the masks ** //
+    ch_masks_to_transform = ch_mask_files
+        | join(REGISTRATION_ANTS.out.image)
+        | join(REGISTRATION_ANTS.out.warp)
+        | join(REGISTRATION_ANTS.out.affine)
+    WARPMASK ( ch_masks_to_transform )
+    ch_versions = ch_versions.mix(WARPMASK.out.versions)
+
+    // ** Same process for the labels ** //
+    ch_labels_to_transform = ch_labels_files
+        | join(REGISTRATION_ANTS.out.image)
+        | join(REGISTRATION_ANTS.out.warp)
+        | join(REGISTRATION_ANTS.out.affine)
+    WARPLABELS ( ch_labels_to_transform )
+    ch_versions = ch_versions.mix(WARPLABELS.out.versions)
 
     // ** Apply the transformation to the tractograms ** //
     ch_tractograms_to_transform = ch_trk_files
@@ -167,7 +187,9 @@ workflow OUTPUT_TEMPLATE_SPACE {
         ch_t1w_tpl                  = ch_t1w_tpl                                        // channel: [ tpl-T1w ]
         ch_t2w_tpl                  = ch_t2w_tpl                                        // channel: [ tpl-T2w ]
         ch_registered_anat          = REGISTRATION_ANTS.out.image                       // channel: [ val(meta), [ image ] ]
-        ch_warped_nifti_files       = REGISTRATION_ANTSAPPLYTRANSFORMS.out.warped_image // channel: [ val(meta), [ warped_image ] ]
+        ch_warped_nifti_files       = WARPIMAGES.out.warped_image                       // channel: [ val(meta), [ warped_image ] ]
+        ch_warped_mask_files        = WARPMASK.out.warped_image                         // channel: [ val(meta), [ warped_mask ] ]
+        ch_warped_labels_files      = WARPLABELS.out.warped_image                       // channel: [ val(meta), [ warped_labels ] ]
         ch_warped_trk_files         = REGISTRATION_TRACTOGRAM.out.warped_tractogram     // channel: [ val(meta), [ warped_tractogram ] ]
         versions                    = ch_versions                                       // channel: [ versions.yml ]
 }
