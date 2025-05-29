@@ -33,6 +33,19 @@ input:
       description: Nifti image file mask for the reference
       pattern: "*.{nii,nii.gz}"
 
+args:
+  - prefix:
+      type: string
+      description: Prefix to add to the output file name (e.g. "n4_")
+  - bspline_knot_per_voxel:
+      type: number
+      description: Number of B-spline knots per voxel
+      default: 1
+  - shrink_factor:
+      type: number
+      description: Shrink factor for the image resampling.
+      default: 1
+
 output:
   - meta:
       type: map
