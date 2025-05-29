@@ -18,7 +18,6 @@ process PREPROC_N4 {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def bspline_knot_per_voxel = task.ext.bspline_knot_per_voxel ? "$task.ext.bspline_knot_per_voxel" : "1"
     def shrink_factor = task.ext.shrink_factor ? "$task.ext.shrink_factor" : "1"
@@ -34,6 +33,7 @@ process PREPROC_N4 {
         N4BiasFieldCorrection -i $ref\
             -o [${prefix}__ref_n4.nii.gz, bias_field_ref.nii.gz]\
             -c [300x150x75x50, 1e-6] -v 1\
+            -x $ref_mask\
             -b [\${knot_spacing}, 3] \
             -s $shrink_factor
 
@@ -54,7 +54,6 @@ process PREPROC_N4 {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     N4BiasFieldCorrection -h
