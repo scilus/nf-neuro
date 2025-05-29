@@ -50,12 +50,20 @@ nextflow_workflow {
                     test_data_directory -> [
                         [ id: 'test' ], // meta map
                         [
-                            file("\${test_data_directory}/IFGWM.nii.gz"),
+                            file("\${test_data_directory}/IFGWM.nii.gz")
+                        ]
+                    ]
+                }
+                input[2] = Channel.empty()
+                input[3] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        [
                             file("\${test_data_directory}/IFGWM_labels_map.nii.gz")
                         ]
                     ]
                 }
-                input[2] = ch_split_test_data.tractometry.map{
+                input[4] = ch_split_test_data.tractometry.map{
                     test_data_directory -> [
                         [ id: 'test' ], // meta map
                         [
@@ -94,12 +102,20 @@ nextflow_workflow {
                     test_data_directory -> [
                         [ id: 'test' ], // meta map
                         [
-                            file("\${test_data_directory}/IFGWM.nii.gz"),
+                            file("\${test_data_directory}/IFGWM.nii.gz")
+                        ]
+                    ]
+                }
+                input[2] = Channel.empty()
+                input[3] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        [
                             file("\${test_data_directory}/IFGWM_labels_map.nii.gz")
                         ]
                     ]
                 }
-                input[2] = ch_split_test_data.tractometry.map{
+                input[4] = ch_split_test_data.tractometry.map{
                     test_data_directory -> [
                         [ id: 'test' ], // meta map
                         [
@@ -139,12 +155,20 @@ nextflow_workflow {
                     test_data_directory -> [
                         [ id: 'test' ], // meta map
                         [
-                            file("\${test_data_directory}/IFGWM.nii.gz"),
+                            file("\${test_data_directory}/IFGWM.nii.gz")
+                        ]
+                    ]
+                }
+                input[2] = Channel.empty()
+                input[3] = ch_split_test_data.tractometry.map{
+                    test_data_directory -> [
+                        [ id: 'test' ], // meta map
+                        [
                             file("\${test_data_directory}/IFGWM_labels_map.nii.gz")
                         ]
                     ]
                 }
-                input[2] = ch_split_test_data.tractometry.map{
+                input[4] = ch_split_test_data.tractometry.map{
                     test_data_directory -> [
                         [ id: 'test' ], // meta map
                         [

@@ -21,13 +21,21 @@
                         {
                             "id": "test"
                         },
-                        [
-                            "test__IFGWM__warped.nii.gz:md5,0dd7bd06c7e8bbd8a98ae1543291656c",
-                            "test__IFGWM_labels_map__warped.nii.gz:md5,c0d246d9122612c368ad8188726b9aac"
-                        ]
+                        "test__IFGWM__warped.nii.gz:md5,fb770a7e718011de4da6b23a712fcb03"
                     ]
                 ],
                 "4": [
+                    
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__IFGWM_labels_map__warped.nii.gz:md5,d31f6ce5792d9ceeae93d987f6fa82eb"
+                    ]
+                ],
+                "6": [
                     [
                         {
                             "id": "test"
@@ -39,8 +47,9 @@
                         ]
                     ]
                 ],
-                "5": [
-                    "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
+                "7": [
+                    "versions.yml:md5,04f69537f2d6cdc20e0a8c110ae9b7e7",
+                    "versions.yml:md5,0d37dad46b915d0f062b1e1c791f47a7",
                     "versions.yml:md5,29c5499c53451b27652c9eb978a79e76",
                     "versions.yml:md5,75c8524f95824b358ede7fe52dfa35e6",
                     "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
@@ -61,15 +70,23 @@
                 "ch_t2w_tpl": [
                     "template__image_bet.nii.gz:md5,a86fa91b93732a6a8bb0ef7ee8c6f758"
                 ],
+                "ch_warped_labels_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__IFGWM_labels_map__warped.nii.gz:md5,d31f6ce5792d9ceeae93d987f6fa82eb"
+                    ]
+                ],
+                "ch_warped_mask_files": [
+                    
+                ],
                 "ch_warped_nifti_files": [
                     [
                         {
                             "id": "test"
                         },
-                        [
-                            "test__IFGWM__warped.nii.gz:md5,0dd7bd06c7e8bbd8a98ae1543291656c",
-                            "test__IFGWM_labels_map__warped.nii.gz:md5,c0d246d9122612c368ad8188726b9aac"
-                        ]
+                        "test__IFGWM__warped.nii.gz:md5,fb770a7e718011de4da6b23a712fcb03"
                     ]
                 ],
                 "ch_warped_trk_files": [
@@ -85,7 +102,8 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
+                    "versions.yml:md5,04f69537f2d6cdc20e0a8c110ae9b7e7",
+                    "versions.yml:md5,0d37dad46b915d0f062b1e1c791f47a7",
                     "versions.yml:md5,29c5499c53451b27652c9eb978a79e76",
                     "versions.yml:md5,75c8524f95824b358ede7fe52dfa35e6",
                     "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
@@ -96,15 +114,16 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-03-27T15:00:17.090921"
+        "timestamp": "2025-05-29T13:56:29.991808"
     },
     "output to template MNI152NLin2009aAsym - stub": {
         "content": [
             [
+                "versions.yml:md5,04f69537f2d6cdc20e0a8c110ae9b7e7",
                 "versions.yml:md5,08c023826481c9130c3914096cda7f63",
-                "versions.yml:md5,1d06d6c5ffbc79a3b5ad3d379583b86d",
+                "versions.yml:md5,0d37dad46b915d0f062b1e1c791f47a7",
                 "versions.yml:md5,a166b69e9dc7963b29c7a5944fbbf72a",
                 "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
                 "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf",
@@ -113,8 +132,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-03-27T11:25:15.322213"
+        "timestamp": "2025-05-29T13:57:01.689815"
     }
 }
