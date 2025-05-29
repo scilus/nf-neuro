@@ -22,6 +22,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "__warped"
     def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
 
+    def output_dtype = task.ext.output_dtype ? "-u " + task.ext.output_dtype : ""
     def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : ""
     def image_type = task.ext.image_type ? "-e " + task.ext.image_type : ""
     def interpolation = task.ext.interpolation ? "-n " + task.ext.interpolation : ""
@@ -38,21 +39,13 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
         ext=\${image#*.}
         bname=\$(basename \${image} .\${ext})
 
-        # Fetch datatype from moving image.
-        dtype=\$(mrinfo \$image -datatype)
-        if [[ \$dtype =~ "Int" ]]; then
-            dtype="int"
-        else
-            dtype="float"
-        fi
-
         antsApplyTransforms $dimensionality\
                             -i \$image\
                             -r $reference\
                             -o ${prefix}__\${bname}${suffix}.nii.gz\
                             $interpolation\
                             -t $warp $affine\
-                            -u \$dtype\
+                            $output_dtype\
                             $image_type\
                             $default_val
 
