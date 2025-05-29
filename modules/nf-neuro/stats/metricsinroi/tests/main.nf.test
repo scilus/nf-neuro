@@ -68,10 +68,10 @@ nextflow_process {
                 input[0] = ch_split_test_data.plot.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ], // meta map
-                        [   file("\${test_data_directory}/fa.nii.gz"),
-                            file("\${test_data_directory}/ad.nii.gz")],
-                            file("\${test_data_directory}/atlas_brainnetome.nii.gz"),
-                            file("\${test_data_directory}/atlas_brainnetome.json")
+                        [ file("\${test_data_directory}/fa.nii.gz"),
+                          file("\${test_data_directory}/ad.nii.gz")],
+                        file("\${test_data_directory}/atlas_brainnetome.nii.gz"),
+                        file("\${test_data_directory}/atlas_brainnetome.json")
                     ]
                 }
                 """
@@ -97,11 +97,11 @@ nextflow_process {
                     }
                 input[0] = ch_split_test_data.plot.map{
                     test_data_directory -> [
-                        [   id:'test', single_end:false ], // meta map
-                        [   file("\${test_data_directory}/fa.nii.gz"),
-                            file("\${test_data_directory}/ad.nii.gz")],
-                            file("\${test_data_directory}/atlas_brainnetome.nii.gz"),
-                            file("\${test_data_directory}/atlas_brainnetome.json")
+                        [ id:'test', single_end:false ], // meta map
+                        [ file("\${test_data_directory}/fa.nii.gz"),
+                          file("\${test_data_directory}/ad.nii.gz")],
+                        file("\${test_data_directory}/atlas_brainnetome.nii.gz"),
+                        file("\${test_data_directory}/atlas_brainnetome.json")
                     ]
                 }
                 """
