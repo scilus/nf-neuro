@@ -2,9 +2,9 @@
     "Verbose": false,
     "Debug": false,
     "IgnoreDefaults": false,
-    "SpacesAftertabs": false,
+    "SpacesAfterTabs": false,
     "NoColor": false,
-    "Exclude": ["^tests/.runs/", "^\\.nf-test/", "^\\.venv/", "^\\node_modules/", "\\.nf-test.log$","^\\.git/"],
+    "Exclude": ["^tests/\\.runs/", "^\\.nf-test/", "^\\.venv/", "^node_modules/", "\\.nf-test.log$", "\\.nextflow" ,"^\\.git/"],
     "AllowedContentTypes": [],
     "PassedFiles": [],
     "Disable": {

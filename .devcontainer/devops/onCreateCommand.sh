@@ -13,4 +13,4 @@ echo "source $XDG_CONFIG_HOME/nf-neuro/.env" >> ~/.bashrc
 mkdir -p /nf-test/bin
 cd /nf-test/bin/
 curl -fsSL https://code.askimed.com/install/nf-test | bash -s ${NFTEST_VERSION}
-echo "PATH=$PATH:/nf-test/bin" >> ~/.bashrc
+echo "export PATH=$PATH:/nf-test/bin" >> ~/.bashrc
