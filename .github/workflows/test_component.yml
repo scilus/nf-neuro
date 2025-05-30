@@ -74,7 +74,9 @@ jobs:
       # In our case, it's only the _work workspace for security reasons
       NXF_WORKDIR: "${{ github.workspace }}/.."
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.
+        with:
+          ref: main_3.2.0
 
       - name: Setup Python
         uses: Wandalen/wretry.action@v3.7.2
