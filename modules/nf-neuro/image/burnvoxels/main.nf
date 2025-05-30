@@ -10,9 +10,9 @@ process IMAGE_BURNVOXELS {
     tuple val(meta), path(masks), path(anat)
 
     output:
-    tuple val(meta), path("*__all.nii.gz"), emit: all_masks_burned
-    tuple val(meta), path("*__*_*.nii.gz"), emit: each_mask_burned
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*__all.nii.gz")      , emit: all_masks_burned
+    tuple val(meta), path("*__*_[0-9]*[0-9].nii.gz") , emit: each_mask_burned
+    path "versions.yml"                         , emit: versions
 
     when:
     task.ext.when == null || task.ext.when

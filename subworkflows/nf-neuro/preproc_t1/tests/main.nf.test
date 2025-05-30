@@ -5,7 +5,7 @@ nextflow_workflow {
     workflow "PREPROC_T1"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/preproc_t1"
 
     tag "denoising/nlmeans"

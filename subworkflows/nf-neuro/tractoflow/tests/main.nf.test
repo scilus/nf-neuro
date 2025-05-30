@@ -7,7 +7,7 @@ nextflow_workflow {
     workflow "TRACTOFLOW"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/tractoflow"
 
     tag "load_test_data"

@@ -5,7 +5,7 @@ nextflow_process {
     process "RECONST_DIFFUSIVITYPRIORS"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "reconst"
     tag "reconst/diffusivitypriors"
 
