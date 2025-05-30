@@ -82,10 +82,11 @@ jobs:
       - name: Lint ${{ inputs.type }} ${{ inputs.component }}
         env:
           GIT_CLONE_PROTECTION_ACTIVE: false
-        run: |
-          poetry run nf-core --verbose ${{ inputs.type }}s \
-            --git-remote https://github.com/${{ github.repository }}.git \
-            lint ${{ inputs.component }}
+          NFCORE_MODULES_GIT_REMOTE: https://github.com/${{ github.repository }}.git
+          NFCORE_SUBWORKFLOWS_GIT_REMOTE: https://github.com/${{ github.repository }}.git
+          NFCORE_MODULES_BRANCH: main_3.2.0
+          NFCORE_SUBWORKFLOWS_BRANCH: main_3.2.0
+        run: poetry run nf-core --verbose ${{ inputs.type }}s lint ${{ inputs.component }}
 
       - name: Convert component meta.yml to markdown
         run: |
