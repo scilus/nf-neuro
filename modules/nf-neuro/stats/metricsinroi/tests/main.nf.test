@@ -88,6 +88,7 @@ nextflow_process {
     }
 
     test("stats - metrics in roi -stub-run") {
+        tag "stub"
         options "-stub-run"
         when {
             process {

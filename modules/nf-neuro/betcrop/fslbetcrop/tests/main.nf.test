@@ -110,6 +110,7 @@ nextflow_process {
 
     test("betcrop - fslbetcrop - stub-run") {
 
+        tag "stub"
         options "-stub-run"
 
         when {

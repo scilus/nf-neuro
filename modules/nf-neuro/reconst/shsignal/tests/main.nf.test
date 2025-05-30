@@ -68,6 +68,7 @@ nextflow_process {
 
     test("fit sh - stub") {
 
+        tag "stub"
         options "-stub-run"
 
         when {
