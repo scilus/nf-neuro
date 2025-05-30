@@ -122,6 +122,7 @@ nextflow_process {
     }
 
     test("topup - stub-run") {
+        tag "stub"
         options "-stub-run"
         when {
             process {
