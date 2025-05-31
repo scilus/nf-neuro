@@ -70,7 +70,8 @@ nextflow_process {
     }
 
     test("connectivity - afdfixel - with stub") {
-        options "-stub"
+        tag "stub"
+        options "-stub-run"
         when {
             process {
                 """

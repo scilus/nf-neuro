@@ -33,33 +33,33 @@ nextflow_process {
                 """
                     input[0] = LOAD_DATA.out.test_data_directory.map{
                         test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
-                        [file("\${test_data_directory}/echo-1_acq-altpn_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-altpn_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-altpn_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-altnp_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-altnp_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-altnp_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-pos_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-pos_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-pos_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-neg_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-neg_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-neg_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-mtoff_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-T1w_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-T1w_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-T1w_ihmt.nii.gz", checkIfExists: true)],
-                        file("\${test_data_directory}/mask_resample.nii.gz", checkIfExists: true),
-                        [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.json", checkIfExists: true),
-                        file("\${test_data_directory}/echo-1_acq-T1w_ihmt.json", checkIfExists: true)],
-                        [],
-                        [],
-                        []
-                    ]
-                }
+                            [ id:'test', single_end:false ], // meta map
+                            [file("\${test_data_directory}/echo-1_acq-altpn_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-altpn_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-altpn_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-altnp_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-altnp_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-altnp_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-pos_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-pos_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-pos_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-neg_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-neg_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-neg_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-mtoff_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-T1w_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-T1w_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-T1w_ihmt.nii.gz", checkIfExists: true)],
+                            file("\${test_data_directory}/mask_resample.nii.gz", checkIfExists: true),
+                            [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.json", checkIfExists: true),
+                            file("\${test_data_directory}/echo-1_acq-T1w_ihmt.json", checkIfExists: true)],
+                            [],
+                            [],
+                            []
+                        ]
+                    }
                 """
             }
         }
@@ -80,33 +80,33 @@ nextflow_process {
                 """
                     input[0] = LOAD_DATA.out.test_data_directory.map{
                         test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
-                        [file("\${test_data_directory}/echo-1_acq-altpn_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-altpn_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-altpn_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-altnp_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-altnp_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-altnp_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-pos_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-pos_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-pos_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-neg_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-neg_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-neg_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-mtoff_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-T1w_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-T1w_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-T1w_ihmt.nii.gz", checkIfExists: true)],
-                        [],
-                        [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.json", checkIfExists: true),
-                        file("\${test_data_directory}/echo-1_acq-T1w_ihmt.json", checkIfExists: true)],
-                        [],
-                        [],
-                        []
-                    ]
-                }
+                            [ id:'test', single_end:false ], // meta map
+                            [file("\${test_data_directory}/echo-1_acq-altpn_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-altpn_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-altpn_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-altnp_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-altnp_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-altnp_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-pos_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-pos_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-pos_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-neg_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-neg_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-neg_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-mtoff_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-T1w_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-T1w_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-T1w_ihmt.nii.gz", checkIfExists: true)],
+                            [],
+                            [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.json", checkIfExists: true),
+                            file("\${test_data_directory}/echo-1_acq-T1w_ihmt.json", checkIfExists: true)],
+                            [],
+                            [],
+                            []
+                        ]
+                    }
                 """
             }
         }
@@ -127,30 +127,30 @@ nextflow_process {
                 """
                     input[0] = LOAD_DATA.out.test_data_directory.map{
                         test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
-                        [file("\${test_data_directory}/echo-1_acq-altpn_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-altpn_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-altpn_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-altnp_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-altnp_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-altnp_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-pos_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-pos_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-pos_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-neg_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-neg_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-neg_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-2_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
-                        file("\${test_data_directory}/echo-3_acq-mtoff_ihmt.nii.gz", checkIfExists: true)],
-                        [],
-                        file("\${test_data_directory}/mask_resample.nii.gz", checkIfExists: true),
-                        [],
-                        [],
-                        [],
-                        []
-                    ]
-                }
+                            [ id:'test', single_end:false ], // meta map
+                            [file("\${test_data_directory}/echo-1_acq-altpn_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-altpn_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-altpn_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-altnp_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-altnp_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-altnp_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-pos_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-pos_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-pos_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-neg_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-neg_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-neg_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-2_acq-mtoff_ihmt.nii.gz", checkIfExists: true),
+                            file("\${test_data_directory}/echo-3_acq-mtoff_ihmt.nii.gz", checkIfExists: true)],
+                            [],
+                            file("\${test_data_directory}/mask_resample.nii.gz", checkIfExists: true),
+                            [],
+                            [],
+                            [],
+                            []
+                        ]
+                    }
                 """
             }
         }
@@ -171,21 +171,21 @@ nextflow_process {
                 """
                     input[0] = LOAD_DATA.out.test_data_directory.map{
                         test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
-                        [file("\${test_data_directory}/echo-1_acq-altpn_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-altnp_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-pos_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-neg_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.nii.gz", checkIfExists: true)],
-                        [file("\${test_data_directory}/echo-1_acq-T1w_ihmt.nii.gz", checkIfExists: true)],
-                        file("\${test_data_directory}/mask_resample.nii.gz", checkIfExists: true),
-                        [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.json", checkIfExists: true),
-                        file("\${test_data_directory}/echo-1_acq-T1w_ihmt.json", checkIfExists: true)],
-                        [],
-                        [],
-                        []
-                    ]
-                }
+                            [ id:'test', single_end:false ], // meta map
+                            [file("\${test_data_directory}/echo-1_acq-altpn_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-altnp_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-pos_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-neg_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.nii.gz", checkIfExists: true)],
+                            [file("\${test_data_directory}/echo-1_acq-T1w_ihmt.nii.gz", checkIfExists: true)],
+                            file("\${test_data_directory}/mask_resample.nii.gz", checkIfExists: true),
+                            [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.json", checkIfExists: true),
+                            file("\${test_data_directory}/echo-1_acq-T1w_ihmt.json", checkIfExists: true)],
+                            [],
+                            [],
+                            []
+                        ]
+                    }
                 """
             }
         }
@@ -240,6 +240,41 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("reconst - ihmt - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${test_data_directory}/echo-1_acq-altpn_ihmt.nii.gz", checkIfExists: true)],
+                        [file("\${test_data_directory}/echo-1_acq-altnp_ihmt.nii.gz", checkIfExists: true)],
+                        [file("\${test_data_directory}/echo-1_acq-pos_ihmt.nii.gz", checkIfExists: true)],
+                        [file("\${test_data_directory}/echo-1_acq-neg_ihmt.nii.gz", checkIfExists: true)],
+                        [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.nii.gz", checkIfExists: true)],
+                        [file("\${test_data_directory}/echo-1_acq-T1w_ihmt.nii.gz", checkIfExists: true)],
+                        file("\${test_data_directory}/mask_resample.nii.gz", checkIfExists: true),
+                        [file("\${test_data_directory}/echo-1_acq-mtoff_ihmt.json", checkIfExists: true),
+                        file("\${test_data_directory}/echo-1_acq-T1w_ihmt.json", checkIfExists: true)],
+                        [],
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
 

@@ -86,4 +86,32 @@ nextflow_process {
             )
         }
     }
+
+    test("io - nii2dcm - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        b0: it.simpleName == "b0"
+                        dicom: it.simpleName == "dicom"
+                    }
+                input[0] = ch_split_test_data.b0
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/b0.nii.gz"),
+                    []
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
 }

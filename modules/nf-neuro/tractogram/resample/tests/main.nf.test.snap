@@ -47,5 +47,17 @@
             "nextflow": "24.04.1"
         },
         "timestamp": "2024-05-22T16:20:10.024974"
+    },
+    "tractogram - resample - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,f593a3a81a06f02aaa1ba17ba0baccfd"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:58:46.051639016"
     }
 }
