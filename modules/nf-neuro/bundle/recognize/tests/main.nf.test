@@ -141,4 +141,33 @@ nextflow_process {
 
     }
 
+    test("bundle - recognize - stub-run") {
+        tag "stub"
+        options "-stub-run"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.trk"),
+                        file("\${test_data_directory}/affine.txt"),
+                        file("\${test_data_directory}/config.json"),
+                        file("\${test_data_directory}/fibercup_atlas/")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
 }
