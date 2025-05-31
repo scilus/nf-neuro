@@ -104,4 +104,32 @@ nextflow_process {
 
     }
 
+    test("tractogram - math - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/local.trk"),
+                            file("\${test_data_directory}/pft.trk"),
+                        ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
 }

@@ -53,6 +53,16 @@ process SEGMENTATION_FASTSURFER {
     def FASTSURFER_HOME = "/fastsurfer"
 
     """
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
+
+    $FASTSURFER_HOME/run_fastsurfer.sh --version
+
     mkdir -p ${prefix}__fastsurfer/${prefix}/mri/transforms \
         ${prefix}__fastsurfer/${prefix}/label/ \
         ${prefix}__fastsurfer/${prefix}/surf/ \
@@ -65,14 +75,5 @@ process SEGMENTATION_FASTSURFER {
     "${task.process}":
         fastsurfer: \$($FASTSURFER_HOME/run_fastsurfer.sh --version)
     END_VERSIONS
-
-    function handle_code () {
-    local code=\$?
-    ignore=( 1 )
-    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
-    }
-    trap 'handle_code' ERR
-
-    $FASTSURFER_HOME/run_fastsurfer.sh --version
     """
 }

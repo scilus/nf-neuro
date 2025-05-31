@@ -50,10 +50,9 @@ process RECONST_IHMT {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_mti_maps_ihmt.py -h
+    scil_mti_maps_ihMT.py -h
     mkdir ihMT_native_maps
     mkdir Complementary_maps
-
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

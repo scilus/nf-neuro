@@ -1,4 +1,16 @@
 {
+    "image - applymask - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:21:54.744973933"
+    },
     "image - applymask - 3D": {
         "content": [
             {

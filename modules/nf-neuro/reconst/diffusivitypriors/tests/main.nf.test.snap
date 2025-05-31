@@ -134,5 +134,17 @@
             "nextflow": "23.10.1"
         },
         "timestamp": "2024-05-14T19:15:10.632882"
+    },
+    "reconst - diffusivitypriors - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,bc73c7d541abf11e86b32e2c596a3dfd"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T19:19:38.67413556"
     }
 }

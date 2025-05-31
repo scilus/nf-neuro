@@ -73,6 +73,20 @@ process BETCROP_FSLBETCROP {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
+
+    bet
+    scil_dwi_extract_b0.py -h
+    scil_volume_math.py -h
+    mrcalc -h
+    scil_volume_crop.py -h
+
     touch ${prefix}__image_bet.nii.gz
     touch ${prefix}__image_bet_mask.nii.gz
     touch ${prefix}__image_boundingBox.pkl
@@ -83,18 +97,5 @@ process BETCROP_FSLBETCROP {
         mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
         fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
     END_VERSIONS
-
-    function handle_code () {
-    local code=\$?
-    ignore=( 1 )
-    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
-    }
-    trap 'handle_code' ERR
-
-    bet
-    scil_dwi_extract_b0.py -h
-    scil_volume_math.py -h
-    mrcalc -h
-    scil_volume_crop.py -h
     """
 }
