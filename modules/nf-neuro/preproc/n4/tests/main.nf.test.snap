@@ -46,6 +46,18 @@
         },
         "timestamp": "2025-06-27T02:58:46.251940089"
     },
+    "preproc - n4 - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,08cced153fb00b483f3a59216e05aaff"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:35:05.431923645"
+    },
     "preproc - n4 - anat": {
         "content": [
             {
