@@ -19,9 +19,6 @@
                 "test__image_n4.nii.gz",
                 "test__dwi_corrected.nii.gz",
                 [
-
-                ],
-                [
                     "versions.yml:md5,0280006ceecc575513278292734ffb27",
                     "versions.yml:md5,0b8c908e52917b0b706fc9d1b4d6cd24",
                     "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
@@ -41,7 +38,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-05-27T15:54:13.88773213"
+        "timestamp": "2025-05-31T22:02:07.118371636"
     },
     "preproc_dwi - AP DWI | PA sbref": {
         "content": [
@@ -63,9 +60,6 @@
                 "test__image_n4.nii.gz",
                 "test__dwi_corrected.nii.gz",
                 [
-
-                ],
-                [
                     "versions.yml:md5,0280006ceecc575513278292734ffb27",
                     "versions.yml:md5,0b8c908e52917b0b706fc9d1b4d6cd24",
                     "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
@@ -83,7 +77,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-05-27T15:47:26.04268339"
+        "timestamp": "2025-05-31T21:55:51.382714246"
     },
     "preproc_dwi - AP DWI | PA DWI": {
         "content": [
@@ -105,9 +99,6 @@
                 "test__image_n4.nii.gz",
                 "test__dwi_corrected.nii.gz",
                 [
-
-                ],
-                [
                     "versions.yml:md5,0280006ceecc575513278292734ffb27",
                     "versions.yml:md5,0b8c908e52917b0b706fc9d1b4d6cd24",
                     "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
@@ -126,6 +117,7 @@
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "25.04.2"
-        }
+        },
+        "timestamp": "2025-05-31T21:59:09.713124634"
     }
 }

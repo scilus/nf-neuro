@@ -58,10 +58,10 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger()  }
+                        .findAll{ !it.key.isInteger() && it.value  }
                         .collect{ out -> ["b0_mask", "bval", "versions"].contains(out.key)
                         ? out.value
-                        : out.value ? file(out.value.get(0).get(1)).name : out.value }
+                        : file(out.value.get(0).get(1)).name }
                 ).match() }
             )
         }
@@ -106,10 +106,10 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger()  }
+                        .findAll{ !it.key.isInteger() && it.value  }
                         .collect{ out -> ["b0_mask", "bval", "versions"].contains(out.key)
                         ? out.value
-                        : out.value ? file(out.value.get(0).get(1)).name : out.value }
+                        : file(out.value.get(0).get(1)).name }
                 ).match() }
             )
         }
@@ -154,10 +154,10 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger()  }
+                        .findAll{ !it.key.isInteger() && it.value  }
                         .collect{ out -> ["b0_mask", "bval", "versions"].contains(out.key)
                         ? out.value
-                        : out.value ? file(out.value.get(0).get(1)).name : out.value }
+                        : file(out.value.get(0).get(1)).name }
                 ).match() }
             )
         }
