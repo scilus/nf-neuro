@@ -68,7 +68,7 @@ nextflow_process {
         }
     }
 
-        test("connectivity - visualisation - stub-run") {
+        test("connectivity - decompose - stub-run") {
         tag "stub"
         options "-stub-run"
         when {

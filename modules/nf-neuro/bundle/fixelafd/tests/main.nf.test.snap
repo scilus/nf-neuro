@@ -33,5 +33,17 @@
             "nextflow": "23.10.1"
         },
         "timestamp": "2024-05-22T18:04:46.370916"
+    },
+    "bundle - fixelafd - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,ad93266aca700e520e81c846f48d0ed1"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:20:08.890317558"
     }
 }

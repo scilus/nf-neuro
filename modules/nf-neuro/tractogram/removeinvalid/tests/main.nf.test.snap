@@ -1,4 +1,16 @@
 {
+    "tractogram - remove invalid - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,9c98a9977d211116b5e0585b635769c1"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:58:36.79962212"
+    },
     "tractogram - remove invalid": {
         "content": [
             {
