@@ -46,6 +46,18 @@
         },
         "timestamp": "2025-03-23T00:13:02.277120813"
     },
+    "bundle - recognize - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,eb3601ea7d75a814065dbdf1e78702de"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:20:34.821881425"
+    },
     "bundle - recognize - base": {
         "content": [
             {
