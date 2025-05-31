@@ -10,10 +10,10 @@
             "test__aparc_aseg.nii.gz",
             "test__resampled_image.nii.gz:md5:header,728dfc231a3dfcf567ac640930f68629,data,1f02837025def8b0701f79549c2955e1",
             [
-                
+
             ],
             [
-                
+
             ],
             [
                 "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"

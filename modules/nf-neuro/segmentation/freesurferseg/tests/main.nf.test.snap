@@ -82,6 +82,18 @@
         },
         "timestamp": "2025-07-11T23:48:02.463800893"
     },
+    "segmentation - freesurferseg - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,6aaa50346ccfbb298945a071cd3df37e"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:56:53.340960113"
+    },
     "segmentation - freesurferseg": {
         "content": [
             {
