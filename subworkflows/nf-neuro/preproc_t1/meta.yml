@@ -83,6 +83,20 @@ input:
         Structure: [ val(meta), path(image) ]
       pattern: "*.{nii,nii.gz}"
       mandatory: false
+  - ch_template_mask:
+      type: file
+      description: |
+        Brain mask (in template space) used to restrict metric
+        computation when performing registration.
+      pattern: "*.{nii,nii.gz}"
+      mandatory: false
+  - ch_initial_affine:
+      type: file
+      description: |
+        Affine transform from T1w space to DWI space, used as
+        initialization for registration algorithms.
+      pattern: "*.{mat/txt}"
+      mandatory: false
   - ch_mask_nlmeans:
       type: file
       description: |
