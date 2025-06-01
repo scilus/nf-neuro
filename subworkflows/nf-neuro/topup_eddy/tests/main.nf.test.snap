@@ -24,9 +24,6 @@
                 "test__dwi_eddy_corrected.bvec",
                 "test__dwi_corrected.nii.gz",
                 [
-                    
-                ],
-                [
                     "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
                     "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
                 ]
@@ -36,7 +33,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-05-27T15:40:50.697506991"
+        "timestamp": "2025-06-01T00:20:35.227281757"
     },
     "topup_eddy - ONLY Eddy - AP DWI | PA sbref": {
         "content": [
@@ -63,9 +60,6 @@
                 "test__dwi_eddy_corrected.bvec",
                 "test__dwi_corrected.nii.gz",
                 [
-                    
-                ],
-                [
                     "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
                     "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
                 ]
@@ -75,7 +69,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-05-27T15:39:38.131810054"
+        "timestamp": "2025-06-01T00:19:48.37302071"
     },
     "topup_eddy - AP DWI+sbref | PA DWI+sbref": {
         "content": [
@@ -102,9 +96,6 @@
                 "test__dwi_eddy_corrected.bvec",
                 "test__dwi_corrected.nii.gz",
                 [
-                    
-                ],
-                [
                     "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
                     "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
                 ]
@@ -114,6 +105,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-05-27T15:41:59.669335969"
+        "timestamp": "2025-06-01T00:21:19.437875741"
     }
 }
