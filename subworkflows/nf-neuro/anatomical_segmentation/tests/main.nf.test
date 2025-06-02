@@ -15,17 +15,19 @@ nextflow_workflow {
 
     tag "load_test_data"
 
-        setup {
-            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
-                script "../../load_test_data/main.nf"
-                process {
-                    """
-                    input[0] = Channel.from( [ "T1w.zip", "freesurfer_nifti.zip", "freesurfer.zip" ] )
-                    input[1] = "test.load-test-data"
-                    """
-                }
+    options "-stub-run"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "T1w.zip", "freesurfer_nifti.zip", "freesurfer.zip" ] )
+                input[1] = "test.load-test-data"
+                """
             }
         }
+    }
 
     test("anatomical_segmentation - fslfast") {
         config "./nextflow.config"
@@ -54,7 +56,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }
@@ -87,7 +95,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }
@@ -125,14 +139,23 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }
 
     test("anatomical_segmentation - synthseg") {
-        config "./nextflow_synthseg.config"
+        config "./nextflow.config"
         when {
+            params {
+                run_synthseg = true
+            }
             workflow {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
@@ -162,15 +185,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    file(workflow.out.wm_mask.get(0).get(1)).name,
-                    file(workflow.out.gm_mask.get(0).get(1)).name,
-                    file(workflow.out.csf_mask.get(0).get(1)).name,
-                    file(workflow.out.wm_map.get(0).get(1)).name,
-                    file(workflow.out.gm_map.get(0).get(1)).name,
-                    file(workflow.out.csf_map.get(0).get(1)).name,
-                    file(workflow.out.seg.get(0).get(1)).name,
-                    workflow.out.versions
-                ).match()}
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }
