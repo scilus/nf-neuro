@@ -5,7 +5,7 @@ nextflow_process {
     process "RECONST_FRF"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "reconst"
     tag "reconst/frf"
 
@@ -241,6 +241,43 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("reconst - frf - stub-run") {
+        tag "stub"
+        options "-stub-run"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        ssst: it.simpleName == "heavy"
+                        msmt: it.simpleName == "commit_amico"
+                    }
+                input[0] = ch_split_test_data.ssst.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi/dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/dwi/dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/dwi/dwi.bvec", checkIfExists: true),
+                        file("\${test_data_directory}/dwi/mask.nii.gz", checkIfExists: true),
+                        [],
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
 

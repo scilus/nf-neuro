@@ -5,7 +5,7 @@ nextflow_process {
     process "RECONST_SHSIGNAL"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "reconst"
     tag "reconst/shsignal"
 
@@ -68,6 +68,7 @@ nextflow_process {
 
     test("fit sh - stub") {
 
+        tag "stub"
         options "-stub-run"
 
         when {

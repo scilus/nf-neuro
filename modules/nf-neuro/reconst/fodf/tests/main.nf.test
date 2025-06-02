@@ -5,7 +5,7 @@ nextflow_process {
     process "RECONST_FODF"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "reconst"
     tag "reconst/fodf"
 
@@ -296,6 +296,64 @@ nextflow_process {
                     file(process.out.nufo.get(0).get(1)).name,
                     process.out.vent_mask,
                     process.out.versions).match()}
+            )
+        }
+
+    }
+
+    test("reconst - fodf - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "processing"
+                        segmentation: it.simpleName == "segmentation"
+                        dti: it.simpleName == "dti"
+                        response: it.simpleName == "processing_response"
+                    }
+                ch_dwi = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/brainmask.nii.gz")
+                    ]
+                }
+                ch_metrics = ch_split_test_data.dti.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/md.nii.gz")
+                    ]
+                }
+                ch_response = ch_split_test_data.response.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/response_wm.txt"),
+                        file("\${test_data_directory}/response_gm.txt"),
+                        file("\${test_data_directory}/response_csf.txt")
+                    ]
+                }
+                input[0] = ch_dwi
+                    .join(ch_mask)
+                    .join(ch_metrics)
+                    .join(ch_response)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
 

@@ -6,7 +6,7 @@ nextflow_process {
     config "./nextflow.config"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "bundle"
     tag "bundle/uniformize"
 
@@ -108,6 +108,36 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("bundle - uniformize - stub-run") {
+        tag "stub"
+        options "-stub-run"
+
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        bundles: it.simpleName == "bundles"
+                        tractometry: it.simpleName == "tractometry"
+                    }
+                input[0] = ch_split_test_data.bundles.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/fibercup_atlas/subj_1/*.trk"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
     }

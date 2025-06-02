@@ -6,7 +6,7 @@ nextflow_process {
     config "./nextflow.config"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "betcrop"
     tag "betcrop/synthbet"
 
@@ -47,6 +47,7 @@ nextflow_process {
     }
 
     test("betcrop - synthbet - stub-run") {
+        tag "stub"
         options "-stub-run"
         setup {
             run("LOAD_TEST_DATA", alias: "LOAD_DATA") {

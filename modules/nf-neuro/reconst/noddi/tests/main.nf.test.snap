@@ -29,5 +29,17 @@
             "nextflow": "23.10.1"
         },
         "timestamp": "2024-05-21T17:04:36.944861"
+    },
+    "reconst - noddi - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,7d60348ede01d2f9bd3a2fe9da61741d"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:43:02.680473161"
     }
 }

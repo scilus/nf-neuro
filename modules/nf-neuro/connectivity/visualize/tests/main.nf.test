@@ -5,7 +5,7 @@ nextflow_process {
     process "CONNECTIVITY_VISUALIZE"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "connectivity"
     tag "connectivity/visualize"
 
@@ -46,7 +46,9 @@ nextflow_process {
             )
         }
     }
-        test("connectivity - visualisation - stub-run") {
+
+    test("connectivity - visualisation - stub-run") {
+        tag "stub"
         options "-stub-run"
         config "./nextflow.config"
         when {

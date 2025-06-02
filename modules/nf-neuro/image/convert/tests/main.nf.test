@@ -5,7 +5,7 @@ nextflow_process {
     process "IMAGE_CONVERT"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "image"
     tag "image/convert"
 
@@ -88,6 +88,7 @@ nextflow_process {
 
     test("Image convert - stub") {
 
+        tag "stub"
         options "-stub-run"
 
         config "./nextflow_float32.config"

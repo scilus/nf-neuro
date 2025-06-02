@@ -5,7 +5,7 @@ nextflow_process {
     process "PREPROC_TOPUP"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "preproc"
     tag "preproc/topup"
 
@@ -122,6 +122,7 @@ nextflow_process {
     }
 
     test("topup - stub-run") {
+        tag "stub"
         options "-stub-run"
         when {
             process {

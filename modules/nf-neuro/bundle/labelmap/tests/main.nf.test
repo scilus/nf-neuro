@@ -6,7 +6,7 @@ nextflow_process {
     config "./nextflow.config"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "bundle"
     tag "bundle/labelmap"
 
@@ -48,6 +48,30 @@ nextflow_process {
                     file(process.out.distances.get(0).get(1)).name,
                     file(process.out.distances_trk.get(0).get(1)).name
                 ).match() }
+            )
+        }
+    }
+
+    test("bundle - labelmap - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/IFGWM.trk"),
+                        file("\${test_data_directory}/IFGWM_uni_c_10.trk"),
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
     }

@@ -6,7 +6,7 @@ nextflow_process {
     config "./nextflow.config"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "reconst"
     tag "reconst/meanfrf"
 
@@ -53,6 +53,7 @@ nextflow_process {
     }
 
     test("reconst - meanfrf - stub") {
+        tag "stub"
         options "-stub-run"
 
         when {
