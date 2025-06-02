@@ -76,9 +76,15 @@ workflow ANATOMICAL_SEGMENTATION {
             ch_versions = ch_versions.mix(SEGMENTATION_FREESURFERSEG.out.versions.first())
 
             // ** Setting outputs ** //
-            wm_mask = wm_mask.mix( SEGMENTATION_FREESURFERSEG.out.wm_mask )
-            gm_mask = gm_mask.mix( SEGMENTATION_FREESURFERSEG.out.gm_mask )
-            csf_mask = csf_mask.mix( SEGMENTATION_FREESURFERSEG.out.csf_mask )
+            wm_mask = wm_mask
+                .join( SEGMENTATION_FREESURFERSEG.out.wm_mask, remainder: true )
+                .map{ meta, fast, freesurfer -> [meta, freesurfer ?: fast] }
+            gm_mask = gm_mask
+                .join( SEGMENTATION_FREESURFERSEG.out.gm_mask, remainder: true )
+                .map{ meta, fast, freesurfer -> [meta, freesurfer ?: fast] }
+            csf_mask = csf_mask
+                .join( SEGMENTATION_FREESURFERSEG.out.csf_mask, remainder: true )
+                .map{ meta, fast, freesurfer -> [meta, freesurfer ?: fast] }
         }
 
     emit:
