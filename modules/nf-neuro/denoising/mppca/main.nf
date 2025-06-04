@@ -3,9 +3,7 @@ process DENOISING_MPPCA {
     tag "$meta.id"
     label 'process_medium'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
+    container "mrtrix3/mrtrix3:3.0.5"
 
     input:
     tuple val(meta), path(dwi), path(mask)
