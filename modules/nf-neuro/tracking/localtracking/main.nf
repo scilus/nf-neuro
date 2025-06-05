@@ -24,10 +24,13 @@ process TRACKING_LOCALTRACKING {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def local_fa_tracking_mask_threshold = task.ext.local_fa_tracking_mask_threshold ? task.ext.local_fa_tracking_mask_threshold : ""
-    def local_fa_seeding_mask_threshold = task.ext.local_fa_seeding_mask_threshold ? task.ext.local_fa_seeding_mask_threshold : ""
-    def local_tracking_mask = task.ext.local_tracking_mask_type ? "${task.ext.local_tracking_mask_type}" : ""
-    def local_seeding_mask = task.ext.local_seeding_mask_type ? "${task.ext.local_seeding_mask_type}" : ""
+    def local_fa_tracking_mask_threshold = task.ext.local_fa_tracking_mask_threshold ?: 0.1
+    def local_fa_seeding_mask_threshold = task.ext.local_fa_seeding_mask_threshold ?: 0.1
+    def local_wm_tracking_mask_threshold = task.ext.local_wm_tracking_mask_threshold ?: 0.5
+    def local_wm_seeding_mask_threshold = task.ext.local_wm_seeding_mask_threshold ?: 0.5
+
+    def local_tracking_mask = task.ext.local_tracking_mask_type ?: "wm"
+    def local_seeding_mask = task.ext.local_seeding_mask_type ?: "wm"
 
     def local_step = task.ext.local_step ? "--step " + task.ext.local_step : ""
     def local_random_seed = task.ext.local_random_seed ? "--seed " + task.ext.local_random_seed : ""
@@ -38,7 +41,7 @@ process TRACKING_LOCALTRACKING {
     def local_theta = task.ext.local_theta ? "--theta "  + task.ext.local_theta : ""
     def local_sfthres = task.ext.local_sfthres ? "--sfthres "  + task.ext.local_sfthres : ""
     def local_algo = task.ext.local_algo ? "--algo " + task.ext.local_algo: ""
-    def compress = task.ext.local_compress_streamlines ? "--compress " + task.ext.local_compress_value : ""
+    def compress = task.ext.local_compress_value ? "--compress " + task.ext.local_compress_value : ""
     def basis = task.ext.basis ? "--sh_basis " + task.ext.basis : ""
 
     def gpu_batch_size = task.ext.gpu_batch_size ? "--batch_size " + task.ext.gpu_batch_size : ""
@@ -52,7 +55,9 @@ process TRACKING_LOCALTRACKING {
     export OPENBLAS_NUM_THREADS=1
 
     if [ "${local_tracking_mask}" == "wm" ]; then
-        scil_volume_math.py convert $wm ${prefix}__local_tracking_mask.nii.gz \
+        scil_volume_math.py lower_threshold $wm \
+            $local_wm_tracking_mask_threshold \
+            ${prefix}__local_tracking_mask.nii.gz \
             --data_type uint8 -f
         cp $wm tmp_anat_qc.nii.gz
 
@@ -65,7 +70,9 @@ process TRACKING_LOCALTRACKING {
     fi
 
     if [ "${local_seeding_mask}" == "wm" ]; then
-        scil_volume_math.py convert $wm ${prefix}__local_seeding_mask.nii.gz \
+        scil_volume_math.py lower_threshold $wm \
+            $local_wm_seeding_mask_threshold \
+            ${prefix}__local_seeding_mask.nii.gz \
             --data_type uint8 -f
 
     elif [ "${local_seeding_mask}" == "fa" ]; then
@@ -125,6 +132,8 @@ process TRACKING_LOCALTRACKING {
     scil_tracking_local.py -h
     scil_tractogram_remove_invalid.py -h
     scil_volume_math.py -h
+    scil_viz_bundle_screenshot_mosaic.py -h
+    scil_tractogram_print_info.py -h
 
     touch ${prefix}__local_tracking.trk
     touch ${prefix}__local_tracking_config.json
