@@ -1,7 +1,36 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
 name: "preproc_n4"
-description: Bias field correction using N4
+description: |
+  Perform N4 bias field correction on either an anatomical image or a diffusion
+  volume. For diffusion volumes, the module automatically determines the
+  bspline parameter, number of stages, and iteration pyramid based on the image
+  resolution and size.
+
+  The formula used are as follows:
+  For the BSpline parameter:
+  `BSplineParam = 2 ** (NbStages - 1) * BSplineKnotPerVoxel * ShrinkFactor * ImageResolution`
+
+  For the number of stages in the iteration pyramid:
+  If SmallestDimension ≤ BSplineKnotPerVoxel * ShrinkFactor:
+      NbStages = 1
+  Else:
+      NbStages = ceil( log2(SmallestDimension / (BSplineKnotPerVoxel * ShrinkFactor)) )
+
+  For the iteration pyramid:
+  Slope     = (MinIter - MaxIter) / (1 - Retain)
+  Intercept = MaxIter - Slope * Retain
+
+  For i in linspace(0, 1, NbStages):
+      If i < Retain:
+          Iteration = MaxIter
+      Else:
+          Iteration = round(Slope * i + Intercept)
+
+  The default values for the shrink_factor and bspline_knot_per_voxel are set
+  to 4 and 8, respectively, which are suitable for most diffusion volumes from
+  a large age range of subjects and species.
+
 keywords:
   - correction
   - N4
@@ -40,11 +69,23 @@ args:
   - bspline_knot_per_voxel:
       type: number
       description: Number of B-spline knots per voxel
-      default: 1
+      default: 8
   - shrink_factor:
       type: number
       description: Shrink factor for the image resampling.
-      default: 1
+      default: 4
+  - maxiter:
+      type: number
+      description: Maximum number of iterations for the N4 algorithm.
+      default: 1000
+  - miniter:
+      type: number
+      description: Minimum number of iterations for the N4 algorithm.
+      default: 100
+  - retain:
+      type: number
+      description: Percentage of iterations to retain for deeper iterations.
+      default: 0.6
 
 output:
   - meta:
