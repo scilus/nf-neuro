@@ -21,11 +21,15 @@ args:
   local_wm_tracking_mask_threshold:
     type: float
     default: 0.5
-    description: "WM threshold for the tracking mask."
+    description: |
+      WM threshold for the tracking mask. If the mask
+      is binary, this threshold has no effect.
   local_wm_seeding_mask_threshold:
     type: float
     default: 0.5
-    description: "WM threshold for the seeding mask."
+    description: |
+      WM threshold for the seeding mask. If the mask
+      is binary, this threshold has no effect.
   local_tracking_mask_type:
     type: string
     default: "wm"
