@@ -33,7 +33,7 @@ nextflow_workflow {
         }
     }
 
-    test("preproc_dwi_rev_b0") {
+    test("preproc_dwi - AP DWI | PA sbref") {
 
         when {
             workflow {
@@ -59,22 +59,19 @@ nextflow_workflow {
 
         then {
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.bval,
-                    workflow.out.versions,
-                    file(workflow.out.b0.get(0).get(1)).name,
-                    file(workflow.out.b0_mask.get(0).get(1)).name,
-                    file(workflow.out.bvec.get(0).get(1)).name,
-                    file(workflow.out.dwi_bounding_box.get(0).get(1)).name,
-                    file(workflow.out.dwi_n4.get(0).get(1)).name,
-                    file(workflow.out.dwi.get(0).get(1)).name,
-                    file(workflow.out.dwi_topup_eddy.get(0).get(1)).name).match() }
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["bval", "versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }
 
-    test("preproc_dwi_rev_dwi_nob0") {
+    test("preproc_dwi - AP DWI | PA DWI") {
 
         when {
             workflow {
@@ -102,23 +99,20 @@ nextflow_workflow {
 
         then {
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.bval,
-                    workflow.out.versions,
-                    file(workflow.out.b0.get(0).get(1)).name,
-                    file(workflow.out.b0_mask.get(0).get(1)).name,
-                    file(workflow.out.bvec.get(0).get(1)).name,
-                    file(workflow.out.dwi_bounding_box.get(0).get(1)).name,
-                    file(workflow.out.dwi_n4.get(0).get(1)).name,
-                    file(workflow.out.dwi.get(0).get(1)).name,
-                    file(workflow.out.dwi_topup_eddy.get(0).get(1)).name).match() }
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["bval", "versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }
 
 
-    test("preproc_dwi_all_options") {
+    test("preproc_dwi - AP DWI+sbref | PA DWI+sbref") {
 
         when {
             workflow {
@@ -154,17 +148,14 @@ nextflow_workflow {
 
         then {
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.bval,
-                    workflow.out.versions,
-                    file(workflow.out.b0.get(0).get(1)).name,
-                    file(workflow.out.b0_mask.get(0).get(1)).name,
-                    file(workflow.out.bvec.get(0).get(1)).name,
-                    file(workflow.out.dwi_bounding_box.get(0).get(1)).name,
-                    file(workflow.out.dwi_n4.get(0).get(1)).name,
-                    file(workflow.out.dwi.get(0).get(1)).name,
-                    file(workflow.out.dwi_topup_eddy.get(0).get(1)).name).match() }
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["bval", "versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }

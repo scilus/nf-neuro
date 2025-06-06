@@ -13,12 +13,14 @@ workflow PREPROC_T1 {
 
     take:
         ch_image            // channel: [ val(meta), image ]
-        ch_template         // channel: [ val(meta), template ]                              , optional
-        ch_probability_map  // channel: [ val(meta), probability-map, mask, initial-affine ] , optional
-        ch_mask_nlmeans     // channel: [ val(meta), mask ]                                  , optional
-        ch_ref_n4           // channel: [ val(meta), ref, ref-mask ]                         , optional
-        ch_ref_resample     // channel: [ val(meta), ref ]                                   , optional
-        ch_weights          // channel: [ val(meta), weights ]                               , optional
+        ch_template         // channel: [ val(meta), template ]         , optional
+        ch_probability_map  // channel: [ val(meta), probability-map ]  , optional
+        ch_template_mask    // channel: [ val(meta), mask ]             , optional
+        ch_initial_affine   // channel: [ val(meta), init_affine ]      , optional
+        ch_mask_nlmeans     // channel: [ val(meta), mask ]             , optional
+        ch_ref_n4           // channel: [ val(meta), ref, ref-mask ]    , optional
+        ch_ref_resample     // channel: [ val(meta), ref ]              , optional
+        ch_weights          // channel: [ val(meta), weights ]          , optional
 
     main:
 
@@ -108,7 +110,10 @@ workflow PREPROC_T1 {
             ch_bet = image_resample
                 .join(ch_template.ifEmpty{ error("ANTS BET needs a template") })
                 .join(ch_probability_map.ifEmpty{ error("ANTS BET needs a tissue probability map") })
-                .map{ it + [[], []] }
+                .join(ch_template_mask, remainder: true)
+                .map{ it[0..3] + [it[4] ?: []] }
+                .join(ch_initial_affine, remainder: true)
+                .map{ it[0..4] + [it[5] ?: []] }
 
             BETCROP_ANTSBET ( ch_bet )
             ch_versions = ch_versions.mix(BETCROP_ANTSBET.out.versions.first())

@@ -46,27 +46,12 @@ nextflow_workflow {
                     ]}
                 input[1] = Channel.empty()
                 input[2] = Channel.empty()
-                input[3] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[4] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        [],
-                        []
-                    ]}
-                input[5] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[6] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                input[6] = Channel.empty()
+                input[7] = Channel.empty()
+                input[8] = Channel.empty()
                 """
             }
         }
@@ -100,30 +85,13 @@ nextflow_workflow {
                     test_data_directory -> [
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/t1_brain_probability_map.nii.gz"),
-                        [],
-                        []
                     ]}
-                input[3] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[4] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        [],
-                        []
-                    ]}
-                input[5] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[6] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                input[6] = Channel.empty()
+                input[7] = Channel.empty()
+                input[8] = Channel.empty()
                 """
             }
         }
@@ -162,39 +130,14 @@ nextflow_workflow {
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
-                input[1] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[2] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[3] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        [],
-                        [],
-                        []
-                    ]}
-                input[4] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        [],
-                        []
-                    ]}
-                input[5] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[6] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
+                input[1] = Channel.empty()
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                input[6] = Channel.empty()
+                input[7] = Channel.empty()
+                input[8] = Channel.empty()
                 """
             }
         }
@@ -233,39 +176,14 @@ nextflow_workflow {
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
-                input[1] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[2] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[3] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        [],
-                        [],
-                        []
-                    ]}
-                input[4] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        [],
-                        []
-                    ]}
-                input[5] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[6] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
+                input[1] = Channel.empty()
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                input[6] = Channel.empty()
+                input[7] = Channel.empty()
+                input[8] = Channel.empty()
                 """
             }
         }
@@ -294,39 +212,14 @@ nextflow_workflow {
                         [ id:'test', single_end:false ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
-                input[1] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[2] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[3] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        [],
-                        [],
-                        []
-                    ]}
-                input[4] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        [],
-                        []
-                    ]}
-                input[5] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
-                input[6] = ch_split_test_data.antsbet.map{
-                    test_data_directory -> [
-                        [ id:'test', single_end:false ],
-                        []
-                    ]}
+                input[1] = Channel.empty()
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                input[6] = Channel.empty()
+                input[7] = Channel.empty()
+                input[8] = Channel.empty()
                 """
             }
         }

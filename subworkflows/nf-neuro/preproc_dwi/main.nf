@@ -100,7 +100,7 @@ workflow PREPROC_DWI {
         } // No else, we just use the input DWI
 
         // ** Eddy Topup ** //
-        TOPUP_EDDY ( ch_dwi, ch_b0, ch_rev_dwi, ch_rev_b0, ch_config_topup )
+        TOPUP_EDDY ( ch_dwi, ch_b0, ch_rev_dwi, ch_rev_b0, ch_config_topup.ifEmpty( "b02b0.cnf" ) )
         ch_versions = ch_versions.mix(TOPUP_EDDY.out.versions.first())
         ch_multiqc_files = ch_multiqc_files.mix(TOPUP_EDDY.out.mqc)
 

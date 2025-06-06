@@ -1,6 +1,6 @@
 process PREPROC_TOPUP {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
@@ -26,12 +26,12 @@ process PREPROC_TOPUP {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def prefix_topup = task.ext.prefix_topup ? task.ext.prefix_topup : ""
+    def prefix_topup = task.ext.prefix_topup ?: ""
     config_topup = config_topup ?: task.ext.default_config_topup
-    def encoding = task.ext.encoding ? task.ext.encoding : ""
-    def readout = task.ext.readout ? task.ext.readout : ""
-    def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ? task.ext.b0_thr_extract_b0 : ""
-    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
+    def encoding = task.ext.encoding ?: ""
+    def readout = task.ext.readout ?: ""
+    def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ?: ""
+    def run_qc = task.ext.run_qc
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
@@ -61,7 +61,8 @@ process PREPROC_TOPUP {
         --config $config_topup\
         --encoding_direction $encoding\
         --readout $readout --out_prefix $prefix_topup\
-        --out_script
+        --out_script \
+        --topup_options=\"--nthr=$task.cpus\" -f
     sh topup.sh
     cp corrected_b0s.nii.gz ${prefix}__corrected_b0s.nii.gz
 
@@ -114,10 +115,10 @@ process PREPROC_TOPUP {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        antsRegistration: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
-        fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
-        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
-        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+        fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
     END_VERSIONS
     """
 

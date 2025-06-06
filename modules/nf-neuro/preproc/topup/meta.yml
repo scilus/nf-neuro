@@ -1,7 +1,12 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
 name: "preproc_topup"
-description: Prepare data and apply FSL topup
+description: |
+  Run magnetic susceptibility distortions correction using FSL Topup. The module can take either
+  b0 or DWI volumes. The latter activates b0 extraction prior to running Topup. Extraction can be
+  configured to take one (default) or many b0 volumes in each forward and reverse acquired DWI and
+  perform averaging if needed. Note that running Topup with more than one volume per encoding
+  direction greatly increases computation time.
 keywords:
   - DWI
   - distorsion
@@ -85,6 +90,14 @@ args:
       type: int
       description: Threshold under which b-values are considered to be b0s.
       default: 10
+  - prefix_topup:
+      type: string
+      description: Prefix to prepend to Topup output files.
+  - default_config_topup:
+    type: string
+    description: Default Topup configuration to use.
+    choices: "b02b0.cnf, b02b0_1.cnf, b02b0_2.cnf, b02b0_4.cnf, b02b0_7T.cnf"
+    default: "b02b0.cnf"
   - run_qc:
       type: boolean
       description: Run quality control.
