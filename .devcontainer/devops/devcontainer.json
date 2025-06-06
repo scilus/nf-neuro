@@ -23,11 +23,11 @@
             "dockerDashComposeVersion": "none",
             "installDockerComposeSwitch": false
         },
-        "ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {},
+        "ghcr.io/devcontainers-extra/features/apt-get-packages:1": {},
         "ghcr.io/robsyme/features/nextflow:1": {},
-        "ghcr.io/devcontainers-contrib/features/curl-apt-get:1": {},
-        "ghcr.io/devcontainers-contrib/features/tmux-apt-get:1": {},
-        "ghcr.io/devcontainers-contrib/features/wget-apt-get:1": {}
+        "ghcr.io/devcontainers-extra/features/curl-apt-get:1": {},
+        "ghcr.io/devcontainers-extra/features/tmux-apt-get:1": {},
+        "ghcr.io/devcontainers-extra/features/wget-apt-get:1": {}
     },
     "mounts": [
         {
