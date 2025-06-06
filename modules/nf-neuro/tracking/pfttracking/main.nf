@@ -17,7 +17,7 @@ process TRACKING_PFTTRACKING {
         tuple val(meta), path("*__map_exclude.nii.gz")          , emit: excludes
         tuple val(meta), path("*__pft_seeding_mask.nii.gz")     , emit: seeding
         tuple val(meta), path("*__pft_tracking_mqc.png")        , emit: mqc, optional: true
-        tuple val(meta), path("*__pft_tracking_stats.json")      , emit: global_mqc, optional: true
+        tuple val(meta), path("*__pft_tracking_stats.json")     , emit: global_mqc, optional: true
         path "versions.yml"                                     , emit: versions
 
     when:
@@ -26,14 +26,15 @@ process TRACKING_PFTTRACKING {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def pft_fa_threshold = task.ext.pft_fa_seeding_mask_threshold ? task.ext.pft_fa_seeding_mask_threshold : ""
-    def pft_seeding_mask = task.ext.pft_seeding_mask_type ? "${task.ext.pft_seeding_mask_type}" : ""
+    def pft_fa_threshold = task.ext.pft_fa_seeding_mask_threshold ?: 0.1
+    def pft_wm_threshold = task.ext.pft_wm_seeding_mask_threshold ?: 0.5
+    def pft_seeding_mask = task.ext.pft_seeding_mask_type ?: "wm"
 
-    def pft_random_seed = task.ext.pft_random_seed ? "--seed " + task.ext.pft_random_seed : ""
-    def compress = task.ext.pft_compress_streamlines ? "--compress " + task.ext.pft_compress_value : ""
+    def pft_random_seed = task.ext.pft_random_seed ? "--seed " + task.ext.pft_random_seed : "--seed 0"
+    def compress = task.ext.pft_compress_value ? "--compress " + task.ext.pft_compress_value : ""
     def pft_algo = task.ext.pft_algo ? "--algo " + task.ext.pft_algo: ""
-    def pft_seeding_type = task.ext.pft_seeding ? "--"  + task.ext.pft_seeding : ""
-    def pft_nbr_seeds = task.ext.pft_nbr_seeds ? ""  + task.ext.pft_nbr_seeds : ""
+    def pft_seeding_type = task.ext.pft_seeding ? "--"  + task.ext.pft_seeding : "--npv"
+    def pft_nbr_seeds = task.ext.pft_nbr_seeds ?: 5
     def pft_step = task.ext.pft_step ? "--step "  + task.ext.pft_step : ""
     def pft_theta = task.ext.pft_theta ? "--theta "  + task.ext.pft_theta : ""
     def pft_sfthres = task.ext.pft_sfthres ? "--sfthres "  + task.ext.pft_sfthres : ""
@@ -60,28 +61,30 @@ process TRACKING_PFTTRACKING {
     cp $wm tmp_anat_qc.nii.gz
 
     if [ "${pft_seeding_mask}" == "wm" ]; then
-        scil_volume_math.py convert $wm ${prefix}__pft_seeding_mask.nii.gz \
+        scil_volume_math.py lower_threshold $wm $pft_wm_threshold ${prefix}__pft_seeding_mask.nii.gz \
             --data_type uint8 -f
         scil_volume_math.py union ${prefix}__pft_seeding_mask.nii.gz \
             ${prefix}__interface.nii.gz ${prefix}__pft_seeding_mask.nii.gz \
             --data_type uint8 -f
 
     elif [ "${pft_seeding_mask}" == "interface" ]; then
-        cp ${prefix}__interface.nii.gz ${prefix}__pft_seeding_mask.nii.gz
+        mv ${prefix}__interface.nii.gz ${prefix}__pft_seeding_mask.nii.gz
 
     elif [ "${pft_seeding_mask}" == "fa" ]; then
-        mrcalc $fa $pft_fa_threshold -ge ${prefix}__pft_seeding_mask.nii.gz \
-            -datatype uint8 -force
+        scil_volume_math.py lower_threshold $fa $pft_fa_threshold \
+            ${prefix}__pft_seeding_mask.nii.gz --data_type uint8 -f
     fi
 
     scil_tracking_pft.py $fodf ${prefix}__pft_seeding_mask.nii.gz \
-        ${prefix}__map_include.nii.gz ${prefix}__map_exclude.nii.gz tmp.trk \
+        ${prefix}__map_include.nii.gz ${prefix}__map_exclude.nii.gz \
+        ${prefix}__pft_tracking.trk \
         $pft_algo $pft_seeding_type $pft_nbr_seeds \
         $pft_random_seed $pft_step $pft_theta \
         $pft_sfthres $pft_sfthres_init $pft_min_len $pft_max_len \
         $pft_particles $pft_back $pft_front $compress $basis -f
 
-    scil_tractogram_remove_invalid.py tmp.trk ${prefix}__pft_tracking.trk \
+    scil_tractogram_remove_invalid.py ${prefix}__pft_tracking.trk \
+        ${prefix}__pft_tracking.trk \
         --remove_single_point -f
 
     cat <<-TRACKING_INFO > ${prefix}__pft_tracking_config.json
@@ -115,7 +118,6 @@ process TRACKING_PFTTRACKING {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """
 
@@ -126,8 +128,9 @@ process TRACKING_PFTTRACKING {
     scil_tracking_pft.py -h
     scil_tracking_pft_maps.py -h
     scil_volume_math.py -h
-    mrcalc -h
     scil_tractogram_remove_invalid.py -h
+    scil_viz_bundle_screenshot_mosaic.py -h
+    scil_tractogram_print_info.py -h
 
     touch ${prefix}__map_include.nii.gz
     touch ${prefix}__map_exclude.nii.gz
@@ -140,7 +143,6 @@ process TRACKING_PFTTRACKING {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """
 }

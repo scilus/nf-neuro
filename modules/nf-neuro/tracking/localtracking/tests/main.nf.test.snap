@@ -17,7 +17,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__local_seeding_mask.nii.gz:md5,6180aeda681e4443e56287ef1e1aee83"
+                    "test__local_seeding_mask.nii.gz:md5,0e098ec82a05ceaa2e94073510cbcdee"
                 ]
             ],
             [
@@ -26,7 +26,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__local_tracking_mask.nii.gz:md5,6180aeda681e4443e56287ef1e1aee83"
+                    "test__local_tracking_mask.nii.gz:md5,0e098ec82a05ceaa2e94073510cbcdee"
                 ]
             ],
             [
@@ -35,9 +35,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2024-10-24T19:38:16.835402429"
+        "timestamp": "2025-06-05T20:57:07.158672254"
     },
     "tracking - localtracking - fa": {
         "content": [
