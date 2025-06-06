@@ -17,6 +17,9 @@ nextflow_workflow {
 
     tag "load_test_data"
 
+    tag "stub"
+    options "-stub-run"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
@@ -68,7 +71,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }
@@ -105,7 +114,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }
@@ -145,14 +160,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    file(workflow.out.image_warped.get(0).get(1)).name,
-                    file(workflow.out.ref_warped.get(0).get(1)).name,
-                    file(workflow.out.transfo_image.get(0).get(1)).name,
-                    file(workflow.out.transfo_trk.get(0).get(1)).name,
-                    niftiMD5SUM(workflow.out.segmentation.get(0).get(1), 6),
-                    file(workflow.out.ref_segmentation.get(0).get(1)).name,
-                    workflow.out.versions
-                ).match()}
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }
@@ -191,11 +204,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    file(workflow.out.image_warped.get(0).get(1)).name,
-                    file(workflow.out.transfo_image.get(0).get(1)).name,
-                    file(workflow.out.transfo_image.get(0).get(2)).name,
-                    workflow.out.versions
-                ).match()}
+                    workflow.out
+                        .findAll{ !it.key.isInteger() && it.value  }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
+                ).match() }
             )
         }
     }

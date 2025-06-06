@@ -2,14 +2,14 @@
     "Image convert - stub": {
         "content": [
             [
-                "versions.yml:md5,a7c7bc13cd65656aa5c6c2f6abefb34f"
+                "versions.yml:md5,5c6f0565fe5f61aea47dc7436b5cd390"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2024-11-28T17:13:29.87483603"
+        "timestamp": "2025-06-06T02:11:34.184230153"
     },
     "Image convert - uint8": {
         "content": [
