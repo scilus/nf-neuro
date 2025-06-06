@@ -38,16 +38,28 @@
             "test__b0_topup_mqc.gif",
             "test__rev_b0_topup_mqc.gif",
             [
-                "versions.yml:md5,4f4b0ba79e976735b1c4ccfb8b3ee140"
+                "versions.yml:md5,94c36112d1661051122b9e24ff3a0f3a"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-05-27T15:08:29.188827108"
+        "timestamp": "2025-06-05T15:19:27.742542792"
     },
-    "topup - AP DWI | PA sbref": {
+    "topup - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,94c36112d1661051122b9e24ff3a0f3a"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.3"
+        },
+        "timestamp": "2025-06-05T15:21:44.106910251"
+    },
+    "topup_light": {
         "content": [
             "test1__corrected_b0s.nii.gz",
             "topup_results_fieldcoef.nii.gz",
@@ -88,14 +100,14 @@
             "test1__b0_topup_mqc.gif",
             "test1__rev_b0_topup_mqc.gif",
             [
-                "versions.yml:md5,4f4b0ba79e976735b1c4ccfb8b3ee140",
-                "versions.yml:md5,4f4b0ba79e976735b1c4ccfb8b3ee140"
+                "versions.yml:md5,94c36112d1661051122b9e24ff3a0f3a",
+                "versions.yml:md5,94c36112d1661051122b9e24ff3a0f3a"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-05-27T15:09:38.579042348"
+        "timestamp": "2025-06-05T15:37:37.732999777"
     }
 }

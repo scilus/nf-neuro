@@ -44,9 +44,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-06-09T20:32:33.077471281"
+        "timestamp": "2025-06-04T03:19:41.033223181"
     },
     "registration - convert - default": {
         "content": [
@@ -83,21 +83,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-06-09T20:32:16.587990237"
-    },
-    "registration - convert - stub-run": {
-        "content": [
-            [
-                "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
-        },
-        "timestamp": "2025-05-30T21:45:21.615899949"
+        "timestamp": "2025-06-04T03:23:23.394821601"
     },
     "registration - convert - antsfs": {
         "content": [
@@ -116,9 +104,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-06-09T20:33:42.941197078"
+        "timestamp": "2025-06-04T03:22:34.322609153"
     },
     "registration - convert - fslants": {
         "content": [
@@ -165,9 +153,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-06-09T20:33:35.283275031"
+        "timestamp": "2025-06-04T03:24:33.171811516"
     },
     "registration - convert - affine": {
         "content": [
@@ -214,9 +202,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-06-09T20:32:24.776340074"
+        "timestamp": "2025-06-04T03:21:57.24523274"
     },
     "registration - convert - fslfs": {
         "content": [
@@ -235,8 +223,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-06-09T20:33:07.460003657"
+        "timestamp": "2025-06-04T03:15:42.966436752"
     }
 }
