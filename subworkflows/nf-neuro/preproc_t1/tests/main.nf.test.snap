@@ -31,7 +31,7 @@
                     "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
                     "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
                 ]
-            }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
