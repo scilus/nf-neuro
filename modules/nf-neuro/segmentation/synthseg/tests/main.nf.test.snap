@@ -66,13 +66,13 @@
     "segmentation - synthseg - stub-run": {
         "content": [
             [
-                
+                "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-05-30T18:57:12.867825484"
+        "timestamp": "2025-06-06T02:17:26.8838415"
     }
 }

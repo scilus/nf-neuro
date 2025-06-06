@@ -21,6 +21,9 @@ nextflow_workflow {
 
     tag "load_test_data"
 
+    tag "stub"
+    options "-stub-run"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
@@ -63,7 +66,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out
                         .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ item -> ["bval", "versions"].contains(item.key)
+                        .collect{ item -> ["versions"].contains(item.key)
                             ? item.value
                             : file(item.value.get(0).get(1)).name}
                 ).match() }
@@ -103,7 +106,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out
                         .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ item -> ["bval", "versions"].contains(item.key)
+                        .collect{ item -> ["versions"].contains(item.key)
                             ? item.value
                             : file(item.value.get(0).get(1)).name}
                 ).match() }
@@ -152,7 +155,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out
                         .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ item -> ["bval", "versions"].contains(item.key)
+                        .collect{ item -> ["versions"].contains(item.key)
                             ? item.value
                             : file(item.value.get(0).get(1)).name}
                 ).match() }

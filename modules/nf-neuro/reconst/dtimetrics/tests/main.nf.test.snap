@@ -2,14 +2,14 @@
     "reconst - stub-run dtimetrics": {
         "content": [
             [
-                "versions.yml:md5,c7a6b86e604d3b25340611cec27c758a"
+                "versions.yml:md5,12ec945cb1d5b0de8b38de44757fd707"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-03-06T15:57:03.763217558"
+        "timestamp": "2025-06-06T02:14:00.199448584"
     },
     "reconst - dtimetrics_with_b0mask": {
         "content": [

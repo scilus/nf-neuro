@@ -15,6 +15,7 @@ nextflow_workflow {
 
     tag "load_test_data"
 
+    tag "stub"
     options "-stub-run"
 
     setup {
@@ -61,8 +62,20 @@ nextflow_workflow {
                         .findAll{ !it.key.isInteger() && it.value  }
                         .collect{ item -> ["versions"].contains(item.key)
                             ? item.value
-                            : file(item.value.get(0).get(1)).name}
-                ).match() }
+                            : file(item.value.get(0).get(1)).name }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ !it.key.isInteger() }
+                    .every{ channel -> ["wm_mask",
+                                        "gm_mask",
+                                        "csf_mask",
+                                        "wm_map",
+                                        "gm_map",
+                                        "csf_map",
+                                        "versions"].contains(channel.key)
+                        ? channel.value.every{ item ->
+                            item instanceof ArrayList ? item.get(1) : item }
+                        : channel.value.size() == 0 } }
             )
         }
     }
@@ -101,7 +114,16 @@ nextflow_workflow {
                         .collect{ item -> ["versions"].contains(item.key)
                             ? item.value
                             : file(item.value.get(0).get(1)).name}
-                ).match() }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ !it.key.isInteger() }
+                    .every{ channel -> ["wm_mask",
+                                        "gm_mask",
+                                        "csf_mask",
+                                        "versions"].contains(channel.key)
+                        ? channel.value.every{ item ->
+                            item instanceof ArrayList ? item.get(1) : item }
+                        : channel.value.size() == 0 } }
             )
         }
     }
@@ -145,7 +167,19 @@ nextflow_workflow {
                         .collect{ item -> ["versions"].contains(item.key)
                             ? item
                             : file(item.value.get(0).get(1)).name}
-                ).match() }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ !it.key.isInteger() }
+                    .every{ channel -> ["wm_mask",
+                                        "gm_mask",
+                                        "csf_mask",
+                                        "wm_map",
+                                        "gm_map",
+                                        "csf_map",
+                                        "versions"].contains(channel.key)
+                        ? channel.value.every{ item ->
+                            item instanceof ArrayList ? item.get(1) : item }
+                        : channel.value.size() == 0 } }
             )
         }
     }
@@ -190,7 +224,24 @@ nextflow_workflow {
                         .collect{ item -> ["versions"].contains(item.key)
                             ? item.value
                             : file(item.value.get(0).get(1)).name}
-                ).match() }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ !it.key.isInteger() }
+                    .every{ channel -> ["wm_mask",
+                                        "gm_mask",
+                                        "csf_mask",
+                                        "wm_map",
+                                        "gm_map",
+                                        "csf_map",
+                                        "aparc_aseg",
+                                        "qc_score",
+                                        "resample",
+                                        "seg",
+                                        "volume",
+                                        "versions"].contains(channel.key)
+                        ? channel.value.every{ item ->
+                            item instanceof ArrayList ? item.get(1) : item }
+                        : channel.value.size() == 0 } }
             )
         }
     }

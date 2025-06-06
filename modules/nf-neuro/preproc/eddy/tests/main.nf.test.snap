@@ -69,13 +69,13 @@
     "eddy - stub-run": {
         "content": [
             [
-                "versions.yml:md5,95220463b44e9e5778729aaa87c09b3f"
+                "versions.yml:md5,29c9d17f4eebae09ad78a651d7ed6b97"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-02-23T21:27:53.190124319"
+        "timestamp": "2025-06-06T02:12:52.085919841"
     }
 }
