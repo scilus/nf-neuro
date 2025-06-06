@@ -124,7 +124,7 @@
                 "versions": [
                     "versions.yml:md5,04d2203fd83e0422e103384bee7a1696"
                 ]
-            }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
@@ -164,7 +164,7 @@
                 "versions": [
                     "versions.yml:md5,b39c35bdc0e79c6a3595616e01e37a72"
                 ]
-            }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
