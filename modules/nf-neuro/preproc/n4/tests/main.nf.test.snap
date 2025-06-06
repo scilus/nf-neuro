@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,6383b9ffb68d04bf089ba7a040c4a77f"
+                        "test__image_n4.nii.gz:md5,b2ed0364b6c784952e0564afc95b462c"
                     ]
                 ],
                 "1": [
@@ -20,7 +20,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,6383b9ffb68d04bf089ba7a040c4a77f"
+                        "test__image_n4.nii.gz:md5,b2ed0364b6c784952e0564afc95b462c"
                     ]
                 ],
                 "versions": [
@@ -29,10 +29,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2024-05-10T16:06:45.886061"
+        "timestamp": "2025-06-04T10:44:22.933264"
     },
     "preproc - n4 - anat": {
         "content": [
@@ -64,9 +64,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2024-05-10T16:09:11.896134"
+        "timestamp": "2025-06-04T10:49:01.917093"
     }
 }
