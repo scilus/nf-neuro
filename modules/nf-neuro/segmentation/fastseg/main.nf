@@ -46,7 +46,7 @@ process SEGMENTATION_FASTSEG {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: 2.0.2
-        fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
+        fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -75,7 +75,7 @@ process SEGMENTATION_FASTSEG {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: 2.0.0
-        fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
+        fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 }
