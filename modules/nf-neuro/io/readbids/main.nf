@@ -9,8 +9,8 @@ process IO_READBIDS {
         path(bids_ignore)
 
     output:
-        path("bids_struct.json")             , emit: bidsstructure
-        path "versions.yml"                             , emit: versions
+        path("bids_struct.json")    , emit: bidsstructure
+        path("versions.yml")        , emit: versions
 
 
     when:
