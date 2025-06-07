@@ -1,9 +1,7 @@
 process IO_READBIDS {
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"
 
     input:
         path(bids_folder)
@@ -27,10 +25,18 @@ process IO_READBIDS {
     """
     scil_bids_validate.py $bids_folder tractoflow_bids_struct.json\
         $readout \
-        $clean_flag\
-        $fs_folder\
-        $bids_ignore\
-        -v
+        $clean_flag \
+        $fs_folder \
+        $bids_ignore \
+        -v -f
+
+    # Relativize paths in the output JSON
+    cat tractoflow_bids_struct.json | jq 'map(map_values( \
+        if type == "string" then \
+            if contains("/") then \
+                scan("^.*/($bids_folder/.*)") | first \
+            else . end \
+        else . end ))' > tractoflow_bids_struct.json
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -43,7 +49,11 @@ process IO_READBIDS {
     """
     scil_bids_validate.py -h
 
-    touch tractoflow_bids_struct.json
+    cat <<-ENDSTRUCT > tractoflow_bids_struct.json
+    {
+
+    }
+    ENDSTRUCT
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

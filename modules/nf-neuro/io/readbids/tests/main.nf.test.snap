@@ -3,35 +3,35 @@
         "content": [
             {
                 "0": [
-                    "tractoflow_bids_struct.json:md5,58e0494c51d30eb3494f7c9198986bb9"
+                    "tractoflow_bids_struct.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ],
                 "1": [
-                    "versions.yml:md5,53cf301d7d6076acbc0691d3e7e52437"
+                    "versions.yml:md5,d5fb02ea0d1d647fa107f760b268e703"
                 ],
                 "bidsstructure": [
-                    "tractoflow_bids_struct.json:md5,58e0494c51d30eb3494f7c9198986bb9"
+                    "tractoflow_bids_struct.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ],
                 "versions": [
-                    "versions.yml:md5,53cf301d7d6076acbc0691d3e7e52437"
+                    "versions.yml:md5,d5fb02ea0d1d647fa107f760b268e703"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2024-10-24T19:43:56.536400136"
+        "timestamp": "2025-06-06T19:31:59.761976611"
     },
     "io - readbids - stub-run": {
         "content": [
             [
-                "versions.yml:md5,53cf301d7d6076acbc0691d3e7e52437"
+                "versions.yml:md5,d5fb02ea0d1d647fa107f760b268e703"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-05-30T18:34:28.581526504"
+        "timestamp": "2025-06-06T19:32:18.054021242"
     }
 }
