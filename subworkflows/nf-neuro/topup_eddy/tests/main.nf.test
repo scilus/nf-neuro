@@ -17,6 +17,9 @@ nextflow_workflow {
 
     tag "load_test_data"
 
+    tag "stub"
+    options "-stub-run"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
@@ -59,9 +62,9 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out
                         .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ out -> ["b0_mask", "bval", "versions"].contains(out.key)
-                        ? out.value
-                        : file(out.value.get(0).get(1)).name }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
                 ).match() }
             )
         }
@@ -107,9 +110,9 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out
                         .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ out -> ["b0_mask", "bval", "versions"].contains(out.key)
-                        ? out.value
-                        : file(out.value.get(0).get(1)).name }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
                 ).match() }
             )
         }
@@ -155,9 +158,9 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out
                         .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ out -> ["b0_mask", "bval", "versions"].contains(out.key)
-                        ? out.value
-                        : file(out.value.get(0).get(1)).name }
+                        .collect{ item -> ["versions"].contains(item.key)
+                            ? item.value
+                            : file(item.value.get(0).get(1)).name}
                 ).match() }
             )
         }

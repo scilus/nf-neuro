@@ -21,8 +21,8 @@ workflow IO_BIDS {
     // ** Fetching the BIDS data as a json file ** //
     IO_READBIDS (
         bids_folder,
-        fs_folder,
-        bidsignore
+        fs_folder.ifEmpty( [] ),
+        bidsignore.ifEmpty( [] )
     )
     ch_versions = ch_versions.mix(IO_READBIDS.out.versions)
 
