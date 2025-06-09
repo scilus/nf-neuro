@@ -1,68 +1,175 @@
 {
     "registration - synthregistration": {
         "content": [
-            [
-                
-            ]
+            {
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__output_warped.nii.gz"
+                    ]
+                ],
+                "transfo_image": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__deform_warp.nii.gz",
+                        "test__affine_warp.lta"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8a5fc770044eef3575fe68a3f7792976"
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T02:40:25.324050643"
+        "timestamp": "2025-06-09T04:50:52.780105922"
     },
     "registration - easyreg": {
         "content": [
-            [
-                "test_floating_registered.nii.gz",
-                "test_reference_segmentation.nii.gz",
-                "test_reference_registered.nii.gz",
-                "test_floating_segmentation.nii.gz",
-                "test_forward_field.nii.gz",
-                "test_backward_field.nii.gz",
-                [
+            {
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_floating_registered.nii.gz"
+                    ]
+                ],
+                "ref_segmentation": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_reference_segmentation.nii.gz"
+                    ]
+                ],
+                "ref_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_reference_registered.nii.gz"
+                    ]
+                ],
+                "segmentation": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_floating_segmentation.nii.gz"
+                    ]
+                ],
+                "transfo_image": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward_field.nii.gz"
+                    ]
+                ],
+                "transfo_trk": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward_field.nii.gz"
+                    ]
+                ],
+                "versions": [
                     "versions.yml:md5,3f38c911476c605480c02e484fcf6e9f"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T02:40:17.204947005"
+        "timestamp": "2025-06-09T04:48:58.867241465"
     },
     "registration - antsRegistration": {
         "content": [
-            [
-                "test__t1_warped.nii.gz",
-                "test__output1Warp.nii.gz",
-                "test__output0GenericAffine.mat",
-                [
+            {
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__t1_warped.nii.gz"
+                    ]
+                ],
+                "transfo_image": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__output1Warp.nii.gz",
+                        "test__output0GenericAffine.mat"
+                    ]
+                ],
+                "transfo_trk": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__output0GenericAffine.mat",
+                        "test__output1InverseWarp.nii.gz"
+                    ]
+                ],
+                "versions": [
                     "versions.yml:md5,04d2203fd83e0422e103384bee7a1696"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T02:39:50.365006729"
+        "timestamp": "2025-06-09T05:06:59.658030199"
     },
     "registration - SyNQuick": {
         "content": [
-            [
-                "test__t1_warped.nii.gz",
-                "test__output0Warp.nii.gz",
-                "test__output0InverseAffine.mat",
-                [
+            {
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__t1_warped.nii.gz"
+                    ]
+                ],
+                "transfo_image": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__output0Warp.nii.gz",
+                        "test__output1GenericAffine.mat"
+                    ]
+                ],
+                "transfo_trk": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__output0InverseAffine.mat",
+                        "test__output1InverseWarp.nii.gz"
+                    ]
+                ],
+                "versions": [
                     "versions.yml:md5,b39c35bdc0e79c6a3595616e01e37a72"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T02:39:59.105645013"
+        "timestamp": "2025-06-09T05:07:08.668646604"
     }
 }

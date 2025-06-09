@@ -88,17 +88,17 @@ workflow ANATOMICAL_SEGMENTATION {
         }
 
     emit:
-        wm_mask    = wm_mask                     // channel: [ val(meta), [ wm_mask ] ]
-        gm_mask    = gm_mask                     // channel: [ val(meta), [ gm_mask ] ]
-        csf_mask   = csf_mask                    // channel: [ val(meta), [ csf_mask ] ]
-        wm_map     = wm_map                      // channel: [ val(meta), [ wm_map ] ]
-        gm_map     = gm_map                      // channel: [ val(meta), [ gm_map ] ]
-        csf_map    = csf_map                     // channel: [ val(meta), [ csf_map ] ]
-        seg        = seg                         // channel: [ val(meta), [ seg ] ]
-        aparc_aseg = aparc_aseg                  // channel: [ val(meta), [ aparc_aseg ] ]
-        resample   = resample                    // channel: [ val(meta), [ resample ] ]
-        volume     = volume                      // channel: [ val(meta), [ volume ] ]
-        qc_score   = qc_score                    // channel: [ val(meta), [ qc_score ] ]
+        wm_mask    = wm_mask                     // channel: [ val(meta), wm_mask ]
+        gm_mask    = gm_mask                     // channel: [ val(meta), gm_mask ]
+        csf_mask   = csf_mask                    // channel: [ val(meta), csf_mask ]
+        wm_map     = wm_map                      // channel: [ val(meta), wm_map ]
+        gm_map     = gm_map                      // channel: [ val(meta), gm_map ]
+        csf_map    = csf_map                     // channel: [ val(meta), csf_map ]
+        seg        = seg                         // channel: [ val(meta), seg ]
+        aparc_aseg = aparc_aseg                  // channel: [ val(meta), aparc_aseg ]
+        resample   = resample                    // channel: [ val(meta), resample ]
+        volume     = volume                      // channel: [ val(meta), volume ]
+        qc_score   = qc_score                    // channel: [ val(meta), qc_score ]
 
         versions  = ch_versions                  // channel: [ versions.yml ]
 }
