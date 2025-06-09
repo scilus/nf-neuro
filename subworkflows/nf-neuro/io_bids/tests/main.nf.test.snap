@@ -1,26 +1,238 @@
 {
     "Read BIDS directory - with .bidsignore": {
         "content": [
-            [
-                
-            ]
+            {
+                "ch_aparc_aseg": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            [
+                                
+                            ]
+                        ]
+                    ]
+                ],
+                "ch_dwi_bval_bvec": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            "/workspaces/nf-neuro/tests/.runs/tests/9b0ccf12ba09759a315b57f746d29ad0/i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.nii.gz",
+                            "/workspaces/nf-neuro/tests/.runs/tests/9b0ccf12ba09759a315b57f746d29ad0/i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.bval",
+                            "/workspaces/nf-neuro/tests/.runs/tests/9b0ccf12ba09759a315b57f746d29ad0/i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.bvec"
+                        ]
+                    ]
+                ],
+                "ch_rev_b0": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            "/workspaces/nf-neuro/tests/.runs/tests/9b0ccf12ba09759a315b57f746d29ad0/i_bids/sub-01/ses-001/fmap/sub-01_ses-001_dir-PA_epi.nii.gz"
+                        ]
+                    ]
+                ],
+                "ch_rev_dwi_bval_bvec": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            [
+                                
+                            ],
+                            [
+                                
+                            ],
+                            [
+                                
+                            ]
+                        ]
+                    ]
+                ],
+                "ch_t1": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            "/workspaces/nf-neuro/tests/.runs/tests/9b0ccf12ba09759a315b57f746d29ad0/i_bids/sub-01/ses-001/anat/sub-01_ses-001_T1w.nii.gz"
+                        ]
+                    ]
+                ],
+                "ch_wmparc": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            [
+                                
+                            ]
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,dc358bb3a486d7638ea93e4815688106"
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T02:35:08.920096313"
+        "timestamp": "2025-06-09T02:54:32.080983093"
     },
     "Read BIDS directory - without .bidsignore": {
         "content": [
-            [
-                
-            ]
+            {
+                "ch_aparc_aseg": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            [
+                                
+                            ]
+                        ]
+                    ]
+                ],
+                "ch_dwi_bval_bvec": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            "/workspaces/nf-neuro/tests/.runs/tests/1bb872a7259d7a7392d4922529bb97c0/i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.nii.gz",
+                            "/workspaces/nf-neuro/tests/.runs/tests/1bb872a7259d7a7392d4922529bb97c0/i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.bval",
+                            "/workspaces/nf-neuro/tests/.runs/tests/1bb872a7259d7a7392d4922529bb97c0/i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.bvec"
+                        ]
+                    ]
+                ],
+                "ch_rev_b0": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            "/workspaces/nf-neuro/tests/.runs/tests/1bb872a7259d7a7392d4922529bb97c0/i_bids/sub-01/ses-001/fmap/sub-01_ses-001_dir-PA_epi.nii.gz"
+                        ]
+                    ]
+                ],
+                "ch_rev_dwi_bval_bvec": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            [
+                                
+                            ],
+                            [
+                                
+                            ],
+                            [
+                                
+                            ]
+                        ]
+                    ]
+                ],
+                "ch_t1": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            "/workspaces/nf-neuro/tests/.runs/tests/1bb872a7259d7a7392d4922529bb97c0/i_bids/sub-01/ses-001/anat/sub-01_ses-001_T1w.nii.gz"
+                        ]
+                    ]
+                ],
+                "ch_wmparc": [
+                    [
+                        [
+                            {
+                                "id": "sub-01",
+                                "session": "_ses-001",
+                                "run": "",
+                                "dwi_tr": 0.062,
+                                "dwi_phase": "",
+                                "dwi_revphase": ""
+                            },
+                            [
+                                
+                            ]
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,dc358bb3a486d7638ea93e4815688106"
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T02:35:01.267035439"
+        "timestamp": "2025-06-09T02:53:35.118614118"
     }
 }

@@ -75,21 +75,21 @@ workflow IO_BIDS {
             }
         }
         .multiMap{ meta, t1, wmparc, aparc_aseg, dwi, bval, bvec, rev_dwi, rev_bval, rev_bvec, rev_b0 ->
-                t1: [meta, t1]
-                wmparc: [meta, wmparc]
-                aparc_aseg: [meta, aparc_aseg]
-                dwi_bval_bvec: [meta, dwi, bval, bvec]
-                rev_dwi_bval_bvec: [meta, rev_dwi, rev_bval, rev_bvec]
-                rev_b0: [meta, rev_b0]
+            t1: [meta, t1]
+            wmparc: [meta, wmparc]
+            aparc_aseg: [meta, aparc_aseg]
+            dwi_bval_bvec: [meta, dwi, bval, bvec]
+            rev_dwi_bval_bvec: [meta, rev_dwi, rev_bval, rev_bvec]
+            rev_b0: [meta, rev_b0]
         }
 
     emit:
-    ch_t1                   = ch_files.t1                   // channel: [ [meta], file(t1) ]
-    ch_wmparc               = ch_files.wmparc               // channel: [ [meta], file(wmparc) ]
-    ch_aparc_aseg           = ch_files.aparc_aseg           // channel: [ [meta], file(aparc_aseg) ]
-    ch_dwi_bval_bvec        = ch_files.dwi_bval_bvec        // channel: [ [meta], file(dwi), file(bval), file(bvec) ]
-    ch_rev_dwi_bval_bvec    = ch_files.rev_dwi_bval_bvec    // channel: [ [meta], file(rev_dwi), file(rev_bval), file(rev_bvec) ]
-    ch_rev_b0               = ch_files.rev_b0               // channel: [ [meta], file(fieldmap) ]
+    ch_t1                   = ch_files.t1.view{ "t1 : $it" }                   // channel: [ [meta], file(t1) ]
+    ch_wmparc               = ch_files.wmparc.view{ "wmparc : $it" }               // channel: [ [meta], file(wmparc) ]
+    ch_aparc_aseg           = ch_files.aparc_aseg.view{ "aparcaseg : $it" }           // channel: [ [meta], file(aparc_aseg) ]
+    ch_dwi_bval_bvec        = ch_files.dwi_bval_bvec.view{ "dwibvalbvec : $it" }        // channel: [ [meta], file(dwi), file(bval), file(bvec) ]
+    ch_rev_dwi_bval_bvec    = ch_files.rev_dwi_bval_bvec.view{ "revdwibvalbvec : $it" }    // channel: [ [meta], file(rev_dwi), file(rev_bval), file(rev_bvec) ]
+    ch_rev_b0               = ch_files.rev_b0.view{ "revb0 : $it" }               // channel: [ [meta], file(fieldmap) ]
 
     versions = ch_versions                     // channel: [ versions.yml ]
 }
