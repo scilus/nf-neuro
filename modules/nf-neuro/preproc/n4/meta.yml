@@ -66,9 +66,9 @@ args:
   - prefix:
       type: string
       description: Prefix to add to the output file name (e.g. "n4_")
-  - bspline_knot_per_voxel:
+  - nb_voxels_between_knots:
       type: number
-      description: Number of B-spline knots per voxel
+      description: Number of voxels between B-spline knots.
       default: 8
   - shrink_factor:
       type: number
@@ -84,7 +84,7 @@ args:
       default: 100
   - retain:
       type: number
-      description: Percentage of iterations to retain for deeper iterations.
+      description: Ratio of stages for which the number of iterations is fixed to the maximum iterations defined.
       default: 0.6
 
 output:

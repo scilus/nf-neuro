@@ -19,7 +19,7 @@ process PREPROC_N4 {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def bspline_knot_per_voxel = task.ext.bspline_knot_per_voxel ?: "8"
+    def nb_voxels_between_knots = task.ext.nb_voxels_between_knots ?: "8"
     def shrink_factor = task.ext.shrink_factor ?: "4"
     def maxiter = task.ext.maxiter ?: "1000"
     def miniter = task.ext.miniter ?: "100"
@@ -36,15 +36,15 @@ process PREPROC_N4 {
         smallest_dim=\$(mrinfo -size $ref | tr ' ' '\\n' | sort -n | head -n 1)
 
         # Computing the optimal number of stages to include in the pyramid.
-        if (( \$(echo "\$smallest_dim <= $bspline_knot_per_voxel * $shrink_factor" | bc -l) )); then
+        if (( \$(echo "\$smallest_dim <= $nb_voxels_between_knots * $shrink_factor" | bc -l) )); then
             n_stages="1"
         else
-            logval=\$(echo "l(\$smallest_dim / ($bspline_knot_per_voxel * $shrink_factor)) / l(2)" | bc -l)
+            logval=\$(echo "l(\$smallest_dim / ($nb_voxels_between_knots * $shrink_factor)) / l(2)" | bc -l)
             n_stages=\$(echo "(\$logval+0.999999)/1" | bc)
         fi
 
         # Computing the BSpline parameters.
-        bspline=\$(echo "2^(\$n_stages - 1) * $bspline_knot_per_voxel * $shrink_factor * \$spacing" | bc -l)
+        bspline=\$(echo "2^(\$n_stages - 1) * $nb_voxels_between_knots * $shrink_factor * \$spacing" | bc -l)
 
         # Setting the iterations.
         if [[ "\$n_stages" -eq 1 ]]; then
@@ -78,7 +78,7 @@ process PREPROC_N4 {
         echo "Spacing: \$spacing"
         echo "Smallest dimension: \$smallest_dim"
         echo "Shrink factor: $shrink_factor"
-        echo "BSpline knot per voxel: $bspline_knot_per_voxel"
+        echo "BSpline knot per voxel: $nb_voxels_between_knots"
         echo "Iterations: \$iterations"
         echo "BSpline: \$bspline"
 
