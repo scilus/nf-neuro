@@ -51,11 +51,16 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ channel -> !channel.key.isInteger() && channel.value.flatten()  }
-                        .collectEntries{ channel -> [(channel.key): ["versions"].contains(channel.key)
-                            ? channel.value
-                            : channel.value.collect{ meta, ...entries ->
-                                [ meta ] + entries.collect{ entry -> entry ? file(entry).name : "" } } ] }
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
                 ).match() }
             )
         }
@@ -86,11 +91,16 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ channel -> !channel.key.isInteger() && channel.value.flatten()  }
-                        .collectEntries{ channel -> [(channel.key): ["versions"].contains(channel.key)
-                            ? channel.value
-                            : channel.value.collect{ meta, ...entries ->
-                                [ meta ] + entries.collect{ entry -> entry ? file(entry).name : "" } } ] }
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
                 ).match() }
             )
         }
