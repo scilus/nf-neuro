@@ -1,0 +1,21 @@
+[
+    {
+        "DWIPhaseEncodingDir": "y",
+        "TotalReadoutTime": 0.062,
+        "aparc_aseg": "",
+        "bval": "/workspaces/nf-neuro/tests/.runs/tests/ec5155976fb4339feb3e9c75c10740a9/work/a1/a024367b0b324d86b4df15e3253320/i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.bval",
+        "bvec": "/workspaces/nf-neuro/tests/.runs/tests/ec5155976fb4339feb3e9c75c10740a9/work/a1/a024367b0b324d86b4df15e3253320/i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.bvec",
+        "dwi": "/workspaces/nf-neuro/tests/.runs/tests/ec5155976fb4339feb3e9c75c10740a9/work/a1/a024367b0b324d86b4df15e3253320/i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.nii.gz",
+        "rev_DWIPhaseEncodingDir": "y-",
+        "rev_bval": "",
+        "rev_bvec": "",
+        "rev_dwi": "",
+        "rev_topup": "/workspaces/nf-neuro/tests/.runs/tests/ec5155976fb4339feb3e9c75c10740a9/work/a1/a024367b0b324d86b4df15e3253320/i_bids/sub-01/ses-001/fmap/sub-01_ses-001_dir-PA_epi.nii.gz",
+        "run": 0,
+        "session": "001",
+        "subject": "01",
+        "t1": "/workspaces/nf-neuro/tests/.runs/tests/ec5155976fb4339feb3e9c75c10740a9/work/a1/a024367b0b324d86b4df15e3253320/i_bids/sub-01/ses-001/anat/sub-01_ses-001_T1w.nii.gz",
+        "topup": "/workspaces/nf-neuro/tests/.runs/tests/ec5155976fb4339feb3e9c75c10740a9/work/a1/a024367b0b324d86b4df15e3253320/i_bids/sub-01/ses-001/fmap/sub-01_ses-001_dir-AP_epi.nii.gz",
+        "wmparc": ""
+    }
+]

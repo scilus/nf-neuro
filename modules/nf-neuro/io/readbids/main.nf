@@ -30,29 +30,46 @@ process IO_READBIDS {
         $bids_ignore \
         -v -f
 
+    cat tractoflow_bids_struct.json
     # Relativize paths in the output JSON
-    cat tractoflow_bids_struct.json | jq 'map(map_values( \
-        if type == "string" then \
-            if contains("/") then \
-                scan("^.*/($bids_folder/.*)") | first \
-            else . end \
-        else . end ))' > tractoflow_bids_struct.json
+    cat <<< \$(jq 'map(map_values(
+        if type == "string" then
+            if contains("/") then
+                scan("^.*/($bids_folder/.*)") | first
+            else . end
+        else . end ))' tractoflow_bids_struct.json) > tractoflow_bids_struct.json
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
-
-
     stub:
     """
     scil_bids_validate.py -h
 
     cat <<-ENDSTRUCT > tractoflow_bids_struct.json
-    {
-
-    }
+    [
+        {
+            "DWIPhaseEncodingDir": "y",
+            "TotalReadoutTime": 0.062,
+            "aparc_aseg": "",
+            "bval": "i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.bval",
+            "bvec": "i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.bvec",
+            "dwi": "i_bids/sub-01/ses-001/dwi/sub-01_ses-001_dir-AP_dwi.nii.gz",
+            "rev_DWIPhaseEncodingDir": "y-",
+            "rev_bval": "",
+            "rev_bvec": "",
+            "rev_dwi": "",
+            "rev_topup": "i_bids/sub-01/ses-001/fmap/sub-01_ses-001_dir-PA_epi.nii.gz",
+            "run": 0,
+            "session": "001",
+            "subject": "01",
+            "t1": "i_bids/sub-01/ses-001/anat/sub-01_ses-001_T1w.nii.gz",
+            "topup": "i_bids/sub-01/ses-001/fmap/sub-01_ses-001_dir-AP_epi.nii.gz",
+            "wmparc": ""
+        }
+    ]
     ENDSTRUCT
 
     cat <<-END_VERSIONS > versions.yml

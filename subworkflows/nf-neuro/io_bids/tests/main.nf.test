@@ -51,10 +51,11 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ item -> ["versions"].contains(item.key)
-                            ? item.value
-                            : file(item.value.get(0).get(1)).name}
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value.flatten()  }
+                        .collectEntries{ channel -> [(channel.key): ["versions"].contains(channel.key)
+                            ? channel.value
+                            : channel.value.collect{ meta, ...entries ->
+                                [ meta ] + entries.collect{ entry -> entry ? file(entry).name : "" } } ] }
                 ).match() }
             )
         }
@@ -85,10 +86,11 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ item -> ["versions"].contains(item.key)
-                            ? item.value
-                            : file(item.value.get(0).get(1)).name}
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value.flatten()  }
+                        .collectEntries{ channel -> [(channel.key): ["versions"].contains(channel.key)
+                            ? channel.value
+                            : channel.value.collect{ meta, ...entries ->
+                                [ meta ] + entries.collect{ entry -> entry ? file(entry).name : "" } } ] }
                 ).match() }
             )
         }

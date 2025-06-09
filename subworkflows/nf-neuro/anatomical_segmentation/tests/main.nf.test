@@ -59,13 +59,17 @@ nextflow_workflow {
                 { assert workflow.success},
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ item -> ["versions"].contains(item.key)
-                            ? item.value
-                            : file(item.value.get(0).get(1)).name }
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
                 ).match() },
                 { assert workflow.out
-                    .findAll{ !it.key.isInteger() }
+                    .findAll{ channel -> !channel.key.isInteger() }
                     .every{ channel -> ["wm_mask",
                                         "gm_mask",
                                         "csf_mask",
@@ -73,8 +77,9 @@ nextflow_workflow {
                                         "gm_map",
                                         "csf_map",
                                         "versions"].contains(channel.key)
-                        ? channel.value.every{ item ->
-                            item instanceof ArrayList ? item.get(1) : item }
+                        ? channel.value.every{ subject -> subject instanceof ArrayList
+                                ? subject.every()
+                                : subject }
                         : channel.value.size() == 0 } }
             )
         }
@@ -94,7 +99,7 @@ nextflow_workflow {
                 input[0] = Channel.empty()
                 input[1] = ch_split_test_data.freesurfer_nifti.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
+                        [ id:'test' ], // meta map
                         file("\${test_data_directory}/aparc+aseg.nii.gz", checkIfExists: true),
                         file("\${test_data_directory}/wmparc.nii.gz", checkIfExists: true)
                     ]
@@ -110,10 +115,14 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ item -> ["versions"].contains(item.key)
-                            ? item.value
-                            : file(item.value.get(0).get(1)).name}
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
                 ).match() },
                 { assert workflow.out
                     .findAll{ !it.key.isInteger() }
@@ -121,8 +130,9 @@ nextflow_workflow {
                                         "gm_mask",
                                         "csf_mask",
                                         "versions"].contains(channel.key)
-                        ? channel.value.every{ item ->
-                            item instanceof ArrayList ? item.get(1) : item }
+                        ? channel.value.every{ subject -> subject instanceof ArrayList
+                                ? subject.every()
+                                : subject }
                         : channel.value.size() == 0 } }
             )
         }
@@ -163,10 +173,14 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ item -> ["versions"].contains(item.key)
-                            ? item
-                            : file(item.value.get(0).get(1)).name}
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
                 ).match() },
                 { assert workflow.out
                     .findAll{ !it.key.isInteger() }
@@ -177,8 +191,9 @@ nextflow_workflow {
                                         "gm_map",
                                         "csf_map",
                                         "versions"].contains(channel.key)
-                        ? channel.value.every{ item ->
-                            item instanceof ArrayList ? item.get(1) : item }
+                        ? channel.value.every{ subject -> subject instanceof ArrayList
+                                ? subject.every()
+                                : subject }
                         : channel.value.size() == 0 } }
             )
         }
@@ -220,10 +235,14 @@ nextflow_workflow {
                 { assert workflow.success},
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ item -> ["versions"].contains(item.key)
-                            ? item.value
-                            : file(item.value.get(0).get(1)).name}
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
                 ).match() },
                 { assert workflow.out
                     .findAll{ !it.key.isInteger() }
@@ -239,8 +258,9 @@ nextflow_workflow {
                                         "seg",
                                         "volume",
                                         "versions"].contains(channel.key)
-                        ? channel.value.every{ item ->
-                            item instanceof ArrayList ? item.get(1) : item }
+                        ? channel.value.every{ subject -> subject instanceof ArrayList
+                                ? subject.every()
+                                : subject }
                         : channel.value.size() == 0 } }
             )
         }

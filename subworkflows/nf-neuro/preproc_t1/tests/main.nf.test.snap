@@ -1,35 +1,112 @@
 {
     "preproc_t1_quick": {
         "content": [
-            [
-                "test_denoised.nii.gz",
-                "test_resampled.nii.gz",
-                "test_cropped.nii.gz",
-                [
+            {
+                "image_nlmeans": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_denoised.nii.gz"
+                    ]
+                ],
+                "image_resample": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_resampled.nii.gz"
+                    ]
+                ],
+                "t1_final": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_cropped.nii.gz"
+                    ]
+                ],
+                "versions": [
                     "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
                     "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
                     "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T03:42:28.067482504"
+        "timestamp": "2025-06-09T05:10:44.027554806"
     },
     "preproc_t1_synthbet": {
         "content": [
-            [
-                "test_t1_cropped_bbox.pkl",
-                "test__image_n4.nii.gz",
-                "test__bet_image.nii.gz",
-                "test_denoised.nii.gz",
-                "test_resampled.nii.gz",
-                "test__brain_mask.nii.gz",
-                "test_cropped.nii.gz",
-                "test_t1_cropped.nii.gz",
-                [
+            {
+                "crop_box": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_cropped_bbox.pkl"
+                    ]
+                ],
+                "image_N4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__image_n4.nii.gz"
+                    ]
+                ],
+                "image_bet": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__bet_image.nii.gz"
+                    ]
+                ],
+                "image_nlmeans": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_denoised.nii.gz"
+                    ]
+                ],
+                "image_resample": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_resampled.nii.gz"
+                    ]
+                ],
+                "mask_bet": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__brain_mask.nii.gz"
+                    ]
+                ],
+                "mask_final": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_cropped.nii.gz"
+                    ]
+                ],
+                "t1_final": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_cropped.nii.gz"
+                    ]
+                ],
+                "versions": [
                     "versions.yml:md5,318cabe934be45528a25f52083d9c90d",
                     "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                     "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
@@ -37,38 +114,101 @@
                     "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
                     "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T02:39:12.500766209"
+        "timestamp": "2025-06-09T05:10:26.363848088"
     },
     "preproc_t1_skip_all": {
         "content": [
-            [
-                "T1w.nii.gz"
-            ]
+            {
+                "t1_final": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "T1w.nii.gz"
+                    ]
+                ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T03:42:34.67822011"
+        "timestamp": "2025-06-09T05:10:51.002651291"
     },
     "preproc_t1_antsbet": {
         "content": [
-            [
-                "test_t1_cropped_bbox.pkl",
-                "test__image_n4.nii.gz",
-                "test__t1_bet.nii.gz",
-                "test_denoised.nii.gz",
-                "test_resampled.nii.gz",
-                "test__t1_bet_mask.nii.gz",
-                "test_cropped.nii.gz",
-                "test_t1_cropped.nii.gz",
-                [
+            {
+                "crop_box": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_cropped_bbox.pkl"
+                    ]
+                ],
+                "image_N4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__image_n4.nii.gz"
+                    ]
+                ],
+                "image_bet": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__t1_bet.nii.gz"
+                    ]
+                ],
+                "image_nlmeans": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_denoised.nii.gz"
+                    ]
+                ],
+                "image_resample": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_resampled.nii.gz"
+                    ]
+                ],
+                "mask_bet": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__t1_bet_mask.nii.gz"
+                    ]
+                ],
+                "mask_final": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_cropped.nii.gz"
+                    ]
+                ],
+                "t1_final": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_cropped.nii.gz"
+                    ]
+                ],
+                "versions": [
                     "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                     "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
                     "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
@@ -76,12 +216,12 @@
                     "versions.yml:md5,da278daafbe3afa8454021e2716dd205",
                     "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-06T03:41:44.024143539"
+        "timestamp": "2025-06-09T05:10:02.571299544"
     }
 }
