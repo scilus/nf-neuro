@@ -35,18 +35,35 @@ input:
         registration into template space.
         Structure: [ val(meta), path(anat) ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
   - ch_nifti_files:
       type: file
       description: |
         Channel containing the NIfTI files to register into the template space.
         Structure: [ val(meta), [path(nifti1), path(nifti2), path(nifti3), ...] ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
+  - ch_mask_files:
+      type: file
+      description: |
+        Channel containing binary mask files to transform in the template space.
+        Structure: [ val(meta), [path(mask1), path(mask2), path(mask3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+      mandatory: false
+  - ch_labels_files:
+      type: file
+      description: |
+        Channel containing label files to transform in the template space.
+        Structure: [ val(meta), [path(label1), path(label2), path(label3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+      mandatory: false
   - ch_trk_files:
       type: file
       description: |
         Channel containing the TRK files to register into the template space.
         Structure: [ val(meta), [path(trk1), path(trk2), path(trk3), ...] ]
       pattern: "*.trk"
+      mandatory: false
 output:
   - ch_t1w_tpl:
       type: file

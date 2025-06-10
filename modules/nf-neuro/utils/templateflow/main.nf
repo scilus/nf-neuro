@@ -6,7 +6,7 @@ process UTILS_TEMPLATEFLOW {
     container "${ 'community.wave.seqera.io/library/pip_templateflow:2f726c524c63271e' }"
 
     input:
-        tuple val(template), val(res) /* Optional Input */, val(cohort) /* Optional Input */
+        tuple val(template), val(res), val(cohort)
 
     output:
         path("tpl-${template}")             , emit: folder

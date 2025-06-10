@@ -16,26 +16,31 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
+      mandatory: true
 
   - image:
       type: file
       description: Input image to register
       pattern: "*.{nii.nii.gz}"
+      mandatory: true
 
   - reference:
       type: file
       description: Reference image for registration
       pattern: "*.{nii.nii.gz}"
+      mandatory: true
 
   - warp:
       type: file
       description: Warp transformation file to warp image or trk.
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - affine:
       type: file
       description: Affine or rigid transformation file to warp image or trk (*mat). If a rigid or affine transformation needs to be inverted before being applied, use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this module does not handles it.
       pattern: "*.mat"
+      mandatory: true
 
 args:
   - prefix:

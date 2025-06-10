@@ -22,18 +22,21 @@ input:
         e.g. `MNI152NLin2009cAsym`
         Refer to the TemplateFlow documentation for available templates.
         https://www.templateflow.org/browse/
+      mandatory: true
   - res:
       type: integer
       description: |
         Resolution of the template. This is optional, but will be used to
         fetch the template at the specified resolution and make it
         accessible in the output channels.
+      mandatory: false
   - cohort:
       type: integer
       description: |
         Cohort of the template. This is optional, but will be used to fetch
         the template for the specified cohort and make it accessible in the
         output channels.
+      mandatory: false
 
 output:
   - folder:
