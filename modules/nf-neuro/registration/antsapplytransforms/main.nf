@@ -23,8 +23,8 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
 
     def output_dtype = task.ext.output_dtype ? "-u " + task.ext.output_dtype : ""
-    def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : ""
-    def image_type = task.ext.image_type ? "-e " + task.ext.image_type : ""
+    def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : "-d 3"
+    def image_type = task.ext.image_type ? "-e " + task.ext.image_type : "-e 0"
     def interpolation = task.ext.interpolation ? "-n " + task.ext.interpolation : ""
     def default_val = task.ext.default_val ? "-f " + task.ext.default_val : ""
     def run_qc = task.ext.run_qc ? task.ext.run_qc : false
