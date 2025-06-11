@@ -9,7 +9,7 @@ nextflow_process {
     tag "vascular"
     tag "vascular/eicab"
 
-    test("segmentation - fastsurfer") {
+    test("segmentation - eicab") {
         when {
             process {
                 """
