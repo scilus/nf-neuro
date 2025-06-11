@@ -16,26 +16,86 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
+      mandatory: true
 
   - image:
       type: file
       description: Input image to register
       pattern: "*.{nii.nii.gz}"
+      mandatory: true
 
   - reference:
       type: file
       description: Reference image for registration
       pattern: "*.{nii.nii.gz}"
+      mandatory: true
 
   - warp:
       type: file
       description: Warp transformation file to warp image or trk.
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
 
   - affine:
       type: file
       description: Affine or rigid transformation file to warp image or trk (*mat). If a rigid or affine transformation needs to be inverted before being applied, use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this module does not handles it.
       pattern: "*.mat"
+      mandatory: true
+
+args:
+  - prefix:
+      type: string
+      description: |
+        Prefix to add to the output file name.
+        e.g. `warped_` will result in `warped_image.nii.gz`.
+      default: "${meta.id}"
+  - suffix:
+      type: string
+      description: |
+        Suffix to add to the output file name.
+        e.g. `_warped` will result in `image_warped.nii.gz`.
+      default: "__warped"
+  - suffix_qc:
+      type: string
+      description: |
+        Suffix to add to the quality control image file name.
+        e.g. `qc` will result in `*qc_registration_antsapplytransforms_mqc.gif`.
+  - dimensionality:
+      type: number
+      description: |
+        Dimensionality of the input image.
+        e.g. `2` for 2D images, `3` for 3D images.
+  - image_type:
+      type: integer
+      description: |
+        Type of the input image.
+        e.g. `0` for scalar images, `1` for vector images, `2` for tensor images, `3` for time series, `4` for multichannel, and `5` for five-dimensional image.
+  - interpolation:
+      type: string
+      description: |
+        Interpolation method to use for the registration.
+        e.g. `Linear`, `NearestNeighbor`, `BSpline`, `Gaussian`, etc.
+      choices: |
+        ["Linear", "NearestNeighbor", "BSpline", "Gaussian", "Label", "MultiLabel", "CosineWindowedSinc", "WelchWindowedSinc",
+        "HammingWindowedSinc", "LanczosWindowedSinc", "GenericLabel"]
+  - output_dtype:
+      type: string
+      description: |
+        Output data type for the warped image.
+        e.g. `float`, `double`, `int`, `uchar`, etc.
+      choices: |
+        ["float", "double", "int", "uchar", "char", "short"]
+  - default_val:
+      type: number
+      description: |
+        Default value to use for the input image. It specifies the voxel value when the input
+        point maps outside the output domain.
+  - run_qc:
+      type: boolean
+      description: |
+        Whether to run quality control for the registration process.
+        e.g. `true` to generate a quality control image, `false` to skip it.
+      default: false
 
 output:
   - meta:

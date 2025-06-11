@@ -1,0 +1,7 @@
+---
+name: "utils_templateflow"
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - conda-forge::templateflow

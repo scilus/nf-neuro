@@ -1,0 +1,75 @@
+nextflow_process {
+
+    name "Test Process UTILS_TEMPLATEFLOW"
+    script "../main.nf"
+    process "UTILS_TEMPLATEFLOW"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "utils"
+    tag "utils/templateflow"
+
+    test("templateflow - MNIPediatricAsym - T1w") {
+        when {
+            process {
+                """
+                input[0] = ['MNIPediatricAsym', 2, 6]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+    test("templateflow - MNI152NLin2009aAsym") {
+        when {
+            process {
+                """
+                input[0] = ['MNI152NLin2009aAsym', 1, []]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+    test("templateflow - not available") {
+        when {
+            process {
+                """
+                input[0] = ['nf-neuro']
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.failed }
+            )
+        }
+    }
+    test("templateflow - stub") {
+        options "-stub"
+        when {
+            process {
+                """
+                input[0] = ['test']
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
+}

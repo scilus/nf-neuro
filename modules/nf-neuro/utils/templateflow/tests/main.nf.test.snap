@@ -1,0 +1,386 @@
+{
+    "templateflow - MNI152NLin2009aAsym": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "CHANGES:md5,ca4840baa24bebfa15cf4058905083b0",
+                        "LICENSE:md5,5008f92de1adb82c1d65d184a78b3d7f",
+                        "template_description.json:md5,49bb16d818492192af7baeec5d9f0d28",
+                        "tpl-MNI152NLin2009aAsym_res-1_PDw.nii.gz:md5,99801f7f8496cc9cf1014c26642579b5",
+                        "tpl-MNI152NLin2009aAsym_res-1_T1w.nii.gz:md5,d19925e0afe467eacc3a19ac49aacce2",
+                        "tpl-MNI152NLin2009aAsym_res-1_T2w.nii.gz:md5,9340d1c08292079f1502b9fef47c5215",
+                        "tpl-MNI152NLin2009aAsym_res-1_desc-brain_mask.nii.gz:md5,d4a805f42dad1bc7cb6b6b29ea514cb2",
+                        "tpl-MNI152NLin2009aAsym_res-1_desc-eye_mask.nii.gz:md5,b385729ea5236e6bb8b47f7058daa628",
+                        "tpl-MNI152NLin2009aAsym_res-1_desc-face_mask.nii.gz:md5,d40cef5ad0e7ed3eedae5001f551fd15",
+                        "tpl-MNI152NLin2009aAsym_res-1_label-CSF_probseg.nii.gz:md5,bc22ff228e1fe92a1b9ad085e37af356",
+                        "tpl-MNI152NLin2009aAsym_res-1_label-GM_probseg.nii.gz:md5,ae362b20e5464efe56a80da2e8b1ef5d",
+                        "tpl-MNI152NLin2009aAsym_res-1_label-WM_probseg.nii.gz:md5,8ef5776d7dad196560144a0ad5258e3b"
+                    ]
+                ],
+                "1": [
+                    "tpl-MNI152NLin2009aAsym_res-1_T1w.nii.gz:md5,d19925e0afe467eacc3a19ac49aacce2"
+                ],
+                "2": [
+                    "tpl-MNI152NLin2009aAsym_res-1_T2w.nii.gz:md5,9340d1c08292079f1502b9fef47c5215"
+                ],
+                "3": [
+                    "tpl-MNI152NLin2009aAsym_res-1_desc-brain_mask.nii.gz:md5,d4a805f42dad1bc7cb6b6b29ea514cb2"
+                ],
+                "4": [
+                    "tpl-MNI152NLin2009aAsym_res-1_label-CSF_probseg.nii.gz:md5,bc22ff228e1fe92a1b9ad085e37af356"
+                ],
+                "5": [
+                    "tpl-MNI152NLin2009aAsym_res-1_label-GM_probseg.nii.gz:md5,ae362b20e5464efe56a80da2e8b1ef5d"
+                ],
+                "6": [
+                    "tpl-MNI152NLin2009aAsym_res-1_label-WM_probseg.nii.gz:md5,8ef5776d7dad196560144a0ad5258e3b"
+                ],
+                "7": [
+                    "MNI152NLin2009aAsym_metadata.json:md5,29130500de04b8c14a5ba30d0c5120e0"
+                ],
+                "8": [
+                    "MNI152NLin2009aAsym_citations.bib:md5,4235facc2ccbd8b8045271af3432851c"
+                ],
+                "9": [
+                    "versions.yml:md5,b3513ddb60d7ae51e533589902d54d16"
+                ],
+                "T1w": [
+                    "tpl-MNI152NLin2009aAsym_res-1_T1w.nii.gz:md5,d19925e0afe467eacc3a19ac49aacce2"
+                ],
+                "T2w": [
+                    "tpl-MNI152NLin2009aAsym_res-1_T2w.nii.gz:md5,9340d1c08292079f1502b9fef47c5215"
+                ],
+                "brain_mask": [
+                    "tpl-MNI152NLin2009aAsym_res-1_desc-brain_mask.nii.gz:md5,d4a805f42dad1bc7cb6b6b29ea514cb2"
+                ],
+                "citations": [
+                    "MNI152NLin2009aAsym_citations.bib:md5,4235facc2ccbd8b8045271af3432851c"
+                ],
+                "folder": [
+                    [
+                        "CHANGES:md5,ca4840baa24bebfa15cf4058905083b0",
+                        "LICENSE:md5,5008f92de1adb82c1d65d184a78b3d7f",
+                        "template_description.json:md5,49bb16d818492192af7baeec5d9f0d28",
+                        "tpl-MNI152NLin2009aAsym_res-1_PDw.nii.gz:md5,99801f7f8496cc9cf1014c26642579b5",
+                        "tpl-MNI152NLin2009aAsym_res-1_T1w.nii.gz:md5,d19925e0afe467eacc3a19ac49aacce2",
+                        "tpl-MNI152NLin2009aAsym_res-1_T2w.nii.gz:md5,9340d1c08292079f1502b9fef47c5215",
+                        "tpl-MNI152NLin2009aAsym_res-1_desc-brain_mask.nii.gz:md5,d4a805f42dad1bc7cb6b6b29ea514cb2",
+                        "tpl-MNI152NLin2009aAsym_res-1_desc-eye_mask.nii.gz:md5,b385729ea5236e6bb8b47f7058daa628",
+                        "tpl-MNI152NLin2009aAsym_res-1_desc-face_mask.nii.gz:md5,d40cef5ad0e7ed3eedae5001f551fd15",
+                        "tpl-MNI152NLin2009aAsym_res-1_label-CSF_probseg.nii.gz:md5,bc22ff228e1fe92a1b9ad085e37af356",
+                        "tpl-MNI152NLin2009aAsym_res-1_label-GM_probseg.nii.gz:md5,ae362b20e5464efe56a80da2e8b1ef5d",
+                        "tpl-MNI152NLin2009aAsym_res-1_label-WM_probseg.nii.gz:md5,8ef5776d7dad196560144a0ad5258e3b"
+                    ]
+                ],
+                "label_CSF": [
+                    "tpl-MNI152NLin2009aAsym_res-1_label-CSF_probseg.nii.gz:md5,bc22ff228e1fe92a1b9ad085e37af356"
+                ],
+                "label_GM": [
+                    "tpl-MNI152NLin2009aAsym_res-1_label-GM_probseg.nii.gz:md5,ae362b20e5464efe56a80da2e8b1ef5d"
+                ],
+                "label_WM": [
+                    "tpl-MNI152NLin2009aAsym_res-1_label-WM_probseg.nii.gz:md5,8ef5776d7dad196560144a0ad5258e3b"
+                ],
+                "metadata": [
+                    "MNI152NLin2009aAsym_metadata.json:md5,29130500de04b8c14a5ba30d0c5120e0"
+                ],
+                "versions": [
+                    "versions.yml:md5,b3513ddb60d7ae51e533589902d54d16"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-03-13T15:00:53.050008"
+    },
+    "templateflow - stub": {
+        "content": [
+            [
+                "versions.yml:md5,b25230db89c0082d58ab6d048193a284"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-15T07:43:16.478111"
+    },
+    "templateflow - MNIPediatricAsym - T1w": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "LICENSE:md5,f83b7d61949081e03c17c1676cbf54c3",
+                        [
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_PD.nii.gz:md5,0d39d2cb24f297d2b14a4c00fd7ccfd7",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_T1w.nii.gz:md5,7d93629139af51fb29a98889c9f4da16",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_T2w.nii.gz:md5,a41a57326fa1e5713b9b3b32992308a2",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_desc-brain_mask.nii.gz:md5,6bcf77e952a86620b8fcc1fe26519568",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_label-CSF_probseg.nii.gz:md5,269316e8927a17375c5838278d4ab97c",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_label-GM_probseg.nii.gz:md5,ebec456c1ac665cb33dbe114e5a3ca97",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_label-WM_probseg.nii.gz:md5,3b32aba8cfdf48e55d7a4af081252577",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_PD.nii.gz:md5,cafff218bf354b0ecbb83593e10146d9",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_T1w.nii.gz:md5,5980bdba1e5784767bc7e061d5d688fa",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_T2w.nii.gz:md5,a6762d4007c18d3312d02f4851d331d7",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_desc-brain_mask.nii.gz:md5,605cf25d992dc1a1f16b01cee11186a9",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_label-CSF_probseg.nii.gz:md5,a1703b1c586e2ca6cd5524ab5a05b3dc",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_label-GM_probseg.nii.gz:md5,45443568acf5bd3a412f85ee6305f45b",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_label-WM_probseg.nii.gz:md5,fa286ec280283e562f925689e3ffcc53"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_PD.nii.gz:md5,c0dd964edead915e24d17ed0eeb53ae5",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_T1w.nii.gz:md5,b5c35b447d37a09271b0604b3bfae546",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_T2w.nii.gz:md5,6f521830428e9e601723f0f301c9f3f6",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_desc-brain_mask.nii.gz:md5,7ed70ef6de7104f4f0348352bbea2cc4",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_label-CSF_probseg.nii.gz:md5,41f7e65eb4e2e8ff5723f670ea74bd3b",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_label-GM_probseg.nii.gz:md5,3e6b944ec470ed7d2f5769445a4aeae8",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_label-WM_probseg.nii.gz:md5,9eafc3d944e976243b50696900e6067c",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_PD.nii.gz:md5,dafaa361ba4599b53d58cee77089a675",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_T1w.nii.gz:md5,f65f8d945692eb53c45d2c5f36660de3",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_T2w.nii.gz:md5,ff623be1ec2b93a44a7a1f94e55119ce",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_desc-brain_mask.nii.gz:md5,a44171ccbb77bbd41a41e87ea9dd744e",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_label-CSF_probseg.nii.gz:md5,0bccb1648e82b40e856ea28ae534ad09",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_label-GM_probseg.nii.gz:md5,561daf8031ffa8c78e79ee5f363af776",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_label-WM_probseg.nii.gz:md5,835d9ba7ae7d539cc2c082ec70f903e3"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_PD.nii.gz:md5,56ff48bc1bc8d3662c73be4608ee4ffe",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_T1w.nii.gz:md5,04db4d59bc1024da7cc6ea125fbc5ff0",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_T2w.nii.gz:md5,9830aba8558f26fc035727b0eb787c20",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_desc-brain_mask.nii.gz:md5,855c0d433ffa5816707b4e30462445b5",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_label-CSF_probseg.nii.gz:md5,65cdcc860e3722c9692b45e02c2b4e8c",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_label-GM_probseg.nii.gz:md5,2deb36644437e1a365347b8b60ea5e3d",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_label-WM_probseg.nii.gz:md5,a0cb3c19750f3f80712683fb82bbd6d4",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_PD.nii.gz:md5,87af46adb2b9c9f63ebbb2ea43e8189a",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_T1w.nii.gz:md5,bc0ef35ad857202f6882371d27bf7f0c",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_T2w.nii.gz:md5,b61faec940e32e06727bccc0442981e7",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_desc-brain_mask.nii.gz:md5,df046c3671da760f00ed03fbb2ca194c",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_label-CSF_probseg.nii.gz:md5,d3f2f335fb141788882411d02288632a",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_label-GM_probseg.nii.gz:md5,4d9d97e51eaff68b05a95b0aba110667",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_label-WM_probseg.nii.gz:md5,cb714b57515c1cb9eb60254a9aab09c9"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_PD.nii.gz:md5,a98ca5ae479bad28938219c6241d6838",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_T1w.nii.gz:md5,3087bf3a3afca9f6ae2865afcb60268a",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_T2w.nii.gz:md5,b4b5f14f3b37b9ed7414c21b00af0cff",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_desc-brain_mask.nii.gz:md5,f35c7a3e8fab89946d409c4af0ce6b51",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_label-CSF_probseg.nii.gz:md5,7b8d3cdbd93a19e406c87b3684181b48",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_label-GM_probseg.nii.gz:md5,b605a591902bb3867f761351b644adb6",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_label-WM_probseg.nii.gz:md5,cc35a2bc94f40b008d3977cd3db90fc0",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_PD.nii.gz:md5,19d95e6f96fe8ca241494fe0d0756806",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_T1w.nii.gz:md5,4b1583cbbc8181954b61b40c1384c897",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_T2w.nii.gz:md5,731422cfc496a91cae01dc50a3d764fd",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_desc-brain_mask.nii.gz:md5,048adf26ce8c997304bd00943166d584",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_label-CSF_probseg.nii.gz:md5,027c1fc9926d49645ff5dd45f31dd218",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_label-GM_probseg.nii.gz:md5,63a98533b1fbdb943b0c0f695edb7447",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_label-WM_probseg.nii.gz:md5,0b8dea4a960dcb82cf0b63b9e9eef29f"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_PD.nii.gz:md5,bdbc914d0462711a1dc78cca29a79012",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_T1w.nii.gz:md5,6ab16bbed49ff835efc3e0063998abc4",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_T2w.nii.gz:md5,9b0e99fa3ad52b6ae9d6b062e1a0df05",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_desc-brain_mask.nii.gz:md5,1ee22e17daf6a2d4ca2676970af3e3bb",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_label-CSF_probseg.nii.gz:md5,d8f783cdd96005f604d1670fdede1f7b",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_label-GM_probseg.nii.gz:md5,d54b330f7f9bae95b7d73ff12fb09b81",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_label-WM_probseg.nii.gz:md5,5e1ed113dd0cc4492d71919b4ee67446",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_PD.nii.gz:md5,bd7ac136609244594c136acf50f8caa9",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_T1w.nii.gz:md5,1efa9081ac71800da691c2224f24210a",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_T2w.nii.gz:md5,6f4defd3b75142db96172750bf78bfb6",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_desc-brain_mask.nii.gz:md5,b32b2c91e349d6df138b6f4b9365c80f",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_label-CSF_probseg.nii.gz:md5,c375e76af93bbd9f61b84f34228c1afb",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_label-GM_probseg.nii.gz:md5,b55dd263480e19dc134a410c53392235",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_label-WM_probseg.nii.gz:md5,31d1e22c8ca27d3ca91f36b1420107e5"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_PD.nii.gz:md5,856cdc42b208c2a3069ff15049d446cf",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_T1w.nii.gz:md5,396eb0ad8baab9c633467062e4c56b01",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_T2w.nii.gz:md5,2399860d7478cac2eb4144ca067bf911",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_desc-brain_mask.nii.gz:md5,e73e089d467d657217fd0b639d159744",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_label-CSF_probseg.nii.gz:md5,c222fa2e2f016132433de512f4797468",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_label-GM_probseg.nii.gz:md5,a8f6358a1c21cec2aba6636154bc18d7",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_label-WM_probseg.nii.gz:md5,fd2ad9cff68d8d7541d824229bb11364",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_PD.nii.gz:md5,23260ce1d575d5b358418cb59c4ce633",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_T1w.nii.gz:md5,c9c47e76fddf3b457d78e3c56378cdb1",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_T2w.nii.gz:md5,bd01c6f9179e87077024977937400f36",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_desc-brain_mask.nii.gz:md5,a6aa1b0127539b0df5d33bf5bae29cdf",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_label-CSF_probseg.nii.gz:md5,c2d72e671b0e1b6e8f9c3028818071c5",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_label-GM_probseg.nii.gz:md5,628c089b266aed4882e4ba3bed143d5f",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_label-WM_probseg.nii.gz:md5,c53544b422fe4d3151631936961225d4"
+                        ],
+                        [
+                            "sanitize.py:md5,1bbb4b00001c78f9c4ffe4663c828ffc"
+                        ],
+                        "template_description.json:md5,0b82d8bb0594b4e3946ba7b9d33f3887"
+                    ]
+                ],
+                "1": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_T1w.nii.gz:md5,c9c47e76fddf3b457d78e3c56378cdb1"
+                ],
+                "2": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_T2w.nii.gz:md5,bd01c6f9179e87077024977937400f36"
+                ],
+                "3": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_desc-brain_mask.nii.gz:md5,a6aa1b0127539b0df5d33bf5bae29cdf"
+                ],
+                "4": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_label-CSF_probseg.nii.gz:md5,c2d72e671b0e1b6e8f9c3028818071c5"
+                ],
+                "5": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_label-GM_probseg.nii.gz:md5,628c089b266aed4882e4ba3bed143d5f"
+                ],
+                "6": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_label-WM_probseg.nii.gz:md5,c53544b422fe4d3151631936961225d4"
+                ],
+                "7": [
+                    "MNIPediatricAsym_metadata.json:md5,56f976e5c8f1a5651ce72d1518cf15c9"
+                ],
+                "8": [
+                    "MNIPediatricAsym_citations.bib:md5,f50e3178d05efec005ce54aaf618eaae"
+                ],
+                "9": [
+                    "versions.yml:md5,b3513ddb60d7ae51e533589902d54d16"
+                ],
+                "T1w": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_T1w.nii.gz:md5,c9c47e76fddf3b457d78e3c56378cdb1"
+                ],
+                "T2w": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_T2w.nii.gz:md5,bd01c6f9179e87077024977937400f36"
+                ],
+                "brain_mask": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_desc-brain_mask.nii.gz:md5,a6aa1b0127539b0df5d33bf5bae29cdf"
+                ],
+                "citations": [
+                    "MNIPediatricAsym_citations.bib:md5,f50e3178d05efec005ce54aaf618eaae"
+                ],
+                "folder": [
+                    [
+                        "LICENSE:md5,f83b7d61949081e03c17c1676cbf54c3",
+                        [
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_PD.nii.gz:md5,0d39d2cb24f297d2b14a4c00fd7ccfd7",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_T1w.nii.gz:md5,7d93629139af51fb29a98889c9f4da16",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_T2w.nii.gz:md5,a41a57326fa1e5713b9b3b32992308a2",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_desc-brain_mask.nii.gz:md5,6bcf77e952a86620b8fcc1fe26519568",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_label-CSF_probseg.nii.gz:md5,269316e8927a17375c5838278d4ab97c",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_label-GM_probseg.nii.gz:md5,ebec456c1ac665cb33dbe114e5a3ca97",
+                            "tpl-MNIPediatricAsym_cohort-1_res-1_label-WM_probseg.nii.gz:md5,3b32aba8cfdf48e55d7a4af081252577",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_PD.nii.gz:md5,cafff218bf354b0ecbb83593e10146d9",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_T1w.nii.gz:md5,5980bdba1e5784767bc7e061d5d688fa",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_T2w.nii.gz:md5,a6762d4007c18d3312d02f4851d331d7",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_desc-brain_mask.nii.gz:md5,605cf25d992dc1a1f16b01cee11186a9",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_label-CSF_probseg.nii.gz:md5,a1703b1c586e2ca6cd5524ab5a05b3dc",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_label-GM_probseg.nii.gz:md5,45443568acf5bd3a412f85ee6305f45b",
+                            "tpl-MNIPediatricAsym_cohort-1_res-2_label-WM_probseg.nii.gz:md5,fa286ec280283e562f925689e3ffcc53"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_PD.nii.gz:md5,c0dd964edead915e24d17ed0eeb53ae5",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_T1w.nii.gz:md5,b5c35b447d37a09271b0604b3bfae546",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_T2w.nii.gz:md5,6f521830428e9e601723f0f301c9f3f6",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_desc-brain_mask.nii.gz:md5,7ed70ef6de7104f4f0348352bbea2cc4",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_label-CSF_probseg.nii.gz:md5,41f7e65eb4e2e8ff5723f670ea74bd3b",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_label-GM_probseg.nii.gz:md5,3e6b944ec470ed7d2f5769445a4aeae8",
+                            "tpl-MNIPediatricAsym_cohort-2_res-1_label-WM_probseg.nii.gz:md5,9eafc3d944e976243b50696900e6067c",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_PD.nii.gz:md5,dafaa361ba4599b53d58cee77089a675",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_T1w.nii.gz:md5,f65f8d945692eb53c45d2c5f36660de3",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_T2w.nii.gz:md5,ff623be1ec2b93a44a7a1f94e55119ce",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_desc-brain_mask.nii.gz:md5,a44171ccbb77bbd41a41e87ea9dd744e",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_label-CSF_probseg.nii.gz:md5,0bccb1648e82b40e856ea28ae534ad09",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_label-GM_probseg.nii.gz:md5,561daf8031ffa8c78e79ee5f363af776",
+                            "tpl-MNIPediatricAsym_cohort-2_res-2_label-WM_probseg.nii.gz:md5,835d9ba7ae7d539cc2c082ec70f903e3"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_PD.nii.gz:md5,56ff48bc1bc8d3662c73be4608ee4ffe",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_T1w.nii.gz:md5,04db4d59bc1024da7cc6ea125fbc5ff0",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_T2w.nii.gz:md5,9830aba8558f26fc035727b0eb787c20",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_desc-brain_mask.nii.gz:md5,855c0d433ffa5816707b4e30462445b5",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_label-CSF_probseg.nii.gz:md5,65cdcc860e3722c9692b45e02c2b4e8c",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_label-GM_probseg.nii.gz:md5,2deb36644437e1a365347b8b60ea5e3d",
+                            "tpl-MNIPediatricAsym_cohort-3_res-1_label-WM_probseg.nii.gz:md5,a0cb3c19750f3f80712683fb82bbd6d4",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_PD.nii.gz:md5,87af46adb2b9c9f63ebbb2ea43e8189a",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_T1w.nii.gz:md5,bc0ef35ad857202f6882371d27bf7f0c",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_T2w.nii.gz:md5,b61faec940e32e06727bccc0442981e7",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_desc-brain_mask.nii.gz:md5,df046c3671da760f00ed03fbb2ca194c",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_label-CSF_probseg.nii.gz:md5,d3f2f335fb141788882411d02288632a",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_label-GM_probseg.nii.gz:md5,4d9d97e51eaff68b05a95b0aba110667",
+                            "tpl-MNIPediatricAsym_cohort-3_res-2_label-WM_probseg.nii.gz:md5,cb714b57515c1cb9eb60254a9aab09c9"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_PD.nii.gz:md5,a98ca5ae479bad28938219c6241d6838",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_T1w.nii.gz:md5,3087bf3a3afca9f6ae2865afcb60268a",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_T2w.nii.gz:md5,b4b5f14f3b37b9ed7414c21b00af0cff",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_desc-brain_mask.nii.gz:md5,f35c7a3e8fab89946d409c4af0ce6b51",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_label-CSF_probseg.nii.gz:md5,7b8d3cdbd93a19e406c87b3684181b48",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_label-GM_probseg.nii.gz:md5,b605a591902bb3867f761351b644adb6",
+                            "tpl-MNIPediatricAsym_cohort-4_res-1_label-WM_probseg.nii.gz:md5,cc35a2bc94f40b008d3977cd3db90fc0",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_PD.nii.gz:md5,19d95e6f96fe8ca241494fe0d0756806",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_T1w.nii.gz:md5,4b1583cbbc8181954b61b40c1384c897",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_T2w.nii.gz:md5,731422cfc496a91cae01dc50a3d764fd",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_desc-brain_mask.nii.gz:md5,048adf26ce8c997304bd00943166d584",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_label-CSF_probseg.nii.gz:md5,027c1fc9926d49645ff5dd45f31dd218",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_label-GM_probseg.nii.gz:md5,63a98533b1fbdb943b0c0f695edb7447",
+                            "tpl-MNIPediatricAsym_cohort-4_res-2_label-WM_probseg.nii.gz:md5,0b8dea4a960dcb82cf0b63b9e9eef29f"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_PD.nii.gz:md5,bdbc914d0462711a1dc78cca29a79012",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_T1w.nii.gz:md5,6ab16bbed49ff835efc3e0063998abc4",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_T2w.nii.gz:md5,9b0e99fa3ad52b6ae9d6b062e1a0df05",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_desc-brain_mask.nii.gz:md5,1ee22e17daf6a2d4ca2676970af3e3bb",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_label-CSF_probseg.nii.gz:md5,d8f783cdd96005f604d1670fdede1f7b",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_label-GM_probseg.nii.gz:md5,d54b330f7f9bae95b7d73ff12fb09b81",
+                            "tpl-MNIPediatricAsym_cohort-5_res-1_label-WM_probseg.nii.gz:md5,5e1ed113dd0cc4492d71919b4ee67446",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_PD.nii.gz:md5,bd7ac136609244594c136acf50f8caa9",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_T1w.nii.gz:md5,1efa9081ac71800da691c2224f24210a",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_T2w.nii.gz:md5,6f4defd3b75142db96172750bf78bfb6",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_desc-brain_mask.nii.gz:md5,b32b2c91e349d6df138b6f4b9365c80f",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_label-CSF_probseg.nii.gz:md5,c375e76af93bbd9f61b84f34228c1afb",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_label-GM_probseg.nii.gz:md5,b55dd263480e19dc134a410c53392235",
+                            "tpl-MNIPediatricAsym_cohort-5_res-2_label-WM_probseg.nii.gz:md5,31d1e22c8ca27d3ca91f36b1420107e5"
+                        ],
+                        [
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_PD.nii.gz:md5,856cdc42b208c2a3069ff15049d446cf",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_T1w.nii.gz:md5,396eb0ad8baab9c633467062e4c56b01",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_T2w.nii.gz:md5,2399860d7478cac2eb4144ca067bf911",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_desc-brain_mask.nii.gz:md5,e73e089d467d657217fd0b639d159744",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_label-CSF_probseg.nii.gz:md5,c222fa2e2f016132433de512f4797468",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_label-GM_probseg.nii.gz:md5,a8f6358a1c21cec2aba6636154bc18d7",
+                            "tpl-MNIPediatricAsym_cohort-6_res-1_label-WM_probseg.nii.gz:md5,fd2ad9cff68d8d7541d824229bb11364",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_PD.nii.gz:md5,23260ce1d575d5b358418cb59c4ce633",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_T1w.nii.gz:md5,c9c47e76fddf3b457d78e3c56378cdb1",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_T2w.nii.gz:md5,bd01c6f9179e87077024977937400f36",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_desc-brain_mask.nii.gz:md5,a6aa1b0127539b0df5d33bf5bae29cdf",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_label-CSF_probseg.nii.gz:md5,c2d72e671b0e1b6e8f9c3028818071c5",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_label-GM_probseg.nii.gz:md5,628c089b266aed4882e4ba3bed143d5f",
+                            "tpl-MNIPediatricAsym_cohort-6_res-2_label-WM_probseg.nii.gz:md5,c53544b422fe4d3151631936961225d4"
+                        ],
+                        [
+                            "sanitize.py:md5,1bbb4b00001c78f9c4ffe4663c828ffc"
+                        ],
+                        "template_description.json:md5,0b82d8bb0594b4e3946ba7b9d33f3887"
+                    ]
+                ],
+                "label_CSF": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_label-CSF_probseg.nii.gz:md5,c2d72e671b0e1b6e8f9c3028818071c5"
+                ],
+                "label_GM": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_label-GM_probseg.nii.gz:md5,628c089b266aed4882e4ba3bed143d5f"
+                ],
+                "label_WM": [
+                    "tpl-MNIPediatricAsym_cohort-6_res-2_label-WM_probseg.nii.gz:md5,c53544b422fe4d3151631936961225d4"
+                ],
+                "metadata": [
+                    "MNIPediatricAsym_metadata.json:md5,56f976e5c8f1a5651ce72d1518cf15c9"
+                ],
+                "versions": [
+                    "versions.yml:md5,b3513ddb60d7ae51e533589902d54d16"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-03-13T14:59:57.181347"
+    }
+}

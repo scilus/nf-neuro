@@ -1,0 +1,107 @@
+name: "output_template_space"
+description: |
+  This subworkflow is used to output files in a specific template space.
+  It leverages the `templateflow` template repository to fetch the requested
+  template and its associated files, then register the input files to the
+  requested template space.
+
+  The subworkflow relies on three parameters to be set:
+
+    - params.template: the template to use (e.g., 'MNI152NLin2009cAsym')
+    - params.templateflow_home: the path to the templateflow home directory.
+      will be used to store the templateflow templates or to fetch them if
+      they were already downloaded.
+    - params.template_res: the resolution of the template (e.g., 1)
+    - params.template_cohort: the cohort of the template (e.g., 1)
+
+  An example of how to set the module's ext.args can be find in the
+  `test/nextflow.config` file.
+keywords:
+  - template
+  - TemplateFlow
+  - registration
+components:
+  - registration/ants
+  - registration/antsapplytransforms
+  - registration/tractogram
+  - image/applymask
+  - betcrop/fslbetcrop
+  - utils/templateflow
+input:
+  - ch_anat:
+      type: file
+      description: |
+        Channel containing the anatomical image to use to compute the
+        registration into template space.
+        Structure: [ val(meta), path(anat) ]
+      pattern: "*.{nii,nii.gz}"
+      mandatory: true
+  - ch_nifti_files:
+      type: file
+      description: |
+        Channel containing the NIfTI files to register into the template space.
+        Structure: [ val(meta), [path(nifti1), path(nifti2), path(nifti3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+      mandatory: false
+  - ch_mask_files:
+      type: file
+      description: |
+        Channel containing binary mask files to transform in the template space.
+        Structure: [ val(meta), [path(mask1), path(mask2), path(mask3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+      mandatory: false
+  - ch_labels_files:
+      type: file
+      description: |
+        Channel containing label files to transform in the template space.
+        Structure: [ val(meta), [path(label1), path(label2), path(label3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+      mandatory: false
+  - ch_trk_files:
+      type: file
+      description: |
+        Channel containing the TRK files to register into the template space.
+        Structure: [ val(meta), [path(trk1), path(trk2), path(trk3), ...] ]
+      pattern: "*.trk"
+      mandatory: false
+output:
+  - ch_t1w_tpl:
+      type: file
+      description: |
+        Channel containing the T1w template.
+        Structure: [ path(t1w) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_t2w_tpl:
+      type: file
+      description: |
+        Channel containing the T2w template.
+        Structure: [ path(t2w) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_registered_anat:
+      type: file
+      description: |
+        Channel containing the registered anatomical image into the template space.
+        Structure: [ val(meta), path(anat) ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_registered_nifti_files:
+      type: file
+      description: |
+        Channel containing the registered NIfTI files into the template space.
+        Structure: [ val(meta), [path(nifti1), path(nifti2), path(nifti3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+  - ch_registered_trk_files:
+      type: file
+      description: |
+        Channel containing the registered TRK files into the template space.
+        Structure: [ val(meta), [path(trk1), path(trk2), path(trk3), ...] ]
+      pattern: "*.trk"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"
