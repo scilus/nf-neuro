@@ -43,7 +43,7 @@ output:
   - eicabdirectory:
       type: directory
       description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      pattern: "*_eicab/"
 
 authors:
   - "@arnaudbore"
