@@ -4,6 +4,9 @@ process VASCULAR_EICAB {
     label 'process_medium'
 
     container "${ 'felixdumais1/eicab:v1.0.1' }"
+    containerOptions {
+        (workflow.containerEngine == 'docker') ? '--entrypoint ""' : ''
+    }
 
     input:
         tuple val(meta), path(in_tof)
@@ -26,7 +29,7 @@ process VASCULAR_EICAB {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        vessel-segmentation: \$(pip list | grep vessel-segmentation | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -37,7 +40,7 @@ process VASCULAR_EICAB {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        vessel-segmentation: \$(pip list | grep vessel-segmentation | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
