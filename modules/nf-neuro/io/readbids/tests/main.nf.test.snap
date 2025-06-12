@@ -3,13 +3,13 @@
         "content": [
             {
                 "0": [
-                    "tractoflow_bids_struct.json:md5,309f00ae14abe9ac3ed2dd239652ce90"
+                    "bids_struct.json:md5,309f00ae14abe9ac3ed2dd239652ce90"
                 ],
                 "1": [
                     "versions.yml:md5,d5fb02ea0d1d647fa107f760b268e703"
                 ],
                 "bidsstructure": [
-                    "tractoflow_bids_struct.json:md5,309f00ae14abe9ac3ed2dd239652ce90"
+                    "bids_struct.json:md5,309f00ae14abe9ac3ed2dd239652ce90"
                 ],
                 "versions": [
                     "versions.yml:md5,d5fb02ea0d1d647fa107f760b268e703"
@@ -20,7 +20,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-08T23:32:22.246038018"
+        "timestamp": "2025-06-12T19:48:52.777148243"
     },
     "io - readbids - stub-run": {
         "content": [
