@@ -24,7 +24,7 @@ process PREPROC_N4 {
     def maxiter = task.ext.maxiter ?: "1000"
     def miniter = task.ext.miniter ?: "100"
     def retain = task.ext.retain ?: "0.6"
-    def mask = ref_mask ? "-x $ref_mask" : ""
+    def mask = ref_mask ? "-w $ref_mask" : ""
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
     export ANTS_RANDOM_SEED=1234
