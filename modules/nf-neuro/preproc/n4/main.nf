@@ -31,72 +31,79 @@ process PREPROC_N4 {
 
     if [[ -f "$ref" ]]
     then
-        # Fetching the smallest dimension of the reference volume and the resolution.
-        spacing=\$(mrinfo -spacing $ref | tr ' ' '\\n' | sort -n | head -n 1)
-        smallest_dim=\$(mrinfo -size $ref | tr ' ' '\\n' | sort -n | head -n 1)
+        cp $ref reference_for_formula.nii.gz
+    else
+        cp $image reference_for_formula.nii.gz
+    fi
 
-        # Computing the optimal number of stages to include in the pyramid.
-        if (( \$(echo "\$smallest_dim <= $nb_voxels_between_knots * $shrink_factor" | bc -l) )); then
-            n_stages="1"
-        else
-            logval=\$(echo "l(\$smallest_dim / ($nb_voxels_between_knots * $shrink_factor)) / l(2)" | bc -l)
-            n_stages=\$(echo "(\$logval+0.999999)/1" | bc)
-        fi
+    # Fetching the smallest dimension of the reference volume and the resolution.
+    spacing=\$(PrintHeader reference_for_formula.nii.gz 1 | tr 'x' '\\n' | sort -n | head -n 1)
+    smallest_dim=\$(PrintHeader reference_for_formula.nii.gz 2 | tr 'x' '\\n' | sort -n | head -n 1)
 
-        # Computing the BSpline parameters.
-        bspline=\$(echo "2^(\$n_stages - 1) * $nb_voxels_between_knots * $shrink_factor * \$spacing" | bc -l)
+    # Computing the optimal number of stages to include in the pyramid.
+    if (( \$(echo "\$smallest_dim <= $nb_voxels_between_knots * $shrink_factor" | bc -l) )); then
+        n_stages="1"
+    else
+        logval=\$(echo "l(\$smallest_dim / ($nb_voxels_between_knots * $shrink_factor)) / l(2)" | bc -l)
+        n_stages=\$(echo "\$logval" | awk '{ if (\$1 == int(\$1)) print int(\$1)+1; else print int(\$1)+2 }')
+    fi
 
-        # Setting the iterations.
-        if [[ "\$n_stages" -eq 1 ]]; then
-            iterations="$maxiter"
-        else
-            iterations=""
-            slope=\$(echo "scale=6; ($miniter - $maxiter) / (1 - $retain)" | bc -l)
-            intercept=\$(echo "scale=6; $maxiter - \$slope * $retain" | bc -l)
-            n=\$(printf "%.0f" \$n_stages)
-            step=\$(echo "scale=6; 1 / (\$n - 1)" | bc -l)
-            for ((idx=0; idx<\$n; idx++)); do
-                i=\$(echo "scale=6; \$idx * \$step" | bc -l)
-                is_less=\$(echo "\$i < $retain" | bc)
+    # Computing the BSpline parameters.
+    bspline=\$(echo "2^(\$n_stages - 1) * $nb_voxels_between_knots * $shrink_factor * \$spacing" | bc -l)
 
-                if [[ "\$is_less" -eq 1 ]]; then
-                    iter=$maxiter
-                else
-                    val=\$(echo "scale=6; \$i * \$slope + \$intercept" | bc -l)
-                    iter=\$(printf "%.0f" "\$val")
-                fi
+    # Setting the iterations.
+    if [[ "\$n_stages" -eq 1 ]]; then
+        iterations="$maxiter"
+    else
+        iterations=""
+        slope=\$(echo "scale=6; ($miniter - $maxiter) / (1 - $retain)" | bc -l)
+        intercept=\$(echo "scale=6; $maxiter - \$slope * $retain" | bc -l)
+        n=\$(printf "%.0f" \$n_stages)
+        step=\$(echo "scale=6; 1 / (\$n - 1)" | bc -l)
+        for ((idx=0; idx<\$n; idx++)); do
+            i=\$(echo "scale=6; \$idx * \$step" | bc -l)
+            is_less=\$(echo "\$i < $retain" | bc)
 
-                if [[ -z "\$iterations" ]]; then
-                    iterations="\$iter"
-                else
-                    iterations="\${iterations}x\$iter"
-                fi
-            done
-        fi
+            if [[ "\$is_less" -eq 1 ]]; then
+                iter=$maxiter
+            else
+                val=\$(echo "scale=6; \$i * \$slope + \$intercept" | bc -l)
+                iter=\$(printf "%.0f" "\$val")
+            fi
 
-        echo "Number of stages: \$n_stages"
-        echo "Spacing: \$spacing"
-        echo "Smallest dimension: \$smallest_dim"
-        echo "Shrink factor: $shrink_factor"
-        echo "BSpline knot per voxel: $nb_voxels_between_knots"
-        echo "Iterations: \$iterations"
-        echo "BSpline: \$bspline"
+            if [[ -z "\$iterations" ]]; then
+                iterations="\$iter"
+            else
+                iterations="\${iterations}x\$iter"
+            fi
+        done
+    fi
 
+    echo "Number of stages: \$n_stages"
+    echo "Spacing: \$spacing"
+    echo "Smallest dimension: \$smallest_dim"
+    echo "Shrink factor: $shrink_factor"
+    echo "Number of voxel between knots: $nb_voxels_between_knots"
+    echo "Iterations: \$iterations"
+    echo "BSpline: \$bspline"
+
+    if [[ -f "$ref" ]]
+    then
         N4BiasFieldCorrection -i $ref\
             -o [${prefix}__ref_n4.nii.gz, bias_field_ref.nii.gz]\
             -c [\$iterations, 1e-6] -v 0\
             $mask\
             -b [\$bspline, 3] \
             -s $shrink_factor
-
         scil_dwi_apply_bias_field.py $image bias_field_ref.nii.gz\
             ${prefix}__image_n4.nii.gz --mask $ref_mask -f
-
     else
         N4BiasFieldCorrection -i $image\
             -o [${prefix}__image_n4.nii.gz, bias_field_t1.nii.gz]\
+            -c [\$iterations, 1e-6] -v 0\
             $mask\
-            -c [300x150x75x50, 1e-6] -v 1
+            -b [\$bspline, 3] \
+            -s $shrink_factor
     fi
 
     cat <<-END_VERSIONS > versions.yml

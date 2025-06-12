@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,b2ed0364b6c784952e0564afc95b462c"
+                        "test__image_n4.nii.gz:md5,342a65ebd5e1405213d39e5ebfa33d36"
                     ]
                 ],
                 "1": [
@@ -20,7 +20,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,b2ed0364b6c784952e0564afc95b462c"
+                        "test__image_n4.nii.gz:md5,342a65ebd5e1405213d39e5ebfa33d36"
                     ]
                 ],
                 "versions": [
@@ -32,7 +32,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-04T10:44:22.933264"
+        "timestamp": "2025-06-12T14:20:31.662518"
     },
     "preproc - n4 - anat": {
         "content": [
@@ -43,7 +43,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,a0329a81f3cc26dfa04e3fb8c6e6dc66"
+                        "test__image_n4.nii.gz:md5,84ed388ef8b1e5339be377fd5f65b979"
                     ]
                 ],
                 "1": [
@@ -55,7 +55,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,a0329a81f3cc26dfa04e3fb8c6e6dc66"
+                        "test__image_n4.nii.gz:md5,84ed388ef8b1e5339be377fd5f65b979"
                     ]
                 ],
                 "versions": [
@@ -67,6 +67,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-04T10:49:01.917093"
+        "timestamp": "2025-06-12T15:00:39.228198"
     }
 }
