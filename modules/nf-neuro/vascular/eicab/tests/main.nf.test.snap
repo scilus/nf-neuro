@@ -1,0 +1,16 @@
+{
+    "segmentation - eicab": {
+        "content": [
+            "test_eicab",
+            "sub-OAS30001_ses-d2430_acq-TOF_angio_resampled_eICAB_CW.nii.gz",
+            [
+                "versions.yml:md5,6b433c9a3e91fd2a59ac92510ccee4dd"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.3"
+        },
+        "timestamp": "2025-06-12T02:51:01.189807007"
+    }
+}
