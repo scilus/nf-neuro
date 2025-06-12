@@ -3,19 +3,19 @@
 name: "preproc_n4"
 description: |
   Perform N4 bias field correction on either an anatomical image or a diffusion
-  volume. For diffusion volumes, the module automatically determines the
+  volume. For diffusion volumes, the module automatically derives the
   bspline parameter, number of stages, and iteration pyramid based on the image
   resolution and size.
 
   The formula used are as follows:
   For the BSpline parameter:
-  `BSplineParam = 2 ** (NbStages - 1) * BSplineKnotPerVoxel * ShrinkFactor * ImageResolution`
+  `BSplineParam = 2 ** (NbStages - 1) * NbVoxelsBetweenKnots * ShrinkFactor * ImageResolution`
 
   For the number of stages in the iteration pyramid:
-  If SmallestDimension ≤ BSplineKnotPerVoxel * ShrinkFactor:
+  If SmallestDimension ≤ NbVoxelsBetweenKnots * ShrinkFactor:
       NbStages = 1
   Else:
-      NbStages = ceil( log2(SmallestDimension / (BSplineKnotPerVoxel * ShrinkFactor)) )
+      NbStages = ceil( log2(SmallestDimension / (NbVoxelsBetweenKnots * ShrinkFactor)) )
 
   For the iteration pyramid:
   Slope     = (MinIter - MaxIter) / (1 - Retain)
@@ -27,9 +27,19 @@ description: |
       Else:
           Iteration = round(Slope * i + Intercept)
 
-  The default values for the shrink_factor and bspline_knot_per_voxel are set
+  The default values for the shrink_factor and nb_voxels_between_knots are set
   to 4 and 8, respectively, which are suitable for most diffusion volumes from
   a large age range of subjects and species.
+
+  For more information on how this formula was derived, please view those references:
+  [1] N4 Wiki: https://github.com/ANTsX/ANTs/wiki/N4BiasFieldCorrection
+  [2] Tustison, N. J., Avants, B. B., Cook, P. A., Zheng, Y., Egan, A., Yushkevich, P. A.,
+      & Gee, J. C. (2010). N4ITK: Improved N3 Bias Correction. IEEE Transactions on Medical
+      Imaging, 29(6), 1310–1320. https://doi.org/10.1109/TMI.2010.2046908
+  [3] Valcourt Caron, A., Shmuel, A., Hao, Z., & Descoteaux, M. (2023). versaFlow:
+      A versatile pipeline for resolution adapted diffusion MRI processing and its
+      application to studying the variability of the PRIME-DE database. Frontiers
+      in Neuroinformatics, Volume 17-2023. https://doi.org/10.3389/fninf.2023.1191200
 
 keywords:
   - correction
