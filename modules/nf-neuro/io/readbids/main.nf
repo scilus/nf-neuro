@@ -9,7 +9,7 @@ process IO_READBIDS {
         path(bids_ignore)
 
     output:
-        path("tractoflow_bids_struct.json")             , emit: bidsstructure
+        path("bids_struct.json")             , emit: bidsstructure
         path "versions.yml"                             , emit: versions
 
 
@@ -23,21 +23,21 @@ process IO_READBIDS {
     def clean_flag = task.ext.clean_bids ? "--clean " : ''
 
     """
-    scil_bids_validate.py $bids_folder tractoflow_bids_struct.json\
+    scil_bids_validate.py $bids_folder bids_struct.json\
         $readout \
         $clean_flag \
         $fs_folder \
         $bids_ignore \
         -v -f
 
-    cat tractoflow_bids_struct.json
+    cat bids_struct.json
     # Relativize paths in the output JSON
     cat <<< \$(jq 'map(map_values(
         if type == "string" then
             if contains("/") then
                 scan("^.*/($bids_folder/.*)") | first
             else . end
-        else . end ))' tractoflow_bids_struct.json) > tractoflow_bids_struct.json
+        else . end ))' bids_struct.json) > bids_struct.json
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -48,7 +48,7 @@ process IO_READBIDS {
     """
     scil_bids_validate.py -h
 
-    cat <<-ENDSTRUCT > tractoflow_bids_struct.json
+    cat <<-ENDSTRUCT > bids_struct.json
     [
         {
             "DWIPhaseEncodingDir": "y",
