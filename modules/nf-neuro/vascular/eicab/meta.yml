@@ -1,7 +1,10 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "vascular_eicab"
-description: "eICAB - A novel deep learning pipeline for Circle of Willis multiclass segmentation and analysis"
+description: |
+  eICAB automatically segments and labels the Internal Carotid Arteries (ICA), Basilar Artery (BA), Anterior Communicating
+  Artery (AComm), Anterior Cerebral Arteries (ACA), Middle Cerebral Arteries (MCA), Posterior Communicating Arteries (
+  PComm), Posterior Cerebral Arteries (PCA), Superior Cerebellar Arteries (SCA) and Anterior Choroidal Arteries (AChA).
 keywords:
   - angiography
   - segmentation
@@ -43,7 +46,12 @@ output:
   - eicabdirectory:
       type: directory
       description: Sorted BAM/CRAM/SAM file
-      pattern: "*_eicab/"
+      pattern: "*_eicab"
+
+  - eicabcw:
+      type: file
+      description: Segmented Circle of Willis (CW) annotated
+      pattern: "*_eicab_cw.nii.gz"
 
 authors:
   - "@arnaudbore"

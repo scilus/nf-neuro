@@ -12,8 +12,9 @@ process VASCULAR_EICAB {
         tuple val(meta), path(in_tof)
 
     output:
-        tuple val(meta), path("*eicab/"), emit: eicabdirectory
-        path "versions.yml"             , emit: versions
+        tuple val(meta), path("*_eicab")                  , emit: eicabdirectory
+        tuple val(meta), path("*_eicab/*_eICAB_CW.nii.gz"), emit: eicabcw
+        path "versions.yml"                               , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
