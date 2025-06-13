@@ -14,6 +14,9 @@ nextflow_workflow {
 
     tag "load_test_data"
 
+    tag "stub"
+    options "-stub-run"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
@@ -33,13 +36,13 @@ nextflow_workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/fa.nii.gz")
                     ]
                 }
                 input[1] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/pft.trk")
                     ]
                 }
@@ -50,7 +53,17 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
             )
         }
     }

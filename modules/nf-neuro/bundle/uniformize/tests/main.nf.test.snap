@@ -85,6 +85,18 @@
         },
         "timestamp": "2024-05-22T20:19:03.734244"
     },
+    "bundle - uniformize - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,f2a592bbc31c9c2393317ab72bcabe8c"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:21:05.572388511"
+    },
     "bundle - uniformize_centroid": {
         "content": [
             {

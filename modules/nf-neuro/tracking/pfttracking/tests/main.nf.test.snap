@@ -1,4 +1,16 @@
 {
+    "tracking - pfttracking - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,50bec6db1c8ebd60c43b27cbb7ac3105"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.5"
+        },
+        "timestamp": "2025-06-07T03:59:20.752368463"
+    },
     "tracking - pfttracking - fa": {
         "content": [
             "test__pft_tracking.trk",

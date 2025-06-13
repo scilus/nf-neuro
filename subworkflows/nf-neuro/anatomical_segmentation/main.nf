@@ -76,23 +76,29 @@ workflow ANATOMICAL_SEGMENTATION {
             ch_versions = ch_versions.mix(SEGMENTATION_FREESURFERSEG.out.versions.first())
 
             // ** Setting outputs ** //
-            wm_mask = wm_mask.mix( SEGMENTATION_FREESURFERSEG.out.wm_mask )
-            gm_mask = gm_mask.mix( SEGMENTATION_FREESURFERSEG.out.gm_mask )
-            csf_mask = csf_mask.mix( SEGMENTATION_FREESURFERSEG.out.csf_mask )
+            wm_mask = wm_mask
+                .join( SEGMENTATION_FREESURFERSEG.out.wm_mask, remainder: true )
+                .map{ meta, fast, freesurfer -> [meta, freesurfer ?: fast] }
+            gm_mask = gm_mask
+                .join( SEGMENTATION_FREESURFERSEG.out.gm_mask, remainder: true )
+                .map{ meta, fast, freesurfer -> [meta, freesurfer ?: fast] }
+            csf_mask = csf_mask
+                .join( SEGMENTATION_FREESURFERSEG.out.csf_mask, remainder: true )
+                .map{ meta, fast, freesurfer -> [meta, freesurfer ?: fast] }
         }
 
     emit:
-        wm_mask    = wm_mask                     // channel: [ val(meta), [ wm_mask ] ]
-        gm_mask    = gm_mask                     // channel: [ val(meta), [ gm_mask ] ]
-        csf_mask   = csf_mask                    // channel: [ val(meta), [ csf_mask ] ]
-        wm_map     = wm_map                      // channel: [ val(meta), [ wm_map ] ]
-        gm_map     = gm_map                      // channel: [ val(meta), [ gm_map ] ]
-        csf_map    = csf_map                     // channel: [ val(meta), [ csf_map ] ]
-        seg        = seg                         // channel: [ val(meta), [ seg ] ]
-        aparc_aseg = aparc_aseg                  // channel: [ val(meta), [ aparc_aseg ] ]
-        resample   = resample                    // channel: [ val(meta), [ resample ] ]
-        volume     = volume                      // channel: [ val(meta), [ volume ] ]
-        qc_score   = qc_score                    // channel: [ val(meta), [ qc_score ] ]
+        wm_mask    = wm_mask                     // channel: [ val(meta), wm_mask ]
+        gm_mask    = gm_mask                     // channel: [ val(meta), gm_mask ]
+        csf_mask   = csf_mask                    // channel: [ val(meta), csf_mask ]
+        wm_map     = wm_map                      // channel: [ val(meta), wm_map ]
+        gm_map     = gm_map                      // channel: [ val(meta), gm_map ]
+        csf_map    = csf_map                     // channel: [ val(meta), csf_map ]
+        seg        = seg                         // channel: [ val(meta), seg ]
+        aparc_aseg = aparc_aseg                  // channel: [ val(meta), aparc_aseg ]
+        resample   = resample                    // channel: [ val(meta), resample ]
+        volume     = volume                      // channel: [ val(meta), volume ]
+        qc_score   = qc_score                    // channel: [ val(meta), qc_score ]
 
         versions  = ch_versions                  // channel: [ versions.yml ]
 }

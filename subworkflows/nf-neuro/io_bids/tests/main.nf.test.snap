@@ -2,107 +2,183 @@
     "Read BIDS directory - with .bidsignore": {
         "content": [
             {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    
-                ],
-                "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    
-                ],
-                "6": [
-                    
-                ],
                 "ch_aparc_aseg": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        }
+                    ]
                 ],
                 "ch_dwi_bval_bvec": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        },
+                        "sub-01_ses-001_dir-AP_dwi.nii.gz",
+                        "sub-01_ses-001_dir-AP_dwi.bval",
+                        "sub-01_ses-001_dir-AP_dwi.bvec"
+                    ]
                 ],
                 "ch_rev_b0": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        },
+                        "sub-01_ses-001_dir-PA_epi.nii.gz"
+                    ]
                 ],
                 "ch_rev_dwi_bval_bvec": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        }
+                    ]
                 ],
                 "ch_t1": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        },
+                        "sub-01_ses-001_T1w.nii.gz"
+                    ]
                 ],
                 "ch_wmparc": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        }
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,dc358bb3a486d7638ea93e4815688106"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-02-14T08:08:38.357417"
+        "timestamp": "2025-06-09T22:36:29.391127203"
     },
     "Read BIDS directory - without .bidsignore": {
         "content": [
             {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    
-                ],
-                "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    
-                ],
-                "6": [
-                    
-                ],
                 "ch_aparc_aseg": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        }
+                    ]
                 ],
                 "ch_dwi_bval_bvec": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        },
+                        "sub-01_ses-001_dir-AP_dwi.nii.gz",
+                        "sub-01_ses-001_dir-AP_dwi.bval",
+                        "sub-01_ses-001_dir-AP_dwi.bvec"
+                    ]
                 ],
                 "ch_rev_b0": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        },
+                        "sub-01_ses-001_dir-PA_epi.nii.gz"
+                    ]
                 ],
                 "ch_rev_dwi_bval_bvec": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        }
+                    ]
                 ],
                 "ch_t1": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        },
+                        "sub-01_ses-001_T1w.nii.gz"
+                    ]
                 ],
                 "ch_wmparc": [
-                    
+                    [
+                        {
+                            "id": "sub-01",
+                            "session": "_ses-001",
+                            "run": "",
+                            "dwi_tr": 0.062,
+                            "dwi_phase": "",
+                            "dwi_revphase": ""
+                        }
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,dc358bb3a486d7638ea93e4815688106"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-02-14T08:08:01.011554"
+        "timestamp": "2025-06-09T22:36:18.493836632"
     }
 }

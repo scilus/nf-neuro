@@ -1,4 +1,16 @@
 {
+    "reconst - shmetrics - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,a07e324c55b4310c93cc4003bee2cd6c"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:47:23.878145793"
+    },
     "reconst - shmetrics": {
         "content": [
             {
