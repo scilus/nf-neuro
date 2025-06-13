@@ -1,13 +1,13 @@
-include { UTILS_TEMPLATEFLOW                            } from '../../../modules/nf-neuro/utils/templateflow/main.nf'
-include { IMAGE_APPLYMASK as MASK_T1W                   } from '../../../modules/nf-neuro/image/applymask/main.nf'
-include { IMAGE_APPLYMASK as MASK_T2W                   } from '../../../modules/nf-neuro/image/applymask/main.nf'
-include { BETCROP_FSLBETCROP as BET_T1W                 } from '../../../modules/nf-neuro/betcrop/fslbetcrop/main.nf'
-include { BETCROP_FSLBETCROP as BET_T2W                 } from '../../../modules/nf-neuro/betcrop/fslbetcrop/main.nf'
-include { REGISTRATION_ANTS                             } from '../../../modules/nf-neuro/registration/ants/main.nf'
-include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARPIMAGES} from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
-include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARPMASK  } from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
-include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARPLABELS} from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
-include { REGISTRATION_TRACTOGRAM                       } from '../../../modules/nf-neuro/registration/tractogram/main.nf'
+include { UTILS_TEMPLATEFLOW                             } from '../../../modules/nf-neuro/utils/templateflow/main.nf'
+include { IMAGE_APPLYMASK as MASK_T1W                    } from '../../../modules/nf-neuro/image/applymask/main.nf'
+include { IMAGE_APPLYMASK as MASK_T2W                    } from '../../../modules/nf-neuro/image/applymask/main.nf'
+include { BETCROP_FSLBETCROP as BET_T1W                  } from '../../../modules/nf-neuro/betcrop/fslbetcrop/main.nf'
+include { BETCROP_FSLBETCROP as BET_T2W                  } from '../../../modules/nf-neuro/betcrop/fslbetcrop/main.nf'
+include { REGISTRATION_ANTS                              } from '../../../modules/nf-neuro/registration/ants/main.nf'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARPIMAGES } from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARPMASK   } from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARPLABELS } from '../../../modules/nf-neuro/registration/antsapplytransforms/main.nf'
+include { REGISTRATION_TRACTOGRAM                        } from '../../../modules/nf-neuro/registration/tractogram/main.nf'
 
 workflow OUTPUT_TEMPLATE_SPACE {
 
