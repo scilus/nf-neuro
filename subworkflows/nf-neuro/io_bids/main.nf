@@ -21,8 +21,8 @@ workflow IO_BIDS {
     // ** Fetching the BIDS data as a json file ** //
     IO_READBIDS (
         bids_folder,
-        fs_folder,
-        bidsignore
+        fs_folder.ifEmpty( [] ),
+        bidsignore.ifEmpty( [] )
     )
     ch_versions = ch_versions.mix(IO_READBIDS.out.versions)
 
@@ -75,12 +75,12 @@ workflow IO_BIDS {
             }
         }
         .multiMap{ meta, t1, wmparc, aparc_aseg, dwi, bval, bvec, rev_dwi, rev_bval, rev_bvec, rev_b0 ->
-                t1: [meta, t1]
-                wmparc: [meta, wmparc]
-                aparc_aseg: [meta, aparc_aseg]
-                dwi_bval_bvec: [meta, dwi, bval, bvec]
-                rev_dwi_bval_bvec: [meta, rev_dwi, rev_bval, rev_bvec]
-                rev_b0: [meta, rev_b0]
+            t1: [meta, t1]
+            wmparc: [meta, wmparc]
+            aparc_aseg: [meta, aparc_aseg]
+            dwi_bval_bvec: [meta, dwi, bval, bvec]
+            rev_dwi_bval_bvec: [meta, rev_dwi, rev_bval, rev_bvec]
+            rev_b0: [meta, rev_b0]
         }
 
     emit:

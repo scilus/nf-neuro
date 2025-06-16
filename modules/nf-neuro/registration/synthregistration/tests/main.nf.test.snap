@@ -13,5 +13,17 @@
             "nextflow": "24.04.3"
         },
         "timestamp": "2024-12-18T13:10:28.733204"
+    },
+    "registration - synthregistration - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,6f946408922f25f1a8182d35615b6d7b"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:56:18.76904087"
     }
 }
