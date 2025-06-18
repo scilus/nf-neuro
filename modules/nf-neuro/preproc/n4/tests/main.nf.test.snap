@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,08cced153fb00b483f3a59216e05aaff"
+                    "versions.yml:md5,59c35f81d3700bded7b94403ab1d2dc4"
                 ],
                 "image": [
                     [
@@ -24,7 +24,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,08cced153fb00b483f3a59216e05aaff"
+                    "versions.yml:md5,59c35f81d3700bded7b94403ab1d2dc4"
                 ]
             }
         ],
@@ -32,7 +32,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-12T14:20:31.662518"
+        "timestamp": "2025-06-18T14:25:32.390539"
     },
     "preproc - n4 - anat": {
         "content": [
@@ -47,7 +47,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,08cced153fb00b483f3a59216e05aaff"
+                    "versions.yml:md5,59c35f81d3700bded7b94403ab1d2dc4"
                 ],
                 "image": [
                     [
@@ -59,7 +59,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,08cced153fb00b483f3a59216e05aaff"
+                    "versions.yml:md5,59c35f81d3700bded7b94403ab1d2dc4"
                 ]
             }
         ],
@@ -67,6 +67,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-12T15:00:39.228198"
+        "timestamp": "2025-06-18T14:50:20.017871"
     }
 }

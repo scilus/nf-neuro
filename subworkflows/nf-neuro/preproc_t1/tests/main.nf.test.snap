@@ -147,8 +147,8 @@
             "test_cropped.nii.gz:md5:header,6472f75b74a4a583a8cad060b4d09888,data,f6dfc33d040e48aabbe3c44ad08b1853",
             "test_t1_cropped.nii.gz:md5:header,6472f75b74a4a583a8cad060b4d09888,data,f550cd541c775917e463300fd04e31f6",
             [
+                "versions.yml:md5,313c1c7a8ef247b5a6402339aa4b293f",
                 "versions.yml:md5,318cabe934be45528a25f52083d9c90d",
-                "versions.yml:md5,b979132991d8f72a3585465533bd5730",
                 "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
                 "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
                 "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
@@ -159,7 +159,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-12T10:13:37.231808"
+        "timestamp": "2025-06-18T15:12:41.503438"
     },
     "preproc_t1_skip_all": {
         "content": [
@@ -297,7 +297,7 @@
             "test_cropped.nii.gz",
             "test_t1_cropped.nii.gz",
             [
-                "versions.yml:md5,b979132991d8f72a3585465533bd5730",
+                "versions.yml:md5,313c1c7a8ef247b5a6402339aa4b293f",
                 "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
                 "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
                 "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
@@ -309,6 +309,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-12T09:52:57.313319"
+        "timestamp": "2025-06-18T15:09:29.992024"
     }
 }
