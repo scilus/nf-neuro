@@ -30,7 +30,10 @@ description: |
   LOCAL TRACKING (dipy on CPU, scilpy on GPU)
     Perform Local Tracking on the FODF to generate whole brain tractograms.
 
-  [1] https://tractoflow-documentation.readthedocs.io
+  [1] Theaud, G., Houde, J.-C., Boré, A., Rheault, F., Morency, F., Descoteaux, M.,
+      TractoFlow: A robust, efficient and reproducible diffusion MRI pipeline
+      leveraging Nextflow & Singularity, NeuroImage,
+      https://doi.org/10.1016/j.neuroimage.2020.116889.
 keywords:
   - diffusion
   - MRI
@@ -348,6 +351,11 @@ output:
         Structure: [ path(versions.yml) ]
       pattern: "versions.yml"
 authors:
-  - "@AlexVCaron"
+  - "Guillaume Theaud"
+  - "Jean-Christophe Houde"
+  - "Arnaud Bore"
+  - "Francois Rheault"
+  - "Felix Morency"
+  - "Maxime Descoteaux"
 maintainers:
   - "@AlexVCaron"
