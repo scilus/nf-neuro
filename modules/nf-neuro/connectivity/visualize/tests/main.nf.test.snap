@@ -43,7 +43,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+                    "versions.yml:md5,40403eb0a7a17ab7e4ddffcfe6be34d9"
                 ],
                 "figure": [
                     [
@@ -86,26 +86,26 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+                    "versions.yml:md5,40403eb0a7a17ab7e4ddffcfe6be34d9"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2025-01-16T10:54:29.917241635"
+        "timestamp": "2025-06-25T21:38:56.223746285"
     },
     "connectivity - visualisation - stub-run": {
         "content": [
             [
-                "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+                "versions.yml:md5,40403eb0a7a17ab7e4ddffcfe6be34d9"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2025-01-16T10:55:34.856253711"
+        "timestamp": "2025-06-25T21:39:01.823911587"
     }
 }

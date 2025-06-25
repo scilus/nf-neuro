@@ -2,7 +2,9 @@ process CONNECTIVITY_AFDFIXEL {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ 'scilus/scilus:latest' }"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://scil.usherbrooke.ca/containers/scilpy_2.1.0.sif':
+        'scilus/scilpy:2.1.0' }"
 
     input:
     tuple val(meta), path(hdf5), path(fodf)
