@@ -20,7 +20,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,99caf95a695ad5ae4c7e8e879af86b5a"
+                    "versions.yml:md5,ec7d04ff18d9f18678c788f72715ff3b"
                 ],
                 "bundles": [
                     [
@@ -40,14 +40,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,99caf95a695ad5ae4c7e8e879af86b5a"
+                    "versions.yml:md5,ec7d04ff18d9f18678c788f72715ff3b"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-09-10T15:52:32.023077"
+        "timestamp": "2025-06-25T20:39:04.115264268"
     }
 }

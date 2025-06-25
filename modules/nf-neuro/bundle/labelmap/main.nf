@@ -3,8 +3,8 @@ process BUNDLE_LABELMAP {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        'https://scil.usherbrooke.ca/containers/scilpy_2.1.0.sif':
+        'scilus/scilpy:2.1.0' }"
 
     input:
         tuple val(meta), path(bundles), path(centroids)
@@ -23,7 +23,6 @@ process BUNDLE_LABELMAP {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def nb_points = task.ext.nb_points ? "--nb_pts ${task.ext.nb_points} ": ""
     def colormap = task.ext.colormap ? "--colormap ${task.ext.colormap} ": ""
-    def new_labelling = task.ext.new_labelling ? "--new_labelling ": ""
 
     """
     bundles=(${bundles.join(" ")})
@@ -34,7 +33,7 @@ process BUNDLE_LABELMAP {
         bname=\$(basename \${bundles[index]} .\${ext})
 
         scil_bundle_label_map.py \${bundles[index]} \${centroids[index]} \
-            tmp_out $nb_points $colormap $new_labelling -f
+            tmp_out $nb_points $colormap -f
 
         mv tmp_out/labels_map.nii.gz ${prefix}__\${bname}_labels.nii.gz
         mv tmp_out/distance_map.nii.gz ${prefix}__\${bname}_distances.nii.gz

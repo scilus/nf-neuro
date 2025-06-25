@@ -3,8 +3,8 @@ process BUNDLE_STATS {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        'https://scil.usherbrooke.ca/containers/scilpy_2.1.0.sif':
+        'scilus/scilpy:2.1.0' }"
 
     input:
     tuple val(meta), path(bundles), path(labels_map), path(metrics), path(lesions)
@@ -102,7 +102,7 @@ process BUNDLE_STATS {
 
         if [[ "$lesions_stats" ]];
         then
-            scil_analyse_lesions_load.py $lesions \${bname}_volume_per_label_lesions_stat.json \
+            scil_lesions_info.py $lesions \${bname}_volume_per_label_lesions_stat.json \
                 --bundle_labels_map \${label_map[index]} \
                 --out_lesion_atlas "${prefix}__\${bname}_lesion_map.nii.gz" \
                 --min_lesion_vol $min_lesion_vol
@@ -130,8 +130,7 @@ process BUNDLE_STATS {
         scil_json_merge_entries.py *_endpoints_raw.json ${prefix}_endpoints_map_raw.json \
             --no_list --add_parent_key ${prefix}
 
-    #Bundle_Metrics_Stats_In_Endpoints
-
+        #Bundle_Metrics_Stats_In_Endpoints
         scil_json_merge_entries.py *_tail.json *_head.json ${prefix}_endpoints_metric_stats.json \
             --no_list --add_parent_key ${prefix}
     fi
