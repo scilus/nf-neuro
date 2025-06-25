@@ -51,7 +51,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
@@ -91,7 +90,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
@@ -137,7 +135,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
@@ -183,7 +180,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
@@ -219,7 +215,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
