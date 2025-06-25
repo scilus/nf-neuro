@@ -33,9 +33,10 @@ nextflow_process {
                 input[0] = LOAD_DATA.out.test_data_directory
                     .map{ test_data_directory -> [
                     [ id:'test', single_end:false ], // meta map
-                    file("\${test_data_directory}/dwi_with_b0/dwi.nii.gz", checkIfExists: true),
-                    file("\${test_data_directory}/dwi_with_b0/b0.nii.gz", checkIfExists: true),
-                    file("\${test_data_directory}/dwi_with_b0/mask.nii.gz", checkIfExists: true)]}
+                    file("\${test_data_directory}/dwi/dwi.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/dwi/dwi.bval", checkIfExists: true),
+                    file("\${test_data_directory}/dwi/dwi.bvec", checkIfExists: true),
+                    file("\${test_data_directory}/dwi/mask.nii.gz", checkIfExists: true)]}
                 """
             }
         }
@@ -55,6 +56,7 @@ nextflow_process {
                     .map{ test_data_directory -> [
                     [ id:'test', single_end:false ], // meta map
                     file("\${test_data_directory}/anat/anat_image.nii.gz", checkIfExists: true),
+                    [],
                     [],
                     []]}
                 """

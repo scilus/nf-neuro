@@ -56,17 +56,18 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
-
   - image:
       type: file
       description: Nifti image file to correct
       pattern: "*.{nii,nii.gz}"
-
-  - ref:
+  - bval:
       type: file
-      description: Nifti image file for the reference
-      pattern: "*.{nii,nii.gz}"
-
+      description: B-value file for the diffusion image
+      pattern: "*.bval"
+  - bvec:
+      type: file
+      description: B-vector file for the diffusion image
+      pattern: "*.bvec"
   - ref_mask:
       type: file
       description: Nifti image file mask for the reference
@@ -76,20 +77,24 @@ args:
   - prefix:
       type: string
       description: Prefix to add to the output file name (e.g. "n4_")
+  - b0threshold:
+      type: integer
+      description: Threshold for the b0 volume to be used as a mask.
+      default: 10
   - nb_voxels_between_knots:
-      type: number
+      type: integer
       description: Number of voxels between B-spline knots.
       default: 8
   - shrink_factor:
-      type: number
+      type: integer
       description: Shrink factor for the image resampling.
       default: 4
   - maxiter:
-      type: number
+      type: integer
       description: Maximum number of iterations for the N4 algorithm.
       default: 1000
   - miniter:
-      type: number
+      type: integer
       description: Minimum number of iterations for the N4 algorithm.
       default: 100
   - retain:
@@ -103,12 +108,10 @@ output:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
-
   - image:
       type: file
       description: N4 corrected image
       pattern: "*.{nii,nii.gz}"
-
   - versions:
       type: file
       description: File containing software versions
