@@ -29,6 +29,10 @@ process PREPROC_N4 {
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
     export ANTS_RANDOM_SEED=1234
 
+    # Checking if the input image is a DWI volume, if so, extract the b0 volume
+    # as the reference volume to use in the parameters calculation. Final N4 will
+    # be applied directly to the whole DWI volume. If anatomical, use the image
+    # as the reference volume.
     if [[ -f "$bval" ]]
     then
         dwiextract $image -fslgrad $bvec $bval - -bzero $b0threshold | mrmath - mean reference_for_formula.nii.gz -axis 3
