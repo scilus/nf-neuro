@@ -104,13 +104,6 @@ input:
         Structure: [ val(meta), path(mask) ]
       pattern: "*.{nii,nii.gz}"
       mandatory: false
-  - ch_ref_n4:
-      type: file
-      description: |
-        The input channel containing the reference and the reference mask for the n4 correction. Optional
-        Structure: [ val(meta), path(ref), path(mask_ref) ]
-      pattern: "*.{nii,nii.gz}"
-      mandatory: false
   - ch_ref_resample:
       type: file
       description: |
