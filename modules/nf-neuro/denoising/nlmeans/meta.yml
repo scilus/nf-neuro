@@ -37,6 +37,23 @@ args:
       description: Number of coils used for the acquisition
       default: 1
 
+  - gaussian:
+      type: bool
+      description: |
+        If your data contains gaussian noise, set this option.
+        Otherwise, Rician is assumed.
+
+  - sigma:
+      type: float
+      description: |
+        Provide your own standard deviation of the noise.
+
+  - piesno:
+      type: bool
+      description: |
+        Estimate sigma using Piesno's method.
+        If data is 4D, the noise is estimated for each slice (3rd dimension).
+
 output:
   - meta:
       type: map

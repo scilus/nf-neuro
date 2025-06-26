@@ -8,11 +8,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_cropped.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test_cropped.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "1": [
-
+                    
                 ],
                 "2": [
                     [
@@ -20,7 +20,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__denoised.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test__denoised.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "3": [
@@ -29,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__denoised.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test__denoised.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "4": [
@@ -38,7 +38,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_resampled.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test_resampled.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "5": [
@@ -47,22 +47,22 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_resampled.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test_resampled.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "6": [
-
+                    
                 ],
                 "7": [
-
+                    
                 ],
                 "8": [
+                    "versions.yml:md5,bd12cec77fa03cf508a94e5e0f67bcc2",
                     "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
-                    "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
-                    "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
+                    "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20"
                 ],
                 "crop_box": [
-
+                    
                 ],
                 "image_N4": [
                     [
@@ -70,7 +70,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__denoised.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test__denoised.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "image_bet": [
@@ -79,7 +79,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_resampled.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test_resampled.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "image_nlmeans": [
@@ -88,7 +88,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__denoised.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test__denoised.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "image_resample": [
@@ -97,14 +97,14 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_resampled.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test_resampled.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "mask_bet": [
-
+                    
                 ],
                 "mask_final": [
-
+                    
                 ],
                 "t1_final": [
                     [
@@ -112,29 +112,29 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_cropped.nii.gz:md5,c507c9182cc410c298fad4a03540c0c9"
+                        "test_cropped.nii.gz:md5,ce10054d30c0a0753c619d67d811fe32"
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,bd12cec77fa03cf508a94e5e0f67bcc2",
                     "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
-                    "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
-                    "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
+                    "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2025-01-14T10:02:29.972139887"
+        "timestamp": "2025-06-26T02:52:17.018066814"
     },
     "preproc_t1_synthbet": {
         "content": [
-            "test__denoised.nii.gz:md5:header,a7ee0e819007aba98d14f7a145b550e6,data,2e21433e2bcd4de2a6b6167c6233cd40",
-            "test__image_n4.nii.gz:md5:header,e7cfbd06624321d70cbd667a77315ba3,data,a81e98f32ed963c098ccb07486101898",
-            "test_resampled.nii.gz:md5:header,7628a07204938d640c3530fa3d76d2b7,data,a81e98f32ed963c098ccb07486101898",
-            "test__bet_image.nii.gz:md5:header,38a09a5addf7c1f13dae1121c562f3b5,data,74f76699e09839809038875af1d9ae6c",
-            "test__brain_mask.nii.gz:md5:header,8fc2b4ae979d881623dfd34d377d437d,data,2d61506dc4ab2f8093b731474ae7e45c",
+            "test__denoised.nii.gz:md5:header,a7ee0e819007aba98d14f7a145b550e6,data,232af4b453005cab23cd8f7ab63e7048",
+            "test__image_n4.nii.gz:md5:header,e7cfbd06624321d70cbd667a77315ba3,data,04e2137ca059f44f65937144f0b9fbcf",
+            "test_resampled.nii.gz:md5:header,7628a07204938d640c3530fa3d76d2b7,data,04e2137ca059f44f65937144f0b9fbcf",
+            "test__bet_image.nii.gz:md5:header,38a09a5addf7c1f13dae1121c562f3b5,data,698db5b5fdef9bb6af1c8ebe44bf5f75",
+            "test__brain_mask.nii.gz:md5:header,8fc2b4ae979d881623dfd34d377d437d,data,7b4d5beeb69676bf2a07e677e90ec99e",
             [
                 [
                     {
@@ -144,22 +144,22 @@
                     "test_t1_cropped_bbox.pkl:md5,522d2c44d3ad1058ea77457a263e39c8"
                 ]
             ],
-            "test_cropped.nii.gz:md5:header,efab188f3700b5b29d4b4ef99cec1295,data,e551be653d402018fd73a4f708b1641e",
-            "test_t1_cropped.nii.gz:md5:header,efab188f3700b5b29d4b4ef99cec1295,data,8a93b9d76ead7dae4af4792b9cf70479",
+            "test_cropped.nii.gz:md5:header,efab188f3700b5b29d4b4ef99cec1295,data,bd91c2aab8b7ba6f5ad5eb7291ba0885",
+            "test_t1_cropped.nii.gz:md5:header,efab188f3700b5b29d4b4ef99cec1295,data,c8ee11581465d43efaed84066f221d00",
             [
                 "versions.yml:md5,318cabe934be45528a25f52083d9c90d",
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
+                "versions.yml:md5,bd12cec77fa03cf508a94e5e0f67bcc2",
                 "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
                 "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
-                "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
-                "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
+                "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-11-25T18:23:03.990173398"
+        "timestamp": "2025-06-26T02:52:00.519110991"
     },
     "preproc_t1_skip_all": {
         "content": [
@@ -174,7 +174,7 @@
                     ]
                 ],
                 "1": [
-
+                    
                 ],
                 "2": [
                     [
@@ -213,16 +213,16 @@
                     ]
                 ],
                 "6": [
-
+                    
                 ],
                 "7": [
-
+                    
                 ],
                 "8": [
-
+                    
                 ],
                 "crop_box": [
-
+                    
                 ],
                 "image_N4": [
                     [
@@ -261,10 +261,10 @@
                     ]
                 ],
                 "mask_bet": [
-
+                    
                 ],
                 "mask_final": [
-
+                    
                 ],
                 "t1_final": [
                     [
@@ -276,7 +276,7 @@
                     ]
                 ],
                 "versions": [
-
+                    
                 ]
             }
         ],
@@ -288,9 +288,9 @@
     },
     "preproc_t1_antsbet": {
         "content": [
-            "test__denoised.nii.gz:md5:header,a7ee0e819007aba98d14f7a145b550e6,data,2e21433e2bcd4de2a6b6167c6233cd40",
-            "test__image_n4.nii.gz:md5:header,e7cfbd06624321d70cbd667a77315ba3,data,a81e98f32ed963c098ccb07486101898",
-            "test_resampled.nii.gz:md5:header,7628a07204938d640c3530fa3d76d2b7,data,a81e98f32ed963c098ccb07486101898",
+            "test__denoised.nii.gz:md5:header,a7ee0e819007aba98d14f7a145b550e6,data,232af4b453005cab23cd8f7ab63e7048",
+            "test__image_n4.nii.gz:md5:header,e7cfbd06624321d70cbd667a77315ba3,data,04e2137ca059f44f65937144f0b9fbcf",
+            "test_resampled.nii.gz:md5:header,7628a07204938d640c3530fa3d76d2b7,data,04e2137ca059f44f65937144f0b9fbcf",
             "test__t1_bet.nii.gz",
             "test__t1_bet_mask.nii.gz",
             "test_t1_cropped_bbox.pkl",
@@ -298,17 +298,17 @@
             "test_t1_cropped.nii.gz",
             [
                 "versions.yml:md5,b979132991d8f72a3585465533bd5730",
+                "versions.yml:md5,bd12cec77fa03cf508a94e5e0f67bcc2",
                 "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
                 "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
                 "versions.yml:md5,bf4dd58c38dd4863ebfb9e78a94c3a20",
-                "versions.yml:md5,da278daafbe3afa8454021e2716dd205",
-                "versions.yml:md5,ea32c30f5320f720b2f5dc32ac2535ea"
+                "versions.yml:md5,da278daafbe3afa8454021e2716dd205"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-12-12T15:50:29.838128539"
+        "timestamp": "2025-06-26T01:53:00.065500426"
     }
 }
