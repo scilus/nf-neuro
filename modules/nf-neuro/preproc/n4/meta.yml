@@ -68,22 +68,27 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
+      mandatory: true
   - image:
       type: file
       description: Nifti image file to correct
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
   - bval:
       type: file
       description: B-value file for the diffusion image
       pattern: "*.bval"
+      mandatory: false
   - bvec:
       type: file
       description: B-vector file for the diffusion image
       pattern: "*.bvec"
+      mandatory: false
   - mask:
       type: file
       description: Nifti image file mask for the reference
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
 
 args:
   - prefix:
