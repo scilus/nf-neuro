@@ -126,29 +126,29 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.4"
         },
-        "timestamp": "2025-06-26T02:52:17.018066814"
+        "timestamp": "2025-06-27T12:18:31.137416769"
     },
     "preproc_t1_synthbet": {
         "content": [
             "test__denoised.nii.gz:md5:header,a7ee0e819007aba98d14f7a145b550e6,data,232af4b453005cab23cd8f7ab63e7048",
-            "test__image_n4.nii.gz:md5:header,e7cfbd06624321d70cbd667a77315ba3,data,04e2137ca059f44f65937144f0b9fbcf",
-            "test_resampled.nii.gz:md5:header,7628a07204938d640c3530fa3d76d2b7,data,04e2137ca059f44f65937144f0b9fbcf",
-            "test__bet_image.nii.gz:md5:header,38a09a5addf7c1f13dae1121c562f3b5,data,698db5b5fdef9bb6af1c8ebe44bf5f75",
-            "test__brain_mask.nii.gz:md5:header,8fc2b4ae979d881623dfd34d377d437d,data,7b4d5beeb69676bf2a07e677e90ec99e",
+            "test__image_n4.nii.gz:md5:header,1eef210e471594bfd0725884e15c9b88,data,4cc37d92d39cbbe9425053edb5098086",
+            "test_resampled.nii.gz:md5:header,9dac59dbaf2d894eeb5f121d4c2405f5,data,4cc37d92d39cbbe9425053edb5098086",
+            "test__bet_image.nii.gz:md5:header,7e7a5fb3e07629f39fa67eeb56afc91e,data,668905981fb59ad73a16176b0999eaf3",
+            "test__brain_mask.nii.gz:md5:header,fd21463c4f2683ce228b7d96b07ec71e,data,7e1fe1e43df16f9f458bf194a2ddd497",
             [
                 [
                     {
                         "id": "test",
                         "single_end": false
                     },
-                    "test_t1_cropped_bbox.pkl:md5,522d2c44d3ad1058ea77457a263e39c8"
+                    "test_t1_cropped_bbox.pkl:md5,0a28ae78d2243bf0b345e7f7e976a35a"
                 ]
             ],
-            "test_cropped.nii.gz:md5:header,efab188f3700b5b29d4b4ef99cec1295,data,bd91c2aab8b7ba6f5ad5eb7291ba0885",
-            "test_t1_cropped.nii.gz:md5:header,efab188f3700b5b29d4b4ef99cec1295,data,c8ee11581465d43efaed84066f221d00",
+            "test_cropped.nii.gz:md5:header,7a5d4efd7aa7baef0e825f878b2a73f1,data,f682cfc67bea0cff229d843862a86670",
+            "test_t1_cropped.nii.gz:md5:header,7a5d4efd7aa7baef0e825f878b2a73f1,data,03eb490e09e52b63519667ce15fb8159",
             [
                 "versions.yml:md5,318cabe934be45528a25f52083d9c90d",
-                "versions.yml:md5,b979132991d8f72a3585465533bd5730",
+                "versions.yml:md5,7aad91b5043d2dc8e8fc69ffbbe6f657",
                 "versions.yml:md5,bd12cec77fa03cf508a94e5e0f67bcc2",
                 "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
                 "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
@@ -159,7 +159,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.4"
         },
-        "timestamp": "2025-06-26T02:52:00.519110991"
+        "timestamp": "2025-06-27T12:18:08.892320642"
     },
     "preproc_t1_skip_all": {
         "content": [
@@ -282,22 +282,22 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2025-01-14T21:44:26.607236449"
+        "timestamp": "2025-06-27T12:18:38.832987377"
     },
     "preproc_t1_antsbet": {
         "content": [
             "test__denoised.nii.gz:md5:header,a7ee0e819007aba98d14f7a145b550e6,data,232af4b453005cab23cd8f7ab63e7048",
-            "test__image_n4.nii.gz:md5:header,e7cfbd06624321d70cbd667a77315ba3,data,04e2137ca059f44f65937144f0b9fbcf",
-            "test_resampled.nii.gz:md5:header,7628a07204938d640c3530fa3d76d2b7,data,04e2137ca059f44f65937144f0b9fbcf",
+            "test__image_n4.nii.gz:md5:header,1eef210e471594bfd0725884e15c9b88,data,4cc37d92d39cbbe9425053edb5098086",
+            "test_resampled.nii.gz:md5:header,9dac59dbaf2d894eeb5f121d4c2405f5,data,4cc37d92d39cbbe9425053edb5098086",
             "test__t1_bet.nii.gz",
             "test__t1_bet_mask.nii.gz",
             "test_t1_cropped_bbox.pkl",
             "test_cropped.nii.gz",
             "test_t1_cropped.nii.gz",
             [
-                "versions.yml:md5,b979132991d8f72a3585465533bd5730",
+                "versions.yml:md5,7aad91b5043d2dc8e8fc69ffbbe6f657",
                 "versions.yml:md5,bd12cec77fa03cf508a94e5e0f67bcc2",
                 "versions.yml:md5,bdd934b4b8456060c36d6d97e4f30740",
                 "versions.yml:md5,be3dbb0ac2589ad263d583018f339102",
@@ -309,6 +309,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.4"
         },
-        "timestamp": "2025-06-26T01:53:00.065500426"
+        "timestamp": "2025-06-27T12:17:13.369749763"
     }
 }
