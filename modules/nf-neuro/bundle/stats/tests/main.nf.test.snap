@@ -133,76 +133,34 @@
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_length_stats.json:md5,72873da12072e254f369ec316911df28"
-                    ]
+                    
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_endpoints_map_raw.json:md5,2a86a4d10878c942c09723c3122940b4"
-                    ]
+                    
                 ],
                 "10": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_mean_std_per_point.json:md5,efcac000fb6c0f607b7377154e68854c"
-                    ]
+                    
                 ],
                 "11": [
                     
                 ],
                 "12": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__IFGWM_endpoints_map_head.nii.gz:md5,444b8e3e40f4694b84a1fb5a2be8a52f"
-                    ]
+                    
                 ],
                 "13": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__IFGWM_endpoints_map_tail.nii.gz:md5,a4cb0339f71c17a8703e920e0eb4916a"
-                    ]
+                    
                 ],
                 "14": [
                     
                 ],
                 "15": [
-                    "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
+                    
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_endpoints_metric_stats.json:md5,3a0fef22a945c74ae4792a5de818acff"
-                    ]
+                    
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_mean_std.json:md5,f7463e5519063f7e0f32709d0dfdc1a2"
-                    ]
+                    
                 ],
                 "4": [
                     
@@ -217,61 +175,25 @@
                     
                 ],
                 "8": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_volume_per_label.json:md5,1ba8e9d51cc2dec86fdaa4498488424b"
-                    ]
+                    
                 ],
                 "9": [
                     
                 ],
                 "endpoints_head": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__IFGWM_endpoints_map_head.nii.gz:md5,444b8e3e40f4694b84a1fb5a2be8a52f"
-                    ]
+                    
                 ],
                 "endpoints_metric_stats": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_endpoints_metric_stats.json:md5,3a0fef22a945c74ae4792a5de818acff"
-                    ]
+                    
                 ],
                 "endpoints_raw": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_endpoints_map_raw.json:md5,2a86a4d10878c942c09723c3122940b4"
-                    ]
+                    
                 ],
                 "endpoints_tail": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__IFGWM_endpoints_map_tail.nii.gz:md5,a4cb0339f71c17a8703e920e0eb4916a"
-                    ]
+                    
                 ],
                 "length": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_length_stats.json:md5,72873da12072e254f369ec316911df28"
-                    ]
+                    
                 ],
                 "lesion_map": [
                     
@@ -280,22 +202,10 @@
                     
                 ],
                 "mean_std": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_mean_std.json:md5,f7463e5519063f7e0f32709d0dfdc1a2"
-                    ]
+                    
                 ],
                 "mean_std_per_point": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_mean_std_per_point.json:md5,efcac000fb6c0f607b7377154e68854c"
-                    ]
+                    
                 ],
                 "streamline_count": [
                     
@@ -304,7 +214,7 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
+                    
                 ],
                 "volume": [
                     
@@ -313,13 +223,7 @@
                     
                 ],
                 "volume_per_labels": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_volume_per_label.json:md5,1ba8e9d51cc2dec86fdaa4498488424b"
-                    ]
+                    
                 ],
                 "volume_per_labels_lesions": [
                     
@@ -328,9 +232,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2025-03-24T00:59:26.250777022"
+        "timestamp": "2025-06-25T20:46:57.683412042"
     },
     "bundle - stats - light": {
         "content": [
@@ -357,7 +261,7 @@
                     
                 ],
                 "15": [
-                    "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
+                    "versions.yml:md5,7ca828a89bafdcf130b1d29f6973ba54"
                 ],
                 "2": [
                     
@@ -429,7 +333,7 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
+                    "versions.yml:md5,7ca828a89bafdcf130b1d29f6973ba54"
                 ],
                 "volume": [
                     
@@ -446,9 +350,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-08-01T13:42:46.785058"
+        "timestamp": "2025-06-25T20:47:05.855975399"
     }
 }

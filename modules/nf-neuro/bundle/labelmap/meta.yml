@@ -41,11 +41,6 @@ args:
       description: Select the colormap for colored trk (data_per_point).
       default: "jet"
 
-  - new_labelling:
-      type: boolean
-      description: Use the new labelling method (multi-centroids).
-      default: False
-
 output:
   - meta:
       type: map
