@@ -18,10 +18,8 @@ workflow PREPROC_T1 {
         ch_template_mask    // channel: [ val(meta), mask ]             , optional
         ch_initial_affine   // channel: [ val(meta), init_affine ]      , optional
         ch_ref_mask         // channel: [ val(meta), mask ]             , optional
-        ch_ref_n4           // channel: [ val(meta), ref, ref-mask ]    , optional
         ch_ref_resample     // channel: [ val(meta), ref ]              , optional
         ch_weights          // channel: [ val(meta), weights ]          , optional
-
     main:
         ch_versions = Channel.empty()
         image_nlmeans = Channel.empty()
@@ -48,10 +46,9 @@ workflow PREPROC_T1 {
 
         if ( params.preproc_t1_run_N4 ) {
             ch_N4 = ch_image
-                .join(ch_ref_n4, remainder: true)
-                .map{ meta, image, ref_image -> [meta, image, ref_image ?: []] }
+                .map{ meta, image -> [meta, image, [], []] }
                 .join(ch_ref_mask, remainder: true)
-                .map{ meta, image, ref_image, mask -> [meta, image, ref_image, mask ?: []] }
+                .map{ meta, image, bval, bvec, mask -> [meta, image, bval, bvec, mask ?: []] }
 
             PREPROC_N4 ( ch_N4 )
             ch_versions = ch_versions.mix(PREPROC_N4.out.versions.first())

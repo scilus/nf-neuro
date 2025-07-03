@@ -81,6 +81,7 @@ nextflow_process {
                     [ id:'test', single_end:false ], // meta map
                     file("\${test_data_directory}/anat/anat_image.nii.gz", checkIfExists: true),
                     [],
+                    [],
                     []]}
                 """
             }
