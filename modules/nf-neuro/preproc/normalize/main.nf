@@ -2,9 +2,7 @@ process PREPROC_NORMALIZE {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"
 
     input:
     tuple val(meta), path(dwi), path(bval), path(bvec), path(mask)

@@ -89,6 +89,7 @@
                 ],
                 "versions": [
                     "versions.yml:md5,034b6d262d1e0e45c673d3ac1756e22f",
+                    "versions.yml:md5,0dfa527114007701520caa5715cfca2f",
                     "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
                     "versions.yml:md5,218c08543fae3d1e7dd9b1527aa67a21",
                     "versions.yml:md5,402cf9392803a66cdfa9e5666bfc6e0d",
@@ -97,7 +98,6 @@
                     "versions.yml:md5,662ea558da42564a0f6140473132bcb4",
                     "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                     "versions.yml:md5,96b217735e8b8f2f6a2d0f43f94d51e5",
-                    "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
                     "versions.yml:md5,ea5858879452a59bb355228ae7f38111",
                     "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
                 ]
@@ -107,7 +107,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.4"
         },
-        "timestamp": "2025-06-27T03:23:28.777715614"
+        "timestamp": "2025-07-03T20:35:01.828215028"
     },
     "preproc_dwi - AP DWI | PA sbref": {
         "content": [
@@ -199,13 +199,13 @@
                 ],
                 "versions": [
                     "versions.yml:md5,034b6d262d1e0e45c673d3ac1756e22f",
+                    "versions.yml:md5,0dfa527114007701520caa5715cfca2f",
                     "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
                     "versions.yml:md5,218c08543fae3d1e7dd9b1527aa67a21",
                     "versions.yml:md5,402cf9392803a66cdfa9e5666bfc6e0d",
                     "versions.yml:md5,571265e710ca29198e69be22c0f970d5",
                     "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                     "versions.yml:md5,96b217735e8b8f2f6a2d0f43f94d51e5",
-                    "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
                     "versions.yml:md5,ea5858879452a59bb355228ae7f38111",
                     "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
                 ]
@@ -215,7 +215,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.4"
         },
-        "timestamp": "2025-06-27T03:21:53.907356551"
+        "timestamp": "2025-07-03T20:33:25.315672668"
     },
     "preproc_dwi - AP DWI | PA DWI": {
         "content": [
@@ -307,6 +307,7 @@
                 ],
                 "versions": [
                     "versions.yml:md5,034b6d262d1e0e45c673d3ac1756e22f",
+                    "versions.yml:md5,0dfa527114007701520caa5715cfca2f",
                     "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
                     "versions.yml:md5,218c08543fae3d1e7dd9b1527aa67a21",
                     "versions.yml:md5,402cf9392803a66cdfa9e5666bfc6e0d",
@@ -315,7 +316,6 @@
                     "versions.yml:md5,662ea558da42564a0f6140473132bcb4",
                     "versions.yml:md5,7ddf2e98f59b19c9b933670550f26ad7",
                     "versions.yml:md5,96b217735e8b8f2f6a2d0f43f94d51e5",
-                    "versions.yml:md5,c15ba5efd24564dba4710b6da8c4b791",
                     "versions.yml:md5,ea5858879452a59bb355228ae7f38111",
                     "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
                 ]
@@ -325,6 +325,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.4"
         },
-        "timestamp": "2025-06-27T03:22:42.855285921"
+        "timestamp": "2025-07-03T20:34:14.625155213"
     }
 }
