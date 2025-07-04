@@ -9,7 +9,6 @@ keywords:
   - Diffusion MRI
   - Tractography
   - Particle Filtering Tractography
-
 tools:
   - "DIPY":
       description: "DIPY is the paragon 3D/4D+ imaging library in Python."
@@ -18,7 +17,97 @@ tools:
   - "scilpy":
       description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
-
+args:
+  pft_fa_seeding_mask_threshold:
+    type: float
+    default: 0.1
+    description: "FA threshold for the seeding mask."
+  pft_wm_seeding_mask_threshold:
+    type: float
+    default: 0.5
+    description: "WM threshold for the seeding mask."
+  pft_seeding_mask_type:
+    type: string
+    default: "wm"
+    choices:
+      - "wm"
+      - "fa"
+    description: Strategy to use to compute the seeding mask.
+  pft_step:
+    type: float
+    default: 0.2
+    description: Tracking Step size.
+  pft_random_seed:
+    type: int
+    default: 0
+    description: Seed for random number generators.
+  pft_seeding:
+    type: string
+    default: "npv"
+    choices:
+      - "npv"
+      - "nt"
+    description: Seeding strategy, either Number Per Voxel (npv) or Number Total (nt).
+  pft_nbr_seeds:
+    type: int
+    default: 5
+    description: Number of seeds per voxel (if npv) or total number of seeds (if nt).
+  pft_min_len:
+    type: float
+    default: 10.0
+    description: Minimum length of streamlines to keep.
+  pft_max_len:
+    type: float
+    default: 300.0
+    description: Maximum length of streamlines to keep.
+  pft_theta:
+    type: float
+    default: 40.0
+    description: Maximum angular difference between tracking steps, in degrees.
+  pft_sfthres:
+    type: float
+    default: 0.1
+    description: Spherical function threshold for tracking.
+  pft_sfthres_init:
+    type: float
+    default: 0.5
+    description: Initial spherical function threshold for tracking.
+  pft_algo:
+    type: string
+    default: "prob"
+    choices:
+      - "det"
+      - "prob"
+    description: Algorithm to use for tracking.
+  pft_compress_value:
+    type: float
+    default: 0.0
+    description: Compression value for the streamlines, in mm. If 0, no compression is applied.
+  basis:
+    type: string
+    default: "descoteaux07_legacy"
+    choices:
+      - "descoteaux07_legacy"
+      - "descoteaux07"
+      - "tournier07"
+      - "tournier07_legacy"
+    description: Spherical basis used for FODF reconstruction.
+  pft_particles:
+    type: int
+    default: 15
+    description: Number of particles to use in the particle filter tracking.
+  pft_back:
+    type: float
+    default: 2.0
+    description: Backtracking distance in mm.
+  pft_front:
+    type: float
+    default: 1.0
+    description: Front tracking distance in mm.
+  run_qc:
+    type: boolean
+    default: true
+    description: Whether to run quality control (QC) on the tracking results.
 input:
   - meta:
       type: map

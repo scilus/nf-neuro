@@ -9,7 +9,108 @@ tools:
   - "scilpy":
       description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
-
+args:
+  local_fa_tracking_mask_threshold:
+    type: float
+    default: 0.1
+    description: "FA threshold for the tracking mask."
+  local_fa_seeding_mask_threshold:
+    type: float
+    default: 0.1
+    description: "FA threshold for the seeding mask."
+  local_wm_tracking_mask_threshold:
+    type: float
+    default: 0.5
+    description: |
+      WM threshold for the tracking mask. If the mask
+      is binary, this threshold has no effect.
+  local_wm_seeding_mask_threshold:
+    type: float
+    default: 0.5
+    description: |
+      WM threshold for the seeding mask. If the mask
+      is binary, this threshold has no effect.
+  local_tracking_mask_type:
+    type: string
+    default: "wm"
+    choices:
+      - "wm"
+      - "fa"
+    description: Strategy to use to compute the tracking mask.
+  local_seeding_mask_type:
+    type: string
+    default: "wm"
+    choices:
+      - "wm"
+      - "fa"
+    description: Strategy to use to compute the seeding mask.
+  local_step:
+    type: float
+    default: 0.5
+    description: Tracking Step size.
+  local_random_seed:
+    type: int
+    default: 0
+    description: Seed for random number generators.
+  local_seeding:
+    type: string
+    default: "npv"
+    choices:
+      - "npv"
+      - "nt"
+    description: Seeding strategy, either Number Per Voxel (npv) or Number Total (nt).
+  local_nbr_seeds:
+    type: int
+    default: 1000
+    description: Number of seeds per voxel (if npv) or total number of seeds (if nt).
+  local_min_len:
+    type: float
+    default: 10.0
+    description: Minimum length of streamlines to keep.
+  local_max_len:
+    type: float
+    default: 250.0
+    description: Maximum length of streamlines to keep.
+  local_theta:
+    type: float
+    default: 40.0
+    description: Maximum angular difference between tracking steps, in degrees.
+  local_sfthres:
+    type: float
+    default: 0.0
+    description: Spherical function threshold for tracking.
+  local_algo:
+    type: string
+    default: "eudx"
+    choices:
+      - "det"
+      - "prob"
+    description: Algorithm to use for tracking.
+  local_compress_value:
+    type: float
+    default: 0.0
+    description: Compression value for the streamlines, in mm. If 0, no compression is applied.
+  basis:
+    type: string
+    default: "descoteaux07_legacy"
+    choices:
+      - "descoteaux07_legacy"
+      - "descoteaux07"
+      - "tournier07"
+      - "tournier07_legacy"
+    description: Spherical basis used for FODF reconstruction.
+  gpu_batch_size:
+    type: int
+    default: 10000
+    description: Seed batch size for GPU processing.
+  enable_gpu:
+    type: boolean
+    default: false
+    description: Enable GPU tracking kernel.
+  run_qc:
+    type: boolean
+    default: true
+    description: Enable quality control image generation for tracking.
 input:
   - meta:
       type: map
@@ -19,7 +120,7 @@ input:
 
   - wm:
       type: file
-      description: Nifti image white matter mask.
+      description: Nifti image white matter probability map or mask.
       pattern: "*.{nii,nii.gz}"
 
   - fodf:

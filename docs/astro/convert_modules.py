@@ -91,7 +91,10 @@ def convert_module_to_md(yaml_data):
             param_type = param[name]['type'].replace("\n", " ")
             description = param[name]['description'].replace("\n", " ")
             try:
-                choices = param[name]['choices'].replace("\n", " ")
+                if isinstance(param[name]['choices'], str):
+                    choices = param[name]['choices'].replace("\n", " ")
+                elif isinstance(param[name]['choices'], list):
+                    choices = ", ".join(param[name]['choices']).replace("\n", " ")
             except KeyError:
                 choices = ""
             default = param[name]['default']

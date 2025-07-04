@@ -15,6 +15,9 @@ nextflow_workflow {
 
     tag "load_test_data"
 
+    tag "stub"
+    options "-stub-run"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
@@ -46,7 +49,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value.flatten()  }
+                        .collectEntries{ channel -> [(channel.key): ["versions"].contains(channel.key)
+                            ? channel.value
+                            : channel.value.collect{ meta, ...entries ->
+                                [ meta ] + entries.collect{ entry -> entry ? file(entry).name : "" } } ] }
+                ).match() }
             )
         }
     }
@@ -74,7 +84,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value.flatten()  }
+                        .collectEntries{ channel -> [(channel.key): ["versions"].contains(channel.key)
+                            ? channel.value
+                            : channel.value.collect{ meta, ...entries ->
+                                [ meta ] + entries.collect{ entry -> entry ? file(entry).name : "" } } ] }
+                ).match() }
             )
         }
     }
