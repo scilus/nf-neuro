@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
 name: reconst_fodf
 description: Perform FODF reconstruction and compute FODF metrics from a dwi volume
   for a selected number of shells. Note that multiple choices of FODF reconstruction
@@ -27,56 +27,46 @@ input:
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - dwi:
         type: file
         description: Nifti DWI volume to reconstruct FODF from.
         pattern: "*.{nii,nii.gz}"
-
     - bval:
         type: file
         description: B-values in FSL format.
         pattern: "*.bval"
-
     - bvec:
         type: file
         description: B-vectors in FSL format.
         pattern: "*.bvec"
-
     - mask:
         type: file
         description: B0 mask.
         pattern: "*.{nii,nii.gz}"
-
     - fa:
         type: file
         description: FA map.
         pattern: "*.{nii,nii.gz}"
-
     - md:
         type: file
         description: MD map.
         pattern: "*.{nii,nii.gz}"
-
     - wm_frf:
         type: file
         description: Fiber Response Function (FRF) for the white matter (WM). In the
           case of single-shell method, this should be the only input FRF. In the case
           of multi-shell method, gm_frf and csf_frf are also mandatory.
         pattern: "*.txt"
-
     - gm_frf:
         type: file
         description: Fiber Response Function (FRF) for the grey matter (GM). Only use
           with multi-shell method, along with wm_frf and csf_frf.
         pattern: "*.txt"
-
     - csf_frf:
         type: file
         description: Fiber Response Function (FRF) for the CSF. Only use with multi-shell
           method, along with wm_frf and gm_frf.
         pattern: "*.txt"
-
 output:
   - fodf:
       - meta:
@@ -158,10 +148,6 @@ output:
           type: file
           description: Peak values file.
           pattern: "*__peak_values.nii.gz"
-      - ues:
-          type: integer
-          description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
-          pattern: "remove-me"
   - peak_indices:
       - meta:
           type: map

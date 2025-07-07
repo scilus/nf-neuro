@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
 name: preproc_eddy
 description: Apply Eddy (and Topup if already run)
 keywords:
@@ -20,58 +20,6 @@ tools:
       description: FSL Toolbox
       homepage: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
       doi: 10.1016/j.neuroimage.2011.09.015
-input:
-  # Only when we have meta
-  - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
-
-    - dwi:
-        type: file
-        description: DWI Nifti image
-        pattern: "*.{nii,nii.gz}"
-
-    - bval:
-        type: file
-        description: B-values in FSL format [DWI].
-        pattern: "*.bval"
-
-    - bvec:
-        type: file
-        description: B-values in FSL format [DWI].
-        pattern: "*.bvec"
-
-    - rev_dwi:
-        type: file
-        description: DWI Nifti image [rev-DWI].
-        pattern: "*.{nii,nii.gz}"
-
-    - rev_bval:
-        type: file
-        description: B-values in FSL format [rev-DWI].
-        pattern: "*.bval"
-
-    - rev_bvec:
-        type: file
-        description: B-vectors in FSL format [rev-DWI].
-        pattern: "*.bvec"
-
-    - corrected_b0s:
-        type: file
-        description: Nifti volume b0 corrected
-        pattern: "*__corrected_b0s.nii.gz"
-
-    - topup_fieldcoef:
-        type: file
-        description: Nifti volume - topup field to correct for distorsion
-        pattern: "*_fieldcoef.nii.gz"
-
-    - topup_movpart:
-        type: file
-        description: Text file - topup movpart
-        pattern: "*__movpar.txt"
 args:
   - slice_drop_flag:
       type: boolean
@@ -118,6 +66,48 @@ args:
       type: boolean
       description: Run QC for Eddy.
       default: false
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - dwi:
+        type: file
+        description: DWI Nifti image
+        pattern: "*.{nii,nii.gz}"
+    - bval:
+        type: file
+        description: B-values in FSL format [DWI].
+        pattern: "*.bval"
+    - bvec:
+        type: file
+        description: B-values in FSL format [DWI].
+        pattern: "*.bvec"
+    - rev_dwi:
+        type: file
+        description: DWI Nifti image [rev-DWI].
+        pattern: "*.{nii,nii.gz}"
+    - rev_bval:
+        type: file
+        description: B-values in FSL format [rev-DWI].
+        pattern: "*.bval"
+    - rev_bvec:
+        type: file
+        description: B-vectors in FSL format [rev-DWI].
+        pattern: "*.bvec"
+    - corrected_b0s:
+        type: file
+        description: Nifti volume b0 corrected
+        pattern: "*__corrected_b0s.nii.gz"
+    - topup_fieldcoef:
+        type: file
+        description: Nifti volume - topup field to correct for distorsion
+        pattern: "*_fieldcoef.nii.gz"
+    - topup_movpart:
+        type: file
+        description: Text file - topup movpart
+        pattern: "*__movpar.txt"
 output:
   - dwi_corrected:
       - meta:
@@ -139,10 +129,6 @@ output:
           type: file
           description: B-values corrected in FSL format
           pattern: "*__dwi_eddy_corrected.bval"
-      - _corrected:
-          type: integer
-          description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
-          pattern: "remove-me"
   - bvec_corrected:
       - meta:
           type: map

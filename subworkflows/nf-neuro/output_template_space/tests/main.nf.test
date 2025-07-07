@@ -5,7 +5,7 @@ nextflow_workflow {
     workflow "OUTPUT_TEMPLATE_SPACE"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/output_template_space"
 
     tag "registration"
