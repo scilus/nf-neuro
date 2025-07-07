@@ -60,7 +60,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -108,13 +108,13 @@
                 ]
             ],
             [
-
+                
             ],
             [
-
+                
             ],
             [
-
+                
             ]
         ],
         "meta": {
@@ -154,16 +154,16 @@
                     ]
                 ],
                 "11": [
-
+                    
                 ],
                 "12": [
-
+                    
                 ],
                 "13": [
-
+                    
                 ],
                 "14": [
-
+                    
                 ],
                 "15": [
                     "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
@@ -187,19 +187,16 @@
                     ]
                 ],
                 "4": [
-
+                    
                 ],
                 "5": [
-
-
+                    
                 ],
                 "6": [
-
-
+                    
                 ],
                 "7": [
-
-
+                    
                 ],
                 "8": [
                     [
@@ -211,10 +208,10 @@
                     ]
                 ],
                 "9": [
-
+                    
                 ],
                 "endpoints_head": [
-
+                    
                 ],
                 "endpoints_metric_stats": [
                     [
@@ -235,7 +232,7 @@
                     ]
                 ],
                 "endpoints_tail": [
-
+                    
                 ],
                 "length": [
                     [
@@ -247,10 +244,10 @@
                     ]
                 ],
                 "lesion_map": [
-
+                    
                 ],
                 "lesion_stats": [
-
+                    
                 ],
                 "mean_std": [
                     [
@@ -271,19 +268,19 @@
                     ]
                 ],
                 "streamline_count": [
-
+                    
                 ],
                 "streamline_count_lesions": [
-
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
                 ],
                 "volume": [
-
+                    
                 ],
                 "volume_lesions": [
-
+                    
                 ],
                 "volume_per_labels": [
                     [
@@ -295,7 +292,7 @@
                     ]
                 ],
                 "volume_per_labels_lesions": [
-
+                    
                 ]
             }
         ],
@@ -309,40 +306,40 @@
         "content": [
             {
                 "0": [
-
+                    
                 ],
                 "1": [
-
+                    
                 ],
                 "10": [
-
+                    
                 ],
                 "11": [
-
+                    
                 ],
                 "12": [
-
+                    
                 ],
                 "13": [
-
+                    
                 ],
                 "14": [
-
+                    
                 ],
                 "15": [
                     "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
-
+                    
                 ],
                 "4": [
-
+                    
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
                     [
@@ -350,44 +347,44 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_streamline_count.json:md5,bedf1fbd223dd47d9a8970dc779f296f"
+                        "test__streamline_count.json:md5,bedf1fbd223dd47d9a8970dc779f296f"
                     ]
                 ],
                 "7": [
-
+                    
                 ],
                 "8": [
-
+                    
                 ],
                 "9": [
-
+                    
                 ],
                 "endpoints_head": [
-
+                    
                 ],
                 "endpoints_metric_stats": [
-
+                    
                 ],
                 "endpoints_raw": [
-
+                    
                 ],
                 "endpoints_tail": [
-
+                    
                 ],
                 "length": [
-
+                    
                 ],
                 "lesion_map": [
-
+                    
                 ],
                 "lesion_stats": [
-
+                    
                 ],
                 "mean_std": [
-
+                    
                 ],
                 "mean_std_per_point": [
-
+                    
                 ],
                 "streamline_count": [
                     [
@@ -395,33 +392,33 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_streamline_count.json:md5,bedf1fbd223dd47d9a8970dc779f296f"
+                        "test__streamline_count.json:md5,bedf1fbd223dd47d9a8970dc779f296f"
                     ]
                 ],
                 "streamline_count_lesions": [
-
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
                 ],
                 "volume": [
-
+                    
                 ],
                 "volume_lesions": [
-
+                    
                 ],
                 "volume_per_labels": [
-
+                    
                 ],
                 "volume_per_labels_lesions": [
-
+                    
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2024-08-01T13:42:46.785058"
+        "timestamp": "2025-07-04T21:10:39.637231712"
     }
 }
