@@ -1,0 +1,33 @@
+nextflow_process {
+
+    name "Test Process VASCULAR_EICAB"
+    script "../main.nf"
+    process "VASCULAR_EICAB"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "vascular"
+    tag "vascular/eicab"
+
+    test("segmentation - eicab") {
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    [ file("/workspaces/nf-neuro/data/sub-OAS30001_ses-d2430_acq-TOF_angio_resampled.nii.gz") ]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.eicabdirectory.get(0).get(1)).name,
+                    file(process.out.eicabcw.get(0).get(1)).name,
+                    process.out.versions).match()}
+            )
+        }
+    }
+}

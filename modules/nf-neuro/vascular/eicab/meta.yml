@@ -1,0 +1,61 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "vascular_eicab"
+description: |
+  eICAB automatically segments and labels the Internal Carotid Arteries (ICA), Basilar Artery (BA), Anterior Communicating
+  Artery (AComm), Anterior Cerebral Arteries (ACA), Middle Cerebral Arteries (MCA), Posterior Communicating Arteries (
+  PComm), Posterior Cerebral Arteries (PCA), Superior Cerebellar Arteries (SCA) and Anterior Choroidal Arteries (AChA).
+keywords:
+  - angiography
+  - segmentation
+  - labelling
+  - vascular
+tools:
+  - "vascular":
+      homepage: "https://gitlab.com/FelixDumais/vessel_segmentation_snaillab/"
+      description: "Automated segmentation and labeling of the main intracranial arteries on MR angiography images"
+      tool_dev_url: "https://gitlab.com/FelixDumais/vessel_segmentation_snaillab/"
+      doi: "10.1016/j.neuroimage.2022.119425"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+      mandatory: true
+
+  - in_tof:
+      type: file
+      description: ToF MRA image
+      pattern: "*.{nii/nii.gz}"
+      mandatory: true
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - eicabdirectory:
+      type: directory
+      description: Sorted BAM/CRAM/SAM file
+      pattern: "*_eicab"
+
+  - eicabcw:
+      type: file
+      description: Segmented Circle of Willis (CW) annotated
+      pattern: "*_eicab_cw.nii.gz"
+
+authors:
+  - "@arnaudbore"
+maintainers:
+  - "@arnaudbore"
+references:
+  - "eICAB: A novel deep learning pipeline for Circle of Willis multiclass segmentation and analysis"
