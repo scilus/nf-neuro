@@ -60,20 +60,20 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*out_deform_warp.{nii,nii.gz,mgz,m3z}":
+      - "*out_warp.{nii,nii.gz,mgz,m3z}":
           type: file
           description: Deform transform. Default usage outputs ANTs (ITK) format .nii.gz
-          pattern: "*.{nii,nii.gz,mgz,m3z}"
+          pattern: "*out_warp.{nii,nii.gz,mgz,m3z}"
   - affine_transform:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*out_affine_warp.{txt,lta,mat,dat}":
+      - "*out_affine.{txt,lta,mat,dat}":
           type: map
           description: Affine transform. Default usage outputs ANTs (ITK) format .txt
-          pattern: "*.{txt,lta,mat,dat}"
+          pattern: "*out_affine.{txt,lta,mat,dat}"
   - versions:
       - versions.yml:
           type: file
