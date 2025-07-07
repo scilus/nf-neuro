@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
 name: reconst_shmetrics
 description: Compute FODF metrics from given FODF or SH map.
 keywords:
@@ -9,34 +9,28 @@ tools:
   - scilpy:
       description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - sh:
         type: file
         description: SH or FODF map.
         pattern: "*.{nii,nii.gz}"
-
     - mask:
         type: file
         description: B0 mask.
         pattern: "*.{nii,nii.gz}"
-
     - fa:
         type: file
         description: FA map.
         pattern: "*.{nii,nii.gz}"
-
     - md:
         type: file
         description: MD map.
         pattern: "*.{nii,nii.gz}"
-
 output:
   - peaks:
       - meta:
@@ -68,10 +62,6 @@ output:
           type: file
           description: Peaks values file.
           pattern: "*peak_values.nii.gz"
-      - "ues":
-          type: integer
-          description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
-          pattern: "remove-me"
   - afd_max:
       - meta:
           type: map

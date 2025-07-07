@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
 name: io_readbids
 description: Module reading bids specification for an input folder.
 keywords:
@@ -36,10 +36,10 @@ args:
       default: false
 output:
   - bidsstructure:
-      - tractoflow_bids_struct.json:
+      - bids_struct.json:
           type: file
           description: json file containing tractoflow bids structure
-          pattern: "tractoflow_bids_struct.json"
+          pattern: "bids_struct.json"
   - versions:
       - versions.yml:
           type: file

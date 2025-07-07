@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
 name: reconst_dtimetrics
 description: Script to compute all of the Diffusion Tensor Imaging (DTI) metrics
 keywords:
@@ -10,34 +10,6 @@ tools:
   - scilpy:
       description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
-input:
-  - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
-    - dwi:
-        type: file
-        description: Nifti DWI volume used to extract DTI metrics.
-        pattern: "*.{nii,nii.gz}"
-        mandatory: true
-    - bval:
-        type: file
-        description: B-values in FSL format.
-        pattern: "*.bval"
-        mandatory: true
-    - bvec:
-        type: file
-        description: B-vectors in FSL format.
-        pattern: "*.bvec"
-        mandatory: true
-    - b0mask:
-        type: file
-        description: Nifti b0 volume file used to mask the input image.
-        pattern: "*.{nii,nii.gz}"
-        mandatory: false
-
 args:
   - dwi_shell_tolerance:
       type: integer
@@ -119,7 +91,32 @@ args:
       type: boolean
       description: "Compute the residual."
       default: true
-
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - dwi:
+        type: file
+        description: Nifti DWI volume used to extract DTI metrics.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
+    - bval:
+        type: file
+        description: B-values in FSL format.
+        pattern: "*.bval"
+        mandatory: true
+    - bvec:
+        type: file
+        description: B-vectors in FSL format.
+        pattern: "*.bvec"
+        mandatory: true
+    - b0mask:
+        type: file
+        description: Nifti b0 volume file used to mask the input image.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
 output:
   - ad:
       - meta:
@@ -181,10 +178,6 @@ output:
           type: file
           description: Eigenvalues of the tensor.
           pattern: "*__evals.{nii,nii.gz}"
-      - s:
-          type: integer
-          description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
-          pattern: "remove-me"
   - evals_e1:
       - meta:
           type: map
@@ -195,10 +188,6 @@ output:
           type: file
           description: First eigenvalue.
           pattern: "*__evals_e1.{nii,nii.gz}"
-      - s_e1:
-          type: integer
-          description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
-          pattern: "remove-me"
   - evals_e2:
       - meta:
           type: map
@@ -209,10 +198,6 @@ output:
           type: file
           description: Second eigenvalue.
           pattern: "*__evals_e2.{nii,nii.gz}"
-      - s_e2:
-          type: integer
-          description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
-          pattern: "remove-me"
   - evals_e3:
       - meta:
           type: map
@@ -223,10 +208,6 @@ output:
           type: file
           description: Third eigenvalue.
           pattern: "*__evals_e3.{nii,nii.gz}"
-      - s_e3:
-          type: integer
-          description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
-          pattern: "remove-me"
   - fa:
       - meta:
           type: map
