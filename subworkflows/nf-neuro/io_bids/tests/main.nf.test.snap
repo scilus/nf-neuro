@@ -113,9 +113,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T02:54:32.080983093"
+        "timestamp": "2025-07-04T20:56:13.389095658"
     },
     "Read BIDS directory - without .bidsignore": {
         "content": [
@@ -231,8 +231,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T02:53:35.118614118"
+        "timestamp": "2025-07-04T20:56:06.299441052"
     }
 }
