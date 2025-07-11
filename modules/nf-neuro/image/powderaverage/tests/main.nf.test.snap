@@ -3,70 +3,46 @@
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_pwd_avg.nii.gz:md5,b0065ccd52d4921738a6538c3cd5d86a"
-                    ]
+                    
                 ],
                 "1": [
-                    "versions.yml:md5,3619451d57a493ca225d01175c202215"
+                    
                 ],
                 "pwd_avg": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_pwd_avg.nii.gz:md5,b0065ccd52d4921738a6538c3cd5d86a"
-                    ]
+                    
                 ],
                 "versions": [
-                    "versions.yml:md5,3619451d57a493ca225d01175c202215"
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-11-22T17:09:05.483883967"
+        "timestamp": "2025-06-27T16:38:33.039923609"
     },
     "powderaverage - no mask and no shell": {
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_pwd_avg.nii.gz:md5,168d711e7b84fad327966ca3d49ede0f"
-                    ]
+                    
                 ],
                 "1": [
-                    "versions.yml:md5,3619451d57a493ca225d01175c202215"
+                    
                 ],
                 "pwd_avg": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_pwd_avg.nii.gz:md5,168d711e7b84fad327966ca3d49ede0f"
-                    ]
+                    
                 ],
                 "versions": [
-                    "versions.yml:md5,3619451d57a493ca225d01175c202215"
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-11-22T19:45:06.796263708"
+        "timestamp": "2025-06-27T16:33:58.62746552"
     }
 }
