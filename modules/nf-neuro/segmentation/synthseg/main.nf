@@ -144,9 +144,17 @@ process SEGMENTATION_SYNTHSEG {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    mri_synthseg -h
-    mri_binarize -h
-    mri_convert -h
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
+
+    mri_synthseg --help
+    mri_binarize --help
+    mri_convert --help
 
     touch ${prefix}__mask_wm.nii.gz
     touch ${prefix}__mask_gm.nii.gz

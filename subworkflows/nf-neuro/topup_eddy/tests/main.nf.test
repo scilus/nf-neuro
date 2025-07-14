@@ -17,6 +17,9 @@ nextflow_workflow {
 
     tag "load_test_data"
 
+    tag "stub"
+    options "-stub-run"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
@@ -36,14 +39,14 @@ nextflow_workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
                     ]}
                 input[1] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
                     ]}
                 input[2] = Channel.from( [] )
@@ -58,10 +61,14 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ out -> ["b0_mask", "bval", "versions"].contains(out.key)
-                        ? out.value
-                        : file(out.value.get(0).get(1)).name }
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
                 ).match() }
             )
         }
@@ -73,19 +80,19 @@ nextflow_workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
                     ]}
                 input[1] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
                     ]}
                 input[2] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         [],
                         [],
                         []
@@ -93,7 +100,7 @@ nextflow_workflow {
 
                 input[3] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz")
                     ]}
                 input[4] = Channel.from( [] )
@@ -106,10 +113,14 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ out -> ["b0_mask", "bval", "versions"].contains(out.key)
-                        ? out.value
-                        : file(out.value.get(0).get(1)).name }
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
                 ).match() }
             )
         }
@@ -122,26 +133,26 @@ nextflow_workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
                     ]}
                 input[1] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
                     ]}
                 input[2] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.bvec")
                     ]}
                 input[3] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz")
                     ]}
                 input[4] = Channel.from( [] )
@@ -154,10 +165,14 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out
-                        .findAll{ !it.key.isInteger() && it.value  }
-                        .collect{ out -> ["b0_mask", "bval", "versions"].contains(out.key)
-                        ? out.value
-                        : file(out.value.get(0).get(1)).name }
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
                 ).match() }
             )
         }

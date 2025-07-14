@@ -4,7 +4,7 @@ process PREPROC_TOPUP {
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:latest"}"
+        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(b0), path(rev_dwi), path(rev_bval), path(rev_bvec), path(rev_b0)
@@ -127,6 +127,19 @@ process PREPROC_TOPUP {
     def prefix_topup = task.ext.prefix_topup ? task.ext.prefix_topup : ""
 
     """
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
+
+    scil_volume_math.py -h
+    scil_dwi_extract_b0.py -h
+    antsRegistrationSyNQuick.sh
+    scil_dwi_prepare_topup_command.py -h
+
     touch ${prefix}__corrected_b0s.nii.gz
     touch ${prefix}__rev_b0_warped.nii.gz
     touch ${prefix}__rev_b0_mean.nii.gz
@@ -144,17 +157,5 @@ process PREPROC_TOPUP {
         mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
         imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
-
-    function handle_code () {
-    local code=\$?
-    ignore=( 1 )
-    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
-    }
-    trap 'handle_code' ERR
-
-    scil_volume_math.py -h
-    scil_dwi_extract_b0.py -h
-    antsRegistrationSyNQuick.sh
-    scil_dwi_prepare_topup_command.py -h
     """
 }

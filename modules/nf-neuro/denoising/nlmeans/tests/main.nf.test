@@ -62,4 +62,42 @@ nextflow_process {
 
     }
 
+    test("denoising - nlmeans - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        b0: it.simpleName == "raw_b0"
+                        segmentation: it.simpleName == "raw_segmentation"
+                    }
+                ch_b0 = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/slices/axial.nii.gz")
+                    ]
+                }
+                input[0] = ch_b0
+                    .join(ch_mask)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
 }

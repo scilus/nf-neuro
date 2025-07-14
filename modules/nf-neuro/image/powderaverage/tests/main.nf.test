@@ -77,4 +77,31 @@ nextflow_process {
             )
         }
     }
+
+    test("powderaverage - stub-run") {
+        tag "stub"
+        options "-stub-run"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi/dwi.bval"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
 }
