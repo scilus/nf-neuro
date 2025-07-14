@@ -1,0 +1,142 @@
+nextflow_process {
+
+    name "Test Process RECONST_DKIMETRICS"
+    script "../main.nf"
+    process "RECONST_DKIMETRICS"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "reconst"
+    tag "reconst/dkimetrics"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "DWIms1000-2000-dir10-10.zip", "segmentation.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("reconst - dkimetrics") {
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIms1000-2000-dir10-10"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                ch_dwi = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/brainmask.nii.gz")
+                    ]
+                }
+                input[0] = ch_dwi
+                    .join(ch_mask)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.ak.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.dki_ad.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.dki_fa.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.dki_md.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.dki_rd.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.dki_residual.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.mk.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.msd.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.rk.get(0).get(1), 6),
+                    file(process.out.mqc.get(0).get(1)).name,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("reconst - dkimetrics_with_b0mask") {
+        config "./nextflow_light.config"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                input[0] = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.dki_fa.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.dki_ad.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.dki_md.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.dki_rd.get(0).get(1), 6),
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("reconst - stub-run dkimetrics") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                input[0] = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
+}

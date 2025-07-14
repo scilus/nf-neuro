@@ -1,0 +1,139 @@
+name: "reconst_dkimetrics"
+
+description: Script to compute all of the Diffusion Kurtosis Imaging (DKI) metrics
+keywords:
+  - nifti
+  - DKI
+  - tensor
+  - scilpy
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - dwi:
+      type: file
+      description: Nifti DWI volume used to extract DTI metrics.
+      pattern: "*.{nii,nii.gz}"
+
+  - bval:
+      type: file
+      description: B-values in FSL format.
+      pattern: "*.bval"
+
+  - bvec:
+      type: file
+      description: B-vectors in FSL format.
+      pattern: "*.bvec"
+
+  - b0mask:
+      type: file
+      description: Nifti b0 volume file used to mask the input image.
+      pattern: "*.{nii,nii.gz}"
+
+args:
+  - dwi_shell_tolerance:
+      type: int
+      description: "Tolerance for the shell detection algorithm."
+      default: 50
+  - mask:
+      type: boolean
+      description: "Use the mask to mask the input image."
+      default: true
+  - ak:
+      type: boolean
+      description: "Compute the axial kurtosis."
+      default: true
+  - dki_ad:
+      type: boolean
+      description: "Compute the axial diffusivity from DKI."
+      default: true
+  - dki_fa:
+      type: boolean
+      description: "Compute the fractional anisotropy diffusivity from DKI."
+      default: true
+  - dki_md:
+      type: boolean
+      description: "Compute the mean diffusivity from DKI."
+      default: true
+  - dki_rd:
+      type: boolean
+      description: "Compute the radial diffusivity from DKI."
+      default: true
+  - dki_residual:
+      type: boolean
+      description: "Compute the redisual."
+      default: true
+  - mk:
+      type: boolean
+      description: "Compute the mean kurtosis."
+      default: true
+  - msd:
+      type: boolean
+      description: "Compute the mean signal diffusion."
+      default: true
+  - rk:
+      type: boolean
+      description: "Compute the radial kurtosis."
+      default: true
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+  - ak:
+      type: file
+      description: Output filename for the axial kurtosis.
+      pattern: "*__ak.{nii,nii.gz}"
+  - dki_ad:
+      type: file
+      description: Output filename for the axial diffusivity from DKI.
+      pattern: "*__dki_ad.{nii,nii.gz}"
+  - dki_fa:
+      type: file
+      description: Output filename for the fractional anisotropy diffusivity from DKI.
+      pattern: "*__dki_fa.{nii,nii.gz}"
+  - dki_md:
+      type: file
+      description: Output filename for the mean diffusivity from DKI.
+      pattern: "*__dki_md.{nii,nii.gz}"
+  - dki_rd:
+      type: file
+      description: Output filename for the radial diffusivity from DKI.
+      pattern: "*__dki_rd.{nii,nii.gz}"
+  - dki_residual:
+      type: file
+      description: Output filename for the map of the residual of the tensor fit.
+        Note. In previous versions, the resulting map was normalized.
+      pattern: "*__dki_residual.{nii,nii.gz}"
+  - mk:
+      type: file
+      description: Output filename for the mean diffusivity kurtosis.
+      pattern: "*__mk.{nii,nii.gz}"
+  - msd:
+      type: file
+      description: Output filename for the mean signal diffusion (powder-average).
+      pattern: "*__msd.{nii,nii.gz}"
+  - rk:
+      type: file
+      description: Output filename for the radial kurtosis.
+      pattern: "*__rk.{nii,nii.gz}"
+  - mqc:
+      type: file
+      pattern: "*__dki_mqc.png"
+      description: .png file containing screenshots of some DKI metrics. Made for use in MultiQC report.
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@scilus"
