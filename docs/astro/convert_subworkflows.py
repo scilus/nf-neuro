@@ -77,7 +77,7 @@ def convert_subworkflow_to_md(yaml_data):
     try:
         params = "|  | Type | Description | Default |\n"
         params += "|-------|------|-------------|---------|\n"
-        for param in yaml_data['parameters']:
+        for param in yaml_data['args']:
             name = next(iter(param))
             param_type = param[name]['type'].replace("\n", " ")
             description = param[name]['description'].replace("\n", " ")
