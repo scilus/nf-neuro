@@ -10,6 +10,7 @@ https://github.com/mskcc-omics-workflows/yaml_to_md/blob/main/yaml_to_md.py
 
 import argparse
 import yaml
+import datetime
 
 from pathlib import Path
 
@@ -23,69 +24,131 @@ def read_yml(yml_file):
 
 def _build_arg_parser():
     p = argparse.ArgumentParser(
-            description='Convert modules YAML to a Markdown files',
+            description='Convert a module\'s meta.yml file to markdown',
             formatter_class=argparse.RawTextHelpFormatter)
 
-    p.add_argument('modules_dir', help='Path to the modules directory')
-    p.add_argument('output_dir', help='Path to output the Markdown files')
+    p.add_argument('module_meta', help='Module meta.yml file to convert')
+    p.add_argument('last_commit', help='Last commit hash of the module')
+    p.add_argument('output', help='Name of the output markdown file')
 
     return p
 
+def TEMPLATE(
+    module_name : str,
+    short_name : str,
+    description : str,
+    keywords : list[str],
+    params : str | None,
+    inputs : str,
+    outputs : str,
+    tools : str,
+    authors : str,
+    maintainers : str | None,
+    last_updated : str,
+    last_commit : str):
 
-def convert_module_to_md(yaml_data):
-    # Order:
-    # Inputs
-    # Params
-    # outputs
-    # Tools
-    # Keywords
+    return f"""\
+---
+title: {short_name}
+head:
+- tag: meta
+attrs:
+    name: keywords
+    content: {', '.join(keywords)}
+- tag: meta
+attrs:
+    name: description
+    content: {description}
+---
 
+## Module: {module_name}
+
+{description}
+
+**Keywords :** {', '.join(keywords)}
+
+---
+
+### Inputs
+
+| | Type | Description | Mandatory | Pattern |
+|-|------|-------------|-----------|---------|
+{inputs}
+
+### Outputs
+
+| | Type | Description | Pattern |
+|-|------|-------------|---------|
+{outputs}
+
+{f'''
+### Arguments (see [process.ext](https://www.nextflow.io/docs/latest/reference/process.html#ext))
+| | Type | Description | Default | Choices |
+|-|------|-------------|---------|---------|
+{params}
+''' if params else ''}
+
+---
+
+### Tools
+
+| | Description | DOI |
+|-|-------------|-----|
+{tools}
+
+---
+
+### Authors
+
+{authors}
+
+{'### Maintainers' if maintainers else ''}
+
+{maintainers}
+
+---
+**Last updated** : [{last_updated}](https://github.com/scilus/nf-neuro/commit/{last_commit})
+"""
+
+
+def convert_module_to_md(yaml_data, commit_hash):
     # Take the module name and replace the _ by /.
     module_name = yaml_data['name'].replace("_", "/")
     # Take only the second part of the module name.
     short_name = module_name.split("/")[1]
 
-    # Create a table for the Keywords section.
-    keywords = "|  |\n"
-    keywords += "|----------|\n"
-    for keyword in yaml_data['keywords']:
-        keywords += f"| {keyword} |\n"
-
     # Table for the tools section.
-    tools = "|  | Description | Homepage | DOI |\n"
-    tools += "|------|-------------|----------|-----|\n"
+    tools = []
     for tool in yaml_data['tools']:
         name = next(iter(tool))
         description = tool[name]['description'].replace("\n", " ")
         homepage = tool[name].get('homepage', "").replace("\n", " ")
         doi = tool[name].get('doi', "").replace("\n", " ")
-        tools += f"| {name} | {description} | {homepage} | {doi} |\n"
+        tools.append(f"| [{name}]({homepage}) | {description} | {doi} |")
 
     # Table for inputs.
-    inputs = "|  | Type | Description | Mandatory | Pattern |\n"
-    inputs += "|-------|------|-------------|---------|---------|\n"
-    for input in yaml_data['input']:
-        name = next(iter(input))
-        input_type = input[name]['type'].replace("\n", " ")
-        description = input[name]['description'].replace("\n", " ")
+    inputs = []
+    for input_ in yaml_data['input']:
+        name = next(iter(input_))
+        input_type = input_[name]['type'].replace("\n", " ")
+        description = input_[name]['description'].replace("\n", " ")
         try:  # If no pattern, then set it to empty string.
-            pattern = input[name]['pattern'].replace("\n", " ")
+            pattern = input_[name]['pattern'].replace("\n", " ")
         except KeyError:
             pattern = ""
         if name != "meta":
             try:
-                mandatory = str(input[name]['mandatory']).replace("\n", " ").lower()
+                mandatory = str(input_[name]['mandatory']).replace("\n", " ").lower()
             except KeyError:
                 mandatory = ""
         else:
             mandatory = "true"
 
-        inputs += f"| {name} | {input_type} | {description} | {mandatory} | {pattern} |\n"
+        inputs.append(f"| {name} | {input_type} | {description} | {mandatory} | {pattern} |")
 
     # Table for params.
     try:
-        params = "|  | Type | Description | Choices | Default |\n"
-        params += "|-------|------|-------------|---------|---------|\n"
+        params = []
         for param in yaml_data['args']:
             name = next(iter(param))
             param_type = param[name]['type'].replace("\n", " ")
@@ -98,13 +161,12 @@ def convert_module_to_md(yaml_data):
             except KeyError:
                 choices = ""
             default = param[name]['default']
-            params += f"| {name} | {param_type} | {description} | {choices} | {default} |\n"
+            params.append(f"| {name} | {param_type} | {description} | {default} | {choices} |")
     except KeyError:
         params = ""
 
     # Table for outputs.
-    outputs = "|  | Type | Description | Pattern |\n"
-    outputs += "|--------|------|-------------|---------|\n"
+    outputs = []
     for output in yaml_data['output']:
         name = next(iter(output))
         output_type = output[name]['type'].replace("\n", " ")
@@ -113,42 +175,52 @@ def convert_module_to_md(yaml_data):
             pattern = output[name]['pattern'].replace("\n", " ")
         except KeyError:
             pattern = ""
-        outputs += f"| {name} | {output_type} | {description} | {pattern} |\n"
+        outputs.append(f"| {name} | {output_type} | {description} | {pattern} |")
 
-    # Markdown file needs a frontmatter for astro to read properly.
-    final_md = "---\n"
-    final_md += f"title: {short_name}\n"
-    final_md += "---\n\n"
+    # Authors list.
+    authors = []
+    for author in yaml_data['authors']:
+        if "@" in author:
+            authors.append(f"[{author.replace('@', '')}](https://github.com/{author.replace('@', '')})")
+        else:
+            authors.append(author)
 
-    final_md += f"## Module: {module_name}\n\n{yaml_data['description']}\n\n"
-    final_md += f"### Inputs\n\n{inputs}\n"
-    if params != "":
-        final_md += f"### Arguments\n\n{params}\n"
-    final_md += f"### Outputs\n\n{outputs}\n"
-    final_md += f"### Tools\n\n{tools}\n"
-    # final_md += f"### Keywords\n\n{keywords}\n"
-    final_md += f"### Authors\n\n{', '.join(yaml_data['authors'])}\n\n"
-    try:  # If no maintainers, then do not add the section.
-        final_md += f"## Maintainers\n\n{', '.join(yaml_data['maintainers'])}\n\n"
+    # Maintainers list.
+    try:
+        maintainers = []
+        for maintainer in yaml_data['maintainers']:
+            if "@" in maintainer:
+                maintainers.append(f"[{maintainer.replace('@', '')}](https://github.com/{maintainer.replace('@', '')})")
+            else:
+                maintainers.append(maintainer)
     except KeyError:
-        pass
+        maintainers = []
 
-    return final_md
+    return TEMPLATE(
+        module_name=module_name,
+        short_name=short_name,
+        description=yaml_data['description'],
+        keywords=yaml_data.get('keywords', []),
+        params="\n".join(params),
+        inputs="\n".join(inputs),
+        outputs="\n".join(outputs),
+        tools="\n".join(tools),
+        authors=", ".join(authors),
+        maintainers=", ".join(maintainers),
+        last_updated=datetime.datetime.now().strftime("%Y-%m-%d"),
+        last_commit=commit_hash
+    )
 
 
 def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
 
-    for category in [p for p in Path(args.modules_dir).iterdir() if p.is_dir()]:
-        output_dir = Path(args.output_dir).joinpath(category.name)
-        output_dir.mkdir(parents=True, exist_ok=True)
-        for module in [p for p in category.iterdir() if p.is_dir()]:
-            with open(module.joinpath('meta.yml').resolve(), 'r') as meta:
-                md_data = convert_module_to_md(yaml.safe_load(meta))
-                # Write the final markdown file.
-                output_path = output_dir.joinpath(f"{module.name}.md")
-                output_path.write_text(md_data)
+    with open(args.module_meta, 'r') as meta:
+        md_data = convert_module_to_md(yaml.safe_load(meta), args.last_commit)
+        # Write the final markdown file.
+        output_path = Path(args.output)
+        output_path.write_text(md_data)
 
 
 if __name__ == '__main__':

@@ -10,6 +10,7 @@ https://github.com/mskcc-omics-workflows/yaml_to_md/blob/main/yaml_to_md.py
 
 import argparse
 import yaml
+import datetime
 
 from pathlib import Path
 
@@ -26,35 +27,97 @@ def _build_arg_parser():
             description='Convert subworkflows YAML to Markdown files',
             formatter_class=argparse.RawTextHelpFormatter)
 
-    p.add_argument('subworkflows_dir', help='Path to the subworkflows directory')
-    p.add_argument('output_dir', help='Path to output the Markdown files')
+    p.add_argument('subworkflow_meta', help='Subworkflow meta.yml file to convert')
+    p.add_argument('last_commit', help='Last commit hash of the subworkflow')
+    p.add_argument('output', help='Name of the output markdown file')
 
     return p
 
 
-def convert_subworkflow_to_md(yaml_data):
-    # Order:
-    # Inputs
-    # Params
-    # outputs
-    # Tools
-    # Keywords
+def TEMPLATE(
+    subworkflow_name,
+    description,
+    keywords,
+    params,
+    inputs,
+    outputs,
+    components,
+    authors,
+    maintainers,
+    last_updated,
+    last_commit):
 
-    # Create a table for the Keywords section.
-    keywords = "|  |\n"
-    keywords += "|----------|\n"
-    for keyword in yaml_data['keywords']:
-        keywords += f"| {keyword} |\n"
+    return f"""\
+---
+title: {subworkflow_name}
+head:
+- tag: meta
+attrs:
+    name: keywords
+    content: {', '.join(keywords)}
+- tag: meta
+attrs:
+    name: description
+    content: {description}
+---
 
-    # Table for the components section.
-    components = "|  |\n"
-    components += "|----------|\n"
-    for component in yaml_data['components']:
-        components += f"| {component} |\n"
+## Subworkflow: {subworkflow_name}
 
+{description}
+
+**Keywords :** {', '.join(keywords)}
+
+---
+
+{f'''
+### Inputs
+
+| | Type | Description | Mandatory | Pattern |
+|-|------|-------------|-----------|---------|
+{inputs}
+''' if inputs else ''}
+
+{f'''
+### Outputs
+
+| | Type | Description | Pattern |
+|-|------|-------------|---------|
+{outputs}
+''' if outputs else ''}
+
+{f'''
+### Parameters (see [parameters](https://www.nextflow.io/docs/latest/config.html#parameters))
+| | Type | Description | Default | Choices |
+|-|------|-------------|---------|---------|
+{params}
+''' if params else ''}
+
+---
+
+{f'''
+### Components
+
+{components}
+''' if components else ''}
+
+---
+
+### Authors
+
+{authors}
+
+{'### Maintainers' if any(maintainers) else ''}
+
+{maintainers}
+
+---
+**Last updated** : [{last_updated}](https://github.com/scilus/nf-neuro/commit/{last_commit})
+"""
+
+
+def convert_subworkflow_to_md(yaml_data, commit_hash):
     # Table for inputs.
-    inputs = "|  | Type | Description | Mandatory | Pattern |\n"
-    inputs += "|-------|------|-------------|---------|---------|\n"
+    inputs = []
     for input in yaml_data['input']:
         name = next(iter(input))
         input_type = input[name]['type'].replace("\n", " ")
@@ -71,24 +134,29 @@ def convert_subworkflow_to_md(yaml_data):
         else:
             mandatory = "true"
 
-        inputs += f"| {name} | {input_type} | {description} | {mandatory} | {pattern} |\n"
+        inputs.append(f"| {name} | {input_type} | {description} | {mandatory} | {pattern} |")
 
     # Table for params.
     try:
-        params = "|  | Type | Description | Default |\n"
-        params += "|-------|------|-------------|---------|\n"
+        params = []
         for param in yaml_data['args']:
             name = next(iter(param))
             param_type = param[name]['type'].replace("\n", " ")
             description = param[name]['description'].replace("\n", " ")
             default = param[name]['default']
-            params += f"| {name} | {param_type} | {description} | {default} |\n"
+            try:  # If no choices, then set it to empty string.
+                if isinstance(param[name]['choices'], str):
+                    choices = param[name]['choices'].replace("\n", " ")
+                else:
+                    choices = ", ".join(param[name]['choices']).replace("\n", " ")
+            except KeyError:
+                choices = ""
+            params.append(f"| {name} | {param_type} | {description} | {default} | {choices} |")
     except KeyError:
         params = ""
 
     # Table for outputs.
-    outputs = "|  | Type | Description | Pattern |\n"
-    outputs += "|--------|------|-------------|---------|\n"
+    outputs = []
     for output in yaml_data['output']:
         name = next(iter(output))
         output_type = output[name]['type'].replace("\n", " ")
@@ -97,42 +165,40 @@ def convert_subworkflow_to_md(yaml_data):
             pattern = output[name]['pattern'].replace("\n", " ")
         except KeyError:
             pattern = ""
-        outputs += f"| {name} | {output_type} | {description} | {pattern} |\n"
+        outputs.append(f"| {name} | {output_type} | {description} | {pattern} |")
 
-    # Markdown file needs a frontmatter for astro to read properly.
-    final_md = "---\n"
-    final_md += f"title: {yaml_data['name']}\n"
-    final_md += "---\n\n"
+    # Components list
+    components = []
+    for component in yaml_data.get('components', []):
+        if "/" in component:
+            components.append(f"- [{component}](https://scilus.github.io/nf-neuro/api/modules/{component})")
+        else:
+            components.append(f"- [{component}](https://scilus.github.io/nf-neuro/api/subworkflows/{component})")
 
-    final_md += f"## Subworkflow: {yaml_data['name']}\n\n{yaml_data['description']}\n\n"
-    final_md += f"### Inputs\n\n{inputs}\n"
-    if params != "":
-        final_md += f"### Parameters\n\n{params}\n"
-    final_md += f"### Outputs\n\n{outputs}\n"
-    final_md += f"### Components\n\n{components}\n"
-    #final_md += f"### Keywords\n\n{keywords}\n"
-    final_md += f"### Authors\n\n{', '.join(yaml_data['authors'])}\n\n"
-    try:  # If no maintainers, then do not add the section.
-        final_md += f"## Maintainers\n\n{', '.join(yaml_data['maintainers'])}\n\n"
-    except KeyError:
-        pass
-
-    return final_md
+    return TEMPLATE(
+        subworkflow_name=yaml_data['name'],
+        description=yaml_data['description'],
+        keywords=yaml_data.get('keywords', []),
+        params="\n".join(params),
+        inputs="\n".join(inputs),
+        outputs="\n".join(outputs),
+        components="\n".join(components),
+        authors=", ".join(yaml_data['authors']),
+        maintainers=", ".join(yaml_data.get('maintainers', [])),
+        last_updated=datetime.datetime.now().strftime("%Y-%m-%d"),
+        last_commit=commit_hash
+    )
 
 
 def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
 
-    for subworkflow in [p for p in Path(args.subworkflows_dir).iterdir()
-                                if p.is_dir()]:
-
-        with open(subworkflow.joinpath("meta.yml").resolve(), 'r') as meta:
-            md_data = convert_subworkflow_to_md(yaml.safe_load(meta))
-            # Write the final markdown file.
-            output_path = Path(args.output_dir).joinpath(
-                f"{subworkflow.name}.md")
-            output_path.write_text(md_data)
+    with open(args.subworkflow_meta, 'r') as meta:
+        md_data = convert_subworkflow_to_md(yaml.safe_load(meta), args.last_commit)
+        # Write the final markdown file.
+        output_path = Path(args.output)
+        output_path.write_text(md_data)
 
 
 if __name__ == '__main__':
