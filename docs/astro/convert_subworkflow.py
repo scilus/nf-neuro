@@ -58,7 +58,8 @@ attrs:
 - tag: meta
 attrs:
     name: description
-    content: {description}
+    content: |
+        {description}
 ---
 
 ## Subworkflow: {subworkflow_name}

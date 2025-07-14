@@ -58,7 +58,8 @@ attrs:
 - tag: meta
 attrs:
     name: description
-    content: {description}
+    content: |
+        {description}
 ---
 
 ## Module: {module_name}
