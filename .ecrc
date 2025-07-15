@@ -4,7 +4,7 @@
     "IgnoreDefaults": false,
     "SpacesAfterTabs": false,
     "NoColor": false,
-    "Exclude": ["^tests/\\.runs/", "^\\.nf-test/", "^\\.venv/", "^node_modules/", "\\.nf-test.log$", "\\.nextflow" ,"^\\.git/"],
+    "Exclude": ["^tests/\\.runs/", "^\\.nf-test/", "^\\.venv/", "^node_modules/", "\\.nf-test.log$", "\\.nextflow" ,"^\\.git/", "^docs/astro/"],
     "AllowedContentTypes": [],
     "PassedFiles": [],
     "Disable": {

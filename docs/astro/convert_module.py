@@ -37,6 +37,7 @@ def TEMPLATE(
     module_name : str,
     short_name : str,
     description : str,
+    short_description : str,
     keywords : list[str],
     params : str | None,
     inputs : str,
@@ -52,14 +53,14 @@ def TEMPLATE(
 title: {short_name}
 head:
 - tag: meta
-attrs:
+  attrs:
     name: keywords
     content: {', '.join(keywords)}
 - tag: meta
-attrs:
+  attrs:
     name: description
     content: |
-        {description}
+        {short_description}
 ---
 
 ## Module: {module_name}
@@ -125,7 +126,7 @@ def convert_module_to_md(yaml_data, commit_hash):
         description = tool[name]['description'].replace("\n", " ")
         homepage = tool[name].get('homepage', "").replace("\n", " ")
         doi = tool[name].get('doi', "").replace("\n", " ")
-        tools.append(f"| [{name}]({homepage}) | {description} | {doi} |")
+        tools.append(f"| [{name}]({homepage}) | {description} | [{doi}](https://doi.org/{doi}) |")
 
     # Table for inputs.
     inputs = []
@@ -158,7 +159,7 @@ def convert_module_to_md(yaml_data, commit_hash):
                 if isinstance(param[name]['choices'], str):
                     choices = param[name]['choices'].replace("\n", " ")
                 elif isinstance(param[name]['choices'], list):
-                    choices = ", ".join(param[name]['choices']).replace("\n", " ")
+                    choices = "<br>".join(param[name]['choices']).replace("\n", " ")
             except KeyError:
                 choices = ""
             default = param[name]['default']
@@ -197,10 +198,15 @@ def convert_module_to_md(yaml_data, commit_hash):
     except KeyError:
         maintainers = []
 
+    short_description = yaml_data['description'].split('.')
+    short_description = short_description[:min(4, len(short_description) - 1)]
+    short_description = '.'.join(short_description).replace("\n", " ") + ". ..."
+
     return TEMPLATE(
         module_name=module_name,
         short_name=short_name,
         description=yaml_data['description'],
+        short_description=short_description,
         keywords=yaml_data.get('keywords', []),
         params="\n".join(params),
         inputs="\n".join(inputs),
