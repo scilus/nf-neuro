@@ -37,6 +37,7 @@ def _build_arg_parser():
 def TEMPLATE(
     subworkflow_name,
     description,
+    short_description,
     keywords,
     params,
     inputs,
@@ -52,14 +53,14 @@ def TEMPLATE(
 title: {subworkflow_name}
 head:
 - tag: meta
-attrs:
+  attrs:
     name: keywords
     content: {', '.join(keywords)}
 - tag: meta
-attrs:
+  attrs:
     name: description
     content: |
-        {description}
+        {short_description}
 ---
 
 ## Subworkflow: {subworkflow_name}
@@ -149,7 +150,7 @@ def convert_subworkflow_to_md(yaml_data, commit_hash):
                 if isinstance(param[name]['choices'], str):
                     choices = param[name]['choices'].replace("\n", " ")
                 else:
-                    choices = ", ".join(param[name]['choices']).replace("\n", " ")
+                    choices = "<br>".join(param[name]['choices']).replace("\n", " ")
             except KeyError:
                 choices = ""
             params.append(f"| {name} | {param_type} | {description} | {default} | {choices} |")
@@ -176,9 +177,14 @@ def convert_subworkflow_to_md(yaml_data, commit_hash):
         else:
             components.append(f"- [{component}](https://scilus.github.io/nf-neuro/api/subworkflows/{component})")
 
+    short_description = yaml_data['description'].split('.')
+    short_description = short_description[:min(4, len(short_description) - 1)]
+    short_description = '.'.join(short_description).replace("\n", " ") + ". ..."
+
     return TEMPLATE(
         subworkflow_name=yaml_data['name'],
         description=yaml_data['description'],
+        short_description=short_description,
         keywords=yaml_data.get('keywords', []),
         params="\n".join(params),
         inputs="\n".join(inputs),
