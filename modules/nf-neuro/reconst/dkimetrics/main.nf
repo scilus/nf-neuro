@@ -40,7 +40,7 @@ process RECONST_DKIMETRICS {
     if ( task.ext.dki_residual ) args += " --dki_residual ${prefix}__dki_residual.nii.gz"
     if ( task.ext.mk ) args += " --mk ${prefix}__mk.nii.gz"
     if ( task.ext.msd ) args += " --msd ${prefix}__msd.nii.gz"
-    if ( task.ext.msd ) args += " --rk ${prefix}__rk.nii.gz"
+    if ( task.ext.rk ) args += " --rk ${prefix}__rk.nii.gz"
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
@@ -51,8 +51,6 @@ process RECONST_DKIMETRICS {
 
     if [ "$run_qc" = true ] && [ "$args" != '' ];
     then
-        mv ${prefix}__residual_residuals_stats.png ${prefix}__residual_residuals_stats.png_bk
-
         nii_files=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(dki_ad|dki_fa|dki_md|dki_rd|dki_residual)\$/) print \$(i+1)}')
 
         # Viz 3D images
@@ -93,8 +91,7 @@ process RECONST_DKIMETRICS {
         done
 
         rm -rf *slice*
-        convert -append *png ${prefix}__dti_mqc.png
-        mv ${prefix}__residual_residuals_stats.png_bk ${prefix}__residual_residuals_stats.png
+        convert -append *png ${prefix}__dki_mqc.png
     fi
 
     cat <<-END_VERSIONS > versions.yml
