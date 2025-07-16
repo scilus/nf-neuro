@@ -13,10 +13,10 @@
     },
     "reconst - dkimetrics_light": {
         "content": [
-            "test__dki_fa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,bd4d9ba08cf1d6d38c271950b5003d1c",
-            "test__dki_ad.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,59c64827ef5ed43c5e37632fcbbc3312",
-            "test__dki_md.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,f45a78a08fe054fc59a47b00bec528e5",
-            "test__dki_rd.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,73578541bf1219f26c93a68b53c93dbb",
+            "test__dki_fa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,9493a787d2ee9ae704b7462da5803e94",
+            "test__dki_ad.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,8df70c5712878b4936d9013ea414bf9b",
+            "test__dki_md.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,f3a575465960aa826cc41ce74d441d79",
+            "test__dki_rd.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,49dc74f3c947da6cacc7951d8244c040",
             [
                 "versions.yml:md5,254c1fb19cea238e381632d5ac4d93ba"
             ]
@@ -25,19 +25,19 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-15T17:52:19.051125326"
+        "timestamp": "2025-07-16T20:15:46.889232414"
     },
     "reconst - dkimetrics": {
         "content": [
-            "test__ak.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,323c7e06b2f0d4b4949964d3fbaa68f8",
-            "test__dki_ad.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,59c64827ef5ed43c5e37632fcbbc3312",
-            "test__dki_fa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,bd4d9ba08cf1d6d38c271950b5003d1c",
-            "test__dki_md.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,f45a78a08fe054fc59a47b00bec528e5",
-            "test__dki_rd.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,73578541bf1219f26c93a68b53c93dbb",
-            "test__dki_residual.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,cd704db10e562429bb817d40d72de661",
-            "test__mk.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,3fa463c05280f3c9f6bfdfb38ba868a8",
+            "test__ak.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,fae256a2251146e17d873cdbb0b45dcf",
+            "test__dki_ad.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,8df70c5712878b4936d9013ea414bf9b",
+            "test__dki_fa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,9493a787d2ee9ae704b7462da5803e94",
+            "test__dki_md.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,f3a575465960aa826cc41ce74d441d79",
+            "test__dki_rd.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,49dc74f3c947da6cacc7951d8244c040",
+            "test__dki_residual.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,d17ebf78c1abbf084f8ea4dbb304b81f",
+            "test__mk.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,cf80a48eb0069e9e8ed670e58339fa1c",
             "test__msd.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,1dbd63dc9a4fd2b18eba652499fe2131",
-            "test__rk.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,fb250d550753fb1c0bbdc304e30739b5",
+            "test__rk.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,62e4dcc7ca960f9e20dfe48be53fdb62",
             "test__dki_mqc.png",
             [
                 "versions.yml:md5,254c1fb19cea238e381632d5ac4d93ba"
@@ -47,6 +47,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-15T17:42:38.429429555"
+        "timestamp": "2025-07-16T20:08:46.015031827"
     }
 }
