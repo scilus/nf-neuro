@@ -1,0 +1,2 @@
+image/mathsingle:
+  - "modules/nf-neuro/image/mathsingle/**"
