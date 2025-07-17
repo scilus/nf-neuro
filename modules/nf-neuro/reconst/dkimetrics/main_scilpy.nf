@@ -1,7 +1,7 @@
 
 process RECONST_DKIMETRICS {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_single'
 
     container "mrtrix3/mrtrix3:3.0.5"
 
@@ -25,34 +25,31 @@ process RECONST_DKIMETRICS {
     task.ext.when == null || task.ext.when
 
     script:
-    def threads = "-nthreads ${task.cpus - 1}"
-    def args = ""
-
+    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def run_qc = task.ext.run_qc ?: false
 
-    if ( mask ) args += " -mask $mask"
-    if ( task.ext.dki_ad ) args += " -ad ${prefix}__dki_ad.nii.gz"
-    if ( task.ext.dki_fa ) args += " -fa ${prefix}__dki_fa.nii.gz"
-    if ( task.ext.dki_md ) args += " -adc ${prefix}__dki_md.nii.gz"
-    if ( task.ext.dki_rd ) args += " -rd ${prefix}__dki_rd.nii.gz"
-
-    if ( task.ext.ak ) args += " -ak ${prefix}__ak.nii.gz"
-    if ( task.ext.mk ) args += " -mk ${prefix}__mk.nii.gz"
-    if ( task.ext.rk ) args += " -rk ${prefix}__rk.nii.gz"
+    if ( mask ) args += " --mask $mask"
+    if ( task.ext.ak ) args += " --ak ${prefix}__ak.nii.gz"
+    if ( task.ext.dki_ad ) args += " --dki_ad ${prefix}__dki_ad.nii.gz"
+    if ( task.ext.dki_fa ) args += " --dki_fa ${prefix}__dki_fa.nii.gz"
+    if ( task.ext.dki_md ) args += " --dki_md ${prefix}__dki_md.nii.gz"
+    if ( task.ext.dki_rd ) args += " --dki_rd ${prefix}__dki_rd.nii.gz"
+    if ( task.ext.dki_residual ) args += " --dki_residual ${prefix}__dki_residual.nii.gz"
+    if ( task.ext.mk ) args += " --mk ${prefix}__mk.nii.gz"
+    if ( task.ext.msd ) args += " --msd ${prefix}__msd.nii.gz"
+    if ( task.ext.rk ) args += " --rk ${prefix}__rk.nii.gz"
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
-    export MRTRIX_RNG_SEED=112524
 
-    dwi2tensor -fslgrad $bvec $bval -dkt ${prefix}__dki.nii.gz $threads $dwi ${prefix}__tensor.nii.gz
-    tensor2metric $args -dkt ${prefix}__dki.nii.gz $threads ${prefix}__tensor.nii.gz
+    scil_dki_metrics.py $dwi $bval $bvec --not_all $args -f
 
     if [ "$run_qc" = true ] && [ "$args" != '' ];
     then
-        nii_files=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(dki_ad|dki_fa|dki_md|dki_rd)\$/) print \$(i+1)}')
+        nii_files=\$(echo "$args" | awk '{for(i=1; i<NF; i++) if (\$i ~ /^--(dki_ad|dki_fa|dki_md|dki_rd|dki_residual)\$/) print \$(i+1)}')
 
         # Viz 3D images
         for image in \${nii_files};

@@ -33,9 +33,9 @@ input:
       description: B-vectors in FSL format.
       pattern: "*.bvec"
 
-  - b0mask:
+  - mask:
       type: file
-      description: Nifti b0 volume file used to mask the input image.
+      description: Nifti volume file used to mask the input image.
       pattern: "*.{nii,nii.gz}"
 
 args:
