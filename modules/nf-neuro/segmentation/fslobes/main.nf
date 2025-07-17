@@ -10,8 +10,8 @@ process SEGMENTATION_FSLOBES {
         tuple val(meta), path(fs_folder)
 
     output:
-        tuple val(meta), path("atlas_lobes.nii.gz")            , emit: labels
-        tuple val(meta), path("atlas_lobes_dilate.nii.gz")     , emit: labels_dilate
+        tuple val(meta), path("*atlas_lobes.nii.gz")            , emit: labels
+        tuple val(meta), path("*atlas_lobes_dilate.nii.gz")     , emit: labels_dilate
         path "versions.yml"                                    , emit: versions
 
     when:
@@ -27,14 +27,14 @@ process SEGMENTATION_FSLOBES {
     mrconvert ${fs_folder}/mri/wmparc.mgz wmparc.nii.gz
     mrconvert ${fs_folder}/mri/brainmask.mgz brain_mask.nii.gz
 
-    scil_volume_reshape_to_reference.py wmparc.nii.gz rawavg.nii.gz \
+    scil_volume_reslice_to_reference.py wmparc.nii.gz rawavg.nii.gz \
         wmparc.nii.gz --interpolation nearest -f
     scil_volume_math.py convert wmparc.nii.gz wmparc.nii.gz --data_type uint16 -f
 
     scil_volume_math.py lower_threshold brain_mask.nii.gz 0.001 brain_mask.nii.gz \
         --data_type uint8 -f
     scil_volume_math.py dilation brain_mask.nii.gz 1 brain_mask.nii.gz -f
-    scil_volume_reshape_to_reference.py brain_mask.nii.gz rawavg.nii.gz \
+    scil_volume_reslice_to_reference.py brain_mask.nii.gz rawavg.nii.gz \
         brain_mask.nii.gz --interpolation nearest \
         --interpolation nearest --keep_dtype -f
 
@@ -75,8 +75,8 @@ process SEGMENTATION_FSLOBES {
     scil_labels_dilate.py -h
     scil_labels_combine.py -h
 
-    touch atlas_lobes.nii.gz
-    touch atlas_lobes_dilate.nii.gz
+    touch ${prefix}__atlas_lobes.nii.gz
+    touch ${prefix}__atlas_lobes_dilate.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
