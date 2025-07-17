@@ -53,7 +53,8 @@ process REGISTRATION_ANATTODWI {
     mv output1InverseWarp.nii.gz ${prefix}__output0BackwardWarp.nii.gz
     mv output1Warp.nii.gz ${prefix}__output1ForwardWarp.nii.gz
 
-    antsApplyTransforms -d 3 -i $b0 -r $t1 -o Linear[${prefix}__output1BackwardAffine.mat] \
+    antsApplyTransforms -d 3 -i $b0 -r $t1 \
+        -o Linear[${prefix}__output1BackwardAffine.mat] \
         -t [${prefix}__output0ForwardAffine.mat,1]
 
     ### ** QC ** ###

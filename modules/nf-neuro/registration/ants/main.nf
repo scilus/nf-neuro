@@ -12,8 +12,8 @@ process REGISTRATION_ANTS {
         tuple val(meta), path("*_warped.nii.gz")                , emit: image
         tuple val(meta), path("*__output0ForwardAffine.mat")    , emit: affine
         tuple val(meta), path("*__output1ForwardWarp.nii.gz")   , emit: warp, optional:true
-        tuple val(meta), path("*__output1InverseWarp.nii.gz")   , emit: inverse_warp, optional: true
-        tuple val(meta), path("*__output0InverseAffine.mat")    , emit: inverse_affine
+        tuple val(meta), path("*__output0BackwardWarp.nii.gz")  , emit: inverse_warp, optional: true
+        tuple val(meta), path("*__output1BackwardAffine.mat")   , emit: inverse_affine
         tuple val(meta), path("*_registration_ants_mqc.gif")    , emit: mqc, optional: true
         path "versions.yml"                                     , emit: versions
 
@@ -58,8 +58,8 @@ process REGISTRATION_ANTS {
     fi
 
     antsApplyTransforms -d 3 -i $fixedimage -r $movingimage \
-        -o Linear[${prefix}__output0BackwardAffine.mat]\
-        -t [${prefix}__output1ForwardAffine.mat,1]
+        -o Linear[${prefix}__output1BackwardAffine.mat] \
+        -t [${prefix}__output0ForwardAffine.mat,1]
 
     ### ** QC ** ###
     if $run_qc;
