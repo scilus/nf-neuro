@@ -1,0 +1,51 @@
+---
+name: "segmentation_fslobes"
+description: Generate lobes parcellation using FS output
+keywords:
+  - FreeSurfer
+  - Segmentation
+  - Tissues
+tools:
+  - "Scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+  - "MRtrix3":
+      description: "Toolbox for image processing, analysis and visualisation of dMRI."
+      homepage: "https://mrtrix.readthedocs.io/en/latest/"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - fs_folder:
+      type: directory
+      description: FreeSurfer output folder
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - labels:
+      type: file
+      description: Nifti WM mask file.
+      pattern: "*.{nii,nii.gz}"
+
+  - labels_dilate:
+      type: file
+      description: Nifti GM mask file.
+      pattern: "*.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@frheault"
+  - "@arnaudbore"

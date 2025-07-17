@@ -1,0 +1,197 @@
+{
+    "segmentation - fs_lobes": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "labels": [
+                    
+                ],
+                "labels_dilate": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-17T17:21:01.693066949"
+    },
+    "segmentation - freesurferseg - lesion": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_wm.nii.gz:md5,2dc635526adb6ef185300acc326ead13"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_gm.nii.gz:md5,247106ed727133078fe262b0b8244071"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_csf.nii.gz:md5,b92db7e454c95afadea320a143912ce8"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+                ],
+                "csf_mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_csf.nii.gz:md5,b92db7e454c95afadea320a143912ce8"
+                    ]
+                ],
+                "gm_mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_gm.nii.gz:md5,247106ed727133078fe262b0b8244071"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+                ],
+                "wm_mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_wm.nii.gz:md5,2dc635526adb6ef185300acc326ead13"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-11T23:47:46.765364092"
+    },
+    "segmentation - freesurferseg - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-11T23:48:02.463800893"
+    },
+    "segmentation - freesurferseg": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_wm.nii.gz:md5,2dc635526adb6ef185300acc326ead13"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_gm.nii.gz:md5,247106ed727133078fe262b0b8244071"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_csf.nii.gz:md5,b92db7e454c95afadea320a143912ce8"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+                ],
+                "csf_mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_csf.nii.gz:md5,b92db7e454c95afadea320a143912ce8"
+                    ]
+                ],
+                "gm_mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_gm.nii.gz:md5,247106ed727133078fe262b0b8244071"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+                ],
+                "wm_mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mask_wm.nii.gz:md5,2dc635526adb6ef185300acc326ead13"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-11T23:42:49.898656938"
+    },
+    "segmentation - fs_lobes - stub-run": {
+        "content": [
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-17T17:21:15.0529189"
+    }
+}
