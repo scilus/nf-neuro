@@ -1,3 +1,3 @@
 # Contributing
 
-Open contributions are closed for now, `nf-neuro` is still being internally developed. We'll get in touch with the community through [Neurostar](https://neurostars.org/tag/nf-neuro-dev) (tag incoming) when we get there ! See you then 🚀
+You are welcome to contribute to **nf-neuro**. Use the provided **templates** to format your Issues and Pull Requests, badly formatted ones will be closed without notice. We are working on setupping a **neurostar community**, look for the [nf-neuro](https://neurostars.org/tag/nf-neuro) tag coming soon ! See you 🚀
