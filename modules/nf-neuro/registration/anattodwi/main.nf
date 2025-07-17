@@ -5,22 +5,22 @@ process REGISTRATION_ANATTODWI {
     container "scilus/scilus:2.2.0"
 
     input:
-    tuple val(meta), path(t1), path(b0), path(metric)
+        tuple val(meta), path(t1), path(b0), path(metric)
 
     output:
-    tuple val(meta), path("*0GenericAffine.mat")                                , emit: affine
-    tuple val(meta), path("*1Warp.nii.gz")                                      , emit: warp
-    tuple val(meta), path("*1InverseWarp.nii.gz")                               , emit: inverse_warp
-    tuple val(meta), path("*t1_warped.nii.gz")                                  , emit: t1_warped
-    tuple val(meta), path("*_registration_anattodwi_mqc.gif")                   , emit: mqc, optional: true
-    path "versions.yml"                                                         , emit: versions
+        tuple val(meta), path("*__output0ForwardAffine.mat")        , emit: affine
+        tuple val(meta), path("*__output1ForwardWarp.nii.gz")       , emit: warp
+        tuple val(meta), path("*__output0BackwardWarp.nii.gz")      , emit: inverse_warp
+        tuple val(meta), path("*__output1BackwardAffine.nii.gz")    , emit: inverse_affine
+        tuple val(meta), path("*t1_warped.nii.gz")                  , emit: t1_warped
+        tuple val(meta), path("*_registration_anattodwi_mqc.gif")   , emit: mqc, optional: true
+        path "versions.yml"                                         , emit: versions
 
     when:
-    task.ext.when == null || task.ext.when
+        task.ext.when == null || task.ext.when
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-
     def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
     """
@@ -49,9 +49,12 @@ process REGISTRATION_ANATTODWI {
         --smoothing-sigmas 3x2x1
 
     mv outputWarped.nii.gz ${prefix}__t1_warped.nii.gz
-    mv output0GenericAffine.mat ${prefix}__output0GenericAffine.mat
-    mv output1InverseWarp.nii.gz ${prefix}__output1InverseWarp.nii.gz
-    mv output1Warp.nii.gz ${prefix}__output1Warp.nii.gz
+    mv output0GenericAffine.mat ${prefix}__output0ForwardAffine.mat
+    mv output1InverseWarp.nii.gz ${prefix}__output0BackwardWarp.nii.gz
+    mv output1Warp.nii.gz ${prefix}__output1ForwardWarp.nii.gz
+
+    antsApplyTransforms -d 3 -i $b0 -r $t1 -o Linear[${prefix}__output1BackwardAffine.mat] \
+        -t [${prefix}__output0ForwardAffine.mat,1]
 
     ### ** QC ** ###
     if $run_qc;
@@ -109,7 +112,7 @@ process REGISTRATION_ANATTODWI {
         scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*: v?([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
-        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
+        imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -130,9 +133,10 @@ process REGISTRATION_ANATTODWI {
     convert -h
 
     touch ${prefix}__t1_warped.nii.gz
-    touch ${prefix}__output0GenericAffine.mat
-    touch ${prefix}__output1InverseWarp.nii.gz
-    touch ${prefix}__output1Warp.nii.gz
+    touch ${prefix}__output0ForwardAffine.mat
+    touch ${prefix}__output1ForwardWarp.nii.gz
+    touch ${prefix}__output0BackwardWarp.nii.gz
+    touch ${prefix}__output1BackwardAffine.mat
     touch ${prefix}__registration_anattodwi_mqc.gif
 
     cat <<-END_VERSIONS > versions.yml
@@ -140,7 +144,7 @@ process REGISTRATION_ANATTODWI {
         scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*: v?([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
-        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
+        imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
     END_VERSIONS
     """
 }
