@@ -99,7 +99,7 @@ process SEGMENTATION_FREESURFERSEG {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        mrtrix: \$(mrconvert -version 2>&1 | grep "== mrconvert" | sed -E 's/== mrconvert ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -117,7 +117,7 @@ process SEGMENTATION_FREESURFERSEG {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        mrtrix: \$(mrconvert -version 2>&1 | grep "== mrconvert" | sed -E 's/== mrconvert ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 }
