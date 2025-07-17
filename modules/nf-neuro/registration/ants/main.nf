@@ -6,19 +6,19 @@ process REGISTRATION_ANTS {
     container "scilus/scilus:2.2.0"
 
     input:
-    tuple val(meta), path(fixedimage), path(movingimage), path(mask) /* optional, input = [] */
+        tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
 
     output:
-    tuple val(meta), path("*_warped.nii.gz")                        , emit: image
-    tuple val(meta), path("*__output0GenericAffine.mat")             , emit: affine
-    tuple val(meta), path("*__output1InverseAffine.mat")            , emit: inverse_affine
-    tuple val(meta), path("*__output1Warp.nii.gz")                  , emit: warp, optional:true
-    tuple val(meta), path("*__output0InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
-    tuple val(meta), path("*_registration_ants_mqc.gif")            , emit: mqc, optional: true
-    path "versions.yml"                                             , emit: versions
+        tuple val(meta), path("*_warped.nii.gz")                , emit: image
+        tuple val(meta), path("*__output0ForwardAffine.mat")    , emit: affine
+        tuple val(meta), path("*__output1ForwardWarp.nii.gz")   , emit: warp, optional:true
+        tuple val(meta), path("*__output1InverseWarp.nii.gz")   , emit: inverse_warp, optional: true
+        tuple val(meta), path("*__output0InverseAffine.mat")    , emit: inverse_affine
+        tuple val(meta), path("*_registration_ants_mqc.gif")    , emit: mqc, optional: true
+        path "versions.yml"                                     , emit: versions
 
     when:
-    task.ext.when == null || task.ext.when
+        task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
@@ -49,17 +49,17 @@ process REGISTRATION_ANTS {
     $ants $dimension -f $fixedimage -m $movingimage -o output -t $transform $args $seed
 
     mv outputWarped.nii.gz ${prefix}__warped.nii.gz
-    mv output0GenericAffine.mat ${prefix}__output0GenericAffine.mat
+    mv output0GenericAffine.mat ${prefix}__output0ForwardAffine.mat
 
     if [ $transform != "t" ] && [ $transform != "r" ] && [ $transform != "a" ];
     then
-        mv output1InverseWarp.nii.gz ${prefix}__output0InverseWarp.nii.gz
-        mv output1Warp.nii.gz ${prefix}__output1Warp.nii.gz
+        mv output1InverseWarp.nii.gz ${prefix}__output0BackwardWarp.nii.gz
+        mv output1Warp.nii.gz ${prefix}__output1ForwardWarp.nii.gz
     fi
 
     antsApplyTransforms -d 3 -i $fixedimage -r $movingimage \
-                        -o Linear[${prefix}__output1InverseAffine.mat] \
-                        -t [${prefix}__output0GenericAffine.mat,1]
+        -o Linear[${prefix}__output0BackwardAffine.mat]\
+        -t [${prefix}__output1ForwardAffine.mat,1]
 
     ### ** QC ** ###
     if $run_qc;
@@ -116,7 +116,6 @@ process REGISTRATION_ANTS {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
@@ -134,10 +133,10 @@ process REGISTRATION_ANTS {
     scil_viz_volume_screenshot -h
 
     touch ${prefix}__t1_warped.nii.gz
-    touch ${prefix}__output0GenericAffine.mat
-    touch ${prefix}__output1InverseAffine.mat
-    touch ${prefix}__output0InverseWarp.nii.gz
-    touch ${prefix}__output1Warp.nii.gz
+    touch ${prefix}__output0ForwardAffine.mat
+    touch ${prefix}__output1ForwardWarp.nii.gz
+    touch ${prefix}__output0BackwardWarp.nii.gz
+    touch ${prefix}__output1BackwardAffine.mat
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
