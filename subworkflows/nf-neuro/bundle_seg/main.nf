@@ -1,5 +1,6 @@
-include { REGISTRATION_ANTS                 } from '../../../modules/nf-neuro/registration/ants/main'
-include { BUNDLE_RECOGNIZE                  } from '../../../modules/nf-neuro/bundle/recognize/main'
+include { BUNDLE_RECOGNIZE  } from '../../../modules/nf-neuro/bundle/recognize/main'
+
+include { REGISTRATION } from '../../../subworkflows/nf-neuro/registration/main'
 
 def fetch_bundleseg_atlas(atlasUrl, configUrl, dest) {
 
@@ -60,9 +61,11 @@ workflow BUNDLE_SEG {
         }
         else {
             if ( !file("$workflow.workDir/atlas/mni_masked.nii.gz").exists() ) {
-            fetch_bundleseg_atlas(  "https://zenodo.org/records/10103446/files/atlas.zip?download=1",
-                                    "https://zenodo.org/records/10103446/files/config.zip?download=1",
-                                    "${workflow.workDir}/")
+                fetch_bundleseg_atlas(
+                    "https://zenodo.org/records/10103446/files/atlas.zip?download=1",
+                    "https://zenodo.org/records/10103446/files/config.zip?download=1",
+                    "${workflow.workDir}/"
+                )
             }
             atlas_anat = Channel.fromPath("$workflow.workDir/atlas/mni_masked.nii.gz")
             atlas_config = Channel.fromPath("$workflow.workDir/config/config_fss_1.json")
@@ -71,15 +74,19 @@ workflow BUNDLE_SEG {
 
         // ** Register the atlas to subject's space. Set up atlas file as moving image ** //
         // ** and subject anat as fixed image.                                         ** //
-        ch_register =  ch_fa.combine(atlas_anat)
-                            .map{ it + [[]] }
-
-        REGISTRATION_ANTS ( ch_register )
-        ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions.first())
+        REGISTRATION(
+            atlas_anat,
+            ch_fa,
+            Channel.empty(),
+            Channel.empty(),
+            Channel.empty(),
+            Channel.empty()
+        )
+        ch_versions = ch_versions.mix(REGISTRATION.out.versions.first())
 
         // ** Perform bundle recognition and segmentation ** //
         ch_recognize_bundle = ch_tractogram
-            .join(REGISTRATION_ANTS.out.affine)
+            .join(REGISTRATION.out.affine)
             .combine(atlas_config)
             .combine(atlas_average)
 
