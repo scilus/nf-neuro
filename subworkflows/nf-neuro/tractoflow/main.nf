@@ -1,18 +1,18 @@
 
 // PREPROCESSING
-include {   PREPROC_DWI                                               } from '../preproc_dwi/main'
-include {   PREPROC_T1                                                } from '../preproc_t1/main'
-include {   REGISTRATION as T1_REGISTRATION                           } from '../registration/main'
-include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_WMPARC      } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
-include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_APARC_ASEG  } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
-include {   REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_LESION_MASK } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
-include {   ANATOMICAL_SEGMENTATION                                   } from '../anatomical_segmentation/main'
+include { PREPROC_DWI                                               } from '../preproc_dwi/main'
+include { PREPROC_T1                                                } from '../preproc_t1/main'
+include { REGISTRATION as T1_REGISTRATION                           } from '../registration/main'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_WMPARC      } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_APARC_ASEG  } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as TRANSFORM_LESION_MASK } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
+include { ANATOMICAL_SEGMENTATION                                   } from '../anatomical_segmentation/main'
 
 // RECONSTRUCTION
-include {   RECONST_FRF        } from '../../../modules/nf-neuro/reconst/frf/main'
-include {   RECONST_MEANFRF    } from '../../../modules/nf-neuro/reconst/meanfrf/main'
-include {   RECONST_DTIMETRICS } from '../../../modules/nf-neuro/reconst/dtimetrics/main'
-include {   RECONST_FODF       } from '../../../modules/nf-neuro/reconst/fodf/main'
+include { RECONST_FRF        } from '../../../modules/nf-neuro/reconst/frf/main'
+include { RECONST_MEANFRF    } from '../../../modules/nf-neuro/reconst/meanfrf/main'
+include { RECONST_DTIMETRICS } from '../../../modules/nf-neuro/reconst/dtimetrics/main'
+include { RECONST_FODF       } from '../../../modules/nf-neuro/reconst/fodf/main'
 
 // TRACKING
 include { TRACKING_PFTTRACKING   } from '../../../modules/nf-neuro/tracking/pfttracking/main'
@@ -110,7 +110,7 @@ workflow TRACTOFLOW {
         TRANSFORM_WMPARC(
             ch_wmparc
                 .join(PREPROC_DWI.out.b0)
-                .join(T1_REGISTRATION.out.transfo_image)
+                .join(T1_REGISTRATION.out.image_transform)
         )
         ch_versions = ch_versions.mix(TRANSFORM_WMPARC.out.versions.first())
 
@@ -120,7 +120,7 @@ workflow TRACTOFLOW {
         TRANSFORM_APARC_ASEG(
             ch_aparc_aseg
                 .join(PREPROC_DWI.out.b0)
-                .join(T1_REGISTRATION.out.transfo_image)
+                .join(T1_REGISTRATION.out.image_transform)
         )
         ch_versions = ch_versions.mix(TRANSFORM_APARC_ASEG.out.versions.first())
 
@@ -129,7 +129,7 @@ workflow TRACTOFLOW {
         TRANSFORM_LESION_MASK(
             ch_lesion_mask
                 .join(PREPROC_DWI.out.b0)
-                .join(T1_REGISTRATION.out.transfo_image)
+                .join(T1_REGISTRATION.out.image_transform)
         )
         ch_versions = ch_versions.mix(TRANSFORM_LESION_MASK.out.versions.first())
 
@@ -269,8 +269,8 @@ workflow TRACTOFLOW {
         wmparc                  = TRANSFORM_WMPARC.out.warped_image
 
         // REGISTRATION
-        anatomical_to_diffusion = T1_REGISTRATION.out.transfo_image
-        diffusion_to_anatomical = T1_REGISTRATION.out.transfo_trk
+        anatomical_to_diffusion = T1_REGISTRATION.out.image_transform
+        diffusion_to_anatomical = T1_REGISTRATION.out.inverse_image_transform
 
         // IN ANATOMICAL SPACE
         t1_native               = PREPROC_T1.out.t1_final

@@ -45,14 +45,20 @@ workflow REGISTRATION {
             ch_versions = ch_versions.mix(REGISTRATION_EASYREG.out.versions.first())
 
             // ** Set compulsory outputs ** //
+            affine = Channel.empty()
+            warp = REGISTRATION_EASYREG.out.fwd_field
+            inverse_affine = Channel.empty()
+            inverse_warp = REGISTRATION_EASYREG.out.bak_field
             image_warped = REGISTRATION_EASYREG.out.flo_reg
-            transfo_image = REGISTRATION_EASYREG.out.fwd_field
-            transfo_trk = REGISTRATION_EASYREG.out.bak_field
-            ref_warped = REGISTRATION_EASYREG.out.ref_reg
+            image_transform = REGISTRATION_EASYREG.out.fwd_field
+            inverse_image_transform = REGISTRATION_EASYREG.out.bak_field
+            tractogram_transform = REGISTRATION_EASYREG.out.bak_field
+            inverse_tractogram_transform = REGISTRATION_EASYREG.out.fwd_field
 
             // ** Set optional outputs. ** //
             // If segmentations are not provided as inputs,
             // easyreg will outputs synthseg segmentations
+            ref_warped = REGISTRATION_EASYREG.out.ref_reg
             out_segmentation = ch_segmentation.mix( REGISTRATION_EASYREG.out.flo_seg )
             out_ref_segmentation = ch_ref_segmentation.mix( REGISTRATION_EASYREG.out.ref_seg )
         }
@@ -64,11 +70,22 @@ workflow REGISTRATION {
             REGISTRATION_SYNTHREGISTRATION ( ch_register )
             ch_versions = ch_versions.mix(REGISTRATION_SYNTHREGISTRATION.out.versions.first())
 
-            // ** Set outputs ** //
+            // ** Set compulsory outputs ** //
+            affine = REGISTRATION_SYNTHREGISTRATION.out.affine
+            warp = REGISTRATION_SYNTHREGISTRATION.out.warp
+            inverse_affine = Channel.empty() // FIXME : this transformation should be available
+            inverse_warp = Channel.empty()   // FIXME : this transformation should be available
+
             image_warped = REGISTRATION_SYNTHREGISTRATION.out.warped_image
-            transfo_image = REGISTRATION_SYNTHREGISTRATION.out.warp
-                .join(REGISTRATION_SYNTHREGISTRATION.out.affine)        // FIXME : this is .lta, should be .mat, but we need a custom container for that
-            transfo_trk = Channel.empty()       // FIXME : this transformation should be available
+            // FIXME : this is .lta, should be .mat, but we need a custom container for that
+            image_transform = REGISTRATION_SYNTHREGISTRATION.out.warp
+                .join(REGISTRATION_SYNTHREGISTRATION.out.affine)
+            inverse_image_transform = Channel.empty() // FIXME : this transformation should be available
+            tractogram_transform = Channel.empty()    // FIXME : this transformation should be available
+            inverse_tractogram_transform = REGISTRATION_SYNTHREGISTRATION.out.warp
+                .join(REGISTRATION_SYNTHREGISTRATION.out.affine)
+
+            // ** and optional outputs. ** //
             ref_warped = Channel.empty()
             out_segmentation = Channel.empty()
             out_ref_segmentation = Channel.empty()
@@ -97,11 +114,16 @@ workflow REGISTRATION {
             ch_versions = ch_versions.mix(REGISTRATION_ANATTODWI.out.versions.first())
 
             // ** Set compulsory outputs ** //
+            affine = REGISTRATION_ANATTODWI.out.affine
+            warp = REGISTRATION_ANATTODWI.out.warp
+            inverse_affine = REGISTRATION_ANATTODWI.out.inverse_affine
+            inverse_warp = REGISTRATION_ANATTODWI.out.inverse_warp
+
             image_warped = REGISTRATION_ANATTODWI.out.t1_warped
-            transfo_image = REGISTRATION_ANATTODWI.out.warp
-                .join(REGISTRATION_ANATTODWI.out.affine)
-            transfo_trk = REGISTRATION_ANATTODWI.out.affine
-                .join(REGISTRATION_ANATTODWI.out.inverse_warp)
+            image_transform = REGISTRATION_ANATTODWI.out.image_transform
+            inverse_image_transform = REGISTRATION_ANATTODWI.out.inverse_image_transform
+            tractogram_transform = REGISTRATION_ANATTODWI.out.tractogram_transform
+            inverse_tractogram_transform = REGISTRATION_ANATTODWI.out.inverse_tractogram_transform
 
             // ** Registration using ANTS SYN SCRIPTS ** //
             // Registration using antsRegistrationSyN.sh or antsRegistrationSyNQuick.sh, has
@@ -118,26 +140,44 @@ workflow REGISTRATION {
             ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions.first())
 
             // ** Set compulsory outputs ** //
-            image_warped = image_warped.mix(REGISTRATION_ANTS.out.image)
-            transfo_image = REGISTRATION_ANTS.out.warp
-                .join(REGISTRATION_ANTS.out.affine)
-                .mix(transfo_image)
-            transfo_trk = REGISTRATION_ANTS.out.inverse_affine
-                .join(REGISTRATION_ANTS.out.inverse_warp)
-                .mix(transfo_trk)
+            affine = affine.mix(REGISTRATION_ANTS.out.affine)
+            warp = warp.mix(REGISTRATION_ANTS.out.warp)
+            inverse_affine = inverse_affine.mix(REGISTRATION_ANTS.out.inverse_affine)
+            inverse_warp = inverse_warp.mix(REGISTRATION_ANTS.out.inverse_warp)
 
-            // **et optional outputs **//
+            image_warped = image_warped
+                .mix(REGISTRATION_ANTS.out.image)
+            image_transform = image_transform
+                .mix(REGISTRATION_ANTS.out.image_transform)
+            inverse_image_transform = inverse_image_transform
+                .mix(REGISTRATION_ANTS.out.inverse_image_transform)
+            tractogram_transform = tractogram_transform
+                .mix(REGISTRATION_ANTS.out.tractogram_transform)
+            inverse_tractogram_transform = inverse_tractogram_transform
+                .mix(REGISTRATION_ANTS.out.inverse_tractogram_transform)
+
+            // **and optional outputs **//
             ref_warped = Channel.empty()
             out_segmentation = Channel.empty()
             out_ref_segmentation = Channel.empty()
         }
 
     emit:
-        image_warped        = image_warped            // channel: [ val(meta), image ] ]
-        ref_warped          = ref_warped              // channel: [ val(meta), ref ]
-        transfo_image       = transfo_image           // channel: [ val(meta), [ warp ], [ <affine> ] ]
-        transfo_trk         = transfo_trk             // channel: [ val(meta), [ <inverse-affine> ], [ inverse-warp ] ]
-        segmentation        = out_segmentation        // channel: [ val(meta), segmentation ]
-        ref_segmentation    = out_ref_segmentation    // channel: [ val(meta), ref-segmentation ]
-        versions            = ch_versions             // channel: [ versions.yml ]
+        image_warped                    = image_warped                  // channel: [ val(meta), image ]
+        ref_warped                      = ref_warped                    // channel: [ val(meta), ref ]
+        // Individual transforms
+        affine                          = affine                        // channel: [ val(meta), <affine> ]
+        warp                            = warp                          // channel: [ val(meta), <warp> ]
+        inverse_affine                  = inverse_affine                // channel: [ val(meta), <inverse-affine> ]
+        inverse_warp                    = inverse_warp                  // channel: [ val(meta), <inverse-warp> ]
+        // Combined transforms
+        image_transform                 = image_transform               // channel: [ val(meta), [ <warp>, <affine> ] ]
+        inverse_image_transform         = inverse_image_transform       // channel: [ val(meta), [ <inverse-affine>, <inverse-warp> ] ]
+        tractogram_transform            = tractogram_transform          // channel: [ val(meta), [ <inverse-affine>, <inverse-warp> ] ]
+        inverse_tractogram_transform    = inverse_tractogram_transform  // channel: [ val(meta), [ <warp>, <affine> ] ]
+        // Segmentations
+        segmentation                    = out_segmentation              // channel: [ val(meta), segmentation ]
+        ref_segmentation                = out_ref_segmentation          // channel: [ val(meta), ref-segmentation ]
+
+        versions                        = ch_versions                   // channel: [ versions.yml ]
 }
