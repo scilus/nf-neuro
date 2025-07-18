@@ -9,12 +9,24 @@ keywords:
   - dwi
 
 tools:
-  - "antsRegistration":
-      description: "ANTs (Advanced Normalization Tools) open-source software package for image registration and segmentation"
-      homepage: "https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Linux-and-Mac-OS"
+  - ANTs:
+      description: "Advanced Normalization Tools."
+      homepage: "https://github.com/ANTsX/ANTs"
       documentation: "http://stnava.github.io/ANTsDoc/"
-      doi: "10.1016/j.neuroimage.2010.09.025"
-
+      doi: "10.1038/s41598-021-87564-6"
+  - ImageMagick:
+      description: "ImageMagick is a software suite to create, edit, compose, or convert bitmap images."
+      homepage: "https://imagemagick.org/"
+      documentation: "https://imagemagick.org/script/command-line-processing.php"
+  - MRtrix3:
+      description: "MRtrix3 is a software package for processing diffusion MRI data."
+      homepage: "https://www.mrtrix3.org/"
+      documentation: "https://mrtrix.readthedocs.io/en/latest/"
+      doi: "10.1016/j.neuroimage.2019.116137"
+  - Scilpy:
+      description: "Scilpy is a Python library for processing diffusion MRI data."
+      homepage: "https://github.com/scilus/scilpy"
+      documentation: "https://scilpy.readthedocs.io/en/latest/"
 args:
   - run_qc:
       type: boolean
@@ -28,19 +40,19 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
 
-  - t1:
+  - fixedreference:
       type: file
-      description: Nifti image file to register on dwi
+      description: Nifti image file - fixed DWI reference (usually b0)
       pattern: "*.{nii,nii.gz}"
 
-  - b0:
+  - movinganat:
       type: file
-      description: Nifti image file - b0
+      description: Nifti image file - moving anat to register (usually T1w)
       pattern: "*.{nii,nii.gz}"
 
   - metric:
       type: file
-      description: Nifti image file metric used to register (fa)
+      description: Nifti image file - additional fixed metric (usually FA)
       pattern: "*.{nii,nii.gz}"
 
 output:
@@ -50,20 +62,51 @@ output:
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
 
-  - transfo_trk:
-      type: list
-      description: Tuple, Transformation files to warp tractogram/streamlines (mat file, nii InverseWarp)
-      pattern: "*.{mat,nii,nii.gz}"
+  - anat_warped:
+      type: file
+      description: Anatomical image warped to DWI space
+      pattern: "*.{nii,nii.gz}"
 
-  - transfo_image:
+  - affine:
+      type: file
+      description: Affine transformation matrix file.
+      pattern: "*__output1ForwardAffine.mat"
+
+  - warp:
+      type: file
+      description: Deformation field file.
+      pattern: "*__output0ForwardWarp.nii.gz"
+
+  - inverse_warp:
+      type: file
+      description: Inverse deformation field file.
+      pattern: "*__output1BackwardWarp.nii.gz"
+
+  - inverse_affine:
+      type: file
+      description: Inverse affine transformation matrix file.
+      pattern: "*__output0BackwardAffine.mat"
+
+  - image_transform:
       type: list
-      description: Tuple, Transformation files to warp images (nii Warp, mat file)
+      description: |
+        Tuple, Transformation files to warp images in the correct order
+        for REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ warp, affine ] ].
       pattern: "*.{nii,nii.gz,mat}"
 
-  - t1_warped:
-      type: file
-      description: Anatomical T1 warped to dwi space
-      pattern: "*.{nii,nii.gz}"
+  - inverse_image_transform:
+      type: list
+      description: |
+        Tuple, Transformation files to warp images in the correct order for
+        REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ inverse_affine, inverse_warp ] ].
+      pattern: "*.{nii,nii.gz,mat}"
+
+  - tractogram_transform:
+      type: list
+      description: |
+        Tuple, Transformation files to warp tractograms in the correct order
+        for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ inverse_affine, inverse_warp ] ].
+      pattern: "*.{nii,nii.gz,mat}"
 
   - mqc:
       type: file

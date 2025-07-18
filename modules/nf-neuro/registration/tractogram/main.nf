@@ -3,8 +3,8 @@ process REGISTRATION_TRACTOGRAM {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        'https://scil.usherbrooke.ca/containers/scilpy_2.1.0.sif':
+        'scilus/scilpy:2.1.0' }"
 
     input:
     tuple val(meta), path(anat), path(transfo), path(tractogram), path(ref) /* optional, value = [] */, path(deformation) /* optional, value = [] */
@@ -34,31 +34,33 @@ process REGISTRATION_TRACTOGRAM {
 
     """
     for tractogram in ${tractogram};
-        do \
-        ext=\${tractogram#*.}
-        bname=\$(basename \${tractogram} .\${ext})
+    do
 
-        scil_tractogram_apply_transform.py \$tractogram $anat $transfo tmp.trk\
-                        $in_deformation\
-                        $inverse\
-                        $reverse_operation\
-                        $force\
-                        $reference
+    ext=\${tractogram#*.}
+    bname=\$(basename \${tractogram} .\${ext})
 
-        scil_tractogram_remove_invalid.py tmp.trk ${prefix}__\${bname}${suffix}.\${ext}\
-                        $cut_invalid\
-                        $remove_single_point\
-                        $remove_overlapping_points\
-                        $threshold\
-                        $no_empty\
-                        -f
+    scil_tractogram_apply_transform.py \$tractogram $anat $transfo \
+        ${prefix}__\${bname}${suffix}.\${ext} \
+        $in_deformation \
+        $inverse \
+        $reverse_operation \
+        $force \
+        $reference
+
+    scil_tractogram_remove_invalid.py ${prefix}__\${bname}${suffix}.\${ext} \
+        ${prefix}__\${bname}${suffix}.\${ext} \
+        $cut_invalid \
+        $remove_single_point \
+        $remove_overlapping_points \
+        $threshold \
+        $no_empty \
+        -f
+
     done
-
-
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -70,16 +72,18 @@ process REGISTRATION_TRACTOGRAM {
     scil_tractogram_remove_invalid.py -h
 
     for tractogram in ${tractogram};
-        do \
-        ext=\${tractogram#*.}
-        bname=\$(basename \${tractogram} .\${ext})
+    do
 
-        touch ${prefix}__\${bname}${suffix}.\${ext}
+    ext=\${tractogram#*.}
+    bname=\$(basename \${tractogram} .\${ext})
+
+    touch ${prefix}__\${bname}${suffix}.\${ext}
+
     done
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
