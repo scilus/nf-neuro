@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                        "test__T1w_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
                     ]
                 ],
                 "1": [
@@ -17,8 +17,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
+                        "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                     ]
+                ],
+                "10": [
+                    "versions.yml:md5,f7d4a628967ea923c4ce688c43ad7f5f"
                 ],
                 "2": [
                     [
@@ -26,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                        "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
                     ]
                 ],
                 "3": [
@@ -35,7 +38,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
+                        "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
                 "4": [
@@ -44,11 +47,65 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_registration_anattodwi_mqc.gif:md5,74a7cf404c443726487683c23bd926c0"
+                        "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2"
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,f368bc76bf8d1f1a68caea3597b0c65b"
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                            "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                        ]
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
+                            "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                        ]
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
+                            "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                        ]
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                            "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                        ]
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_registration_anattodwi_mqc.gif:md5,ae3d7eb12c0092b722bbc639b8d10f53"
+                    ]
                 ],
                 "affine": [
                     [
@@ -56,7 +113,61 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                        "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                    ]
+                ],
+                "anat_warped": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__T1w_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
+                    ]
+                ],
+                "image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                            "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                        ]
+                    ]
+                ],
+                "inverse_affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2"
+                    ]
+                ],
+                "inverse_image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
+                            "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                        ]
+                    ]
+                ],
+                "inverse_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                            "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                        ]
                     ]
                 ],
                 "inverse_warp": [
@@ -65,7 +176,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1InverseWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                        "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
                 "mqc": [
@@ -74,20 +185,23 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_registration_anattodwi_mqc.gif:md5,74a7cf404c443726487683c23bd926c0"
+                        "test_registration_anattodwi_mqc.gif:md5,ae3d7eb12c0092b722bbc639b8d10f53"
                     ]
                 ],
-                "t1_warped": [
+                "tractogram_transform": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,9c34f424900adea263e39ed1f37a793f"
+                        [
+                            "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
+                            "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                        ]
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,f368bc76bf8d1f1a68caea3597b0c65b"
+                    "versions.yml:md5,f7d4a628967ea923c4ce688c43ad7f5f"
                 ],
                 "warp": [
                     [
@@ -95,27 +209,27 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
+                        "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
                     ]
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-02-20T14:58:42.372471"
+        "timestamp": "2025-07-18T18:41:43.375324216"
     },
     "registration - anattodwi -stub-run": {
         "content": [
             [
-                "versions.yml:md5,f368bc76bf8d1f1a68caea3597b0c65b"
+                "versions.yml:md5,ab10576626dce951b89cbc1b84e6c130"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-02-20T14:58:49.169195"
+        "timestamp": "2025-07-18T01:24:58.265561573"
     }
 }
