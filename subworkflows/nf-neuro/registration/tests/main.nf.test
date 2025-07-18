@@ -78,7 +78,7 @@ nextflow_workflow {
                             [(channel.key): ["versions"].contains(channel.key)
                                 ? channel.value
                                 : channel.value.collect{ subject ->
-                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
                 ).match() },
@@ -134,7 +134,7 @@ nextflow_workflow {
                             [(channel.key): ["versions"].contains(channel.key)
                                 ? channel.value
                                 : channel.value.collect{ subject ->
-                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
                 ).match() },
@@ -192,7 +192,7 @@ nextflow_workflow {
                             [(channel.key): ["versions"].contains(channel.key)
                                 ? channel.value
                                 : channel.value.collect{ subject ->
-                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
                 ).match() }
@@ -240,14 +240,14 @@ nextflow_workflow {
                             [(channel.key): ["versions"].contains(channel.key)
                                 ? channel.value
                                 : channel.value.collect{ subject ->
-                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
                 ).match() },
                 { assert workflow.out
                     .findAll{ channel -> !channel.key.isInteger() }
                     .every{ channel -> ["ref_warped",
-                                        "transfo_trk",
+                                        "tractogram_transform",
                                         "segmentation",
                                         "ref_segmentation"].contains(channel.key)
                         ? channel.value.size() == 0
