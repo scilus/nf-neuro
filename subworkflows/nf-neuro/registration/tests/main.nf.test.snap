@@ -2,6 +2,15 @@
     "registration - synthregistration": {
         "content": [
             {
+                "image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__deform_warp.nii.gz",
+                        "test__affine_warp.lta"
+                    ]
+                ],
                 "image_warped": [
                     [
                         {
@@ -10,7 +19,7 @@
                         "test__output_warped.nii.gz"
                     ]
                 ],
-                "transfo_image": [
+                "inverse_tractogram_transform": [
                     [
                         {
                             "id": "test"
@@ -28,17 +37,41 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-04T21:00:00.502234107"
+        "timestamp": "2025-07-18T01:59:59.744051543"
     },
     "registration - easyreg": {
         "content": [
             {
+                "image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward_field.nii.gz"
+                    ]
+                ],
                 "image_warped": [
                     [
                         {
                             "id": "test"
                         },
                         "test_floating_registered.nii.gz"
+                    ]
+                ],
+                "inverse_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward_field.nii.gz"
+                    ]
+                ],
+                "inverse_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward_field.nii.gz"
                     ]
                 ],
                 "ref_segmentation": [
@@ -65,15 +98,7 @@
                         "test_floating_segmentation.nii.gz"
                     ]
                 ],
-                "transfo_image": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_forward_field.nii.gz"
-                    ]
-                ],
-                "transfo_trk": [
+                "tractogram_transform": [
                     [
                         {
                             "id": "test"
@@ -95,6 +120,15 @@
     "registration - antsRegistration": {
         "content": [
             {
+                "image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__output0ForwardWarp.nii.gz",
+                        "test__output1ForwardAffine.mat"
+                    ]
+                ],
                 "image_warped": [
                     [
                         {
@@ -103,22 +137,31 @@
                         "test__t1_warped.nii.gz"
                     ]
                 ],
-                "transfo_image": [
+                "inverse_image_transform": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__output1Warp.nii.gz",
-                        "test__output0GenericAffine.mat"
+                        "test__output0BackwardAffine.mat",
+                        "test__output1BackwardWarp.nii.gz"
                     ]
                 ],
-                "transfo_trk": [
+                "inverse_tractogram_transform": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__output0GenericAffine.mat",
-                        "test__output1InverseWarp.nii.gz"
+                        "test__output0ForwardWarp.nii.gz",
+                        "test__output1ForwardAffine.mat"
+                    ]
+                ],
+                "tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__output0BackwardAffine.mat",
+                        "test__output1BackwardWarp.nii.gz"
                     ]
                 ],
                 "versions": [
@@ -135,6 +178,15 @@
     "registration - SyNQuick": {
         "content": [
             {
+                "image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__output0ForwardWarp.nii.gz",
+                        "test__output1ForwardAffine.mat"
+                    ]
+                ],
                 "image_warped": [
                     [
                         {
@@ -143,22 +195,31 @@
                         "test__t1_warped.nii.gz"
                     ]
                 ],
-                "transfo_image": [
+                "inverse_image_transform": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__output1Warp.nii.gz",
-                        "test__output0GenericAffine.mat"
+                        "test__output0BackwardAffine.mat",
+                        "test__output1BackwardWarp.nii.gz"
                     ]
                 ],
-                "transfo_trk": [
+                "inverse_tractogram_transform": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__output1InverseAffine.mat",
-                        "test__output0InverseWarp.nii.gz"
+                        "test__output0ForwardWarp.nii.gz",
+                        "test__output1ForwardAffine.mat"
+                    ]
+                ],
+                "tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__output0BackwardAffine.mat",
+                        "test__output1BackwardWarp.nii.gz"
                     ]
                 ],
                 "versions": [
