@@ -70,7 +70,6 @@ process REGISTRATION_TRACTOGRAM {
         ext=\${tractogram#*.}
         bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
 
-        touch ${prefix}__\${bname}${suffix}.\${ext}
     done
 
     cat <<-END_VERSIONS > versions.yml

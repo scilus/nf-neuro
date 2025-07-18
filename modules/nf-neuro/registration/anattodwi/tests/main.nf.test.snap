@@ -20,6 +20,9 @@
                         "test__output1Warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
                     ]
                 ],
+                "10": [
+                    "versions.yml:md5,f7d4a628967ea923c4ce688c43ad7f5f"
+                ],
                 "2": [
                     [
                         {
@@ -77,7 +80,7 @@
                         "test_registration_anattodwi_mqc.gif:md5,687252d31b0109f99a174b4e3960e4e6"
                     ]
                 ],
-                "t1_warped": [
+                "tractogram_transform": [
                     [
                         {
                             "id": "test",
