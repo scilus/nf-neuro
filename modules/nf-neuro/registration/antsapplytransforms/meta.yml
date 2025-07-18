@@ -31,7 +31,7 @@ args:
   - dimensionality:
       type: number
       description: |
-        Dimensionality of the input image.
+        Dimensionality of input images.
         e.g. `2` for 2D images, `3` for 3D images.
   - image_type:
       type: integer

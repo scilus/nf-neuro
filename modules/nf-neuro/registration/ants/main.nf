@@ -9,37 +9,42 @@ process REGISTRATION_ANTS {
         tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
 
     output:
-        tuple val(meta), path("*_warped.nii.gz")                , emit: image
-        tuple val(meta), path("*__output0ForwardAffine.mat")    , emit: affine
-        tuple val(meta), path("*__output1ForwardWarp.nii.gz")   , emit: warp, optional:true
-        tuple val(meta), path("*__output0BackwardWarp.nii.gz")  , emit: inverse_warp, optional: true
-        tuple val(meta), path("*__output1BackwardAffine.mat")   , emit: inverse_affine
-        tuple val(meta), path("*_registration_ants_mqc.gif")    , emit: mqc, optional: true
-        path "versions.yml"                                     , emit: versions
+        tuple val(meta), path("*_warped.nii.gz")                                 , emit: image
+        tuple val(meta), path("*__output1ForwardAffine.mat")                     , emit: affine
+        tuple val(meta), path("*__output0ForwardWarp.nii.gz")                    , emit: warp, optional: true
+        tuple val(meta), path("*__output1BackwardWarp.nii.gz")                   , emit: inverse_warp, optional: true
+        tuple val(meta), path("*__output0BackwardAffine.mat")                    , emit: inverse_affine
+        tuple val(meta), path("*__output*Forward*.{nii.gz,mat}", arity: '1..2')  , emit: image_transform
+        tuple val(meta), path("*__output*Backward*.{nii.gz,mat}", arity: '1..2') , emit: inverse_image_transform
+        tuple val(meta), path("*__output*Backward*.{nii.gz,mat}", arity: '1..2') , emit: tractogram_transform
+        tuple val(meta), path("*__output*Forward*.{nii.gz,mat}", arity: '1..2')  , emit: inverse_tractogram_transform
+        tuple val(meta), path("*_registration_ants_mqc.gif")                     , emit: mqc, optional: true
+        path "versions.yml"                                                      , emit: versions
 
     when:
         task.ext.when == null || task.ext.when
 
     script:
+    def initialization_types = ["geometric center": 0, "intensities": 1, "origin": 2]
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
-    def ants = task.ext.quick ? "antsRegistrationSyNQuick.sh " :  "antsRegistrationSyN.sh "
-    def dimension = task.ext.dimension ? "-d " + task.ext.dimension : "-d 3"
-    def transform = task.ext.transform ? task.ext.transform : "s"
-    def seed = task.ext.random_seed ? " -e " + task.ext.random_seed : "-e 1234"
-    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
+    def suffix_qc = task.ext.suffix_qc ?: ""
+    def ants = task.ext.quick ? "antsRegistrationSyNQuick.sh" : "antsRegistrationSyN.sh"
+    def dimension = "-d ${task.ext.dimension ?: 3}"
+    def transform = task.ext.transform ?: "s"
+    def seed = " -e ${task.ext.random_seed ?: 1234}"
+    def run_qc = task.ext.run_qc as Boolean || false
 
-    if ( task.ext.threads ) args += "-n " + task.ext.threads
-    if ( task.ext.initial_transform ) args += " -i " + task.ext.initial_transform
-    if ( task.ext.histogram_bins ) args += " -r " + task.ext.histogram_bins
-    if ( task.ext.spline_distance ) args += " -s " + task.ext.spline_distance
-    if ( task.ext.gradient_step ) args += " -g " + task.ext.gradient_step
-    if ( task.ext.mask ) args += " -x $mask"
-    if ( task.ext.type ) args += " -p " + task.ext.type
-    if ( task.ext.histogram_matching ) args += " -j " + task.ext.histogram_matching
-    if ( task.ext.repro_mode ) args += " -y " + task.ext.repro_mode
-    if ( task.ext.collapse_output ) args += " -z " + task.ext.collapse_output
+    args += " -n $task.cpus"
+    if ( mask ) args += " -x $mask"
+    if ( task.ext.initial_transform ) args += " -i [$fixedimage,$movingimage,${initialization_types[task.ext.initial_transform]}]"
+    if ( task.ext.histogram_bins ) args += " -r $task.ext.histogram_bins"
+    if ( task.ext.spline_distance ) args += " -s $task.ext.spline_distance"
+    if ( task.ext.gradient_step ) args += " -g $task.ext.gradient_step"
+    if ( task.ext.precision ) args += " -p $task.ext.precision"
+    if ( task.ext.histogram_matching ) args += " -j $task.ext.histogram_matching"
+    if ( task.ext.repro_mode ) args += " -y $task.ext.repro_mode"
+    if ( task.ext.collapse_output ) args += " -z $task.ext.collapse_output"
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
@@ -49,17 +54,17 @@ process REGISTRATION_ANTS {
     $ants $dimension -f $fixedimage -m $movingimage -o output -t $transform $args $seed
 
     mv outputWarped.nii.gz ${prefix}__warped.nii.gz
-    mv output0GenericAffine.mat ${prefix}__output0ForwardAffine.mat
+    mv output0GenericAffine.mat ${prefix}__output1ForwardAffine.mat
 
     if [ $transform != "t" ] && [ $transform != "r" ] && [ $transform != "a" ];
     then
-        mv output1InverseWarp.nii.gz ${prefix}__output0BackwardWarp.nii.gz
-        mv output1Warp.nii.gz ${prefix}__output1ForwardWarp.nii.gz
+        mv output1InverseWarp.nii.gz ${prefix}__output1BackwardWarp.nii.gz
+        mv output1Warp.nii.gz ${prefix}__output0ForwardWarp.nii.gz
     fi
 
     antsApplyTransforms -d 3 -i $fixedimage -r $movingimage \
-        -o Linear[${prefix}__output1BackwardAffine.mat] \
-        -t [${prefix}__output0ForwardAffine.mat,1]
+        -o Linear[${prefix}__output0BackwardAffine.mat] \
+        -t [${prefix}__output1ForwardAffine.mat,1]
 
     ### ** QC ** ###
     if $run_qc;
@@ -108,10 +113,10 @@ process REGISTRATION_ANTS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*: v?([0-9.a-zA-Z-]+).*/\\1/')
-        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -133,17 +138,17 @@ process REGISTRATION_ANTS {
     scil_viz_volume_screenshot -h
 
     touch ${prefix}__t1_warped.nii.gz
-    touch ${prefix}__output0ForwardAffine.mat
-    touch ${prefix}__output1ForwardWarp.nii.gz
-    touch ${prefix}__output0BackwardWarp.nii.gz
-    touch ${prefix}__output1BackwardAffine.mat
+    touch ${prefix}__output1ForwardAffine.mat
+    touch ${prefix}__output0ForwardWarp.nii.gz
+    touch ${prefix}__output1BackwardWarp.nii.gz
+    touch ${prefix}__output0BackwardAffine.mat
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*: v?([0-9.a-zA-Z-]+).*/\\1/')
-        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
