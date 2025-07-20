@@ -1,29 +1,66 @@
 {
     "registration - synthregistration": {
         "content": [
-            "test__output_warped.nii.gz",
-            "test__deform_warp.nii.gz",
-            "test__affine_warp.lta",
-            [
-                "versions.yml:md5,6f946408922f25f1a8182d35615b6d7b"
-            ]
+            {
+                "affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__forward1_affine.lta"
+                    ]
+                ],
+                "image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__forward0_deform.nii.gz",
+                        "test__forward1_affine.lta"
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__warped.nii.gz"
+                    ]
+                ],
+                "inverse_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__forward0_deform.nii.gz",
+                        "test__forward1_affine.lta"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,c9f5ddf6ca4a08a71b117bdb7653c7f9"
+                ]
+            }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2024-12-18T13:10:28.733204"
+        "timestamp": "2025-07-19T23:30:21.67250369"
     },
     "registration - synthregistration - stub-run": {
         "content": [
             [
-                "versions.yml:md5,6f946408922f25f1a8182d35615b6d7b"
+                "versions.yml:md5,c9f5ddf6ca4a08a71b117bdb7653c7f9"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-05-30T18:56:18.76904087"
+        "timestamp": "2025-07-19T04:08:35.236332874"
     }
 }
