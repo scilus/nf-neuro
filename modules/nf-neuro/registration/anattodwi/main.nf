@@ -5,20 +5,20 @@ process REGISTRATION_ANATTODWI {
     container "scilus/scilus:2.2.0"
 
     input:
-        tuple val(meta), path(fixedreference), path(movinganat), path(metric)
+        tuple val(meta), path(fixed_reference), path(moving_anat), path(metric)
 
     output:
-        tuple val(meta), path("*_warped.nii.gz")                                 , emit: anat_warped
-        tuple val(meta), path("*__output1ForwardAffine.mat")                     , emit: affine
-        tuple val(meta), path("*__output0ForwardWarp.nii.gz")                    , emit: warp
-        tuple val(meta), path("*__output1BackwardWarp.nii.gz")                   , emit: inverse_warp
-        tuple val(meta), path("*__output0BackwardAffine.mat")                    , emit: inverse_affine
-        tuple val(meta), path("*__output*Forward*.{nii.gz,mat}", arity: '1..2')  , emit: image_transform
-        tuple val(meta), path("*__output*Backward*.{nii.gz,mat}", arity: '1..2') , emit: inverse_image_transform
-        tuple val(meta), path("*__output*Backward*.{nii.gz,mat}", arity: '1..2') , emit: tractogram_transform
-        tuple val(meta), path("*__output*Forward*.{nii.gz,mat}", arity: '1..2')  , emit: inverse_tractogram_transform
-        tuple val(meta), path("*_registration_anattodwi_mqc.gif")                , emit: mqc, optional: true
-        path "versions.yml"                                                      , emit: versions
+        tuple val(meta), path("*_warped.nii.gz")                            , emit: anat_warped
+        tuple val(meta), path("*__forward1_affine.mat")                     , emit: affine
+        tuple val(meta), path("*__forward0_warp.nii.gz")                    , emit: warp
+        tuple val(meta), path("*__backward1_warp.nii.gz")                   , emit: inverse_warp
+        tuple val(meta), path("*__backward0_affine.mat")                    , emit: inverse_affine
+        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: image_transform
+        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: inverse_image_transform
+        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: tractogram_transform
+        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: inverse_tractogram_transform
+        tuple val(meta), path("*_registration_anattodwi_mqc.gif")           , emit: mqc, optional: true
+        path "versions.yml"                                                 , emit: versions
 
     when:
         task.ext.when == null || task.ext.when
@@ -34,35 +34,35 @@ process REGISTRATION_ANATTODWI {
     export ANTS_RANDOM_SEED=1234
 
     antsRegistration --dimensionality 3 --float 0\
-        --output [output,outputWarped.nii.gz,outputInverseWarped.nii.gz]\
+        --output [trans,warped.nii.gz]\
         --interpolation Linear --use-histogram-matching 0\
         --winsorize-image-intensities [0.005,0.995]\
-        --initial-moving-transform [$fixedreference,$movinganat,1]\
+        --initial-moving-transform [$fixed_reference,$moving_anat,1]\
         --transform Rigid['0.2']\
-        --metric MI[$fixedreference,$movinganat,1,32,Regular,0.25]\
+        --metric MI[$fixed_reference,$moving_anat,1,32,Regular,0.25]\
         --convergence [500x250x125x50,1e-6,10] --shrink-factors 8x4x2x1\
         --smoothing-sigmas 3x2x1x0\
         --transform Affine['0.2']\
-        --metric MI[$fixedreference,$movinganat,1,32,Regular,0.25]\
+        --metric MI[$fixed_reference,$moving_anat,1,32,Regular,0.25]\
         --convergence [500x250x125x50,1e-6,10] --shrink-factors 8x4x2x1\
         --smoothing-sigmas 3x2x1x0\
         --transform SyN[0.1,3,0]\
-        --metric MI[$fixedreference,$movinganat,1,32]\
-        --metric CC[$metric,$movinganat,1,4]\
+        --metric MI[$fixed_reference,$moving_anat,1,32]\
+        --metric CC[$metric,$moving_anat,1,4]\
         --convergence [50x25x10,1e-6,10] --shrink-factors 4x2x1\
         --smoothing-sigmas 3x2x1
 
-    moving_id=\$(basename $movinganat .nii.gz)
+    moving_id=\$(basename $moving_anat .nii.gz)
     moving_id=\${moving_id#${meta.id}__*}
 
-    mv outputWarped.nii.gz ${prefix}__\${moving_id}_warped.nii.gz
-    mv output0GenericAffine.mat ${prefix}__output1ForwardAffine.mat
-    mv output1Warp.nii.gz ${prefix}__output0ForwardWarp.nii.gz
-    mv output1InverseWarp.nii.gz ${prefix}__output1BackwardWarp.nii.gz
+    mv warped.nii.gz ${prefix}__\${moving_id}_warped.nii.gz
+    mv trans0GenericAffine.mat ${prefix}__forward1_affine.mat
+    mv trans1Warp.nii.gz ${prefix}__forward0_warp.nii.gz
+    mv trans1InverseWarp.nii.gz ${prefix}__backward1_warp.nii.gz
 
-    antsApplyTransforms -d 3 -i $movinganat -r $fixedreference \
-        -o Linear[${prefix}__output0BackwardAffine.mat] \
-        -t [${prefix}__output1ForwardAffine.mat,1]
+    antsApplyTransforms -d 3 -i $moving_anat -r $fixed_reference \
+        -o Linear[${prefix}__backward0_affine.mat] \
+        -t [${prefix}__forward1_affine.mat,1]
 
     ### ** QC ** ###
     if $run_qc;
@@ -80,7 +80,7 @@ process REGISTRATION_ANATTODWI {
         viz_params="--display_slice_number --display_lr --size 256 256"
 
         # Get fixed ID, moving ID already computed
-        fixed_id=\$(basename $fixedreference .nii.gz)
+        fixed_id=\$(basename $fixed_reference .nii.gz)
         fixed_id=\${fixed_id#${meta.id}__*}
 
         # Iterate over images.
@@ -144,14 +144,14 @@ process REGISTRATION_ANATTODWI {
     scil_viz_volume_screenshot -h
     convert -h
 
-    moving_id=\$(basename $movinganat .nii.gz)
+    moving_id=\$(basename $moving_anat .nii.gz)
     moving_id=\${moving_id#${meta.id}__*}
 
     touch ${prefix}__\${moving_id}_warped.nii.gz
-    touch ${prefix}__output1ForwardAffine.mat
-    touch ${prefix}__output0ForwardWarp.nii.gz
-    touch ${prefix}__output1BackwardWarp.nii.gz
-    touch ${prefix}__output0BackwardAffine.mat
+    touch ${prefix}__forward1_affine.mat
+    touch ${prefix}__forward0_warp.nii.gz
+    touch ${prefix}__backward1_warp.nii.gz
+    touch ${prefix}__backward0_affine.mat
     touch ${prefix}__registration_anattodwi_mqc.gif
 
     cat <<-END_VERSIONS > versions.yml

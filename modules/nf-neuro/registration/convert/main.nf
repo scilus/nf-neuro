@@ -9,8 +9,8 @@ process REGISTRATION_CONVERT {
     tuple val(meta), path(deform), path(affine), path(source), path(target), path(fs_license)
 
     output:
-    tuple val(meta), path("*out_warp.{nii,nii.gz,mgz,m3z}") , emit: deform_transform
-    tuple val(meta), path("*out_affine.{txt,lta,mat,dat}")    , emit: affine_transform, optional: true
+    tuple val(meta), path("*out_warp.{nii,nii.gz,mgz,m3z}") , emit: deform_transform, optional: true
+    tuple val(meta), path("*out_affine.{txt,lta,mat,dat}")  , emit: affine_transform, optional: true
     path "versions.yml"           , emit: versions
 
     when:
@@ -55,16 +55,19 @@ process REGISTRATION_CONVERT {
         lta_convert ${invert} ${source_geometry_affine} ${target_geometry_affine} ${in_format_affine} ${out_format_affine} ${prefix}__out_affine.\${ext_affine}
     fi
 
-    declare -A deform_dictionnary=( ["--outm3z"]="m3z" \
-                                    ["--outfsl"]="nii.gz" \
-                                    ["--outlps"]="nii.gz" \
-                                    ["--outitk"]="nii.gz" \
-                                    ["--outras"]="nii.gz" \
-                                    ["--outvox"]="mgz" )
+    if [[ -f "$affine" ]];
+    then
+        declare -A deform_dictionnary=( ["--outm3z"]="m3z" \
+                                        ["--outfsl"]="nii.gz" \
+                                        ["--outlps"]="nii.gz" \
+                                        ["--outitk"]="nii.gz" \
+                                        ["--outras"]="nii.gz" \
+                                        ["--outvox"]="mgz" )
 
-    ext_deform=\${deform_dictionnary[${out_format_deform}]}
+        ext_deform=\${deform_dictionnary[${out_format_deform}]}
 
-    mri_warp_convert ${source_geometry_deform} ${downsample} ${in_format_deform} ${out_format_deform}  ${prefix}__out_warp.\${ext_deform}
+        mri_warp_convert ${source_geometry_deform} ${downsample} ${in_format_deform} ${out_format_deform} ${prefix}__out_warp.\${ext_deform}
+    fi
 
     rm \$FREESURFER_HOME/license.txt
 
