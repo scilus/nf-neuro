@@ -23,26 +23,31 @@ input:
       type: file
       description: Deform transform to convert. Default usage expects Freesurfer .mgz format from mri_synthmorph
       pattern: "*.{nii,nii.gz,mgz,m3z}"
+      mandatory: false
 
   - affine:
       type: file
       description: Affine transform to convert. Default usage expects Freesurfer .lta format from mri_synthmorph
       pattern: "*.{lta,txt,xfm,dat}"
+      mandatory: false
 
   - source:
       type: file
       description: Moving Nifti volume used for registration. Defines source image geometry
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
 
   - target:
       type: file
-      description: Fixed Nifti volume used for registration. Defines target image geometry. (optional)
+      description: Fixed Nifti volume used for registration. Defines target image geometry.
       pattern: "*.{nii,nii.gz}"
+      mandatory: false
 
   - fs_license:
       type: file
       description: The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html. Optional. If you have already set your license as prescribed by Freesurfer (copied to a .license file in your $FREESURFER_HOME), this is not required.
       pattern: "*.txt"
+      mandatory: true
 
 output:
   - meta:

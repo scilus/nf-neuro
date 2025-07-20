@@ -7,7 +7,6 @@ keywords:
   - registration
   - anatomical
   - dwi
-
 tools:
   - ANTs:
       description: "Advanced Normalization Tools."
@@ -32,91 +31,86 @@ args:
       type: boolean
       description: "Run quality control for the registration process"
       default: false
-
 input:
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
-
-  - fixedreference:
+  - fixed_reference:
       type: file
       description: Nifti image file - fixed DWI reference (usually b0)
       pattern: "*.{nii,nii.gz}"
-
-  - movinganat:
+      mandatory: true
+  - moving_anat:
       type: file
       description: Nifti image file - moving anat to register (usually T1w)
       pattern: "*.{nii,nii.gz}"
-
+      mandatory: true
   - metric:
       type: file
       description: Nifti image file - additional fixed metric (usually FA)
       pattern: "*.{nii,nii.gz}"
-
+      mandatory: true
 output:
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
-
   - anat_warped:
       type: file
       description: Anatomical image warped to DWI space
-      pattern: "*.{nii,nii.gz}"
-
+      pattern: "*_warped.{nii,nii.gz}"
   - affine:
       type: file
       description: Affine transformation matrix file.
-      pattern: "*__output1ForwardAffine.mat"
-
+      pattern: "*__forward1_affine.mat"
   - warp:
       type: file
       description: Deformation field file.
-      pattern: "*__output0ForwardWarp.nii.gz"
-
+      pattern: "*__forward0_warp.nii.gz"
   - inverse_warp:
       type: file
       description: Inverse deformation field file.
-      pattern: "*__output1BackwardWarp.nii.gz"
-
+      pattern: "*__backward1_warp.nii.gz"
   - inverse_affine:
       type: file
       description: Inverse affine transformation matrix file.
-      pattern: "*__output0BackwardAffine.mat"
-
+      pattern: "*__backward0_affine.mat"
   - image_transform:
       type: list
       description: |
-        Tuple, Transformation files to warp images in the correct order
+        Tuple, Transformation files to warp images to fixed space, in the correct order
         for REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ warp, affine ] ].
-      pattern: "*.{nii,nii.gz,mat}"
-
+      pattern: "*__forward*.{nii,nii.gz,mat}"
   - inverse_image_transform:
       type: list
       description: |
-        Tuple, Transformation files to warp images in the correct order for
+        Tuple, Transformation files to warp images to moving space, in the correct order for
         REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ inverse_affine, inverse_warp ] ].
-      pattern: "*.{nii,nii.gz,mat}"
-
+      pattern: "*__backward*.{nii,nii.gz,mat}"
   - tractogram_transform:
       type: list
       description: |
-        Tuple, Transformation files to warp tractograms in the correct order
+        Tuple, Transformation files to warp tractograms to fixed space, in the correct order
         for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ inverse_affine, inverse_warp ] ].
-      pattern: "*.{nii,nii.gz,mat}"
-
+      pattern: "*__backward*.{nii,nii.gz,mat}"
+  - inverse_tractogram_transform:
+      type: list
+      description: |
+        Tuple, Transformation files to warp tractograms to moving space, in the correct order
+        for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ warp, affine ] ].
+      pattern: "*__forward*.{nii,nii.gz,mat}"
   - mqc:
       type: file
       description: .gif file containing quality control image for the registration process. Made for use in MultiQC report.
-      pattern: "*.gif"
-
+      pattern: "*_registration_anattodwi_mqc.gif"
+      optional: true
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-
 authors:
   - "@medde"
+  - "@AlexVCaron"

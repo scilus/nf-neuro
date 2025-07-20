@@ -19,7 +19,7 @@
                         {
                             "id": "test"
                         },
-                        "test__warped.nii.gz:md5,a898be9f21947e50d5c5c30ef27e42f6"
+                        "test__t1_warped.nii.gz:md5,a898be9f21947e50d5c5c30ef27e42f6"
                     ]
                 ],
                 "1": [
@@ -27,7 +27,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1ForwardAffine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
+                        "test__forward1_affine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
                     ]
                 ],
                 "10": [
@@ -38,7 +38,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0ForwardWarp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375"
+                        "test__forward0_warp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375"
                     ]
                 ],
                 "3": [
@@ -46,7 +46,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1BackwardWarp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
+                        "test__backward1_warp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
                     ]
                 ],
                 "4": [
@@ -54,7 +54,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0BackwardAffine.mat:md5,f00a5cf4f05e0017a271d7fff1834567"
+                        "test__backward0_affine.mat:md5,f00a5cf4f05e0017a271d7fff1834567"
                     ]
                 ],
                 "5": [
@@ -63,8 +63,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375",
-                            "test__output1ForwardAffine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
+                            "test__forward0_warp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375",
+                            "test__forward1_affine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
                         ]
                     ]
                 ],
@@ -74,8 +74,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,f00a5cf4f05e0017a271d7fff1834567",
-                            "test__output1BackwardWarp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
+                            "test__backward0_affine.mat:md5,f00a5cf4f05e0017a271d7fff1834567",
+                            "test__backward1_warp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
                         ]
                     ]
                 ],
@@ -85,8 +85,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,f00a5cf4f05e0017a271d7fff1834567",
-                            "test__output1BackwardWarp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
+                            "test__backward0_affine.mat:md5,f00a5cf4f05e0017a271d7fff1834567",
+                            "test__backward1_warp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
                         ]
                     ]
                 ],
@@ -96,8 +96,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375",
-                            "test__output1ForwardAffine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
+                            "test__forward0_warp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375",
+                            "test__forward1_affine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
                         ]
                     ]
                 ],
@@ -106,7 +106,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,80737b4e6d720ae934aa2d21465310e1"
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,68793765227976b1458991f2e4d207db"
                     ]
                 ],
                 "affine": [
@@ -114,15 +114,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1ForwardAffine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
-                    ]
-                ],
-                "image": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__warped.nii.gz:md5,a898be9f21947e50d5c5c30ef27e42f6"
+                        "test__forward1_affine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
                     ]
                 ],
                 "image_transform": [
@@ -131,9 +123,17 @@
                             "id": "test"
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375",
-                            "test__output1ForwardAffine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
+                            "test__forward0_warp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375",
+                            "test__forward1_affine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
                         ]
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__t1_warped.nii.gz:md5,a898be9f21947e50d5c5c30ef27e42f6"
                     ]
                 ],
                 "inverse_affine": [
@@ -141,7 +141,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0BackwardAffine.mat:md5,f00a5cf4f05e0017a271d7fff1834567"
+                        "test__backward0_affine.mat:md5,f00a5cf4f05e0017a271d7fff1834567"
                     ]
                 ],
                 "inverse_image_transform": [
@@ -150,8 +150,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,f00a5cf4f05e0017a271d7fff1834567",
-                            "test__output1BackwardWarp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
+                            "test__backward0_affine.mat:md5,f00a5cf4f05e0017a271d7fff1834567",
+                            "test__backward1_warp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
                         ]
                     ]
                 ],
@@ -161,8 +161,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375",
-                            "test__output1ForwardAffine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
+                            "test__forward0_warp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375",
+                            "test__forward1_affine.mat:md5,47aa7f471ad6efa575de43df8077e4bb"
                         ]
                     ]
                 ],
@@ -171,7 +171,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1BackwardWarp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
+                        "test__backward1_warp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
                     ]
                 ],
                 "mqc": [
@@ -179,7 +179,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,80737b4e6d720ae934aa2d21465310e1"
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,68793765227976b1458991f2e4d207db"
                     ]
                 ],
                 "tractogram_transform": [
@@ -188,8 +188,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,f00a5cf4f05e0017a271d7fff1834567",
-                            "test__output1BackwardWarp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
+                            "test__backward0_affine.mat:md5,f00a5cf4f05e0017a271d7fff1834567",
+                            "test__backward1_warp.nii.gz:md5,3ce5cc3c5bc84878425dee39cf7f51f8"
                         ]
                     ]
                 ],
@@ -201,7 +201,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0ForwardWarp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375"
+                        "test__forward0_warp.nii.gz:md5,a28c530fc0e65b46cfd24dc00e0c7375"
                     ]
                 ]
             }
@@ -210,7 +210,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-18T16:55:20.097689504"
+        "timestamp": "2025-07-19T03:50:35.901962827"
     },
     "registration - ants - SyN": {
         "content": [
@@ -220,7 +220,7 @@
                         {
                             "id": "test"
                         },
-                        "test__warped.nii.gz:md5,803f1896a363b2149ed74a24d6a563a3"
+                        "test__t1_warped.nii.gz:md5,803f1896a363b2149ed74a24d6a563a3"
                     ]
                 ],
                 "1": [
@@ -228,7 +228,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1ForwardAffine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
+                        "test__forward1_affine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
                     ]
                 ],
                 "10": [
@@ -239,7 +239,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0ForwardWarp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853"
+                        "test__forward0_warp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853"
                     ]
                 ],
                 "3": [
@@ -247,7 +247,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1BackwardWarp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
+                        "test__backward1_warp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
                     ]
                 ],
                 "4": [
@@ -255,7 +255,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0BackwardAffine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b"
+                        "test__backward0_affine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b"
                     ]
                 ],
                 "5": [
@@ -264,8 +264,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853",
-                            "test__output1ForwardAffine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
+                            "test__forward0_warp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853",
+                            "test__forward1_affine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
                         ]
                     ]
                 ],
@@ -275,8 +275,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b",
-                            "test__output1BackwardWarp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
+                            "test__backward0_affine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b",
+                            "test__backward1_warp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
                         ]
                     ]
                 ],
@@ -286,8 +286,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b",
-                            "test__output1BackwardWarp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
+                            "test__backward0_affine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b",
+                            "test__backward1_warp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
                         ]
                     ]
                 ],
@@ -297,8 +297,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853",
-                            "test__output1ForwardAffine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
+                            "test__forward0_warp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853",
+                            "test__forward1_affine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
                         ]
                     ]
                 ],
@@ -310,15 +310,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1ForwardAffine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
-                    ]
-                ],
-                "image": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__warped.nii.gz:md5,803f1896a363b2149ed74a24d6a563a3"
+                        "test__forward1_affine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
                     ]
                 ],
                 "image_transform": [
@@ -327,9 +319,17 @@
                             "id": "test"
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853",
-                            "test__output1ForwardAffine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
+                            "test__forward0_warp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853",
+                            "test__forward1_affine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
                         ]
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__t1_warped.nii.gz:md5,803f1896a363b2149ed74a24d6a563a3"
                     ]
                 ],
                 "inverse_affine": [
@@ -337,7 +337,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0BackwardAffine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b"
+                        "test__backward0_affine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b"
                     ]
                 ],
                 "inverse_image_transform": [
@@ -346,8 +346,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b",
-                            "test__output1BackwardWarp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
+                            "test__backward0_affine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b",
+                            "test__backward1_warp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
                         ]
                     ]
                 ],
@@ -357,8 +357,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853",
-                            "test__output1ForwardAffine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
+                            "test__forward0_warp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853",
+                            "test__forward1_affine.mat:md5,9490485382c71e8630cc9dfaf7b7f680"
                         ]
                     ]
                 ],
@@ -367,7 +367,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1BackwardWarp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
+                        "test__backward1_warp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
                     ]
                 ],
                 "mqc": [
@@ -379,8 +379,8 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b",
-                            "test__output1BackwardWarp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
+                            "test__backward0_affine.mat:md5,5904a4d92305bc6ea12bbff0c2a6535b",
+                            "test__backward1_warp.nii.gz:md5,ac6b899b0c39a4d2fb6801247c834fb4"
                         ]
                     ]
                 ],
@@ -392,7 +392,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0ForwardWarp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853"
+                        "test__forward0_warp.nii.gz:md5,6bc17183760f1fc556e8cc6781261853"
                     ]
                 ]
             }
@@ -401,7 +401,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-18T16:54:24.928971381"
+        "timestamp": "2025-07-19T03:49:42.755682209"
     },
     "registration - ants - no warps": {
         "content": [
@@ -411,7 +411,7 @@
                         {
                             "id": "test"
                         },
-                        "test__warped.nii.gz:md5,4c579bf7bf92bc47969bfb8a5a195323"
+                        "test__t1_warped.nii.gz:md5,4c579bf7bf92bc47969bfb8a5a195323"
                     ]
                 ],
                 "1": [
@@ -419,7 +419,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1ForwardAffine.mat:md5,ec3336384ce5380654d7a90711e634aa"
+                        "test__forward1_affine.mat:md5,ec3336384ce5380654d7a90711e634aa"
                     ]
                 ],
                 "10": [
@@ -436,7 +436,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0BackwardAffine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
+                        "test__backward0_affine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
                     ]
                 ],
                 "5": [
@@ -445,7 +445,7 @@
                             "id": "test"
                         },
                         [
-                            "test__output1ForwardAffine.mat:md5,ec3336384ce5380654d7a90711e634aa"
+                            "test__forward1_affine.mat:md5,ec3336384ce5380654d7a90711e634aa"
                         ]
                     ]
                 ],
@@ -455,7 +455,7 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
+                            "test__backward0_affine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
                         ]
                     ]
                 ],
@@ -465,7 +465,7 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
+                            "test__backward0_affine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
                         ]
                     ]
                 ],
@@ -475,7 +475,7 @@
                             "id": "test"
                         },
                         [
-                            "test__output1ForwardAffine.mat:md5,ec3336384ce5380654d7a90711e634aa"
+                            "test__forward1_affine.mat:md5,ec3336384ce5380654d7a90711e634aa"
                         ]
                     ]
                 ],
@@ -487,15 +487,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output1ForwardAffine.mat:md5,ec3336384ce5380654d7a90711e634aa"
-                    ]
-                ],
-                "image": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__warped.nii.gz:md5,4c579bf7bf92bc47969bfb8a5a195323"
+                        "test__forward1_affine.mat:md5,ec3336384ce5380654d7a90711e634aa"
                     ]
                 ],
                 "image_transform": [
@@ -504,8 +496,16 @@
                             "id": "test"
                         },
                         [
-                            "test__output1ForwardAffine.mat:md5,ec3336384ce5380654d7a90711e634aa"
+                            "test__forward1_affine.mat:md5,ec3336384ce5380654d7a90711e634aa"
                         ]
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__t1_warped.nii.gz:md5,4c579bf7bf92bc47969bfb8a5a195323"
                     ]
                 ],
                 "inverse_affine": [
@@ -513,7 +513,7 @@
                         {
                             "id": "test"
                         },
-                        "test__output0BackwardAffine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
+                        "test__backward0_affine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
                     ]
                 ],
                 "inverse_image_transform": [
@@ -522,7 +522,7 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
+                            "test__backward0_affine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
                         ]
                     ]
                 ],
@@ -532,7 +532,7 @@
                             "id": "test"
                         },
                         [
-                            "test__output1ForwardAffine.mat:md5,ec3336384ce5380654d7a90711e634aa"
+                            "test__forward1_affine.mat:md5,ec3336384ce5380654d7a90711e634aa"
                         ]
                     ]
                 ],
@@ -548,7 +548,7 @@
                             "id": "test"
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
+                            "test__backward0_affine.mat:md5,8534fb705a82819d4dd660b0a1bba99f"
                         ]
                     ]
                 ],
@@ -564,6 +564,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-18T16:55:37.962671087"
+        "timestamp": "2025-07-19T03:50:53.607552073"
     }
 }
