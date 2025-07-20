@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Subworkflow REGISTRATION"
     script "../main.nf"
     workflow "REGISTRATION"
+    config "./nextflow.config"
 
     tag "subworkflows"
     tag "subworkflows_nfneuro"
@@ -33,7 +34,7 @@ nextflow_workflow {
     }
 
     test("registration - antsRegistration") {
-        config "./nextflow.config"
+        config "./nextflow_ants.config"
         when {
             workflow {
                 """
@@ -96,7 +97,7 @@ nextflow_workflow {
     }
 
     test("registration - SyNQuick") {
-        config "./nextflow.config"
+        config "./nextflow_ants.config"
         when {
             workflow {
                 """
@@ -247,7 +248,6 @@ nextflow_workflow {
                 { assert workflow.out
                     .findAll{ channel -> !channel.key.isInteger() }
                     .every{ channel -> ["ref_warped",
-                                        "tractogram_transform",
                                         "segmentation",
                                         "ref_segmentation"].contains(channel.key)
                         ? channel.value.size() == 0
