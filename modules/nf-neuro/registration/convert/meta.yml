@@ -26,6 +26,7 @@ input:
         description: Deform transform to convert. Default usage expects Freesurfer .mgz
           format from mri_synthmorph
         pattern: "*.{nii,nii.gz,mgz,m3z}"
+        mandatory: false
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
     - affine:
@@ -33,12 +34,14 @@ input:
         description: Affine transform to convert. Default usage expects Freesurfer .lta
           format from mri_synthmorph
         pattern: "*.{lta,txt,xfm,dat}"
+        mandatory: false
         ontologies: []
     - source:
         type: file
         description: Moving Nifti volume used for registration. Defines source image
           geometry
         pattern: "*.{nii,nii.gz}"
+        mandatory: false
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
     - target:
@@ -46,6 +49,7 @@ input:
         description: Fixed Nifti volume used for registration. Defines target image
           geometry. (optional)
         pattern: "*.{nii,nii.gz}"
+        mandatory: false
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
     - fs_license:
@@ -55,6 +59,7 @@ input:
           Optional. If you have already set your license as prescribed by Freesurfer
           (copied to a .license file in your $FREESURFER_HOME), this is not required.
         pattern: "*.txt"
+        mandatory: true
         ontologies: []
 output:
   deform_transform:

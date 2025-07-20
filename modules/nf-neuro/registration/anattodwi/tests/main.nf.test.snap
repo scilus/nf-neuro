@@ -17,7 +17,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                        "test__forward1_affine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                     ]
                 ],
                 "10": [
@@ -29,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
+                        "test__forward0_warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
                     ]
                 ],
                 "3": [
@@ -38,7 +38,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                        "test__backward1_warp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
                 "4": [
@@ -47,7 +47,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2"
+                        "test__backward0_affine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2"
                     ]
                 ],
                 "5": [
@@ -57,8 +57,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
-                            "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                            "test__forward0_warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                            "test__forward1_affine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                         ]
                     ]
                 ],
@@ -69,8 +69,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
-                            "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                            "test__backward0_affine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
+                            "test__backward1_warp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                         ]
                     ]
                 ],
@@ -81,8 +81,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
-                            "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                            "test__backward0_affine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
+                            "test__backward1_warp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                         ]
                     ]
                 ],
@@ -93,8 +93,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
-                            "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                            "test__forward0_warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                            "test__forward1_affine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                         ]
                     ]
                 ],
@@ -113,7 +113,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                        "test__forward1_affine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                     ]
                 ],
                 "anat_warped": [
@@ -132,8 +132,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
-                            "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                            "test__forward0_warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                            "test__forward1_affine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                         ]
                     ]
                 ],
@@ -143,7 +143,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2"
+                        "test__backward0_affine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2"
                     ]
                 ],
                 "inverse_image_transform": [
@@ -153,8 +153,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
-                            "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                            "test__backward0_affine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
+                            "test__backward1_warp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                         ]
                     ]
                 ],
@@ -165,8 +165,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
-                            "test__output1ForwardAffine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
+                            "test__forward0_warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6",
+                            "test__forward1_affine.mat:md5,6eef07f9004fb96e57ae0404ffef174c"
                         ]
                     ]
                 ],
@@ -176,7 +176,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                        "test__backward1_warp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                     ]
                 ],
                 "mqc": [
@@ -195,8 +195,8 @@
                             "single_end": false
                         },
                         [
-                            "test__output0BackwardAffine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
-                            "test__output1BackwardWarp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
+                            "test__backward0_affine.mat:md5,ed61257997bb5d55bf79f29a9a37b0e2",
+                            "test__backward1_warp.nii.gz:md5,28694d2b41f5209ab8f1acbb219014fe"
                         ]
                     ]
                 ],
@@ -209,7 +209,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0ForwardWarp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
+                        "test__forward0_warp.nii.gz:md5,e0995852e251bee5521572a4495a0bd6"
                     ]
                 ]
             }
@@ -218,18 +218,18 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-18T18:41:43.375324216"
+        "timestamp": "2025-07-19T01:40:29.087654922"
     },
     "registration - anattodwi -stub-run": {
         "content": [
             [
-                "versions.yml:md5,ab10576626dce951b89cbc1b84e6c130"
+                "versions.yml:md5,f7d4a628967ea923c4ce688c43ad7f5f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-18T01:24:58.265561573"
+        "timestamp": "2025-07-19T01:40:42.138875468"
     }
 }
