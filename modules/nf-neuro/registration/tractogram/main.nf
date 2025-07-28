@@ -5,7 +5,7 @@ process REGISTRATION_TRACTOGRAM {
     container "scilus/scilpy:2.2.0_cpu"
 
     input:
-    tuple val(meta), path(anat), path(transfo), path(tractogram), path(ref) /* optional, input = [] */, path(deformation) /* optional, input = [] */
+    tuple val(meta), path(anat), path(affine), path(tractogram), path(ref) /* optional, value = [] */, path(deformation) /* optional, value = [] */
 
     output:
     tuple val(meta), path("*__*.{trk,tck}"), emit: warped_tractogram
@@ -31,17 +31,25 @@ process REGISTRATION_TRACTOGRAM {
     def no_empty = task.ext.no_empty ? "--no_empty" : ""
 
     """
+    affine=$affine
+    if [[ "$affine" == *.txt ]]; then
+        ConvertTransformFile 3 $affine affine.mat --convertToAffineType \
+            && affine="affine.mat" \
+            || echo "TXT affine transform file conversion failed, using original file."
+    fi
+
     for tractogram in ${tractogram};
         do \
         ext=\${tractogram#*.}
         bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
 
-        scil_tractogram_apply_transform \$tractogram $anat $transfo tmp.trk\
-                        $in_deformation\
-                        $inverse\
-                        $reverse_operation\
-                        $force\
-                        $reference
+    scil_tractogram_apply_transform.py \$tractogram $anat \$affine \
+        ${prefix}__\${bname}${suffix}.\${ext} \
+        $in_deformation \
+        $inverse \
+        $reverse_operation \
+        $force \
+        $reference
 
         scil_tractogram_remove_invalid tmp.trk ${prefix}__\${bname}${suffix}.\${ext}\
                         $cut_invalid\

@@ -1,5 +1,5 @@
 {
-    "output to template MNI152NLin2009aAsym - without brain mask": {
+    "Template MNI152NLin2009aAsym - using synthmorph registration": {
         "content": [
             {
                 "ch_registered_anat": [
@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz"
+                        "test__warped.nii.gz"
                     ]
                 ],
                 "ch_t1w_tpl": [
@@ -59,7 +59,7 @@
         },
         "timestamp": "2025-10-17T17:39:24.646305544"
     },
-    "output to template MNI152NLin2009cAsym with local folder": {
+    "Template MNI152NLin2009aAsym - no brain mask": {
         "content": [
             {
                 "ch_registered_anat": [
@@ -67,7 +67,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz"
+                        "test__template__image_bet_warped.nii.gz"
                     ]
                 ],
                 "ch_t1w_tpl": [
