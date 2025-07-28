@@ -15,7 +15,15 @@ description: |
     - params.template_cohort: the cohort of the template (e.g., 1)
 
   An example of how to set the module's ext.args can be find in the
-  `test/nextflow.config` file.
+  `test/nextflow.config` file. Additional configuration for local templates
+  are also available in the `test/local.config` file.
+
+  To select the registration technique used to register the input files, use the
+  following parameters :
+  - params.run_easyreg : Use Easyreg any-to-any registration model
+  - params.run_synthmorph : Use Synthmorph ML registration model
+
+  Refer to the `registration` subworkflow and the modules it uses for configuration options.
 keywords:
   - template
   - TemplateFlow
@@ -27,6 +35,27 @@ components:
   - image/applymask
   - betcrop/fslbetcrop
   - utils/templateflow
+args:
+  - template:
+      type: string
+      description: Name of the template to use (see https://templateflow.org).
+  - templateflow_home:
+      type: string
+      description: Path to the templateflow local home directory where files are located and/or downloaded.
+  - template_res:
+      type: int
+      description: Template resolution to use or download.
+  - template_cohort:
+      type: string
+      description: Name/type of the cohort to use.
+  - run_easyreg:
+      type: boolean
+      description: Use Easyreg any-to-any registration model.
+      default: false
+  - run_synthmorph:
+      type: boolean
+      description: Use Synthmorph ML registration model.
+      default: false
 input:
   - ch_anat:
       type: file
@@ -103,5 +132,6 @@ output:
       pattern: "versions.yml"
 authors:
   - "@gagnonanthony"
+  - "@AlexVCaron"
 maintainers:
   - "@gagnonanthony"
