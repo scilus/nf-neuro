@@ -98,6 +98,7 @@ workflow TRACTOFLOW {
             RECONST_DTIMETRICS.out.fa,
             Channel.empty(),
             Channel.empty(),
+            Channel.empty(),
             Channel.empty()
         )
         ch_versions = ch_versions.mix(T1_REGISTRATION.out.versions.first())

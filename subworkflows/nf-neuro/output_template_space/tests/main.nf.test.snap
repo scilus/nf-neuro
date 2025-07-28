@@ -1,5 +1,5 @@
 {
-    "output to template MNI152NLin2009aAsym - without brain mask": {
+    "Template MNI152NLin2009aAsym - using synthmorph registration": {
         "content": [
             {
                 "ch_registered_anat": [
@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz"
+                        "test__warped.nii.gz"
                     ]
                 ],
                 "ch_t1w_tpl": [
@@ -43,13 +43,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,00dee5d05eb6c7fa693b718e2264ce48",
-                    "versions.yml:md5,08c023826481c9130c3914096cda7f63",
-                    "versions.yml:md5,4fe062075b77eb5fd05e956d9da383c8",
+                    "versions.yml:md5,07b568504188b0a69350779f17c346c1",
+                    "versions.yml:md5,121d1754b8709c17ae693bf5e6c16937",
+                    "versions.yml:md5,4ff93225e30c1a1f2d0ce7d759cfc55a",
                     "versions.yml:md5,533cb552fa6ecee7fed55e4d60708ba1",
                     "versions.yml:md5,58ac6bb92b84539e8a7dcf72fd12b703",
                     "versions.yml:md5,61d2f568089fbc28ad00afe9c5e9436c",
-                    "versions.yml:md5,e58935231dd66f7577b21c515dd0eb10"
+                    "versions.yml:md5,75c8524f95824b358ede7fe52dfa35e6",
+                    "versions.yml:md5,774a31582f37bfef6089b0c018b34cad"
                 ]
             }
         ],
@@ -57,9 +58,9 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-18T17:51:59.007520448"
+        "timestamp": "2025-07-28T17:15:47.722210168"
     },
-    "output to template MNI152NLin2009cAsym with local folder": {
+    "Template MNI152NLin2009aAsym - no brain mask": {
         "content": [
             {
                 "ch_registered_anat": [
@@ -67,7 +68,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz"
+                        "test__template__image_bet_warped.nii.gz"
                     ]
                 ],
                 "ch_t1w_tpl": [
@@ -103,12 +104,12 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,00dee5d05eb6c7fa693b718e2264ce48",
-                    "versions.yml:md5,08c023826481c9130c3914096cda7f63",
-                    "versions.yml:md5,4fe062075b77eb5fd05e956d9da383c8",
+                    "versions.yml:md5,07b568504188b0a69350779f17c346c1",
+                    "versions.yml:md5,4ff93225e30c1a1f2d0ce7d759cfc55a",
                     "versions.yml:md5,533cb552fa6ecee7fed55e4d60708ba1",
                     "versions.yml:md5,58ac6bb92b84539e8a7dcf72fd12b703",
                     "versions.yml:md5,61d2f568089fbc28ad00afe9c5e9436c",
+                    "versions.yml:md5,75c8524f95824b358ede7fe52dfa35e6",
                     "versions.yml:md5,e58935231dd66f7577b21c515dd0eb10"
                 ]
             }
@@ -117,6 +118,66 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-18T17:51:22.935068132"
+        "timestamp": "2025-07-28T17:24:39.955660719"
+    },
+    "Template MNI152NLin2009cAsym - local templates": {
+        "content": [
+            {
+                "ch_registered_anat": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__template__image_bet_warped.nii.gz"
+                    ]
+                ],
+                "ch_t1w_tpl": [
+                    "template__image_bet.nii.gz"
+                ],
+                "ch_t2w_tpl": [
+                    "template__image_bet.nii.gz"
+                ],
+                "ch_warped_labels_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__IFGWM_labels_map__warped.nii.gz"
+                    ]
+                ],
+                "ch_warped_nifti_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__IFGWM__warped.nii.gz"
+                    ]
+                ],
+                "ch_warped_trk_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__IFGWM.trk",
+                        "test__IFGWM_color.trk",
+                        "test__IFGWM_uni.trk"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,07b568504188b0a69350779f17c346c1",
+                    "versions.yml:md5,4ff93225e30c1a1f2d0ce7d759cfc55a",
+                    "versions.yml:md5,533cb552fa6ecee7fed55e4d60708ba1",
+                    "versions.yml:md5,58ac6bb92b84539e8a7dcf72fd12b703",
+                    "versions.yml:md5,61d2f568089fbc28ad00afe9c5e9436c",
+                    "versions.yml:md5,75c8524f95824b358ede7fe52dfa35e6",
+                    "versions.yml:md5,e58935231dd66f7577b21c515dd0eb10"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-28T17:20:12.979707013"
     }
 }

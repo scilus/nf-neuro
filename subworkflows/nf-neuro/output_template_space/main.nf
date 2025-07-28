@@ -18,7 +18,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
         ch_mask_files               // channel: [ val(meta), [ mask_files ] ]
         ch_labels_files             // channel: [ val(meta), [ labels_files ] ]
         ch_trk_files                // channel: [ val(meta), [ trk_files ] ]
-
+        ch_freesurfer_license       // channel: [ val(freesurfer_license) ]
     main:
 
     ch_versions = Channel.empty()
@@ -138,14 +138,19 @@ workflow OUTPUT_TEMPLATE_SPACE {
     ch_template = ch_anat
         .map{ meta, _anat -> meta }
         .combine(params.use_template_t2w ? ch_t2w_tpl : ch_t1w_tpl)
+
+    ch_brain_mask = ch_anat
+        .map{ meta, _anat -> meta }
+        .combine(ch_brain_mask.TRUE)
     // ** Register the subject to the template space ** //
     REGISTRATION(
         ch_anat,
         ch_template,
         Channel.empty(),
+        ch_brain_mask,
         Channel.empty(),
         Channel.empty(),
-        Channel.empty()
+        ch_freesurfer_license
     )
     ch_versions = ch_versions.mix(REGISTRATION.out.versions)
 
@@ -178,10 +183,10 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** Apply the transformation to the tractograms ** //
     ch_tractograms_to_transform = ch_trk_files
         .join(REGISTRATION.out.image_warped)
-        .join(REGISTRATION.out.tractogram_transform)
-        .map{ it[0..1] + it[2..-1].flatten() }
+        .join(REGISTRATION.out.inverse_affine)
+        .join(REGISTRATION.out.inverse_warp, remainder: true)
         .map{ meta, trk, image, affine, warp ->
-            tuple(meta, image, affine, trk, [], warp)
+            [meta, image, affine, trk, [], warp ?: []]
         }
 
     REGISTRATION_TRACTOGRAM ( ch_tractograms_to_transform )

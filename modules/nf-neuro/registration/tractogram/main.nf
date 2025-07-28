@@ -3,11 +3,11 @@ process REGISTRATION_TRACTOGRAM {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilpy_2.1.0.sif':
-        'scilus/scilpy:2.1.0' }"
+        'https://scil.usherbrooke.ca/containers/scilus_2.1.0.sif':
+        'scilus/scilus:2.1.0' }"
 
     input:
-    tuple val(meta), path(anat), path(transfo), path(tractogram), path(ref) /* optional, value = [] */, path(deformation) /* optional, value = [] */
+    tuple val(meta), path(anat), path(affine), path(tractogram), path(ref) /* optional, value = [] */, path(deformation) /* optional, value = [] */
 
     output:
     tuple val(meta), path("*__*.{trk,tck}"), emit: warped_tractogram
@@ -33,13 +33,20 @@ process REGISTRATION_TRACTOGRAM {
     def no_empty = task.ext.no_empty ? "--no_empty" : ""
 
     """
+    affine=$affine
+    if [[ "$affine" == *.txt ]]; then
+        ConvertTransformFile 3 $affine affine.mat --convertToAffineType \
+            && affine="affine.mat" \
+            || echo "TXT affine transform file conversion failed, using original file."
+    fi
+
     for tractogram in ${tractogram};
     do
 
     ext=\${tractogram#*.}
     bname=\$(basename \${tractogram} .\${ext})
 
-    scil_tractogram_apply_transform.py \$tractogram $anat $transfo \
+    scil_tractogram_apply_transform.py \$tractogram $anat \$affine \
         ${prefix}__\${bname}${suffix}.\${ext} \
         $in_deformation \
         $inverse \
