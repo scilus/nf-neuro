@@ -64,7 +64,7 @@ args:
         - 256
   - disable_resampling:
       type: boolean
-      description: Update image header instead of performing resampling of the output image.
+      description: Update image header instead of performing resampling of the image grid.
       default: false
 input:
   - - meta:
