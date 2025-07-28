@@ -23,6 +23,12 @@ process BUNDLE_RECOGNIZE {
     def rbx_processes = task.cpus ? "--processes " + task.cpus : "--processes 1"
     def outlier_alpha = task.ext.outlier_alpha ? "--alpha " + task.ext.outlier_alpha : ""
     """
+    if [[ "$transform" == *.txt ]]; then
+        ConvertTransformFile 3 $transform transform.mat --convertToAffineType \
+            && transform="transform.mat" \
+            || echo "TXT transform file conversion failed, using original file."
+    fi
+
     mkdir recobundles/
     scil_tractogram_segment_with_bundleseg ${tractograms} ${config} ${directory}/ ${transform} --inverse --out_dir recobundles/ \
         -v DEBUG $minimal_vote_ratio $seed $rbx_processes
