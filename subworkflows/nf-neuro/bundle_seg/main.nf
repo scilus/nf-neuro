@@ -1,19 +1,20 @@
 include { BUNDLE_RECOGNIZE  } from '../../../modules/nf-neuro/bundle/recognize/main'
+include { REGISTRATION_CONVERT } from '../../../modules/nf-neuro/registration/convert/main'
 
 include { REGISTRATION } from '../../../subworkflows/nf-neuro/registration/main'
 
 def fetch_bundleseg_atlas(atlasUrl, configUrl, dest) {
 
-    def atlas = new File("$dest/atlas.zip").withOutputStream { out ->
+    def atlas = new File("$dest/atlas.zip").withOutputStream{ out ->
         new URL(atlasUrl).withInputStream { from -> out << from; }
     }
 
-    def config = new File("$dest/config.zip").withOutputStream { out ->
+    def config = new File("$dest/config.zip").withOutputStream{ out ->
         new URL(configUrl).withInputStream { from -> out << from; }
     }
 
     def atlasFile = new java.util.zip.ZipFile("$dest/atlas.zip")
-    atlasFile.entries().each { it ->
+    atlasFile.entries().each{ it ->
         def path = java.nio.file.Paths.get("$dest/atlas/" + it.name)
         if(it.directory){
             java.nio.file.Files.createDirectories(path)
@@ -28,7 +29,7 @@ def fetch_bundleseg_atlas(atlasUrl, configUrl, dest) {
     }
 
     def configFile = new java.util.zip.ZipFile("$dest/config.zip")
-    configFile.entries().each { it ->
+    configFile.entries().each{ it ->
         def path = java.nio.file.Paths.get("$dest/config/" + it.name)
         if(it.directory){
             java.nio.file.Files.createDirectories(path)
@@ -44,20 +45,24 @@ def fetch_bundleseg_atlas(atlasUrl, configUrl, dest) {
 }
 
 workflow BUNDLE_SEG {
-
     take:
-        ch_fa               // channel: [ val(meta), [ fa ] ]
-        ch_tractogram       // channel: [ val(meta), [ tractogram ] ]
-
+        ch_fa                   // channel: [ val(meta), [ fa ] ]
+        ch_tractogram           // channel: [ val(meta), [ tractogram ] ]
+        ch_freesurfer_license   // channel: [ val(meta), path(fs_license) ]
     main:
+
+        if ( params.run_easyreg ) error "The BUNDLE_SEG workflow does not support the easyreg registration method."
+        if ( params.run_synthmorph ) {
+            ch_freesurfer_license.ifEmpty{ error "Synthmorph registration need a Freesurfer License to run." }
+        }
 
         ch_versions = Channel.empty()
 
         // ** Setting up Atlas reference channels. ** //
         if ( params.atlas_directory ) {
-            atlas_anat = Channel.fromPath("$params.atlas_directory/atlas/mni_masked.nii.gz", checkIfExists: true, relative: true)
-            atlas_config = Channel.fromPath("$params.atlas_directory/config/config_fss_1.json", checkIfExists: true, relative: true)
-            atlas_average = Channel.fromPath("$params.atlas_directory/atlas/atlas/", checkIfExists: true, relative: true)
+            ch_atlas_anat = Channel.fromPath("$params.atlas_directory/atlas/mni_masked.nii.gz", checkIfExists: true, relative: true)
+            ch_atlas_config = Channel.fromPath("$params.atlas_directory/config/config_fss_1.json", checkIfExists: true, relative: true)
+            ch_atlas_average = Channel.fromPath("$params.atlas_directory/atlas/atlas/", checkIfExists: true, relative: true)
         }
         else {
             if ( !file("$workflow.workDir/atlas/mni_masked.nii.gz").exists() ) {
@@ -67,35 +72,37 @@ workflow BUNDLE_SEG {
                     "${workflow.workDir}/"
                 )
             }
-            atlas_anat = Channel.fromPath("$workflow.workDir/atlas/mni_masked.nii.gz")
-            atlas_config = Channel.fromPath("$workflow.workDir/config/config_fss_1.json")
-            atlas_average = Channel.fromPath("$workflow.workDir/atlas/atlas/")
+            ch_atlas_anat = Channel.fromPath("$workflow.workDir/atlas/mni_masked.nii.gz")
+            ch_atlas_config = Channel.fromPath("$workflow.workDir/config/config_fss_1.json")
+            ch_atlas_average = Channel.fromPath("$workflow.workDir/atlas/atlas/")
         }
 
         // ** Register the atlas to subject's space. Set up atlas file as moving image ** //
         // ** and subject anat as fixed image.                                         ** //
+        ch_atlas_anat = ch_fa
+            .combine(ch_atlas_anat)
+            .map{ meta, _fa, anat -> [meta, anat] }
+
         REGISTRATION(
-            atlas_anat,
+            ch_atlas_anat,
             ch_fa,
             Channel.empty(),
             Channel.empty(),
             Channel.empty(),
-            Channel.empty()
+            Channel.empty(),
+            ch_freesurfer_license
         )
         ch_versions = ch_versions.mix(REGISTRATION.out.versions.first())
 
         // ** Perform bundle recognition and segmentation ** //
         ch_recognize_bundle = ch_tractogram
             .join(REGISTRATION.out.affine)
-            .combine(atlas_config)
-            .combine(atlas_average)
+            .combine(ch_atlas_config)
+            .combine(ch_atlas_average)
 
         BUNDLE_RECOGNIZE ( ch_recognize_bundle )
         ch_versions = ch_versions.mix(BUNDLE_RECOGNIZE.out.versions.first())
-
-
     emit:
         bundles = BUNDLE_RECOGNIZE.out.bundles              // channel: [ val(meta), [ bundles ] ]
-
         versions = ch_versions                              // channel: [ versions.yml ]
 }

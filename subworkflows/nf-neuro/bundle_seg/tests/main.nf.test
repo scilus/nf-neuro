@@ -15,36 +15,89 @@ nextflow_workflow {
     tag "load_test_data"
 
     tag "stub"
-    options "-stub-run"
+    // options "-stub-run"
 
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
             process {
                 """
-                input[0] = Channel.from( [ "tracking.zip" ] )
+                input[0] = Channel.from( [ "tracking.zip", "freesurfer.zip" ] )
                 input[1] = "test.load-test-data"
                 """
             }
         }
     }
 
-    test("rbx - base - no_atlas_folder") {
-
+    test("rbx - download atlas - ants registration") {
         when {
             workflow {
                 """
-                input[0] = LOAD_DATA.out.test_data_directory.map{
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        tracking: it.simpleName == "tracking"
+                        freesurfer: it.simpleName == "freesurfer"
+                    }
+                input[0] = ch_split_test_data.tracking.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/fa.nii.gz")
                     ]
                 }
-                input[1] = LOAD_DATA.out.test_data_directory.map{
+                input[1] = ch_split_test_data.tracking.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/pft.trk")
                     ]
+                }
+                input[2] = Channel.empty()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
+            )
+        }
+    }
+
+    test("rbx - download atlas - synthmorph registration") {
+        config "./synthregistration.config"
+
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        tracking: it.simpleName == "tracking"
+                        freesurfer: it.simpleName == "freesurfer"
+                    }
+                input[0] = ch_split_test_data.tracking.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/fa.nii.gz")
+                    ]
+                }
+                input[1] = ch_split_test_data.tracking.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/pft.trk")
+                    ]
+                }
+                input[2] = ch_split_test_data.freesurfer.map{
+                    test_data_directory -> file("\${test_data_directory}/license.txt")
                 }
                 """
             }
