@@ -1,5 +1,5 @@
 {
-    "rbx - base - no_atlas_folder": {
+    "rbx - download atlas - synthmorph registration": {
         "content": [
             {
                 "bundles": [
@@ -7,11 +7,53 @@
                         {
                             "id": "test"
                         },
-                        "test__AF_L_cleaned.trk"
+                        "test__AF_L_cleaned.trk",
+                        "test__CC_Fr_1_cleaned.trk",
+                        "test__CG_L_An_cleaned.trk",
+                        "test__CG_L_cleaned.trk",
+                        "test__FPT_R_Brainstem_cleaned.trk",
+                        "test__FPT_R_cleaned.trk",
+                        "test__ILF_R_cleaned.trk",
+                        "test__MCP_cleaned.trk",
+                        "test__POPT_R_Brainstem_cleaned.trk",
+                        "test__POPT_R_cleaned.trk",
+                        "test__PYT_R_cleaned.trk",
+                        "test__SCP_R_cleaned.trk",
+                        "test__SLF_R_cleaned.trk"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1254d4d21b9568274fe6137cd8d9dcca",
+                    "versions.yml:md5,84a499436fbf8f1367ec4d8b21cf3abd",
+                    "versions.yml:md5,a7e31b7279716126495bc494578461be"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-28T15:18:49.737043083"
+    },
+    "rbx - download atlas - ants registration": {
+        "content": [
+            {
+                "bundles": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__CC_Fr_1_cleaned.trk",
+                        "test__FPT_L_cleaned.trk",
+                        "test__FPT_R_Brainstem_cleaned.trk",
+                        "test__FPT_R_cleaned.trk",
+                        "test__POPT_R_Brainstem_cleaned.trk",
+                        "test__PYT_R_Brainstem_cleaned.trk",
+                        "test__PYT_R_cleaned.trk",
+                        "test__SCP_R_cleaned.trk"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,40aa50ff3933b180cfb4512899515141",
                     "versions.yml:md5,84a499436fbf8f1367ec4d8b21cf3abd"
                 ]
             }
@@ -20,6 +62,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-18T16:59:46.458412675"
+        "timestamp": "2025-07-28T15:14:25.989538512"
     }
 }
