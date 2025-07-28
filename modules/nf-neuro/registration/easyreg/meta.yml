@@ -15,6 +15,11 @@ tools:
       homepage: https://surfer.nmr.mgh.harvard.edu/
       doi: 10.1016/j.neuroimage.2012.01.021
       identifier: ""
+args:
+  - affine_only:
+      type: boolean
+      description: Only perform affine registration
+      default: false
 input:
   - - meta:
         type: map

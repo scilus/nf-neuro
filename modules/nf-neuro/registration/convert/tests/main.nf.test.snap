@@ -1,230 +1,126 @@
 {
-    "registration - convert - fsants": {
+    "registration - convert - stub-run": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_affine.txt:md5,5f989a979be61faa578ad619377a8a07"
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
-                ],
-                "affine_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_affine.txt:md5,5f989a979be61faa578ad619377a8a07"
-                    ]
-                ],
-                "deform_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
-        },
-        "timestamp": "2025-06-04T03:19:41.033223181"
-    },
-    "registration - convert - default": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
-                    ]
-                ],
-                "1": [
-
-                ],
-                "2": [
-                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
-                ],
-                "affine_transform": [
-
-                ],
-                "deform_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
-        },
-        "timestamp": "2025-06-04T03:23:23.394821601"
-    },
-    "registration - convert - antsfs": {
-        "content": [
-            "test__out_affine.lta",
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__out_warp.nii.gz:md5,599fbe3a6b85d61c0c67cea8be4972b7"
-                ]
-            ],
             [
                 "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-04T03:22:34.322609153"
+        "timestamp": "2025-05-30T21:45:21.615899949"
     },
-    "registration - convert - fslants": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_warp.nii.gz:md5,94feb8f0e648256eaa5ae0a47e5702c6"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_affine.txt:md5,074e8ac5777a91ba0808cd58c5a0cc44"
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
-                ],
-                "affine_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_affine.txt:md5,074e8ac5777a91ba0808cd58c5a0cc44"
-                    ]
-                ],
-                "deform_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_warp.nii.gz:md5,94feb8f0e648256eaa5ae0a47e5702c6"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
-        },
-        "timestamp": "2025-06-04T03:24:33.171811516"
-    },
-    "registration - convert - affine": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_affine.txt:md5,5f989a979be61faa578ad619377a8a07"
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
-                ],
-                "affine_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_affine.txt:md5,5f989a979be61faa578ad619377a8a07"
-                    ]
-                ],
-                "deform_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
-        },
-        "timestamp": "2025-06-04T03:21:57.24523274"
-    },
-    "registration - convert - fslfs": {
+    "registration - convert - affine - to lta (needs source)": {
         "content": [
             "test__out_affine.lta",
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test__out_warp.nii.gz:md5,df432a27c586e57cad93af7509941cd4"
-                ]
-            ],
             [
                 "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-04T03:15:42.966436752"
+        "timestamp": "2025-07-25T15:15:22.167873891"
+    },
+    "registration - convert - affine - lta to fsl": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__out_affine.mat:md5,c88fcae39c94d8af95ca00592c2f2634"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
+                ],
+                "transformation": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__out_affine.mat:md5,c88fcae39c94d8af95ca00592c2f2634"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-25T15:15:03.099213703"
+    },
+    "registration - convert - mixed - to itk": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test1"
+                        },
+                        "test1__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
+                ],
+                "transformation": [
+                    [
+                        {
+                            "id": "test1"
+                        },
+                        "test1__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-25T15:15:12.599002015"
+    },
+    "registration - convert - deformation - ras to itk (lps)": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
+                ],
+                "transformation": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,9912ec095965c1ff571f77b447c18f92"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-25T14:54:35.309900291"
     }
 }

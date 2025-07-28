@@ -3,6 +3,7 @@ nextflow_process {
     name "Test Process REGISTRATION_CONVERT"
     script "../main.nf"
     process "REGISTRATION_CONVERT"
+    config "./nextflow.config"
 
     tag "modules"
     tag "modules_nfneuro"
@@ -25,10 +26,7 @@ nextflow_process {
         }
     }
 
-    test("registration - convert - default") {
-
-        config "./nextflow_default.config"
-
+    test("registration - convert - deformation - ras to itk (lps)") {
         when {
             process {
                 """
@@ -38,29 +36,28 @@ nextflow_process {
                         reslice: it.simpleName == "freesurfer_reslice"
                         transforms: it.simpleName == "freesurfer_transforms"
                     }
-                ch_transforms = ch_split_test_data.transforms.map{
+                ch_transform = ch_split_test_data.transforms.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/fs_deform.nii.gz"),
-                        []
+                        file("\${test_data_directory}/fs_deform.nii.gz")
                     ]
                 }
-                ch_reslice = ch_split_test_data.reslice.map{
+                ch_reference = ch_split_test_data.reslice.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/t1_reslice.nii.gz"),
-                        []
+                        file("\${test_data_directory}/t1_reslice.nii.gz")
                     ]
                 }
-                ch_freesurfer = ch_split_test_data.freesurfer.map{
+                ch_license = ch_split_test_data.freesurfer.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/license.txt")
                     ]
                 }
-                input[0] = ch_transforms
-                    .join(ch_reslice)
-                    .join(ch_freesurfer)
+                input[0] = ch_transform
+                    .join(ch_reference)
+                    .join(ch_license)
+                    .map{ meta, transform, reference, license -> [ meta, transform, "ras", "lps", reference, [], license ] }
                 """
             }
         }
@@ -73,10 +70,7 @@ nextflow_process {
         }
     }
 
-    test("registration - convert - affine") {
-
-        config "./nextflow_default.config"
-
+    test("registration - convert - affine - lta to fsl") {
         when {
             process {
                 """
@@ -86,29 +80,28 @@ nextflow_process {
                         reslice: it.simpleName == "freesurfer_reslice"
                         transforms: it.simpleName == "freesurfer_transforms"
                     }
-                ch_transforms = ch_split_test_data.transforms.map{
+                ch_transform = ch_split_test_data.transforms.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/fs_deform.nii.gz"),
                         file("\${test_data_directory}/fs_affine.lta")
                     ]
                 }
-                ch_reslice = ch_split_test_data.reslice.map{
+                ch_reference = ch_split_test_data.reslice.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/t1_reslice.nii.gz"),
                         file("\${test_data_directory}/fa_reslice.nii.gz")
                     ]
                 }
-                ch_freesurfer = ch_split_test_data.freesurfer.map{
+                ch_license = ch_split_test_data.freesurfer.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/license.txt")
                     ]
                 }
-                input[0] = ch_transforms
-                    .join(ch_reslice)
-                    .join(ch_freesurfer)
+                input[0] = ch_transform
+                    .join(ch_reference)
+                    .join(ch_license)
+                    .map{ meta, transform, reference, license -> [ meta, transform, "lta", "fsl", reference, [], license ] }
                 """
             }
         }
@@ -121,10 +114,7 @@ nextflow_process {
         }
     }
 
-    test("registration - convert - fsants") {
-
-        config "./nextflow_fsants.config"
-
+    test("registration - convert - mixed - to itk") {
         when {
             process {
                 """
@@ -136,27 +126,34 @@ nextflow_process {
                     }
                 ch_transforms = ch_split_test_data.transforms.map{
                     test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/fs_deform.nii.gz"),
-                        file("\${test_data_directory}/fs_affine.lta")
+                        [[ id:'test1' ], [ id:'test2' ]],
+                        [
+                            file("\${test_data_directory}/fs_deform.nii.gz"),
+                            file("\${test_data_directory}/fs_affine.lta")
+                        ],
+                        [ "ras", "lta" ],
+                        [ "itk" ]
                     ]
                 }
-                ch_reslice = ch_split_test_data.reslice.map{
+                ch_reference = ch_split_test_data.reslice.map{
                     test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/t1_reslice.nii.gz"),
-                        file("\${test_data_directory}/fa_reslice.nii.gz")
+                        [[ id:'test1' ], [ id:'test2' ]],
+                        [
+                            file("\${test_data_directory}/t1_reslice.nii.gz"),
+                            file("\${test_data_directory}/fa_reslice.nii.gz")
+                        ]
                     ]
                 }
-                ch_freesurfer = ch_split_test_data.freesurfer.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/license.txt")
-                    ]
+                ch_license = ch_split_test_data.freesurfer.map{
+                    test_data_directory -> file("\${test_data_directory}/license.txt")
                 }
                 input[0] = ch_transforms
-                    .join(ch_reslice)
-                    .join(ch_freesurfer)
+                    .join(ch_reference)
+                    .transpose()
+                    .combine(ch_license)
+                    .map{ meta, transform, intype, outtype, reference, license ->
+                        [ meta, transform, intype, outtype, reference, [], license ]
+                    }
                 """
             }
         }
@@ -169,10 +166,7 @@ nextflow_process {
         }
     }
 
-    test("registration - convert - fslfs") {
-
-        config "./nextflow_fslfs.config"
-
+    test("registration - convert - affine - to lta (needs source)") {
         when {
             process {
                 """
@@ -182,29 +176,35 @@ nextflow_process {
                         reslice: it.simpleName == "freesurfer_reslice"
                         transforms: it.simpleName == "freesurfer_transforms"
                     }
-                ch_transforms = ch_split_test_data.transforms.map{
+                ch_transform = ch_split_test_data.transforms.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/fsl_deform.nii.gz"),
                         file("\${test_data_directory}/fsl_affine.mat")
                     ]
                 }
-                ch_reslice = ch_split_test_data.reslice.map{
+                ch_reference = ch_split_test_data.reslice.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/t1_reslice.nii.gz"),
                         file("\${test_data_directory}/fa_reslice.nii.gz")
                     ]
                 }
-                ch_freesurfer = ch_split_test_data.freesurfer.map{
+                ch_source = ch_split_test_data.reslice.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_reslice.nii.gz")
+                    ]
+                }
+                ch_license = ch_split_test_data.freesurfer.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/license.txt")
                     ]
                 }
-                input[0] = ch_transforms
-                    .join(ch_reslice)
-                    .join(ch_freesurfer)
+                input[0] = ch_transform
+                    .map{ meta, transform -> [meta, transform, "fsl", "lta"] }
+                    .join(ch_reference)
+                    .join(ch_source)
+                    .join(ch_license)
                 """
             }
         }
@@ -213,108 +213,7 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    file(process.out.affine_transform.get(0).get(1)).name,
-                    process.out.deform_transform,
-                    process.out.versions
-                ).match() }
-            )
-        }
-    }
-
-    test("registration - convert - fslants") {
-
-        config "./nextflow_fslants.config"
-
-        when {
-            process {
-                """
-                ch_split_test_data = LOAD_DATA.out.test_data_directory
-                    .branch{
-                        freesurfer: it.simpleName == "freesurfer"
-                        reslice: it.simpleName == "freesurfer_reslice"
-                        transforms: it.simpleName == "freesurfer_transforms"
-                    }
-                ch_transforms = ch_split_test_data.transforms.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/fsl_deform.nii.gz"),
-                        file("\${test_data_directory}/fsl_affine.mat")
-                    ]
-                }
-                ch_reslice = ch_split_test_data.reslice.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/t1_reslice.nii.gz"),
-                        file("\${test_data_directory}/fa_reslice.nii.gz")
-                    ]
-                }
-                ch_freesurfer = ch_split_test_data.freesurfer.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/license.txt")
-                    ]
-                }
-                input[0] = ch_transforms
-                    .join(ch_reslice)
-                    .join(ch_freesurfer)
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert process.success },
-                { assert snapshot(process.out).match() }
-            )
-        }
-    }
-
-    test("registration - convert - antsfs") {
-
-        config "./nextflow_antsfs.config"
-
-        when {
-            process {
-                """
-                ch_split_test_data = LOAD_DATA.out.test_data_directory
-                    .branch{
-                        freesurfer: it.simpleName == "freesurfer"
-                        reslice: it.simpleName == "freesurfer_reslice"
-                        transforms: it.simpleName == "freesurfer_transforms"
-                    }
-                ch_transforms = ch_split_test_data.transforms.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/ants_deform.nii.gz"),
-                        file("\${test_data_directory}/ants_affine.txt")
-                    ]
-                }
-                ch_reslice = ch_split_test_data.reslice.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/t1_reslice.nii.gz"),
-                        file("\${test_data_directory}/fa_reslice.nii.gz")
-                    ]
-                }
-                ch_freesurfer = ch_split_test_data.freesurfer.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/license.txt")
-                    ]
-                }
-                input[0] = ch_transforms
-                    .join(ch_reslice)
-                    .join(ch_freesurfer)
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert process.success },
-                { assert snapshot(
-                    file(process.out.affine_transform.get(0).get(1)).name,
-                    process.out.deform_transform,
+                    file(process.out.transformation.get(0).get(1)).name,
                     process.out.versions
                 ).match() }
             )
@@ -334,29 +233,28 @@ nextflow_process {
                         reslice: it.simpleName == "freesurfer_reslice"
                         transforms: it.simpleName == "freesurfer_transforms"
                     }
-                ch_transforms = ch_split_test_data.transforms.map{
+                ch_transform = ch_split_test_data.transforms.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/fs_deform.nii.gz"),
-                        []
                     ]
                 }
-                ch_reslice = ch_split_test_data.reslice.map{
+                ch_reference = ch_split_test_data.reslice.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/t1_reslice.nii.gz"),
-                        []
                     ]
                 }
-                ch_freesurfer = ch_split_test_data.freesurfer.map{
+                ch_license = ch_split_test_data.freesurfer.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/license.txt")
                     ]
                 }
-                input[0] = ch_transforms
-                    .join(ch_reslice)
-                    .join(ch_freesurfer)
+                input[0] = ch_transform
+                    .join(ch_reference)
+                    .join(ch_license)
+                    .map{ meta, transform, reference, license -> [ meta, transform, "ras", "itk", reference, [], license ] }
                 """
             }
         }

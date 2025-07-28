@@ -15,39 +15,92 @@ tools:
       homepage: https://surfer.nmr.mgh.harvard.edu/
       doi: 10.1016/j.neuroimage.2012.01.021
       identifier: ""
+args:
+  - invert:
+      type: boolean
+      description: FOR AFFINE CONVERSION ONLY. Invert the transformation.
+      default: false
+  - conform:
+      type: boolean
+      description: FOR AFFINE CONVERSION ONLY. Conform target geometry before conversion (see freesurfer documentation).
+      default: false
+  - output_space:
+      type: string
+      description: FOR AFFINE CONVERSION ONLY. Reference space to convert to. Default is ras2ras.
+      default: "ras2ras"
+      choices:
+        - ras2ras
+        - vox2vox
+        - register_dat
+  - downsample:
+      type: boolean
+      description: FOR WARP CONVERSION ONLY. Downsample the input warp to 2mm isotropic resolution.
+      default: false
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-    - deform:
+    - transformation:
         type: file
-        description: Deform transform to convert. Default usage expects Freesurfer .mgz
-          format from mri_synthmorph
-        pattern: "*.{nii,nii.gz,mgz,m3z}"
-        mandatory: false
-        ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
-    - affine:
-        type: file
-        description: Affine transform to convert. Default usage expects Freesurfer .lta
-          format from mri_synthmorph
-        pattern: "*.{lta,txt,xfm,dat}"
-        mandatory: false
+        description: Input transformation to convert.
+        pattern: "*.{nii,nii.gz,mgz,m3z,lta,txt,xfm,dat}"
+        mandatory: true
         ontologies: []
-    - source:
+    - input_type:
+        type: string
+        description: |
+          Type of input transformation :
+            - affine : lta, fsl, mni, reg, niftyreg, itk, vox
+            - deform : m3z, fsl, lps, itk, ras, vox
+        mandatory: true
+        choices:
+          - lta
+          - fsl
+          - mni
+          - reg
+          - niftyreg
+          - itk
+          - vox
+          - m3z
+          - fsl
+          - lps
+          - ras
+          - vox
+    - output_type:
+        type: string
+        description: |
+          Type of output transformation :
+            - affine : lta, fsl, mni, reg, niftyreg, itk
+            - deform : m3z, fsl, lps, itk, ras, vox
+        mandatory: true
+        choices:
+          - lta
+          - fsl
+          - mni
+          - reg
+          - niftyreg
+          - itk
+          - vox
+          - m3z
+          - fsl
+          - lps
+          - ras
+          - vox
+    - reference:
         type: file
-        description: Moving Nifti volume used for registration. Defines source image
-          geometry
+        description: |
+          Reference volume used for registration. For affine transformations, it's usually the target
+          image, and for warp the moving (source) image. Validate with the tools you used to generate
+          the transformation.
         pattern: "*.{nii,nii.gz}"
-        mandatory: false
+        mandatory: true
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
-    - target:
+    - affine_source:
         type: file
-        description: Fixed Nifti volume used for registration. Defines target image
-          geometry. (optional)
+        description: ONLY USED FOR CONVERSION OF AFFINES IN LTA FORMAT. Moving (source) Nifti volume used for registration.
         pattern: "*.{nii,nii.gz}"
         mandatory: false
         ontologies:
@@ -62,28 +115,18 @@ input:
         mandatory: true
         ontologies: []
 output:
-  deform_transform:
+  transformation:
     - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*out_warp.{nii,nii.gz,mgz,m3z}":
+      - "*out_{affine,warp}.{nii,nii.gz,mgz,m3z,txt,lta,mat,dat}":
           type: file
-          description: Deform transform. Default usage outputs ANTs (ITK) format .nii.gz
-          pattern: "*out_warp.{nii,nii.gz,mgz,m3z}"
+          description: Affine or warp converted to the desired format.
+          pattern: "*out_{affine,warp}.{nii,nii.gz,mgz,m3z,txt,lta,mat,dat}"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-  affine_transform:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'test', single_end:false ]`
-      - "*out_affine.{txt,lta,mat,dat}":
-          type: map
-          description: Affine transform. Default usage outputs ANTs (ITK) format .txt
-          pattern: "*out_affine.{txt,lta,mat,dat}"
   versions:
     - versions.yml:
         type: file
@@ -93,3 +136,4 @@ output:
           - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@anroy1"
+  - "@AlexVCaron"

@@ -152,14 +152,14 @@ output:
         Tuple, Transformation files to warp tractograms in the correct order
         for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ warp, affine ] ].
       pattern: "*__forward*.{nii,nii.gz,mat,lta}"
-  - out_segmentation:
+  - segmentation:
       type: file
       description: |
         ONLY PROVIDED BY REGISTRATION_SYNTHREGISTRATION. Channel containing the SynthSeg v2 (non-robust)
         segmentation + parcellation in moving space (floating in Easyreg naming convention).
       pattern: "*.{nii,nii.gz}"
       optional: true
-  - out_ref_segmentation:
+  - ref_segmentation:
       type: file
       description: |
         ONLY PROVIDED BY REGISTRATION_SYNTHREGISTRATION. Channel containing the SynthSeg v2 (non-robust)
