@@ -12,8 +12,8 @@ process REGISTRATION_EASYREG {
     output:
     tuple val(meta), path("*_warped.nii.gz")                        , emit: image_warped
     tuple val(meta), path("*_warped_reference.nii.gz")              , emit: fixed_warped
-    tuple val(meta), path("*_forward0_warp.nii.gz")                 , emit: warp
-    tuple val(meta), path("*_backward0_warp.nii.gz")                , emit: inverse_warp
+    tuple val(meta), path("*_forward0_warp.nii.gz")                 , emit: warp, optional: true
+    tuple val(meta), path("*_backward0_warp.nii.gz")                , emit: inverse_warp, optional: true
     tuple val(meta), path("*_warped_segmentation.nii.gz")           , emit: segmentation_warped, optional: true
     tuple val(meta), path("*_warped_reference_segmentation.nii.gz") , emit: fixed_segmentation_warped, optional: true
     path "versions.yml"                                             , emit: versions
@@ -23,8 +23,7 @@ process REGISTRATION_EASYREG {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def field = task.ext.field ? "--fwd_field ${prefix}_forward0_warp.nii.gz --bak_field ${prefix}_backward0_warp.nii.gz " : ""
-    def affine = task.ext.affine ? "--affine_only " : ""
+    def affine_only = task.ext.affine_only ? "--affine_only " : ""
     fixed_segmentation = "--ref_seg ${fixed_segmentation ?: "${prefix}__warped_segmentation.nii.gz" }"
     moving_segmentation = "--flo_seg ${moving_segmentation ?: "${prefix}__warped_reference_segmentation.nii.gz" }"
     """
@@ -36,8 +35,10 @@ process REGISTRATION_EASYREG {
         --flo $moving_image \
         --flo_reg ${prefix}_warped.nii.gz \
         --ref_reg ${prefix}_warped_reference.nii.gz \
+        --fwd_field ${prefix}_forward0_warp.nii.gz \
+        --bak_field ${prefix}_backward0_warp.nii.gz \
         $fixed_segmentation $moving_segmentation \
-        --threads $task.cpus $field $affine
+        --threads $task.cpus $affine_only
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

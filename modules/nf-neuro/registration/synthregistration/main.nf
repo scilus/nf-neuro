@@ -11,16 +11,16 @@ process REGISTRATION_SYNTHREGISTRATION {
     tuple val(meta), path(fixed_image), path(moving_image)
 
     output:
-    tuple val(meta), path("*__warped.nii.gz")           , emit: image_warped
-    tuple val(meta), path("*__forward1_affine.lta")     , emit: affine, optional: true
-    tuple val(meta), path("*__forward0_warp.nii.gz")    , emit: warp, optional: true
-    tuple val(meta), path("*__backward1_warp.nii.gz")   , emit: inverse_warp, optional: true
-    tuple val(meta), path("*__backward0_affine.lta")    , emit: inverse_affine, optional: true
-    tuple val(meta), path("*__forward*.{lta,nii.gz}")   , emit: image_transform
-    tuple val(meta), path("*__backward*.{lta,nii.gz}")  , emit: inverse_image_transform
-    tuple val(meta), path("*__backward*.{lta,nii.gz}")  , emit: tractogram_transform
-    tuple val(meta), path("*__forward*.{lta,nii.gz}")   , emit: inverse_tractogram_transform
-    path "versions.yml"                                 , emit: versions
+    tuple val(meta), path("*__warped.nii.gz")                               , emit: image_warped
+    tuple val(meta), path("*__forward{0,1,_standalone}_affine.lta")         , emit: affine, optional: true
+    tuple val(meta), path("*__forward0_deform.nii.gz")                      , emit: warp, optional: true
+    tuple val(meta), path("*__backward1_deform.nii.gz")                     , emit: inverse_warp, optional: true
+    tuple val(meta), path("*__backward{0,_standalone}_affine.lta")          , emit: inverse_affine, optional: true
+    tuple val(meta), path("*__forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: image_transform
+    tuple val(meta), path("*__backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: inverse_image_transform
+    tuple val(meta), path("*__backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: tractogram_transform
+    tuple val(meta), path("*__forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: inverse_tractogram_transform
+    path "versions.yml"                                                     , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -58,6 +58,7 @@ process REGISTRATION_SYNTHREGISTRATION {
     skip=0
     j=${models.size()}
     initializer=""
+    init_assoc=""
     for model in ${models.join(" ")}
     do
     echo "Processing model: \$model"
@@ -98,16 +99,22 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     mri_synthmorph register \$moving fixed.nii.gz -v -m \$model \$weight \$args \
         -t ${prefix}__forward\${j}_\$model.\${extension[\$model]} \
+        -T ${prefix}__backward\${i}_\$model.\${extension[\$model]} \
         -o warped.nii.gz -j $task.cpus $extent $use_gpu
 
     if [ \$initializer ]
     then
-        rm \$initializer
+        # rm \$initializer \$init_assoc
+        # Retag initializer file to standalone using sed
+        #  - replace the number after forward/backward to standalone
+        mv \$initializer \$(echo "\$initializer" | sed -r 's/(_forward|_backward)[[:digit:]]+/\\1_standalone/')
+        mv \$init_assoc \$(echo "\$init_assoc" | sed -r 's/(_forward|_backward)[[:digit:]]+/\\1_standalone/')
     fi
 
     if [ \${extension[\$model]} = "lta" ]
     then
         initializer=${prefix}__forward\${j}_\$model.\${extension[\$model]}
+        init_assoc=${prefix}__backward\${i}_\$model.\${extension[\$model]}
     else
         moving=warped.nii.gz
     fi

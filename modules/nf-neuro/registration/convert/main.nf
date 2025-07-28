@@ -6,12 +6,11 @@ process REGISTRATION_CONVERT {
     containerOptions "--env FSLOUTPUTTYPE='NIFTI_GZ'"
 
     input:
-    tuple val(meta), path(deform), path(affine), path(source), path(target), path(fs_license)
+    tuple val(meta), path(transformation), val(input_type), val(output_type), path(reference), path(affine_source), path(fs_license)
 
     output:
-    tuple val(meta), path("*out_warp.{nii,nii.gz,mgz,m3z}") , emit: deform_transform, optional: true
-    tuple val(meta), path("*out_affine.{txt,lta,mat,dat}")  , emit: affine_transform, optional: true
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*out_{affine,warp}.{nii,nii.gz,mgz,m3z,txt,lta,mat,dat}")    , emit: transformation
+    path "versions.yml"                                                                 , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -20,19 +19,47 @@ process REGISTRATION_CONVERT {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    //For arguments definition, lta_convert -h
-    def invert = task.ext.invert ? "--invert" : ""
-    def source_geometry_affine = "$source" ? "--src " + "$source" : ""
-    def target_geometry_affine = "$target" ? "--trg " + "$target" : ""
-    def in_format_affine = task.ext.in_format_affine ? "--in" + task.ext.in_format_affine + " " + "$affine" : "--inlta " + "$affine"
-    def out_format_affine = task.ext.out_format_affine ? "--out" + task.ext.out_format_affine : "--outitk"
+    def transform_types = [
+        affine: [lta: "lta", fsl: "mat", mni: "xfm", reg: "dat", niftyreg: "txt", itk: "txt", vox: "txt"],
+        warp: [m3z: "m3z", fsl: "nii.gz", lps: "nii.gz", itk: "nii.gz", ras: "nii.gz", vox: "mgz"]
+    ]
+    def spaces = ["ras2ras", "vox2vox", "register_dat"]
 
-    //For arguments definition, mri_warp_convert -h
-    def source_geometry_deform = "$source" ? "--insrcgeom " + "$source" : ""
-    def in_format_deform = task.ext.in_format_deform ? "--in" + task.ext.in_format_deform + " " + "$deform" : "--inras " + "$deform"
-    def out_format_deform = task.ext.out_format_deform ? "--out" + task.ext.out_format_deform : "--outitk"
-    def downsample = task.ext.downsample ? "--downsample" : ""
+    // Validation transformation type and coercion with conversion type
+    def in_extension = transformation.name.tokenize('.')[1..-1].join('.')
+    def transform_type = transform_types.affine.find{ it.value == in_extension } ? "affine" : "warp"
+    if ( transform_type == "warp" && !transform_types.warp.containsKey(output_type) ) {
+        error "Invalid combination of transformation type and conversion type: ${transform_type} to ${output_type}."
+    }
 
+    def output_name = "${prefix}__out_${transform_type}.${transform_types[transform_type][output_type]}"
+    def command = transform_type == "affine" ? "lta_convert" : "mri_warp_convert"
+
+    if ( transform_type == "affine" ) {
+        // Affine transformations are defined on the target space
+        args += " --in$input_type $transformation --out$output_type $output_name --trg $reference"
+
+        // Validate source geometry is available for conversion to .lta
+        if ( output_type == "lta" ) {
+            if ( !affine_source ) error "Source geometry must be provided for conversion to .lta."
+            args += " --src $affine_source"
+        }
+
+        if ( task.ext.invert ) args += " --invert"
+        if ( task.ext.conform ) args += " --trgconform"
+        if ( task.ext.output_space ) {
+            if ( !spaces.contains(task.ext.output_space) ) {
+                error "Invalid output space: ${task.ext.output_space}. Valid options are: ${spaces.join(', ')}"
+            }
+            args += " --outspace " + task.ext.output_space
+        }
+    }
+    else {
+        // Deformable transformations are defined on the source space
+        args += " --insrcgeom $reference --in$input_type $transformation --out$output_type $output_name"
+
+        if ( task.ext.downsample ) args += " --downsample"
+    }
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
     export OMP_NUM_THREADS=1
@@ -40,34 +67,7 @@ process REGISTRATION_CONVERT {
 
     cp $fs_license \$FREESURFER_HOME/license.txt
 
-    if [[ -f "$affine" ]];
-    then
-        declare -A affine_dictionnary=( ["--outlta"]="lta" \
-                                        ["--outfsl"]="mat" \
-                                        ["--outmni"]="xfm" \
-                                        ["--outreg"]="dat" \
-                                        ["--outniftyreg"]="txt" \
-                                        ["--outitk"]="txt" \
-                                        ["--outvox"]="txt" )
-
-        ext_affine=\${affine_dictionnary[${out_format_affine}]}
-
-        lta_convert ${invert} ${source_geometry_affine} ${target_geometry_affine} ${in_format_affine} ${out_format_affine} ${prefix}__out_affine.\${ext_affine}
-    fi
-
-    if [[ -f "$affine" ]];
-    then
-        declare -A deform_dictionnary=( ["--outm3z"]="m3z" \
-                                        ["--outfsl"]="nii.gz" \
-                                        ["--outlps"]="nii.gz" \
-                                        ["--outitk"]="nii.gz" \
-                                        ["--outras"]="nii.gz" \
-                                        ["--outvox"]="mgz" )
-
-        ext_deform=\${deform_dictionnary[${out_format_deform}]}
-
-        mri_warp_convert ${source_geometry_deform} ${downsample} ${in_format_deform} ${out_format_deform} ${prefix}__out_warp.\${ext_deform}
-    fi
+    $command $args
 
     rm \$FREESURFER_HOME/license.txt
 
@@ -78,7 +78,6 @@ process REGISTRATION_CONVERT {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
