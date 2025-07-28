@@ -11,6 +11,11 @@ tools:
   - "Freesurfer":
       description: "Software package for the analysis and visualization of structural and functional neuroimaging data."
       homepage: "https://surfer.nmr.mgh.harvard.edu/fswiki"
+args:
+  - affine_only:
+      type: boolean
+      description: Only perform affine registration
+      default: false
 input:
   - meta:
       type: map

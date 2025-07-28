@@ -11,65 +11,110 @@ tools:
       description: "Freesurfer lta_convert (affine conversion) and mri_warp_convert (deform) tools for transform conversion"
       homepage: "https://surfer.nmr.mgh.harvard.edu/"
       documentation: "https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferWiki"
-
+args:
+  - invert:
+      type: boolean
+      description: FOR AFFINE CONVERSION ONLY. Invert the transformation.
+      default: false
+  - conform:
+      type: boolean
+      description: FOR AFFINE CONVERSION ONLY. Conform target geometry before conversion (see freesurfer documentation).
+      default: false
+  - output_space:
+      type: string
+      description: FOR AFFINE CONVERSION ONLY. Reference space to convert to. Default is ras2ras.
+      default: "ras2ras"
+      choices:
+        - ras2ras
+        - vox2vox
+        - register_dat
+  - downsample:
+      type: boolean
+      description: FOR WARP CONVERSION ONLY. Downsample the input warp to 2mm isotropic resolution.
+      default: false
 input:
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
-
-  - deform:
+  - transformation:
       type: file
-      description: Deform transform to convert. Default usage expects Freesurfer .mgz format from mri_synthmorph
-      pattern: "*.{nii,nii.gz,mgz,m3z}"
-      mandatory: false
-
-  - affine:
+      description: Input transformation to convert.
+      pattern: "*.{nii,nii.gz,mgz,m3z,lta,txt,xfm,dat}"
+      mandatory: true
+  - input_type:
+      type: string
+      description: |
+        Type of input transformation :
+          - affine : lta, fsl, mni, reg, niftyreg, itk, vox
+          - deform : m3z, fsl, lps, itk, ras, vox
+      mandatory: true
+      choices:
+        - lta
+        - fsl
+        - mni
+        - reg
+        - niftyreg
+        - itk
+        - vox
+        - m3z
+        - fsl
+        - lps
+        - ras
+        - vox
+  - output_type:
+      type: string
+      description: |
+        Type of output transformation :
+          - affine : lta, fsl, mni, reg, niftyreg, itk
+          - deform : m3z, fsl, lps, itk, ras, vox
+      mandatory: true
+      choices:
+        - lta
+        - fsl
+        - mni
+        - reg
+        - niftyreg
+        - itk
+        - vox
+        - m3z
+        - fsl
+        - lps
+        - ras
+        - vox
+  - reference:
       type: file
-      description: Affine transform to convert. Default usage expects Freesurfer .lta format from mri_synthmorph
-      pattern: "*.{lta,txt,xfm,dat}"
-      mandatory: false
-
-  - source:
+      description: |
+        Reference volume used for registration. For affine transformations, it's usually the target
+        image, and for warp the moving (source) image. Validate with the tools you used to generate
+        the transformation.
+      pattern: "*.{nii,nii.gz}"
+      mandatory: true
+  - affine_source:
       type: file
-      description: Moving Nifti volume used for registration. Defines source image geometry
+      description: ONLY USED FOR CONVERSION OF AFFINES IN LTA FORMAT. Moving (source) Nifti volume used for registration.
       pattern: "*.{nii,nii.gz}"
       mandatory: false
-
-  - target:
-      type: file
-      description: Fixed Nifti volume used for registration. Defines target image geometry.
-      pattern: "*.{nii,nii.gz}"
-      mandatory: false
-
   - fs_license:
       type: file
       description: The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html. Optional. If you have already set your license as prescribed by Freesurfer (copied to a .license file in your $FREESURFER_HOME), this is not required.
       pattern: "*.txt"
       mandatory: true
-
 output:
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
-
-  - deform_transform:
+  - transformation:
       type: file
-      description: Deform transform. Default usage outputs ANTs (ITK) format .nii.gz
-      pattern: "*.{nii,nii.gz,mgz,m3z}"
-
-  - affine_transform:
-      type: file
-      description: Affine transform. Default usage outputs ANTs (ITK) format .txt
-      pattern: "*.{txt,lta,mat,dat}"
-
+      description: Affine or warp converted to the desired format.
+      pattern: "*out_{affine,warp}.{nii,nii.gz,mgz,m3z,txt,lta,mat,dat}"
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-
 authors:
   - "@anroy1"
+  - "@AlexVCaron"
