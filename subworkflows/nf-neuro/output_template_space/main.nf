@@ -199,14 +199,14 @@ workflow OUTPUT_TEMPLATE_SPACE {
     ch_versions = ch_versions.mix(REGISTRATION_TRACTOGRAM.out.versions)
 
     emit:
-        ch_t1w_tpl                  = ch_t1w_tpl                                        // channel: [ tpl-T1w ]
-        ch_t2w_tpl                  = ch_t2w_tpl                                        // channel: [ tpl-T2w ]
-        ch_registered_anat          = REGISTRATION.out.image_warped                     // channel: [ val(meta), [ image ] ]
-        ch_registered_nifti_files   = WARPIMAGES.out.warped_image                       // channel: [ val(meta), [ warped_image ] ]
-        ch_registered_mask_files    = WARPMASK.out.warped_image                         // channel: [ val(meta), [ warped_mask ] ]
-        ch_registered_labels_files  = WARPLABELS.out.warped_image                       // channel: [ val(meta), [ warped_labels ] ]
-        ch_registered_trk_files     = REGISTRATION_TRACTOGRAM.out.warped_tractogram     // channel: [ val(meta), [ warped_tractogram ] ]
-        mqc                         = ch_mqc                                            // channel: [ mqc ]
-        versions                    = ch_versions                                       // channel: [ versions.yml ]
+        ch_t1w_tpl                  = ch_t1w_tpl                                // channel: [ tpl-T1w ]
+        ch_t2w_tpl                  = ch_t2w_tpl                                // channel: [ tpl-T2w ]
+        ch_registered_anat          = REGISTRATION.out.image_warped             // channel: [ val(meta), [ image ] ]
+        ch_registered_nifti_files   = WARPIMAGES.out.warped_image               // channel: [ val(meta), [ warped_image ] ]
+        ch_registered_mask_files    = WARPMASK.out.warped_image                 // channel: [ val(meta), [ warped_mask ] ]
+        ch_registered_labels_files  = WARPLABELS.out.warped_image               // channel: [ val(meta), [ warped_labels ] ]
+        ch_registered_trk_files     = REGISTRATION_TRACTOGRAM.out.tractogram    // channel: [ val(meta), [ warped_tractogram ] ]
+        mqc                         = ch_mqc                                    // channel: [ mqc ]
+        versions                    = ch_versions                               // channel: [ versions.yml ]
 }
 
