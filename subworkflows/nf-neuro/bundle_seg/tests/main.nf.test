@@ -8,9 +8,9 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_nfneuro"
     tag "subworkflows/bundle_seg"
+    tag "subworkflows/registration"
 
     tag "bundle/recognize"
-    tag "registration/ants"
 
     tag "load_test_data"
 
