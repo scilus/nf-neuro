@@ -79,8 +79,8 @@ head:
 
 ### Outputs
 
-| | Type | Description | Pattern |
-|-|------|-------------|---------|
+| | Type | Description | Optional | Pattern |
+|-|------|-------------|----------|---------|
 {outputs}
 
 {f'''
@@ -177,7 +177,11 @@ def convert_module_to_md(yaml_data, commit_hash):
             pattern = output[name]['pattern'].replace("\n", " ")
         except KeyError:
             pattern = ""
-        outputs.append(f"| {name} | {output_type} | {description} | {pattern} |")
+        try:
+            optional = str(output[name]['optional']).replace("\n", " ").lower()
+        except KeyError:
+            optional = "false"
+        outputs.append(f"| {name} | {output_type} | {description} | {optional} | {pattern} |")
 
     # Authors list.
     authors = []
