@@ -115,12 +115,14 @@ output:
         Channel containing the forward deformation field file.
         Structure: [ val(meta), path(warp) ]
       pattern: "*__forward*.{nii,nii.gz}"
+      optional: true
   - inverse_warp:
       type: file
       description: |
         Channel containing the inverse deformation field file.
         Structure: [ val(meta), path(inverse_warp) ]
       pattern: "*__backward*.{nii,nii.gz}"
+      optional: true
   - inverse_affine:
       type: file
       description: |
@@ -157,6 +159,7 @@ output:
       description: |
         ONLY PROVIDED BY REGISTRATION_SYNTHREGISTRATION. Channel containing the SynthSeg v2 (non-robust)
         segmentation + parcellation in moving space (floating in Easyreg naming convention).
+        Structure: [ val(meta), path(segmentation) ]
       pattern: "*.{nii,nii.gz}"
       optional: true
   - ref_segmentation:
@@ -164,7 +167,15 @@ output:
       description: |
         ONLY PROVIDED BY REGISTRATION_SYNTHREGISTRATION. Channel containing the SynthSeg v2 (non-robust)
         segmentation + parcellation in fixed space (reference in Easyreg naming convention).
+        Structure: [ val(meta), path(ref_segmentation) ]
       pattern: "*.{nii,nii.gz}"
+      optional: true
+  - mqc:
+      type: file
+      description: |
+        Channel containing the MultiQC report data for the registration.
+        Structure: [ path(mqc) ]
+      pattern: "*mqc.*"
       optional: true
   - versions:
       type: file

@@ -1,7 +1,6 @@
 include { BUNDLE_RECOGNIZE  } from '../../../modules/nf-neuro/bundle/recognize/main'
-include { REGISTRATION_CONVERT } from '../../../modules/nf-neuro/registration/convert/main'
 
-include { REGISTRATION } from '../../../subworkflows/nf-neuro/registration/main'
+include { REGISTRATION } from '../registration/main'
 
 def fetch_bundleseg_atlas(atlasUrl, configUrl, dest) {
 
@@ -50,13 +49,13 @@ workflow BUNDLE_SEG {
         ch_tractogram           // channel: [ val(meta), [ tractogram ] ]
         ch_freesurfer_license   // channel: [ val(meta), path(fs_license) ]
     main:
-
         if ( params.run_easyreg ) error "The BUNDLE_SEG workflow does not support the easyreg registration method."
         if ( params.run_synthmorph ) {
             ch_freesurfer_license.ifEmpty{ error "Synthmorph registration need a Freesurfer License to run." }
         }
 
         ch_versions = Channel.empty()
+        ch_mqc = Channel.empty()
 
         // ** Setting up Atlas reference channels. ** //
         if ( params.atlas_directory ) {
@@ -93,6 +92,7 @@ workflow BUNDLE_SEG {
             ch_freesurfer_license
         )
         ch_versions = ch_versions.mix(REGISTRATION.out.versions.first())
+        ch_mqc = ch_mqc.mix(REGISTRATION.out.mqc)
 
         // ** Perform bundle recognition and segmentation ** //
         ch_recognize_bundle = ch_tractogram
@@ -104,5 +104,6 @@ workflow BUNDLE_SEG {
         ch_versions = ch_versions.mix(BUNDLE_RECOGNIZE.out.versions.first())
     emit:
         bundles = BUNDLE_RECOGNIZE.out.bundles              // channel: [ val(meta), [ bundles ] ]
+        mqc = ch_mqc                                        // channel: [ *mqc.* ]
         versions = ch_versions                              // channel: [ versions.yml ]
 }

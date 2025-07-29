@@ -22,6 +22,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     main:
 
     ch_versions = Channel.empty()
+    ch_mqc = Channel.empty()
 
     // ** First, let's assess if the desired template exists in      ** //
     // ** the templateflow home directory (user-specified as params. ** //
@@ -42,6 +43,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
                 params.templateflow_cohort != null ? params.templateflow_cohort : []
             ]
         )
+        // TODO: look into adding metadata and citations to MultiQC report
         ch_versions = ch_versions.mix(UTILS_TEMPLATEFLOW.out.versions)
 
         // ** Setting outputs ** //
@@ -153,6 +155,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
         ch_freesurfer_license
     )
     ch_versions = ch_versions.mix(REGISTRATION.out.versions)
+    ch_mqc = ch_mqc.mix(REGISTRATION.out.mqc)
 
     // ** Apply the transformation to all files ** //
     // ** The channel ch_nifti_files contains all the files that ** //
@@ -165,6 +168,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
 
     WARPIMAGES ( ch_files_to_transform )
     ch_versions = ch_versions.mix(WARPIMAGES.out.versions)
+    ch_mqc = ch_mqc.mix(WARPIMAGES.out.mqc)
 
     // ** Same process for the masks ** //
     ch_masks_to_transform = ch_mask_files
@@ -172,6 +176,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
         .join(REGISTRATION.out.image_transform)
     WARPMASK ( ch_masks_to_transform )
     ch_versions = ch_versions.mix(WARPMASK.out.versions)
+    ch_mqc = ch_mqc.mix(WARPMASK.out.mqc)
 
     // ** Same process for the labels ** //
     ch_labels_to_transform = ch_labels_files
@@ -179,6 +184,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
         .join(REGISTRATION.out.image_transform)
     WARPLABELS ( ch_labels_to_transform )
     ch_versions = ch_versions.mix(WARPLABELS.out.versions)
+    ch_mqc = ch_mqc.mix(WARPLABELS.out.mqc)
 
     // ** Apply the transformation to the tractograms ** //
     ch_tractograms_to_transform = ch_trk_files
@@ -196,10 +202,11 @@ workflow OUTPUT_TEMPLATE_SPACE {
         ch_t1w_tpl                  = ch_t1w_tpl                                        // channel: [ tpl-T1w ]
         ch_t2w_tpl                  = ch_t2w_tpl                                        // channel: [ tpl-T2w ]
         ch_registered_anat          = REGISTRATION.out.image_warped                     // channel: [ val(meta), [ image ] ]
-        ch_warped_nifti_files       = WARPIMAGES.out.warped_image                       // channel: [ val(meta), [ warped_image ] ]
-        ch_warped_mask_files        = WARPMASK.out.warped_image                         // channel: [ val(meta), [ warped_mask ] ]
-        ch_warped_labels_files      = WARPLABELS.out.warped_image                       // channel: [ val(meta), [ warped_labels ] ]
-        ch_warped_trk_files         = REGISTRATION_TRACTOGRAM.out.warped_tractogram     // channel: [ val(meta), [ warped_tractogram ] ]
+        ch_registered_nifti_files   = WARPIMAGES.out.warped_image                       // channel: [ val(meta), [ warped_image ] ]
+        ch_registered_mask_files    = WARPMASK.out.warped_image                         // channel: [ val(meta), [ warped_mask ] ]
+        ch_registered_labels_files  = WARPLABELS.out.warped_image                       // channel: [ val(meta), [ warped_labels ] ]
+        ch_registered_trk_files     = REGISTRATION_TRACTOGRAM.out.warped_tractogram     // channel: [ val(meta), [ warped_tractogram ] ]
+        mqc                         = ch_mqc                                            // channel: [ mqc ]
         versions                    = ch_versions                                       // channel: [ versions.yml ]
 }
 

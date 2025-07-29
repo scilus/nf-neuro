@@ -8,18 +8,14 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_nfneuro"
     tag "subworkflows/output_template_space"
+    tag "subworkflows/registration"
+    tag "load_test_data"
 
-    tag "registration"
-    tag "registration/ants"
     tag "registration/antsapplytransforms"
     tag "registration/tractogram"
-    tag "image"
     tag "image/applymask"
-    tag "betcrop"
     tag "betcrop/fslbetcrop"
-    tag "utils"
     tag "utils/templateflow"
-    tag "load_test_data"
 
     tag "stub"
     //options "-stub-run"
@@ -102,12 +98,13 @@ nextflow_workflow {
                 ).match()},
                 { assert workflow.out
                     .findAll{ channel -> !channel.key.isInteger() }
-                    .every{ channel -> ["ch_registered_anat",
-                                        "ch_t1w_tpl",
+                    .every{ channel -> ["ch_t1w_tpl",
                                         "ch_t2w_tpl",
-                                        "ch_warped_labels_files",
-                                        "ch_warped_nifti_files",
-                                        "ch_warped_trk_files",
+                                        "ch_registered_anat",
+                                        "ch_registered_labels_files",
+                                        "ch_registered_nifti_files",
+                                        "ch_registered_trk_files",
+                                        "mqc",
                                         "versions"].contains(channel.key)
                         ? channel.value.every{ subject -> subject instanceof ArrayList
                                 ? subject.every()
@@ -182,12 +179,13 @@ nextflow_workflow {
                 ).match()},
                 { assert workflow.out
                     .findAll{ channel -> !channel.key.isInteger() }
-                    .every{ channel -> ["ch_registered_anat",
-                                        "ch_t1w_tpl",
+                    .every{ channel -> ["ch_t1w_tpl",
                                         "ch_t2w_tpl",
-                                        "ch_warped_labels_files",
-                                        "ch_warped_nifti_files",
-                                        "ch_warped_trk_files",
+                                        "ch_registered_anat",
+                                        "ch_registered_labels_files",
+                                        "ch_registered_nifti_files",
+                                        "ch_registered_trk_files",
+                                        "mqc",
                                         "versions"].contains(channel.key)
                         ? channel.value.every{ subject -> subject instanceof ArrayList
                                 ? subject.every()
@@ -269,9 +267,10 @@ nextflow_workflow {
                     .every{ channel -> ["ch_registered_anat",
                                         "ch_t1w_tpl",
                                         "ch_t2w_tpl",
-                                        "ch_warped_labels_files",
-                                        "ch_warped_nifti_files",
-                                        "ch_warped_trk_files",
+                                        "ch_registered_labels_files",
+                                        "ch_registered_nifti_files",
+                                        "ch_registered_trk_files",
+                                        "mqc",
                                         "versions"].contains(channel.key)
                         ? channel.value.every{ subject -> subject instanceof ArrayList
                                 ? subject.every()

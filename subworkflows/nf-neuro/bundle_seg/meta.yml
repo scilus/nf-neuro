@@ -19,7 +19,7 @@ description: |
       computational stability of the subworkflow, we cannot guarantee the correctness of the results.
   Anatomical Registration (SynthMorph) : params.run_synthmorph = true
       Synthmorph is a machine learning-based registration method developed by the Freesurfer team. It is made
-      available in this subworkflow by the REGISTRATION subworkflow, please refer to its implementation for
+      available in this subworkflow by the REGISTRATION subworkflow, please refer to its documentation for
       more details.
 keywords:
   - BundleSeg
@@ -27,8 +27,8 @@ keywords:
   - Tractogram
   - Segmentation
 components:
-  - registration/ants
   - bundle/recognize
+  - registration
 args:
   - run_synthmorph:
       type: boolean
@@ -54,18 +54,21 @@ input:
         space and the subject's space.
         Structure: [ val(meta), path(fa) ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
   - ch_tractogram:
       type: file
       description: |
         The input channel containing the whole-brain tractogram to be segmented.
         Structure: [ val(meta), path(tractogram) ]
       pattern: "*.trk"
+      mandatory: true
   - ch_freesurfer_license:
       type: file
       description: |
         ONLY USED WITH SYNTHMORPH REGISTRATION. The input channel containing the Freesurfer license file.
         Structure: [ val(meta), path(license) ]
       pattern: "*.txt"
+      mandatory: false
 output:
   - bundles:
       type: file
@@ -73,6 +76,13 @@ output:
         Channel containing all the segmented bundle files.
         Structure: [ val(meta), path(bundles) ]
       pattern: "*.trk"
+  - mqc:
+      type: file
+      description: |
+        Channel containing QC data for MultiQC reports.
+        Structure: [ *mqc.* ]
+      pattern: "*mqc.*"
+      optional: true
   - versions:
       type: file
       description: |
@@ -81,5 +91,6 @@ output:
       pattern: "versions.yml"
 authors:
   - "@gagnonanthony"
+  - "@AlexVCaron"
 maintainers:
   - "@gagnonanthony"
