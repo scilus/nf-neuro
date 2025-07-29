@@ -7,10 +7,10 @@ process REGISTRATION_TRACTOGRAM {
         'scilus/scilus:2.1.0' }"
 
     input:
-    tuple val(meta), path(anat), path(affine), path(tractogram), path(ref) /* optional, value = [] */, path(deformation) /* optional, value = [] */
+    tuple val(meta), path(anat), path(affine), path(tractogram), path(ref), path(deformation)
 
     output:
-    tuple val(meta), path("*__*.{trk,tck}"), emit: warped_tractogram
+    tuple val(meta), path("*__*.{trk,tck}"), emit: tractogram
     path "versions.yml"           , emit: versions
 
     when:
@@ -24,7 +24,6 @@ process REGISTRATION_TRACTOGRAM {
 
     def inverse = task.ext.inverse ? "--inverse" : ""
     def reverse_operation = task.ext.reverse_operation ? "--reverse_operation" : ""
-    def force = task.ext.force ? "-f" : ""
 
     def cut_invalid = task.ext.cut_invalid ? "--cut_invalid" : ""
     def remove_single_point = task.ext.remove_single_point ? "--remove_single_point" : ""
@@ -51,8 +50,7 @@ process REGISTRATION_TRACTOGRAM {
         $in_deformation \
         $inverse \
         $reverse_operation \
-        $force \
-        $reference
+        $reference -f
 
     scil_tractogram_remove_invalid.py ${prefix}__\${bname}${suffix}.\${ext} \
         ${prefix}__\${bname}${suffix}.\${ext} \
