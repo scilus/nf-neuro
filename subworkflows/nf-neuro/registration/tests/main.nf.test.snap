@@ -70,6 +70,100 @@
         },
         "timestamp": "2025-07-28T15:34:09.121403461"
     },
+    "registration - easyreg": {
+        "content": [
+            {
+                "image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz"
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped.nii.gz"
+                    ]
+                ],
+                "inverse_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_warp.nii.gz"
+                    ]
+                ],
+                "inverse_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz"
+                    ]
+                ],
+                "inverse_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_warp.nii.gz"
+                    ]
+                ],
+                "ref_segmentation": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__warped_reference_segmentation.nii.gz"
+                    ]
+                ],
+                "ref_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz"
+                    ]
+                ],
+                "segmentation": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__warped_segmentation.nii.gz"
+                    ]
+                ],
+                "tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_warp.nii.gz"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,3f38c911476c605480c02e484fcf6e9f"
+                ],
+                "warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-29T01:50:43.433891046"
+    },
     "registration - ANTs - SyNQuick": {
         "content": [
             {
