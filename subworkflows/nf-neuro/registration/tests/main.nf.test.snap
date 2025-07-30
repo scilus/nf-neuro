@@ -15,6 +15,7 @@
                         {
                             "id": "test"
                         },
+                        "test__out_warp.nii.gz",
                         "test__out_affine.txt"
                     ]
                 ],
@@ -39,7 +40,8 @@
                         {
                             "id": "test"
                         },
-                        "test__out_affine.txt"
+                        "test__out_affine.txt",
+                        "test__out_warp.nii.gz"
                     ]
                 ],
                 "inverse_tractogram_transform": [
@@ -47,6 +49,7 @@
                         {
                             "id": "test"
                         },
+                        "test__out_warp.nii.gz",
                         "test__out_affine.txt"
                     ]
                 ],
@@ -55,7 +58,8 @@
                         {
                             "id": "test"
                         },
-                        "test__out_affine.txt"
+                        "test__out_affine.txt",
+                        "test__out_warp.nii.gz"
                     ]
                 ],
                 "versions": [
@@ -68,7 +72,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-28T15:34:09.121403461"
+        "timestamp": "2025-07-30T02:55:56.619117796"
     },
     "registration - easyreg": {
         "content": [
@@ -118,7 +122,7 @@
                         {
                             "id": "test"
                         },
-                        "test__warped_reference_segmentation.nii.gz"
+                        "test_warped_reference_segmentation.nii.gz"
                     ]
                 ],
                 "ref_warped": [
@@ -134,7 +138,7 @@
                         {
                             "id": "test"
                         },
-                        "test__warped_segmentation.nii.gz"
+                        "test_warped_segmentation.nii.gz"
                     ]
                 ],
                 "tractogram_transform": [
@@ -162,7 +166,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-29T01:50:43.433891046"
+        "timestamp": "2025-07-30T02:06:11.777613914"
     },
     "registration - ANTs - SyNQuick": {
         "content": [
@@ -180,6 +184,7 @@
                         {
                             "id": "test"
                         },
+                        "test__forward0_warp.nii.gz",
                         "test__forward1_affine.mat"
                     ]
                 ],
@@ -204,7 +209,8 @@
                         {
                             "id": "test"
                         },
-                        "test__backward0_affine.mat"
+                        "test__backward0_affine.mat",
+                        "test__backward1_warp.nii.gz"
                     ]
                 ],
                 "inverse_tractogram_transform": [
@@ -212,7 +218,16 @@
                         {
                             "id": "test"
                         },
+                        "test__forward0_warp.nii.gz",
                         "test__forward1_affine.mat"
+                    ]
+                ],
+                "inverse_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__backward1_warp.nii.gz"
                     ]
                 ],
                 "mqc": [
@@ -228,11 +243,20 @@
                         {
                             "id": "test"
                         },
-                        "test__backward0_affine.mat"
+                        "test__backward0_affine.mat",
+                        "test__backward1_warp.nii.gz"
                     ]
                 ],
                 "versions": [
                     "versions.yml:md5,7b059759af9e9bd4711e94db65e61095"
+                ],
+                "warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward0_warp.nii.gz"
+                    ]
                 ]
             }
         ],
@@ -309,7 +333,7 @@
                         {
                             "id": "test"
                         },
-                        "test_registration_anattodwi_mqc.gif"
+                        "test__registration_anattodwi_mqc.gif"
                     ]
                 ],
                 "tractogram_transform": [
