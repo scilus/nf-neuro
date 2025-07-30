@@ -32,7 +32,7 @@ process REGISTRATION_CONVERT {
         error "Invalid combination of transformation type and conversion type: ${transform_type} to ${output_type}."
     }
 
-    def out_extension = transform_types[transform_type]["$output_type"]
+    def out_extension = transform_types[transform_type][output_type]
     def output_name = "${prefix}__out_${transform_type}.${out_extension}"
     def command = transform_type == "affine" ? "lta_convert" : "mri_warp_convert"
 
@@ -80,7 +80,19 @@ process REGISTRATION_CONVERT {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def transform_types = [
+        affine: [lta: "lta", fsl: "mat", mni: "xfm", reg: "dat", niftyreg: "txt", itk: "txt", vox: "txt"],
+        warp: [m3z: "m3z", fsl: "nii.gz", lps: "nii.gz", itk: "nii.gz", ras: "nii.gz", vox: "mgz"]
+    ]
+    // Validation transformation type and coercion with conversion type
+    def in_extension = transformation.name.tokenize('.')[1..-1].join('.')
+    def transform_type = transform_types.affine.find{ it.value == in_extension } ? "affine" : "warp"
+    if ( transform_type == "warp" && !transform_types.warp.containsKey(output_type) ) {
+        error "Invalid combination of transformation type and conversion type: ${transform_type} to ${output_type}."
+    }
 
+    def out_extension = transform_types[transform_type][output_type]
+    def output_name = "${prefix}__out_${transform_type}.${out_extension}"
     """
     set +e
     function handle_code () {
@@ -93,8 +105,7 @@ process REGISTRATION_CONVERT {
     lta_convert --help
     mri_warp_convert --help
 
-    touch ${prefix}__out_warp.nii.gz
-    touch ${prefix}__out_affine.txt
+    touch $output_name
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

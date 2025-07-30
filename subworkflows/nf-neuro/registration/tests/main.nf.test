@@ -20,7 +20,7 @@ nextflow_workflow {
     tag "load_test_data"
 
     tag "stub"
-    //options "-stub-run"
+    options "-stub-run"
 
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
