@@ -150,7 +150,7 @@ def convert_subworkflow_to_md(yaml_data, commit_hash):
                 if isinstance(param[name]['choices'], str):
                     choices = param[name]['choices'].replace("\n", " ")
                 else:
-                    choices = "<br>".join(param[name]['choices']).replace("\n", " ")
+                    choices = "<br>".join([str(c) for c in param[name]['choices']])
             except KeyError:
                 choices = ""
             params.append(f"| {name} | {param_type} | {description} | {default} | {choices} |")

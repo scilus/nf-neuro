@@ -159,7 +159,7 @@ def convert_module_to_md(yaml_data, commit_hash):
                 if isinstance(param[name]['choices'], str):
                     choices = param[name]['choices'].replace("\n", " ")
                 elif isinstance(param[name]['choices'], list):
-                    choices = "<br>".join(param[name]['choices']).replace("\n", " ")
+                    choices = "<br>".join([str(c) for c in param[name]['choices']])
             except KeyError:
                 choices = ""
             default = param[name]['default']
