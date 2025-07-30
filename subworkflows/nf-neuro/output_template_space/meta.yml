@@ -15,18 +15,47 @@ description: |
     - params.template_cohort: the cohort of the template (e.g., 1)
 
   An example of how to set the module's ext.args can be find in the
-  `test/nextflow.config` file.
+  `test/nextflow.config` file. Additional configuration for local templates
+  are also available in the `test/local.config` file.
+
+  To select the registration technique used to register the input files, use the
+  following parameters :
+  - params.run_easyreg : Use Easyreg any-to-any registration model
+  - params.run_synthmorph : Use Synthmorph ML registration model
+
+  Refer to the `registration` subworkflow and the modules it uses for configuration options.
 keywords:
   - template
   - TemplateFlow
   - registration
 components:
-  - registration/ants
   - registration/antsapplytransforms
   - registration/tractogram
   - image/applymask
   - betcrop/fslbetcrop
   - utils/templateflow
+  - registration
+args:
+  - template:
+      type: string
+      description: Name of the template to use (see https://templateflow.org).
+  - templateflow_home:
+      type: string
+      description: Path to the templateflow local home directory where files are located and/or downloaded.
+  - template_res:
+      type: int
+      description: Template resolution to use or download.
+  - template_cohort:
+      type: string
+      description: Name/type of the cohort to use.
+  - run_easyreg:
+      type: boolean
+      description: Use Easyreg any-to-any registration model.
+      default: false
+  - run_synthmorph:
+      type: boolean
+      description: Use Synthmorph ML registration model.
+      default: false
 input:
   - ch_anat:
       type: file
@@ -64,6 +93,13 @@ input:
         Structure: [ val(meta), [path(trk1), path(trk2), path(trk3), ...] ]
       pattern: "*.trk"
       mandatory: false
+  - ch_freesurfer_license:
+      type: file
+      description: |
+        ONLY USED WITH SYNTHMORPH REGISTRATION. The input channel containing the Freesurfer license file.
+        Structure: [ val(meta), path(license) ]
+      pattern: "*.txt"
+      mandatory: false
 output:
   - ch_t1w_tpl:
       type: file
@@ -80,21 +116,44 @@ output:
   - ch_registered_anat:
       type: file
       description: |
-        Channel containing the registered anatomical image into the template space.
+        Channel containing the anatomical image registered into the template space.
         Structure: [ val(meta), path(anat) ]
       pattern: "*.{nii,nii.gz}"
   - ch_registered_nifti_files:
       type: file
       description: |
-        Channel containing the registered NIfTI files into the template space.
+        Channel containing the NIfTI files registered into the template space.
         Structure: [ val(meta), [path(nifti1), path(nifti2), path(nifti3), ...] ]
       pattern: "*.{nii,nii.gz}"
+      optional: true
+  - ch_registered_mask_files:
+      type: file
+      description: |
+        Channel containing the mask files registered into the template space.
+        Structure: [ val(meta), [path(mask1), path(mask2), path(mask3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+      optional: true
+  - ch_registered_labels_files:
+      type: file
+      description: |
+        Channel containing the label files registered into the template space.
+        Structure: [ val(meta), [path(label1), path(label2), path(label3), ...] ]
+      pattern: "*.{nii,nii.gz}"
+      optional: true
   - ch_registered_trk_files:
       type: file
       description: |
-        Channel containing the registered TRK files into the template space.
+        Channel containing the TRK files registered into the template space.
         Structure: [ val(meta), [path(trk1), path(trk2), path(trk3), ...] ]
       pattern: "*.trk"
+      optional: true
+  - mqc:
+      type: file
+      description: |
+        Channel containing the MultiQC report of the registration.
+        Structure: [ path(mqc) ]
+      pattern: "*mqc.*"
+      optional: true
   - versions:
       type: file
       description: |
@@ -103,5 +162,6 @@ output:
       pattern: "versions.yml"
 authors:
   - "@gagnonanthony"
+  - "@AlexVCaron"
 maintainers:
   - "@gagnonanthony"

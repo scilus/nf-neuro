@@ -18,30 +18,25 @@ input:
         e.g. `[ id:'test', single_end:false ]`
       mandatory: true
 
-  - image:
+  - images:
       type: file
-      description: Input image to register
+      description: Input images to transform
       pattern: "*.{nii.nii.gz}"
       mandatory: true
 
   - reference:
       type: file
-      description: Reference image for registration
+      description: Reference image for transformation (in fixed/target space)
       pattern: "*.{nii.nii.gz}"
       mandatory: true
 
-  - warp:
-      type: file
-      description: Warp transformation file to warp image or trk.
-      pattern: "*.{nii,nii.gz}"
+  - transformations:
+      type: list
+      description: |
+        List of transformation files. Take note they are applied in
+        inorder (right to left) by the antsApplyTransforms command.
+      pattern: "*.{nii,nii.gz,mat,txt}"
       mandatory: true
-
-  - affine:
-      type: file
-      description: Affine or rigid transformation file to warp image or trk (*mat). If a rigid or affine transformation needs to be inverted before being applied, use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this module does not handles it.
-      pattern: "*.mat"
-      mandatory: true
-
 args:
   - prefix:
       type: string
@@ -63,28 +58,42 @@ args:
   - dimensionality:
       type: number
       description: |
-        Dimensionality of the input image.
+        Dimensionality of input images.
         e.g. `2` for 2D images, `3` for 3D images.
   - image_type:
       type: integer
       description: |
-        Type of the input image.
+        Type of input images.
         e.g. `0` for scalar images, `1` for vector images, `2` for tensor images, `3` for time series, `4` for multichannel, and `5` for five-dimensional image.
   - interpolation:
       type: string
       description: |
         Interpolation method to use for the registration.
         e.g. `Linear`, `NearestNeighbor`, `BSpline`, `Gaussian`, etc.
-      choices: |
-        ["Linear", "NearestNeighbor", "BSpline", "Gaussian", "Label", "MultiLabel", "CosineWindowedSinc", "WelchWindowedSinc",
-        "HammingWindowedSinc", "LanczosWindowedSinc", "GenericLabel"]
+      choices:
+        - Linear
+        - NearestNeighbor
+        - BSpline
+        - Gaussian
+        - Label
+        - MultiLabel
+        - CosineWindowedSinc
+        - WelchWindowedSinc
+        - HammingWindowedSinc
+        - LanczosWindowedSinc
+        - GenericLabel
   - output_dtype:
       type: string
       description: |
         Output data type for the warped image.
         e.g. `float`, `double`, `int`, `uchar`, etc.
-      choices: |
-        ["float", "double", "int", "uchar", "char", "short"]
+      choices:
+        - float
+        - double
+        - int
+        - uchar
+        - char
+        - short
   - default_val:
       type: number
       description: |
@@ -96,7 +105,6 @@ args:
         Whether to run quality control for the registration process.
         e.g. `true` to generate a quality control image, `false` to skip it.
       default: false
-
 output:
   - meta:
       type: map
@@ -106,7 +114,7 @@ output:
 
   - warped_image:
       type: file
-      description: Warped image
+      description: Warped images
       pattern: "*.{nii.nii.gz}"
 
   - mqc:

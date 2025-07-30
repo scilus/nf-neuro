@@ -1,44 +1,120 @@
 {
-    "registration - synthregistration": {
+    "registration - Synthmorph": {
         "content": [
             {
+                "affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__out_affine.txt"
+                    ]
+                ],
+                "image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__out_warp.nii.gz",
+                        "test__out_affine.txt"
+                    ]
+                ],
                 "image_warped": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__output_warped.nii.gz"
+                        "test__warped.nii.gz"
                     ]
                 ],
-                "transfo_image": [
+                "inverse_affine": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__deform_warp.nii.gz",
-                        "test__affine_warp.lta"
+                        "test__out_affine.txt"
+                    ]
+                ],
+                "inverse_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__out_affine.txt",
+                        "test__out_warp.nii.gz"
+                    ]
+                ],
+                "inverse_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__out_warp.nii.gz",
+                        "test__out_affine.txt"
+                    ]
+                ],
+                "tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__out_affine.txt",
+                        "test__out_warp.nii.gz"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,8a5fc770044eef3575fe68a3f7792976"
+                    "versions.yml:md5,5f2030eca02186c4f9b3e76425f94bf1",
+                    "versions.yml:md5,f0fa799dd0d27d1974ea409d9c9e5da7"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T04:50:52.780105922"
+        "timestamp": "2025-07-30T02:55:56.619117796"
     },
     "registration - easyreg": {
         "content": [
             {
+                "image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz"
+                    ]
+                ],
                 "image_warped": [
                     [
                         {
                             "id": "test"
                         },
-                        "test_floating_registered.nii.gz"
+                        "test_warped.nii.gz"
+                    ]
+                ],
+                "inverse_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_warp.nii.gz"
+                    ]
+                ],
+                "inverse_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz"
+                    ]
+                ],
+                "inverse_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_warp.nii.gz"
                     ]
                 ],
                 "ref_segmentation": [
@@ -46,7 +122,7 @@
                         {
                             "id": "test"
                         },
-                        "test_reference_segmentation.nii.gz"
+                        "test_warped_reference_segmentation.nii.gz"
                     ]
                 ],
                 "ref_warped": [
@@ -54,7 +130,7 @@
                         {
                             "id": "test"
                         },
-                        "test_reference_registered.nii.gz"
+                        "test_warped_reference.nii.gz"
                     ]
                 ],
                 "segmentation": [
@@ -62,39 +138,56 @@
                         {
                             "id": "test"
                         },
-                        "test_floating_segmentation.nii.gz"
+                        "test_warped_segmentation.nii.gz"
                     ]
                 ],
-                "transfo_image": [
+                "tractogram_transform": [
                     [
                         {
                             "id": "test"
                         },
-                        "test_forward_field.nii.gz"
-                    ]
-                ],
-                "transfo_trk": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_backward_field.nii.gz"
+                        "test_backward0_warp.nii.gz"
                     ]
                 ],
                 "versions": [
                     "versions.yml:md5,3f38c911476c605480c02e484fcf6e9f"
+                ],
+                "warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz"
+                    ]
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T04:48:58.867241465"
+        "timestamp": "2025-07-30T02:06:11.777613914"
     },
-    "registration - antsRegistration": {
+    "registration - ANTs - SyNQuick": {
         "content": [
             {
+                "affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward1_affine.mat"
+                    ]
+                ],
+                "image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward0_warp.nii.gz",
+                        "test__forward1_affine.mat"
+                    ]
+                ],
                 "image_warped": [
                     [
                         {
@@ -103,73 +196,172 @@
                         "test__t1_warped.nii.gz"
                     ]
                 ],
-                "transfo_image": [
+                "inverse_affine": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__output1Warp.nii.gz",
-                        "test__output0GenericAffine.mat"
+                        "test__backward0_affine.mat"
                     ]
                 ],
-                "transfo_trk": [
+                "inverse_image_transform": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__output0GenericAffine.mat",
-                        "test__output1InverseWarp.nii.gz"
+                        "test__backward0_affine.mat",
+                        "test__backward1_warp.nii.gz"
+                    ]
+                ],
+                "inverse_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward0_warp.nii.gz",
+                        "test__forward1_affine.mat"
+                    ]
+                ],
+                "inverse_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__backward1_warp.nii.gz"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__registration_ants_mqc.gif"
+                    ]
+                ],
+                "tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__backward0_affine.mat",
+                        "test__backward1_warp.nii.gz"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,04d2203fd83e0422e103384bee7a1696"
+                    "versions.yml:md5,7b059759af9e9bd4711e94db65e61095"
+                ],
+                "warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward0_warp.nii.gz"
+                    ]
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T05:06:59.658030199"
+        "timestamp": "2025-07-30T02:05:55.281364932"
     },
-    "registration - SyNQuick": {
+    "registration - ANTs - Anat to DWI": {
         "content": [
             {
+                "affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward1_affine.mat"
+                    ]
+                ],
+                "image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward0_warp.nii.gz",
+                        "test__forward1_affine.mat"
+                    ]
+                ],
                 "image_warped": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz"
+                        "test__T1w_warped.nii.gz"
                     ]
                 ],
-                "transfo_image": [
+                "inverse_affine": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__output0Warp.nii.gz",
-                        "test__output1GenericAffine.mat"
+                        "test__backward0_affine.mat"
                     ]
                 ],
-                "transfo_trk": [
+                "inverse_image_transform": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__output0InverseAffine.mat",
-                        "test__output1InverseWarp.nii.gz"
+                        "test__backward0_affine.mat",
+                        "test__backward1_warp.nii.gz"
+                    ]
+                ],
+                "inverse_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward0_warp.nii.gz",
+                        "test__forward1_affine.mat"
+                    ]
+                ],
+                "inverse_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__backward1_warp.nii.gz"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__registration_anattodwi_mqc.gif"
+                    ]
+                ],
+                "tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__backward0_affine.mat",
+                        "test__backward1_warp.nii.gz"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,b39c35bdc0e79c6a3595616e01e37a72"
+                    "versions.yml:md5,e2de941af01c790110a1d50dfbac08d6"
+                ],
+                "warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward0_warp.nii.gz"
+                    ]
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T05:07:08.668646604"
+        "timestamp": "2025-07-30T02:05:43.161937777"
     }
 }
