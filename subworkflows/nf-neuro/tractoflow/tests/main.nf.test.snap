@@ -31,8 +31,8 @@
                         {
                             "id": "test"
                         },
-                        "test__output0ForwardWarp.nii.gz",
-                        "test__output1ForwardAffine.mat"
+                        "test__forward0_warp.nii.gz",
+                        "test__forward1_affine.mat"
                     ]
                 ],
                 "csf_fodf": [
@@ -64,8 +64,8 @@
                         {
                             "id": "test"
                         },
-                        "test__output0BackwardAffine.mat",
-                        "test__output1BackwardWarp.nii.gz"
+                        "test__backward0_affine.mat",
+                        "test__backward1_warp.nii.gz"
                     ]
                 ],
                 "dti_ad": [
@@ -363,7 +363,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz"
+                        "test__test_b0_warped.nii.gz"
                     ]
                 ],
                 "t1_native": [
@@ -378,10 +378,10 @@
                     "versions.yml:md5,29eb4791c0e509ddbfa054f7d864e119",
                     "versions.yml:md5,4a7c801d46bade11523003b6bd06f8ed",
                     "versions.yml:md5,647b63809e635c82552cf53178bf73be",
+                    "versions.yml:md5,6a3e02901fbcc3f4bc49664da0d1c313",
                     "versions.yml:md5,79d2201c1c1d128616cfe9b2974d3c0b",
                     "versions.yml:md5,b365d463ddf58fc7b47cd51c70876a11",
                     "versions.yml:md5,b5dfa5f2a38b2c54419653e999251f50",
-                    "versions.yml:md5,c383de25b796349d95a7a4a49a60fe05",
                     "versions.yml:md5,da10c87dbb2ad07aa8bbf89a0c172a60",
                     "versions.yml:md5,e092829f98d53bda1802d1cda0cb017f"
                 ],
@@ -423,6 +423,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-18T15:58:18.103064686"
+        "timestamp": "2025-07-30T02:10:32.461291266"
     }
 }
