@@ -23,7 +23,8 @@ process REGISTRATION_TRACTOGRAM {
     def inverse = task.ext.inverse ? "--inverse" : ""
     def reverse_operation = task.ext.reverse_operation ? "--reverse_operation" : ""
 
-    def cut_invalid = task.ext.cut_invalid ? "--cut_invalid" : ""
+    def invalid_management = task.ext.invalid_streamlines ?: "cut"
+    def cut_invalid = invalid_management == "cut" ? "--cut_invalid" : ""
     def remove_single_point = task.ext.remove_single_point ? "--remove_single_point" : ""
     def remove_overlapping_points = task.ext.remove_overlapping_points ? "--remove_overlapping_points" : ""
     def threshold = task.ext.threshold ? "--threshold " + task.ext.threshold : ""
@@ -47,7 +48,13 @@ process REGISTRATION_TRACTOGRAM {
         $in_deformation \
         $inverse \
         $reverse_operation \
-        $reference -f
+        $reference \
+        --keep_invalid -f
+
+    if [[ "$invalid_management" == "keep" ]]; then
+        echo "Skip invalid streamline detection: ${prefix}__\${bname}${suffix}.\${ext}"
+        continue
+    fi
 
         scil_tractogram_remove_invalid tmp.trk ${prefix}__\${bname}${suffix}.\${ext}\
                         $cut_invalid\

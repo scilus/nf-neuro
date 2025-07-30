@@ -23,11 +23,18 @@ args:
       description: |
         If true, applies affine and deformation in reverse order (deformation first).
       default: false
-  - cut_invalid:
-      type: boolean
+  - invalid_streamlines:
+      type: string
       description: |
-        Cut invalid streamlines after applying the transform rather than removing them.
-      default: false
+        How to manage invalid streamlines after applying the transform. Either 'keep' invalid
+        streamlines in the tractogram, 'cut' invalid segments and keep the remainder or 'remove'
+        invalid streamlines entierly. NOTE : selecting 'keep' disables overlapping and single-point
+        streamlines detection.
+      default: "cut"
+      choices:
+        - keep
+        - cut
+        - remove
   - remove_single_point:
       type: boolean
       description: |
@@ -107,3 +114,4 @@ output:
           - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"
+  - "@AlexVCaron"
