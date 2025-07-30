@@ -13,6 +13,7 @@ nextflow_workflow {
     tag "registration/anattodwi"
     tag "registration"
     tag "registration/ants"
+    tag "registration/convert"
     tag "registration/easyreg"
     tag "registration/synthregistration"
 

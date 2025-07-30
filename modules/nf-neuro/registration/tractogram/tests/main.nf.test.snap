@@ -41,6 +41,9 @@
                             "test__bundle_6.trk:md5,125e50561b4b0c5fd8ee23867c28bc51"
                         ]
                     ]
+                ],
+                "versions": [
+                    "versions.yml:md5,616950ab6895e0c55937a4ca94a64fea"
                 ]
             }
         ],
@@ -88,6 +91,9 @@
                         },
                         "test__bundle_2_mni.trk:md5,824bcbf796cbce3e1c93e39d1c98dcf9"
                     ]
+                ],
+                "versions": [
+                    "versions.yml:md5,616950ab6895e0c55937a4ca94a64fea"
                 ]
             }
         ],

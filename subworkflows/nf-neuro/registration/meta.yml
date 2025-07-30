@@ -41,6 +41,7 @@ keywords:
 components:
   - registration/anattodwi
   - registration/ants
+  - registration/convert
   - registration/easyreg
   - registration/synthregistration
 input:

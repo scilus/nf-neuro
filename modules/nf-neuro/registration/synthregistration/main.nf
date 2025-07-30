@@ -47,10 +47,10 @@ process REGISTRATION_SYNTHREGISTRATION {
     moving=$moving_image
     mv $fixed_image fixed.nii.gz
 
-    declare -A extension=( ["affine"]="lta" \
-                           ["rigid"]="lta" \
-                           ["deform"]="nii.gz" \
-                           ["joint"]="nii.gz" )
+    declare -A extension=(  ["affine"]="lta" \
+                            ["rigid"]="lta" \
+                            ["deform"]="nii.gz" \
+                            ["joint"]="nii.gz" )
 
     weights=( $weights )
 

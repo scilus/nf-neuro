@@ -30,7 +30,7 @@ args:
   - models:
       type: list
       description: List of transformation models to apply to the moving image in series.
-      default: "[\"affine\", \"deform\"]"
+      default: '["affine", "deform"]'
       choices:
         - rigid
         - affine
