@@ -1,4 +1,39 @@
 {
+    "registration - tractogram - keep invalid": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__bundle_2.trk:md5,824bcbf796cbce3e1c93e39d1c98dcf9"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,616950ab6895e0c55937a4ca94a64fea"
+                ],
+                "tractogram": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__bundle_2.trk:md5,824bcbf796cbce3e1c93e39d1c98dcf9"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,616950ab6895e0c55937a4ca94a64fea"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-30T17:00:29.348451708"
+    },
     "registration - tractogram_bundles": {
         "content": [
             {
@@ -65,7 +100,7 @@
         },
         "timestamp": "2025-09-22T22:17:25.469054766"
     },
-    "registration - tractogram": {
+    "registration - tractogram - custom suffix": {
         "content": [
             {
                 "0": [
