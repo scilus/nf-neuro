@@ -194,12 +194,6 @@ jobs:
             path: modules/nf-neuro/betcrop/synthbet
           - runner: scilus-docker-large
             path: modules/nf-neuro/registration/synthregistration
-          - runner: scilus-docker-large
-            path: subworkflows/nf-neuro/preproc_t1
-          - runner: scilus-docker-large
-            path: subworkflows/nf-neuro/registration
-          - runner: scilus-docker-large
-            path: subworkflows/nf-neuro/anatomical_segmentation
         exclude:
           - path: subworkflows/nf-neuro/load_test_data
     uses: ./.github/workflows/test_component.yml
