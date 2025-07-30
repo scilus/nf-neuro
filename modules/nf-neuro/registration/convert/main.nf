@@ -32,7 +32,8 @@ process REGISTRATION_CONVERT {
         error "Invalid combination of transformation type and conversion type: ${transform_type} to ${output_type}."
     }
 
-    def output_name = "${prefix}__out_${transform_type}.${transform_types[transform_type][output_type]}"
+    def out_extension = transform_types[transform_type][output_type]
+    def output_name = "${prefix}__out_${transform_type}.${out_extension}"
     def command = transform_type == "affine" ? "lta_convert" : "mri_warp_convert"
 
     if ( transform_type == "affine" ) {
