@@ -37,17 +37,7 @@
                         {
                             "id": "test"
                         },
-                        "test__CC_Fr_1_cleaned.trk",
-                        "test__CG_L_An_cleaned.trk",
-                        "test__CG_L_cleaned.trk",
-                        "test__FPT_L_cleaned.trk",
-                        "test__FPT_R_Brainstem_cleaned.trk",
-                        "test__FPT_R_cleaned.trk",
-                        "test__MCP_cleaned.trk",
-                        "test__POPT_R_Brainstem_cleaned.trk",
-                        "test__POPT_R_cleaned.trk",
-                        "test__SCP_R_cleaned.trk",
-                        "test__SLF_R_cleaned.trk"
+                        "test__AF_L_cleaned.trk"
                     ]
                 ],
                 "versions": [

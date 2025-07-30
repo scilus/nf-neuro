@@ -42,14 +42,6 @@
                 "ch_t2w_tpl": [
                     "template__image_bet.nii.gz"
                 ],
-                "mqc": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_IFGWM_registration_antsapplytransforms_mqc.gif"
-                    ]
-                ],
                 "versions": [
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
                     "versions.yml:md5,513f314aaedec96c49c67ed0bd3bbf4b",
@@ -75,7 +67,7 @@
                         {
                             "id": "test"
                         },
-                        "test__template__image_bet_warped.nii.gz"
+                        "test__t1_warped.nii.gz"
                     ]
                 ],
                 "ch_registered_labels_files": [
@@ -111,12 +103,6 @@
                     "template__image_bet.nii.gz"
                 ],
                 "mqc": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_IFGWM_registration_antsapplytransforms_mqc.gif"
-                    ],
                     [
                         {
                             "id": "test"
