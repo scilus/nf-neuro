@@ -6,7 +6,7 @@ on:
         description: "Nextflow version to use"
         required: false
         type: string
-        default: "24.04.4"
+        default: "25.04.6"
       nf_core_version:
         description: "nf-core version to use"
         required: false
