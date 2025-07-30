@@ -1,6 +1,5 @@
 
 nextflow_process {
-
     name "Test Process REGISTRATION_TRACTOGRAM"
     script "../main.nf"
     process "REGISTRATION_TRACTOGRAM"
@@ -26,10 +25,7 @@ nextflow_process {
         }
     }
 
-
     test("registration - tractogram_bundles") {
-
-
         when {
             process {
                 """
@@ -53,13 +49,10 @@ nextflow_process {
                 { assert snapshot(process.out).match() }
             )
         }
-
     }
 
-    test("registration - tractogram") {
-
-        config "./nextflow_suffix.config"
-
+    test("registration - tractogram - custom suffix") {
+        config "./suffix.config"
         when {
             process {
                 """
@@ -83,7 +76,33 @@ nextflow_process {
                 { assert snapshot(process.out).match() }
             )
         }
+    }
 
+    test("registration - tractogram - keep invalid") {
+        config "./keep_invalid.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/bundle_all_1mm.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/affine.txt", checkIfExists: true),
+                        file("\${test_data_directory}/fibercup_atlas/subj_1/bundle_2.trk", checkIfExists: true),
+                        [],
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
     }
 
     test("registration - tractogram - stub-run") {
@@ -113,6 +132,5 @@ nextflow_process {
                 { assert snapshot(process.out.versions).match() }
             )
         }
-
     }
 }
