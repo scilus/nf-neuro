@@ -92,12 +92,12 @@ workflow REGISTRATION {
                 .map{ meta, tag, idx, transform -> [meta, tag + [idx: idx], transform]}
 
             // Mix all transforms into a single channel for conversion
-            ch_convert = ch_convert_affine.view{ "affine $it" }
-                .mix(ch_convert_warp.view{ "warp $it" })
-                .mix(ch_convert_inverse_affine.view{ "inv-affine $it" })
-                .mix(ch_convert_inverse_warp.view{ "inv-warp $it" })
-                .mix(ch_convert_image_transform.view{ "image-transform $it" })
-                .mix(ch_convert_inverse_image_transform.view{ "inv-image-transform $it" })
+            ch_convert = ch_convert_affine
+                .mix(ch_convert_warp)
+                .mix(ch_convert_inverse_affine)
+                .mix(ch_convert_inverse_warp)
+                .mix(ch_convert_image_transform)
+                .mix(ch_convert_inverse_image_transform)
                 .combine(ch_fixed_image, by: 0)
                 .combine(ch_moving_image, by: 0)
                 .map{ meta, tag, transform, fixed, moving ->
