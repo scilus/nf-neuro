@@ -79,8 +79,8 @@ head:
 
 ### Outputs
 
-| | Type | Description | Pattern |
-|-|------|-------------|---------|
+| | Type | Description | Optional | Pattern |
+|-|------|-------------|----------|---------|
 {outputs}
 
 {f'''
@@ -159,7 +159,7 @@ def convert_module_to_md(yaml_data, commit_hash):
                 if isinstance(param[name]['choices'], str):
                     choices = param[name]['choices'].replace("\n", " ")
                 elif isinstance(param[name]['choices'], list):
-                    choices = "<br>".join(param[name]['choices']).replace("\n", " ")
+                    choices = "<br>".join([str(c) for c in param[name]['choices']])
             except KeyError:
                 choices = ""
             default = param[name]['default']
@@ -177,7 +177,11 @@ def convert_module_to_md(yaml_data, commit_hash):
             pattern = output[name]['pattern'].replace("\n", " ")
         except KeyError:
             pattern = ""
-        outputs.append(f"| {name} | {output_type} | {description} | {pattern} |")
+        try:
+            optional = str(output[name]['optional']).replace("\n", " ").lower()
+        except KeyError:
+            optional = "false"
+        outputs.append(f"| {name} | {output_type} | {description} | {optional} | {pattern} |")
 
     # Authors list.
     authors = []

@@ -82,8 +82,8 @@ head:
 {f'''
 ### Outputs
 
-| | Type | Description | Pattern |
-|-|------|-------------|---------|
+| | Type | Description | Optional | Pattern |
+|-|------|-------------|----------|---------|
 {outputs}
 ''' if outputs else ''}
 
@@ -150,7 +150,7 @@ def convert_subworkflow_to_md(yaml_data, commit_hash):
                 if isinstance(param[name]['choices'], str):
                     choices = param[name]['choices'].replace("\n", " ")
                 else:
-                    choices = "<br>".join(param[name]['choices']).replace("\n", " ")
+                    choices = "<br>".join([str(c) for c in param[name]['choices']])
             except KeyError:
                 choices = ""
             params.append(f"| {name} | {param_type} | {description} | {default} | {choices} |")
@@ -167,7 +167,11 @@ def convert_subworkflow_to_md(yaml_data, commit_hash):
             pattern = output[name]['pattern'].replace("\n", " ")
         except KeyError:
             pattern = ""
-        outputs.append(f"| {name} | {output_type} | {description} | {pattern} |")
+        try:
+            optional = str(output[name]['optional']).replace("\n", " ").lower()
+        except KeyError:
+            optional = "false"
+        outputs.append(f"| {name} | {output_type} | {description} | {optional} | {pattern} |")
 
     # Components list
     components = []
