@@ -19,7 +19,7 @@ export DEVCONTAINER_CPU_LIMIT=$(grep -c ^processor /proc/cpuinfo)
 EOF
 
 unset maxmem
-NFCORE_VERSION=2.14.1
+NFCORE_VERSION=3.3.2
 
 if [ -f poetry.lock ] && [ -f pyproject.toml ]
 then

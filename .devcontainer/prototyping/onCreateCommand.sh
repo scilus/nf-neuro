@@ -9,7 +9,7 @@ echo "source $XDG_CONFIG_HOME/nf-neuro/.env" >> ~/.bashrc
 # Try to download nf-neuro setup with poetry. If it fails, we defer to pip
 {
     NFNEURO_RAW_REPOSITORY=https://raw.githubusercontent.com/scilus/nf-neuro/main
-    NFCORE_VERSION=2.14.1
+    NFCORE_VERSION=3.3.2
     wget -N $NFNEURO_RAW_REPOSITORY/pyproject.toml \
             $NFNEURO_RAW_REPOSITORY/poetry.toml \
             $NFNEURO_RAW_REPOSITORY/poetry.lock
