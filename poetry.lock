@@ -876,13 +876,13 @@ files = [
 
 [[package]]
 name = "nf-core"
-version = "3.2.1"
+version = "3.3.2"
 description = "Helper tools for use with nf-core Nextflow pipelines."
 optional = false
-python-versions = "<4,>=3.8"
+python-versions = "<4,>=3.9"
 files = [
-    {file = "nf_core-3.2.1-py3-none-any.whl", hash = "sha256:be41f467946e7370b5229ba0e6806f4a88161b082c2eaf838256ba93252f263c"},
-    {file = "nf_core-3.2.1.tar.gz", hash = "sha256:a9d703036d4a3bcd8857b4e3d8d4b3ae7e32435bed0bdedb2974a3817b844a5d"},
+    {file = "nf_core-3.3.2-py3-none-any.whl", hash = "sha256:36fdc5a5bb2fc0f60863d1abd2a3d3a2cb8319c6b686e5ebbdfa763b39cdf92d"},
+    {file = "nf_core-3.3.2.tar.gz", hash = "sha256:ee884e6b0635ec084be4fcb7598717735eb44d781eab07f75acded9d651a7ec8"},
 ]
 
 [package.dependencies]
@@ -896,7 +896,7 @@ packaging = "*"
 pdiff = "*"
 pillow = "*"
 pre-commit = "*"
-prompt_toolkit = "<=3.0.48"
+prompt_toolkit = "<=3.0.51"
 pydantic = ">=2.2.1"
 PyGithub = "*"
 pyyaml = "*"
@@ -910,7 +910,7 @@ rich-click = "==1.8.*"
 rocrate = "*"
 "ruamel.yaml" = "*"
 tabulate = "*"
-textual = "0.71.0"
+textual = "3.5.0"
 trogon = "*"
 
 [[package]]
@@ -2170,22 +2170,23 @@ widechars = ["wcwidth"]
 
 [[package]]
 name = "textual"
-version = "0.71.0"
+version = "3.5.0"
 description = "Modern Text User Interface framework"
 optional = false
-python-versions = "<4.0,>=3.8"
+python-versions = "<4.0.0,>=3.8.1"
 files = [
-    {file = "textual-0.71.0-py3-none-any.whl", hash = "sha256:60500cc63ffd98a4aff8679976a1530d5e99a881e13bb040d26558a2c45f49d8"},
-    {file = "textual-0.71.0.tar.gz", hash = "sha256:a38a3bd7e450ed173b59ab1c93a3aa8174d95bc5c79647f220a50243236ce70a"},
+    {file = "textual-3.5.0-py3-none-any.whl", hash = "sha256:7c960efb70391b754e66201776793de2b26d699d51fb91f5f78401d13cec79a1"},
+    {file = "textual-3.5.0.tar.gz", hash = "sha256:c4a440338694672acf271c74904f1cf1e4a64c6761c056b02a561774b81a04f4"},
 ]
 
 [package.dependencies]
 markdown-it-py = {version = ">=2.1.0", extras = ["linkify", "plugins"]}
+platformdirs = ">=3.6.0,<5"
 rich = ">=13.3.3"
 typing-extensions = ">=4.4.0,<5.0.0"
 
 [package.extras]
-syntax = ["tree-sitter (>=0.20.1,<0.21.0)", "tree-sitter-languages (==1.10.2)"]
+syntax = ["tree-sitter (>=0.23.0)", "tree-sitter-bash (>=0.23.0)", "tree-sitter-css (>=0.23.0)", "tree-sitter-go (>=0.23.0)", "tree-sitter-html (>=0.23.0)", "tree-sitter-java (>=0.23.0)", "tree-sitter-javascript (>=0.23.0)", "tree-sitter-json (>=0.24.0)", "tree-sitter-markdown (>=0.3.0)", "tree-sitter-python (>=0.23.0)", "tree-sitter-regex (>=0.24.0)", "tree-sitter-rust (>=0.23.0,<=0.23.2)", "tree-sitter-sql (>=0.3.0,<0.3.8)", "tree-sitter-toml (>=0.6.0)", "tree-sitter-xml (>=0.7.0)", "tree-sitter-yaml (>=0.6.0)"]
 
 [[package]]
 name = "tomli"
