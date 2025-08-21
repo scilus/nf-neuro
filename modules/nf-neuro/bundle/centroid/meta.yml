@@ -8,16 +8,16 @@ keywords:
   - Streamlines
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1', single_end:false ]`
-
     - bundles:
         type: file
         description: |
@@ -25,32 +25,32 @@ input:
           the module will compute centroids.
         pattern: "*.trk"
         mandatory: true
-
+        ontologies: []
 args:
   - nb_points:
       type: int
       description: |
         Number of points to resample the centroids to.
       default: 5
-
 output:
-  - centroids:
-      - meta:
+  centroids:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-
       - "*_centroid_*.trk":
           type: file
           description: Computed centroids.
           pattern: "*_centroid_*.trk"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
 maintainers:

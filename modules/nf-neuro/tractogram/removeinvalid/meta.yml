@@ -8,9 +8,10 @@ keywords:
   - Streamlines
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
@@ -21,23 +22,26 @@ input:
         type: file
         description: Tractogram or list of tractograms from which to remove invalid streamlines.
         pattern: "*.{trk,tck}"
+        ontologies: []
 output:
-  - tractograms:
-      - meta:
+  tractograms:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-
       - "*.{trk,tck}":
           type: file
           description: Tractogram without invalid streamlines
           pattern: "*.{trk,tck}"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
 maintainers:

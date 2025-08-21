@@ -1,35 +1,36 @@
----
 name: "mqc_gif"
 description: generates quality control (QC) screenshots between two MRI volumes or,
-  if you give only one input, runs through all the images in a volume in 4d.
-  It extracts the central sections (sagittal, coronal and axial) of the volumes,
-  creates annotated mosaics and combines them into an animated GIF for rapid visual comparison.
+  if you give only one input, runs through all the images in a volume in 4d. It extracts
+  the central sections (sagittal, coronal and axial) of the volumes, creates annotated
+  mosaics and combines them into an animated GIF for rapid visual comparison.
 keywords:
   - mqc
   - Visualisation
   - gif
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
   - MRtrix3:
       description: |
         MRtrix3 is a software package for various types of diffusion imaging
         data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
       homepage: https://www.mrtrix.org/
       doi: 10.1016/j.neuroimage.2019.116137
+      identifier: ""
   - imagemagick:
-      description: "ImageMagick is a free, open-source software suite, used for editing and manipulating digital images."
+      description: "ImageMagick is a free, open-source software suite, used for editing
+        and manipulating digital images."
       homepage: "https://imagemagick.org/index.php"
-
+      identifier: biotools:imagemagick
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - image1:
         type: file
         description: |
@@ -37,44 +38,44 @@ input:
           analysed across the whole set of images, in which case you need to be in 4d.
         pattern: "*.{nii,nii.gz}"
         mandatory: true
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - image2:
         type: file
         description: Second image to be analysed.
         pattern: "*.{nii,nii.gz}"
         mandatory: false
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 args:
   - title_image1:
       type: string
       description: name given to the first image
-
   - title_image2:
       type: string
       description: name given to the second image
-
   - suffix_qc:
       type: string
       description: suffix given to final image
-
 output:
-  - mqc_screenshots:
-      - meta:
+  mqc_screenshots:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-
       - "*_screenshots_merged_mqc.gif":
           type: file
-          description: .gif file containing quality control image for visually compares MRI volumes using middle-slice mosaics.
+          description: .gif file containing quality control image for visually compares
+            MRI volumes using middle-slice mosaics.
           pattern: "*_screenshots_merged_mqc.gif"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@ThoumyreStanislas"

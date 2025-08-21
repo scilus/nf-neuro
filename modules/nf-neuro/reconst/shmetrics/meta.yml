@@ -7,8 +7,10 @@ keywords:
   - Metrics
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
   - - meta:
         type: map
@@ -19,21 +21,29 @@ input:
         type: file
         description: SH or FODF map.
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - mask:
         type: file
         description: B0 mask.
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - fa:
         type: file
         description: FA map.
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - md:
         type: file
         description: MD map.
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - peaks:
-      - meta:
+  peaks:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -42,8 +52,10 @@ output:
           type: file
           description: Peaks file.
           pattern: "*peaks.nii.gz"
-  - peak_indices:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  peak_indices:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -52,8 +64,10 @@ output:
           type: file
           description: Peak indices file.
           pattern: "*peak_indices.nii.gz"
-  - peak_values:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  peak_values:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -62,8 +76,10 @@ output:
           type: file
           description: Peaks values file.
           pattern: "*peak_values.nii.gz"
-  - afd_max:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  afd_max:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -72,8 +88,10 @@ output:
           type: file
           description: Maximum Apparent Fiber Density (AFDmax) map.
           pattern: "*afd_max.nii.gz"
-  - afd_total:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  afd_total:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -82,8 +100,10 @@ output:
           type: file
           description: Total Apparent Fiber Density (AFDtotal) map.
           pattern: "*afd_total.nii.gz"
-  - afd_sum:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  afd_sum:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -92,8 +112,10 @@ output:
           type: file
           description: Sum of all Apparent Fiber Density (Afdsum) map.
           pattern: "*afd_sum.nii.gz"
-  - nufo:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  nufo:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -102,8 +124,10 @@ output:
           type: file
           description: Number of Fiber Orientation (NuFO) map.
           pattern: "*nufo.nii.gz"
-  - vent_mask:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  vent_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -112,10 +136,14 @@ output:
           type: file
           description: Ventricles mask.
           pattern: "*ventricles_mask.nii.gz"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@karanphil"

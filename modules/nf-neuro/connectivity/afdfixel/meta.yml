@@ -9,29 +9,30 @@ keywords:
   - Metrics
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1', single_end:false ]`
-
     - hdf5:
         type: file
         description: HDF5 file containing decomposed connections.
         pattern: "*.h5"
-
+        ontologies: []
     - fodf:
         type: file
         description: FODF file.
         pattern: "*.nii.gz"
-
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
 output:
-  - hdf5:
-      - meta:
+  hdf5:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -40,11 +41,14 @@ output:
           type: file
           description: HDF5 file containing the computed AFD fixel and radial fODF metrics.
           pattern: "*__afd_fixel.h5"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
 maintainers:

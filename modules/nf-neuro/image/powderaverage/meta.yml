@@ -7,34 +7,36 @@ keywords:
   - BET
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1', single_end:false ]`
-
     - dwi:
         type: file
         description: Nifti DWI volume to compute the powder average on.
         pattern: "*.nii.gz"
-
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
     - bval:
         type: file
         description: b-values file.
         pattern: "*.bval"
-
+        ontologies: []
     - mask:
         type: file
         description: Binary mask to apply on the DWI volume.
         pattern: "*.nii.gz"
-
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
 output:
-  - pwd_avg:
-      - meta:
+  pwd_avg:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -43,11 +45,15 @@ output:
           type: file
           description: Powder averaged DWI volume.
           pattern: "*pwd_avg.nii.gz"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
 maintainers:

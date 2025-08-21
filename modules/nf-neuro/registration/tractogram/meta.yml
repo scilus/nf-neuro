@@ -8,9 +8,10 @@ keywords:
   - Tractogram
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
@@ -21,26 +22,33 @@ input:
         type: file
         description: FA nifti format as anatomical image
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - transfo:
         type: file
         description: ANTs affine transform
         pattern: "*.mat"
+        ontologies: []
     - tractogram:
         type: file
         description: Tractogram or list of tractograms to register
         pattern: "*.{trk,tck}"
+        ontologies: []
     - ref:
         type: file
         description: Reference anatomy for tck/vtk/fib/dpy file support (.nii or .nii.gz)
           (optional)
         pattern: "*.{tck,vtk,fib,dpy}"
+        ontologies: []
     - deformation:
         type: file
         description: Path to the file containing a deformation field (optional)
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - warped_tractogram:
-      - meta:
+  warped_tractogram:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -49,10 +57,13 @@ output:
           type: file
           description: Warped tractogram(s).
           pattern: "*__*.{trk,tck}"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"

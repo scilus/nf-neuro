@@ -6,37 +6,39 @@ keywords:
   - registration
   - anatomical
   - dwi
-
 tools:
   - ANTs:
       description: Advanced Normalization Tools (ANTs) for image processing.
       homepage: http://stnava.github.io/ANTs/
       doi: "10.1038/s41598-021-87564-6"
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - t1:
         type: file
         description: Nifti image file to register on dwi
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - b0:
         type: file
         description: Nifti image file - b0
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - metric:
         type: file
         description: Nifti image file metric used to register (fa)
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - affine:
-      - meta:
+  affine:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -45,8 +47,9 @@ output:
           type: file
           description: Affine transformation matrix.
           pattern: "*0GenericAffine.mat"
-  - warp:
-      - meta:
+          ontologies: []
+  warp:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -55,8 +58,10 @@ output:
           type: file
           description: Warp field.
           pattern: "*1Warp.{nii,nii.gz}"
-  - inverse_warp:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  inverse_warp:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -65,8 +70,10 @@ output:
           type: file
           description: Inverse warp field.
           pattern: "*1InverseWarp.{nii,nii.gz}"
-  - t1_warped:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  t1_warped:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -75,8 +82,10 @@ output:
           type: file
           description: Anatomical T1 warped to dwi space.
           pattern: "*t1_warped.{nii,nii.gz}"
-  - mqc:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  mqc:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -87,10 +96,13 @@ output:
             .gif file containing quality control image for the
             registration process. For use in MultiQC report.
           pattern: "*_registration_anattodwi_mqc.gif"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@medde"

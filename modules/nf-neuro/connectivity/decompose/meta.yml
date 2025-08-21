@@ -10,35 +10,35 @@ keywords:
   - scilpy
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1', single_end:false ]`
-
     - trk:
         type: file
         description: Tractogram to decompose.
         pattern: "*.{trk, tck, vtk, fib, dpy}"
-
+        ontologies: []
     - labels:
         type: file
         description: brain parcellation. Labels must have 0 as background. Volumes must
           have isotropic voxels.
         pattern: "*.nii.gz"
-
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
 output:
-  - hdf5:
-      - meta:
+  hdf5:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-
       - "*__decomposed.h5":
           type: file
           description: |
@@ -47,25 +47,25 @@ output:
             group is composed of 'data', 'offsets' and 'lengths' from the array
             sequence. The 'data' is stored in VOX/CORNER for simplicity and efficiency.
           pattern: "*__decomposed.h5"
-
-  - labels_list:
-      - meta:
+          ontologies: []
+  labels_list:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-
       - "*__labels_list.txt":
           type: file
           description: Save the labels list as text file.
           pattern: "*__labels_list.txt"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@ThoumyreStanislas"
 maintainers:

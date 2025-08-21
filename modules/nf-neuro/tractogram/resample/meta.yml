@@ -8,43 +8,43 @@ keywords:
   - Streamlines
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1', single_end:false ]`
-
     - tractograms:
         type: file
         description: |
           List of tractograms to resample. If the tractogram is a centroid file
           with a specific number of points, please use the nb_points parameter.
         pattern: "*.{trk}"
-
+        ontologies: []
 output:
-  - tractograms:
-      - meta:
+  tractograms:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-
       - "*_resampled.trk":
           type: file
           description: |
             Resampled tractograms.
           pattern: "*_resampled.trk"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
 maintainers:

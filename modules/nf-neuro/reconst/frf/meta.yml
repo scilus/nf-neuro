@@ -14,56 +14,61 @@ tools:
   - DIPY:
       description: DIPY is the paragon 3D/4D+ imaging library in Python.
       homepage: https://dipy.org
-
+      identifier: ""
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - dwi:
         type: file
         description: Nifti image of DWI.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - bval:
         type: file
         description: B-values in FSL format.
         pattern: "*.bval"
-
+        ontologies: []
     - bvec:
         type: file
         description: B-vectors in FSL format.
         pattern: "*.bvec"
-
+        ontologies: []
     - mask:
         type: file
         description: Nifti b0 binary mask.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - wm_mask:
         type: file
         description: Nifti binary WM mask.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - gm_mask:
         type: file
         description: Nifti binary GM mask.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - csf_mask:
         type: file
         description: Nifti binary CSF mask.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - frf:
-      - meta:
+  frf:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -72,8 +77,9 @@ output:
           type: file
           description: Fiber Response Function (FRF), in the case of ssst_frf.
           pattern: "*__frf.txt"
-  - wm_frf:
-      - meta:
+          ontologies: []
+  wm_frf:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -82,8 +88,9 @@ output:
           type: file
           description: WM Fiber Response Function (FRF), in the case of msmt_frf.
           pattern: "*__wm_frf.txt"
-  - gm_frf:
-      - meta:
+          ontologies: []
+  gm_frf:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -92,8 +99,9 @@ output:
           type: file
           description: GM Fiber Response Function (FRF), in the case of msmt_frf.
           pattern: "*__gm_frf.txt"
-  - csf_frf:
-      - meta:
+          ontologies: []
+  csf_frf:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -102,11 +110,14 @@ output:
           type: file
           description: CSF Fiber Response Function (FRF), in the case of msmt_frf.
           pattern: "*__csf_frf.txt"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@Manonedde"
   - "@karanphil"

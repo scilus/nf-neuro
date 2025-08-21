@@ -14,37 +14,40 @@ tools:
         Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
       homepage: https://surfer.nmr.mgh.harvard.edu/
       doi: 10.1016/j.neuroimage.2012.01.021
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - deform:
         type: file
         description: Deform transform to convert. Default usage expects Freesurfer .mgz
           format from mri_synthmorph
         pattern: "*.{nii,nii.gz,mgz,m3z}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - affine:
         type: file
         description: Affine transform to convert. Default usage expects Freesurfer .lta
           format from mri_synthmorph
         pattern: "*.{lta,txt,xfm,dat}"
-
+        ontologies: []
     - source:
         type: file
         description: Moving Nifti volume used for registration. Defines source image
           geometry
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - target:
         type: file
         description: Fixed Nifti volume used for registration. Defines target image
           geometry. (optional)
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - fs_license:
         type: file
         description:
@@ -52,10 +55,10 @@ input:
           Optional. If you have already set your license as prescribed by Freesurfer
           (copied to a .license file in your $FREESURFER_HOME), this is not required.
         pattern: "*.txt"
-
+        ontologies: []
 output:
-  - deform_transform:
-      - meta:
+  deform_transform:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -64,8 +67,10 @@ output:
           type: file
           description: Deform transform. Default usage outputs ANTs (ITK) format .nii.gz
           pattern: "*out_warp.{nii,nii.gz,mgz,m3z}"
-  - affine_transform:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  affine_transform:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -74,10 +79,12 @@ output:
           type: map
           description: Affine transform. Default usage outputs ANTs (ITK) format .txt
           pattern: "*out_affine.{txt,lta,mat,dat}"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@anroy1"

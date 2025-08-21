@@ -10,9 +10,10 @@ keywords:
   - myelin
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
@@ -53,6 +54,8 @@ input:
         type: file
         description: Nifti brain mask.
         pattern: "*mask.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - jsons:
         type: list
         description: List of json files for acquisition parameters extraction in the
@@ -68,42 +71,41 @@ input:
         type: file
         description: Nifti file containing a coregistered B1 map.
         pattern: "*b1*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - b1_fit:
         type: list
         description: List of files for the model based B1 correction method.
         pattern: "*fitValues*.mat"
 output:
-  - ihmt_maps:
-      - meta:
+  ihmt_maps:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - ihMT_native_maps:
           type: directory
-          description: Folder containing ihMT maps in native space. (MTR and ihMTR, plus
-            MTsat and ihMTsat if mtoff_t1 was given)
+          description: Folder containing ihMT maps in native space. (MTR and ihMTR,
+            plus MTsat and ihMTsat if mtoff_t1 was given)
           pattern: ihMT_native_maps
-
-  - comp_maps:
-      - meta:
+  comp_maps:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - Complementary_maps:
           type: directory
-          description: Folder containing complementary maps. (intermediate files, B1 correction
-            files, if extended option given)
+          description: Folder containing complementary maps. (intermediate files, B1
+            correction files, if extended option given)
           pattern: Complementary_maps
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@karanphil"

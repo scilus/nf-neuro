@@ -8,8 +8,10 @@ keywords:
   - scilpy
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 args:
   - dwi_shell_tolerance:
       type: integer
@@ -102,24 +104,30 @@ input:
         description: Nifti DWI volume used to extract DTI metrics.
         pattern: "*.{nii,nii.gz}"
         mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - bval:
         type: file
         description: B-values in FSL format.
         pattern: "*.bval"
         mandatory: true
+        ontologies: []
     - bvec:
         type: file
         description: B-vectors in FSL format.
         pattern: "*.bvec"
         mandatory: true
+        ontologies: []
     - b0mask:
         type: file
         description: Nifti b0 volume file used to mask the input image.
         pattern: "*.{nii,nii.gz}"
         mandatory: false
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - ad:
-      - meta:
+  ad:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -128,8 +136,10 @@ output:
           type: file
           description: Axial diffusivity.
           pattern: "*__ad.{nii,nii.gz}"
-  - evecs:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evecs:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -138,8 +148,10 @@ output:
           type: file
           description: Eigenvectors of the tensor.
           pattern: "*__evecs.{nii,nii.gz}"
-  - evecs_v1:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evecs_v1:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -148,8 +160,10 @@ output:
           type: file
           description: First eigenvector.
           pattern: "*__evecs_v1.{nii,nii.gz}"
-  - evecs_v2:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evecs_v2:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -158,8 +172,10 @@ output:
           type: file
           description: Second eigenvector.
           pattern: "*__evecs_v2.{nii,nii.gz}"
-  - evecs_v3:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evecs_v3:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -168,8 +184,10 @@ output:
           type: file
           description: Third eigenvector.
           pattern: "*__evecs_v3.{nii,nii.gz}"
-  - evals:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evals:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -178,8 +196,10 @@ output:
           type: file
           description: Eigenvalues of the tensor.
           pattern: "*__evals.{nii,nii.gz}"
-  - evals_e1:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evals_e1:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -188,8 +208,10 @@ output:
           type: file
           description: First eigenvalue.
           pattern: "*__evals_e1.{nii,nii.gz}"
-  - evals_e2:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evals_e2:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -198,8 +220,10 @@ output:
           type: file
           description: Second eigenvalue.
           pattern: "*__evals_e2.{nii,nii.gz}"
-  - evals_e3:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evals_e3:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -208,8 +232,10 @@ output:
           type: file
           description: Third eigenvalue.
           pattern: "*__evals_e3.{nii,nii.gz}"
-  - fa:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  fa:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -218,8 +244,10 @@ output:
           type: file
           description: Fractional anisotropy.
           pattern: "*__fa.{nii,nii.gz}"
-  - ga:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  ga:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -228,8 +256,10 @@ output:
           type: file
           description: Geodesic anisotropy.
           pattern: "*__ga.{nii,nii.gz}"
-  - rgb:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  rgb:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -238,8 +268,10 @@ output:
           type: file
           description: Colored fractional anisotropy.
           pattern: "*__rgb.{nii,nii.gz}"
-  - md:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  md:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -248,8 +280,10 @@ output:
           type: file
           description: Mean diffusivity.
           pattern: "*__md.{nii,nii.gz}"
-  - mode:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  mode:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -258,8 +292,10 @@ output:
           type: file
           description: Mode of tensors.
           pattern: "*__mode.{nii,nii.gz}"
-  - norm:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  norm:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -268,8 +304,10 @@ output:
           type: file
           description: Norm of tensors.
           pattern: "*__norm.{nii,nii.gz}"
-  - rd:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  rd:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -278,8 +316,10 @@ output:
           type: file
           description: Radial diffusivity.
           pattern: "*__rd.{nii,nii.gz}"
-  - tensor:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  tensor:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -288,8 +328,10 @@ output:
           type: file
           description: Tensor coefficients.
           pattern: "*__tensor.{nii,nii.gz}"
-  - nonphysical:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  nonphysical:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -300,8 +342,10 @@ output:
             Map of voxels with physically implausible signals where the mean of
             b=0 images is below one or more diffusion-weighted images.
           pattern: "*__nonphysical.{nii,nii.gz}"
-  - pulsation_std_dwi:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  pulsation_std_dwi:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -312,8 +356,10 @@ output:
             Standard deviation map across all diffusion-weighted images.
             Shows pulsation and misalignment artifacts.
           pattern: "*__pulsation_std_dwi.{nii,nii.gz}"
-  - pulsation_std_b0:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  pulsation_std_b0:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -324,8 +370,10 @@ output:
             Standard deviation map across b=0 images if more than one is
             available. Shows pulsation and misalignment artifacts.
           pattern: "*__pulsation_std_b0.{nii,nii.gz}"
-  - residual:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  residual:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -334,8 +382,10 @@ output:
           type: file
           description: Residual of the tensor fit.
           pattern: "*__residual.{nii,nii.gz}"
-  - residual_iqr_residuals:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  residual_iqr_residuals:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -344,8 +394,10 @@ output:
           type: file
           description: Interquartile range of the residual of the tensor fit.
           pattern: "*__residual_iqr_residuals.npy"
-  - residual_mean_residuals:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  residual_mean_residuals:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -354,8 +406,10 @@ output:
           type: file
           description: Average of the residual of the tensor fit.
           pattern: "*__residual_mean_residuals.npy"
-  - residual_q1_residuals:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  residual_q1_residuals:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -364,8 +418,10 @@ output:
           type: file
           description: First quartile of the residual of the tensor fit.
           pattern: "*__residual_q1_residuals.npy"
-  - residual_q3_residuals:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  residual_q3_residuals:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -374,8 +430,10 @@ output:
           type: file
           description: Third quartile of the residual of the tensor fit.
           pattern: "*__residual_q3_residuals.npy"
-  - residual_residuals_stats:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  residual_residuals_stats:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -384,8 +442,9 @@ output:
           type: file
           description: Complete statistics of the residual of the tensor fit.
           pattern: "*__residual_residuals_stats.png"
-  - residual_std_residuals:
-      - meta:
+          ontologies: []
+  residual_std_residuals:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -394,8 +453,10 @@ output:
           type: file
           description: Standard deviation of the residual of the tensor fit.
           pattern: "*__residual_std_residuals.npy"
-  - mqc:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  mqc:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -405,10 +466,13 @@ output:
           description: |
             .png file containing screenshots of some DTI metrics.
             Made for use in MultiQC report.
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"

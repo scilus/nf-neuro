@@ -8,46 +8,45 @@ keywords:
   - Fixel
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - bundles:
         type: list
         description: List of bundles in .trk format.
         pattern: "*.trk"
         mandatory: true
-
     - fodf:
         type: file
         description: fODF file to extract fixel measurements from.
         pattern: "*.nii.gz"
         mandatory: true
-
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
 output:
-  - fixel_afd:
-      - meta:
+  fixel_afd:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*_afd_metric.nii.gz":
           type: list
           description: Mean Apparent Fiber Density (AFD) along the bundle.
           pattern: "*_afd_metric.nii.gz"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@grahamlittlephd"

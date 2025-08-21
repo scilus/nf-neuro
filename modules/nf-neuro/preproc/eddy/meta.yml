@@ -7,23 +7,27 @@ keywords:
   - eddy
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
   - MRtrix3:
       description: |
         MRtrix3 is a software package for various types of diffusion imaging
         data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
       homepage: https://www.mrtrix.org/
       doi: 10.1016/j.neuroimage.2019.116137
+      identifier: ""
   - FSL:
       description: FSL Toolbox
       homepage: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
       doi: 10.1016/j.neuroimage.2011.09.015
+      identifier: ""
 args:
   - slice_drop_flag:
       type: boolean
-      description: "If set, will activate eddy's outlier correction, which includes slice drop correction."
+      description: "If set, will activate eddy's outlier correction, which includes
+        slice drop correction."
       default: false
   - bet_topup_before_eddy_f:
       type: float
@@ -76,41 +80,54 @@ input:
         type: file
         description: DWI Nifti image
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - bval:
         type: file
         description: B-values in FSL format [DWI].
         pattern: "*.bval"
+        ontologies: []
     - bvec:
         type: file
         description: B-values in FSL format [DWI].
         pattern: "*.bvec"
+        ontologies: []
     - rev_dwi:
         type: file
         description: DWI Nifti image [rev-DWI].
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - rev_bval:
         type: file
         description: B-values in FSL format [rev-DWI].
         pattern: "*.bval"
+        ontologies: []
     - rev_bvec:
         type: file
         description: B-vectors in FSL format [rev-DWI].
         pattern: "*.bvec"
+        ontologies: []
     - corrected_b0s:
         type: file
         description: Nifti volume b0 corrected
         pattern: "*__corrected_b0s.nii.gz"
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
     - topup_fieldcoef:
         type: file
         description: Nifti volume - topup field to correct for distorsion
         pattern: "*_fieldcoef.nii.gz"
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
     - topup_movpart:
         type: file
         description: Text file - topup movpart
         pattern: "*__movpar.txt"
+        ontologies: []
 output:
-  - dwi_corrected:
-      - meta:
+  dwi_corrected:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -119,8 +136,10 @@ output:
           type: file
           description: Nifti volume - DWI corrected.
           pattern: "*__dwi_corrected.nii.gz"
-  - bval_corrected:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  bval_corrected:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -129,8 +148,9 @@ output:
           type: file
           description: B-values corrected in FSL format
           pattern: "*__dwi_eddy_corrected.bval"
-  - bvec_corrected:
-      - meta:
+          ontologies: []
+  bvec_corrected:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -139,8 +159,9 @@ output:
           type: file
           description: B-vectors corrected in FSL format
           pattern: "*__dwi_eddy_corrected.bvec"
-  - b0_mask:
-      - meta:
+          ontologies: []
+  b0_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -149,8 +170,10 @@ output:
           type: file
           description: Nifti volume - Mask for b0 corrected
           pattern: "*__b0_bet_mask.nii.gz"
-  - dwi_eddy_mqc:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  dwi_eddy_mqc:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -161,8 +184,9 @@ output:
             .gif file containing quality control image for the eddy process.
             Made for use in MultiQC report.
           pattern: "*_dwi_eddy_mqc.gif"
-  - rev_dwi_eddy_mqc:
-      - meta:
+          ontologies: []
+  rev_dwi_eddy_mqc:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -173,10 +197,13 @@ output:
             .gif file containing quality control image for the eddy process
             for the rev_dwi. Made for use in MultiQC report.
           pattern: "*_rev_dwi_eddy_mqc.gif"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@arnaudbore"

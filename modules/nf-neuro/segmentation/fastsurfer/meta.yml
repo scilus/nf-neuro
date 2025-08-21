@@ -5,25 +5,24 @@ keywords:
   - segmentation
   - fastsurfer
   - deepmi
-
 tools:
   - Fastsurfer:
       description: The FastSurfer pipeline consists of two main parts for segmentation
         and surface reconstruction.
       homepage: https://github.com/Deep-MI/FastSurfer
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1', single_end:false ]`
-
     - anat:
         type: file
         description: An anatomy (ex, .nii.gz).
         pattern: "*.{nii,nii.gz,mgz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - fs_license:
         type: file
         description:
@@ -31,7 +30,7 @@ input:
           Optional. If you have already set your license as prescribed by Freesurfer
           (copied to a .license file in your $FREESURFER_HOME), this is not required.
         pattern: "*.txt"
-
+        ontologies: []
 args:
   - acq3T:
       type: boolean
@@ -51,10 +50,9 @@ args:
         Use this flag to only run the segmentation part of FastSurfer. If false, will also
         run the surface reconstruction part (recon-surf).
       default: true
-
 output:
-  - fastsurferdirectory:
-      - meta:
+  fastsurferdirectory:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -63,11 +61,13 @@ output:
           type: directory
           description: Fastsurfer segmentation outputs.
           pattern: "*_fastsurfer"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@arnaudbore"
 maintainers:

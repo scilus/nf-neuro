@@ -14,78 +14,76 @@ tools:
         Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
       homepage: https://surfer.nmr.mgh.harvard.edu/
       doi: 10.1016/j.neuroimage.2012.01.021
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - image:
         type: file
         description: Nifti image volume to perform BET.
         pattern: "*.{nii,nii.gz}"
         mandatory: true
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - weights:
         type: file
         description: Alternative model weights
         pattern: "*.pt"
         mandatory: false
-
+        ontologies: []
 args:
   - gpu:
       type: boolean
       description: Use GPU for synthstrip
       default: false
-
   - border:
       type: int
       description: Mask border threshold in mm.
       default: 1
-
   - nocsf:
       type: boolean
       description: Exclude CSF from brain border
       default: false
-
   - model:
       type: string
       description: |
         Alternative model weights
         (see [https://surfer.nmr.mgh.harvard.edu/docs/synthstrip/](https://surfer.nmr.mgh.harvard.edu/docs/synthstrip/) for a list of available models.
       default: None
-
 output:
-  - bet_image:
-      - meta:
+  bet_image:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*__bet_image.nii.gz":
           type: file
           description: Nifti brain-extracted volume.
           pattern: "*__bet_image.{nii,nii.gz}"
-
-  - brain_mask:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  brain_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*__brain_mask.nii.gz":
           type: file
           description: Brain-extracted image mask .
           pattern: "*__brain_mask.{nii,nii.gz}"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@anroy1"

@@ -12,6 +12,7 @@ tools:
         data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
       homepage: https://www.mrtrix.org/
       doi: 10.1016/j.neuroimage.2019.116137
+      identifier: ""
 input:
   - - meta:
         type: map
@@ -19,19 +20,20 @@ input:
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
         mandatory: true
-
     - dwi:
         type: file
         description: Nifti dwi file to denoise
         pattern: "*.{nii,nii.gz}"
         mandatory: true
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - mask:
         type: file
         description: Nifti mask file for the dwi
         pattern: "*.{nii,nii.gz}"
         mandatory: false
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 args:
   - extent:
       type: int
@@ -40,25 +42,25 @@ args:
         By default, the command will select the smallest
         isotropic patch size that exceeds the number of DW
         images in the input data
-
 output:
-  - image:
-      - meta:
+  image:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*_dwi_denoised.nii.gz":
           type: file
           description: Denoised Nifti image file
           pattern: "*_dwi_denoised.{nii,nii.gz}"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"

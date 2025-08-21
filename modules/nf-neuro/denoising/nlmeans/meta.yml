@@ -8,52 +8,54 @@ keywords:
   - scilpy
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - image:
         type: file
         description: Nifti image file to denoise
         pattern: "*.{nii,nii.gz}"
         mandatory: true
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - mask:
         type: file
         description: Nifti image file used to mask the input image
         pattern: "*.{nii,nii.gz}"
         mandatory: false
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 args:
   - ncoils:
       type: int
       description: Number of coils used for the acquisition
       default: 1
-
 output:
-  - image:
-      - meta:
+  image:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*_denoised.nii.gz":
           type: file
           description: Denoised Nifti image file
           pattern: "*_denoised.{nii,nii.gz}"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"

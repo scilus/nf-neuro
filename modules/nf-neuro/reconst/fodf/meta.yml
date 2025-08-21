@@ -18,9 +18,10 @@ keywords:
   - Reconst
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
@@ -31,45 +32,58 @@ input:
         type: file
         description: Nifti DWI volume to reconstruct FODF from.
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - bval:
         type: file
         description: B-values in FSL format.
         pattern: "*.bval"
+        ontologies: []
     - bvec:
         type: file
         description: B-vectors in FSL format.
         pattern: "*.bvec"
+        ontologies: []
     - mask:
         type: file
         description: B0 mask.
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - fa:
         type: file
         description: FA map.
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - md:
         type: file
         description: MD map.
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - wm_frf:
         type: file
         description: Fiber Response Function (FRF) for the white matter (WM). In the
           case of single-shell method, this should be the only input FRF. In the case
           of multi-shell method, gm_frf and csf_frf are also mandatory.
         pattern: "*.txt"
+        ontologies: []
     - gm_frf:
         type: file
         description: Fiber Response Function (FRF) for the grey matter (GM). Only use
           with multi-shell method, along with wm_frf and csf_frf.
         pattern: "*.txt"
+        ontologies: []
     - csf_frf:
         type: file
         description: Fiber Response Function (FRF) for the CSF. Only use with multi-shell
           method, along with wm_frf and gm_frf.
         pattern: "*.txt"
+        ontologies: []
 output:
-  - fodf:
-      - meta:
+  fodf:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -78,8 +92,10 @@ output:
           type: file
           description: FODF map.
           pattern: "*__fodf.nii.gz"
-  - wm_fodf:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  wm_fodf:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -88,8 +104,10 @@ output:
           type: file
           description: WM FODF map.
           pattern: "*__wm_fodf.nii.gz"
-  - gm_fodf:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  gm_fodf:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -98,8 +116,10 @@ output:
           type: file
           description: GM FODF map.
           pattern: "*__gm_fodf.nii.gz"
-  - csf_fodf:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  csf_fodf:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -108,8 +128,10 @@ output:
           type: file
           description: CSF FODF map.
           pattern: "*__csf_fodf.nii.gz"
-  - vf:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  vf:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -118,8 +140,10 @@ output:
           type: file
           description: Volume fraction map.
           pattern: "*__vf.nii.gz"
-  - vf_rgb:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  vf_rgb:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -128,8 +152,10 @@ output:
           type: file
           description: Volume fraction map in rgb.
           pattern: "*__vf_rgb.nii.gz"
-  - peaks:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  peaks:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -138,8 +164,10 @@ output:
           type: file
           description: Peaks file.
           pattern: "*__peaks.nii.gz"
-  - peak_values:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  peak_values:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -148,8 +176,10 @@ output:
           type: file
           description: Peak values file.
           pattern: "*__peak_values.nii.gz"
-  - peak_indices:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  peak_indices:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -158,8 +188,10 @@ output:
           type: file
           description: Peak indices file.
           pattern: "*__peak_indices.nii.gz"
-  - afd_max:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  afd_max:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -168,8 +200,10 @@ output:
           type: file
           description: Maximum Apparent Fiber Density (AFDmax) map.
           pattern: "*__afd_max.nii.gz"
-  - afd_total:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  afd_total:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -178,8 +212,10 @@ output:
           type: file
           description: Total Apparent Fiber Density (AFDtotal) map.
           pattern: "*__afd_total.nii.gz"
-  - afd_sum:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  afd_sum:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -188,8 +224,10 @@ output:
           type: file
           description: Sum of all Apparent Fiber Density (Afdsum) map.
           pattern: "*__afd_sum.nii.gz"
-  - nufo:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  nufo:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -198,8 +236,10 @@ output:
           type: file
           description: Number of Fiber Orientation (NuFO) map.
           pattern: "*__nufo.nii.gz"
-  - vent_mask:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  vent_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -208,11 +248,15 @@ output:
           type: file
           description: Ventricule mask estimated from an MD and FA threshold.
           pattern: "*__ventricles_mask.nii.gz"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
   - "@karanphil"

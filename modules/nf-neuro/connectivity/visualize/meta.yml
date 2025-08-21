@@ -8,52 +8,54 @@ keywords:
   - scilpy
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1', single_end:false ]`
-
     - matrices:
         type: file
         description: List of connectivity matrices. the set of matrices is concatenated
           into a single matrix, but can also contain a single matrix.
         pattern: "*.npy"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4003 # NumPy format
     - atlas_labels:
         type: file
         description: Lookup table with the label number as keys and the name as values
         pattern: "*.json"
-
+        ontologies:
+          - edam: http://edamontology.org/format_3464 # JSON
     - labels_list:
         type: file
         description: List saved by the decomposition script, must contain labels rather
           than coordinates.
         pattern: "*.txt"
-
+        ontologies: []
 output:
-  - figure:
-      - meta:
+  figure:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-
       - "*.png":
           type: file
           description: Output filename for the connectivity matrix figure.
           pattern: "*.png"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@ThoumyreStanislas"
 maintainers:

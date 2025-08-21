@@ -20,65 +20,64 @@ tools:
         Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
       homepage: https://surfer.nmr.mgh.harvard.edu/
       doi: 10.1016/j.neuroimage.2012.01.021
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - moving:
         type: file
         description: Nifti volume moving for registration
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - fixed:
         type: file
         description: Nifti volume fixed for registration
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - warped_image:
-      - meta:
+  warped_image:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*__output_warped.nii.gz":
           type: file
           description: Warped image
           pattern: "*__output_warped.nii.gz"
-
-  - warp:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  warp:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*__deform_warp.nii.gz":
           type: list
           description: Nifti volume containing warp field from moving to fixed
           pattern: "*__deform_warp.nii.gz"
-
-  - affine:
-      - meta:
+  affine:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*__affine_warp.lta":
           type: list
           description: Affine transformation from moving to fixed
           pattern: "*__affine_warp.lta"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@anroy1"

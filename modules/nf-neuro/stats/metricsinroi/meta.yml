@@ -1,6 +1,6 @@
----
 name: "stats_metricsinroi"
-description: Module to compute statistics (mean, std) of scalar maps (metrics), which can represent diffusion metrics, in ROIs or labels.
+description: Module to compute statistics (mean, std) of scalar maps (metrics), which
+  can represent diffusion metrics, in ROIs or labels.
 keywords:
   - nifti
   - volume
@@ -9,9 +9,10 @@ keywords:
   - rois
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
@@ -22,15 +23,20 @@ input:
         type: file
         description: Metrics volume(s) in Nifti
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - rois:
         type: file
         description: ROI or Label volume(s) in Nifti
         pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - rois_lut:
         type: file
         description: LUT file corresponding to labels, used to name the regions of interest
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 args:
   - suffix:
       type: string
@@ -51,12 +57,12 @@ args:
       default: false
   - use_label:
       type: boolean
-      description: If set, rois image will be considered as a label image with multiple indices.
+      description: If set, rois image will be considered as a label image with multiple
+        indices.
       default: false
-
 output:
-  - mqc:
-      - meta:
+  mqc:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -65,12 +71,14 @@ output:
           type: file
           description: JSON file containing mean/std per pair of roi/metrics or label/metrics
           pattern: "*_stats.json"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
-
+          ontologies:
+            - edam: http://edamontology.org/format_3464 # JSON
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@arnaudbore"

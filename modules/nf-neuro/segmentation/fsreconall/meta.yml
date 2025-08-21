@@ -14,6 +14,7 @@ tools:
         Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
       homepage: https://surfer.nmr.mgh.harvard.edu/
       doi: 10.1016/j.neuroimage.2012.01.021
+      identifier: ""
 input:
   - - meta:
         type: map
@@ -24,6 +25,8 @@ input:
         type: file
         description: An anatomy (ex, .nii.gz).
         pattern: "*.{nii,nii.gz,mgz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - fs_license:
         type: file
         description:
@@ -31,9 +34,10 @@ input:
           Optional. If you have already set your license as prescribed by Freesurfer
           (copied to a .license file in your $FREESURFER_HOME), this is not required.
         pattern: "*.txt"
+        ontologies: []
 output:
-  - recon_all_out_folder:
-      - meta:
+  recon_all_out_folder:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -42,10 +46,12 @@ output:
           type: directory
           description: Directory containing all recon-all outputs.
           pattern: "*__recon_all"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@EmmaRenauld"

@@ -8,32 +8,35 @@ keywords:
   - extraction
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
   - ANTs:
       description: Advanced Normalization Tools (ANTs) for image processing.
       homepage: http://stnava.github.io/ANTs/
       doi: "10.1038/s41598-021-87564-6"
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - t1:
         type: file
         description: Nifti t1 volume to perform BET.
         pattern: "*.{nii,nii.gz}"
         mandatory: true
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - template:
         type: file
         description: Nifti Anatomical template to perform BET.
         pattern: "*.{nii,nii.gz}"
         mandatory: true
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - tissues_probabilities:
         type: file
         description: |
@@ -41,7 +44,8 @@ input:
           range 1 (definitely brain) to 0 (definitely background).
         pattern: "*.{nii,nii.gz}"
         mandatory: true
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - mask:
         type: file
         description: |
@@ -49,7 +53,8 @@ input:
           computation when performing registration.
         pattern: "*.{nii,nii.gz}"
         mandatory: false
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - initial_affine:
         type: file
         description: |
@@ -57,37 +62,38 @@ input:
           initialization for registration algorithms.
         pattern: "*.{mat/txt}"
         mandatory: false
-
+        ontologies: [] #TODO: add or find the right ontologies on EDAM
 output:
-  - t1:
-      - meta:
+  t1:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*t1_bet.nii.gz":
           type: file
           description: Nifti T1 volume brain-extracted.
           pattern: "*t1_bet.{nii,nii.gz}"
-
-  - mask:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*t1_bet_mask.nii.gz":
           type: file
           description: T1 mask brain-extracted and cropped.
           pattern: "*t1_bet_mask.{nii,nii.gz}"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@ThoumyreStanislas"

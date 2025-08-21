@@ -16,24 +16,26 @@ tools:
         Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
       homepage: https://surfer.nmr.mgh.harvard.edu/
       doi: 10.1016/j.neuroimage.2012.01.021
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1', single_end:false ]`
-
     - image:
         type: file
         description: Nifti T1 volume to segment into tissue maps.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - lesion:
         type: file
         description: Nifti lesion volume to correct the white matter with a lesion mask.
           The lesion mask must be a binary mask.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - fs_license:
         type: file
         description:
@@ -41,10 +43,10 @@ input:
           Optional. If you have already set your license as prescribed by Freesurfer
           (copied to a .license file in your $FREESURFER_HOME), this is not required.
         pattern: "*.txt"
-
+        ontologies: []
 output:
-  - wm_mask:
-      - meta:
+  wm_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -53,8 +55,10 @@ output:
           type: file
           description: Nifti WM mask volume.
           pattern: "*__mask_wm.{nii,nii.gz}"
-  - gm_mask:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  gm_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -63,8 +67,10 @@ output:
           type: file
           description: Nifti GM mask volume.
           pattern: "*__mask_gm.{nii,nii.gz}"
-  - csf_mask:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  csf_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -73,8 +79,10 @@ output:
           type: file
           description: Nifti CSF mask volume.
           pattern: "*__mask_csf.{nii,nii.gz}"
-  - wm_map:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  wm_map:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -83,8 +91,10 @@ output:
           type: file
           description: Nifti WM map volume.
           pattern: "*__map_wm.{nii,nii.gz}"
-  - gm_map:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  gm_map:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -93,8 +103,10 @@ output:
           type: file
           description: Nifti GM map volume.
           pattern: "*__map_gm.{nii,nii.gz}"
-  - csf_map:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  csf_map:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -103,8 +115,10 @@ output:
           type: file
           description: Nifti CSF map volume.
           pattern: "*__map_csf.{nii,nii.gz}"
-  - seg:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  seg:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -113,8 +127,10 @@ output:
           type: file
           description: (optional) Nifti cortical segmentation volume.
           pattern: "*__seg.{nii,nii.gz}"
-  - aparc_aseg:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  aparc_aseg:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -123,8 +139,10 @@ output:
           type: file
           description: (optional) Nifti cortical parcellation volume and segmentation.
           pattern: "*__aparc_aseg.{nii,nii.gz}"
-  - resample:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  resample:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -136,18 +154,23 @@ output:
             images are internally resampled (except if they already are at 1mm). Use
             this optional flag to save the resampled images. This must be the same type as —i.
           pattern: "*__resampled_image.{nii,nii.gz}"
-  - volume:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  volume:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
       - "*__volume.csv":
           type: file
-          description: (optional) Output CSV file with volumes for all structures and subjects.
+          description: (optional) Output CSV file with volumes for all structures and
+            subjects.
           pattern: "*__volume.csv"
-  - qc_score:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3752 # CSV
+  qc_score:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -156,11 +179,15 @@ output:
           type: file
           description: (optional) Output CSV file with qc scores for all subjects.
           pattern: "*__qc_score.csv"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies:
+            - edam: http://edamontology.org/format_3752 # CSV
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@anroy1"
 maintainers:

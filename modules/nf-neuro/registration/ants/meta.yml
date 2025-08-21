@@ -12,6 +12,7 @@ tools:
       description: Advanced Normalization Tools (ANTs) for image processing.
       homepage: http://stnava.github.io/ANTs/
       doi: "10.1038/s41598-021-87564-6"
+      identifier: ""
 input:
   # Only when we have meta
   - - meta:
@@ -19,100 +20,101 @@ input:
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - fixedimage:
         type: file
         description: Fixed image(s) or source image(s) or reference image(s)
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - movingimage:
         type: file
         description: Moving image(s) or target image(s)
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - mask:
         type: file
         description: Mask(s) for the fixed image space
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - image:
-      - meta:
+  image:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*_warped.nii.gz":
           type: file
           description: Nifti volume after registration.
           pattern: "*_warped.nii.gz"
-
-  - affine:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  affine:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*__output0GenericAffine.mat":
           type: file
           description: Affine transformation from moving to fixed
           pattern: "*__output0GenericAffine.mat"
-
-  - inverse_affine:
-      - meta:
+          ontologies: []
+  inverse_affine:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*__output1InverseAffine.mat":
           type: file
           description: Affine transformation from fixed to moving
           pattern: "*__output1InverseAffine.mat"
-
-  - warp:
-      - meta:
+          ontologies: []
+  warp:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*__output1Warp.nii.gz":
           type: file
           description: Nifti volume containing warp field from moving to fixed
           pattern: "*__output1Warp.nii.gz"
-
-  - inverse_warp:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  inverse_warp:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*__output0InverseWarp.nii.gz":
           type: file
           description: Nifti volume containing warp field from fixed to moving
           pattern: "*__output0InverseWarp.nii.gz"
-
-  - mqc:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  mqc:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-
       - "*_registration_ants_mqc.gif":
           type: file
-          description: .gif file containing quality control image for the registration process. Made for use in MultiQC report.
+          description: .gif file containing quality control image for the registration
+            process. Made for use in MultiQC report.
           pattern: "*_registration_ants_mqc.gif"
-
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
-
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@ThoumyreStanislas"

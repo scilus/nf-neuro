@@ -1,4 +1,3 @@
----
 name: "reconst_shsignal"
 description: Compute the SH coefficient directly on the raw DWI signal
 keywords:
@@ -7,45 +6,47 @@ keywords:
   - signal
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - dwi:
         type: file
         description: Nifti DWI volume used to extract DTI metrics.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - bval:
         type: file
         description: B-values in FSL format.
         pattern: "*.bval"
-
+        ontologies: []
     - bvec:
         type: file
         description: B-vectors in FSL format.
         pattern: "*.bvec"
-
+        ontologies: []
     - mask:
         type: file
         description: Nifti volume file used to mask the input image.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - ue:
         type: integer
         description: "Dummy entry for lint to run succesfully. Refer to nf-core/tools#3483"
         pattern: "remove-me"
-
 args:
   - dwi_shell_tolerance:
       type: integer
-      description: Volumes with b-values that differ by this tolerance are considered of same weighting.
+      description: Volumes with b-values that differ by this tolerance are considered
+        of same weighting.
       default: 20
   - b0_thr_extract_b0:
       type: integer
@@ -76,10 +77,9 @@ args:
       type: boolean
       description: If enabled, divide the weighted volumes by the b0 before fitting.
       default: false
-
 output:
-  - sh_signal:
-      - meta:
+  sh_signal:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -88,13 +88,15 @@ output:
           type: file
           description: Output filename for the SH coefficients.
           pattern: "*__dwi_sh.{nii,nii.gz}"
-
-  - versions:
-      - "versions.yml":
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
-
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@AlexVCaron"
 maintainers:

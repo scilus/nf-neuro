@@ -11,31 +11,34 @@ tools:
       description: FSL Toolbox
       homepage: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
       doi: 10.1016/j.neuroimage.2011.09.015
+      identifier: ""
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
       homepage: https://github.com/scilus/scilpy.git
-
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-
     - image:
         type: file
         description: Nifti T1 volume to segment into tissue maps.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
     - lesion:
         type: file
         description: Nifti lesion volume to correct the white matter with a lesion mask.
           The lesion mask must be a binary mask.
         pattern: "*.{nii,nii.gz}"
-
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - wm_mask:
-      - meta:
+  wm_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -44,8 +47,10 @@ output:
           type: file
           description: Nifti WM mask volume.
           pattern: "*mask_wm.{nii,nii.gz}"
-  - gm_mask:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  gm_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -54,8 +59,10 @@ output:
           type: file
           description: Nifti GM mask volume.
           pattern: "*mask_gm.{nii,nii.gz}"
-  - csf_mask:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  csf_mask:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -64,8 +71,10 @@ output:
           type: file
           description: Nifti CSF mask volume.
           pattern: "*mask_csf.{nii,nii.gz}"
-  - wm_map:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  wm_map:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -74,8 +83,10 @@ output:
           type: file
           description: Nifti WM map volume.
           pattern: "*map_wm.{nii,nii.gz}"
-  - gm_map:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  gm_map:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -84,8 +95,10 @@ output:
           type: file
           description: Nifti GM map volume.
           pattern: "*map_gm.{nii,nii.gz}"
-  - csf_map:
-      - meta:
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  csf_map:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -94,10 +107,14 @@ output:
           type: file
           description: Nifti CSF map volume.
           pattern: "*map_csf.{nii,nii.gz}"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: versions.yml
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
