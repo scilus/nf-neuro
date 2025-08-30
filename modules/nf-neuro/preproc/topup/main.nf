@@ -68,7 +68,7 @@ process PREPROC_TOPUP {
     if $run_qc;
     then
         extract_dim=\$(mrinfo ${prefix}__b0_mean.nii.gz -size)
-        read sagittal_dim axial_dim coronal_dim <<< "\${extract_dim}"
+        read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
 
         # Get the middle slice
         coronal_dim=\$((\$coronal_dim / 2))
