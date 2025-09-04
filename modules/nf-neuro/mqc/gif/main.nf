@@ -38,6 +38,8 @@ process MQC_GIF {
             coronal_dim=\$((\$coronal_dim / 2))
             axial_dim=\$((\$axial_dim / 2))
 
+            mrconvert \${image} \${image} -stride -1,2,3 -force
+
             # Set viz params.
             viz_params="--display_slice_number --display_lr --size 256 256"
 

@@ -119,10 +119,11 @@ process RECONST_DTIMETRICS {
 
             image=\${image/${prefix}__/}
             image=\${image/.nii.gz/}
+            mrconvert ${prefix}__\${image}.nii.gz ${prefix}__\${image}_viz.nii.gz -stride -1,2,3
             viz_params="--display_slice_number --display_lr --size 256 256"
-            scil_viz_volume_screenshot ${prefix}__\${image}.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
-            scil_viz_volume_screenshot ${prefix}__\${image}.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
-            scil_viz_volume_screenshot ${prefix}__\${image}.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
+            scil_viz_volume_screenshot ${prefix}__\${image}_viz.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
+            scil_viz_volume_screenshot ${prefix}__\${image}_viz.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
+            scil_viz_volume_screenshot ${prefix}__\${image}_viz.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
 
             convert +append ${prefix}__\${image}_coronal_slice_\${coronal_dim}.png \
                     ${prefix}__\${image}_axial_slice_\${axial_dim}.png  \

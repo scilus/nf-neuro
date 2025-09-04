@@ -71,11 +71,12 @@ process REGISTRATION_ANATTODWI {
         # Iterate over images.
         for image in t1_warped b0;
         do
-            scil_viz_volume_screenshot *\${image}.nii.gz \${image}_coronal.png \
+            mrconvert *\${image}.nii.gz *\${image}_viz.nii.gz -stride -1,2,3
+            scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_coronal.png \
                 --slices \$coronal_mid --axis coronal \$viz_params
-            scil_viz_volume_screenshot *\${image}.nii.gz \${image}_sagittal.png \
+            scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_sagittal.png \
                 --slices \$sagittal_mid --axis sagittal \$viz_params
-            scil_viz_volume_screenshot *\${image}.nii.gz \${image}_axial.png \
+            scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_axial.png \
                 --slices \$axial_mid --axis axial \$viz_params
 
             if [ \$image != b0 ];
