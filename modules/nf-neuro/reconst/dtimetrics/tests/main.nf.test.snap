@@ -26,34 +26,34 @@
     },
     "reconst - dtimetrics": {
         "content": [
-            "test__ad.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,b0819a7ed5aa4a4fcc211bcb327411cd",
+            "test__ad.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,a4f053c9d65bed0062f7778818c555b4",
             "test__dti_mqc.png",
             "test__evecs.nii.gz",
             "test__evecs_v1.nii.gz",
             "test__evecs_v2.nii.gz",
             "test__evecs_v3.nii.gz",
-            "test__evals.nii.gz:md5:header,6a667c1adb8ac1636526963bb9091ea6,data,61b086023bc463476a79089e0e180685",
-            "test__evals_e1.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,b0819a7ed5aa4a4fcc211bcb327411cd",
-            "test__evals_e2.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,f3eed4631ad9bcb737b036177c4c0b86",
-            "test__evals_e3.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,79cd7ff381c46a55c6ff52433c87f7ee",
-            "test__fa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,29c72b28d8169360dd84e649b92f8cef",
-            "test__ga.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,d9f3450b1943034b3c98c13f0db6a6c2",
-            "test__rgb.nii.gz:md5:header,952bd2b13b64d7f1b128af7d85191a18,data,4f6610da6ba3e86668b0e4e0eebe989d",
-            "test__md.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,c524379d24b3970db5af9d79ec1cec66",
+            "test__evals.nii.gz:md5:header,6a667c1adb8ac1636526963bb9091ea6,data,194ed3036c73a0120615e95bc343607e",
+            "test__evals_e1.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,a4f053c9d65bed0062f7778818c555b4",
+            "test__evals_e2.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,ffa92eecb19b6ffbfb27d1696e521d44",
+            "test__evals_e3.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,7a79a34de17b0653d10242455f3b8a3a",
+            "test__fa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,cd80bf54bc8529c97cb042d49c50d4fc",
+            "test__ga.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,a76a594121a0ef669616621eb15aec57",
+            "test__rgb.nii.gz:md5:header,952bd2b13b64d7f1b128af7d85191a18,data,a2063164b39833b2a1596683b63494bd",
+            "test__md.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,4e1b42f49af7ed531d0d85fcae5effa8",
             "test__mode.nii.gz",
-            "test__norm.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,d6e3990118e442765fdbe12efacfcb86",
-            "test__rd.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,b95468a48e8b753e633958a4b37ab17c",
+            "test__norm.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,e4f9a5a1ea4021f01879c2ba269b33dd",
+            "test__rd.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,48d8030185bea2f3b11a0a648bbb6abd",
             "test__tensor.nii.gz",
             "test__nonphysical.nii.gz:md5:header,0968ff06e75bcbd0d7b2dcbcc5bf6ff7,data,4e865d417aae67c66e2a7c681aacfcae",
             "test__pulsation_std_dwi.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,62fe8dc99a6e3733c28b2c05281b6781",
             "test__pulsation_std_b0.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,e5bed827c14a49c4ff1aa97844ade64f",
-            "test__residual.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,e8b36af54bc93412445f3c22f28e1713",
+            "test__residual.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,a01c5897af1087af9a9153e20b491e91",
             [
                 [
                     {
                         "id": "test"
                     },
-                    "test__residual_iqr_residuals.npy:md5,3a6806626999ae2b9c2c1831aa8eccea"
+                    "test__residual_iqr_residuals.npy:md5,58dfe3925469668723c16dc37f5c787c"
                 ]
             ],
             [
@@ -61,7 +61,7 @@
                     {
                         "id": "test"
                     },
-                    "test__residual_mean_residuals.npy:md5,8b2412fe2c7b533a10d755e2324d301d"
+                    "test__residual_mean_residuals.npy:md5,5429f2a46c9b14efa47278c7cdb32b3c"
                 ]
             ],
             [
@@ -69,7 +69,7 @@
                     {
                         "id": "test"
                     },
-                    "test__residual_q1_residuals.npy:md5,8d8055ac7d778df40cc43fcc878cc0bd"
+                    "test__residual_q1_residuals.npy:md5,2790db91a0e7727358dd2aaccb887983"
                 ]
             ],
             [
@@ -77,7 +77,7 @@
                     {
                         "id": "test"
                     },
-                    "test__residual_q3_residuals.npy:md5,fd931164fca9570ab15faf38f1e68c47"
+                    "test__residual_q3_residuals.npy:md5,15c3d97be583a3e39bad3731aaea082d"
                 ]
             ],
             [
@@ -93,7 +93,7 @@
                     {
                         "id": "test"
                     },
-                    "test__residual_std_residuals.npy:md5,bc219ca4d0b49155a7fa202b661034e4"
+                    "test__residual_std_residuals.npy:md5,0d41ba9ad5d2ac4543f957a1d84c187f"
                 ]
             ],
             [
