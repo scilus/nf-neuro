@@ -185,20 +185,20 @@ jobs:
         path: ["${{ fromJson(needs.nf-test-changes.outputs.paths) }}"]
         include:
           - profile: docker
-          - runner: scilus-nf-neuro-runners
-          - runner: scilus-nf-neuro-bigmem-runners
+          - runner: scilus-docker
+          - runner: scilus-docker-large
             path: modules/nf-neuro/registration/easyreg
-          - runner: scilus-nf-neuro-bigmem-runners
+          - runner: scilus-docker-large
             path: modules/nf-neuro/segmentation/synthseg
-          - runner: scilus-nf-neuro-bigmem-runners
+          - runner: scilus-docker-large
             path: modules/nf-neuro/betcrop/synthbet
-          - runner: scilus-nf-neuro-bigmem-runners
+          - runner: scilus-docker-large
             path: modules/nf-neuro/registration/synthregistration
-          - runner: scilus-nf-neuro-bigmem-runners
+          - runner: scilus-docker-large
             path: subworkflows/nf-neuro/preproc_t1
-          - runner: scilus-nf-neuro-bigmem-runners
+          - runner: scilus-docker-large
             path: subworkflows/nf-neuro/registration
-          - runner: scilus-nf-neuro-bigmem-runners
+          - runner: scilus-docker-large
             path: subworkflows/nf-neuro/anatomical_segmentation
         exclude:
           - path: subworkflows/nf-neuro/load_test_data
