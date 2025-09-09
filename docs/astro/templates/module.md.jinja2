@@ -1,0 +1,120 @@
+---
+title: {{ name.split('/') | last }}
+head:
+- tag: meta
+  attrs:
+    name: keywords
+    content: {{ keywords | join(', ') }}
+- tag: meta
+  attrs:
+    name: description
+    content: |
+        {{ description.split("\n") | map('trim') | join(' ') | truncate(200) }}
+---
+
+## {{ name }}
+
+{{ description }}
+
+**Keywords :** {{ keywords | join(', ') }}
+
+---
+
+### Inputs
+
+{% for channel in input -%}
+
+#### `Input {{loop.index}}`
+
+{{ channel | channel_format }}
+
+| | Type | Description | Mandatory | Pattern |
+|-|-|-|-|-|
+
+{%- if channel is mapping -%}
+
+| {{ channel.name }} | {{ channel.description | replace("\n", "<br />") }} | {{ channel.mandatory | default(True) }} | {{ channel.pattern }} |
+
+{%- else -%}
+
+{% for item in channel %}
+{% for name, content in item.items() -%}
+| {{ name }} | {{ content.description | replace("\n", "<br />") }} | {{ content.mandatory | default(True) }} | {{ content.pattern }} |
+{%- endfor %}
+{%- endfor %}
+
+{% endif %}
+
+{%- endfor -%}
+
+---
+
+### Outputs
+
+{% for name, channel in output.items() -%}
+
+#### `{{ name }}`
+
+{{ channel[0] | channel_format }}
+
+| | Type | Description | Mandatory | Pattern |
+|-|-|-|-|-|
+
+{%- if channel[0] is mapping -%}
+
+{% for name, content in channel[0].items() %}
+| {{ name }} | {{ content.description | replace("\n", "<br />") }} | {{ content.mandatory | default(True) }} | {{ content.pattern }} |
+{% endfor -%}
+
+{%- else -%}
+
+{% for item in channel[0] %}
+{% for name, content in item.items() -%}
+| {{ name }} | {{ content.description | replace("\n", "<br />") }} | {{ content.mandatory | default(True) }} | {{ content.pattern }} |
+{%- endfor %}
+{%- endfor %}
+
+{% endif %}
+{% endfor -%}
+
+{%- if args is iterable -%}
+
+---
+
+### Arguments (see [process.ext](https://www.nextflow.io/docs/latest/reference/process.html#ext))
+
+| | Type | Description | Default | Choices |
+|-|-|-|-|-|
+
+{%- for arg in args -%}
+{% for name, content in arg.items() -%}
+| {{ name }} | {{ content.type }} | {{ content.default }} | {{ content.description }} |
+{% endfor %}
+{%- endfor -%}
+
+{% endif %}
+
+---
+
+### Tools
+
+| | Description | DOI |
+|-|-|-|
+
+{%- for tool in tools %}
+{% for name, content in tool.items() -%}
+| {{ name | link_tool(url=content.homepage) }} | {{ content.description }} | {{ content.doi }}
+{% endfor %}
+{%- endfor -%}
+
+---
+
+### Authors
+
+{% for author in authors -%}
+- [{{ author }}](https://github.com/{{ author | trim("@") }})
+{% endfor %}
+
+---
+
+**Last updated **: [{{ currentdate }}](https://github.com/scilus/nf-neuro/commit/{{ currentcommit }})
