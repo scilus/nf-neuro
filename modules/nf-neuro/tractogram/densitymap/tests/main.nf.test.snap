@@ -68,5 +68,17 @@
             "nextflow": "24.10.0"
         },
         "timestamp": "2024-10-31T13:26:15.496099088"
+    },
+    "densitymap - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,7a2b58d5ff9231cb698c8ca1a279171f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-06-06T02:18:25.734188917"
     }
 }

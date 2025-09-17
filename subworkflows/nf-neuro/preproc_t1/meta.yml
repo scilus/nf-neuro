@@ -97,10 +97,10 @@ input:
         initialization for registration algorithms.
       pattern: "*.{mat/txt}"
       mandatory: false
-  - ch_mask_nlmeans:
+  - ch_ref_mask:
       type: file
       description: |
-        The input channel containing the brain mask for the nlmeans denoising. Optional
+        The input channel containing a reference brain mask for all processing. Optional
         Structure: [ val(meta), path(mask) ]
       pattern: "*.{nii,nii.gz}"
       mandatory: false
@@ -108,7 +108,7 @@ input:
       type: file
       description: |
         The input channel containing the reference and the reference mask for the n4 correction. Optional
-        Structure: [ val(meta), path(ref), path(mask_ref) ]
+        Structure: [ val(meta), path(ref) ]
       pattern: "*.{nii,nii.gz}"
       mandatory: false
   - ch_ref_resample:

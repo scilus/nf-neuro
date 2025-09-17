@@ -17,6 +17,9 @@ nextflow_workflow {
 
     tag "load_test_data"
 
+    tag "stub"
+    options "-stub-run"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
@@ -41,7 +44,7 @@ nextflow_workflow {
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[1] = Channel.empty()
@@ -51,7 +54,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
@@ -73,17 +75,17 @@ nextflow_workflow {
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[1] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/t1_template.nii.gz")
                     ]}
                 input[2] = ch_split_test_data.antsbet.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/t1_brain_probability_map.nii.gz"),
                     ]}
                 input[3] = Channel.empty()
@@ -91,7 +93,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
@@ -100,16 +101,22 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    niftiMD5SUM(workflow.out.image_nlmeans.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.image_N4.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.image_resample.get(0).get(1)),
-                    file(workflow.out.image_bet.get(0).get(1)).name,
-                    file(workflow.out.mask_bet.get(0).get(1)).name,
-                    file(workflow.out.crop_box.get(0).get(1)).name,
-                    file(workflow.out.mask_final.get(0).get(1)).name,
-                    file(workflow.out.t1_final.get(0).get(1)).name,
-                    workflow.out.versions
-                ).match()}
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ !it.key.isInteger() }
+                    .every{ channel ->
+                        channel.value.every{ subject -> subject instanceof ArrayList
+                            ? subject.every()
+                            : subject } } }
             )
         }
     }
@@ -127,7 +134,7 @@ nextflow_workflow {
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[1] = Channel.empty()
@@ -137,7 +144,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
@@ -146,16 +152,22 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    niftiMD5SUM(workflow.out.image_nlmeans.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.image_N4.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.image_resample.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.image_bet.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.mask_bet.get(0).get(1)),
-                    workflow.out.crop_box,
-                    niftiMD5SUM(workflow.out.mask_final.get(0).get(1)),
-                    niftiMD5SUM(workflow.out.t1_final.get(0).get(1)),
-                    workflow.out.versions
-                ).match()}
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ !it.key.isInteger() }
+                    .every{ channel ->
+                        channel.value.every{ subject -> subject instanceof ArrayList
+                            ? subject.every()
+                            : subject } } }
             )
         }
     }
@@ -173,7 +185,7 @@ nextflow_workflow {
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[1] = Channel.empty()
@@ -183,7 +195,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
@@ -191,7 +202,26 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ !it.key.isInteger() }
+                    .every{ channel -> ["image_N4",
+                                        "image_bet",
+                                        "mask_bet"].contains(channel.key)
+                        ? channel.value.size() == 0
+                        : channel.value.every{ subject -> subject instanceof ArrayList
+                            ? subject.every()
+                            : subject } } }
             )
         }
     }
@@ -209,7 +239,7 @@ nextflow_workflow {
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[1] = Channel.empty()
@@ -219,7 +249,6 @@ nextflow_workflow {
                 input[5] = Channel.empty()
                 input[6] = Channel.empty()
                 input[7] = Channel.empty()
-                input[8] = Channel.empty()
                 """
             }
         }
@@ -227,7 +256,29 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ !it.key.isInteger() }
+                    .every{ channel -> ["image_nlmeans",
+                                        "image_N4",
+                                        "image_resample",
+                                        "image_bet",
+                                        "mask_bet",
+                                        "crop_box"].contains(channel.key)
+                        ? channel.value.size() == 0
+                        : channel.value.every{ subject -> subject instanceof ArrayList
+                            ? subject.every()
+                            : subject } } }
             )
         }
     }

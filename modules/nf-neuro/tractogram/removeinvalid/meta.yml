@@ -20,7 +20,7 @@ input:
 
   - tractograms:
       type: file
-      description: Tractogram or list of tractograms to register
+      description: Tractogram or list of tractograms from which to remove invalid streamlines.
       pattern: "*.{trk,tck}"
 
 output:

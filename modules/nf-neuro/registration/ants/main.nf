@@ -5,7 +5,7 @@ process REGISTRATION_ANTS {
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:latest"}"
+        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
 
     input:
     tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
@@ -121,6 +121,17 @@ process REGISTRATION_ANTS {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
+
+    antsRegistrationSyNQuick.sh -h
+    antsApplyTransforms -h
+
     touch ${prefix}__t1_warped.nii.gz
     touch ${prefix}__output1GenericAffine.mat
     touch ${prefix}__output0InverseAffine.mat
@@ -133,15 +144,5 @@ process REGISTRATION_ANTS {
         mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
         imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
-
-    function handle_code () {
-    local code=\$?
-    ignore=( 1 )
-    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
-    }
-    trap 'handle_code' ERR
-
-    antsRegistrationSyNQuick.sh -h
-    antsApplyTransforms -h
     """
 }

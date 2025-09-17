@@ -30,7 +30,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T18:43:53.051006441"
+        "timestamp": "2025-09-17T19:05:56.350627744"
     },
     "connectivity - afdfixel - with params": {
         "content": [
@@ -63,7 +63,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T18:45:07.094026363"
+        "timestamp": "2025-09-17T19:07:16.057541682"
     },
     "connectivity - afdfixel - with stub": {
         "content": [
@@ -75,6 +75,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T18:45:24.960486182"
+        "timestamp": "2025-09-17T19:07:33.366547414"
     }
 }

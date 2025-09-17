@@ -77,4 +77,31 @@ nextflow_process {
 
     }
 
+    test("image - cropvolume - stub-run") {
+        tag "stub"
+        options "-stub-run"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/anat/anat_image.nii.gz"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
 }

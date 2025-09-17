@@ -50,6 +50,18 @@
         },
         "timestamp": "2024-05-15T19:11:42.198039"
     },
+    "registration - tractogram - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,609469c08e60062eed7528276deddf5e"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:56:28.652442885"
+    },
     "registration - tractogram": {
         "content": [
             {

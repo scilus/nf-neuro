@@ -84,3 +84,10 @@ jobs:
           poetry run nf-core --verbose ${{ inputs.type }}s \
             --git-remote https://github.com/${{ github.repository }}.git \
             lint ${{ inputs.component }}
+
+      - name: Convert component meta.yml to markdown
+        run: |
+          poetry run python docs/astro/convert_${{ inputs.type }}.py \
+            ${{ inputs.type }}s/nf-neuro/${{ inputs.component }}/meta.yml \
+            ${{ github.sha }} \
+            $(echo "${{ inputs.component }}" | sed 's/\//_/g').md
