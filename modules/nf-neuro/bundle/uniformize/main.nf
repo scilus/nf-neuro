@@ -2,9 +2,7 @@ process BUNDLE_UNIFORMIZE {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilpy_2.1.0.sif':
-        'scilus/scilpy:2.1.0' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
     tuple val(meta), path(bundles), path(centroids)
@@ -36,21 +34,21 @@ process BUNDLE_UNIFORMIZE {
         else
             option="$method"
         fi
-        scil_bundle_uniformize_endpoints.py \${bundles[index]} ${prefix}__\${bname}_uniformized.trk\
+        scil_bundle_uniformize_endpoints \${bundles[index]} ${prefix}__\${bname}_uniformized.trk\
             \${option}\
             $swap -f
     done
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    scil_bundle_uniformize_endpoints.py -h
+    scil_bundle_uniformize_endpoints -h
 
     for bundles in ${bundles};
         do \
@@ -60,7 +58,7 @@ process BUNDLE_UNIFORMIZE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

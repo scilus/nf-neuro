@@ -2,9 +2,7 @@ process BUNDLE_CENTROID {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilpy_2.1.0.sif':
-        'scilus/scilpy:2.1.0' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(bundles)
@@ -33,15 +31,15 @@ process BUNDLE_CENTROID {
             bname=\$(basename \$bundle .\${ext})
         fi
         bname=\${bname/_ic/}
-        scil_bundle_compute_centroid.py \$bundle centroid.\${ext} \
+        scil_bundle_compute_centroid \$bundle centroid.\${ext} \
             --nb_points $nb_points -f
-        scil_bundle_uniformize_endpoints.py centroid.\${ext} \
+        scil_bundle_uniformize_endpoints centroid.\${ext} \
             ${prefix}__\${bname}_centroid_${nb_points}.\${ext} --auto
     done
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -49,8 +47,8 @@ process BUNDLE_CENTROID {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def nb_points = task.ext.nb_points ?: 5
     """
-    scil_bundle_compute_centroid.py -h
-    scil_bundle_uniformize_endpoints.py -h
+    scil_bundle_compute_centroid -h
+    scil_bundle_uniformize_endpoints -h
 
     for bundle in ${bundles};
         do \
@@ -61,7 +59,7 @@ process BUNDLE_CENTROID {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

@@ -20,7 +20,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,e90dc91bd2c205dded81dcd55edc6b9a"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ],
                 "bundles": [
                     [
@@ -40,15 +40,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,e90dc91bd2c205dded81dcd55edc6b9a"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-25T20:47:39.537167596"
+        "timestamp": "2025-09-16T19:55:13.0197735"
     },
     "bundle - uniformize_axis": {
         "content": [
@@ -63,7 +63,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,e90dc91bd2c205dded81dcd55edc6b9a"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ],
                 "bundles": [
                     [
@@ -75,15 +75,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,e90dc91bd2c205dded81dcd55edc6b9a"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-25T20:47:46.00793244"
+        "timestamp": "2025-09-16T19:55:23.606792373"
     },
     "bundle - uniformize_centroid": {
         "content": [
@@ -98,7 +98,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,e90dc91bd2c205dded81dcd55edc6b9a"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ],
                 "bundles": [
                     [
@@ -110,14 +110,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,e90dc91bd2c205dded81dcd55edc6b9a"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-25T20:47:53.813637472"
+        "timestamp": "2025-09-16T19:55:35.525566349"
     }
 }

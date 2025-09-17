@@ -9,16 +9,16 @@
                             "single_end": false
                         },
                         [
-                            "test__bundle_1_cleaned.trk:md5,4f5cb88d05f175d6b55509d0ad307ab3",
-                            "test__bundle_2_cleaned.trk:md5,58b4c1381603d72ad6e72cc705b4606e",
-                            "test__bundle_3_cleaned.trk:md5,8f24a8c534b6e2386bcc755bd8f0c4b9",
-                            "test__bundle_4_cleaned.trk:md5,eafac0796051d6ada4bfc5a5c576c536",
-                            "test__bundle_5_cleaned.trk:md5,0d512bcaaf49325415a1f4860a167f5e"
+                            "test__bundle_1_cleaned.trk:md5,2a832304e911ee15b2cbc7efc46edbd5",
+                            "test__bundle_2_cleaned.trk:md5,4751fab2b533958acf59885e4671f6d7",
+                            "test__bundle_3_cleaned.trk:md5,506698d527149495c19fec81dfd8f6f9",
+                            "test__bundle_4_cleaned.trk:md5,01d7ad966fd9b1794e7623dddee79096",
+                            "test__bundle_5_cleaned.trk:md5,a4de68b8b2baa9908a83b406a3794ca3"
                         ]
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,a97baeed7d3e595006fa51b3c6595ffe"
+                    "versions.yml:md5,1f560cf0ebc3623686b411831c7b2f90"
                 ],
                 "bundles": [
                     [
@@ -27,24 +27,24 @@
                             "single_end": false
                         },
                         [
-                            "test__bundle_1_cleaned.trk:md5,4f5cb88d05f175d6b55509d0ad307ab3",
-                            "test__bundle_2_cleaned.trk:md5,58b4c1381603d72ad6e72cc705b4606e",
-                            "test__bundle_3_cleaned.trk:md5,8f24a8c534b6e2386bcc755bd8f0c4b9",
-                            "test__bundle_4_cleaned.trk:md5,eafac0796051d6ada4bfc5a5c576c536",
-                            "test__bundle_5_cleaned.trk:md5,0d512bcaaf49325415a1f4860a167f5e"
+                            "test__bundle_1_cleaned.trk:md5,2a832304e911ee15b2cbc7efc46edbd5",
+                            "test__bundle_2_cleaned.trk:md5,4751fab2b533958acf59885e4671f6d7",
+                            "test__bundle_3_cleaned.trk:md5,506698d527149495c19fec81dfd8f6f9",
+                            "test__bundle_4_cleaned.trk:md5,01d7ad966fd9b1794e7623dddee79096",
+                            "test__bundle_5_cleaned.trk:md5,a4de68b8b2baa9908a83b406a3794ca3"
                         ]
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,a97baeed7d3e595006fa51b3c6595ffe"
+                    "versions.yml:md5,1f560cf0ebc3623686b411831c7b2f90"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-25T20:46:43.412146635"
+        "timestamp": "2025-09-16T20:15:33.243937394"
     },
     "bundle - recognize - base": {
         "content": [
@@ -56,16 +56,16 @@
                             "single_end": false
                         },
                         [
-                            "test__bundle_1_cleaned.trk:md5,6a5c47dccc9f51087572a8de006183ae",
-                            "test__bundle_2_cleaned.trk:md5,08e2bd3fe0432d4dd58b7db771c8080d",
-                            "test__bundle_3_cleaned.trk:md5,313c4401e7771a966c26be3f73ea7730",
-                            "test__bundle_4_cleaned.trk:md5,b2e8e5a6b9077d6a36552b6bfa579de4",
-                            "test__bundle_5_cleaned.trk:md5,3b975ace291d6fd4fd434ce37cc2263a"
+                            "test__bundle_1_cleaned.trk:md5,113f2d438388b8a0ac1fc5f74d4a8a4a",
+                            "test__bundle_2_cleaned.trk:md5,17c4645545e055bf9592590ff2dc19f4",
+                            "test__bundle_3_cleaned.trk:md5,c1c10158a6a734c113d471644fe66a2c",
+                            "test__bundle_4_cleaned.trk:md5,2c0ac0d9940cf6eeb6d928961f9545a7",
+                            "test__bundle_5_cleaned.trk:md5,92005fd7689aed55dc1415a557818bb6"
                         ]
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,a97baeed7d3e595006fa51b3c6595ffe"
+                    "versions.yml:md5,1f560cf0ebc3623686b411831c7b2f90"
                 ],
                 "bundles": [
                     [
@@ -74,23 +74,23 @@
                             "single_end": false
                         },
                         [
-                            "test__bundle_1_cleaned.trk:md5,6a5c47dccc9f51087572a8de006183ae",
-                            "test__bundle_2_cleaned.trk:md5,08e2bd3fe0432d4dd58b7db771c8080d",
-                            "test__bundle_3_cleaned.trk:md5,313c4401e7771a966c26be3f73ea7730",
-                            "test__bundle_4_cleaned.trk:md5,b2e8e5a6b9077d6a36552b6bfa579de4",
-                            "test__bundle_5_cleaned.trk:md5,3b975ace291d6fd4fd434ce37cc2263a"
+                            "test__bundle_1_cleaned.trk:md5,113f2d438388b8a0ac1fc5f74d4a8a4a",
+                            "test__bundle_2_cleaned.trk:md5,17c4645545e055bf9592590ff2dc19f4",
+                            "test__bundle_3_cleaned.trk:md5,c1c10158a6a734c113d471644fe66a2c",
+                            "test__bundle_4_cleaned.trk:md5,2c0ac0d9940cf6eeb6d928961f9545a7",
+                            "test__bundle_5_cleaned.trk:md5,92005fd7689aed55dc1415a557818bb6"
                         ]
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,a97baeed7d3e595006fa51b3c6595ffe"
+                    "versions.yml:md5,1f560cf0ebc3623686b411831c7b2f90"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-25T20:40:14.382547138"
+        "timestamp": "2025-09-16T20:15:05.397697716"
     }
 }

@@ -2,9 +2,7 @@ process BUNDLE_LABELMAP {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilpy_2.1.0.sif':
-        'scilus/scilpy:2.1.0' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(bundles), path(centroids)
@@ -32,7 +30,7 @@ process BUNDLE_LABELMAP {
         do ext=\${bundles[index]#*.}
         bname=\$(basename \${bundles[index]} .\${ext})
 
-        scil_bundle_label_map.py \${bundles[index]} \${centroids[index]} \
+        scil_bundle_label_map \${bundles[index]} \${centroids[index]} \
             tmp_out $nb_points $colormap -f
 
         mv tmp_out/labels_map.nii.gz ${prefix}__\${bname}_labels.nii.gz
@@ -43,14 +41,14 @@ process BUNDLE_LABELMAP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    scil_bundle_label_map.py -h
+    scil_bundle_label_map -h
 
     for index in \${!bundles[@]};
         do ext=\${bundles[index]#*.}
@@ -64,7 +62,7 @@ process BUNDLE_LABELMAP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
