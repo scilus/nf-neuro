@@ -157,6 +157,9 @@ jobs:
             --debug \
             ${{ inputs.paths }}
 
+      - name: Install gawk
+        run: sudo apt-get update && sudo apt-get -y install gawk
+
       - uses: pcolby/tap-summary@0959cbe1d4422e62afc65778cdaea6716c41d936 # v1.1.1
         with:
           path: >-
