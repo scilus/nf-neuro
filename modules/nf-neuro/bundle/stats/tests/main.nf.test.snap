@@ -1,4 +1,16 @@
 {
+    "bundle - stats - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,2a73062ec9856a8e64adff5aa950661b"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-17T17:41:57.289308495"
+    },
     "bundle - stats - lesions": {
         "content": [
             [
@@ -127,7 +139,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T16:54:50.312658539"
+        "timestamp": "2025-09-17T17:41:34.269042091"
     },
     "bundle - stats": {
         "content": [
@@ -330,7 +342,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T16:52:49.88270581"
+        "timestamp": "2025-09-17T17:40:42.041573154"
     },
     "bundle - stats - light": {
         "content": [
@@ -449,6 +461,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-16T20:50:25.834419637"
+        "timestamp": "2025-09-17T17:40:54.741446866"
     }
 }

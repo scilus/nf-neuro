@@ -124,7 +124,8 @@ workflow PREPROC_DWI {
         if (params.preproc_dwi_run_N4) {
             // ** N4 DWI ** //
             ch_N4 = ch_dwi_preproc
-                .join(IMAGE_CROPVOLUME.out.image)
+                .join(TOPUP_EDDY.out.bval)
+                .join(TOPUP_EDDY.out.bvec)
                 .join(BETCROP_FSLBETCROP.out.mask)
 
             N4_DWI ( ch_N4 )

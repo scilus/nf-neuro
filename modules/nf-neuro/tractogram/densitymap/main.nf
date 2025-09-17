@@ -36,7 +36,7 @@ process TRACTOGRAM_DENSITYMAP {
     """
     scil_tractogram_compute_density_map.py -h
 
-    touch ${prefix}_AF_L.nii.gz
+    touch ${prefix}__AF_L.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

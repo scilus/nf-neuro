@@ -73,4 +73,30 @@ nextflow_process {
             )
         }
     }
+
+    test("preproc - normalize - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/dwi/dwi.nii.gz", checkIfExists: true),
+                    file("\${test_data_directory}/dwi/dwi.bval", checkIfExists: true),
+                    file("\${test_data_directory}/dwi/dwi.bvec", checkIfExists: true),
+                    file("\${test_data_directory}/dwi/mask.nii.gz", checkIfExists: true)
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
 }

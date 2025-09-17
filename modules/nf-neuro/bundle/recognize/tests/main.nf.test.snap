@@ -2,37 +2,17 @@
     "bundle - recognize - params": {
         "content": [
             {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        [
-                            "test__bundle_1_cleaned.trk:md5,2a832304e911ee15b2cbc7efc46edbd5",
-                            "test__bundle_2_cleaned.trk:md5,4751fab2b533958acf59885e4671f6d7",
-                            "test__bundle_3_cleaned.trk:md5,506698d527149495c19fec81dfd8f6f9",
-                            "test__bundle_4_cleaned.trk:md5,01d7ad966fd9b1794e7623dddee79096",
-                            "test__bundle_5_cleaned.trk:md5,a4de68b8b2baa9908a83b406a3794ca3"
-                        ]
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,1f560cf0ebc3623686b411831c7b2f90"
-                ],
                 "bundles": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        [
-                            "test__bundle_1_cleaned.trk:md5,2a832304e911ee15b2cbc7efc46edbd5",
-                            "test__bundle_2_cleaned.trk:md5,4751fab2b533958acf59885e4671f6d7",
-                            "test__bundle_3_cleaned.trk:md5,506698d527149495c19fec81dfd8f6f9",
-                            "test__bundle_4_cleaned.trk:md5,01d7ad966fd9b1794e7623dddee79096",
-                            "test__bundle_5_cleaned.trk:md5,a4de68b8b2baa9908a83b406a3794ca3"
-                        ]
+                        "test__bundle_1_cleaned.trk",
+                        "test__bundle_2_cleaned.trk",
+                        "test__bundle_3_cleaned.trk",
+                        "test__bundle_4_cleaned.trk",
+                        "test__bundle_5_cleaned.trk"
                     ]
                 ],
                 "versions": [
@@ -44,42 +24,45 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-16T20:15:33.243937394"
+        "timestamp": "2025-09-17T17:40:02.174844814"
+    },
+    "bundle - recognize - stub-run": {
+        "content": [
+            {
+                "bundles": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__AF_L_cleaned.trk"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1f560cf0ebc3623686b411831c7b2f90"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-17T17:40:14.633526447"
     },
     "bundle - recognize - base": {
         "content": [
             {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        [
-                            "test__bundle_1_cleaned.trk:md5,113f2d438388b8a0ac1fc5f74d4a8a4a",
-                            "test__bundle_2_cleaned.trk:md5,17c4645545e055bf9592590ff2dc19f4",
-                            "test__bundle_3_cleaned.trk:md5,c1c10158a6a734c113d471644fe66a2c",
-                            "test__bundle_4_cleaned.trk:md5,2c0ac0d9940cf6eeb6d928961f9545a7",
-                            "test__bundle_5_cleaned.trk:md5,92005fd7689aed55dc1415a557818bb6"
-                        ]
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,1f560cf0ebc3623686b411831c7b2f90"
-                ],
                 "bundles": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        [
-                            "test__bundle_1_cleaned.trk:md5,113f2d438388b8a0ac1fc5f74d4a8a4a",
-                            "test__bundle_2_cleaned.trk:md5,17c4645545e055bf9592590ff2dc19f4",
-                            "test__bundle_3_cleaned.trk:md5,c1c10158a6a734c113d471644fe66a2c",
-                            "test__bundle_4_cleaned.trk:md5,2c0ac0d9940cf6eeb6d928961f9545a7",
-                            "test__bundle_5_cleaned.trk:md5,92005fd7689aed55dc1415a557818bb6"
-                        ]
+                        "test__bundle_1_cleaned.trk",
+                        "test__bundle_2_cleaned.trk",
+                        "test__bundle_3_cleaned.trk",
+                        "test__bundle_4_cleaned.trk",
+                        "test__bundle_5_cleaned.trk"
                     ]
                 ],
                 "versions": [
@@ -91,6 +74,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-16T20:15:05.397697716"
+        "timestamp": "2025-09-17T17:39:29.968449034"
     }
 }

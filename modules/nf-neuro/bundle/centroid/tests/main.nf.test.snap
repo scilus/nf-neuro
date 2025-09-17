@@ -48,6 +48,18 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-16T20:03:23.471807575"
+        "timestamp": "2025-09-17T17:36:58.2171355"
+    },
+    "bundle - compute centroids - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,f973b5915a569c3c5d7a27c2680f11ba"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-17T17:37:18.476808522"
     }
 }

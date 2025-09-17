@@ -50,6 +50,7 @@ process BUNDLE_LABELMAP {
     """
     scil_bundle_label_map -h
 
+    bundles=(${bundles.join(" ")})
     for index in \${!bundles[@]};
         do ext=\${bundles[index]#*.}
         bname=\$(basename \${bundles[index]} .\${ext})

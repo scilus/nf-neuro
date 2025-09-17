@@ -48,6 +48,16 @@ process BETCROP_ANTSBET {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
+
+    antsBrainExtraction.sh
+    scil_volume_math.py -h
 
     touch ${prefix}__t1_bet.nii.gz
     touch ${prefix}__t1_bet_mask.nii.gz
@@ -57,16 +67,5 @@ process BETCROP_ANTSBET {
         scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
     END_VERSIONS
-
-    function handle_code () {
-    local code=\$?
-    ignore=( 1 )
-    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
-    }
-    trap 'handle_code' ERR
-
-    antsBrainExtraction.sh
-    scil_volume_math.py -h
-
     """
 }

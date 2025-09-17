@@ -33,8 +33,9 @@ process BUNDLE_COLORING {
     String bundles_list = bundles.join(", ").replace(',', '')
     """
     for bundle in $bundles_list; do
+        ext=\${bundle##*.}
         bname=\$(basename \$bundle .\${ext})
-        touch \${bname}_colored.trk
+        touch \${bname}_colored.\${ext}
     done
 
     scil_tractogram_assign_uniform_color -h

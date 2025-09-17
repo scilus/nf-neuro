@@ -57,6 +57,7 @@ nextflow_process {
         }
     }
     test("templateflow - stub") {
+        tag "stub"
         options "-stub"
         when {
             process {

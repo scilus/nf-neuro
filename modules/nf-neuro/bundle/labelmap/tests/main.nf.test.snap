@@ -1,4 +1,16 @@
 {
+    "bundle - labelmap - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,56ae2d0622ad277071f5a17544c20679"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-17T17:38:58.207102218"
+    },
     "bundle - labelmap": {
         "content": [
             [
@@ -13,6 +25,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-16T20:13:33.624055982"
+        "timestamp": "2025-09-17T17:38:43.319913922"
     }
 }

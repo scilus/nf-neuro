@@ -78,6 +78,7 @@ nextflow_process {
         }
     }
     test("betcrop - antsbet - stub-run") {
+        tag "stub"
         options "-stub-run"
         setup {
             run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
