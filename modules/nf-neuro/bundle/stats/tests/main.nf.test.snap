@@ -2,14 +2,14 @@
     "bundle - stats - stub-run": {
         "content": [
             [
-                "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
+                "versions.yml:md5,2a73062ec9856a8e64adff5aa950661b"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-05-30T18:20:55.208234152"
+        "timestamp": "2025-09-17T17:41:57.289308495"
     },
     "bundle - stats - lesions": {
         "content": [
@@ -19,7 +19,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test_length_stats.json:md5,72873da12072e254f369ec316911df28"
+                    "test_length_stats.json:md5,c343e1e2d731a5b900f7deafba3a274f"
                 ]
             ],
             [
@@ -28,7 +28,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test_endpoints_map_raw.json:md5,2a86a4d10878c942c09723c3122940b4"
+                    "test_endpoints_map_raw.json:md5,36d7f871b8970bd856695b37d8364cd1"
                 ]
             ],
             [
@@ -37,7 +37,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test_endpoints_metric_stats.json:md5,3a0fef22a945c74ae4792a5de818acff"
+                    "test_endpoints_metric_stats.json:md5,37ef94482f4aaff07ad982a622976abf"
                 ]
             ],
             [
@@ -60,7 +60,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -113,7 +113,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__IFGWM_endpoints_map_head.nii.gz:md5,444b8e3e40f4694b84a1fb5a2be8a52f"
+                    "test__IFGWM_endpoints_map_head.nii.gz:md5,c30b04f7b26cf16c84883be863b4cda8"
                 ]
             ],
             [
@@ -122,7 +122,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__IFGWM_endpoints_map_tail.nii.gz:md5,a4cb0339f71c17a8703e920e0eb4916a"
+                    "test__IFGWM_endpoints_map_tail.nii.gz:md5,fcc25d5268ef940eb42b1a8909d36401"
                 ]
             ],
             [
@@ -131,15 +131,15 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__IFGWM_lesion_map.nii.gz:md5,390c8abfcfa2533367099c9fac26ee21"
+                    "test__IFGWM_lesion_map.nii.gz:md5,2028b5a8bafca193d85df29a8f43c9b4"
                 ]
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-03-24T16:27:31.847137901"
+        "timestamp": "2025-09-17T17:41:34.269042091"
     },
     "bundle - stats": {
         "content": [
@@ -150,7 +150,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_length_stats.json:md5,72873da12072e254f369ec316911df28"
+                        "test_length_stats.json:md5,c343e1e2d731a5b900f7deafba3a274f"
                     ]
                 ],
                 "1": [
@@ -159,7 +159,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_endpoints_map_raw.json:md5,2a86a4d10878c942c09723c3122940b4"
+                        "test_endpoints_map_raw.json:md5,36d7f871b8970bd856695b37d8364cd1"
                     ]
                 ],
                 "10": [
@@ -172,8 +172,7 @@
                     ]
                 ],
                 "11": [
-
-
+                    
                 ],
                 "12": [
                     [
@@ -181,7 +180,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__IFGWM_endpoints_map_head.nii.gz:md5,444b8e3e40f4694b84a1fb5a2be8a52f"
+                        "test__IFGWM_endpoints_map_head.nii.gz:md5,c30b04f7b26cf16c84883be863b4cda8"
                     ]
                 ],
                 "13": [
@@ -190,15 +189,14 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__IFGWM_endpoints_map_tail.nii.gz:md5,a4cb0339f71c17a8703e920e0eb4916a"
+                        "test__IFGWM_endpoints_map_tail.nii.gz:md5,fcc25d5268ef940eb42b1a8909d36401"
                     ]
                 ],
                 "14": [
-
-
+                    
                 ],
                 "15": [
-                    "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
+                    "versions.yml:md5,2a73062ec9856a8e64adff5aa950661b"
                 ],
                 "2": [
                     [
@@ -206,7 +204,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_endpoints_metric_stats.json:md5,3a0fef22a945c74ae4792a5de818acff"
+                        "test_endpoints_metric_stats.json:md5,37ef94482f4aaff07ad982a622976abf"
                     ]
                 ],
                 "3": [
@@ -219,19 +217,16 @@
                     ]
                 ],
                 "4": [
-
+                    
                 ],
                 "5": [
-
-
+                    
                 ],
                 "6": [
-
-
+                    
                 ],
                 "7": [
-
-
+                    
                 ],
                 "8": [
                     [
@@ -243,8 +238,7 @@
                     ]
                 ],
                 "9": [
-
-
+                    
                 ],
                 "endpoints_head": [
                     [
@@ -252,7 +246,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__IFGWM_endpoints_map_head.nii.gz:md5,444b8e3e40f4694b84a1fb5a2be8a52f"
+                        "test__IFGWM_endpoints_map_head.nii.gz:md5,c30b04f7b26cf16c84883be863b4cda8"
                     ]
                 ],
                 "endpoints_metric_stats": [
@@ -261,7 +255,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_endpoints_metric_stats.json:md5,3a0fef22a945c74ae4792a5de818acff"
+                        "test_endpoints_metric_stats.json:md5,37ef94482f4aaff07ad982a622976abf"
                     ]
                 ],
                 "endpoints_raw": [
@@ -270,7 +264,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_endpoints_map_raw.json:md5,2a86a4d10878c942c09723c3122940b4"
+                        "test_endpoints_map_raw.json:md5,36d7f871b8970bd856695b37d8364cd1"
                     ]
                 ],
                 "endpoints_tail": [
@@ -279,7 +273,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__IFGWM_endpoints_map_tail.nii.gz:md5,a4cb0339f71c17a8703e920e0eb4916a"
+                        "test__IFGWM_endpoints_map_tail.nii.gz:md5,fcc25d5268ef940eb42b1a8909d36401"
                     ]
                 ],
                 "length": [
@@ -288,14 +282,14 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_length_stats.json:md5,72873da12072e254f369ec316911df28"
+                        "test_length_stats.json:md5,c343e1e2d731a5b900f7deafba3a274f"
                     ]
                 ],
                 "lesion_map": [
-
+                    
                 ],
                 "lesion_stats": [
-
+                    
                 ],
                 "mean_std": [
                     [
@@ -316,19 +310,19 @@
                     ]
                 ],
                 "streamline_count": [
-
+                    
                 ],
                 "streamline_count_lesions": [
-
+                    
                 ],
                 "versions": [
-                    "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
+                    "versions.yml:md5,2a73062ec9856a8e64adff5aa950661b"
                 ],
                 "volume": [
-
+                    
                 ],
                 "volume_lesions": [
-
+                    
                 ],
                 "volume_per_labels": [
                     [
@@ -340,54 +334,54 @@
                     ]
                 ],
                 "volume_per_labels_lesions": [
-
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-03-24T00:59:26.250777022"
+        "timestamp": "2025-09-17T17:40:42.041573154"
     },
     "bundle - stats - light": {
         "content": [
             {
                 "0": [
-
+                    
                 ],
                 "1": [
-
+                    
                 ],
                 "10": [
-
+                    
                 ],
                 "11": [
-
+                    
                 ],
                 "12": [
-
+                    
                 ],
                 "13": [
-
+                    
                 ],
                 "14": [
-
+                    
                 ],
                 "15": [
-                    "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
+                    "versions.yml:md5,2a73062ec9856a8e64adff5aa950661b"
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
-
+                    
                 ],
                 "4": [
-
+                    
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
                     [
@@ -399,40 +393,40 @@
                     ]
                 ],
                 "7": [
-
+                    
                 ],
                 "8": [
-
+                    
                 ],
                 "9": [
-
+                    
                 ],
                 "endpoints_head": [
-
+                    
                 ],
                 "endpoints_metric_stats": [
-
+                    
                 ],
                 "endpoints_raw": [
-
+                    
                 ],
                 "endpoints_tail": [
-
+                    
                 ],
                 "length": [
-
+                    
                 ],
                 "lesion_map": [
-
+                    
                 ],
                 "lesion_stats": [
-
+                    
                 ],
                 "mean_std": [
-
+                    
                 ],
                 "mean_std_per_point": [
-
+                    
                 ],
                 "streamline_count": [
                     [
@@ -444,29 +438,29 @@
                     ]
                 ],
                 "streamline_count_lesions": [
-
+                    
                 ],
                 "versions": [
-                    "versions.yml:md5,c22283763660c5778cdd9c34c64200bd"
+                    "versions.yml:md5,2a73062ec9856a8e64adff5aa950661b"
                 ],
                 "volume": [
-
+                    
                 ],
                 "volume_lesions": [
-
+                    
                 ],
                 "volume_per_labels": [
-
+                    
                 ],
                 "volume_per_labels_lesions": [
-
+                    
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0-rc1",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-08-01T13:42:46.785058"
+        "timestamp": "2025-09-17T17:40:54.741446866"
     }
 }
