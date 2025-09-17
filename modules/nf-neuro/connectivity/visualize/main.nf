@@ -2,9 +2,7 @@ process CONNECTIVITY_VISUALIZE {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'scil.usherbrooke.ca/containers/scilpy_2.1.0.sif':
-        'scilus/scilpy:2.1.0' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
     tuple val(meta), path(matrices), path (atlas_labels), path(labels_list)
@@ -30,7 +28,7 @@ process CONNECTIVITY_VISUALIZE {
 
     """
     for matrix in $matrices_list; do
-        scil_viz_connectivity.py \$matrix \${matrix/.npy/_matrix.png} \
+        scil_viz_connectivity \$matrix \${matrix/.npy/_matrix.png} \
             $name_axis $display_legend --histogram \${matrix/.npy/_histogram.png} \
             $nb_bins $exclude_zeros $axis_text_size \
             $args
@@ -38,7 +36,7 @@ process CONNECTIVITY_VISUALIZE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -50,11 +48,11 @@ process CONNECTIVITY_VISUALIZE {
         touch "\${base_name}.png"
     done
 
-    scil_viz_connectivity.py -h
+    scil_viz_connectivity -h
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

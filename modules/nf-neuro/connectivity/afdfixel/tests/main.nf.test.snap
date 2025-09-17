@@ -7,30 +7,30 @@
                         {
                             "id": "test"
                         },
-                        "test__afd_fixel.h5:md5,a7ff22b87231dcaafca4e885cdc32cef"
+                        "test__afd_fixel.h5:md5,48dfdf3f19dd2a0bce14fed72565b7c1"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,1eed7b392491cee066980ec294a8fb8a"
+                    "versions.yml:md5,54ca1cb9d03e6ac32466840d80771a50"
                 ],
                 "hdf5": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__afd_fixel.h5:md5,a7ff22b87231dcaafca4e885cdc32cef"
+                        "test__afd_fixel.h5:md5,48dfdf3f19dd2a0bce14fed72565b7c1"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1eed7b392491cee066980ec294a8fb8a"
+                    "versions.yml:md5,54ca1cb9d03e6ac32466840d80771a50"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-25T21:37:24.515241639"
+        "timestamp": "2025-09-17T18:43:53.051006441"
     },
     "connectivity - afdfixel - with params": {
         "content": [
@@ -40,41 +40,41 @@
                         {
                             "id": "test"
                         },
-                        "test__afd_fixel.h5:md5,9275d98bfbf82b24984b5d675e4cbfa8"
+                        "test__afd_fixel.h5:md5,2d35f4b2ec5256a48e920143c07d554c"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,1eed7b392491cee066980ec294a8fb8a"
+                    "versions.yml:md5,54ca1cb9d03e6ac32466840d80771a50"
                 ],
                 "hdf5": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__afd_fixel.h5:md5,9275d98bfbf82b24984b5d675e4cbfa8"
+                        "test__afd_fixel.h5:md5,2d35f4b2ec5256a48e920143c07d554c"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1eed7b392491cee066980ec294a8fb8a"
+                    "versions.yml:md5,54ca1cb9d03e6ac32466840d80771a50"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-25T21:38:07.29844556"
+        "timestamp": "2025-09-17T18:45:07.094026363"
     },
     "connectivity - afdfixel - with stub": {
         "content": [
             [
-                "versions.yml:md5,1eed7b392491cee066980ec294a8fb8a"
+                "versions.yml:md5,54ca1cb9d03e6ac32466840d80771a50"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-25T21:38:13.869106231"
+        "timestamp": "2025-09-17T18:45:24.960486182"
     }
 }
