@@ -55,9 +55,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T05:11:51.152914168"
+        "timestamp": "2025-09-17T20:06:30.618698443"
     },
     "output to template MNI152NLin2009cAsym with local folder": {
         "content": [
@@ -115,8 +115,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T05:10:52.359607374"
+        "timestamp": "2025-09-17T20:06:16.771618815"
     }
 }

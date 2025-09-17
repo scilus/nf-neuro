@@ -2,9 +2,7 @@ process IMAGE_BURNVOXELS {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilus:2.0.2"
 
     input:
     tuple val(meta), path(masks), path(anat)
