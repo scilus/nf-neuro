@@ -4,7 +4,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:latest"}"
+        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
 
     input:
     tuple val(meta), path(image), path(reference), path(warp), path(affine)

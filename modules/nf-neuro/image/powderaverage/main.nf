@@ -2,9 +2,7 @@ process IMAGE_POWDERAVERAGE {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(mask)
@@ -27,12 +25,12 @@ process IMAGE_POWDERAVERAGE {
     if ( mask ) args += "--mask ${mask}"
 
     """
-    scil_dwi_powder_average.py $dwi $bval ${prefix}_pwd_avg.nii.gz \
+    scil_dwi_powder_average $dwi $bval ${prefix}_pwd_avg.nii.gz \
         $b0_thr $shells $shell_thr $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -42,11 +40,11 @@ process IMAGE_POWDERAVERAGE {
     """
     touch ${prefix}_pwd_avg.nii.gz
 
-    scil_dwi_powder_average.py -h
+    scil_dwi_powder_average -h
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

@@ -53,6 +53,7 @@ nextflow_process {
     }
 
     test("reconst - meanfrf - stub") {
+        tag "stub"
         options "-stub-run"
 
         when {

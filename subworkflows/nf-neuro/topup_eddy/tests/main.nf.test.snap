@@ -1,110 +1,209 @@
 {
     "topup_eddy - AP DWI | PA sbref": {
         "content": [
-            [
-                "test_b0.nii.gz",
-                [
+            {
+                "b0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__b0_bet_mask.nii.gz:md5,1b45aae94d5bb093dca6ca4a71a8bf97"
+                        "test_b0.nii.gz"
                     ]
                 ],
-                [
+                "b0_mask": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                        "test__b0_bet_mask.nii.gz"
                     ]
                 ],
-                "test__dwi_eddy_corrected.bvec",
-                "test__dwi_corrected.nii.gz",
-                [
+                "bval": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_corrected.bval"
+                    ]
+                ],
+                "bvec": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_corrected.bvec"
+                    ]
+                ],
+                "dwi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_corrected.nii.gz"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__rev_dwi_eddy_mqc.gif"
+                    ]
+                ],
+                "versions": [
                     "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
                     "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-01T00:20:35.227281757"
+        "timestamp": "2025-06-09T05:12:00.145733059"
     },
     "topup_eddy - ONLY Eddy - AP DWI | PA sbref": {
         "content": [
-            [
-                "test_b0.nii.gz",
-                [
+            {
+                "b0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__b0_bet_mask.nii.gz:md5,1b45aae94d5bb093dca6ca4a71a8bf97"
+                        "test_b0.nii.gz"
                     ]
                 ],
-                [
+                "b0_mask": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                        "test__b0_bet_mask.nii.gz"
                     ]
                 ],
-                "test__dwi_eddy_corrected.bvec",
-                "test__dwi_corrected.nii.gz",
-                [
+                "bval": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_corrected.bval"
+                    ]
+                ],
+                "bvec": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_corrected.bvec"
+                    ]
+                ],
+                "dwi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_corrected.nii.gz"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__rev_dwi_eddy_mqc.gif"
+                    ]
+                ],
+                "versions": [
                     "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
                     "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-01T00:19:48.37302071"
+        "timestamp": "2025-06-09T05:11:40.908952696"
     },
     "topup_eddy - AP DWI+sbref | PA DWI+sbref": {
         "content": [
-            [
-                "test_b0.nii.gz",
-                [
+            {
+                "b0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__b0_bet_mask.nii.gz:md5,1b45aae94d5bb093dca6ca4a71a8bf97"
+                        "test_b0.nii.gz"
                     ]
                 ],
-                [
+                "b0_mask": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__dwi_eddy_corrected.bval:md5,8192e97b08e8032382397bb844b31892"
+                        "test__b0_bet_mask.nii.gz"
                     ]
                 ],
-                "test__dwi_eddy_corrected.bvec",
-                "test__dwi_corrected.nii.gz",
-                [
+                "bval": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_corrected.bval"
+                    ]
+                ],
+                "bvec": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_corrected.bvec"
+                    ]
+                ],
+                "dwi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_corrected.nii.gz"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__rev_dwi_eddy_mqc.gif"
+                    ]
+                ],
+                "versions": [
                     "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
                     "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-01T00:21:19.437875741"
+        "timestamp": "2025-06-09T05:12:19.408175462"
     }
 }

@@ -51,6 +51,357 @@ components:
   - registration/antsapplytransforms
   - tracking/localtracking
   - tracking/pfttracking
+args:
+  - b0_max_threshold:
+      type: float
+      description: Maximum b-value threshold to consider as b0 volumes.
+      default: 10
+  - bvalue_tolerance:
+      type: float
+      description: Tolerance for b-value shell extraction and processing.
+      default: 20
+  - dwi_signal_sh_fit:
+      type: boolean
+      description: Enable spherical harmonics fitting of the DWI signal.
+      default: true
+  - dwi_signal_sh_fit_order:
+      type: integer
+      description: Spherical harmonics order for DWI signal fitting.
+      default: 6
+  - dwi_signal_sh_fit_basis:
+      type: string
+      description: Spherical harmonics basis for DWI signal fitting.
+      choices:
+        - descoteaux07
+        - descoteaux07_legacy
+        - tournier07
+        - tournier07_legacy
+      default: "descoteaux07"
+  - dwi_signal_sh_fit_shell:
+      type: boolean
+      description: Fit spherical harmonics on specific shell instead of all shells.
+      default: false
+  - preproc_dwi_run_denoising:
+      type: boolean
+      description: Enable MP-PCA denoising of the DWI image.
+      default: true
+  - dwi_denoise_patch_size:
+      type: integer
+      description: Patch size for MP-PCA denoising algorithm.
+      default: 7
+  - preproc_dwi_run_degibbs:
+      type: boolean
+      description: Enable Gibbs ringing removal correction.
+      default: false
+  - topup_eddy_run_topup:
+      type: boolean
+      description: Enable TOPUP correction for susceptibility distortions.
+      default: true
+  - dwi_topup_config_file:
+      type: string
+      description: Configuration file for TOPUP processing (e.g., "b02b0.cnf").
+      default: "b02b0.cnf"
+  - topup_eddy_run_eddy:
+      type: boolean
+      description: Enable EDDY correction for motion and eddy currents.
+      default: true
+  - dwi_eddy_executable:
+      type: string
+      description: EDDY executable to use (e.g., "eddy_cpu" or "eddy_cuda10.2").
+      choices:
+        - eddy_cpu
+        - eddy_cuda10.2
+      default: "eddy_cpu"
+  - dwi_eddy_restore_slices:
+      type: boolean
+      description: Enable slice-wise outlier detection and replacement in EDDY.
+      default: true
+  - preproc_t1_run_denoising:
+      type: boolean
+      description: Enable NL-Means denoising of the T1 image.
+      default: true
+  - preproc_t1_run_N4:
+      type: boolean
+      description: Enable N4 bias field correction for T1 image.
+      default: true
+  - preproc_t1_run_synthbet:
+      type: boolean
+      description: Enable SynthStrip brain extraction for T1 image.
+      default: false
+  - preproc_t1_run_ants_bet:
+      type: boolean
+      description: Enable ANTs-based brain extraction for T1 image.
+      default: true
+  - preproc_t1_run_crop:
+      type: boolean
+      description: Enable cropping of the T1 image to remove padding.
+      default: true
+  - preproc_t1_run_resampling:
+      type: boolean
+      description: Enable resampling of the T1 image to isotropic resolution.
+      default: true
+  - t1_resample_resolution_mm_iso:
+      type: integer
+      description: Isotropic resolution in mm for T1 resampling.
+      default: 1
+  - t1_resample_interpolation:
+      type: string
+      description: Interpolation method for T1 resampling (e.g., "lin", "cubic").
+      choices:
+        - nn
+        - lin
+        - quad
+        - cubic
+      default: "lin"
+  - preproc_dwi_run_N4:
+      type: boolean
+      description: Enable N4 bias field correction for DWI image.
+      default: true
+  - dwi_n4_knot_interval:
+      type: integer
+      description: Number of voxels between splines' knots for DWI N4 bias correction.
+      default: 1
+  - dwi_n4_subsampling:
+      type: integer
+      description: Subsampling factor for DWI N4 bias correction.
+      default: 2
+  - preproc_dwi_run_resampling:
+      type: boolean
+      description: Enable resampling of the DWI image to isotropic resolution.
+      default: true
+  - dwi_resample_resolution_mm_iso:
+      type: integer
+      description: Isotropic resolution in mm for DWI resampling.
+      default: 1
+  - dwi_resample_interpolation:
+      type: string
+      description: Interpolation method for DWI resampling (e.g., "lin", "cubic").
+      choices:
+        - nn
+        - lin
+        - quad
+        - cubic
+      default: "lin"
+  - dti_max_bvalue:
+      type: integer
+      description: Maximum b-value to consider for DTI shell extraction.
+      default: 1200
+  - dti_shells_to_fit:
+      type: string
+      description: Specific shells to use for DTI fitting (e.g., "0,1000" for b-values).
+      default: null
+  - fodf_min_bvalue:
+      type: integer
+      description: Minimum b-value to consider for fODF shell extraction.
+      default: 700
+  - fodf_shells_to_fit:
+      type: string
+      description: Specific shells to use for fODF fitting (e.g., "0,1000,2000" for b-values).
+      default: null
+  - frf_fa_max_threshold:
+      type: float
+      description: Maximum FA threshold for fiber response function estimation.
+      default: 0.7
+  - frf_fa_min_threshold:
+      type: float
+      description: Minimum FA threshold for fiber response function estimation.
+      default: 0.5
+  - frf_min_n_voxels:
+      type: integer
+      description: Minimum number of voxels required for FRF estimation.
+      default: 300
+  - frf_roi_radius:
+      type: integer
+      description: ROI radius in mm for fiber response function estimation.
+      default: 20
+  - frf_value_to_force:
+      type: string
+      description: Force specific FRF values instead of estimation (e.g., "15,4,4" for eigenvalues).
+      default: null
+  - frf_average_from_data:
+      type: boolean
+      description: Average fiber response functions across all subjects.
+      default: false
+  - fodf_sh_order:
+      type: integer
+      description: Spherical harmonics order for fODF reconstruction (must be even).
+      default: 8
+  - fodf_sh_basis:
+      type: string
+      description: Spherical harmonics basis for fODF reconstruction.
+      choices:
+        - descoteaux07
+        - descoteaux07_legacy
+        - tournier07
+        - tournier07_legacy
+      default: "descoteaux07"
+  - fodf_peaks_absolute_factor:
+      type: float
+      description: Absolute threshold factor for fODF peak extraction.
+      default: 2.0
+  - fodf_peaks_relative_threshold:
+      type: float
+      description: Relative threshold for fODF peak extraction.
+      default: 0.1
+  - fodf_peaks_ventricle_max_fa:
+      type: float
+      description: Maximum FA value for ventricle mask creation.
+      default: 0.1
+  - fodf_peaks_ventricle_min_md:
+      type: float
+      description: Minimum MD value for ventricle mask creation.
+      default: 0.003
+  - run_pft:
+      type: boolean
+      description: Enable Particle Filtering Tractography.
+      default: true
+  - pft_random_seed:
+      type: integer
+      description: Random seed for PFT tractography reproducibility.
+      default: 0
+  - pft_algorithm:
+      type: string
+      description: Algorithm to use for PFT tractography (e.g., "prob", "det").
+      choices:
+        - prob
+        - det
+      default: "prob"
+  - pft_step_mm:
+      type: float
+      description: Step size in mm for PFT tractography.
+      default: 0.5
+  - pft_theta_max_deviation:
+      type: integer
+      description: Maximum angular deviation in degrees for PFT tracking.
+      default: 20
+  - pft_min_streamline_length:
+      type: integer
+      description: Minimum streamline length in mm for PFT tracking.
+      default: 20
+  - pft_max_streamline_length:
+      type: integer
+      description: Maximum streamline length in mm for PFT tracking.
+      default: 200
+  - pft_seeding_type:
+      type: string
+      description: Tissue type for PFT seeding mask generation (e.g., "wm", "fa").
+      choices:
+        - wm
+        - interface
+        - fa
+      default: "wm"
+  - pft_seeding_strategy:
+      type: string
+      description: Seeding strategy for PFT tractography (e.g., "npv", "nt").
+      choices:
+        - npv
+        - nt
+      default: "npv"
+  - pft_number_of_seeds:
+      type: integer
+      description: Number of seeds per voxel - npv (or total - nt) for PFT tracking.
+      default: 10
+  - pft_fa_min_threshold:
+      type: float
+      description: Minimum FA threshold for PFT tracking.
+      default: 0.1
+  - pft_number_of_particles:
+      type: integer
+      description: Number of particles for PFT algorithm.
+      default: 15
+  - pft_backward_step_mm:
+      type: integer
+      description: Backward step size in mm for PFT tracking.
+      default: 2
+  - pft_forward_step_mm:
+      type: integer
+      description: Forward step size in mm for PFT tracking.
+      default: 1
+  - pft_compression_step_mm:
+      type: float
+      description: Compression step size in mm for PFT streamlines.
+      default: 0.2
+  - run_local_tracking:
+      type: boolean
+      description: Enable Local Tractography.
+      default: true
+  - lt_processor:
+      type: string
+      description: Processor type for local tracking (e.g., "cpu", "gpu").
+      choices:
+        - cpu
+        - gpu
+      default: "cpu"
+  - lt_gpu_batch_size:
+      type: integer
+      description: Batch size for GPU-based local tracking.
+      default: 10000
+  - lt_random_seed:
+      type: integer
+      description: Random seed for local tracking reproducibility.
+      default: 0
+  - lt_algorithm:
+      type: string
+      description: Algorithm to use for local tractography (e.g., "prob", "det").
+      choices:
+        - prob
+        - det
+        - ptt
+        - eudx
+      default: "prob"
+  - lt_step_mm:
+      type: float
+      description: Step size in mm for local tracking.
+      default: 0.5
+  - lt_theta_max_deviation:
+      type: integer
+      description: Maximum angular deviation in degrees for local tracking.
+      default: 20
+  - lt_min_streamline_length:
+      type: integer
+      description: Minimum streamline length in mm for local tracking.
+      default: 20
+  - lt_max_streamline_length:
+      type: integer
+      description: Maximum streamline length in mm for local tracking.
+      default: 200
+  - lt_seeding_type:
+      type: string
+      description: Tissue type for local tracking seeding mask generation (e.g., "wm", "fa").
+      choices:
+        - wm
+        - fa
+      default: "wm"
+  - lt_seeding_strategy:
+      type: string
+      description: Seeding strategy for local tractography (e.g., "npv", "nt").
+      choices:
+        - npv
+        - nt
+      default: "npv"
+  - lt_number_of_seeds:
+      type: integer
+      description: Number of seeds per voxel for local tracking.
+      default: 10
+  - lt_fa_min_threshold_for_seeding:
+      type: float
+      description: Minimum FA threshold for local tracking seeding mask.
+      default: 0.1
+  - lt_tracking_type:
+      type: string
+      description: Tissue type for local tracking mask generation (e.g., "wm", "fa").
+      choices:
+        - wm
+        - fa
+      default: "wm"
+  - lt_fa_min_threshold_for_tracking:
+      type: float
+      description: Minimum FA threshold for local tracking mask.
+      default: 0.1
+  - lt_compression_step_mm:
+      type: float
+      description: Compression step size in mm for local tracking streamlines.
+      default: 0.2
 input:
   - ch_dwi:
       type: file

@@ -1,48 +1,84 @@
 {
+    "image - applymask - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-17T20:02:07.503617277"
+    },
     "image - applymask - 3D": {
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_masked.nii.gz:md5,40fd233f77f8ce185f651bbaf4422ff9"
+                    ]
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
                 ],
                 "image": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_masked.nii.gz:md5,40fd233f77f8ce185f651bbaf4422ff9"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-27T16:15:28.617599762"
+        "timestamp": "2025-09-17T20:01:55.772148569"
     },
     "image - applymask - 4D": {
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_masked.nii.gz:md5,f21949dbae7ea40d56eeac08b92cb795"
+                    ]
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
                 ],
                 "image": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_masked.nii.gz:md5,f21949dbae7ea40d56eeac08b92cb795"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-27T16:10:54.151482361"
+        "timestamp": "2025-09-17T20:01:44.995376815"
     }
 }

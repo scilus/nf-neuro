@@ -3,8 +3,8 @@ process SEGMENTATION_FREESURFERSEG {
     label 'process_single'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+        'https://scil.usherbrooke.ca/containers/scilus_2.1.0.sif':
+        'scilus/scilus:2.1.0' }"
 
     input:
         tuple val(meta), path(aparc_aseg), path(wmparc), path(lesion)
@@ -37,58 +37,69 @@ process SEGMENTATION_FREESURFERSEG {
     scil_labels_split_volume_from_lut.py wmparc_int16.nii.gz --scilpy_lut freesurfer_subcortical --out_dir wmparc_subcortical
     scil_labels_split_volume_from_lut.py aparc+aseg_int16.nii.gz --scilpy_lut freesurfer_subcortical --out_dir aparc+aseg_subcortical
 
-    scil_volume_math.py union wmparc_desikan/*\
-        wmparc_subcortical/right-cerebellum-cortex.nii.gz\
-        wmparc_subcortical/left-cerebellum-cortex.nii.gz\
-        mask_cortex_m.nii.gz -f
-
-    scil_volume_math.py union wmparc_subcortical/corpus-callosum-*\
-        aparc+aseg_subcortical/*white-matter*\
-        wmparc_subcortical/brain-stem.nii.gz\
-        aparc+aseg_subcortical/*ventraldc*\
-        mask_wm_m.nii.gz -f
-
-    scil_volume_math.py union wmparc_subcortical/*thalamus*\
-        wmparc_subcortical/*putamen*\
-        wmparc_subcortical/*pallidum*\
-        wmparc_subcortical/*hippocampus*\
-        wmparc_subcortical/*caudate*\
-        wmparc_subcortical/*amygdala*\
-        wmparc_subcortical/*accumbens*\
-        wmparc_subcortical/*plexus*\
-        mask_nuclei_m.nii.gz -f
-
-    scil_volume_math.py union wmparc_subcortical/*-lateral-ventricle.nii.gz\
-        wmparc_subcortical/*-inferior-lateral-ventricle.nii.gz\
-        wmparc_subcortical/cerebrospinal-fluid.nii.gz\
-        wmparc_subcortical/*th-ventricle.nii.gz\
-        mask_csf_1_m.nii.gz -f
-
-    scil_volume_math.py lower_threshold mask_wm_m.nii.gz 0.1\
-        ${prefix}__mask_wm_bin.nii.gz -f
-    scil_volume_math.py lower_threshold mask_cortex_m.nii.gz 0.1\
+    scil_volume_math.py union wmparc_desikan/* \
+        wmparc_subcortical/right-cerebellum-cortex.nii.gz \
+        wmparc_subcortical/left-cerebellum-cortex.nii.gz \
         ${prefix}__mask_gm.nii.gz -f
-    scil_volume_math.py lower_threshold mask_nuclei_m.nii.gz 0.1\
-        ${prefix}__mask_nuclei_bin.nii.gz -f
-    scil_volume_math.py lower_threshold mask_csf_1_m.nii.gz 0.1\
-        ${prefix}__mask_csf.nii.gz -f
-    scil_volume_math.py addition ${prefix}__mask_wm_bin.nii.gz\
-                                ${prefix}__mask_nuclei_bin.nii.gz\
-                                ${prefix}__mask_wm.nii.gz --data_type int16
 
-    scil_volume_math.py convert ${prefix}__mask_wm.nii.gz ${prefix}__mask_wm.nii.gz --data_type uint8 -f
-    scil_volume_math.py convert ${prefix}__mask_gm.nii.gz ${prefix}__mask_gm.nii.gz --data_type uint8 -f
-    scil_volume_math.py convert ${prefix}__mask_csf.nii.gz ${prefix}__mask_csf.nii.gz --data_type uint8 -f
+    scil_volume_math.py union wmparc_subcortical/corpus-callosum-* \
+        aparc+aseg_subcortical/*white-matter* \
+        wmparc_subcortical/brain-stem.nii.gz \
+        aparc+aseg_subcortical/*ventraldc* \
+        ${prefix}__mask_wm.nii.gz -f
+
+    scil_volume_math.py union wmparc_subcortical/*thalamus* \
+        wmparc_subcortical/*putamen* \
+        wmparc_subcortical/*pallidum* \
+        wmparc_subcortical/*hippocampus* \
+        wmparc_subcortical/*caudate* \
+        wmparc_subcortical/*amygdala* \
+        wmparc_subcortical/*accumbens* \
+        wmparc_subcortical/*plexus* \
+        mask_nuclei.nii.gz -f
+
+    scil_volume_math.py union wmparc_subcortical/*-lateral-ventricle.nii.gz \
+        wmparc_subcortical/*-inferior-lateral-ventricle.nii.gz \
+        wmparc_subcortical/cerebrospinal-fluid.nii.gz \
+        wmparc_subcortical/*th-ventricle.nii.gz \
+        ${prefix}__mask_csf.nii.gz -f
+
+    # WM mask construction
+    scil_volume_math.py lower_threshold ${prefix}__mask_wm.nii.gz 0.1 \
+        ${prefix}__mask_wm.nii.gz \
+        --data_type uint8 -f
+    scil_volume_math.py lower_threshold mask_nuclei.nii.gz 0.1 \
+        mask_nuclei.nii.gz \
+        --data_type uint8 -f
+    scil_volume_math.py union ${prefix}__mask_wm.nii.gz mask_nuclei.nii.gz \
+        ${prefix}__mask_wm.nii.gz \
+        --data_type uint8 -f
+
+    # GM mask construction
+    scil_volume_math.py lower_threshold ${prefix}__mask_csf.nii.gz 0.1 \
+        ${prefix}__mask_csf.nii.gz \
+        --data_type uint8 -f
+
+    # CSF mask construction
+    scil_volume_math.py lower_threshold ${prefix}__mask_gm.nii.gz 0.1 \
+        ${prefix}__mask_gm.nii.gz \
+        --data_type uint8 -f
 
     if [[ -f "$lesion" ]];
     then
-        scil_volume_math.py union ${prefix}__mask_wm.nii.gz $lesion ${prefix}__mask_wm.nii.gz --data_type uint8 -f
+        scil_volume_math.py union ${prefix}__mask_wm.nii.gz $lesion \
+            ${prefix}__mask_wm.nii.gz \
+            --data_type uint8 -f
     fi
+
+    # Cleanup
+    rm -rf wmparc_desikan/ wmparc_subcortical/ aparc+aseg_subcortical/
+    rm -f wmparc_int16.nii.gz aparc+aseg_int16.nii.gz mask_nuclei.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrconvert -version 2>&1 | sed -n 's/== mrconvert \\([0-9.]\\+\\).*/\\1/p')
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrtrix: \$(mrconvert -version 2>&1 | grep "== mrconvert" | sed -E 's/== mrconvert ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -105,8 +116,8 @@ process SEGMENTATION_FREESURFERSEG {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrconvert -version 2>&1 | sed -n 's/== mrconvert \\([0-9.]\\+\\).*/\\1/p')
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrtrix: \$(mrconvert -version 2>&1 | grep "== mrconvert" | sed -E 's/== mrconvert ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 }
