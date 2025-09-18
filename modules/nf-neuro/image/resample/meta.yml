@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: image_resample
-description: Script to resample a dataset to match the resolution of another reference
-  dataset or to the resolution specified in argument. Needs either one of voxel_size,
-  volume_size, iso_min or reference as parameter/input. Interpolation defaults as
-  linear.
+description: |
+  Resample image to match the resolution of a reference or to the resolution specified
+  in argument. Needs either one of voxel_size, volume_size, iso_min or reference as
+  parameter/input. Uses linear interpolation by default.
 keywords:
   - resample
   - nifti

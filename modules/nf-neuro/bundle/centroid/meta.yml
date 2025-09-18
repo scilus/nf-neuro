@@ -20,9 +20,7 @@ input:
           e.g. `[ id:'sample1', single_end:false ]`
     - bundles:
         type: file
-        description: |
-          List of bundles to compute centroids for. If this input is supplied,
-          the module will compute centroids.
+        description: List of bundles to compute centroids for.
         pattern: "*.trk"
         mandatory: true
         ontologies: []

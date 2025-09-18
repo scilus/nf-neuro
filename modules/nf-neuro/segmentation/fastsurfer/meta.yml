@@ -1,10 +1,13 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: segmentation_fastsurfer
-description: write your description here
+description: |
+  Perform whole brain segmentation and surface reconstruction using deep-learning through FastSurfer.
 keywords:
   - segmentation
   - fastsurfer
   - deepmi
+  - cnn
+  - deep-learning
 tools:
   - Fastsurfer:
       description: The FastSurfer pipeline consists of two main parts for segmentation
@@ -25,7 +28,7 @@ input:
           - edam: http://edamontology.org/format_4001 # NIFTI format
     - fs_license:
         type: file
-        description:
+        description: |
           The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html.
           Optional. If you have already set your license as prescribed by Freesurfer
           (copied to a .license file in your $FREESURFER_HOME), this is not required.
