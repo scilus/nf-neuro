@@ -14,7 +14,7 @@
                     "versions.yml:md5,2fbc09a51203e509d1a15a631168680e",
                     "versions.yml:md5,84a499436fbf8f1367ec4d8b21cf3abd"
                 ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
