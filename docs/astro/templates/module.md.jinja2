@@ -31,7 +31,7 @@ head:
 
 {%- if channel is mapping -%}
 
-| {{ channel.name }} | {{ content.type }} | {{ channel.description | replace("\n", " ") }} | {{ channel.mandatory | default(True) }} | {% if channel.pattern %} `{{ channel.pattern }}` {% endif %} |
+| {{ channel.name }} | {{ channel.type }} | {{ channel.description | replace("\n", " ") }} | {{ channel.mandatory | default(True) }} | {% if channel.pattern %} `{{ channel.pattern }}` {% endif %} |
 
 {%- else -%}
 
