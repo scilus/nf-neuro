@@ -76,16 +76,16 @@ input:
         pattern: "*.{nii,nii.gz}"
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
-  - config_topup:
-      type: file
-      description: topup config file. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
-      pattern: "*cnf"
-      ontologies: []
+    - config_topup:
+        type: file
+        description: topup config file. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
+        pattern: "*cnf"
+        ontologies: []
 args:
   - encoding:
       type: string
       description: Encoding direction of the forward DWI.
-      choices: "x, y or z"
+      choices: "x, y, z"
       default: "y"
   - readout:
       type: float
@@ -98,11 +98,11 @@ args:
   - prefix_topup:
       type: string
       description: Prefix to prepend to Topup output files.
-  - default_config_topup: null
-    type: string
-    description: Default Topup configuration to use.
-    choices: "b02b0.cnf, b02b0_1.cnf, b02b0_2.cnf, b02b0_4.cnf, b02b0_7T.cnf"
-    default: "b02b0.cnf"
+  - default_config_topup:
+      type: string
+      description: Default Topup configuration to use.
+      choices: "b02b0.cnf, b02b0_1.cnf, b02b0_2.cnf, b02b0_4.cnf, b02b0_7T.cnf"
+      default: "b02b0.cnf"
   - run_qc:
       type: boolean
       description: Run quality control.

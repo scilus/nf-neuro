@@ -62,12 +62,12 @@ args:
       default: 4
   - sh_basis:
       type: string
-      description: |
-        Spherical harmonics basis to use. Options :
-          - descoteaux07
-          - tournier07
-          - descoteaux07_legacy
-          - tournier07_legacy
+      description: Spherical harmonics basis to use.
+      choices:
+        - descoteaux07
+        - tournier07
+        - descoteaux07_legacy
+        - tournier07_legacy
       default: "descoteaux07_legacy"
   - smoothing:
       type: float
