@@ -125,5 +125,3 @@ output:
       pattern: "versions.yml"
 authors:
   - "@gagnonanthony"
-  - baba
-  - toto

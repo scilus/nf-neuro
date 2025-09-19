@@ -44,7 +44,7 @@ def _create_parser():
             description='Generate module markdown from template',
             formatter_class=argparse.RawTextHelpFormatter)
 
-    p.add_argument('module_name', help='Name of the module')
+    p.add_argument('module_path', help='Path to the module')
     p.add_argument('current_commit_sha', help='Current commit sha')
     p.add_argument('output', help='Name of the output markdown file')
 
@@ -64,7 +64,7 @@ def main():
         'link_tool': link
     })
 
-    with open(f"modules/nf-neuro/{args.module_name}/meta.yml", "r") as f:
+    with open(f"{args.module_path}/meta.yml", "r") as f:
         data = yaml.safe_load(f)
 
     data["currentcommit"] = args.current_commit_sha

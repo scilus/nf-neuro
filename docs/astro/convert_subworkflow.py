@@ -25,7 +25,7 @@ def _create_parser():
             description='Generate subworkflow markdown from template',
             formatter_class=argparse.RawTextHelpFormatter)
 
-    p.add_argument('subworkflow_name', help='Name of the subworkflow')
+    p.add_argument('subworkflow_path', help='Name of the subworkflow')
     p.add_argument('current_commit_sha', help='Current commit sha')
     p.add_argument('output', help='Name of the output markdown file')
 
@@ -45,7 +45,7 @@ def main():
         'link_tool': link
     })
 
-    with open(f"subworkflows/nf-neuro/{args.subworkflow_name}/meta.yml", "r") as f:
+    with open(f"{args.subworkflow_path}/meta.yml", "r") as f:
         data = yaml.safe_load(f)
 
     data["currentcommit"] = args.current_commit_sha
