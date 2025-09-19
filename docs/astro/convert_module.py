@@ -18,6 +18,10 @@ TYPE_TO_NTYPE = {
 }
 
 
+def li(text):
+    return f"- {str(text)}"
+
+
 def link(text, url=None):
     if not url:
         return text
@@ -61,7 +65,8 @@ def main():
     )
     env.filters.update({
         'channel_format': channel_format,
-        'link_tool': link
+        'link_tool': link,
+        'format_li': li
     })
 
     with open(f"{args.module_path}/meta.yml", "r") as f:

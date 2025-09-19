@@ -12,19 +12,17 @@ head:
         {{ description.split("\n") | map('trim') | join(' ') | truncate(200) }}
 ---
 
-## {{ name }}
-
 {{ description }}
 
 **Keywords :** {{ keywords | join(', ') }}
 
 ---
 
-### Inputs
+## Inputs
 
 {% for channel in input -%}
 
-#### `Input {{loop.index}}`
+### `Input {{loop.index}}`
 
 {{ channel | channel_format }}
 
@@ -33,13 +31,13 @@ head:
 
 {%- if channel is mapping -%}
 
-| {{ channel.name }} | {{ channel.description | replace("\n", "<br />") }} | {{ channel.mandatory | default(True) }} | {{ channel.pattern }} |
+| {{ channel.name }} | {{ content.type }} | {{ channel.description | replace("\n", " ") }} | {{ channel.mandatory | default(True) }} | {% if channel.pattern %} `{{ channel.pattern }}` {% endif %} |
 
 {%- else -%}
 
 {% for item in channel %}
 {% for name, content in item.items() -%}
-| {{ name }} | {{ content.description | replace("\n", "<br />") }} | {{ content.mandatory | default(True) }} | {{ content.pattern }} |
+| {{ name }} | {{ content.type }} | {{ content.description | replace("\n", " ") }} | {{ content.mandatory | default(True) }} | {% if content.pattern %} `{{ content.pattern }}` {% endif %} |
 {%- endfor %}
 {%- endfor %}
 
@@ -49,11 +47,11 @@ head:
 
 ---
 
-### Outputs
+## Outputs
 
 {% for name, channel in output.items() -%}
 
-#### `{{ name }}`
+### `{{ name }}`
 
 {{ channel[0] | channel_format }}
 
@@ -63,32 +61,32 @@ head:
 {%- if channel[0] is mapping -%}
 
 {% for name, content in channel[0].items() %}
-| {{ name }} | {{ content.description | replace("\n", "<br />") }} | {{ content.mandatory | default(True) }} | {{ content.pattern }} |
+| {{ name }} | {{ content.type }} | {{ content.description | replace("\n", " ") }} | {{ content.mandatory | default(True) }} | {% if content.pattern %} `{{ content.pattern }}` {% endif %} |
 {% endfor -%}
 
 {%- else -%}
 
 {% for item in channel[0] %}
 {% for name, content in item.items() -%}
-| {{ name }} | {{ content.description | replace("\n", "<br />") }} | {{ content.mandatory | default(True) }} | {{ content.pattern }} |
+| {{ name }} | {{ content.type }} | {{ content.description | replace("\n", " ") }} | {{ content.mandatory | default(True) }} | {% if content.pattern %} `{{ content.pattern }}` {% endif %} |
 {%- endfor %}
 {%- endfor %}
 
 {% endif %}
 {% endfor -%}
 
-{%- if args is iterable -%}
+{%- if args is iterable and args | length > 0 -%}
 
 ---
 
-### Arguments (see [process.ext](https://www.nextflow.io/docs/latest/reference/process.html#ext))
+## Arguments (see [process.ext](https://www.nextflow.io/docs/latest/reference/process.html#ext))
 
 | | Type | Description | Default | Choices |
 |-|-|-|-|-|
 
 {%- for arg in args %}
 {% for name, content in arg.items() -%}
-| {{ name }} | {{ content.type }} | {{ content.default }} | {{ content.description }} |
+| {{ name }} | {{ content.type }} | {{ content.default }} | {{ content.description }} | {{ content.choices | map('format_li') | join('<br />') }} |
 {% endfor %}
 {%- endfor -%}
 
@@ -96,20 +94,20 @@ head:
 
 ---
 
-### Tools
+## Tools
 
 | | Description | DOI |
 |-|-|-|
 
 {%- for tool in tools %}
 {% for name, content in tool.items() -%}
-| {{ name | link_tool(url=content.homepage) }} | {{ content.description }} | {{ content.doi }}
+| {{ name | link_tool(url=content.homepage) }} | {{ content.description }} | {{ content.doi }} |
 {% endfor %}
 {%- endfor -%}
 
 ---
 
-### Authors
+## Authors
 
 {% for author in authors -%}
 - [{{ author }}](https://github.com/{{ author | trim("@") }})
@@ -117,4 +115,4 @@ head:
 
 ---
 
-**Last updated **: [{{ currentdate }}](https://github.com/scilus/nf-neuro/commit/{{ currentcommit }})
+**Last updated** : [{{ currentdate }}](https://github.com/scilus/nf-neuro/commit/{{ currentcommit }})

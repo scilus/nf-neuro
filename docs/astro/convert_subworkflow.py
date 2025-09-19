@@ -9,6 +9,18 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 DOC_URL_BASE="https://scilus.github.io/nf-neuro"
 
 
+def channel_description_format(description):
+    _descr = description.split("\n")
+    try:
+        _structure = next(filter(lambda x: "Structure:" in x, _descr))
+    except StopIteration:
+        return " ".join(_descr)
+
+    _descr.remove(_structure)
+    _structure = _structure.replace('[', '`[').replace(']', ']`')
+    return f"{' '.join(_descr)}<br /><br />{_structure}"
+
+
 def component_format(component):
     ctype = "module" if "/" in component else "subworkflow"
     return f"[{component}]({DOC_URL_BASE}/api/{ctype}s/{component})"
@@ -42,7 +54,8 @@ def main():
     )
     env.filters.update({
         'component_format': component_format,
-        'link_tool': link
+        'link_tool': link,
+        'channel_descr': channel_description_format
     })
 
     with open(f"{args.subworkflow_path}/meta.yml", "r") as f:
