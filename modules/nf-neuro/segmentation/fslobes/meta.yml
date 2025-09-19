@@ -1,4 +1,3 @@
----
 name: "segmentation_fslobes"
 description: Generate lobes parcellation using FS output
 keywords:
@@ -7,45 +6,55 @@ keywords:
   - Tissues
 tools:
   - "Scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
+      identifier: ""
   - "MRtrix3":
       description: "Toolbox for image processing, analysis and visualisation of dMRI."
       homepage: "https://mrtrix.readthedocs.io/en/latest/"
-
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - fs_folder:
-      type: directory
-      description: FreeSurfer output folder
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - fs_folder:
+        type: directory
+        description: FreeSurfer output folder
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - labels:
-      type: file
-      description: Nifti WM mask file.
-      pattern: "*.{nii,nii.gz}"
-
-  - labels_dilate:
-      type: file
-      description: Nifti GM mask file.
-      pattern: "*.{nii,nii.gz}"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  labels:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*atlas_lobes.nii.gz":
+          type: file
+          description: Nifti lobes labels file.
+          pattern: "*atlas_lobes.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  labels_dilate:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*atlas_lobes_dilate.nii.gz":
+          type: file
+          description: Nifti dilated lobes labels file.
+          pattern: "*atlas_lobes_dilate.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@frheault"
   - "@arnaudbore"

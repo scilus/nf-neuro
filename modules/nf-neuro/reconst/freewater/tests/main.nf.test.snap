@@ -71,10 +71,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2024-05-14T17:14:18.647389"
+        "timestamp": "2025-06-04T03:07:01.063522624"
     },
     "reconst - freewater - stub-run": {
         "content": [
@@ -160,9 +160,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2024-05-14T17:13:16.769048"
+        "timestamp": "2025-06-04T03:04:53.630167199"
     }
 }

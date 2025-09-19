@@ -1,22 +1,23 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "tracking_pfttracking"
-description: Compute include and exclude maps, and the seeding mask
-  from partial volume estimation (PVE) maps.
-  Generates a tractogram using anatomically-constrained particle
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: tracking_pfttracking
+description: Compute include and exclude maps, and the seeding mask from partial volume
+  estimation (PVE) maps. Generates a tractogram using anatomically-constrained particle
   filter tracking, Particle Filtering Tractography (PFT).
 keywords:
   - Diffusion MRI
   - Tractography
   - Particle Filtering Tractography
 tools:
-  - "DIPY":
-      description: "DIPY is the paragon 3D/4D+ imaging library in Python."
+  - DIPY:
+      description: DIPY is the paragon 3D/4D+ imaging library in Python.
       homepage: https://dipy.org
       doi: "10.1016/j.neuroimage.2014.04.074"
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      identifier: ""
+  - scilpy:
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
+      identifier: ""
 args:
   - pft_fa_seeding_mask_threshold:
       type: float
@@ -82,7 +83,8 @@ args:
   - pft_compress_value:
       type: float
       default: 0.0
-      description: Compression value for the streamlines, in mm. If 0, no compression is applied.
+      description: Compression value for the streamlines, in mm. If 0, no compression
+        is applied.
   - basis:
       type: string
       default: "descoteaux07_legacy"
@@ -109,83 +111,138 @@ args:
       default: true
       description: Whether to run quality control (QC) on the tracking results.
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - wm:
-      type: file
-      description: Nifti white matter probability map.
-      pattern: "*.{nii,nii.gz}"
-
-  - gm:
-      type: file
-      description: Nifti grey matter probability map.
-      pattern: "*.{nii,nii.gz}"
-
-  - csf:
-      type: file
-      description: Nifti cerebrospinal fuild probability map.
-      pattern: "*.{nii,nii.gz}"
-
-  - fodf:
-      type: file
-      description: Nifti image of Spherical harmonic file (fodf).
-      pattern: "*.{nii,nii.gz}"
-
-  - fa:
-      type: file
-      description: Nifti image of FA.
-      pattern: "*.{nii,nii.gz}"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - wm:
+        type: file
+        description: Nifti white matter probability map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - gm:
+        type: file
+        description: Nifti grey matter probability map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - csf:
+        type: file
+        description: Nifti cerebrospinal fuild probability map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fodf:
+        type: file
+        description: Nifti image of Spherical harmonic file (fodf).
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fa:
+        type: file
+        description: Nifti image of FA.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - trk:
-      type: file
-      description: Tractogram output file.
-      pattern: "*.{trk,tck}"
-
-  - config:
-      type: file
-      description: Json file containing tracking parameters.
-      pattern: "*.{json}"
-
-  - includes:
-      type: file
-      description: Nifti probability map for tracking of ending the streamline and including it in the output.
-      pattern: "*.{nii,nii.gz}"
-
-  - excludes:
-      type: file
-      description: Nifti probability map for tracking of ending the streamline and excluding it in the output.
-      pattern: "*.{nii,nii.gz}"
-
-  - seeding:
-      type: file
-      description: Nifti seeding mask for tracking.
-      pattern: "*.{nii,nii.gz}"
-
-  - mqc:
-      type: file
-      description: PNG file containing quality control image for tracking. Made for use in MultiQC report.
-      pattern: "*pft_tracking_mqc.png"
-
-  - global_mqc:
-      type: file
-      description: JSON file containing basic measurements of whole tractogram. Made for use in MultiQC report.
-      pattern: "*pft_tracking_stats.json"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  trk:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__pft_tracking.trk":
+          type: file
+          description: Tractogram output file.
+          pattern: "*__pft_tracking.{trk,tck}"
+          ontologies: []
+  config:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__pft_tracking_config.json":
+          type: file
+          description: Json file containing tracking parameters.
+          pattern: "*__pft_tracking_config.{json}"
+          ontologies:
+            - edam: http://edamontology.org/format_3464 # JSON
+  includes:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__map_include.nii.gz":
+          type: file
+          description: |
+            Nifti probability map for tracking of ending the
+            streamline and including it in the output.
+          pattern: "*__map_include.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  excludes:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__map_exclude.nii.gz":
+          type: file
+          description: |
+            Nifti probability map for tracking of ending the
+            streamline and excluding it in the output.
+          pattern: "*__map_exclude.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  seeding:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__pft_seeding_mask.nii.gz":
+          type: file
+          description: Nifti seeding mask for tracking.
+          pattern: "*__pft_seeding_mask.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  mqc:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__pft_tracking_mqc.png":
+          type: file
+          description: |
+            PNG file containing quality control image for tracking.
+            Made for use in MultiQC report.
+          pattern: "*__pft_tracking_mqc.png"
+          ontologies: []
+  global_mqc:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__pft_tracking_stats.json":
+          type: file
+          description: |
+            JSON file containing basic measurements of whole tractogram.
+            Made for use in MultiQC report.
+          pattern: "*__pft_tracking_stats.json"
+          ontologies:
+            - edam: http://edamontology.org/format_3464 # JSON
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@Manonedde"

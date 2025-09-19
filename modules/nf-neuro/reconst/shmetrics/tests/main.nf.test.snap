@@ -29,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__peak_values.nii.gz:md5,6470a18e37a61f08900516cbbf529327"
+                        "test__peak_indices.nii.gz:md5,ab95b28218d8901af8336b45baec9b6e"
                     ]
                 ],
                 "2": [
@@ -38,7 +38,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__peak_indices.nii.gz:md5,ab95b28218d8901af8336b45baec9b6e"
+                        "test__peak_values.nii.gz:md5,6470a18e37a61f08900516cbbf529327"
                     ]
                 ],
                 "3": [
@@ -167,9 +167,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2024-05-02T13:16:48.656406"
+        "timestamp": "2025-06-03T17:34:03.936828399"
     }
 }

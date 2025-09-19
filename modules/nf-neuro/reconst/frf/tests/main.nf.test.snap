@@ -33,7 +33,7 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "csf_frf": [
                     [
@@ -57,7 +57,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "wm_frf": [
                     [
@@ -72,9 +72,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-11-28T20:54:23.833965559"
+        "timestamp": "2025-09-18T14:35:56.406353607"
     },
     "reconst - frf_set_frf_no_mask": {
         "content": [
@@ -98,7 +98,7 @@
                     
                 ],
                 "4": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "csf_frf": [
                     
@@ -116,7 +116,7 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "wm_frf": [
                     
@@ -125,9 +125,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-11-28T20:54:17.732032899"
+        "timestamp": "2025-09-18T14:35:40.620365644"
     },
     "reconst - frf": {
         "content": [
@@ -151,7 +151,7 @@
                     
                 ],
                 "4": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "csf_frf": [
                     
@@ -169,7 +169,7 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "wm_frf": [
                     
@@ -178,21 +178,21 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-11-28T20:53:55.867095265"
+        "timestamp": "2025-09-18T14:34:42.514423308"
     },
     "reconst - frf - stub-run": {
         "content": [
             [
-                "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-05-30T18:42:33.965586489"
+        "timestamp": "2025-09-18T14:36:38.177672609"
     },
     "reconst - frf_set_frf": {
         "content": [
@@ -216,7 +216,7 @@
                     
                 ],
                 "4": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "csf_frf": [
                     
@@ -234,7 +234,7 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "wm_frf": [
                     
@@ -243,9 +243,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-11-28T20:54:10.018700009"
+        "timestamp": "2025-09-18T14:35:21.84912732"
     },
     "reconst - frf_no_mask": {
         "content": [
@@ -269,7 +269,7 @@
                     
                 ],
                 "4": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "csf_frf": [
                     
@@ -287,7 +287,7 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "wm_frf": [
                     
@@ -296,9 +296,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-11-28T20:54:02.707061504"
+        "timestamp": "2025-09-18T14:35:03.206643299"
     },
     "reconst - frf_msmt_set_frf": {
         "content": [
@@ -334,7 +334,7 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "csf_frf": [
                     [
@@ -358,7 +358,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0ebf33e30da5fc7e67dee8889822322e"
+                    "versions.yml:md5,b2a0ae06cf57c3f9c438cfb9bb882bbb"
                 ],
                 "wm_frf": [
                     [
@@ -373,8 +373,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-11-28T20:54:31.726195565"
+        "timestamp": "2025-09-18T14:36:15.781579421"
     }
 }

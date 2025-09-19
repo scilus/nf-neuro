@@ -11,13 +11,13 @@ process RECONST_FREEWATER {
         tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(kernels)
 
     output:
-        tuple val(meta), path("*_dwi_fw_corrected.nii.gz")      , emit: dwi_fw_corrected, optional: true
-        tuple val(meta), path("*_FIT_dir.nii.gz")               , emit: dir, optional: true
-        tuple val(meta), path("*_FIT_FiberVolume.nii.gz")       , emit: fibervolume, optional: true
-        tuple val(meta), path("*_FIT_FW.nii.gz")                , emit: fw, optional: true
-        tuple val(meta), path("*_FIT_nrmse.nii.gz")             , emit: nrmse, optional: true
-        path("kernels")                                         , emit: kernels, optional: true
-        path "versions.yml"                                     , emit: versions
+        tuple val(meta), path("*__dwi_fw_corrected.nii.gz")      , emit: dwi_fw_corrected, optional: true
+        tuple val(meta), path("*__FIT_dir.nii.gz")               , emit: dir, optional: true
+        tuple val(meta), path("*__FIT_FiberVolume.nii.gz")       , emit: fibervolume, optional: true
+        tuple val(meta), path("*__FIT_FW.nii.gz")                , emit: fw, optional: true
+        tuple val(meta), path("*__FIT_nrmse.nii.gz")             , emit: nrmse, optional: true
+        path("kernels")                                          , emit: kernels, optional: true
+        path "versions.yml"                                      , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -40,7 +40,6 @@ process RECONST_FREEWATER {
     scil_freewater_maps.py $dwi $bval $bvec $para_diff $perp_diff_min \
         $perp_diff_max $iso_diff $lambda1 $lambda2 $nb_threads $b_thr \
         $set_mask $set_kernels
-
 
     if [ -d "$kernels" ]; then
         mv results/dwi_fw_corrected.nii.gz ${prefix}__dwi_fw_corrected.nii.gz

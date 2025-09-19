@@ -26,9 +26,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T04:50:52.780105922"
+        "timestamp": "2025-07-04T21:00:00.502234107"
     },
     "registration - easyreg": {
         "content": [
@@ -88,9 +88,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T04:48:58.867241465"
+        "timestamp": "2025-07-04T20:59:53.627646364"
     },
     "registration - antsRegistration": {
         "content": [
@@ -128,9 +128,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T05:06:59.658030199"
+        "timestamp": "2025-07-04T20:59:34.81185618"
     },
     "registration - SyNQuick": {
         "content": [
@@ -148,8 +148,8 @@
                         {
                             "id": "test"
                         },
-                        "test__output0Warp.nii.gz",
-                        "test__output1GenericAffine.mat"
+                        "test__output1Warp.nii.gz",
+                        "test__output0GenericAffine.mat"
                     ]
                 ],
                 "transfo_trk": [
@@ -157,19 +157,19 @@
                         {
                             "id": "test"
                         },
-                        "test__output0InverseAffine.mat",
-                        "test__output1InverseWarp.nii.gz"
+                        "test__output1InverseAffine.mat",
+                        "test__output0InverseWarp.nii.gz"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,b39c35bdc0e79c6a3595616e01e37a72"
+                    "versions.yml:md5,806ff315748e1402954ef52cadb7e396"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T05:07:08.668646604"
+        "timestamp": "2025-07-04T20:59:41.187983313"
     }
 }

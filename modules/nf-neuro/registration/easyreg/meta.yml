@@ -1,90 +1,145 @@
----
-name: "registration_easyreg"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: registration_easyreg
 description: Image registration and SynthSeg v2 segmentation with easyreg from freesurfer
 keywords:
   - nifti
   - registration
   - segmentation
-  - easyreg
-  - freesurfer
+  - neural network
+  - Artificial intelligence
+  - machine learning
 tools:
-  - "Freesurfer":
-      description: "Software package for the analysis and visualization of structural and functional neuroimaging data."
-      homepage: "https://surfer.nmr.mgh.harvard.edu/fswiki"
-
+  - Freesurfer:
+      description: |
+        Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
+      homepage: https://surfer.nmr.mgh.harvard.edu/
+      doi: 10.1016/j.neuroimage.2012.01.021
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - reference:
-      type: file
-      description: the reference image in .nii(.gz) or .mgz format (note that, since the method is symmetric, the choice of reference vs floating is arbitrary).
-      pattern: "*.{nii,nii.gz,mgz}"
-
-  - floating:
-      type: file
-      description: the floating image in .nii(.gz) or .mgz format.
-      pattern: "*.{nii,nii.gz,mgz}"
-
-  - ref_segmentation:
-      type: file
-      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the reference image.
-        If it does not exist, EasyReg will create it. If it already exists (e.g., from a previous EasyReg run), then EasyReg will read it from disk (which is faster than segmenting).
-      pattern: "*.{nii,nii.gz}"
-
-  - flo_segmentation:
-      type: file
-      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the floating image.
-        If it does not exist, EasyReg will create it. If it already exists (e.g., from a previous EasyReg run), then EasyReg will read it from disk (which is faster than segmenting).
-      pattern: "*.{nii,nii.gz}"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - reference:
+        type: file
+        description: the reference image in .nii(.gz) or .mgz format (note that, since
+          the method is symmetric, the choice of reference vs floating is arbitrary).
+        pattern: "*.{nii,nii.gz,mgz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - floating:
+        type: file
+        description: the floating image in .nii(.gz) or .mgz format.
+        pattern: "*.{nii,nii.gz,mgz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - ref_segmentation:
+        type: file
+        description: file with the SynthSeg v2 (non-robust) segmentation + parcellation
+          of the reference image. If it does not exist, EasyReg will create it. If it
+          already exists (e.g., from a previous EasyReg run), then EasyReg will read
+          it from disk (which is faster than segmenting).
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - flo_segmentation:
+        type: file
+        description: file with the SynthSeg v2 (non-robust) segmentation + parcellation
+          of the floating image. If it does not exist, EasyReg will create it. If it
+          already exists (e.g., from a previous EasyReg run), then EasyReg will read
+          it from disk (which is faster than segmenting).
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - ref_reg:
-      type: file
-      description: this is the file where the deformed (registered) reference image is written.
-      pattern: "*_reference_registered.nii.gz"
-
-  - flo_reg:
-      type: file
-      description: this is the file where the deformed (registered) floating image is written.
-      pattern: "*_floating_registered.nii.gz"
-
-  - ref_seg:
-      type: file
-      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the reference image. Will produce image only if not passed as input.
-      pattern: "*_reference_segmentation.nii.gz"
-
-  - flo_seg:
-      type: file
-      description: file with the SynthSeg v2 (non-robust) segmentation + parcellation of the floating image. Will produce image only if not passed as input.
-      pattern: "*_floating_segmentation.nii.gz"
-
-  - fwd_field:
-      type: file
-      description:
-        this is the file where the forward deformation field is written. The deformation includes both the affine and nonlinear components.
-        Must be a nifti (.nii/.nii.gz) or .mgz file; it is encoded as the real world (RAS) coordinates of the target location for each voxel.
-      pattern: "*_forward_field.nii.gz"
-
-  - bak_field:
-      type: file
-      description: this is the file where the backward deformation field is written. It must also be a nifty or mgz file.
-      pattern: "*_backward_field.nii.gz"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  ref_reg:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_reference_registered.nii.gz":
+          type: file
+          description: this is the file where the deformed (registered) reference image
+            is written.
+          pattern: "*_reference_registered.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  flo_reg:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_floating_registered.nii.gz":
+          type: file
+          description: this is the file where the deformed (registered) floating image
+            is written.
+          pattern: "*_floating_registered.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  ref_seg:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_reference_segmentation.nii.gz":
+          type: file
+          description: file with the SynthSeg v2 (non-robust) segmentation + parcellation
+            of the reference image. Will produce image only if not passed as input.
+          pattern: "*_reference_segmentation.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  flo_seg:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_floating_segmentation.nii.gz":
+          type: file
+          description: file with the SynthSeg v2 (non-robust) segmentation + parcellation
+            of the floating image. Will produce image only if not passed as input.
+          pattern: "*_floating_segmentation.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  fwd_field:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_forward_field.nii.gz":
+          type: file
+          description: this is the file where the forward deformation field is written.
+            The deformation includes both the affine and nonlinear components. Must
+            be a nifti (.nii/.nii.gz) or .mgz file; it is encoded as the real world
+            (RAS) coordinates of the target location for each voxel.
+          pattern: "*_forward_field.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  bak_field:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_backward_field.nii.gz":
+          type: file
+          description: this is the file where the backward deformation field is written.
+            It must also be a nifty or mgz file.
+          pattern: "*_backward_field.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@ThoumyreStanislas"
 maintainers:

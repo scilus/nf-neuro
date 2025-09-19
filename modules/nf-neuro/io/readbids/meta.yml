@@ -1,31 +1,30 @@
----
-name: "io_readbids"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
+name: io_readbids
 description: Module reading bids specification for an input folder.
 keywords:
   - Bids
   - Input
   - Structure
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
   - bids_folder:
       type: directory
       description: Folder containing bids file
       pattern: "*"
-
   - fs_folder:
       type: directory
       description: Folder containing fs file
       pattern: "*"
-
   - bids_ignore:
       type: file
       description: bids_ignore file
       pattern: "*.{bids_ignore}"
-
+      ontologies: []
 args:
   - readout:
       type: float
@@ -37,17 +36,20 @@ args:
         If set to true, will remove participants with missing files
         from the final BIDS layout.
       default: false
-
 output:
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
-  - bidsstructure:
-      type: file
-      description: json file containing tractoflow bids structure
-      pattern: "*.{json}"
-
+  bidsstructure:
+    - bids_struct.json:
+        type: file
+        description: json file containing tractoflow bids structure
+        pattern: "bids_struct.json"
+        ontologies:
+          - edam: http://edamontology.org/format_3464 # JSON
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@harshana2011"
