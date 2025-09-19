@@ -86,7 +86,7 @@ head:
 | | Type | Description | Default | Choices |
 |-|-|-|-|-|
 
-{%- for arg in args -%}
+{%- for arg in args %}
 {% for name, content in arg.items() -%}
 | {{ name }} | {{ content.type }} | {{ content.default }} | {{ content.description }} |
 {% endfor %}
