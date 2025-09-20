@@ -121,14 +121,6 @@ process MQC_GIF {
         fi
     fi
 
-    echo "Environment variables:"
-    env
-    echo "PATH:"
-    echo \$PATH
-    echo "Pip list:"
-    # Run the command
-    uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2
-
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(uv -q -n pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
