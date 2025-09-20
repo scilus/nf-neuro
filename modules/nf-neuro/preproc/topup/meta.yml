@@ -85,7 +85,7 @@ args:
   - encoding:
       type: string
       description: Encoding direction of the forward DWI.
-      choices: "x, y or z"
+      choices: "x, y, z"
       default: "y"
   - readout:
       type: float
@@ -98,11 +98,11 @@ args:
   - prefix_topup:
       type: string
       description: Prefix to prepend to Topup output files.
-  - default_config_topup: null
-    type: string
-    description: Default Topup configuration to use.
-    choices: "b02b0.cnf, b02b0_1.cnf, b02b0_2.cnf, b02b0_4.cnf, b02b0_7T.cnf"
-    default: "b02b0.cnf"
+  - default_config_topup:
+      type: string
+      description: Default Topup configuration to use.
+      choices: "b02b0.cnf, b02b0_1.cnf, b02b0_2.cnf, b02b0_4.cnf, b02b0_7T.cnf"
+      default: "b02b0.cnf"
   - run_qc:
       type: boolean
       description: Run quality control.

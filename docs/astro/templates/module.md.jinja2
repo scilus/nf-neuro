@@ -31,9 +31,11 @@ head:
 
 {%- if channel is mapping -%}
 
-| {{ channel.name }} | {{ channel.type }} | {{ channel.description | replace("\n", " ") }} | {{ channel.mandatory | default(True) }} | {% if channel.pattern %} `{{ channel.pattern }}` {% endif %} |
+{% for name, content in channel.items() %}
+| {{ name }} | {{ content.type }} | {{ content.description | replace("\n", " ") }} | {{ content.mandatory | default(True) }} | {% if content.pattern %} `{{ content.pattern }}` {% endif %} |
+{% endfor %}
 
-{%- else -%}
+{% else -%}
 
 {% for item in channel %}
 {% for name, content in item.items() -%}
@@ -86,11 +88,11 @@ head:
 
 {%- for arg in args %}
 {% for name, content in arg.items() -%}
-| {{ name }} | {{ content.type }} | {{ content.default }} | {{ content.description }} | {{ content.choices | map('format_li') | join('<br />') }} |
-{% endfor %}
-{%- endfor -%}
+| {{ name }} | {{ content.type }} | {{ content.description | replace("\n", " ") }} | {{ content.default }} | {{ content.choices | format_choices }} |
+{%- endfor %}
+{%- endfor %}
 
-{% endif %}
+{%- endif %}
 
 ---
 
@@ -101,9 +103,9 @@ head:
 
 {%- for tool in tools %}
 {% for name, content in tool.items() -%}
-| {{ name | link_tool(url=content.homepage) }} | {{ content.description }} | {{ content.doi }} |
-{% endfor %}
-{%- endfor -%}
+| {{ name | link_tool(url=content.homepage) }} | {{ content.description | replace("\n", " ") }} | {% if content.doi %} [{{ content.doi }}](https://doi.org/{{ content.doi }}) {% endif %} |
+{%- endfor %}
+{%- endfor %}
 
 ---
 

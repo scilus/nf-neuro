@@ -28,6 +28,13 @@ def link(text, url=None):
     return f"[{text}]({url})"
 
 
+def format_choices(choices):
+    if isinstance(choices, str):
+        choices = [c.strip() for c in choices.split(",")]
+
+    return "<br />".join([li(c) for c in choices]) if choices else ""
+
+
 def channel_format(_input):
     if isinstance(_input, list):
         def _nametype(_name, _meta):
@@ -66,7 +73,8 @@ def main():
     env.filters.update({
         'channel_format': channel_format,
         'link_tool': link,
-        'format_li': li
+        'format_li': li,
+        'format_choices': format_choices
     })
 
     with open(f"{args.module_path}/meta.yml", "r") as f:

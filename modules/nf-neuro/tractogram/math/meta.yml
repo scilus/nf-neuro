@@ -48,8 +48,12 @@ args:
       description: |
         The mathematical operation to perform on the tractograms.
         e.g. `concatenate`, `union`, `intersection`, `difference`, `lazy_concatenate`
-      choices: |
-        ["concatenate", "union", "intersection", "difference", "lazy_concatenate"]
+      choices:
+        - concatenate
+        - union
+        - intersection
+        - difference
+        - lazy_concatenate
   - suffix:
       type: string
       description: |
