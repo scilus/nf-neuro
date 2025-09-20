@@ -89,6 +89,6 @@ jobs:
       - name: Convert component meta.yml to markdown
         run: |
           poetry run python docs/astro/convert_${{ inputs.type }}.py \
-            modules/nf-neuro/${{ inputs.component }} \
+            ${{ inputs.type }}s/nf-neuro/${{ inputs.component }} \
             ${{ github.sha }} \
             $(echo "${{ inputs.component }}" | sed 's/\//_/g').md

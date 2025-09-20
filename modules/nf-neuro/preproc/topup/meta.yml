@@ -76,11 +76,11 @@ input:
         pattern: "*.{nii,nii.gz}"
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
-    - config_topup:
-        type: file
-        description: topup config file. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
-        pattern: "*cnf"
-        ontologies: []
+  - config_topup:
+      type: file
+      description: topup config file. See https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/topup/TopupUsersGuide#Configuration_files
+      pattern: "*cnf"
+      ontologies: []
 args:
   - encoding:
       type: string
