@@ -3,9 +3,7 @@ process REGISTRATION_ANTS {
     tag "$meta.id"
     label 'process_medium'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
+    container "scilus/scilus:2.2.0"
 
     input:
     tuple val(meta), path(fixedimage), path(movingimage), path(mask) /* optional, input = [] */
@@ -80,11 +78,12 @@ process REGISTRATION_ANTS {
         # Iterate over images.
         for image in fixedimage warped;
         do
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+            mrconvert *\${image}.nii.gz *\${image}_viz.nii.gz -stride -1,2,3
+            scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_coronal.png \
                 --slices \$coronal_dim --axis coronal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+            scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_sagittal.png \
                 --slices \$sagittal_dim --axis sagittal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+            scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_axial.png \
                 --slices \$axial_dim --axis axial \$viz_params
             if [ \$image != fixedimage ];
             then
