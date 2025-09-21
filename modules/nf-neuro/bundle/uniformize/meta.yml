@@ -1,35 +1,37 @@
----
-name: "bundle_uniformize"
-description: Uniformize streamlines' endpoints according to a defined axis. Useful for tractometry or models creation.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: bundle_uniformize
+description: Uniformize streamlines' endpoints according to a defined axis. Useful
+  for tractometry or models creation.
 keywords:
   - uniformize
   - Bundles
   - endpoints
   - tractometry
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - bundles:
-      type: file
-      description: Bundle or list of bundles to uniformize.
-      pattern: "*.trk"
-      mandatory: true
-
-  - centroids:
-      type: file
-      description: Match endpoints of the streamlines to align it to a reference unique streamline (centroid). (optional)
-      pattern: "*.trk"
-      mandatory: false
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - bundles:
+        type: file
+        description: Bundle or list of bundles to uniformize.
+        pattern: "*.trk"
+        mandatory: true
+        ontologies: []
+    - centroids:
+        type: file
+        description: Match endpoints of the streamlines to align it to a reference unique
+          streamline (centroid). (optional)
+        pattern: "*.trk"
+        mandatory: false
+        ontologies: []
 args:
   - method:
       type: string
@@ -39,30 +41,30 @@ args:
         - "centroid": Match endpoints of the streamlines to align it to a reference unique streamline (centroid).
         - "auto": Match endpoints of the streamlines along an automatically determined axis.
       default: "auto"
-
   - swap:
       type: boolean
       description: |
         Swap head <-> tail convention. Can be useful when the reference is not in RAS.
       default: false
-
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
-  - bundles:
-      type: file
-      description: Bundle or list of bundles uniformized.
-      pattern: "*.trk"
-
+  bundles:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_uniformized.trk":
+          type: file
+          description: Bundle or list of bundles uniformized.
+          pattern: "*.trk"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@ThoumyreStanislas"
 maintainers:

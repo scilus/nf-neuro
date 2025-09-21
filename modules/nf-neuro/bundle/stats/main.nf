@@ -10,21 +10,21 @@ process BUNDLE_STATS {
     tuple val(meta), path(bundles), path(labels_map), path(metrics), path(lesions)
 
     output:
-    tuple val(meta), path("*_length_stats.json")                , emit: length, optional: true
-    tuple val(meta), path("*_endpoints_map_raw.json")           , emit: endpoints_raw, optional: true
-    tuple val(meta), path("*_endpoints_metric_stats.json")      , emit: endpoints_metric_stats, optional: true
-    tuple val(meta), path("*_mean_std.json")                    , emit: mean_std, optional: true
-    tuple val(meta), path("*_volume.json")                      , emit: volume, optional: true
-    tuple val(meta), path("*_volume_lesions.json")              , emit: volume_lesions, optional: true
-    tuple val(meta), path("*_streamline_count.json")            , emit: streamline_count, optional: true
-    tuple val(meta), path("*_streamline_count_lesions.json")    , emit: streamline_count_lesions, optional: true
-    tuple val(meta), path("*_volume_per_label.json")            , emit: volume_per_labels, optional: true
-    tuple val(meta), path("*_volume_per_label_lesions.json")    , emit: volume_per_labels_lesions, optional: true
-    tuple val(meta), path("*_mean_std_per_point.json")          , emit: mean_std_per_point, optional: true
+    tuple val(meta), path("*__length_stats.json")               , emit: length, optional: true
+    tuple val(meta), path("*__endpoints_map_raw.json")          , emit: endpoints_raw, optional: true
+    tuple val(meta), path("*__endpoints_metric_stats.json")     , emit: endpoints_metric_stats, optional: true
+    tuple val(meta), path("*__mean_std.json")                   , emit: mean_std, optional: true
+    tuple val(meta), path("*__volume.json")                     , emit: volume, optional: true
+    tuple val(meta), path("*__volume_lesions.json")             , emit: volume_lesions, optional: true
+    tuple val(meta), path("*__streamline_count.json")           , emit: streamline_count, optional: true
+    tuple val(meta), path("*__streamline_count_lesions.json")   , emit: streamline_count_lesions, optional: true
+    tuple val(meta), path("*__volume_per_label.json")           , emit: volume_per_labels, optional: true
+    tuple val(meta), path("*__volume_per_label_lesions.json")   , emit: volume_per_labels_lesions, optional: true
+    tuple val(meta), path("*__mean_std_per_point.json")         , emit: mean_std_per_point, optional: true
     tuple val(meta), path("*__lesion_stats.json")               , emit: lesion_stats, optional: true
-    tuple val(meta), path("*_endpoints_map_head.nii.gz")        , emit: endpoints_head, optional: true
-    tuple val(meta), path("*_endpoints_map_tail.nii.gz")        , emit: endpoints_tail, optional: true
-    tuple val(meta), path("*_lesion_map.nii.gz")                , emit: lesion_map, optional: true
+    tuple val(meta), path("*__endpoints_map_head.nii.gz")       , emit: endpoints_head, optional: true
+    tuple val(meta), path("*__endpoints_map_tail.nii.gz")       , emit: endpoints_tail, optional: true
+    tuple val(meta), path("*__lesion_map.nii.gz")               , emit: lesion_map, optional: true
     path "versions.yml"                                         , emit: versions
 
     when:
@@ -120,37 +120,37 @@ process BUNDLE_STATS {
     #Bundle_Length_Stats
     if [[ "$length_stats" ]];
     then
-        scil_json_merge_entries.py *_length.json ${prefix}_length_stats.json --add_parent_key ${prefix} \
+        scil_json_merge_entries.py *_length.json ${prefix}__length_stats.json --add_parent_key ${prefix} \
                 --keep_separate
     fi
 
     #Bundle_Endpoints_Map
     if [[ "$endpoints" ]];
     then
-        scil_json_merge_entries.py *_endpoints_raw.json ${prefix}_endpoints_map_raw.json \
+        scil_json_merge_entries.py *_endpoints_raw.json ${prefix}__endpoints_map_raw.json \
             --no_list --add_parent_key ${prefix}
 
     #Bundle_Metrics_Stats_In_Endpoints
 
-        scil_json_merge_entries.py *_tail.json *_head.json ${prefix}_endpoints_metric_stats.json \
+        scil_json_merge_entries.py *_tail.json *_head.json ${prefix}__endpoints_metric_stats.json \
             --no_list --add_parent_key ${prefix}
     fi
 
     #Bundle_Mean_Std
     if [[ "$mean_std" ]];
     then
-        scil_json_merge_entries.py *_std.json ${prefix}_mean_std.json --no_list --add_parent_key ${prefix}
+        scil_json_merge_entries.py *_std.json ${prefix}__mean_std.json --no_list --add_parent_key ${prefix}
     fi
 
     #Bundle_Volume
     if [[ "$volume" ]];
     then
-        scil_json_merge_entries.py *_volume_stat.json ${prefix}_volume.json --no_list --add_parent_key ${prefix}
+        scil_json_merge_entries.py *_volume_stat.json ${prefix}__volume.json --no_list --add_parent_key ${prefix}
 
         if [[ "$lesions_stats" ]];
         then
-            scil_json_merge_entries.py *_volume_lesions_stat.json ${prefix}_volume_lesions.json --no_list --add_parent_key ${prefix}
-            scil_json_merge_entries.py *_streamline_count_lesions_stat.json ${prefix}_streamline_count_lesions.json \
+            scil_json_merge_entries.py *_volume_lesions_stat.json ${prefix}__volume_lesions.json --no_list --add_parent_key ${prefix}
+            scil_json_merge_entries.py *_streamline_count_lesions_stat.json ${prefix}__streamline_count_lesions.json \
                 --no_list --add_parent_key ${prefix}
             scil_merge_json.py ${prefix}__lesion_stats.json ${prefix}__lesion_stats.json \
                 --remove_parent_key --add_parent_key ${prefix} -f
@@ -159,19 +159,19 @@ process BUNDLE_STATS {
     #Bundle_Streamline_Count
     elif [[ "$streamline_count" ]];
     then
-        scil_json_merge_entries.py *_streamlines.json ${prefix}_streamline_count.json --no_list \
+        scil_json_merge_entries.py *_streamlines.json ${prefix}__streamline_count.json --no_list \
             --add_parent_key ${prefix}
     fi
 
     #Bundle_Volume_Per_Label
     if [[ "$volume_per_labels" ]];
     then
-        scil_json_merge_entries.py *_volume_label.json ${prefix}_volume_per_label.json --no_list \
+        scil_json_merge_entries.py *_volume_label.json ${prefix}__volume_per_label.json --no_list \
             --add_parent_key ${prefix}
 
         if [[ "$lesions_stats" ]];
         then
-            scil_json_merge_entries.py *_volume_per_label_lesions_stat.json ${prefix}_volume_per_label_lesions.json \
+            scil_json_merge_entries.py *_volume_per_label_lesions_stat.json ${prefix}__volume_per_label_lesions.json \
                 --no_list --add_parent_key ${prefix}
         fi
     fi
@@ -179,13 +179,13 @@ process BUNDLE_STATS {
     #Bundle_Mean_Std_Per_Point
     if [[ "$mean_std_per_point" ]];
     then
-        scil_json_merge_entries.py *_std_per_point.json ${prefix}_mean_std_per_point.json --no_list \
+        scil_json_merge_entries.py *_std_per_point.json ${prefix}__mean_std_per_point.json --no_list \
             --add_parent_key ${prefix}
     fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -216,7 +216,7 @@ process BUNDLE_STATS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

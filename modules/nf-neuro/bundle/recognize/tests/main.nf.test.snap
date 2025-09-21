@@ -22,9 +22,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-13T18:48:49.480149664"
+        "timestamp": "2025-09-18T13:22:25.194831919"
     },
     "bundle - recognize - stub-run": {
         "content": [
@@ -45,9 +45,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-13T18:49:00.940259324"
+        "timestamp": "2025-08-15T19:27:13.357868159"
     },
     "bundle - recognize - base": {
         "content": [
@@ -72,8 +72,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-13T18:47:25.226228984"
+        "timestamp": "2025-09-18T13:21:45.834410543"
     }
 }

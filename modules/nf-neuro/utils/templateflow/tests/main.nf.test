@@ -5,7 +5,7 @@ nextflow_process {
     process "UTILS_TEMPLATEFLOW"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "utils"
     tag "utils/templateflow"
 

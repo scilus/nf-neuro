@@ -2,14 +2,14 @@
     "denoising - mppca - stub-run": {
         "content": [
             [
-                "versions.yml:md5,adbce7b09c63d541cdc2782235363275"
+                "versions.yml:md5,e453d38b11af2135c99df27ec7b461e3"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-05-30T18:21:37.126316828"
+        "timestamp": "2025-06-04T13:56:52.680444991"
     },
     "denoising - mppca": {
         "content": [
@@ -19,29 +19,29 @@
                         {
                             "id": "test"
                         },
-                        "test_dwi_denoised.nii.gz:md5,697aa941c0cb71fe1865662da5b727fa"
+                        "test_dwi_denoised.nii.gz:md5,89ea3e1f62f668d76118f82e977a7fc4"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,adbce7b09c63d541cdc2782235363275"
+                    "versions.yml:md5,e453d38b11af2135c99df27ec7b461e3"
                 ],
                 "image": [
                     [
                         {
                             "id": "test"
                         },
-                        "test_dwi_denoised.nii.gz:md5,697aa941c0cb71fe1865662da5b727fa"
+                        "test_dwi_denoised.nii.gz:md5,89ea3e1f62f668d76118f82e977a7fc4"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,adbce7b09c63d541cdc2782235363275"
+                    "versions.yml:md5,e453d38b11af2135c99df27ec7b461e3"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2024-12-12T18:27:14.057961679"
+        "timestamp": "2025-06-04T13:56:47.445520854"
     }
 }

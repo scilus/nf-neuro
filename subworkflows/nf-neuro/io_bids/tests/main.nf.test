@@ -7,7 +7,7 @@ nextflow_workflow {
     config "./nextflow.config"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/io_bids"
 
     tag "io"

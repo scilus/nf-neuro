@@ -1,0 +1,71 @@
+---
+title: {{ name }}
+head:
+- tag: meta
+  attrs:
+    name: keywords
+    content: {{ keywords | join(', ') }}
+- tag: meta
+  attrs:
+    name: description
+    content: |
+        {{ description.split("\n") | map('striptags') | join(' ') | truncate(200) }}
+---
+
+## {{ name }}
+
+{{ description }}
+
+**Keywords :** {{ keywords | join(', ') }}
+
+{% if components -%}
+**Components :** {{ components | map('component_format') | join(', ') }}
+{%- endif %}
+
+---
+
+### Inputs
+
+| | Type | Description | Mandatory | Pattern |
+|-|-|-|-|-|
+
+{%- for channel in input %}
+{% for name, content in channel.items() -%}
+| {{ name }} | {{ content.type }} | {{ content.description | channel_descr }} | {{ content.mandatory | default(True) }} | {% if content.pattern %} `{{ content.pattern }}` {% endif %} |
+{%- endfor %}
+{%- endfor -%}
+
+{% if output %}
+---
+
+### Outputs
+
+| | Type | Description | Optional | Pattern |
+|-|-|-|-|-|
+
+{%- for channel in output %}
+{% for name, content in channel.items() -%}
+| {{ name }} | {{ content.type }} | {{ content.description | channel_descr }} | {{ content.optional | default(False) }} | {% if content.pattern %} `{{ content.pattern }}` {% endif %} |
+{%- endfor %}
+{%- endfor -%}
+{% endif %}
+
+---
+
+### Authors
+
+{% for author in authors -%}
+- [{{ author }}](https://github.com/{{ author | trim("@") }})
+{% endfor -%}
+
+{% if maintainers %}
+### Maintainers
+
+{% for maintainer in maintainers -%}
+- [{{ maintainer }}](https://github.com/{{ maintainer | trim("@") }})
+{% endfor -%}
+{%- endif %}
+
+---
+
+**Last updated** : [{{ currentdate }}](https://github.com/scilus/nf-neuro/commit/{{ currentcommit }})

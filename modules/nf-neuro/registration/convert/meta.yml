@@ -1,70 +1,90 @@
----
-name: "registration_convert"
-description: Freesurfer transform conversion tool. Default usage is aim at receiving freesurfer format and converting to ANTs (ITK). See lta_convert --help and mri_warp_convert --help for options.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: registration_convert
+description: Freesurfer transform conversion tool. Default usage is aim at receiving
+  freesurfer format and converting to ANTs (ITK). See lta_convert --help and mri_warp_convert
+  --help for options.
 keywords:
   - Registration
   - Brain imaging
   - MRI
   - Conversion
 tools:
-  - "Freesurfer":
-      description: "Freesurfer lta_convert (affine conversion) and mri_warp_convert (deform) tools for transform conversion"
-      homepage: "https://surfer.nmr.mgh.harvard.edu/"
-      documentation: "https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferWiki"
-
+  - Freesurfer:
+      description: |
+        Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
+      homepage: https://surfer.nmr.mgh.harvard.edu/
+      doi: 10.1016/j.neuroimage.2012.01.021
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - deform:
-      type: file
-      description: Deform transform to convert. Default usage expects Freesurfer .mgz format from mri_synthmorph
-      pattern: "*.{nii,nii.gz,mgz,m3z}"
-
-  - affine:
-      type: file
-      description: Affine transform to convert. Default usage expects Freesurfer .lta format from mri_synthmorph
-      pattern: "*.{lta,txt,xfm,dat}"
-
-  - source:
-      type: file
-      description: Moving Nifti volume used for registration. Defines source image geometry
-      pattern: "*.{nii,nii.gz}"
-
-  - target:
-      type: file
-      description: Fixed Nifti volume used for registration. Defines target image geometry. (optional)
-      pattern: "*.{nii,nii.gz}"
-
-  - fs_license:
-      type: file
-      description: The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html. Optional. If you have already set your license as prescribed by Freesurfer (copied to a .license file in your $FREESURFER_HOME), this is not required.
-      pattern: "*.txt"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - deform:
+        type: file
+        description: Deform transform to convert. Default usage expects Freesurfer .mgz
+          format from mri_synthmorph
+        pattern: "*.{nii,nii.gz,mgz,m3z}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - affine:
+        type: file
+        description: Affine transform to convert. Default usage expects Freesurfer .lta
+          format from mri_synthmorph
+        pattern: "*.{lta,txt,xfm,dat}"
+        ontologies: []
+    - source:
+        type: file
+        description: Moving Nifti volume used for registration. Defines source image
+          geometry
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - target:
+        type: file
+        description: Fixed Nifti volume used for registration. Defines target image
+          geometry. (optional)
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fs_license:
+        type: file
+        description:
+          The path to your FreeSurfer license. To get one, go to https://surfer.nmr.mgh.harvard.edu/registration.html.
+          Optional. If you have already set your license as prescribed by Freesurfer
+          (copied to a .license file in your $FREESURFER_HOME), this is not required.
+        pattern: "*.txt"
+        ontologies: []
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - deform_transform:
-      type: file
-      description: Deform transform. Default usage outputs ANTs (ITK) format .nii.gz
-      pattern: "*.{nii,nii.gz,mgz,m3z}"
-
-  - affine_transform:
-      type: file
-      description: Affine transform. Default usage outputs ANTs (ITK) format .txt
-      pattern: "*.{txt,lta,mat,dat}"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  deform_transform:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*out_warp.{nii,nii.gz,mgz,m3z}":
+          type: file
+          description: Deform transform. Default usage outputs ANTs (ITK) format .nii.gz
+          pattern: "*out_warp.{nii,nii.gz,mgz,m3z}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  affine_transform:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*out_affine.{txt,lta,mat,dat}":
+          type: map
+          description: Affine transform. Default usage outputs ANTs (ITK) format .txt
+          pattern: "*out_affine.{txt,lta,mat,dat}"
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@anroy1"
