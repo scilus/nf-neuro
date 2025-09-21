@@ -1,103 +1,120 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "betcrop_fslbetcrop"
-description: Perform Brain extraction using FSL BET followed by cropping empty planes around the data.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: betcrop_fslbetcrop
+description: Perform Brain extraction using FSL BET followed by cropping empty planes
+  around the data.
 keywords:
   - DWI
   - T1
   - BET
   - Crop
-  - scilpy
 tools:
-  - "FSL":
-      description: "FSL Toolbox"
-      homepage: "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki"
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-  - "MRtrix3":
-      description: "Toolbox for image processing, analysis and visualisation of dMRI."
-      homepage: "https://mrtrix.readthedocs.io/en/latest/"
-
-input:
-  - meta:
-      type: map
+  - FSL:
+      description: FSL Toolbox
+      homepage: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
+      doi: 10.1016/j.neuroimage.2011.09.015
+      identifier: ""
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+  - MRtrix3:
       description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - image:
-      type: file
-      description: Nifti image volume to perform BET + crop.
-      pattern: "*.{nii,nii.gz}"
-      mandatory: true
-
-  - bval:
-      type: file
-      description: B-values in FSL format.
-      pattern: "*.bval"
-      madatory: true
-
-  - bvec:
-      type: file
-      description: B-vectors in FSL format.
-      pattern: "*.bvec"
-      mandatory: true
-
+        MRtrix3 is a software package for various types of diffusion imaging
+        data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
+      homepage: https://www.mrtrix.org/
+      doi: 10.1016/j.neuroimage.2019.116137
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - image:
+        type: file
+        description: Nifti image volume to perform BET + crop.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - bval:
+        type: file
+        description: B-values in FSL format.
+        pattern: "*.bval"
+        mandatory: true
+        ontologies: []
+    - bvec:
+        type: file
+        description: B-vectors in FSL format.
+        pattern: "*.bvec"
+        mandatory: true
+        ontologies: []
 args:
   - b0_thr:
       type: float
       description: Threshold under which b-values are considered to be b0s.
       default: 20
-
   - bet_f:
       type: float
       description: |
         Fractional intensity threshold (0->1).
         Smaller values give larger brain outline estimates"
       default: 0.5
-
   - size_dil:
       type: int
       description: "Size of dilation for the mask (in voxels)."
       default: None
-
   - crop:
       type: boolean
       description: "Crop the output images."
       default: true
-
   - dilate:
       type: boolean
       description: "Dilate the mask."
       default: true
-
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - image:
-      type: file
-      description: Nifti volume brain-extracted and cropped.
-      pattern: "*_bet.{nii,nii.gz}"
-
-  - mask:
-      type: file
-      description: mask brain-extracted and cropped.
-      pattern: "*_bet_mask.{nii,nii.gz}"
-
-  - bbox:
-      type: file
-      description: BoundingBox used for cropping.
-      pattern: "*_boundingBox.pkl"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  image:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_bet.nii.gz":
+          type: file
+          description: Nifti volume brain-extracted and cropped.
+          pattern: "*_bet.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  mask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_bet_mask.nii.gz":
+          type: file
+          description: mask brain-extracted and cropped.
+          pattern: "*_bet_mask.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  bbox:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_boundingBox.pkl":
+          type: file
+          description: BoundingBox used for cropping.
+          pattern: "*_boundingBox.pkl"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"

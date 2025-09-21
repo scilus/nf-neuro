@@ -1,40 +1,32 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
 name: "preproc_n4"
 description: |
   Perform N4 bias field correction on either an anatomical image or a diffusion
   volume. For diffusion volumes, the module automatically derives the
   bspline parameter, number of stages, and iteration pyramid based on the image
   resolution and size.
-
   The formula used are as follows:
   For the BSpline parameter:
   `BSplineParam = 2 ** (NbStages - 1) * NbVoxelsBetweenKnots * ShrinkFactor * ImageResolution`
-
   For the number of stages in the iteration pyramid:
   If SmallestDimension ≤ NbVoxelsBetweenKnots * ShrinkFactor:
       NbStages = 1
   Else:
       NbStages = ceil( log2(SmallestDimension / (NbVoxelsBetweenKnots * ShrinkFactor)) )
-
   For the iteration pyramid:
   Slope     = (MinIter - MaxIter) / (1 - Retain)
   Intercept = MaxIter - Slope * Retain
-
   For i in linspace(0, 1, NbStages):
       If i < Retain:
           Iteration = MaxIter
       Else:
           Iteration = round(Slope * i + Intercept)
-
   The default values for the shrink_factor and nb_voxels_between_knots are set
   to 4 and 8, respectively, which are suitable for most diffusion and anatomical
   volumes from a large age range of subjects and species.
-
   For a human T1w image of 1 mm isotropic resolution and a size of 193x229x193,
   a typical N4 call (with automatically derived parameters) would look
   like this:
-
   ```
   N4BiasFieldCorrection -i T1w.nii.gz \
     -o [output__image_n4.nii.gz, bias_field.nii.gz] \
@@ -42,7 +34,6 @@ description: |
     -b [256, 3] \
     -s 4
   ```
-
   For more information on how this formula was derived, please view those references:
   [1] N4 Wiki: https://github.com/ANTsX/ANTs/wiki/N4BiasFieldCorrection
   [2] Tustison, N. J., Avants, B. B., Cook, P. A., Zheng, Y., Egan, A., Yushkevich, P. A.,
@@ -52,44 +43,16 @@ description: |
       A versatile pipeline for resolution adapted diffusion MRI processing and its
       application to studying the variability of the PRIME-DE database. Frontiers
       in Neuroinformatics, Volume 17-2023. https://doi.org/10.3389/fninf.2023.1191200
-
 keywords:
   - correction
   - N4
   - bias field
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
-input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-      mandatory: true
-  - image:
-      type: file
-      description: Nifti image file to correct
-      pattern: "*.{nii,nii.gz}"
-      mandatory: true
-  - bval:
-      type: file
-      description: B-value file for the diffusion image
-      pattern: "*.bval"
-      mandatory: false
-  - bvec:
-      type: file
-      description: B-vector file for the diffusion image
-      pattern: "*.bvec"
-      mandatory: false
-  - mask:
-      type: file
-      description: Nifti image file mask for the reference
-      pattern: "*.{nii,nii.gz}"
-      mandatory: false
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 args:
   - prefix:
       type: string
@@ -116,23 +79,61 @@ args:
       default: 100
   - retain:
       type: number
-      description: Ratio of stages for which the number of iterations is fixed to the maximum iterations defined.
+      description: Ratio of stages for which the number of iterations is fixed to the
+        maximum iterations defined.
       default: 0.6
-
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+        mandatory: true
+    - image:
+        type: file
+        description: Nifti image file to correct
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - bval:
+        type: file
+        description: B-value file for the diffusion image
+        pattern: "*.bval"
+        mandatory: false
+        ontologies: []
+    - bvec:
+        type: file
+        description: B-vector file for the diffusion image
+        pattern: "*.bvec"
+        mandatory: false
+        ontologies: []
+    - mask:
+        type: file
+        description: Nifti image file mask for the reference
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-  - image:
-      type: file
-      description: N4 corrected image
-      pattern: "*.{nii,nii.gz}"
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  image:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__image_n4.nii.gz":
+          type: file
+          description: N4 corrected image
+          pattern: "*__image_n4.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@arnaudbore"

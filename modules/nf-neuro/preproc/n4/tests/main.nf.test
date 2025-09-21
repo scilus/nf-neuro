@@ -6,7 +6,7 @@ nextflow_process {
     process "PREPROC_N4"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "preproc"
     tag "preproc/n4"
 

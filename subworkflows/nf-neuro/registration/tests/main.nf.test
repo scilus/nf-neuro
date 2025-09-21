@@ -5,7 +5,7 @@ nextflow_workflow {
     workflow "REGISTRATION"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/registration"
 
     tag "registration"

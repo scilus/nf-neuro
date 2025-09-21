@@ -21,7 +21,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,3414a40c02551052589b50e4eb35a3da"
+                    "versions.yml:md5,9c43291bef0aa7f7d49133a0ad7c0878"
                 ],
                 "mqc": [
                     [
@@ -33,7 +33,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3414a40c02551052589b50e4eb35a3da"
+                    "versions.yml:md5,9c43291bef0aa7f7d49133a0ad7c0878"
                 ],
                 "warped_image": [
                     [
@@ -55,13 +55,13 @@
     "registration - antsapplytransforms - stub-run": {
         "content": [
             [
-                "versions.yml:md5,3414a40c02551052589b50e4eb35a3da"
+                "versions.yml:md5,9c43291bef0aa7f7d49133a0ad7c0878"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-02-23T16:23:22.94059003"
+        "timestamp": "2025-06-05T15:36:32.982446247"
     }
 }

@@ -7,7 +7,7 @@ process SEGMENTATION_FSRECONALL {
     container "freesurfer/freesurfer:7.4.1"
 
     input:
-        tuple val(meta), path(anat), path(fs_license) /* optional, value = [] */
+        tuple val(meta), path(anat), path(fs_license) /* optional, input = [] */
 
     output:
         tuple val(meta), path("*__recon_all")   , emit: recon_all_out_folder
@@ -52,7 +52,7 @@ process SEGMENTATION_FSRECONALL {
     # Finish
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -73,7 +73,7 @@ process SEGMENTATION_FSRECONALL {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 }

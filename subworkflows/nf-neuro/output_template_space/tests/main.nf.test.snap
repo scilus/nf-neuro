@@ -44,12 +44,12 @@
                 ],
                 "versions": [
                     "versions.yml:md5,00dee5d05eb6c7fa693b718e2264ce48",
-                    "versions.yml:md5,04f69537f2d6cdc20e0a8c110ae9b7e7",
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
-                    "versions.yml:md5,0d37dad46b915d0f062b1e1c791f47a7",
+                    "versions.yml:md5,4aa75761841b81efa97cd28be409ead9",
                     "versions.yml:md5,4fe062075b77eb5fd05e956d9da383c8",
                     "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
-                    "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf"
+                    "versions.yml:md5,e667d19be259b1983b4451f18751d3b8",
+                    "versions.yml:md5,f131337fe390b5d6c58ab1f1223bd4e8"
                 ]
             }
         ],
@@ -57,7 +57,11 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
+<<<<<<< HEAD
         "timestamp": "2025-09-17T20:06:30.618698443"
+=======
+        "timestamp": "2025-09-18T15:26:49.635678794"
+>>>>>>> main
     },
     "output to template MNI152NLin2009cAsym with local folder": {
         "content": [
@@ -104,12 +108,12 @@
                 ],
                 "versions": [
                     "versions.yml:md5,00dee5d05eb6c7fa693b718e2264ce48",
-                    "versions.yml:md5,04f69537f2d6cdc20e0a8c110ae9b7e7",
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
-                    "versions.yml:md5,0d37dad46b915d0f062b1e1c791f47a7",
+                    "versions.yml:md5,4aa75761841b81efa97cd28be409ead9",
                     "versions.yml:md5,4fe062075b77eb5fd05e956d9da383c8",
                     "versions.yml:md5,a6b014172fd4dfe073bb793b58943c46",
-                    "versions.yml:md5,ad180f312de6e9124ce2789c69d3afdf"
+                    "versions.yml:md5,e667d19be259b1983b4451f18751d3b8",
+                    "versions.yml:md5,f131337fe390b5d6c58ab1f1223bd4e8"
                 ]
             }
         ],
@@ -117,6 +121,10 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
+<<<<<<< HEAD
         "timestamp": "2025-09-17T20:06:16.771618815"
+=======
+        "timestamp": "2025-09-18T15:26:02.703363863"
+>>>>>>> main
     }
 }

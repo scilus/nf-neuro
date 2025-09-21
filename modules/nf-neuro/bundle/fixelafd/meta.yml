@@ -1,50 +1,52 @@
----
-name: "bundle_fixelafd"
-description: USE scilpy to compute mean apparent fiber density (AFD) and mean radial radial fODF (radfODF) maps along a bundle.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: bundle_fixelafd
+description: |
+  Compute mean apparent fiber density (AFD) and mean radial fODF (radfODF) maps along a bundle.
 keywords:
   - DWI
   - AFD
   - Fixel
 tools:
-  - "Scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - bundles:
-      type: list
-      description: "List of bundles in .trk format."
-      pattern: "*.trk"
-      mandatory: true
-
-  - fodf:
-      type: file
-      description: "fODF file to extract fixel measurements from."
-      pattern: "*.nii.gz"
-      mandatory: true
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - bundles:
+        type: list
+        description: List of bundles in .trk format.
+        pattern: "*.trk"
+        mandatory: true
+    - fodf:
+        type: file
+        description: fODF file to extract fixel measurements from.
+        pattern: "*.nii.gz"
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - fixel_afd:
-      type: list
-      description: "Mean Apparent Fiber Density (AFD) along the bundle."
-      pattern: "*_afd_metric.nii.gz"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  fixel_afd:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_afd_metric.nii.gz":
+          type: list
+          description: Mean Apparent Fiber Density (AFD) along the bundle.
+          pattern: "*_afd_metric.nii.gz"
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@grahamlittlephd"

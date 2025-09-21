@@ -1,88 +1,149 @@
----
-name: "reconst_shmetrics"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
+name: reconst_shmetrics
 description: Compute FODF metrics from given FODF or SH map.
 keywords:
   - FODF
   - SH
   - Metrics
 tools:
-  - "Scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - sh:
-      type: file
-      description: SH or FODF map.
-      pattern: "*.{nii,nii.gz}"
-
-  - mask:
-      type: file
-      description: B0 mask.
-      pattern: "*.{nii,nii.gz}"
-
-  - fa:
-      type: file
-      description: FA map.
-      pattern: "*.{nii,nii.gz}"
-
-  - md:
-      type: file
-      description: MD map.
-      pattern: "*.{nii,nii.gz}"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - sh:
+        type: file
+        description: SH or FODF map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - mask:
+        type: file
+        description: B0 mask.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fa:
+        type: file
+        description: FA map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - md:
+        type: file
+        description: MD map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - peaks:
-      type: file
-      description: Peaks file.
-      pattern: "*peaks.nii.gz"
-
-  - peak_indices:
-      type: file
-      description: Peak indices file.
-      pattern: "*peak_indices.nii.gz"
-
-  - afd_max:
-      type: file
-      description: Maximum Apparent Fiber Density (AFDmax) map.
-      pattern: "*afd_max.nii.gz"
-
-  - afd_total:
-      type: file
-      description: Total Apparent Fiber Density (AFDtotal) map.
-      pattern: "*afd_total.nii.gz"
-
-  - afd_sum:
-      type: file
-      description: Sum of all Apparent Fiber Density (Afdsum) map.
-      pattern: "*afd_sum.nii.gz"
-
-  - nufo:
-      type: file
-      description: Number of Fiber Orientation (NuFO) map.
-      pattern: "*nufo.nii.gz"
-
-  - vent_mask:
-      type: file
-      description: Ventricles mask.
-      pattern: "*ventricles_mask.nii.gz"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  peaks:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*peaks.nii.gz":
+          type: file
+          description: Peaks file.
+          pattern: "*peaks.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  peak_indices:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*peak_indices.nii.gz":
+          type: file
+          description: Peak indices file.
+          pattern: "*peak_indices.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  peak_values:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*peak_values.nii.gz":
+          type: file
+          description: Peaks values file.
+          pattern: "*peak_values.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  afd_max:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*afd_max.nii.gz":
+          type: file
+          description: Maximum Apparent Fiber Density (AFDmax) map.
+          pattern: "*afd_max.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  afd_total:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*afd_total.nii.gz":
+          type: file
+          description: Total Apparent Fiber Density (AFDtotal) map.
+          pattern: "*afd_total.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  afd_sum:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*afd_sum.nii.gz":
+          type: file
+          description: Sum of all Apparent Fiber Density (Afdsum) map.
+          pattern: "*afd_sum.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  nufo:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*nufo.nii.gz":
+          type: file
+          description: Number of Fiber Orientation (NuFO) map.
+          pattern: "*nufo.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  vent_mask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*ventricles_mask.nii.gz":
+          type: file
+          description: Ventricles mask.
+          pattern: "*ventricles_mask.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@karanphil"

@@ -8,9 +8,9 @@ process IMAGE_BURNVOXELS {
     tuple val(meta), path(masks), path(anat)
 
     output:
-    tuple val(meta), path("*__all.nii.gz"), emit: all_masks_burned
-    tuple val(meta), path("*__*_*.nii.gz"), emit: each_mask_burned
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*__all.nii.gz")      , emit: all_masks_burned
+    tuple val(meta), path("*__*_[0-9]*[0-9].nii.gz") , emit: each_mask_burned
+    path "versions.yml"                         , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -54,7 +54,7 @@ process IMAGE_BURNVOXELS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: \$(antsRegistration --version | grep Version |  cut -d" " -f3)
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix \$(mrcalc -version | grep mrcalc | cut -d" " -f3)
         scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
@@ -70,7 +70,7 @@ process IMAGE_BURNVOXELS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: \$(antsRegistration --version | grep Version |  cut -d" " -f3)
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix \$(mrcalc -version | grep mrcalc | cut -d" " -f3)
         scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS

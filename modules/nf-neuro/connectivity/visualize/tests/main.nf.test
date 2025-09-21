@@ -5,7 +5,7 @@ nextflow_process {
     process "CONNECTIVITY_VISUALIZE"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "connectivity"
     tag "connectivity/visualize"
 
