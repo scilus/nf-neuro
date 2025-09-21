@@ -1,5 +1,5 @@
----
-name: "image_convert"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: image_convert
 description: |
   Small utility module to perform data type conversion on images. The new
   datatype has to be specified using the task.ext.datatype parameter, otherwise,
@@ -9,39 +9,45 @@ keywords:
   - convert
   - datatype
 tools:
-  - "MRtrix3":
-      description: "MRtrix3 is a software package for various types of diffusion imaging data, including diffusion-weighted, diffusion-tensor, and q-ball imaging."
-      homepage: "https://www.mrtrix.org/"
-
+  - MRtrix3:
+      description: |
+        MRtrix3 is a software package for various types of diffusion imaging
+        data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
+      homepage: https://www.mrtrix.org/
+      doi: 10.1016/j.neuroimage.2019.116137
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - image:
-      type: file
-      description: Image to convert.
-      pattern: "*.nii.gz"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - image:
+        type: file
+        description: Image to convert.
+        pattern: "*.nii.gz"
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - image:
-      type: file
-      description: Image converted into the specified datatype.
-      pattern: "*_converted.nii.gz"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  image:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_converted.nii.gz":
+          type: file
+          description: Image converted into the specified datatype.
+          pattern: "*_converted.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
 maintainers:

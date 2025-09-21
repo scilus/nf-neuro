@@ -9,8 +9,8 @@ process IO_READBIDS {
         path(bids_ignore)
 
     output:
-        path("bids_struct.json")             , emit: bidsstructure
-        path "versions.yml"                             , emit: versions
+        path("bids_struct.json")    , emit: bidsstructure
+        path("versions.yml")        , emit: versions
 
 
     when:
@@ -41,7 +41,7 @@ process IO_READBIDS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
     stub:
@@ -74,7 +74,7 @@ process IO_READBIDS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

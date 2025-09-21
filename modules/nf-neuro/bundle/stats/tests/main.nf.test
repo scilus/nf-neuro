@@ -5,7 +5,7 @@ nextflow_process {
     process "BUNDLE_STATS"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "bundle"
     tag "bundle/stats"
 
@@ -96,7 +96,7 @@ nextflow_process {
                     process.out.endpoints_raw,
                     process.out.endpoints_metric_stats,
                     process.out.mean_std,
-                    file(process.out.volume.get(0).get(1)).name,
+                    process.out.volume,
                     process.out.volume_lesions,
                     process.out.streamline_count,
                     process.out.streamline_count_lesions,

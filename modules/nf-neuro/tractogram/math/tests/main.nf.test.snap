@@ -30,7 +30,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-09T20:49:42.49353292"
+        "timestamp": "2025-06-03T17:49:52.585111196"
     },
     "tractogram - stub": {
         "content": [
@@ -42,7 +42,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-09T20:49:59.858080699"
+        "timestamp": "2025-06-03T17:39:31.553234928"
     },
     "tractogram - math - stub-run": {
         "content": [

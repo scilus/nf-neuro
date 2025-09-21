@@ -11,15 +11,26 @@
                     ]
                 ],
                 "versions": [
+<<<<<<< HEAD
                     "versions.yml:md5,94e5ea77581b6f43f79c3e7e4fc03030",
                     "versions.yml:md5,afaf6c2953accc507d8777303eea8718"
+=======
+                    "versions.yml:md5,2fbc09a51203e509d1a15a631168680e",
+                    "versions.yml:md5,84a499436fbf8f1367ec4d8b21cf3abd"
+>>>>>>> main
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
+<<<<<<< HEAD
             "nextflow": "25.04.7"
         },
         "timestamp": "2025-09-17T20:27:00.049111549"
+=======
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-04T20:55:58.757696313"
+>>>>>>> main
     }
 }

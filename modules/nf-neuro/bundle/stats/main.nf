@@ -8,21 +8,21 @@ process BUNDLE_STATS {
     tuple val(meta), path(bundles), path(labels_map), path(metrics), path(lesions)
 
     output:
-    tuple val(meta), path("*_length_stats.json")                , emit: length, optional: true
-    tuple val(meta), path("*_endpoints_map_raw.json")           , emit: endpoints_raw, optional: true
-    tuple val(meta), path("*_endpoints_metric_stats.json")      , emit: endpoints_metric_stats, optional: true
-    tuple val(meta), path("*_mean_std.json")                    , emit: mean_std, optional: true
-    tuple val(meta), path("*_volume.json")                      , emit: volume, optional: true
-    tuple val(meta), path("*_volume_lesions.json")              , emit: volume_lesions, optional: true
-    tuple val(meta), path("*_streamline_count.json")            , emit: streamline_count, optional: true
-    tuple val(meta), path("*_streamline_count_lesions.json")    , emit: streamline_count_lesions, optional: true
-    tuple val(meta), path("*_volume_per_label.json")            , emit: volume_per_labels, optional: true
-    tuple val(meta), path("*_volume_per_label_lesions.json")    , emit: volume_per_labels_lesions, optional: true
-    tuple val(meta), path("*_mean_std_per_point.json")          , emit: mean_std_per_point, optional: true
+    tuple val(meta), path("*__length_stats.json")               , emit: length, optional: true
+    tuple val(meta), path("*__endpoints_map_raw.json")          , emit: endpoints_raw, optional: true
+    tuple val(meta), path("*__endpoints_metric_stats.json")     , emit: endpoints_metric_stats, optional: true
+    tuple val(meta), path("*__mean_std.json")                   , emit: mean_std, optional: true
+    tuple val(meta), path("*__volume.json")                     , emit: volume, optional: true
+    tuple val(meta), path("*__volume_lesions.json")             , emit: volume_lesions, optional: true
+    tuple val(meta), path("*__streamline_count.json")           , emit: streamline_count, optional: true
+    tuple val(meta), path("*__streamline_count_lesions.json")   , emit: streamline_count_lesions, optional: true
+    tuple val(meta), path("*__volume_per_label.json")           , emit: volume_per_labels, optional: true
+    tuple val(meta), path("*__volume_per_label_lesions.json")   , emit: volume_per_labels_lesions, optional: true
+    tuple val(meta), path("*__mean_std_per_point.json")         , emit: mean_std_per_point, optional: true
     tuple val(meta), path("*__lesion_stats.json")               , emit: lesion_stats, optional: true
-    tuple val(meta), path("*_endpoints_map_head.nii.gz")        , emit: endpoints_head, optional: true
-    tuple val(meta), path("*_endpoints_map_tail.nii.gz")        , emit: endpoints_tail, optional: true
-    tuple val(meta), path("*_lesion_map.nii.gz")                , emit: lesion_map, optional: true
+    tuple val(meta), path("*__endpoints_map_head.nii.gz")       , emit: endpoints_head, optional: true
+    tuple val(meta), path("*__endpoints_map_tail.nii.gz")       , emit: endpoints_tail, optional: true
+    tuple val(meta), path("*__lesion_map.nii.gz")               , emit: lesion_map, optional: true
     path "versions.yml"                                         , emit: versions
 
     when:

@@ -135,9 +135,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T03:34:25.538979419"
+        "timestamp": "2025-07-04T20:54:37.152761975"
     },
     "anatomical_segmentation - fslfast": {
         "content": [
@@ -197,9 +197,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-09T03:29:02.01884958"
+        "timestamp": "2025-07-04T20:54:08.393035504"
     },
     "anatomical_segmentation - both": {
         "content": [
