@@ -34,36 +34,16 @@
     },
     "connectivity - afdfixel - with params": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__afd_fixel.h5:md5,2d35f4b2ec5256a48e920143c07d554c"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,54ca1cb9d03e6ac32466840d80771a50"
-                ],
-                "hdf5": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__afd_fixel.h5:md5,2d35f4b2ec5256a48e920143c07d554c"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,54ca1cb9d03e6ac32466840d80771a50"
-                ]
-            }
+            "test__afd_fixel.h5",
+            [
+                "versions.yml:md5,54ca1cb9d03e6ac32466840d80771a50"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-17T19:07:16.057541682"
+        "timestamp": "2025-09-21T23:37:22.617009561"
     },
     "connectivity - afdfixel - with stub": {
         "content": [
