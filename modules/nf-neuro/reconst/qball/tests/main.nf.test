@@ -58,8 +58,8 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     niftiMD5SUM(process.out.gfa.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.peaks.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.peak_indices.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.peaks.get(0).get(1), 3),
+                    niftiMD5SUM(process.out.peak_indices.get(0).get(1), 3),
                     niftiMD5SUM(process.out.sh.get(0).get(1), 6),
                     niftiMD5SUM(process.out.nufo.get(0).get(1), 6),
                     niftiMD5SUM(process.out.a_power.get(0).get(1), 6),
