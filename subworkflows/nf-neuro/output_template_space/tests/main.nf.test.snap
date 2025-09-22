@@ -57,7 +57,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-18T15:26:49.635678794"
+        "timestamp": "2025-09-17T20:06:30.618698443"
     },
     "output to template MNI152NLin2009cAsym with local folder": {
         "content": [
@@ -117,6 +117,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-18T15:26:02.703363863"
+        "timestamp": "2025-09-17T20:06:16.771618815"
     }
 }

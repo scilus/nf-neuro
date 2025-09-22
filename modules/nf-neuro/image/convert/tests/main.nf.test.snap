@@ -7,9 +7,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-04T02:48:58.610609174"
+        "timestamp": "2025-09-17T20:02:57.148325392"
     },
     "Image convert - uint8": {
         "content": [
@@ -42,9 +42,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-04T02:47:03.050125958"
+        "timestamp": "2025-09-17T20:02:43.382029732"
     },
     "Image convert - float32": {
         "content": [
@@ -77,8 +77,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-04T02:46:29.276909963"
+        "timestamp": "2025-09-17T20:02:50.477023739"
     }
 }

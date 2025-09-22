@@ -89,17 +89,17 @@
                 ],
                 "versions": [
                     "versions.yml:md5,034b6d262d1e0e45c673d3ac1756e22f",
-                    "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
                     "versions.yml:md5,218c08543fae3d1e7dd9b1527aa67a21",
                     "versions.yml:md5,2a21b128aa5c69a8532e114406dae21d",
                     "versions.yml:md5,4f645295735c7f79182fd589063e11a5",
-                    "versions.yml:md5,74b598d20803a03210ee47050cc5d18e",
                     "versions.yml:md5,83bb1f168d146ca8d303c24584044f9f",
+                    "versions.yml:md5,a585ae0f02b31e59f3f641836f5cb608",
                     "versions.yml:md5,ad61f7de0a1a7d63ea98e66c170160e4",
+                    "versions.yml:md5,c7da6834a9868efe7d6878ae023a6782",
                     "versions.yml:md5,cad56766a7aba84e153c3be70f8c48f2",
                     "versions.yml:md5,dd4515fa7d32a40e94927fddf215ef18",
-                    "versions.yml:md5,e8461256ab14c2edfbff1f1bf231688d",
-                    "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
+                    "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9",
+                    "versions.yml:md5,f6302711c5746db0253caef585c65db5"
                 ]
             }
         ],
@@ -107,7 +107,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-18T15:43:43.184566767"
+        "timestamp": "2025-09-22T17:47:06.829327552"
     },
     "preproc_dwi - AP DWI | PA sbref": {
         "content": [
@@ -199,15 +199,15 @@
                 ],
                 "versions": [
                     "versions.yml:md5,034b6d262d1e0e45c673d3ac1756e22f",
-                    "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
                     "versions.yml:md5,218c08543fae3d1e7dd9b1527aa67a21",
                     "versions.yml:md5,2a21b128aa5c69a8532e114406dae21d",
-                    "versions.yml:md5,74b598d20803a03210ee47050cc5d18e",
+                    "versions.yml:md5,a585ae0f02b31e59f3f641836f5cb608",
                     "versions.yml:md5,ad61f7de0a1a7d63ea98e66c170160e4",
+                    "versions.yml:md5,c7da6834a9868efe7d6878ae023a6782",
                     "versions.yml:md5,cad56766a7aba84e153c3be70f8c48f2",
                     "versions.yml:md5,dd4515fa7d32a40e94927fddf215ef18",
-                    "versions.yml:md5,e8461256ab14c2edfbff1f1bf231688d",
-                    "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
+                    "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9",
+                    "versions.yml:md5,f6302711c5746db0253caef585c65db5"
                 ]
             }
         ],
@@ -215,7 +215,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-18T15:38:05.852482123"
+        "timestamp": "2025-09-22T17:45:35.355866661"
     },
     "preproc_dwi - AP DWI | PA DWI": {
         "content": [
@@ -307,17 +307,17 @@
                 ],
                 "versions": [
                     "versions.yml:md5,034b6d262d1e0e45c673d3ac1756e22f",
-                    "versions.yml:md5,10ec368dc91791041043fddf6ea3d5c9",
                     "versions.yml:md5,218c08543fae3d1e7dd9b1527aa67a21",
                     "versions.yml:md5,2a21b128aa5c69a8532e114406dae21d",
                     "versions.yml:md5,4f645295735c7f79182fd589063e11a5",
-                    "versions.yml:md5,74b598d20803a03210ee47050cc5d18e",
                     "versions.yml:md5,83bb1f168d146ca8d303c24584044f9f",
+                    "versions.yml:md5,a585ae0f02b31e59f3f641836f5cb608",
                     "versions.yml:md5,ad61f7de0a1a7d63ea98e66c170160e4",
+                    "versions.yml:md5,c7da6834a9868efe7d6878ae023a6782",
                     "versions.yml:md5,cad56766a7aba84e153c3be70f8c48f2",
                     "versions.yml:md5,dd4515fa7d32a40e94927fddf215ef18",
-                    "versions.yml:md5,e8461256ab14c2edfbff1f1bf231688d",
-                    "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9"
+                    "versions.yml:md5,f041502e22449973d84ac1c618e8ebf9",
+                    "versions.yml:md5,f6302711c5746db0253caef585c65db5"
                 ]
             }
         ],
@@ -325,6 +325,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-18T15:41:10.64659615"
+        "timestamp": "2025-09-22T17:46:21.472576868"
     }
 }
