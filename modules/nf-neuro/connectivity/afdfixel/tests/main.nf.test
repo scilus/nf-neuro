@@ -64,7 +64,10 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out.versions).match() }
+                { assert snapshot(
+                    file(process.out.hdf5.get(0).get(1)).name,
+                    process.out.versions
+                ).match() }
             )
         }
     }
