@@ -157,7 +157,7 @@ output:
         ontologies:
           - edam: http://edamontology.org/format_3750 # YAM
 authors:
-  - @EliseCos
-  - @arnaudbore
+  - "@EliseCos"
+  - "@arnaudbore"
 maintainers:
   - "@arnaudbore"
