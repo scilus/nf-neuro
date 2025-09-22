@@ -1,7 +1,7 @@
 process IO_READBIDS {
     label 'process_single'
 
-    container "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         path(bids_folder)
@@ -23,7 +23,7 @@ process IO_READBIDS {
     def clean_flag = task.ext.clean_bids ? "--clean " : ''
 
     """
-    scil_bids_validate.py $bids_folder bids_struct.json\
+    scil_bids_validate $bids_folder bids_struct.json\
         $readout \
         $clean_flag \
         $fs_folder \
@@ -41,12 +41,12 @@ process IO_READBIDS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
     stub:
     """
-    scil_bids_validate.py -h
+    scil_bids_validate -h
 
     cat <<-ENDSTRUCT > bids_struct.json
     [
@@ -74,7 +74,7 @@ process IO_READBIDS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
