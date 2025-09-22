@@ -9,41 +9,41 @@
                             "single_end": false
                         },
                         [
-                            "afd_max_histogram.png:md5,43912780c2ac709b631fc39d95d464e8",
-                            "afd_max_matrix.png:md5,89adc0462e5f6ee412110994e6e6b3eb",
-                            "len_histogram.png:md5,117651740e19ee3c536c9a4bea6babfb",
-                            "len_matrix.png:md5,e2098003d452ce2ba9db2c265d8516e9",
-                            "mask_histogram.png:md5,073e208a8a327baa5bbf721e66e337d4",
-                            "mask_matrix.png:md5,ec19ecce53d485ca983bf17bc87b56c7",
-                            "pval_histogram.png:md5,892ebc7b367db2ac1bd970f638043904",
-                            "pval_matrix.png:md5,2b8e9a9f8833110d7a2f9d612ae6f2be",
-                            "sc_add_10_histogram.png:md5,265a9399387c856977eae1ea3f83516a",
-                            "sc_add_10_matrix.png:md5,07e322fd583f9b8235c50363d7aba9e0",
-                            "sc_histogram.png:md5,7baccf0dc5a650bea2aecd19d3867653",
-                            "sc_lower_threshold_histogram.png:md5,cd4368e81ef4f9f128a444a7897d0c1e",
-                            "sc_lower_threshold_matrix.png:md5,748d5a2a15159896775ebb7aa71a3fd5",
-                            "sc_masked_histogram.png:md5,2a0163a153ee2b3174138ba4505ec6fb",
-                            "sc_masked_matrix.png:md5,1b52240fc505e2e002c65b9e4f0ce777",
-                            "sc_matrix.png:md5,db388963daf62fae2ef1d8be58c9cad8",
-                            "sc_norm_histogram.png:md5,bfc9fa64063f6a8797f3bb49d2bfcbfd",
-                            "sc_norm_matrix.png:md5,67ef585c7559edb6e7c88ca50304db4f",
-                            "sc_norm_vol_histogram.png:md5,1eb857ea304f82fe73bc3a6416ade1d1",
-                            "sc_norm_vol_matrix.png:md5,572daf7d844699f96cc1519458491f3b",
-                            "sc_normalize_histogram.png:md5,dbc8741adf4dd3a597199c36a9ed197d",
-                            "sc_normalize_matrix.png:md5,2bc762a0e4861d726bbec1372b124763",
-                            "sc_reo_fake_histogram.png:md5,1f2efba6ff6a949f6bdc9b07e3d0952b",
-                            "sc_reo_fake_matrix.png:md5,2d8e4abada02b7d096e38888a2ea2a09",
-                            "sc_thr_histogram.png:md5,cd4368e81ef4f9f128a444a7897d0c1e",
-                            "sc_thr_matrix.png:md5,748d5a2a15159896775ebb7aa71a3fd5",
-                            "sim_histogram.png:md5,e82b14b3fbb8184e53265a05fe247fd0",
-                            "sim_matrix.png:md5,e42c85fbd2211738bb38882305122c9a",
-                            "vol_histogram.png:md5,5b60e61f931294416a22ad3a7d8848ca",
-                            "vol_matrix.png:md5,85ddd42c1562adaf38aee0cc32334039"
+                            "afd_max_histogram.png:md5,acf59e8f729ae5b6c6d4862bff63498d",
+                            "afd_max_matrix.png:md5,c2c06863a85fba3c675603d75e2f49a6",
+                            "len_histogram.png:md5,d268e9f61ab4fd6b4ad16f327aef5c6a",
+                            "len_matrix.png:md5,5d9665b12cd181ee7292cd5586da82bb",
+                            "mask_histogram.png:md5,c343e261a0f19ceff2857e1df6064c22",
+                            "mask_matrix.png:md5,c335c8f738b834dcdf2fa575ee7f5b0b",
+                            "pval_histogram.png:md5,2046f815ad1bdd03916a00fa45e8cbbd",
+                            "pval_matrix.png:md5,b48d02a53037e0919a9aa78b5c9d76fe",
+                            "sc_add_10_histogram.png:md5,a00b70137e4672ac77fe88be3bdade34",
+                            "sc_add_10_matrix.png:md5,eb7bbbadff0f0436e72af3036e13c282",
+                            "sc_histogram.png:md5,1da6479ea5a4a62a38a1e306ab76dfe3",
+                            "sc_lower_threshold_histogram.png:md5,2fbe3def2e032802ceac1181b633889d",
+                            "sc_lower_threshold_matrix.png:md5,61ea6741af1cbac11d3b37fd1c72a617",
+                            "sc_masked_histogram.png:md5,730faa50abaacc7521f5c7a1bd649fdf",
+                            "sc_masked_matrix.png:md5,599a327daa5ddc18b68e5846f4562941",
+                            "sc_matrix.png:md5,7925a60aa3579c93e0e7c3c7da9a219c",
+                            "sc_norm_histogram.png:md5,3c049f3013317d2a547887eab6c6c713",
+                            "sc_norm_matrix.png:md5,00a44b0ce567b5a874af4f72e3ccbf3a",
+                            "sc_norm_vol_histogram.png:md5,25a78947709df35fd05ee078293100e2",
+                            "sc_norm_vol_matrix.png:md5,64b1865183fd34a84e9a29099c3d6a6f",
+                            "sc_normalize_histogram.png:md5,4746d4fc358c0602abd36567808d8651",
+                            "sc_normalize_matrix.png:md5,a07a45fa844ff060d6f85bc6ad232a7d",
+                            "sc_reo_fake_histogram.png:md5,2f098db8f5006438774c7c809ad21b78",
+                            "sc_reo_fake_matrix.png:md5,abf3f196d7a2955551ec7259c5cadd60",
+                            "sc_thr_histogram.png:md5,2fbe3def2e032802ceac1181b633889d",
+                            "sc_thr_matrix.png:md5,61ea6741af1cbac11d3b37fd1c72a617",
+                            "sim_histogram.png:md5,d16bcaa64d755db6186a7253a672957a",
+                            "sim_matrix.png:md5,1e267e0b553700cb36bff6a600839ed8",
+                            "vol_histogram.png:md5,29cf95685db9a1e537df3c77ea7f0bc7",
+                            "vol_matrix.png:md5,5f357f6000d07dfb35185ec4cebfbf3f"
                         ]
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+                    "versions.yml:md5,405994012003d8a4506c810eaa403022"
                 ],
                 "figure": [
                     [
@@ -52,60 +52,60 @@
                             "single_end": false
                         },
                         [
-                            "afd_max_histogram.png:md5,43912780c2ac709b631fc39d95d464e8",
-                            "afd_max_matrix.png:md5,89adc0462e5f6ee412110994e6e6b3eb",
-                            "len_histogram.png:md5,117651740e19ee3c536c9a4bea6babfb",
-                            "len_matrix.png:md5,e2098003d452ce2ba9db2c265d8516e9",
-                            "mask_histogram.png:md5,073e208a8a327baa5bbf721e66e337d4",
-                            "mask_matrix.png:md5,ec19ecce53d485ca983bf17bc87b56c7",
-                            "pval_histogram.png:md5,892ebc7b367db2ac1bd970f638043904",
-                            "pval_matrix.png:md5,2b8e9a9f8833110d7a2f9d612ae6f2be",
-                            "sc_add_10_histogram.png:md5,265a9399387c856977eae1ea3f83516a",
-                            "sc_add_10_matrix.png:md5,07e322fd583f9b8235c50363d7aba9e0",
-                            "sc_histogram.png:md5,7baccf0dc5a650bea2aecd19d3867653",
-                            "sc_lower_threshold_histogram.png:md5,cd4368e81ef4f9f128a444a7897d0c1e",
-                            "sc_lower_threshold_matrix.png:md5,748d5a2a15159896775ebb7aa71a3fd5",
-                            "sc_masked_histogram.png:md5,2a0163a153ee2b3174138ba4505ec6fb",
-                            "sc_masked_matrix.png:md5,1b52240fc505e2e002c65b9e4f0ce777",
-                            "sc_matrix.png:md5,db388963daf62fae2ef1d8be58c9cad8",
-                            "sc_norm_histogram.png:md5,bfc9fa64063f6a8797f3bb49d2bfcbfd",
-                            "sc_norm_matrix.png:md5,67ef585c7559edb6e7c88ca50304db4f",
-                            "sc_norm_vol_histogram.png:md5,1eb857ea304f82fe73bc3a6416ade1d1",
-                            "sc_norm_vol_matrix.png:md5,572daf7d844699f96cc1519458491f3b",
-                            "sc_normalize_histogram.png:md5,dbc8741adf4dd3a597199c36a9ed197d",
-                            "sc_normalize_matrix.png:md5,2bc762a0e4861d726bbec1372b124763",
-                            "sc_reo_fake_histogram.png:md5,1f2efba6ff6a949f6bdc9b07e3d0952b",
-                            "sc_reo_fake_matrix.png:md5,2d8e4abada02b7d096e38888a2ea2a09",
-                            "sc_thr_histogram.png:md5,cd4368e81ef4f9f128a444a7897d0c1e",
-                            "sc_thr_matrix.png:md5,748d5a2a15159896775ebb7aa71a3fd5",
-                            "sim_histogram.png:md5,e82b14b3fbb8184e53265a05fe247fd0",
-                            "sim_matrix.png:md5,e42c85fbd2211738bb38882305122c9a",
-                            "vol_histogram.png:md5,5b60e61f931294416a22ad3a7d8848ca",
-                            "vol_matrix.png:md5,85ddd42c1562adaf38aee0cc32334039"
+                            "afd_max_histogram.png:md5,acf59e8f729ae5b6c6d4862bff63498d",
+                            "afd_max_matrix.png:md5,c2c06863a85fba3c675603d75e2f49a6",
+                            "len_histogram.png:md5,d268e9f61ab4fd6b4ad16f327aef5c6a",
+                            "len_matrix.png:md5,5d9665b12cd181ee7292cd5586da82bb",
+                            "mask_histogram.png:md5,c343e261a0f19ceff2857e1df6064c22",
+                            "mask_matrix.png:md5,c335c8f738b834dcdf2fa575ee7f5b0b",
+                            "pval_histogram.png:md5,2046f815ad1bdd03916a00fa45e8cbbd",
+                            "pval_matrix.png:md5,b48d02a53037e0919a9aa78b5c9d76fe",
+                            "sc_add_10_histogram.png:md5,a00b70137e4672ac77fe88be3bdade34",
+                            "sc_add_10_matrix.png:md5,eb7bbbadff0f0436e72af3036e13c282",
+                            "sc_histogram.png:md5,1da6479ea5a4a62a38a1e306ab76dfe3",
+                            "sc_lower_threshold_histogram.png:md5,2fbe3def2e032802ceac1181b633889d",
+                            "sc_lower_threshold_matrix.png:md5,61ea6741af1cbac11d3b37fd1c72a617",
+                            "sc_masked_histogram.png:md5,730faa50abaacc7521f5c7a1bd649fdf",
+                            "sc_masked_matrix.png:md5,599a327daa5ddc18b68e5846f4562941",
+                            "sc_matrix.png:md5,7925a60aa3579c93e0e7c3c7da9a219c",
+                            "sc_norm_histogram.png:md5,3c049f3013317d2a547887eab6c6c713",
+                            "sc_norm_matrix.png:md5,00a44b0ce567b5a874af4f72e3ccbf3a",
+                            "sc_norm_vol_histogram.png:md5,25a78947709df35fd05ee078293100e2",
+                            "sc_norm_vol_matrix.png:md5,64b1865183fd34a84e9a29099c3d6a6f",
+                            "sc_normalize_histogram.png:md5,4746d4fc358c0602abd36567808d8651",
+                            "sc_normalize_matrix.png:md5,a07a45fa844ff060d6f85bc6ad232a7d",
+                            "sc_reo_fake_histogram.png:md5,2f098db8f5006438774c7c809ad21b78",
+                            "sc_reo_fake_matrix.png:md5,abf3f196d7a2955551ec7259c5cadd60",
+                            "sc_thr_histogram.png:md5,2fbe3def2e032802ceac1181b633889d",
+                            "sc_thr_matrix.png:md5,61ea6741af1cbac11d3b37fd1c72a617",
+                            "sim_histogram.png:md5,d16bcaa64d755db6186a7253a672957a",
+                            "sim_matrix.png:md5,1e267e0b553700cb36bff6a600839ed8",
+                            "vol_histogram.png:md5,29cf95685db9a1e537df3c77ea7f0bc7",
+                            "vol_matrix.png:md5,5f357f6000d07dfb35185ec4cebfbf3f"
                         ]
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+                    "versions.yml:md5,405994012003d8a4506c810eaa403022"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-01-16T10:54:29.917241635"
+        "timestamp": "2025-09-17T18:47:12.144528447"
     },
     "connectivity - visualisation - stub-run": {
         "content": [
             [
-                "versions.yml:md5,3114f700c3813ee15388713fe8a539f1"
+                "versions.yml:md5,405994012003d8a4506c810eaa403022"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-01-16T10:55:34.856253711"
+        "timestamp": "2025-09-17T18:47:28.843510255"
     }
 }
