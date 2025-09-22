@@ -41,7 +41,7 @@ process BUNDLE_LABELMAP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -63,7 +63,7 @@ process BUNDLE_LABELMAP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

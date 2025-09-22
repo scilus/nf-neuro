@@ -91,24 +91,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(
-                    process.out.length,
-                    process.out.endpoints_raw,
-                    process.out.endpoints_metric_stats,
-                    process.out.mean_std,
-                    process.out.volume,
-                    process.out.volume_lesions,
-                    process.out.streamline_count,
-                    process.out.streamline_count_lesions,
-                    process.out.volume_per_labels,
-                    process.out.volume_per_labels_lesions,
-                    process.out.mean_std_per_point,
-                    process.out.lesion_stats,
-                    process.out.endpoints_head,
-                    process.out.endpoints_tail,
-                    process.out.lesion_map
-                    ).match()
-                }
+                { assert snapshot(process.out).match() }
             )
         }
     }
