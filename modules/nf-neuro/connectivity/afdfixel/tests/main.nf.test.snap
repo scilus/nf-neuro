@@ -34,7 +34,6 @@
     },
     "connectivity - afdfixel - with params": {
         "content": [
-            "test__afd_fixel.h5",
             [
                 "versions.yml:md5,54ca1cb9d03e6ac32466840d80771a50"
             ]
@@ -43,7 +42,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-21T23:37:22.617009561"
+        "timestamp": "2025-09-22T15:49:18.832723004"
     },
     "connectivity - afdfixel - with stub": {
         "content": [
