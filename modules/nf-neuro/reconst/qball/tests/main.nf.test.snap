@@ -2,8 +2,8 @@
     "reconst - qball_csa": {
         "content": [
             "test__gfa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,776c03e1654897b87c29b9f940a255ca",
-            "test__peaks.nii.gz:md5:header,76a9953111f97786bd14a451c61529e7,data,3a61a594d48adb23c74517ffa51e4232",
-            "test__peak_indices.nii.gz:md5:header,6ea7b6711fe1cb925e65807d3a2c3039,data,3d100e36304d2f64f54322c5059fd709",
+            "test__peaks.nii.gz",
+            "test__peak_indices.nii.gz",
             "test__sh.nii.gz:md5:header,76a9953111f97786bd14a451c61529e7,data,bdd9a72f76558900d2750f3e88116bab",
             "test__nufo.nii.gz:md5:header,ccd78a751ac6eddb4cc7e037e1c82a41,data,0c6a62153a737d93bbe86d86b418adbb",
             "test__a_power.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,d6b4b3f81f9b7f15e6f8de4a4441d563",
@@ -15,7 +15,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-22T03:22:58.753080099"
+        "timestamp": "2025-09-22T03:40:39.803464351"
     },
     "reconst - qball_gfa": {
         "content": [
