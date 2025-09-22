@@ -20,7 +20,7 @@ process BUNDLE_RECOGNIZE {
     // additional script arguments
     def minimal_vote_ratio = task.ext.minimal_vote_ratio ? "--minimal_vote_ratio " + task.ext.minimal_vote_ratio : ""
     def seed = task.ext.seed ? "--seed " + task.ext.seed : ""
-    def rbx_processes = task.ext.processes ? "--processes " + task.ext.processes : "--processes 1"
+    def rbx_processes = task.cpus ? "--processes " + task.cpus : "--processes 1"
     def outlier_alpha = task.ext.outlier_alpha ? "--alpha " + task.ext.outlier_alpha : ""
     """
     mkdir recobundles/
