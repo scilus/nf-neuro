@@ -2,9 +2,7 @@ process REGISTRATION_ANATTODWI {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123' }"
+    container "scilus/scilus:2.2.0"
 
     input:
     tuple val(meta), path(t1), path(b0), path(metric)
@@ -73,11 +71,11 @@ process REGISTRATION_ANATTODWI {
         # Iterate over images.
         for image in t1_warped b0;
         do
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+            scil_viz_volume_screenshot *\${image}.nii.gz \${image}_coronal.png \
                 --slices \$coronal_mid --axis coronal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+            scil_viz_volume_screenshot *\${image}.nii.gz \${image}_sagittal.png \
                 --slices \$sagittal_mid --axis sagittal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+            scil_viz_volume_screenshot *\${image}.nii.gz \${image}_axial.png \
                 --slices \$axial_mid --axis axial \$viz_params
 
             if [ \$image != b0 ];
@@ -107,6 +105,7 @@ process REGISTRATION_ANATTODWI {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
@@ -117,7 +116,17 @@ process REGISTRATION_ANATTODWI {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
+
     antsRegistration -h
+    scil_viz_volume_screenshot -h
+    convert -h
 
     touch ${prefix}__t1_warped.nii.gz
     touch ${prefix}__output0GenericAffine.mat
@@ -127,6 +136,7 @@ process REGISTRATION_ANATTODWI {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
