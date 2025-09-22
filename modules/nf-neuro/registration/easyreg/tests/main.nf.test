@@ -5,7 +5,7 @@ nextflow_process {
     process "REGISTRATION_EASYREG"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "registration"
     tag "registration/easyreg"
 
@@ -66,6 +66,44 @@ nextflow_process {
                     niftiMD5SUM(process.out.bak_field.get(0).get(1), 6),
                     process.out.versions
                 ).match() }
+            )
+        }
+    }
+
+    test("registration - easyreg - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        t1: it.simpleName == "freesurfer"
+                        b0: it.simpleName == "registration"
+                    }
+                ch_t1 = ch_split_test_data.t1.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1.nii.gz")
+                    ]
+                }
+                ch_b0 = ch_split_test_data.b0.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/b0.nii.gz"),
+                        [],
+                        []
+                    ]
+                }
+                input[0] = ch_t1
+                    .join(ch_b0)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
     }

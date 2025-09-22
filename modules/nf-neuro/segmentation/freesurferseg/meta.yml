@@ -1,66 +1,91 @@
----
-name: "segmentation_freesurferseg"
-description: Performs Brain Tissues Segmentation using the FreeSurfer aparc and wmparc output files.  Optionally, a binary mask of lesion can be add to correct the white matter mask.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: segmentation_freesurferseg
+description: Performs Brain Tissues Segmentation using the FreeSurfer aparc and wmparc
+  output files.  Optionally, a binary mask of lesion can be add to correct the white
+  matter mask.
 keywords:
-  - FreeSurfer
   - Segmentation
   - Tissues
+  - FreeSurfer
 tools:
-  - "Scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-  - "MRtrix3":
-      description: "Toolbox for image processing, analysis and visualisation of dMRI."
-      homepage: "https://mrtrix.readthedocs.io/en/latest/"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+  - MRtrix3:
+      description: |
+        MRtrix3 is a software package for various types of diffusion imaging
+        data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
+      homepage: https://www.mrtrix.org/
+      doi: 10.1016/j.neuroimage.2019.116137
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - aparc_aseg:
-      type: file
-      description: FreeSurfer cortical and subcortical parcellation output file.
-      pattern: "*.mgz"
-
-  - wmparc:
-      type: file
-      description: FreeSurfer WM parcellation output file.
-      pattern: "*.mgz"
-
-  - lesion:
-      type: file
-      description: Nifti lesion volume to correct the white matter with a lesion mask.  The lesion mask must be a binary mask.
-      pattern: "*.{nii,nii.gz}"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - aparc_aseg:
+        type: file
+        description: FreeSurfer cortical and subcortical parcellation output file.
+        pattern: "*.mgz"
+        ontologies: []
+    - wmparc:
+        type: file
+        description: FreeSurfer WM parcellation output file.
+        pattern: "*.mgz"
+        ontologies: []
+    - lesion:
+        type: file
+        description: Nifti lesion volume to correct the white matter with a lesion mask.  The
+          lesion mask must be a binary mask.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - wm_mask:
-      type: file
-      description: Nifti WM mask file.
-      pattern: "*.{nii,nii.gz}"
-
-  - gm_mask:
-      type: file
-      description: Nifti GM mask file.
-      pattern: "*.{nii,nii.gz}"
-
-  - csf_mask:
-      type: file
-      description: Nifti CSF mask file.
-      pattern: "*.{nii,nii.gz}"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  wm_mask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__mask_wm.nii.gz":
+          type: file
+          description: Nifti WM mask file.
+          pattern: "*__mask_wm.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  gm_mask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__mask_gm.nii.gz":
+          type: file
+          description: Nifti GM mask file.
+          pattern: "*__mask_gm.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  csf_mask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__mask_csf.nii.gz":
+          type: file
+          description: Nifti CSF mask file.
+          pattern: "*__mask_csf.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"

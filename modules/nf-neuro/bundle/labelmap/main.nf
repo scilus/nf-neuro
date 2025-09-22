@@ -44,7 +44,7 @@ process BUNDLE_LABELMAP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -53,6 +53,7 @@ process BUNDLE_LABELMAP {
     """
     scil_bundle_label_map.py -h
 
+    bundles=(${bundles.join(" ")})
     for index in \${!bundles[@]};
         do ext=\${bundles[index]#*.}
         bname=\$(basename \${bundles[index]} .\${ext})
@@ -65,7 +66,7 @@ process BUNDLE_LABELMAP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

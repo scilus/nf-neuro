@@ -5,7 +5,7 @@ nextflow_workflow {
     workflow "OUTPUT_TEMPLATE_SPACE"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/output_template_space"
 
     tag "registration"
@@ -20,6 +20,9 @@ nextflow_workflow {
     tag "utils/templateflow"
     tag "load_test_data"
 
+    tag "stub"
+    options "-stub-run"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
@@ -30,7 +33,8 @@ nextflow_workflow {
                 """
             }
         }
-    } /* Commented since we do not have local data on runners
+    }
+
     test("output to template MNI152NLin2009cAsym with local folder") {
         config "./nextflow_local.config"
         when {
@@ -79,65 +83,40 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
-            )
-        }
-    } */
-    test("output to template MNI152NLin2009aAsym - with brain mask") {
-        config "./nextflow.config"
-        when {
-            workflow {
-                """
-                ch_split_test_data = LOAD_DATA.out.test_data_directory
-                    .branch{
-                        tractometry: it.simpleName == "tractometry"
-                    }
-                input[0] = ch_split_test_data.tractometry.map{
-                    test_data_directory -> [
-                        [ id: 'test' ], // meta map
-                        file("\${test_data_directory}/mni_masked.nii.gz")
-                    ]
-                }
-                input[1] = ch_split_test_data.tractometry.map{
-                    test_data_directory -> [
-                        [ id: 'test' ], // meta map
-                        [
-                            file("\${test_data_directory}/IFGWM.nii.gz")
-                        ]
-                    ]
-                }
-                input[2] = Channel.empty()
-                input[3] = ch_split_test_data.tractometry.map{
-                    test_data_directory -> [
-                        [ id: 'test' ], // meta map
-                        [
-                            file("\${test_data_directory}/IFGWM_labels_map.nii.gz")
-                        ]
-                    ]
-                }
-                input[4] = ch_split_test_data.tractometry.map{
-                    test_data_directory -> [
-                        [ id: 'test' ], // meta map
-                        [
-                            file("\${test_data_directory}/IFGWM.trk"),
-                            file("\${test_data_directory}/IFGWM_color.trk"),
-                            file("\${test_data_directory}/IFGWM_uni.trk")
-                        ]
-                    ]
-                }
-                """
-            }
-        }
-        then {
-            assertAll(
-                { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    ["ch_t1w_tpl", "ch_t2w_tpl"].contains(channel.key)
+                                        ? file(subject).name
+                                        : [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                            ? file(entry).name
+                                            : "" }
+                            } ]
+                        }
+                ).match()},
+                { assert workflow.out
+                    .findAll{ channel -> !channel.key.isInteger() }
+                    .every{ channel -> ["ch_registered_anat",
+                                        "ch_t1w_tpl",
+                                        "ch_t2w_tpl",
+                                        "ch_warped_labels_files",
+                                        "ch_warped_nifti_files",
+                                        "ch_warped_trk_files",
+                                        "versions"].contains(channel.key)
+                        ? channel.value.every{ subject -> subject instanceof ArrayList
+                                ? subject.every()
+                                : subject }
+                        : channel.value.size() == 0 } }
             )
         }
     }
-    test("output to template MNI152NLin2009aAsym - stub") {
+
+    test("output to template MNI152NLin2009aAsym - without brain mask") {
         config "./nextflow.config"
-        options "-stub-run"
         when {
             workflow {
                 """
@@ -183,8 +162,35 @@ nextflow_workflow {
         }
         then {
             assertAll(
-                { assert workflow.success},
-                { assert snapshot(workflow.out.versions).match()}
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    ["ch_t1w_tpl", "ch_t2w_tpl"].contains(channel.key)
+                                        ? file(subject).name
+                                        : [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                            ? file(entry).name
+                                            : "" }
+                            } ]
+                        }
+                ).match()},
+                { assert workflow.out
+                    .findAll{ channel -> !channel.key.isInteger() }
+                    .every{ channel -> ["ch_registered_anat",
+                                        "ch_t1w_tpl",
+                                        "ch_t2w_tpl",
+                                        "ch_warped_labels_files",
+                                        "ch_warped_nifti_files",
+                                        "ch_warped_trk_files",
+                                        "versions"].contains(channel.key)
+                        ? channel.value.every{ subject -> subject instanceof ArrayList
+                                ? subject.every()
+                                : subject }
+                        : channel.value.size() == 0 } }
             )
         }
     }

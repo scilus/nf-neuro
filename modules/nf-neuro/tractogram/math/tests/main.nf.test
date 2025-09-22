@@ -5,7 +5,7 @@ nextflow_process {
     process "TRACTOGRAM_MATH"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "tractogram"
     tag "tractogram/math"
 
@@ -79,6 +79,34 @@ nextflow_process {
 
     test("tractogram - stub") {
         options "-stub"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/local.trk"),
+                            file("\${test_data_directory}/pft.trk"),
+                        ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
+    test("tractogram - math - stub-run") {
+        tag "stub"
+        options "-stub-run"
         when {
             process {
                 """

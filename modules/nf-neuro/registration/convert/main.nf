@@ -9,8 +9,8 @@ process REGISTRATION_CONVERT {
     tuple val(meta), path(deform), path(affine), path(source), path(target), path(fs_license)
 
     output:
-    tuple val(meta), path("*out_deform_warp.{nii,nii.gz,mgz,m3z}") , emit: deform_transform
-    tuple val(meta), path("*out_affine_warp.{txt,lta,mat,dat}")    , emit: affine_transform, optional: true
+    tuple val(meta), path("*out_warp.{nii,nii.gz,mgz,m3z}") , emit: deform_transform
+    tuple val(meta), path("*out_affine.{txt,lta,mat,dat}")    , emit: affine_transform, optional: true
     path "versions.yml"           , emit: versions
 
     when:
@@ -52,7 +52,7 @@ process REGISTRATION_CONVERT {
 
         ext_affine=\${affine_dictionnary[${out_format_affine}]}
 
-        lta_convert ${invert} ${source_geometry_affine} ${target_geometry_affine} ${in_format_affine} ${out_format_affine} ${prefix}__out_affine_warp.\${ext_affine}
+        lta_convert ${invert} ${source_geometry_affine} ${target_geometry_affine} ${in_format_affine} ${out_format_affine} ${prefix}__out_affine.\${ext_affine}
     fi
 
     declare -A deform_dictionnary=( ["--outm3z"]="m3z" \
@@ -64,13 +64,13 @@ process REGISTRATION_CONVERT {
 
     ext_deform=\${deform_dictionnary[${out_format_deform}]}
 
-    mri_warp_convert ${source_geometry_deform} ${downsample} ${in_format_deform} ${out_format_deform}  ${prefix}__out_deform_warp.\${ext_deform}
+    mri_warp_convert ${source_geometry_deform} ${downsample} ${in_format_deform} ${out_format_deform}  ${prefix}__out_warp.\${ext_deform}
 
     rm \$FREESURFER_HOME/license.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -79,15 +79,23 @@ process REGISTRATION_CONVERT {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    lta_convert -h
-    mri_warp_convert -h
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
 
-    touch ${prefix}__deform_transform.nii.gz
-    touch ${prefix}__affine_transform.txt
+    lta_convert --help
+    mri_warp_convert --help
+
+    touch ${prefix}__out_warp.nii.gz
+    touch ${prefix}__out_affine.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
+        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 }

@@ -5,7 +5,7 @@ nextflow_process {
     process "REGISTRATION_ANTS"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "registration"
     tag "registration/ants"
 
@@ -133,6 +133,7 @@ nextflow_process {
     }
 
     test("registration - ants - stub") {
+        tag "stub"
         options "-stub-run"
         when {
             process {

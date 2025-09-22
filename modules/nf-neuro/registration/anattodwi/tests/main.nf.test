@@ -5,7 +5,7 @@ nextflow_process {
     process "REGISTRATION_ANATTODWI"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "registration"
     tag "registration/anattodwi"
 
@@ -69,6 +69,7 @@ nextflow_process {
     }
 
     test("registration - anattodwi -stub-run") {
+        tag "stub"
         options "-stub-run"
         when {
             process {

@@ -1,38 +1,15 @@
 {
     "mqc - stub-run": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__screenshots_merged_mqc.gif:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,71ba513974124a5bc3dc32d0ebfd4f6d"
-                ],
-                "mqc_screenshots": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__screenshots_merged_mqc.gif:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,71ba513974124a5bc3dc32d0ebfd4f6d"
-                ]
-            }
+            [
+                "versions.yml:md5,44cc43ad575c2bde7b8ee6d9f8880f11"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-03-18T08:24:34.369265691"
+        "timestamp": "2025-06-06T00:51:48.434909654"
     },
     "mqc - 4d": {
         "content": [
@@ -47,7 +24,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,71ba513974124a5bc3dc32d0ebfd4f6d"
+                    "versions.yml:md5,44cc43ad575c2bde7b8ee6d9f8880f11"
                 ],
                 "mqc_screenshots": [
                     [
@@ -59,15 +36,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,71ba513974124a5bc3dc32d0ebfd4f6d"
+                    "versions.yml:md5,44cc43ad575c2bde7b8ee6d9f8880f11"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-03-18T09:35:58.779963008"
+        "timestamp": "2025-06-05T15:22:30.689274165"
     },
     "mqc - option": {
         "content": [
@@ -82,7 +59,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,71ba513974124a5bc3dc32d0ebfd4f6d"
+                    "versions.yml:md5,44cc43ad575c2bde7b8ee6d9f8880f11"
                 ],
                 "mqc_screenshots": [
                     [
@@ -94,15 +71,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,71ba513974124a5bc3dc32d0ebfd4f6d"
+                    "versions.yml:md5,44cc43ad575c2bde7b8ee6d9f8880f11"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-03-18T08:45:18.85185994"
+        "timestamp": "2025-06-05T15:17:54.643739956"
     },
     "mqc - comparison": {
         "content": [
@@ -117,7 +94,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,71ba513974124a5bc3dc32d0ebfd4f6d"
+                    "versions.yml:md5,44cc43ad575c2bde7b8ee6d9f8880f11"
                 ],
                 "mqc_screenshots": [
                     [
@@ -129,14 +106,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,71ba513974124a5bc3dc32d0ebfd4f6d"
+                    "versions.yml:md5,44cc43ad575c2bde7b8ee6d9f8880f11"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-03-18T08:45:03.492615536"
+        "timestamp": "2025-06-05T15:21:46.147032949"
     }
 }

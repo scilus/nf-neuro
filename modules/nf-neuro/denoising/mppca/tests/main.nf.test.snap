@@ -1,4 +1,16 @@
 {
+    "denoising - mppca - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,e453d38b11af2135c99df27ec7b461e3"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.3"
+        },
+        "timestamp": "2025-06-04T13:56:52.680444991"
+    },
     "denoising - mppca": {
         "content": [
             {

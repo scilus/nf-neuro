@@ -4,7 +4,7 @@ process PREPROC_EDDY {
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:latest"}"
+        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(rev_dwi), path(rev_bval), path(rev_bvec), path(corrected_b0s), path(topup_fieldcoef), path(topup_movpart)
@@ -167,9 +167,9 @@ process PREPROC_EDDY {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
-        fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
+        fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
     END_VERSIONS
     """
@@ -178,25 +178,11 @@ process PREPROC_EDDY {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    touch ${prefix}__dwi_corrected.nii.gz
-    touch ${prefix}__dwi_eddy_mqc.gif
-    touch ${prefix}__rev_dwi_eddy_mqc.gif
-    touch ${prefix}__dwi_eddy_corrected.bval
-    touch ${prefix}__dwi_eddy_corrected.bvec
-    touch ${prefix}__b0_bet_mask.nii.gz
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
-        fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
-        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
-    END_VERSIONS
-
+    set +e
     function handle_code () {
     local code=\$?
     ignore=( 1 )
-    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
     }
     trap 'handle_code' ERR
 
@@ -209,7 +195,22 @@ process PREPROC_EDDY {
     mrconvert -h
     scil_dwi_prepare_eddy_command.py -h
     scil_header_print_info.py -h
-    scil_viz_volume_screenshot -h
+    scil_viz_volume_screenshot.py -h
     convert
+
+    touch ${prefix}__dwi_corrected.nii.gz
+    touch ${prefix}__dwi_eddy_mqc.gif
+    touch ${prefix}__rev_dwi_eddy_mqc.gif
+    touch ${prefix}__dwi_eddy_corrected.bval
+    touch ${prefix}__dwi_eddy_corrected.bvec
+    touch ${prefix}__b0_bet_mask.nii.gz
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
+        fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
+        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
+    END_VERSIONS
     """
 }

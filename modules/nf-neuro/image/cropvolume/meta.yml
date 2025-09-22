@@ -1,54 +1,63 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "image_cropvolume"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: image_cropvolume
 description: Crop empty planes around the data in a volume
 keywords:
   - nifti
   - crop
   - scilpy
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - image:
-      type: file
-      description: Nifti image file to crop
-      pattern: "*.{nii,nii.gz}"
-
-  - bounding_box:
-      type: file
-      description: Input bounding box to use to crop the image
-      pattern: "*.{pkl}"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - image:
+        type: file
+        description: Nifti image file to crop
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - bounding_box:
+        type: file
+        description: Input bounding box to use to crop the image
+        pattern: "*.{pkl}"
+        ontologies: []
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - image:
-      type: file
-      description: Cropped Nifti image file
-      pattern: "*_cropped.{nii,nii.gz}"
-
-  - bounding_box:
-      type: file
-      description: Bouding box defining the limits of the crop
-      pattern: "*.pkl"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  image:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_cropped.nii.gz":
+          type: file
+          description: Cropped Nifti image file
+          pattern: "*_cropped.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  bounding_box:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*.pkl":
+          type: file
+          description: Bouding box defining the limits of the crop
+          pattern: "*.pkl"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@AlexVCaron"

@@ -1,0 +1,14 @@
+{
+    "io - nii2dcm - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,2a0917bc2c5956d3d1928328f8d7edfb"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-05-30T18:34:16.80484783"
+    }
+}

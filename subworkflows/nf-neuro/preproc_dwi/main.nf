@@ -9,7 +9,6 @@ include { PREPROC_NORMALIZE as NORMALIZE_DWI } from '../../../modules/nf-neuro/p
 include { IMAGE_RESAMPLE as RESAMPLE_DWI } from '../../../modules/nf-neuro/image/resample/main'
 include { IMAGE_RESAMPLE as RESAMPLE_MASK } from '../../../modules/nf-neuro/image/resample/main'
 include { UTILS_EXTRACTB0 as EXTRACTB0_RESAMPLE } from '../../../modules/nf-neuro/utils/extractb0/main'
-include { UTILS_EXTRACTB0 as EXTRACTB0_TOPUP } from '../../../modules/nf-neuro/utils/extractb0/main'
 include { TOPUP_EDDY } from '../topup_eddy/main'
 
 
@@ -166,7 +165,7 @@ workflow PREPROC_DWI {
 
         // ** Resample mask ** //
         ch_resample_mask = BETCROP_FSLBETCROP.out.mask
-            .map{ it + [[]] }
+            .join(EXTRACTB0_RESAMPLE.out.b0)
 
         RESAMPLE_MASK ( ch_resample_mask )
         ch_versions = ch_versions.mix(RESAMPLE_MASK.out.versions.first())

@@ -6,7 +6,7 @@ nextflow_process {
     config "./nextflow.config"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "reconst"
     tag "reconst/dtimetrics"
 
@@ -125,6 +125,7 @@ nextflow_process {
     }
 
     test("reconst - stub-run dtimetrics") {
+        tag "stub"
         options "-stub-run"
         when {
             process {

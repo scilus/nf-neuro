@@ -1,4 +1,16 @@
 {
+    "bundle - coloring - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,99caf95a695ad5ae4c7e8e879af86b5a"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-06-03T17:00:24.65500126"
+    },
     "bundle - coloring": {
         "content": [
             {

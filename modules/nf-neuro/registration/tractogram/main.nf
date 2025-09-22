@@ -7,7 +7,7 @@ process REGISTRATION_TRACTOGRAM {
         'scilus/scilus:2.0.2' }"
 
     input:
-    tuple val(meta), path(anat), path(transfo), path(tractogram), path(ref) /* optional, value = [] */, path(deformation) /* optional, value = [] */
+    tuple val(meta), path(anat), path(transfo), path(tractogram), path(ref) /* optional, input = [] */, path(deformation) /* optional, input = [] */
 
     output:
     tuple val(meta), path("*__*.{trk,tck}"), emit: warped_tractogram

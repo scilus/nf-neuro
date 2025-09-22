@@ -5,7 +5,7 @@ nextflow_process {
     process "CONNECTIVITY_AFDFIXEL"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "connectivity"
     tag "connectivity/afdfixel"
 
@@ -70,7 +70,8 @@ nextflow_process {
     }
 
     test("connectivity - afdfixel - with stub") {
-        options "-stub"
+        tag "stub"
+        options "-stub-run"
         when {
             process {
                 """

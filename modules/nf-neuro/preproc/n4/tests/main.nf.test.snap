@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,16156cbdf5b3c14ee1c931f292ba2abd"
+                        "test__image_n4.nii.gz:md5,1430f6e4820b9f2e66d7aec01d9be5fc"
                     ]
                 ],
                 "1": [
@@ -20,7 +20,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,16156cbdf5b3c14ee1c931f292ba2abd"
+                        "test__image_n4.nii.gz:md5,1430f6e4820b9f2e66d7aec01d9be5fc"
                     ]
                 ],
                 "versions": [
@@ -29,10 +29,22 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-24T09:01:49.994718"
+        "timestamp": "2025-06-27T01:01:36.651788631"
+    },
+    "preproc - n4 - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,123bad85bad0aa1d76265f833a97370d"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-15T20:05:12.459908349"
     },
     "preproc - n4 - anat": {
         "content": [
@@ -43,7 +55,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,5e0f63fd8a69eb259a2e8a3455a30d4b"
+                        "test__image_n4.nii.gz:md5,76fd1a32c13437e52b571c5b10acf25e"
                     ]
                 ],
                 "1": [
@@ -55,7 +67,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_n4.nii.gz:md5,5e0f63fd8a69eb259a2e8a3455a30d4b"
+                        "test__image_n4.nii.gz:md5,76fd1a32c13437e52b571c5b10acf25e"
                     ]
                 ],
                 "versions": [
@@ -64,9 +76,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.5"
         },
-        "timestamp": "2025-06-24T09:29:15.755898"
+        "timestamp": "2025-06-27T02:41:54.839988087"
     }
 }

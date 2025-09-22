@@ -5,7 +5,7 @@ nextflow_process {
     process "BETCROP_FSLBETCROP"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "betcrop"
     tag "betcrop/fslbetcrop"
 
@@ -110,6 +110,7 @@ nextflow_process {
 
     test("betcrop - fslbetcrop - stub-run") {
 
+        tag "stub"
         options "-stub-run"
 
         when {

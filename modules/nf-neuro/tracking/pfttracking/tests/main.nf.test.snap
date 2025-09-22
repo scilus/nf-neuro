@@ -1,4 +1,16 @@
 {
+    "tracking - pfttracking - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-04T23:20:08.749601514"
+    },
     "tracking - pfttracking - fa": {
         "content": [
             "test__pft_tracking.trk",
@@ -39,14 +51,14 @@
                 ]
             ],
             [
-                "versions.yml:md5,50bec6db1c8ebd60c43b27cbb7ac3105"
+                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-05T15:27:23.982091697"
+        "timestamp": "2025-07-04T23:19:39.0658835"
     },
     "tracking - pfttracking - interface": {
         "content": [
@@ -79,7 +91,7 @@
                 ]
             ],
             [
-                "versions.yml:md5,50bec6db1c8ebd60c43b27cbb7ac3105"
+                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
             ],
             [
                 [
@@ -93,9 +105,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-05T15:27:46.52764571"
+        "timestamp": "2025-07-04T23:19:55.217847185"
     },
     "tracking - pfttracking - wm": {
         "content": [
@@ -137,13 +149,13 @@
                 ]
             ],
             [
-                "versions.yml:md5,50bec6db1c8ebd60c43b27cbb7ac3105"
+                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-05T15:26:52.35652585"
+        "timestamp": "2025-07-04T23:19:17.963971055"
     }
 }

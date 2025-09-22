@@ -39,8 +39,8 @@ process BETCROP_ANTSBET {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -48,25 +48,24 @@ process BETCROP_ANTSBET {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-
-    touch ${prefix}__t1_bet.nii.gz
-    touch ${prefix}__t1_bet_mask.nii.gz
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\+\\).*/\\1/')
-    END_VERSIONS
-
+    set +e
     function handle_code () {
     local code=\$?
     ignore=( 1 )
-    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
     }
     trap 'handle_code' ERR
 
     antsBrainExtraction.sh
     scil_volume_math.py -h
 
+    touch ${prefix}__t1_bet.nii.gz
+    touch ${prefix}__t1_bet_mask.nii.gz
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+    END_VERSIONS
     """
 }

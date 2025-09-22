@@ -1,4 +1,16 @@
 {
+    "image - applymask - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.3"
+        },
+        "timestamp": "2025-06-04T02:46:16.312598007"
+    },
     "image - applymask - 3D": {
         "content": [
             {
@@ -8,11 +20,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_masked.nii.gz:md5,2fef128e99cb8bf76e68d5ad7c8f9f6e"
+                        "test_masked.nii.gz:md5,40fd233f77f8ce185f651bbaf4422ff9"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,72f62ad02bf476e0defd8c105c4eb83d"
+                    "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
                 ],
                 "image": [
                     [
@@ -20,11 +32,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_masked.nii.gz:md5,2fef128e99cb8bf76e68d5ad7c8f9f6e"
+                        "test_masked.nii.gz:md5,40fd233f77f8ce185f651bbaf4422ff9"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,72f62ad02bf476e0defd8c105c4eb83d"
+                    "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
                 ]
             }
         ],
@@ -43,11 +55,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_masked.nii.gz:md5,8c8b58052f2b573d6fa8a6a221405131"
+                        "test_masked.nii.gz:md5,f21949dbae7ea40d56eeac08b92cb795"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,72f62ad02bf476e0defd8c105c4eb83d"
+                    "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
                 ],
                 "image": [
                     [
@@ -55,11 +67,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_masked.nii.gz:md5,8c8b58052f2b573d6fa8a6a221405131"
+                        "test_masked.nii.gz:md5,f21949dbae7ea40d56eeac08b92cb795"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,72f62ad02bf476e0defd8c105c4eb83d"
+                    "versions.yml:md5,acd6fd5bd7a7e7b4b3798326921f795c"
                 ]
             }
         ],

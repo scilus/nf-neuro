@@ -12,8 +12,8 @@ process RECONST_SHMETRICS {
 
     output:
         tuple val(meta), path("*peaks.nii.gz")          , emit: peaks, optional: true
-        tuple val(meta), path("*peak_values.nii.gz")    , emit: peak_values, optional: true
         tuple val(meta), path("*peak_indices.nii.gz")   , emit: peak_indices, optional: true
+        tuple val(meta), path("*peak_values.nii.gz")    , emit: peak_values, optional: true
         tuple val(meta), path("*afd_max.nii.gz")        , emit: afd_max, optional: true
         tuple val(meta), path("*afd_total.nii.gz")      , emit: afd_total, optional: true
         tuple val(meta), path("*afd_sum.nii.gz")        , emit: afd_sum, optional: true

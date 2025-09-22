@@ -5,7 +5,7 @@ nextflow_workflow {
     workflow "REGISTRATION"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/registration"
 
     tag "registration"
@@ -16,6 +16,9 @@ nextflow_workflow {
     tag "registration/synthregistration"
 
     tag "load_test_data"
+
+    tag "stub"
+    options "-stub-run"
 
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
@@ -42,19 +45,19 @@ nextflow_workflow {
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]
                 }
                 input[1] = ch_split_test_data.b0.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/b0.nii.gz")
                     ]
                 }
                 input[2] = ch_split_test_data.dti.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/fa.nii.gz")
                     ]
                 }
@@ -68,7 +71,26 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ channel -> !channel.key.isInteger() }
+                    .every{ channel -> ["ref_warped",
+                                        "segmentation",
+                                        "ref_segmentation"].contains(channel.key)
+                        ? channel.value.size() == 0
+                        : channel.value.every{ subject -> subject instanceof ArrayList
+                            ? subject.every()
+                            : subject } } }
             )
         }
     }
@@ -86,12 +108,12 @@ nextflow_workflow {
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
                 input[1] = ch_split_test_data.b0.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/b0.nii.gz")
                     ]}
                 input[2] = Channel.empty()
@@ -105,7 +127,26 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ channel -> !channel.key.isInteger() }
+                    .every{ channel -> ["ref_warped",
+                                        "segmentation",
+                                        "ref_segmentation"].contains(channel.key)
+                        ? channel.value.size() == 0
+                        : channel.value.every{ subject -> subject instanceof ArrayList
+                            ? subject.every()
+                            : subject } } }
             )
         }
     }
@@ -145,14 +186,16 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    file(workflow.out.image_warped.get(0).get(1)).name,
-                    file(workflow.out.ref_warped.get(0).get(1)).name,
-                    file(workflow.out.transfo_image.get(0).get(1)).name,
-                    file(workflow.out.transfo_trk.get(0).get(1)).name,
-                    niftiMD5SUM(workflow.out.segmentation.get(0).get(1), 6),
-                    file(workflow.out.ref_segmentation.get(0).get(1)).name,
-                    workflow.out.versions
-                ).match()}
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
             )
         }
     }
@@ -191,11 +234,26 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
-                    file(workflow.out.image_warped.get(0).get(1)).name,
-                    file(workflow.out.transfo_image.get(0).get(1)).name,
-                    file(workflow.out.transfo_image.get(0).get(2)).name,
-                    workflow.out.versions
-                ).match()}
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() },
+                { assert workflow.out
+                    .findAll{ channel -> !channel.key.isInteger() }
+                    .every{ channel -> ["ref_warped",
+                                        "transfo_trk",
+                                        "segmentation",
+                                        "ref_segmentation"].contains(channel.key)
+                        ? channel.value.size() == 0
+                        : channel.value.every{ subject -> subject instanceof ArrayList
+                            ? subject.every()
+                            : subject } } }
             )
         }
     }
