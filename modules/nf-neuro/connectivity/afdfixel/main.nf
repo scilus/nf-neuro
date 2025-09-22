@@ -2,7 +2,7 @@ process CONNECTIVITY_AFDFIXEL {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ 'scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
     tuple val(meta), path(hdf5), path(fodf)
@@ -21,7 +21,7 @@ process CONNECTIVITY_AFDFIXEL {
     def sh_basis = task.ext.sh_basis ? "--sh_basis $task.ext.sh_basis": ""
 
     """
-    scil_bundle_mean_fixel_afd_from_hdf5.py $hdf5 $fodf \
+    scil_bundle_mean_fixel_afd_from_hdf5 $hdf5 $fodf \
         "${prefix}__afd_fixel.h5" \
         $length_weighting \
         $sh_basis \
@@ -29,7 +29,7 @@ process CONNECTIVITY_AFDFIXEL {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -39,11 +39,11 @@ process CONNECTIVITY_AFDFIXEL {
     """
     touch ${prefix}__afd_fixel.h5
 
-    scil_bundle_mean_fixel_afd_from_hdf5.py -h
+    scil_bundle_mean_fixel_afd_from_hdf5 -h
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
