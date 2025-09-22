@@ -2,9 +2,7 @@ process RECONST_NODDI {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(kernels)
@@ -35,7 +33,7 @@ process RECONST_NODDI {
     def compute_only = task.ext.compute_only && !kernels ? "--compute_only" : ""
 
     """
-    scil_NODDI_maps.py $dwi $bval $bvec $para_diff $iso_diff $lambda1 \
+    scil_NODDI_maps $dwi $bval $bvec $para_diff $iso_diff $lambda1 \
         $lambda2 $nb_threads $b_thr $set_mask $set_kernels --skip_b0_check $compute_only
 
     if [ -z "${compute_only}" ];
@@ -45,15 +43,14 @@ process RECONST_NODDI {
         mv results/fit_FWF.nii.gz ${prefix}__fit_FWF.nii.gz # ISOVF/FISO -> FWF
         mv results/fit_ODI.nii.gz ${prefix}__fit_ODI.nii.gz # OD -> ODI
 
-        mrcalc 1 ${prefix}__fit_FWF.nii.gz -subtract \
-            ${prefix}__fit_ECVF.nii.gz
+        scil_volume_math subtraction 1 ${prefix}__fit_FWF.nii.gz ${prefix}__fit_ECVF.nii.gz
 
         rm -rf results
     fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -61,9 +58,11 @@ process RECONST_NODDI {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_NODDI_maps.py -h
-    scil_volume_math.py -h
+    scil_NODDI_maps -h
+    scil_volume_math -h
+
     mkdir kernels
+
     touch "${prefix}__fit_dir.nii.gz"
     touch "${prefix}__fit_FWF.nii.gz"
     touch "${prefix}__fit_NDI.nii.gz"
@@ -72,7 +71,7 @@ process RECONST_NODDI {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

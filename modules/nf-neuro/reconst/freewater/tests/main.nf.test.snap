@@ -19,21 +19,21 @@
                 ],
                 "5": [
                     [
-                        "A_001.npy:md5,21363070a99f8b8e390f713642bdd580",
-                        "A_002.npy:md5,142af968949cc3a15766e3fe35be0bf6",
-                        "A_003.npy:md5,837697b75af5e2207151c0b8c5fe007b",
-                        "A_004.npy:md5,7bfdaf0b3ae6b2e25ec58b74edc3d87e",
-                        "A_005.npy:md5,994ce19ed55493bb96b7759a625b1891",
-                        "A_006.npy:md5,d100c9ee3b05b72a05b219a31dd3192f",
-                        "A_007.npy:md5,84d18ac92409ac364cc1b5809803e214",
-                        "A_008.npy:md5,5073410af3faf70a4ad8d011edb1bf1e",
-                        "A_009.npy:md5,0450dd684224c913794acf8534b12958",
-                        "A_010.npy:md5,6cd83ae58dd4b2b46239a4add9490d21",
-                        "A_011.npy:md5,11a85a7f246689c9f23022f9b1cd45a3"
+                        "A_001.npy:md5,04cebe3b4da0c3f54d81beb30cce22f9",
+                        "A_002.npy:md5,4fdcddb1d72f30ceb221e3f36d960ca0",
+                        "A_003.npy:md5,1791f8129e4b25a40facf9a808828efc",
+                        "A_004.npy:md5,9e4fdaacbb57c71692d075fe69ceca09",
+                        "A_005.npy:md5,ac182140f0cfd2e44740a277510c7ef4",
+                        "A_006.npy:md5,1e9cfc20c2bf417e893e97660c9c5734",
+                        "A_007.npy:md5,7d7adb88bfe14d1549f658ece84b5e47",
+                        "A_008.npy:md5,e1ee4c590da29b62721c56ebb96b9c06",
+                        "A_009.npy:md5,1cda8ff42770369de9c82ad75970fbca",
+                        "A_010.npy:md5,0c819e49a397bee18033e5398e47e5b9",
+                        "A_011.npy:md5,eb99f063313750829840750bad30f1bd"
                     ]
                 ],
                 "6": [
-                    "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
+                    "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
                 ],
                 "dir": [
                     
@@ -49,44 +49,44 @@
                 ],
                 "kernels": [
                     [
-                        "A_001.npy:md5,21363070a99f8b8e390f713642bdd580",
-                        "A_002.npy:md5,142af968949cc3a15766e3fe35be0bf6",
-                        "A_003.npy:md5,837697b75af5e2207151c0b8c5fe007b",
-                        "A_004.npy:md5,7bfdaf0b3ae6b2e25ec58b74edc3d87e",
-                        "A_005.npy:md5,994ce19ed55493bb96b7759a625b1891",
-                        "A_006.npy:md5,d100c9ee3b05b72a05b219a31dd3192f",
-                        "A_007.npy:md5,84d18ac92409ac364cc1b5809803e214",
-                        "A_008.npy:md5,5073410af3faf70a4ad8d011edb1bf1e",
-                        "A_009.npy:md5,0450dd684224c913794acf8534b12958",
-                        "A_010.npy:md5,6cd83ae58dd4b2b46239a4add9490d21",
-                        "A_011.npy:md5,11a85a7f246689c9f23022f9b1cd45a3"
+                        "A_001.npy:md5,04cebe3b4da0c3f54d81beb30cce22f9",
+                        "A_002.npy:md5,4fdcddb1d72f30ceb221e3f36d960ca0",
+                        "A_003.npy:md5,1791f8129e4b25a40facf9a808828efc",
+                        "A_004.npy:md5,9e4fdaacbb57c71692d075fe69ceca09",
+                        "A_005.npy:md5,ac182140f0cfd2e44740a277510c7ef4",
+                        "A_006.npy:md5,1e9cfc20c2bf417e893e97660c9c5734",
+                        "A_007.npy:md5,7d7adb88bfe14d1549f658ece84b5e47",
+                        "A_008.npy:md5,e1ee4c590da29b62721c56ebb96b9c06",
+                        "A_009.npy:md5,1cda8ff42770369de9c82ad75970fbca",
+                        "A_010.npy:md5,0c819e49a397bee18033e5398e47e5b9",
+                        "A_011.npy:md5,eb99f063313750829840750bad30f1bd"
                     ]
                 ],
                 "nrmse": [
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
+                    "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-04T03:07:01.063522624"
+        "timestamp": "2025-09-22T20:45:22.463433677"
     },
     "reconst - freewater - stub-run": {
         "content": [
             [
-                "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
+                "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-05-30T18:36:13.693510804"
+        "timestamp": "2025-09-22T20:45:35.607507929"
     },
     "reconst - freewater": {
         "content": [
@@ -108,21 +108,21 @@
                 ],
                 "5": [
                     [
-                        "A_001.npy:md5,21363070a99f8b8e390f713642bdd580",
-                        "A_002.npy:md5,142af968949cc3a15766e3fe35be0bf6",
-                        "A_003.npy:md5,837697b75af5e2207151c0b8c5fe007b",
-                        "A_004.npy:md5,7bfdaf0b3ae6b2e25ec58b74edc3d87e",
-                        "A_005.npy:md5,994ce19ed55493bb96b7759a625b1891",
-                        "A_006.npy:md5,d100c9ee3b05b72a05b219a31dd3192f",
-                        "A_007.npy:md5,84d18ac92409ac364cc1b5809803e214",
-                        "A_008.npy:md5,5073410af3faf70a4ad8d011edb1bf1e",
-                        "A_009.npy:md5,0450dd684224c913794acf8534b12958",
-                        "A_010.npy:md5,6cd83ae58dd4b2b46239a4add9490d21",
-                        "A_011.npy:md5,11a85a7f246689c9f23022f9b1cd45a3"
+                        "A_001.npy:md5,04cebe3b4da0c3f54d81beb30cce22f9",
+                        "A_002.npy:md5,4fdcddb1d72f30ceb221e3f36d960ca0",
+                        "A_003.npy:md5,1791f8129e4b25a40facf9a808828efc",
+                        "A_004.npy:md5,9e4fdaacbb57c71692d075fe69ceca09",
+                        "A_005.npy:md5,ac182140f0cfd2e44740a277510c7ef4",
+                        "A_006.npy:md5,1e9cfc20c2bf417e893e97660c9c5734",
+                        "A_007.npy:md5,7d7adb88bfe14d1549f658ece84b5e47",
+                        "A_008.npy:md5,e1ee4c590da29b62721c56ebb96b9c06",
+                        "A_009.npy:md5,1cda8ff42770369de9c82ad75970fbca",
+                        "A_010.npy:md5,0c819e49a397bee18033e5398e47e5b9",
+                        "A_011.npy:md5,eb99f063313750829840750bad30f1bd"
                     ]
                 ],
                 "6": [
-                    "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
+                    "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
                 ],
                 "dir": [
                     
@@ -138,31 +138,31 @@
                 ],
                 "kernels": [
                     [
-                        "A_001.npy:md5,21363070a99f8b8e390f713642bdd580",
-                        "A_002.npy:md5,142af968949cc3a15766e3fe35be0bf6",
-                        "A_003.npy:md5,837697b75af5e2207151c0b8c5fe007b",
-                        "A_004.npy:md5,7bfdaf0b3ae6b2e25ec58b74edc3d87e",
-                        "A_005.npy:md5,994ce19ed55493bb96b7759a625b1891",
-                        "A_006.npy:md5,d100c9ee3b05b72a05b219a31dd3192f",
-                        "A_007.npy:md5,84d18ac92409ac364cc1b5809803e214",
-                        "A_008.npy:md5,5073410af3faf70a4ad8d011edb1bf1e",
-                        "A_009.npy:md5,0450dd684224c913794acf8534b12958",
-                        "A_010.npy:md5,6cd83ae58dd4b2b46239a4add9490d21",
-                        "A_011.npy:md5,11a85a7f246689c9f23022f9b1cd45a3"
+                        "A_001.npy:md5,04cebe3b4da0c3f54d81beb30cce22f9",
+                        "A_002.npy:md5,4fdcddb1d72f30ceb221e3f36d960ca0",
+                        "A_003.npy:md5,1791f8129e4b25a40facf9a808828efc",
+                        "A_004.npy:md5,9e4fdaacbb57c71692d075fe69ceca09",
+                        "A_005.npy:md5,ac182140f0cfd2e44740a277510c7ef4",
+                        "A_006.npy:md5,1e9cfc20c2bf417e893e97660c9c5734",
+                        "A_007.npy:md5,7d7adb88bfe14d1549f658ece84b5e47",
+                        "A_008.npy:md5,e1ee4c590da29b62721c56ebb96b9c06",
+                        "A_009.npy:md5,1cda8ff42770369de9c82ad75970fbca",
+                        "A_010.npy:md5,0c819e49a397bee18033e5398e47e5b9",
+                        "A_011.npy:md5,eb99f063313750829840750bad30f1bd"
                     ]
                 ],
                 "nrmse": [
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
+                    "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-04T03:04:53.630167199"
+        "timestamp": "2025-09-22T20:43:14.854711916"
     }
 }
