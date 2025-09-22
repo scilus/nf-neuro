@@ -91,7 +91,24 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.endpoints_head,
+                    process.out.endpoints_metric_stats,
+                    process.out.endpoints_raw,
+                    process.out.endpoints_tail,
+                    process.out.length,
+                    process.out.lesion_map,
+                    process.out.lesion_stats,
+                    process.out.mean_std,
+                    process.out.mean_std_per_point,
+                    process.out.streamline_count,
+                    process.out.streamline_count_lesions,
+                    process.out.volume_lesions,
+                    process.out.volume_per_labels,
+                    process.out.volume_per_labels_lesions,
+                    file(process.out.volume.get(0).get(1)).name,
+                ).match() }
             )
         }
     }
