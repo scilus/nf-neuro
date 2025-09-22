@@ -23,7 +23,7 @@ process RECONST_QBALL {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def b0_threshold = task.ext.b0_threshold ? " --b0_threshold " + task.ext.b0_threshold : ""
-    def processes = task.ext.processes ? " --processes " + task.ext.processes : "--processes 1"
+    def processes = task.cpu ? " --processes " + task.cpu : "--processes 1"
 
     if ( mask ) args += " --mask $mask"
     if ( task.ext.gfa ) args += " --gfa ${prefix}__gfa.nii.gz"
@@ -33,7 +33,7 @@ process RECONST_QBALL {
     if ( task.ext.nufo) args += " --nufo ${prefix}__nufo.nii.gz"
     if ( task.ext.a_power) args += " --a_power ${prefix}__a_power.nii.gz"
     """
-    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
+    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
@@ -41,7 +41,7 @@ process RECONST_QBALL {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -59,7 +59,7 @@ process RECONST_QBALL {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(uv pip -q list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

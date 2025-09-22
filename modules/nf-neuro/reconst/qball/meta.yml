@@ -3,7 +3,6 @@ description: Compute the Constant Solid Angle (CSA) or Analytical Q-ball model,
   the generalized fractional anisotropy (GFA) and the peaks of the model.
 keywords:
   - Qball
-  - example
   - reconst
   - scilpy
 tools:
@@ -18,9 +17,9 @@ args:
       description: "Threshold for the b0 mask."
       default: 0
   - use_qball:
-    type: boolean
-    description: "If set, qball will be used as the odf reconstruction model instead of CSA."
-    default: false
+      type: boolean
+      description: "If set, qball will be used as the odf reconstruction model instead of CSA."
+      default: false
   - gfa:
       type: boolean
       description: "Compute the generalized fractional anisotropy."
@@ -45,10 +44,6 @@ args:
       type: boolean
       description: "Compute the anisotropy power."
       default: true
-  - processes:
-      type: int
-      description: Number of sub-processes to start.
-      default: 1
 input:
   - - meta:
         type: map
@@ -162,6 +157,6 @@ output:
         ontologies:
           - edam: http://edamontology.org/format_3750 # YAM
 authors:
-  - "@EliseCos"
+  - "@EliseCos and @arnaudbore"
 maintainers:
-  - "@EliseCos"
+  - "@arnaudbore"
