@@ -2,9 +2,7 @@ process BUNDLE_FIXELAFD {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(bundles), path(fodf)
@@ -23,12 +21,12 @@ process BUNDLE_FIXELAFD {
     for bundle in $bundles;
         do\
         bname=\$(basename \${bundle} .trk)
-        scil_compute_mean_fixel_afd_from_bundles.py \$bundle $fodf ${prefix}__\${bname}_afd_metric.nii.gz
+        scil_bundle_mean_fixel_afd \$bundle $fodf ${prefix}__\${bname}_afd_metric.nii.gz
     done
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -36,14 +34,13 @@ process BUNDLE_FIXELAFD {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_compute_mean_fixel_afd_from_bundles.py -h
+    scil_bundle_mean_fixel_afd -h
 
     touch ${prefix}_test_afd_metric.nii.gz
 
-
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

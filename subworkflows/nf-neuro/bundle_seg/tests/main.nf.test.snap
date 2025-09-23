@@ -12,14 +12,14 @@
                 ],
                 "versions": [
                     "versions.yml:md5,2fbc09a51203e509d1a15a631168680e",
-                    "versions.yml:md5,84a499436fbf8f1367ec4d8b21cf3abd"
+                    "versions.yml:md5,afaf6c2953accc507d8777303eea8718"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T20:55:58.757696313"
+        "timestamp": "2025-09-21T20:16:54.243026235"
     }
 }
