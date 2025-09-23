@@ -5,7 +5,7 @@ nextflow_workflow {
     workflow "TRACTOMETRY_FLOW"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/tractometry_flow"
 
     tag  "tractogram/removeinvalid"
