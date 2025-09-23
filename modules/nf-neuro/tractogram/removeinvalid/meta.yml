@@ -12,6 +12,27 @@ tools:
         toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
+args:
+  - cut_invalid:
+    type: boolean
+    description: Cut invalid streamlines rather than removing them. Keep the longest segment only.
+    default: false
+  - remove_single_point:
+    type: boolean
+    description: Consider single point streamlines as invalid.
+    default: false
+  - remove_overlapping_points:
+    type: boolean
+    description: Consider streamlines with overlapping points as invalid.
+    default: false
+  - threshold:
+    type: float
+    description: Maximum distance between two points to be considered overlapping.
+    default:  0.001 mm
+  - no_empty:
+    type: boolean
+    description: Do not save empty tractogram.
+    default: false
 input:
   - - meta:
         type: map

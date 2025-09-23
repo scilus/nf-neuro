@@ -12,6 +12,58 @@ tools:
         toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
+args:
+  - nb_points:
+      type: integer
+      description: Number of points per streamline in the output.
+      default: 1
+  - nb_streamlines:
+      type: integer
+      description: Number of streamlines to resample the tractogram to.
+      default: 1000
+  - never_upsample:
+      type: boolean
+      description: Make sure to never upsample a tractogram. Useful when downsampling a batch of files at once.
+      default:
+  - seed:
+      type: integer
+      description: Use a specific random seed for the resampling.
+      default: None
+  - point_wise_std:
+      type: float
+      description: Noise to add to existing streamlines points to generate new ones. Value is in mm.
+      default: 1.0
+  - tube_radius:
+      type: float
+      description: |
+        Maximum distance to generate streamlines
+        around the original ones. Value is in mm.
+      default: 1.0
+  - gaussian:
+      type: float
+      description: |
+        If set, smooth the upsampled streamlines.
+        Value is the gaussian sigma. Uses the coordinates of surrounding points on the
+        streamline to blur the streamlines. A good sigma choice would be around 5.
+      default: None
+  - compress:
+      type: float
+      description: Compress the resulting streamline. Value is the maximum compression distance in mm.
+      default: 0.1
+  - keep_invalid:
+      type: boolean
+      description: Keep invalid newly generated streamlines that may go out of the bounding box.
+      default: false
+  - downsample_per_cluster:
+      type: boolean
+      description: |
+        If set, downsampling will be done per cluster (computed with Quickbundles) to ensure that at least some streamlines are
+        kept per bundle. Else, random downsampling is performed
+      default: false
+  - qbx_threshold:
+      type: float
+      description: If you chose option '--downsample_per_cluster', you may set the Quickbundles threshold value(s) here.
+      default: [40, 30, 20]
 input:
   - - meta:
         type: map

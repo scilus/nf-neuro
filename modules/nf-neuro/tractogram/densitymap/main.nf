@@ -2,9 +2,7 @@ process TRACTOGRAM_DENSITYMAP {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
     tuple val(meta), path(tractogram)
@@ -20,13 +18,15 @@ process TRACTOGRAM_DENSITYMAP {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def binary = task.ext.is_binary ? "--binary" : ""
+    def endpoints_only = task.ext.endpoint_only ? "--endpoints_only" : ""
+
     """
     bname=\$(basename ${tractogram} .trk)
-    scil_tractogram_compute_density_map.py $tractogram ${prefix}__\${bname}.nii.gz ${binary}
+    scil_tractogram_compute_density_map $tractogram ${prefix}__\${bname}.nii.gz ${binary} ${endpoints_only}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -34,13 +34,13 @@ process TRACTOGRAM_DENSITYMAP {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    scil_tractogram_compute_density_map.py -h
+    scil_tractogram_compute_density_map -h
 
     touch ${prefix}__AF_L.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
