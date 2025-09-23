@@ -82,8 +82,8 @@ jobs:
           GIT_CLONE_PROTECTION_ACTIVE: false
           NFCORE_MODULES_GIT_REMOTE: https://github.com/${{ github.repository }}.git
           NFCORE_SUBWORKFLOWS_GIT_REMOTE: https://github.com/${{ github.repository }}.git
-          NFCORE_MODULES_BRANCH: main_3.2.0
-          NFCORE_SUBWORKFLOWS_BRANCH: main_3.2.0
+          NFCORE_MODULES_BRANCH: main
+          NFCORE_SUBWORKFLOWS_BRANCH: main
         run: poetry run nf-core --verbose ${{ inputs.type }}s lint ${{ inputs.component }}
 
       - name: Convert component meta.yml to markdown
