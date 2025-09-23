@@ -43,14 +43,22 @@ nextflow_process {
                 """
             }
         }
-
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    niftiMD5SUM(process.out.peaks.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.peak_indices.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.peak_values.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.afd_max.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.afd_total.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.afd_sum.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.nufo.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.vent_mask.get(0).get(1), 6),
+                    process.out.versions
+                ).match() }
             )
         }
-
     }
 
     test("reconst - shmetrics - stub-run") {

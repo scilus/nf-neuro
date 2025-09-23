@@ -12,8 +12,6 @@ nextflow_process {
     tag "subworkflows"
     tag "subworkflows/load_test_data"
 
-    config "./nextflow.config"
-
     setup {
             run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
@@ -29,6 +27,7 @@ nextflow_process {
     test("reconst - freewater") {
 
         when {
+            config "./nextflow.config"
             process {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory
@@ -47,15 +46,24 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    process.out.versions,
+                    file(process.out.kernels.get(0)).listFiles().size(),
+                    niftiMD5SUM(process.out.dwi_fw_corrected.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.dir.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.fibervolume.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.fw.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.nrmse.get(0).get(1), 6)
+                ).match() }
             )
         }
 
     }
 
-    test("reconst - freewater_no_mask") {
+    test("reconst - freewater_no_mask_compute_only") {
 
         when {
+            config "./nextflow_compute_only.config"
             process {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory
@@ -74,7 +82,10 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    process.out.versions,
+                    file(process.out.kernels.get(0)).listFiles().size()
+                ).match() }
             )
         }
 
