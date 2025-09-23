@@ -1,4 +1,16 @@
 {
+    "preproc - gibbs - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,7b29c0b3ece4feea121dd85f3163a3e0"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.3"
+        },
+        "timestamp": "2025-06-04T03:01:02.282977924"
+    },
     "preproc - gibbs": {
         "content": [
             {
@@ -8,11 +20,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__dwi_gibbs_corrected.nii.gz:md5,f15ce978797cd4342089e16204a40436"
+                        "test__dwi_gibbs_corrected.nii.gz:md5,951a33045710fe77a0a58a640c27bece"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,65c58dca4630ca36c724dd823f437585"
+                    "versions.yml:md5,7b29c0b3ece4feea121dd85f3163a3e0"
                 ],
                 "dwi": [
                     [
@@ -20,18 +32,18 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__dwi_gibbs_corrected.nii.gz:md5,f15ce978797cd4342089e16204a40436"
+                        "test__dwi_gibbs_corrected.nii.gz:md5,951a33045710fe77a0a58a640c27bece"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,65c58dca4630ca36c724dd823f437585"
+                    "versions.yml:md5,7b29c0b3ece4feea121dd85f3163a3e0"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2024-05-08T17:18:35.063226"
+        "timestamp": "2025-06-04T02:51:17.00292454"
     }
 }

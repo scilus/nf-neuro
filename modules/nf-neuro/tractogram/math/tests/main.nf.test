@@ -1,0 +1,135 @@
+nextflow_process {
+
+    name "Test Process TRACTOGRAM_MATH"
+    script "../main.nf"
+    process "TRACTOGRAM_MATH"
+
+    tag "modules"
+    tag "modules_nfneuro"
+    tag "tractogram"
+    tag "tractogram/math"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "tracking.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("tractogram - concatenate") {
+        config "./nextflow.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/local.trk"),
+                            file("\${test_data_directory}/pft.trk"),
+                        ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("tractogram - wrong operation - should fail") {
+        config "./nextflow_fail.config"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/local.trk"),
+                            file("\${test_data_directory}/pft.trk"),
+                        ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.failed }
+            )
+        }
+
+    }
+
+    test("tractogram - stub") {
+        options "-stub"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/local.trk"),
+                            file("\${test_data_directory}/pft.trk"),
+                        ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
+    test("tractogram - math - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test' ], // meta map
+                        [
+                            file("\${test_data_directory}/local.trk"),
+                            file("\${test_data_directory}/pft.trk"),
+                        ],
+                        []
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
+}

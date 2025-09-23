@@ -21,7 +21,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,de4076b60c7dbf985efd96d5e6dc3faf"
+                    "versions.yml:md5,933ff2ae3b34d23822feddef944515c7"
                 ],
                 "dwi": [
                     [
@@ -42,15 +42,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,de4076b60c7dbf985efd96d5e6dc3faf"
+                    "versions.yml:md5,933ff2ae3b34d23822feddef944515c7"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-05-12T02:10:28.526169"
+        "timestamp": "2025-07-04T04:39:04.637181628"
     },
     "preproc - normalize": {
         "content": [
@@ -74,7 +74,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,de4076b60c7dbf985efd96d5e6dc3faf"
+                    "versions.yml:md5,933ff2ae3b34d23822feddef944515c7"
                 ],
                 "dwi": [
                     [
@@ -95,14 +95,26 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,de4076b60c7dbf985efd96d5e6dc3faf"
+                    "versions.yml:md5,933ff2ae3b34d23822feddef944515c7"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-05-12T02:10:08.116591"
+        "timestamp": "2025-07-04T04:37:27.823592255"
+    },
+    "preproc - normalize - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,933ff2ae3b34d23822feddef944515c7"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.4"
+        },
+        "timestamp": "2025-07-04T04:40:08.523560161"
     }
 }

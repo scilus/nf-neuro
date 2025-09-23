@@ -7,7 +7,7 @@ nextflow_workflow {
     workflow "TRACTOFLOW"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/tractoflow"
 
     tag "load_test_data"
@@ -23,6 +23,9 @@ nextflow_workflow {
     tag "registration/antsapplytransforms"
     tag "tracking/localtracking"
     tag "tracking/pfttracking"
+
+    tag "stub"
+    options "-stub-run"
 
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
@@ -89,70 +92,17 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                {
-                    assert snapshot(
-                                                                                                    // IN DIFFUSION SPACE
-                        file(workflow.out.dwi.get(0).get(1)).name,                                  //  dwi
-                        workflow.out.dwi.get(0).get(2),                                             //  bval
-                        file(workflow.out.dwi.get(0).get(3)).name,                                  //  bvec
-                        file(workflow.out.t1.get(0).get(1)).name,                                   //  t1
-                        file(workflow.out.wm_mask.get(0).get(1)).name,                              //  wm_mask
-                        file(workflow.out.gm_mask.get(0).get(1)).name,                              //  gm_mask
-                        file(workflow.out.csf_mask.get(0).get(1)).name,                             //  csf_mask
-                        file(workflow.out.wm_map.get(0).get(1)).name,                               //  wm_map
-                        file(workflow.out.gm_map.get(0).get(1)).name,                               //  gm_map
-                        file(workflow.out.csf_map.get(0).get(1)).name,                              //  csf_map
-                                                                                                    // REGISTRATION
-                                                                                                    //  anatomical_to_diffusion
-                        file(workflow.out.anatomical_to_diffusion.get(0).get(1)).name,              //   warp (or affine)
-                        workflow.out.anatomical_to_diffusion.get(0).get(2)
-                            ? file(workflow.out.anatomical_to_diffusion.get(0).get(2)).name : "",   //   affine
-                                                                                                    //  diffusion_to_anatomical
-                        file(workflow.out.diffusion_to_anatomical.get(0).get(1)).name,              //   affine (or warp)
-                        workflow.out.diffusion_to_anatomical.get(0).get(2)
-                            ? file(workflow.out.diffusion_to_anatomical.get(0).get(2)).name : "",   //   warp
-                                                                                                    // IN ANATOMICAL SPACE
-                        file(workflow.out.t1_native.get(0).get(1)).name,                            //  t1_native
-                                                                                                    // DTI
-                        file(workflow.out.dti_tensor.get(0).get(1)).name,                           //  dti_tensor
-                        file(workflow.out.dti_md.get(0).get(1)).name,                               //  dti_md
-                        file(workflow.out.dti_rd.get(0).get(1)).name,                               //  dti_rd
-                        file(workflow.out.dti_ad.get(0).get(1)).name,                               //  dti_ad
-                        file(workflow.out.dti_fa.get(0).get(1)).name,                               //  dti_fa
-                        file(workflow.out.dti_rgb.get(0).get(1)).name,                              //  dti_rgb
-                        file(workflow.out.dti_peaks.get(0).get(1)).name,                            //  dti_peaks
-                        file(workflow.out.dti_evecs.get(0).get(1)).name,                            //  dti_evecs
-                        file(workflow.out.dti_evals.get(0).get(1)).name,                            //  dti_evals
-                        file(workflow.out.dti_residual.get(0).get(1)).name,                         //  dti_residual
-                        file(workflow.out.dti_ga.get(0).get(1)).name,                               //  dti_ga
-                        file(workflow.out.dti_mode.get(0).get(1)).name,                             //  dti_mode
-                        file(workflow.out.dti_norm.get(0).get(1)).name,                             //  dti_norm
-                                                                                                    // FODF
-                        file(workflow.out.fiber_response.get(0).get(1)).name,                       //  fiber_response
-                        file(workflow.out.fodf.get(0).get(1)).name,                                 //  fodf
-                        file(workflow.out.fodf_peaks.get(0).get(1)).name,                           //  fodf_peaks
-                        file(workflow.out.afd_max.get(0).get(1)).name,                              //  afd_max
-                        file(workflow.out.afd_total.get(0).get(1)).name,                            //  afd_total
-                        file(workflow.out.afd_sum.get(0).get(1)).name,                              //  afd_sum
-                        file(workflow.out.nufo.get(0).get(1)).name,                                 //  nufo
-                                                                                                    // TRACKING
-                        file(workflow.out.pft_tractogram.get(0).get(1)).name,                       //  pft_tractogram
-                        file(workflow.out.pft_config.get(0).get(1)).name,                           //  pft_config
-                        file(workflow.out.pft_map_include.get(0).get(1)).name,                      //  pft_map_include
-                        file(workflow.out.pft_map_exclude.get(0).get(1)).name,                      //  pft_map_exclude
-                        file(workflow.out.pft_seeding_mask.get(0).get(1)).name,                     //  pft_seeding_mask
-                        file(workflow.out.local_tractogram.get(0).get(1)).name,                     //  local_tractogram
-                        file(workflow.out.local_config.get(0).get(1)).name,                         //  local_config
-                        file(workflow.out.local_seeding_mask.get(0).get(1)).name,                   //  local_seeding_mask
-                        file(workflow.out.local_tracking_mask.get(0).get(1)).name,                  //  local_tracking_mask
-                                                                                                    // QC
-                        file(workflow.out.nonphysical_voxels.get(0).get(1)).name,                   //  nonphysical_voxels
-                        file(workflow.out.pulsation_in_dwi.get(0).get(1)).name,                     //  pulsation_in_dwi
-                        file(workflow.out.pulsation_in_b0.get(0).get(1)).name,                      //  pulsation_in_b0
-                        file(workflow.out.dti_residual_stats.get(0).get(1)).name,                   //  dti_residual_stats
-                        workflow.out.versions                                                       // versions
-                    ).match()
-                }
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
             )
         }
     }

@@ -76,4 +76,5 @@ options:
     - WIP
     - Work in progress
     - Hotfix
+    - HOTFIX
   number_of_reviewers: 2

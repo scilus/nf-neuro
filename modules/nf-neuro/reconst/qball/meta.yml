@@ -1,0 +1,163 @@
+name: reconst_qball
+description: Compute the Constant Solid Angle (CSA) or Analytical Q-ball model,
+  the generalized fractional anisotropy (GFA) and the peaks of the model.
+keywords:
+  - Qball
+  - reconst
+  - scilpy
+tools:
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI
+        processing toolbox.
+      homepage: "https://github.com/scilus/scilpy.git"
+      identifier: ""
+args:
+  - b0_threshold:
+      type: integer
+      description: "Threshold for the b0 mask."
+      default: 0
+  - use_qball:
+      type: boolean
+      description: "If set, qball will be used as the odf reconstruction model instead of CSA."
+      default: false
+  - gfa:
+      type: boolean
+      description: "Compute the generalized fractional anisotropy."
+      default: true
+  - peaks:
+      type: boolean
+      description: "Compute the peaks."
+      default: true
+  - peaks_indices:
+      type: boolean
+      description: "Compute the peaks indices on the sphere."
+      default: true
+  - sh:
+      type: boolean
+      description: "Compute the spherical harmonics."
+      default: true
+  - nufo:
+      type: boolean
+      description: "Compute the NUFO."
+      default: true
+  - a_power:
+      type: boolean
+      description: "Compute the anisotropy power."
+      default: true
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - dwi:
+        type: file
+        description: Nifti DWI volume to reconstruct FODF from.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - bval:
+        type: file
+        description: B-values in FSL format.
+        pattern: "*.bval"
+        mandatory: true
+        ontologies: []
+    - bvec:
+        type: file
+        description: B-vectors in FSL format.
+        pattern: "*.bvec"
+        mandatory: true
+        ontologies: []
+    - mask:
+        type: file
+        description: Mask.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+output:
+  gfa:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__gfa.nii.gz":
+          type: file
+          description: Generalized fractional anisotropy.
+          pattern: "*__gfa.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  peaks:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__peaks.nii.gz":
+          type: file
+          description: Extracted peaks.
+          pattern: "*__peaks.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  peak_indices:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__peak_indices.nii.gz":
+          type: file
+          description: Generated peaks indices on the sphere.
+          pattern: "*__peak_indices.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NI
+  sh:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__sh.nii.gz":
+          type: file
+          description: Spherical harmonics coefficients.
+          pattern: "*__sh.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  nufo:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__nufo.nii.gz":
+          type: file
+          description: NUFO map.
+          pattern: "*__nufo.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  a_power:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__a_power.nii.gz":
+          type: file
+          description: Anisotropic power map.
+          pattern: "*__a_power.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAM
+authors:
+  - "@EliseCos"
+  - "@arnaudbore"
+maintainers:
+  - "@arnaudbore"

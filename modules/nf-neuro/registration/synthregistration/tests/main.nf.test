@@ -5,7 +5,7 @@ nextflow_process {
     process "REGISTRATION_SYNTHREGISTRATION"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "registration"
     tag "registration/synthregistration"
 
@@ -50,6 +50,29 @@ nextflow_process {
                     file(process.out.affine.get(0).get(1)).name,
                     process.out.versions
                 ).match() }
+            )
+        }
+    }
+
+    test("registration - synthregistration - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ],
+                    file("\${test_data_directory}/mni_masked_2x2x2.nii.gz"),
+                    file("\${test_data_directory}/b0_mean.nii.gz")
+                ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
     }

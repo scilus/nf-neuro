@@ -4,7 +4,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:latest"}"
+        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
 
     input:
     tuple val(meta), path(image), path(reference), path(warp), path(affine)
@@ -19,13 +19,13 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "warped"
+    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "__warped"
     def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
 
-    def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : ""
-    def image_type = task.ext.image_type ? "-e " + task.ext.image_type : ""
-    def interpolation = task.ext.interpolation ? "-n " + task.ext.interpolation : ""
     def output_dtype = task.ext.output_dtype ? "-u " + task.ext.output_dtype : ""
+    def dimensionality = task.ext.dimensionality ? "-d " + task.ext.dimensionality : "-d 3"
+    def image_type = task.ext.image_type ? "-e " + task.ext.image_type : "-e 0"
+    def interpolation = task.ext.interpolation ? "-n " + task.ext.interpolation : ""
     def default_val = task.ext.default_val ? "-f " + task.ext.default_val : ""
     def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
@@ -34,81 +34,94 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    antsApplyTransforms $dimensionality\
-                        -i $image\
-                        -r $reference\
-                        -o ${prefix}__${suffix}.nii.gz\
-                        $interpolation\
-                        -t $warp $affine\
-                        $image_type\
-                        $default_val\
-                        $output_dtype
+    for image in $image;
+        do \
+        ext=\${image#*.}
+        bname=\$(basename \${image} .\${ext})
 
-    ### ** QC ** ###
-    if $run_qc;
-    then
-        mv $reference reference.nii.gz
-        extract_dim=\$(mrinfo ${prefix}__${suffix}.nii.gz -size)
-        read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
+        antsApplyTransforms $dimensionality\
+                            -i \$image\
+                            -r $reference\
+                            -o ${prefix}__\${bname}${suffix}.nii.gz\
+                            $interpolation\
+                            -t $warp $affine\
+                            $output_dtype\
+                            $image_type\
+                            $default_val
 
-        # Get the middle slice
-        coronal_dim=\$((\$coronal_dim / 2))
-        axial_dim=\$((\$axial_dim / 2))
-        sagittal_dim=\$((\$sagittal_dim / 2))
+        ### ** QC ** ###
+        if $run_qc;
+        then
+            mv $reference reference.nii.gz
+            extract_dim=\$(mrinfo ${prefix}__\${bname}${suffix}.nii.gz -size)
+            read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
 
-        # Set viz params.
-        viz_params="--display_slice_number --display_lr --size 256 256"
-        # Iterate over images.
-        for image in reference warped;
-        do
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
-                --slices \$coronal_dim --axis coronal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
-                --slices \$sagittal_dim --axis sagittal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
-                --slices \$axial_dim --axis axial \$viz_params
-            if [ \$image != reference ];
-            then
-                title="Transformed"
-            else
-                title="Reference"
-            fi
-            convert +append \${image}_coronal*.png \${image}_axial*.png \
-                \${image}_sagittal*.png \${image}_mosaic.png
-            convert -annotate +20+230 "\${title}" -fill white -pointsize 30 \
-                \${image}_mosaic.png \${image}_mosaic.png
+            # Get the middle slice
+            coronal_dim=\$((\$coronal_dim / 2))
+            axial_dim=\$((\$axial_dim / 2))
+            sagittal_dim=\$((\$sagittal_dim / 2))
+
+            # Set viz params.
+            viz_params="--display_slice_number --display_lr --size 256 256"
+            # Iterate over images.
+            for image in reference \${bname}${suffix};
+            do
+                scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+                    --slices \$coronal_dim --axis coronal \$viz_params
+                scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+                    --slices \$sagittal_dim --axis sagittal \$viz_params
+                scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+                    --slices \$axial_dim --axis axial \$viz_params
+                if [ \$image != reference ];
+                then
+                    title="Transformed"
+                else
+                    title="Reference"
+                fi
+                convert +append \${image}_coronal*.png \${image}_axial*.png \
+                    \${image}_sagittal*.png \${image}_mosaic.png
+                convert -annotate +20+230 "\${title}" -fill white -pointsize 30 \
+                    \${image}_mosaic.png \${image}_mosaic.png
+                # Clean up.
+                rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
+            done
+            # Create GIF.
+            convert -delay 10 -loop 0 -morph 10 \
+                \${bname}${suffix}_mosaic.png reference_mosaic.png \${bname}${suffix}_mosaic.png \
+                ${prefix}_\${bname}${suffix_qc}_registration_antsapplytransforms_mqc.gif
             # Clean up.
-            rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
-        done
-        # Create GIF.
-        convert -delay 10 -loop 0 -morph 10 \
-            warped_mosaic.png reference_mosaic.png warped_mosaic.png \
-            ${prefix}_${suffix_qc}_registration_antsapplytransforms_mqc.gif
-        # Clean up.
-        rm *_mosaic.png
-    fi
+            rm *_mosaic.png
+        fi
+    done
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
-        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
-        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
     END_VERSIONS
     """
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "warped"
+    def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "__warped"
 
     """
     antsApplyTransforms -h
 
-    touch ${prefix}__${suffix}.nii.gz
+    for image in $image;
+        do \
+        ext=\${image#*.}
+        bname=\$(basename \${image} .\${ext})
+
+        touch ${prefix}__\${bname}${suffix}.nii.gz
+    done
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
-        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
-        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
     END_VERSIONS
     """
 }

@@ -1,6 +1,5 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "bundle_recognize"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: bundle_recognize
 description: Extract bundles from one (or more) tractograms
 keywords:
   - Diffusion MRI
@@ -8,40 +7,40 @@ keywords:
   - Segmentation
   - Bundles
 tools:
-  - "Scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
+  - Scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - tractograms:
-      type: file
-      description: Tractogram file(s) for bundle extraction
-      pattern: "*.trk"
-      mandatory: true
-
-  - transform:
-      type: file
-      description: Transform matrix bringing the atlas to native space
-      pattern: "*.mat"
-      mandatory: true
-
-  - config:
-      type: file
-      description: Bundle atlas configuration file
-      pattern: "*.json"
-      mandatory: true
-
-  - directory:
-      type: directory
-      description: Directory containing the reference atlas
-      mandatory: true
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - tractograms:
+        type: file
+        description: Tractogram file(s) for bundle extraction
+        pattern: "*.trk"
+        mandatory: true
+        ontologies: []
+    - transform:
+        type: file
+        description: Transform matrix bringing the atlas to native space
+        pattern: "*.mat"
+        mandatory: true
+        ontologies: []
+    - config:
+        type: file
+        description: Bundle atlas configuration file
+        pattern: "*.json"
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_3464 # JSON
+    - directory:
+        type: directory
+        description: Directory containing the reference atlas
+        mandatory: true
 args:
   - minimal_vote_ratio:
       type: float
@@ -49,38 +48,33 @@ args:
         The ratio is a value between 0 and 1.
         Ex: If you have 5 input model directories and a minimal_vote_ratio of 0.5, you will need at least 3 votes.
       default: 0.5
-
   - seed:
       type: int
       description: Seed for random number generator
       default: 0
-
-  - processes:
-      type: int
-      description: Number of sub-processes to start.
-      default: 1
-
   - outlier_alpha:
       type: float
-      description: Percent of the length of the tree that clusters of individual streamlines will be pruned.
+      description: Percent of the length of the tree that clusters of individual streamlines
+        will be pruned.
       default: 0.6
-
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - bundles:
-      type: file
-      description: Segmented and cleaned bundles
-      pattern: "*.trk"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  bundles:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_cleaned.trk":
+          type: file
+          description: Segmented and cleaned bundles
+          pattern: "*_cleaned.trk"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@CHrlS98"

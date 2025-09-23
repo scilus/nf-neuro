@@ -3,9 +3,7 @@ process IMAGE_RESAMPLE {
     label 'process_single'
     label 'process_high_memory'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
     tuple val(meta), path(image), path(ref) /* optional, input = [] */
@@ -33,28 +31,27 @@ process IMAGE_RESAMPLE {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    scil_volume_resample.py $image ${prefix}_${suffix}.nii.gz \
+    scil_volume_resample $image ${prefix}_${suffix}.nii.gz \
         $voxel_size $volume_size $reference $iso_min \
         $f $enforce_dimensions $interp
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_resampled" : "resampled"
     """
-    scil_volume_resample.py -h
+    scil_volume_resample -h
 
     touch ${prefix}_${suffix}.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

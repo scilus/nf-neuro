@@ -2,9 +2,7 @@ process CONNECTIVITY_DECOMPOSE {
     tag "$meta.id"
     label 'process_high'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
     tuple val(meta), path(trk), path(labels)
@@ -32,7 +30,7 @@ process CONNECTIVITY_DECOMPOSE {
 
     """
 
-    scil_decompose_connectivity.py $trk  $labels \
+    scil_tractogram_segment_connections_from_labels $trk  $labels \
         "${prefix}__decomposed.h5" --processes $task.cpus \
         --out_labels_list "${prefix}__labels_list.txt" \
         $no_pruning $no_remove_loops $no_remove_outliers \
@@ -42,7 +40,7 @@ process CONNECTIVITY_DECOMPOSE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -53,11 +51,11 @@ process CONNECTIVITY_DECOMPOSE {
     touch ${prefix}__decomposed.h5
     touch ${prefix}__labels_list.txt
 
-    scil_decompose_connectivity.py -h
+    scil_tractogram_segment_connections_from_labels -h
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

@@ -1,28 +1,28 @@
----
-name: "bundle_coloring"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: bundle_coloring
 description: Assign color to bundles.
 keywords:
   - Bundles
   - Coloring
   - Tractometry
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - bundles:
-      type: file
-      description: Flatten list of trk files containing bundles to be colored.
-      pattern: "*.trk"
-      mandatory: true
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - bundles:
+        type: file
+        description: Flatten list of trk files containing bundles to be colored.
+        pattern: "*.trk"
+        mandatory: true
+        ontologies: []
 args:
   - colors:
       type: string
@@ -30,24 +30,25 @@ args:
         List of colors to be used for coloring for each bundle.
         Example: ext.colors = ["bundle_0":"0xd9bd09", "bundle_1":"0xcc0000"]
       default: None
-
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - bundles:
-      type: file
-      description: Colored bundles file.
-      pattern: "*_colored.trk"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  bundles:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_colored.trk":
+          type: file
+          description: Colored bundles file.
+          pattern: "*_colored.trk"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
 maintainers:

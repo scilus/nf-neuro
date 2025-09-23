@@ -9,7 +9,7 @@
                             "single_end": false
                         },
                         [
-                            "test__bundle_0_uniformized.trk:md5,cd25919f690cdec5874abaa2dd960213",
+                            "test__bundle_0_uniformized.trk:md5,ea488ba3e2640b3a6fe942a8dc6c2732",
                             "test__bundle_1_uniformized.trk:md5,b159c84734897c9c34bcf654ab78e60a",
                             "test__bundle_2_uniformized.trk:md5,eb78c3ba6090d33b901fc28152679bce",
                             "test__bundle_3_uniformized.trk:md5,8877161b9aebaa6b12a4d7a8f8410407",
@@ -20,7 +20,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,f2a592bbc31c9c2393317ab72bcabe8c"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ],
                 "bundles": [
                     [
@@ -29,7 +29,7 @@
                             "single_end": false
                         },
                         [
-                            "test__bundle_0_uniformized.trk:md5,cd25919f690cdec5874abaa2dd960213",
+                            "test__bundle_0_uniformized.trk:md5,ea488ba3e2640b3a6fe942a8dc6c2732",
                             "test__bundle_1_uniformized.trk:md5,b159c84734897c9c34bcf654ab78e60a",
                             "test__bundle_2_uniformized.trk:md5,eb78c3ba6090d33b901fc28152679bce",
                             "test__bundle_3_uniformized.trk:md5,8877161b9aebaa6b12a4d7a8f8410407",
@@ -40,15 +40,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,f2a592bbc31c9c2393317ab72bcabe8c"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-05-22T20:18:24.833877"
+        "timestamp": "2025-09-17T17:42:27.05017156"
     },
     "bundle - uniformize_axis": {
         "content": [
@@ -59,11 +59,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__bundle_0_uniformized.trk:md5,cd25919f690cdec5874abaa2dd960213"
+                        "test__bundle_0_uniformized.trk:md5,ea488ba3e2640b3a6fe942a8dc6c2732"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,f2a592bbc31c9c2393317ab72bcabe8c"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ],
                 "bundles": [
                     [
@@ -71,19 +71,31 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__bundle_0_uniformized.trk:md5,cd25919f690cdec5874abaa2dd960213"
+                        "test__bundle_0_uniformized.trk:md5,ea488ba3e2640b3a6fe942a8dc6c2732"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,f2a592bbc31c9c2393317ab72bcabe8c"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-05-22T20:19:03.734244"
+        "timestamp": "2025-09-17T17:42:41.23704463"
+    },
+    "bundle - uniformize - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-17T17:43:12.374058214"
     },
     "bundle - uniformize_centroid": {
         "content": [
@@ -98,7 +110,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,f2a592bbc31c9c2393317ab72bcabe8c"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ],
                 "bundles": [
                     [
@@ -110,14 +122,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,f2a592bbc31c9c2393317ab72bcabe8c"
+                    "versions.yml:md5,ba694f2a9d87a772a4cf87a5fbd7d948"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-05-22T20:14:52.97367"
+        "timestamp": "2025-09-17T17:42:57.51177576"
     }
 }

@@ -6,7 +6,7 @@ nextflow_process {
     config "./nextflow.config"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "segmentation"
     tag "segmentation/fastseg"
 
@@ -88,6 +88,7 @@ nextflow_process {
         }
     }
     test("segmentation - fastseg - stub-run") {
+        tag "stub"
         options "-stub-run"
         when {
             process {

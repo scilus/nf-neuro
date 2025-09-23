@@ -5,7 +5,7 @@ nextflow_process {
     process "SEGMENTATION_FSRECONALL"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "segmentation"
     tag "segmentation/fsreconall"
 
@@ -81,6 +81,7 @@ nextflow_process {
     }
 
     test("segmentation - fsreconall - stub-run") {
+        tag "stub"
         options "-stub-run"
         when {
             config "./nextflow_debug.config"

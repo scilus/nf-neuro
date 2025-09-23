@@ -3,9 +3,7 @@ process BETCROP_FSLBETCROP {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilus:2.1.0"
 
     input:
         tuple val(meta), path(image), path(bval), path(bvec)
@@ -63,9 +61,9 @@ process BETCROP_FSLBETCROP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
-        fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
+        fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
 
     END_VERSIONS
     """
@@ -73,21 +71,11 @@ process BETCROP_FSLBETCROP {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}__image_bet.nii.gz
-    touch ${prefix}__image_bet_mask.nii.gz
-    touch ${prefix}__image_boundingBox.pkl
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
-        fsl: \$(flirt -version 2>&1 | sed -n 's/FLIRT version \\([0-9.]\\+\\)/\\1/p')
-    END_VERSIONS
-
+    set +e
     function handle_code () {
     local code=\$?
     ignore=( 1 )
-    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
     }
     trap 'handle_code' ERR
 
@@ -96,5 +84,16 @@ process BETCROP_FSLBETCROP {
     scil_volume_math.py -h
     mrcalc -h
     scil_volume_crop.py -h
+
+    touch ${prefix}__image_bet.nii.gz
+    touch ${prefix}__image_bet_mask.nii.gz
+    touch ${prefix}__image_boundingBox.pkl
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
+        fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
+    END_VERSIONS
     """
 }

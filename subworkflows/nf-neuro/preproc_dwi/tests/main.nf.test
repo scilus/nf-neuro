@@ -6,7 +6,7 @@ nextflow_workflow {
     config "./nextflow.config"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/preproc_dwi"
     tag "subworkflows/topup_eddy"
     tag "image/cropvolume"
@@ -21,6 +21,9 @@ nextflow_workflow {
 
     tag "load_test_data"
 
+    tag "stub"
+    options "-stub-run"
+
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
             script "../../load_test_data/main.nf"
@@ -33,14 +36,14 @@ nextflow_workflow {
         }
     }
 
-    test("preproc_dwi_rev_b0") {
+    test("preproc_dwi - AP DWI | PA sbref") {
 
         when {
             workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
@@ -49,7 +52,7 @@ nextflow_workflow {
                 input[2] = Channel.from( [] )
                 input[3] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz")
                     ]}
                 input[4] = Channel.from( [] )
@@ -59,36 +62,39 @@ nextflow_workflow {
 
         then {
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.bval,
-                    workflow.out.versions,
-                    file(workflow.out.b0.get(0).get(1)).name,
-                    file(workflow.out.b0_mask.get(0).get(1)).name,
-                    file(workflow.out.bvec.get(0).get(1)).name,
-                    file(workflow.out.dwi_bounding_box.get(0).get(1)).name,
-                    file(workflow.out.dwi_n4.get(0).get(1)).name,
-                    file(workflow.out.dwi.get(0).get(1)).name,
-                    file(workflow.out.dwi_topup_eddy.get(0).get(1)).name).match() }
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
+                ).match() }
             )
         }
     }
 
-    test("preproc_dwi_rev_dwi_nob0") {
+    test("preproc_dwi - AP DWI | PA DWI") {
 
         when {
             workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
                     ]}
                 input[1] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.bvec")
@@ -102,49 +108,52 @@ nextflow_workflow {
 
         then {
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.bval,
-                    workflow.out.versions,
-                    file(workflow.out.b0.get(0).get(1)).name,
-                    file(workflow.out.b0_mask.get(0).get(1)).name,
-                    file(workflow.out.bvec.get(0).get(1)).name,
-                    file(workflow.out.dwi_bounding_box.get(0).get(1)).name,
-                    file(workflow.out.dwi_n4.get(0).get(1)).name,
-                    file(workflow.out.dwi.get(0).get(1)).name,
-                    file(workflow.out.dwi_topup_eddy.get(0).get(1)).name).match() }
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
+                ).match() }
             )
         }
     }
 
 
-    test("preproc_dwi_all_options") {
+    test("preproc_dwi - AP DWI+sbref | PA DWI+sbref") {
 
         when {
             workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
                     ]}
                 input[1] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.bvec")
                     ]}
                 input[2] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
                     ]}
                 input[3] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz")
                     ]}
                 input[4] = Channel.from( [] )
@@ -154,17 +163,20 @@ nextflow_workflow {
 
         then {
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.bval,
-                    workflow.out.versions,
-                    file(workflow.out.b0.get(0).get(1)).name,
-                    file(workflow.out.b0_mask.get(0).get(1)).name,
-                    file(workflow.out.bvec.get(0).get(1)).name,
-                    file(workflow.out.dwi_bounding_box.get(0).get(1)).name,
-                    file(workflow.out.dwi_n4.get(0).get(1)).name,
-                    file(workflow.out.dwi.get(0).get(1)).name,
-                    file(workflow.out.dwi_topup_eddy.get(0).get(1)).name).match() }
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
+                ).match() }
             )
         }
     }

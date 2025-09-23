@@ -1,0 +1,135 @@
+nextflow_process {
+
+    name "Test Process RECONST_QBALL"
+    script "../main.nf"
+    process "RECONST_QBALL"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfneuro"
+    tag "reconst"
+    tag "reconst/qball"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = Channel.from( [ "DWIss1000-dir32.zip", "segmentation.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+    test("reconst - qball_csa") {
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                ch_dwi = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]
+                }
+                ch_mask = ch_split_test_data.segmentation.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/brainmask/brainmask.nii.gz")
+                    ]
+                }
+                input[0] = ch_dwi
+                    .join(ch_mask)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.gfa.get(0).get(1), 6),
+                    file(process.out.peaks.get(0).get(1)).name,
+                    file(process.out.peak_indices.get(0).get(1)).name,
+                    niftiMD5SUM(process.out.sh.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.nufo.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.a_power.get(0).get(1), 6),
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("reconst - qball_gfa") {
+        config "./nextflow_light.config"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                input[0] = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    niftiMD5SUM(process.out.gfa.get(0).get(1), 6),
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("reconst - stub-run qball") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "DWIss1000-dir32"
+                        segmentation: it.simpleName == "segmentation"
+                    }
+                input[0] = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        []
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
+}

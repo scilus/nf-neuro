@@ -1,0 +1,122 @@
+name: "tractogram_math"
+description: |
+  This module performs mathematical operations on tractograms.
+  It can be used to concatenate multiple tractograms into a single file,
+  compute the union of multiple tractograms, or perform other operations.
+  The available operations are:
+  - Concatenate: Combine multiple tractograms into a single file.
+  - Union: Compute the union of multiple tractograms.
+  - Intersection: Compute the intersection of multiple tractograms.
+  - Difference: Compute the difference between two tractograms.
+  - Lazy Concatenate: Concatenate multiple tractograms without loading them into memory.
+keywords:
+  - tractogram
+  - math
+  - concatenate
+tools:
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - trks:
+        type: file
+        description: |
+          List of tractograms to perform the operation on.
+          e.g. `[ path(trk1), path(trk2), path(trk3), ...]`
+        pattern: "*.trk"
+        mandatory: true
+        ontologies: []
+    - reference:
+        type: file
+        description: |
+          Reference tractogram to use for the operation.
+          e.g. `[ path(reference) ]`
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+args:
+  - operation:
+      type: string
+      description: |
+        The mathematical operation to perform on the tractograms.
+        e.g. `concatenate`, `union`, `intersection`, `difference`, `lazy_concatenate`
+      choices:
+        - concatenate
+        - union
+        - intersection
+        - difference
+        - lazy_concatenate
+  - suffix:
+      type: string
+      description: |
+        Suffix to add to the output tractogram file name.
+  - precision:
+      type: number
+      description: |
+        Precision used to compare streamlines.
+      default: 4
+  - robust:
+      type: boolean
+      description: |
+        Use version robust to small rotations/translations.
+      default: false
+  - no_metadata:
+      type: boolean
+      description: |
+        Strip the streamline metadata from the output.
+      default: false
+  - fake_metadata:
+      type: boolean
+      description: |
+        Skip the metadata verification, create fake metadata if missing,
+        can lead to unexpected behavior.
+      default: false
+  - save_indices:
+      type: string
+      description: |
+        Save the streamline indices to the supplied json file. The string in
+        this argument will be used as the prefix of the output `.json` file.
+  - save_empty:
+      type: boolean
+      description: |
+        If set, we will save all results, even if tractogram if empty.
+      default: false
+  - no_bbox_check:
+      type: boolean
+      description: |
+        Activate to ignore validity of the bounding box during loading / saving of
+        tractograms (ignores the presence of invalid streamlines).
+      default: false
+output:
+  trk:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.trk":
+          type: file
+          description: |
+            Resulting tractogram after the operation.
+            e.g. `[ path(trk) ]`
+          pattern: "*.trk"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"

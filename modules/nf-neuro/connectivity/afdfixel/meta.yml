@@ -1,5 +1,5 @@
----
-name: "connectivity_afdfixel"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: connectivity_afdfixel
 description: |
   Compute the mean Apparent Fiber Density (AFD) and mean Radial fODF (radfODF)
   maps for every connections within a hdf5 (.h5) file.
@@ -8,45 +8,47 @@ keywords:
   - AFD_Fixel
   - Metrics
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - hdf5:
-      type: file
-      description: HDF5 file containing decomposed connections.
-      pattern: "*.h5"
-
-  - fodf:
-      type: file
-      description: FODF file.
-      pattern: "*.nii.gz"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - hdf5:
+        type: file
+        description: HDF5 file containing decomposed connections.
+        pattern: "*.h5"
+        ontologies: []
+    - fodf:
+        type: file
+        description: FODF file.
+        pattern: "*.nii.gz"
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - hdf5:
-      type: file
-      description: |
-        HDF5 file containing the computed AFD fixel and radial fODF metrics.
-      pattern: "*.h5"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  hdf5:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*__afd_fixel.h5":
+          type: file
+          description: HDF5 file containing the computed AFD fixel and radial fODF metrics.
+          pattern: "*__afd_fixel.h5"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@gagnonanthony"
 maintainers:

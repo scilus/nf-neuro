@@ -70,6 +70,7 @@ workflow TRACTOFLOW {
             Channel.empty(),
             Channel.empty(),
             Channel.empty(),
+            Channel.empty(),
             Channel.empty()
         )
         ch_versions = ch_versions.mix(PREPROC_T1.out.versions.first())

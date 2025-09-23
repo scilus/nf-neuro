@@ -1,0 +1,74 @@
+nextflow_process {
+
+    name "Test Process STATS_MERGEJSON"
+    script "../main.nf"
+    process "STATS_MERGEJSON"
+
+    tag "modules"
+    tag "modules_nfneuro"
+    tag "stats"
+    tag "stats/mergejson"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "tractometry.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("stats - length") {
+        when {
+        config "./nextflow.config"
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/length_stats_*.json")
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.json.get(0).get(1)),
+                    file(process.out.xlsx.get(0).get(1)).name,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+    test("stats - merge json -stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/length_stats_*.json")
+                    ]
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
+}

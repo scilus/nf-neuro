@@ -1,5 +1,17 @@
 {
-    "topup_full": {
+    "topup - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,94c36112d1661051122b9e24ff3a0f3a"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.3"
+        },
+        "timestamp": "2025-06-05T15:21:44.106910251"
+    },
+    "topup - AP DWI+sbref | PA DWI+sbref": {
         "content": [
             "test__corrected_b0s.nii.gz",
             "topup_results_fieldcoef.nii.gz",
@@ -26,26 +38,65 @@
             "test__b0_topup_mqc.gif",
             "test__rev_b0_topup_mqc.gif",
             [
-                "versions.yml:md5,94e2c9feaffa49fdd4fd59ac95fd251f"
+                "versions.yml:md5,4f4b0ba79e976735b1c4ccfb8b3ee140"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-02-23T18:16:40.661701215"
+        "timestamp": "2025-07-04T21:35:04.234175695"
     },
-    "topup - stub-run": {
+    "topup - AP DWI | PA sbref": {
         "content": [
+            "test1__corrected_b0s.nii.gz",
+            "topup_results_fieldcoef.nii.gz",
+            "topup_results_movpar.txt",
+            "test1__rev_b0_warped.nii.gz",
             [
-                "versions.yml:md5,94e2c9feaffa49fdd4fd59ac95fd251f"
+                [
+                    {
+                        "id": "test1",
+                        "single_end": false
+                    },
+                    "test1__rev_b0_mean.nii.gz:md5,a0c63d7a8a234d85eeb63045ae2a8f60"
+                ],
+                [
+                    {
+                        "id": "test2",
+                        "single_end": false
+                    },
+                    "test2__rev_b0_mean.nii.gz:md5,a0c63d7a8a234d85eeb63045ae2a8f60"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test1",
+                        "single_end": false
+                    },
+                    "test1__b0_mean.nii.gz:md5,91288914a80e7866ef8b08a363d617f9"
+                ],
+                [
+                    {
+                        "id": "test2",
+                        "single_end": false
+                    },
+                    "test2__b0_mean.nii.gz:md5,91288914a80e7866ef8b08a363d617f9"
+                ]
+            ],
+            "test1__b0_topup_mqc.gif",
+            "test1__rev_b0_topup_mqc.gif",
+            [
+                "versions.yml:md5,4f4b0ba79e976735b1c4ccfb8b3ee140",
+                "versions.yml:md5,4f4b0ba79e976735b1c4ccfb8b3ee140"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-02-20T19:58:59.31028257"
+        "timestamp": "2025-07-04T21:36:00.340672329"
     },
     "topup_light": {
         "content": [
@@ -88,14 +139,14 @@
             "test1__b0_topup_mqc.gif",
             "test1__rev_b0_topup_mqc.gif",
             [
-                "versions.yml:md5,94e2c9feaffa49fdd4fd59ac95fd251f",
-                "versions.yml:md5,94e2c9feaffa49fdd4fd59ac95fd251f"
+                "versions.yml:md5,94c36112d1661051122b9e24ff3a0f3a",
+                "versions.yml:md5,94c36112d1661051122b9e24ff3a0f3a"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-02-23T18:17:42.609518864"
+        "timestamp": "2025-06-05T15:37:37.732999777"
     }
 }

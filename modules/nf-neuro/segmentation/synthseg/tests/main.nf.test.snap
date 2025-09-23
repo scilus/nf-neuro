@@ -10,10 +10,10 @@
             "test__aparc_aseg.nii.gz",
             "test__resampled_image.nii.gz:md5:header,728dfc231a3dfcf567ac640930f68629,data,1f02837025def8b0701f79549c2955e1",
             [
-                
+
             ],
             [
-                
+
             ],
             [
                 "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
@@ -62,5 +62,17 @@
             "nextflow": "24.04.4"
         },
         "timestamp": "2024-10-12T03:50:05.836734582"
+    },
+    "segmentation - synthseg - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,b65418e9ce2ab1cce590b1f659e18c1d"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-06-03T17:49:09.678881891"
     }
 }

@@ -1,5 +1,5 @@
-name: "reconst_dtimetrics"
-
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
+name: reconst_dtimetrics
 description: Script to compute all of the Diffusion Tensor Imaging (DTI) metrics
 keywords:
   - nifti
@@ -7,52 +7,26 @@ keywords:
   - tensor
   - scilpy
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
-input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-  - dwi:
-      type: file
-      description: Nifti DWI volume used to extract DTI metrics.
-      pattern: "*.{nii,nii.gz}"
-      mandatory: true
-  - bval:
-      type: file
-      description: B-values in FSL format.
-      pattern: "*.bval"
-      mandatory: true
-  - bvec:
-      type: file
-      description: B-vectors in FSL format.
-      pattern: "*.bvec"
-      mandatory: true
-  - b0mask:
-      type: file
-      description: Nifti b0 volume file used to mask the input image.
-      pattern: "*.{nii,nii.gz}"
-      mandatory: false
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 args:
   - dwi_shell_tolerance:
-      type: int
+      type: integer
       description: "Tolerance for the shell detection algorithm."
       default: 20
   - max_dti_shell_value:
-      type: int
+      type: integer
       description: "Maximum value for the DTI shell."
       default: 1500
   - b0_thr_extract_b0:
-      type: int
+      type: integer
       description: "Threshold for the b0 extraction."
       default: 0
   - b0_threshold:
-      type: int
+      type: integer
       description: "Threshold for the b0 mask."
       default: 0
   - dti_shells:
@@ -119,133 +93,386 @@ args:
       type: boolean
       description: "Compute the residual."
       default: true
-
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - dwi:
+        type: file
+        description: Nifti DWI volume used to extract DTI metrics.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - bval:
+        type: file
+        description: B-values in FSL format.
+        pattern: "*.bval"
+        mandatory: true
+        ontologies: []
+    - bvec:
+        type: file
+        description: B-vectors in FSL format.
+        pattern: "*.bvec"
+        mandatory: true
+        ontologies: []
+    - b0mask:
+        type: file
+        description: Nifti b0 volume file used to mask the input image.
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-  - ad:
-      type: file
-      description: Output filename for the axial diffusivity.
-      pattern: "*__ad.{nii,nii.gz}"
-  - evecs:
-      type: file
-      description: Output filename for the eigenvectors of the tensor.
-      pattern: "*__evecs.{nii,nii.gz}"
-  - evecs_v1:
-      type: file
-      description: Output filename for the first eigenvector.
-      pattern: "*__evecs_v1.{nii,nii.gz}"
-  - evecs_v2:
-      type: file
-      description: Output filename for the second eigenvector.
-      pattern: "*__evecs_v2.{nii,nii.gz}"
-  - evecs_v3:
-      type: file
-      description: Output filename for the third eigenvector.
-      pattern: "*__evecs_v3.{nii,nii.gz}"
-  - evals:
-      type: file
-      description: Output filename for the eigenvalues of the tensor.
-      pattern: "*__evals.{nii,nii.gz}"
-  - evals_e1:
-      type: file
-      description: Output filename for the first eigenvalue.
-      pattern: "*__evals_e1.{nii,nii.gz}"
-  - evals_e2:
-      type: file
-      description: Output filename for the second eigenvalue.
-      pattern: "*__evals_e2.{nii,nii.gz}"
-  - evals_e3:
-      type: file
-      description: Output filename for the third eigenvalue.
-      pattern: "*__evals_e3.{nii,nii.gz}"
-  - fa:
-      type: file
-      description: Output filename for the fractional anisotropy.
-      pattern: "*__fa.{nii,nii.gz}"
-  - ga:
-      type: file
-      description: Output filename for the geodesic anisotropy.
-      pattern: "*__ga.{nii,nii.gz}"
-  - rgb:
-      type: file
-      description: Output filename for the colored fractional anisotropy.
-      pattern: "*__rgb.{nii,nii.gz}"
-  - md:
-      type: file
-      description: Output filename for the mean diffusivity.
-      pattern: "*__md.{nii,nii.gz}"
-  - mode:
-      type: file
-      description: Output filename for the mode.
-      pattern: "*__mode.{nii,nii.gz}"
-  - norm:
-      type: file
-      description: Output filename for the tensor norm.
-      pattern: "*__norm.{nii,nii.gz}"
-  - rd:
-      type: file
-      description: Output filename for the radial diffusivity.
-      pattern: "*__rd.{nii,nii.gz}"
-  - tensor:
-      type: file
-      description: Output filename for the tensor coefficients.
-      pattern: "*__tensor.{nii,nii.gz}"
-  - nonphysical:
-      type: file
-      description: Output filename for the voxels with physically implausible
-        signals where the mean of b=0 images is below one or more
-        diffusion-weighted images.
-      pattern: "*__nonphysical.{nii,nii.gz}"
-  - pulsation_std_dwi:
-      type: file
-      description: Standard deviation map across all diffusion-weighted images.
-        Shows pulsation and misalignment artifacts.
-      pattern: "*__pulsation_std_dwi.{nii,nii.gz}"
-  - pulsation_std_b0:
-      type: file
-      description: Standard deviation map across b=0 images if more than one
-        is available. Shows pulsation and misalignment artifacts.
-      pattern: "*__pulsation_std_b0.{nii,nii.gz}"
-  - residual:
-      type: file
-      description: Output filename for the map of the residual of the tensor fit.
-      pattern: "*__residual.{nii,nii.gz}"
-  - residual_iqr_residuals:
-      type: file
-      description: Output filename for the interquartile range of the residual of the tensor fit.
-      pattern: "*__residual_iqr_residuals.npy"
-  - residual_mean_residuals:
-      type: file
-      description: Output filename for the mean of the residual of the tensor fit.
-      pattern: "*__residual_mean_residuals.npy"
-  - residual_q1_residuals:
-      type: file
-      description: Output filename for the firt quartile of the residual of the tensor fit.
-      pattern: "*__residual_q1_residuals.npy"
-  - residual_q3_residuals:
-      type: file
-      description: Output filename for the third quartile of the residual of the tensor fit.
-      pattern: "*__residual_q3_residuals.npy"
-  - residual_residuals_stats:
-      type: file
-      description: Output filename for the all statistics of the residual of the tensor fit.
-      pattern: "*__residual_residuals_stats.png"
-  - residual_std_residuals:
-      type: file
-      description: Output filename for the standard deviation of the residual of the tensor fit.
-      pattern: "*__residual_std_residuals.npy"
-  - mqc:
-      type: file
-      pattern: "*__dti_mqc.png"
-      description: .png file containing screenshots of some DTI metrics. Made for use in MultiQC report.
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  ad:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__ad.nii.gz":
+          type: file
+          description: Axial diffusivity.
+          pattern: "*__ad.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evecs:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__evecs.nii.gz":
+          type: file
+          description: Eigenvectors of the tensor.
+          pattern: "*__evecs.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evecs_v1:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__evecs_v1.nii.gz":
+          type: file
+          description: First eigenvector.
+          pattern: "*__evecs_v1.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evecs_v2:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__evecs_v2.nii.gz":
+          type: file
+          description: Second eigenvector.
+          pattern: "*__evecs_v2.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evecs_v3:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__evecs_v3.nii.gz":
+          type: file
+          description: Third eigenvector.
+          pattern: "*__evecs_v3.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evals:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__evals.nii.gz":
+          type: file
+          description: Eigenvalues of the tensor.
+          pattern: "*__evals.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evals_e1:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__evals_e1.nii.gz":
+          type: file
+          description: First eigenvalue.
+          pattern: "*__evals_e1.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evals_e2:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__evals_e2.nii.gz":
+          type: file
+          description: Second eigenvalue.
+          pattern: "*__evals_e2.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  evals_e3:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__evals_e3.nii.gz":
+          type: file
+          description: Third eigenvalue.
+          pattern: "*__evals_e3.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  fa:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__fa.nii.gz":
+          type: file
+          description: Fractional anisotropy.
+          pattern: "*__fa.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  ga:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__ga.nii.gz":
+          type: file
+          description: Geodesic anisotropy.
+          pattern: "*__ga.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  rgb:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__rgb.nii.gz":
+          type: file
+          description: Colored fractional anisotropy.
+          pattern: "*__rgb.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  md:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__md.nii.gz":
+          type: file
+          description: Mean diffusivity.
+          pattern: "*__md.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  mode:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__mode.nii.gz":
+          type: file
+          description: Mode of tensors.
+          pattern: "*__mode.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  norm:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__norm.nii.gz":
+          type: file
+          description: Norm of tensors.
+          pattern: "*__norm.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  rd:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__rd.nii.gz":
+          type: file
+          description: Radial diffusivity.
+          pattern: "*__rd.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  tensor:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__tensor.nii.gz":
+          type: file
+          description: Tensor coefficients.
+          pattern: "*__tensor.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  nonphysical:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__nonphysical.nii.gz":
+          type: file
+          description: |
+            Map of voxels with physically implausible signals where the mean of
+            b=0 images is below one or more diffusion-weighted images.
+          pattern: "*__nonphysical.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  pulsation_std_dwi:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__pulsation_std_dwi.nii.gz":
+          type: file
+          description: |
+            Standard deviation map across all diffusion-weighted images.
+            Shows pulsation and misalignment artifacts.
+          pattern: "*__pulsation_std_dwi.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  pulsation_std_b0:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__pulsation_std_b0.nii.gz":
+          type: file
+          description: |
+            Standard deviation map across b=0 images if more than one is
+            available. Shows pulsation and misalignment artifacts.
+          pattern: "*__pulsation_std_b0.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  residual:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__residual.nii.gz":
+          type: file
+          description: Residual of the tensor fit.
+          pattern: "*__residual.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  residual_iqr_residuals:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__residual_iqr_residuals.npy":
+          type: file
+          description: Interquartile range of the residual of the tensor fit.
+          pattern: "*__residual_iqr_residuals.npy"
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  residual_mean_residuals:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__residual_mean_residuals.npy":
+          type: file
+          description: Average of the residual of the tensor fit.
+          pattern: "*__residual_mean_residuals.npy"
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  residual_q1_residuals:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__residual_q1_residuals.npy":
+          type: file
+          description: First quartile of the residual of the tensor fit.
+          pattern: "*__residual_q1_residuals.npy"
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  residual_q3_residuals:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__residual_q3_residuals.npy":
+          type: file
+          description: Third quartile of the residual of the tensor fit.
+          pattern: "*__residual_q3_residuals.npy"
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  residual_residuals_stats:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__residual_residuals_stats.png":
+          type: file
+          description: Complete statistics of the residual of the tensor fit.
+          pattern: "*__residual_residuals_stats.png"
+          ontologies: []
+  residual_std_residuals:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__residual_std_residuals.npy":
+          type: file
+          description: Standard deviation of the residual of the tensor fit.
+          pattern: "*__residual_std_residuals.npy"
+          ontologies:
+            - edam: http://edamontology.org/format_4003 # NumPy format
+  mqc:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__dti_mqc.png":
+          type: file
+          description: |
+            .png file containing screenshots of some DTI metrics.
+            Made for use in MultiQC report.
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"

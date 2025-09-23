@@ -1,0 +1,2 @@
+segmentation/fslobes:
+  - "modules/nf-neuro/segmentation/fslobes/**"

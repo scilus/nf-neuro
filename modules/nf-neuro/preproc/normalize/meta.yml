@@ -1,68 +1,82 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "preproc_normalize"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: preproc_normalize
 description: Normalize DWI using MRtrix3 (in WM)
 keywords:
   - nifti
   - normalise
   - scilpy
-  - MRtrix3
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-  - "MRtrix3":
-      description: "Toolbox for image processing, analysis and visualisation of dMRI."
-      homepage: "https://mrtrix.readthedocs.io/en/latest/"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+  - MRtrix3:
+      description: |
+        MRtrix3 is a software package for various types of diffusion imaging
+        data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
+      homepage: https://www.mrtrix.org/
+      doi: 10.1016/j.neuroimage.2019.116137
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - dwi:
-      type: file
-      description: Nifti image file to normalize
-      pattern: "*.{nii,nii.gz}"
-
-  - mask:
-      type: file
-      description: Nifti image file used to mask the input image
-      pattern: "*.{nii,nii.gz}"
-
-  - bval:
-      type: file
-      description: Text file containing b-values
-      pattern: "*.bval"
-
-  - bvec:
-      type: file
-      description: Text file containing b-vectors
-      pattern: "*.bvec"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - dwi:
+        type: file
+        description: Nifti image file to normalize
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - bval:
+        type: file
+        description: Text file containing b-values
+        pattern: "*.{.bval}"
+        ontologies: []
+    - bvec:
+        type: file
+        description: Text file containing b-vectors
+        pattern: "*.{.bvec}"
+        ontologies: []
+    - mask:
+        type: file
+        description: Nifti image file used to mask the input image
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - dwi:
-      type: file
-      description: Normalized Nifti image file
-      pattern: "*_normalized.{nii,nii.gz}"
-
-  - mask:
-      type: file
-      description: Nifti image file mask
-      pattern: "*_mask.{nii,nii.gz}"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  dwi:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*dwi_normalized.nii.gz":
+          type: file
+          description: Normalized Nifti image file
+          pattern: "*dwi_normalized.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  mask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*fa_wm_mask.nii.gz":
+          type: file
+          description: Nifti image file mask
+          pattern: "*fa_wm_mask.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"

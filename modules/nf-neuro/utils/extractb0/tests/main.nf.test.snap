@@ -69,6 +69,18 @@
         },
         "timestamp": "2024-05-09T00:13:58.708201"
     },
+    "utils - extractb0 - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,36a507648bd7506126303551eff1e6d0"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-06-03T17:40:16.606767383"
+    },
     "utils - extractb0": {
         "content": [
             {

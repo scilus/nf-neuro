@@ -1,63 +1,148 @@
----
-name: "registration_antsapplytransforms"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main_3.2.0/modules/meta-schema.json
+name: registration_antsapplytransforms
 description: register image from transform
 keywords:
   - MRI
   - registration
   - medical imaging
 tools:
-  - "ANTs":
-      description: "perform registration using transform as input"
-      homepage: "https://antsx.github.io/ANTsRCore/reference/antsApplyTransforms.html"
-
+  - ANTs:
+      description: perform registration using transform as input
+      homepage: https://antsx.github.io/ANTsRCore/reference/antsApplyTransforms.html
+      identifier: ""
+args:
+  - prefix:
+      type: string
+      description: |
+        Prefix to add to the output file name.
+        e.g. `warped_` will result in `warped_image.nii.gz`.
+      default: "${meta.id}"
+  - suffix:
+      type: string
+      description: |
+        Suffix to add to the output file name.
+        e.g. `_warped` will result in `image_warped.nii.gz`.
+      default: "__warped"
+  - suffix_qc:
+      type: string
+      description: |
+        Suffix to add to the quality control image file name.
+        e.g. `qc` will result in `*qc_registration_antsapplytransforms_mqc.gif`.
+  - dimensionality:
+      type: number
+      description: |
+        Dimensionality of the input image.
+        e.g. `2` for 2D images, `3` for 3D images.
+  - image_type:
+      type: integer
+      description: Type of the input image.
+      choices:
+        - 0 (scalar)
+        - 1 (vector)
+        - 2 (tensor)
+        - 3 (time series)
+        - 4 (multichannel)
+        - 5 (five-dimensional)
+  - interpolation:
+      type: string
+      description: |
+        Interpolation method to use for the transformation. Content
+        in `[...]` is optional. Refer the the antsApplyTransforms
+        documentation for more details.
+      choices:
+        - Linear
+        - NearestNeighbor
+        - MultiLabel[<sigma=imageSpacing>,<alpha=4.0>]
+        - Gaussian[<sigma=imageSpacing>,<alpha=1.0>]
+        - BSpline[<order=3>]
+        - CosineWindowedSinc
+        - WelchWindowedSinc
+        - HammingWindowedSinc
+        - LanczosWindowedSinc
+        - GenericLabel[<interpolator=Linear>]
+  - output_dtype:
+      type: string
+      description: Output data type for the warped image.
+      choices:
+        - char
+        - uchar
+        - float
+        - double
+        - short
+        - int
+        - default
+  - default_val:
+      type: number
+      description: |
+        Default value to use for the input image. It specifies the voxel value when the input
+        point maps outside the output domain.
+  - run_qc:
+      type: boolean
+      description: |
+        Whether to run quality control for the registration process.
+        e.g. `true` to generate a quality control image, `false` to skip it.
+      default: false
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - image:
-      type: file
-      description: Input image to register
-      pattern: "*.{nii.nii.gz}"
-
-  - reference:
-      type: file
-      description: Reference image for registration
-      pattern: "*.{nii.nii.gz}"
-
-  - warp:
-      type: file
-      description: Warp transformation file to warp image or trk.
-      pattern: "*.{nii,nii.gz}"
-
-  - affine:
-      type: file
-      description: Affine or rigid transformation file to warp image or trk (*mat). If a rigid or affine transformation needs to be inverted before being applied, use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this module does not handles it.
-      pattern: "*.mat"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - image:
+        type: file
+        description: Input image to register
+        pattern: "*.{nii.nii.gz}"
+        ontologies: []
+    - reference:
+        type: file
+        description: Reference image for registration
+        pattern: "*.{nii.nii.gz}"
+        ontologies: []
+    - warp:
+        type: file
+        description: Warp transformation file to warp image or trk.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - affine:
+        type: file
+        description: Affine or rigig transformation file to warp image or trk (*mat).
+          If a rigid or affine transformation needs to be inverted before being applied,
+          use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this
+          module does not handles it.
+        pattern: "*.mat"
+        ontologies: []
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - warped_image:
-      type: file
-      description: Warped image
-      pattern: "*.{nii.nii.gz}"
-
-  - mqc:
-      type: file
-      description: .gif file containing quality control image for the registration process. Made for use in MultiQC report.
-      pattern: "*.gif"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  warped_image:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__warped.nii.gz":
+          type: file
+          description: Warped image.
+          pattern: "*__warped.{nii.nii.gz}"
+          ontologies: []
+  mqc:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_registration_antsapplytransforms_mqc.gif":
+          type: file
+          description: |
+            .gif file containing quality control image for the registration process.
+            Made for use in MultiQC report.
+          pattern: "*_registration_antsapplytransforms_mqc.gif"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"

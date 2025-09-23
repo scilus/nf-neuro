@@ -5,17 +5,17 @@ process REGISTRATION_ANTS {
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:latest"}"
+        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
 
     input:
-    tuple val(meta), path(fixedimage), path(movingimage), path(mask) //** optional, input = [] **//
+    tuple val(meta), path(fixedimage), path(movingimage), path(mask) /* optional, input = [] */
 
     output:
     tuple val(meta), path("*_warped.nii.gz")                        , emit: image
-    tuple val(meta), path("*__output0Warp.nii.gz")                  , emit: warp, optional:true
-    tuple val(meta), path("*__output1GenericAffine.mat")            , emit: affine
-    tuple val(meta), path("*__output1InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
-    tuple val(meta), path("*__output0InverseAffine.mat")            , emit: inverse_affine
+    tuple val(meta), path("*__output0GenericAffine.mat")             , emit: affine
+    tuple val(meta), path("*__output1InverseAffine.mat")            , emit: inverse_affine
+    tuple val(meta), path("*__output1Warp.nii.gz")                  , emit: warp, optional:true
+    tuple val(meta), path("*__output0InverseWarp.nii.gz")           , emit: inverse_warp, optional: true
     tuple val(meta), path("*_registration_ants_mqc.gif")            , emit: mqc, optional: true
     path "versions.yml"                                             , emit: versions
 
@@ -51,18 +51,17 @@ process REGISTRATION_ANTS {
     $ants $dimension -f $fixedimage -m $movingimage -o output -t $transform $args $seed
 
     mv outputWarped.nii.gz ${prefix}__warped.nii.gz
-    mv output0GenericAffine.mat ${prefix}__output1GenericAffine.mat
+    mv output0GenericAffine.mat ${prefix}__output0GenericAffine.mat
 
     if [ $transform != "t" ] && [ $transform != "r" ] && [ $transform != "a" ];
     then
-        mv output1InverseWarp.nii.gz ${prefix}__output1InverseWarp.nii.gz
-        mv output1Warp.nii.gz ${prefix}__output0Warp.nii.gz
+        mv output1InverseWarp.nii.gz ${prefix}__output0InverseWarp.nii.gz
+        mv output1Warp.nii.gz ${prefix}__output1Warp.nii.gz
     fi
 
-    antsApplyTransforms -d 3 -i $fixedimage -r $movingimage -o Linear[output.mat]\
-                        -t [${prefix}__output1GenericAffine.mat,1]
-
-    mv output.mat ${prefix}__output0InverseAffine.mat
+    antsApplyTransforms -d 3 -i $fixedimage -r $movingimage \
+                        -o Linear[${prefix}__output1InverseAffine.mat] \
+                        -t [${prefix}__output0GenericAffine.mat,1]
 
     ### ** QC ** ###
     if $run_qc;
@@ -110,9 +109,9 @@ process REGISTRATION_ANTS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
-        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
-        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -121,27 +120,28 @@ process REGISTRATION_ANTS {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    touch ${prefix}__t1_warped.nii.gz
-    touch ${prefix}__output1GenericAffine.mat
-    touch ${prefix}__output0InverseAffine.mat
-    touch ${prefix}__output1InverseWarp.nii.gz
-    touch ${prefix}__output0Warp.nii.gz
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/')
-        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
-        imagemagick: \$(magick -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
-    END_VERSIONS
-
+    set +e
     function handle_code () {
     local code=\$?
     ignore=( 1 )
-    exit \$([[ " \${ignore[@]} " =~ " \$code " ]] && echo 0 || echo \$code)
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
     }
     trap 'handle_code' ERR
 
     antsRegistrationSyNQuick.sh -h
     antsApplyTransforms -h
+
+    touch ${prefix}__t1_warped.nii.gz
+    touch ${prefix}__output0GenericAffine.mat
+    touch ${prefix}__output1InverseAffine.mat
+    touch ${prefix}__output0InverseWarp.nii.gz
+    touch ${prefix}__output1Warp.nii.gz
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
+    END_VERSIONS
     """
 }

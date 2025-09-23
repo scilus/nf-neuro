@@ -40,7 +40,7 @@ process UTILS_EXTRACTB0 {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_dwi_extract_b0.py - h
+    scil_dwi_extract_b0.py -h
 
     touch ${prefix}_b0.nii.gz
 

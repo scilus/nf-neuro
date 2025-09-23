@@ -1,0 +1,2 @@
+stats/mergejson:
+  - "modules/nf-neuro/stats/mergejson/**"

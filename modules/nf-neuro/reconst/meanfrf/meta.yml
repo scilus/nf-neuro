@@ -1,38 +1,42 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
-name: "reconst_meanfrf"
-description: Compute the mean Fiber Response Function from a set of individually
-  computed Response Functions.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: reconst_meanfrf
+description: Compute the mean Fiber Response Function from a set of individually computed
+  Response Functions.
 keywords:
   - Fiber Orientation Distribution Function
   - Diffusion MRI
   - Fiber Response Function
   - Average
-
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
-      homepage: "https://github.com/scilus/scilpy.git"
-
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
 input:
-  - label:
-      type: string
-      description: Label for the output file, used as prefix.
-  - frf_list:
-      type: list
-      description: List of individual Fiber Response Function (FRF) path.
-      pattern: "*.txt"
-
+  - - prefix:
+        type: string
+        description: Prefix to append to all FRF files.
+    - frf_list:
+        type: list
+        description: List of individual Fiber Response Function (FRF) path.
+        pattern: "*.txt"
 output:
-  - meanfrf:
-      type: file
-      description: Averaged Fiber Response Function (FRF).
-      pattern: "mean_frf.txt"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  meanfrf:
+    - - prefix:
+          type: string
+          description: Prefix that was append to all FRF files.
+      - "*mean_frf.txt":
+          type: file
+          description: Averaged Fiber Response Function (FRF).
+          pattern: mean_frf.txt
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@Manonedde"

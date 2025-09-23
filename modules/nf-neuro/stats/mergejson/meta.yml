@@ -1,0 +1,100 @@
+name: "stats_mergejson"
+description: Allows you to fuse JSON with different merging possibilities.
+keywords:
+  - scilpy
+  - stats
+  - JSON
+  - xlsx
+  - merge
+tools:
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - jsons:
+        type: file
+        description: set of json to merge together.
+        pattern: "*.json"
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_3464 # JSON
+args:
+  - prefix:
+      type: string
+      description: defines the prefix of output files.
+      mandatory: true
+  - suffix:
+      type: string
+      description: It will add an extra string before "_stats.json"
+      default: "_stats"
+  - per_point:
+      type: boolean
+      description: If set, will perform a first operation to remove parent key from
+        all files.
+      default: false
+  - average_last_layer:
+      type: boolean
+      description: |
+        If set, will average all entries (scalar) at the lowest layers,
+        but instead of creating a list it creates a mean/std level.
+      default: false
+  - recursive:
+      type: boolean
+      description: If set, will merge all entries (scalar) at the lowest layers as a
+        list.
+      default: false
+  - no_list:
+      type: boolean
+      description: |
+        If set, will merge all entries at the top level, if there is a
+        conflict the lowest level will be extended with the new values
+        (if list) or added (if value).
+      default: false
+  - stats_over_population:
+      type: boolean
+      description: If set, consider the input stats to be over an entire population
+        and not subject-based.
+      default: false
+output:
+  json:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_stats.json":
+          type: file
+          description: json containing all merged jsons.
+          pattern: "*_stats.json"
+          ontologies:
+            - edam: http://edamontology.org/format_3464 # JSON
+  xlsx:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_stats.xlsx":
+          type: file
+          description: xlsx containing all merged jsons.
+          pattern: "*_stats.xlsx"
+          ontologies:
+            - edam: http://edamontology.org/format_3977 # ObjTables
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions.
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@ThoumyreStanislas"
+maintainers:
+  - "@ThoumyreStanislas"

@@ -1,0 +1,103 @@
+name: "utils_templateflow"
+description: |
+  Module to fetch a population average template from TemplateFlow.
+keywords:
+  - template
+  - population average
+  - reference
+tools:
+  - "TemplateFlow":
+      description: |
+        TemplateFlow is a modular, version-controlled resource that
+        allows researchers to use templates "off-the-shelf".
+      homepage: "https://www.templateflow.org/"
+      doi: "10.1038/s41592-022-01681-2"
+      identifier: ""
+input:
+  - - template:
+        type: file
+        description: |
+          TemplateFlow template name.
+          e.g. `MNI152NLin2009cAsym`
+          Refer to the TemplateFlow documentation for available templates.
+          https://www.templateflow.org/browse/
+        mandatory: true
+        ontologies: []
+    - res:
+        type: integer
+        description: |
+          Resolution of the template. This is optional, but will be used to
+          fetch the template at the specified resolution and make it
+          accessible in the output channels.
+        mandatory: false
+    - cohort:
+        type: integer
+        description: |
+          Cohort of the template. This is optional, but will be used to fetch
+          the template for the specified cohort and make it accessible in the
+          output channels.
+        mandatory: false
+output:
+  folder:
+    - tpl-${template}:
+        type: directory
+        description: |
+          Directory containing the requested template, with all available
+          resolutions and masks/maps.
+  T1w:
+    - "*T1w.nii.gz":
+        type: file
+        description: T1w image of the requested template.
+        ontologies: []
+  T2w:
+    - "*T2w.nii.gz":
+        type: file
+        description: T2w image of the requested template.
+        ontologies: []
+  brain_mask:
+    - "*desc-brain_mask.nii.gz":
+        type: file
+        description: Brain mask of the requested template.
+        ontologies: []
+  label_CSF:
+    - "*label-CSF_probseg.nii.gz":
+        type: file
+        description: CSF probability map of the requested template.
+        ontologies: []
+  label_GM:
+    - "*label-GM_probseg.nii.gz":
+        type: file
+        description: GM probability map of the requested template.
+        ontologies: []
+  label_WM:
+    - "*label-WM_probseg.nii.gz":
+        type: file
+        description: WM probability map of the requested template.
+        ontologies: []
+  metadata:
+    - ${template}_metadata.json:
+        type: file
+        description: |
+          Metadata file containing information about the template.
+        pattern: "*.json"
+        ontologies:
+          - edam: http://edamontology.org/format_3464 # JSON
+  citations:
+    - ${template}_citations.bib:
+        type: file
+        description: |
+          File containing citations for the template.
+        pattern: "*.bib"
+        ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@gagnonanthony"
+maintainers:
+  - "@gagnonanthony"
+  - "@AlexVCaron"

@@ -6,7 +6,7 @@ nextflow_workflow {
     config "./nextflow.config"
 
     tag "subworkflows"
-    tag "subworkflows_nfcore"
+    tag "subworkflows_nfneuro"
     tag "subworkflows/topup_eddy"
 
     tag "preproc"
@@ -16,6 +16,9 @@ nextflow_workflow {
     tag "betcrop/fslbetcrop"
 
     tag "load_test_data"
+
+    tag "stub"
+    options "-stub-run"
 
     setup {
         run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
@@ -29,21 +32,21 @@ nextflow_workflow {
         }
     }
 
-    test("eddy") {
+    test("topup_eddy - ONLY Eddy - AP DWI | PA sbref") {
 
         when {
             workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
                     ]}
                 input[1] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
                     ]}
                 input[2] = Channel.from( [] )
@@ -57,34 +60,39 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.b0_mask,
-                    workflow.out.bval,
-                    workflow.out.versions,
-                    file(workflow.out.dwi.get(0).get(1)).name,
-                    file(workflow.out.bvec.get(0).get(1)).name,
-                    file(workflow.out.b0.get(0).get(1)).name).match() })
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
+            )
         }
     }
 
-    test("topup_eddy_rev_b0") {
+    test("topup_eddy - AP DWI | PA sbref") {
         when {
             workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
                     ]}
                 input[1] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
                     ]}
                 input[2] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         [],
                         [],
                         []
@@ -92,7 +100,7 @@ nextflow_workflow {
 
                 input[3] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz")
                     ]}
                 input[4] = Channel.from( [] )
@@ -104,42 +112,47 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.b0_mask,
-                    workflow.out.bval,
-                    workflow.out.versions,
-                    file(workflow.out.dwi.get(0).get(1)).name,
-                    file(workflow.out.bvec.get(0).get(1)).name,
-                    file(workflow.out.b0.get(0).get(1)).name).match() })
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
+            )
         }
     }
 
-    test("topup_eddy_rev_dwi") {
+    test("topup_eddy - AP DWI+sbref | PA DWI+sbref") {
 
         when {
             workflow {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-AP_dwi.bvec")
                     ]}
                 input[1] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-AP_sbref.nii.gz")
                     ]}
                 input[2] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.nii.gz"),
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.bval"),
                         file("\${test_data_directory}/sub-01_dir-PA_dwi.bvec")
                     ]}
                 input[3] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
-                        [ id:'test', single_end:false ],
+                        [ id:'test' ],
                         file("\${test_data_directory}/sub-01_dir-PA_sbref.nii.gz")
                     ]}
                 input[4] = Channel.from( [] )
@@ -151,12 +164,17 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.b0_mask,
-                    workflow.out.bval,
-                    workflow.out.versions,
-                    file(workflow.out.dwi.get(0).get(1)).name,
-                    file(workflow.out.bvec.get(0).get(1)).name,
-                    file(workflow.out.b0.get(0).get(1)).name).match() })
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
+            )
         }
     }
 }

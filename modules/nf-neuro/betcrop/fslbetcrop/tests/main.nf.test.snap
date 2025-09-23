@@ -2,14 +2,14 @@
     "betcrop - fslbetcrop - stub-run": {
         "content": [
             [
-                "versions.yml:md5,cc45ab23921525536874337c1c88e5cf"
+                "versions.yml:md5,f7a713e92a5e0bc8cd501c8fe383eebc"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.1"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-12-12T10:33:04.50811"
+        "timestamp": "2025-07-04T05:09:39.813502057"
     },
     "betcrop - fslbetcrop - dwi": {
         "content": [
@@ -38,11 +38,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_boundingBox.pkl:md5,7a2508ff4c6ee3a0c16828411f42ea6a"
+                        "test__image_boundingBox.pkl:md5,0f0659fcc6ea1796e19558ba16a682c4"
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
+                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
                 ],
                 "bbox": [
                     [
@@ -50,7 +50,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_boundingBox.pkl:md5,7a2508ff4c6ee3a0c16828411f42ea6a"
+                        "test__image_boundingBox.pkl:md5,0f0659fcc6ea1796e19558ba16a682c4"
                     ]
                 ],
                 "image": [
@@ -72,15 +72,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
+                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-10-29T11:39:49.11235624"
+        "timestamp": "2025-07-04T05:05:49.020085474"
     },
     "betcrop - fslbetcrop - t1": {
         "content": [
@@ -109,11 +109,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_boundingBox.pkl:md5,8eb94c27b3db4e2f7e233eff697597fc"
+                        "test__image_boundingBox.pkl:md5,a4f59418fe7fb9d067475197de914aa8"
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
+                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
                 ],
                 "bbox": [
                     [
@@ -121,7 +121,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_boundingBox.pkl:md5,8eb94c27b3db4e2f7e233eff697597fc"
+                        "test__image_boundingBox.pkl:md5,a4f59418fe7fb9d067475197de914aa8"
                     ]
                 ],
                 "image": [
@@ -143,15 +143,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
+                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-10-29T11:40:06.612888953"
+        "timestamp": "2025-07-04T05:07:16.782304587"
     },
     "betcrop - fslbetcrop - t1 - dilate": {
         "content": [
@@ -180,11 +180,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_boundingBox.pkl:md5,8eb94c27b3db4e2f7e233eff697597fc"
+                        "test__image_boundingBox.pkl:md5,a4f59418fe7fb9d067475197de914aa8"
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
+                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
                 ],
                 "bbox": [
                     [
@@ -192,7 +192,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__image_boundingBox.pkl:md5,8eb94c27b3db4e2f7e233eff697597fc"
+                        "test__image_boundingBox.pkl:md5,a4f59418fe7fb9d067475197de914aa8"
                     ]
                 ],
                 "image": [
@@ -214,14 +214,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6759fc7721f27034dd14647de8b4987f"
+                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-10-29T11:40:26.52204924"
+        "timestamp": "2025-07-04T05:08:48.202697985"
     }
 }

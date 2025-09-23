@@ -1,4 +1,16 @@
 {
+    "tracking - pfttracking - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-07-04T23:20:08.749601514"
+    },
     "tracking - pfttracking - fa": {
         "content": [
             "test__pft_tracking.trk",
@@ -35,7 +47,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__pft_seeding_mask.nii.gz:md5,fd41bd41399bd7234721715e6ecca018"
+                    "test__pft_seeding_mask.nii.gz:md5,0484a2e44ff153caa79819a8646cc33c"
                 ]
             ],
             [
@@ -44,9 +56,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2024-10-24T19:53:53.332859167"
+        "timestamp": "2025-07-04T23:19:39.0658835"
     },
     "tracking - pfttracking - interface": {
         "content": [
@@ -93,9 +105,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2024-10-24T19:54:04.257171663"
+        "timestamp": "2025-07-04T23:19:55.217847185"
     },
     "tracking - pfttracking - wm": {
         "content": [
@@ -133,7 +145,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__pft_seeding_mask.nii.gz:md5,4710e63db72f7dda7c10e46346bf98d3"
+                    "test__pft_seeding_mask.nii.gz:md5,419fc04c34d14d37e231f43ac1d23e89"
                 ]
             ],
             [
@@ -142,8 +154,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2024-10-24T19:53:38.784232647"
+        "timestamp": "2025-07-04T23:19:17.963971055"
     }
 }

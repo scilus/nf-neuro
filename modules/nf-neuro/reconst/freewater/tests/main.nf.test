@@ -5,7 +5,7 @@ nextflow_process {
     process "RECONST_FREEWATER"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "reconst"
     tag "reconst/freewater"
 
@@ -75,6 +75,33 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("reconst - freewater - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/dwi.nii.gz"),
+                    file("\${test_data_directory}/dwi.bval"),
+                    file("\${test_data_directory}/dwi.bvec"),
+                    file("\${test_data_directory}/mask.nii.gz"),
+                    []
+                ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
 

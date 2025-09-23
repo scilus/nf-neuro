@@ -5,7 +5,7 @@ nextflow_process {
     process "BUNDLE_STATS"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_nfneuro"
     tag "bundle"
     tag "bundle/stats"
 
@@ -92,23 +92,48 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    process.out.length,
-                    process.out.endpoints_raw,
+                    process.out.versions,
+                    process.out.endpoints_head,
                     process.out.endpoints_metric_stats,
+                    process.out.endpoints_raw,
+                    process.out.endpoints_tail,
+                    process.out.length,
+                    process.out.lesion_map,
+                    process.out.lesion_stats,
                     process.out.mean_std,
-                    file(process.out.volume.get(0).get(1)).name,
-                    process.out.volume_lesions,
+                    process.out.mean_std_per_point,
                     process.out.streamline_count,
                     process.out.streamline_count_lesions,
+                    process.out.volume_lesions,
                     process.out.volume_per_labels,
                     process.out.volume_per_labels_lesions,
-                    process.out.mean_std_per_point,
-                    process.out.lesion_stats,
-                    process.out.endpoints_head,
-                    process.out.endpoints_tail,
-                    process.out.lesion_map
-                    ).match()
-                }
+                    file(process.out.volume.get(0).get(1)).name,
+                ).match() }
+            )
+        }
+    }
+
+    test("bundle - stats - stub-run") {
+        tag "stub"
+        options "-stub-run"
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/IFGWM.trk"),
+                        file("\${test_data_directory}/IFGWM_labels_map.nii.gz"),
+                        file("\${test_data_directory}/mni_masked.nii.gz"),
+                        []
+                    ]}
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
             )
         }
     }

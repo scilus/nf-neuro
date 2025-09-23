@@ -1,78 +1,224 @@
----
-name: "tracking_localtracking"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: tracking_localtracking
 description: process local tracking
 keywords:
   - Tractography
   - Local tracking
   - Diffusion MRI
 tools:
-  - "scilpy":
-      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+  - scilpy:
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox."
       homepage: "https://github.com/scilus/scilpy.git"
-
+      identifier: ""
+args:
+  - local_fa_tracking_mask_threshold:
+      type: float
+      default: 0.1
+      description: "FA threshold for the tracking mask."
+  - local_fa_seeding_mask_threshold:
+      type: float
+      default: 0.1
+      description: "FA threshold for the seeding mask."
+  - local_wm_tracking_mask_threshold:
+      type: float
+      default: 0.5
+      description: |
+        WM threshold for the tracking mask. If the mask
+        is binary, this threshold has no effect.
+  - local_wm_seeding_mask_threshold:
+      type: float
+      default: 0.5
+      description: |
+        WM threshold for the seeding mask. If the mask
+        is binary, this threshold has no effect.
+  - local_tracking_mask_type:
+      type: string
+      default: "wm"
+      choices:
+        - "wm"
+        - "fa"
+      description: Strategy to use to compute the tracking mask.
+  - local_seeding_mask_type:
+      type: string
+      default: "wm"
+      choices:
+        - "wm"
+        - "fa"
+      description: Strategy to use to compute the seeding mask.
+  - local_step:
+      type: float
+      default: 0.5
+      description: Tracking Step size.
+  - local_random_seed:
+      type: int
+      default: 0
+      description: Seed for random number generators.
+  - local_seeding:
+      type: string
+      default: "npv"
+      choices:
+        - "npv"
+        - "nt"
+      description: Seeding strategy, either Number Per Voxel (npv) or Number Total (nt).
+  - local_nbr_seeds:
+      type: int
+      default: 1000
+      description: Number of seeds per voxel (if npv) or total number of seeds (if nt).
+  - local_min_len:
+      type: float
+      default: 10.0
+      description: Minimum length of streamlines to keep.
+  - local_max_len:
+      type: float
+      default: 250.0
+      description: Maximum length of streamlines to keep.
+  - local_theta:
+      type: float
+      default: 40.0
+      description: Maximum angular difference between tracking steps, in degrees.
+  - local_sfthres:
+      type: float
+      default: 0.0
+      description: Spherical function threshold for tracking.
+  - local_algo:
+      type: string
+      default: "eudx"
+      choices:
+        - "det"
+        - "prob"
+      description: Algorithm to use for tracking.
+  - local_compress_value:
+      type: float
+      default: 0.0
+      description: Compression value for the streamlines, in mm. If 0, no compression
+        is applied.
+  - basis:
+      type: string
+      default: "descoteaux07_legacy"
+      choices:
+        - "descoteaux07_legacy"
+        - "descoteaux07"
+        - "tournier07"
+        - "tournier07_legacy"
+      description: Spherical basis used for FODF reconstruction.
+  - gpu_batch_size:
+      type: int
+      default: 10000
+      description: Seed batch size for GPU processing.
+  - enable_gpu:
+      type: boolean
+      default: false
+      description: Enable GPU tracking kernel.
+  - run_qc:
+      type: boolean
+      default: true
+      description: Enable quality control image generation for tracking.
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - wm:
-      type: file
-      description: Nifti image white matter mask.
-      pattern: "*.{nii,nii.gz}"
-
-  - fodf:
-      type: file
-      description: Nifti image of spherical harmonic file (fodf)
-      pattern: "*.{nii,nii.gz}"
-
-  - fa:
-      type: file
-      description: NIfti image binary mask for fa mask
-      pattern: "*.{nii,nii.gz}"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - wm:
+        type: file
+        description: Nifti image white matter probability map or mask.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fodf:
+        type: file
+        description: Nifti image of spherical harmonic file (fodf)
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fa:
+        type: file
+        description: NIfti image binary mask for fa mask
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test', single_end:false ]`
-
-  - trk:
-      type: file
-      description: Tractogram output file.
-      pattern: "*.{trk,tck}"
-
-  - config:
-      type: file
-      description: Json file containing tracking parameters.
-      pattern: "*.{json}"
-
-  - seedmask:
-      type: file
-      description: Nifti seeding mask for tracking.
-      pattern: "*.{nii,nii.gz}"
-
-  - trackmask:
-      type: file
-      description: Nifti tracking mask
-      pattern: "*.{nii,nii.gz}"
-
-  - mqc:
-      type: file
-      description: PNG file containing quality control image for tracking. Made for use in MultiQC report.
-      pattern: "*local_tracking_mqc.png"
-
-  - global_mqc:
-      type: file
-      description: JSON file containing basic measurements of whole tractogram. Made for use in MultiQC report.
-      pattern: "*local_tracking_stats.json"
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+  trk:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__local_tracking.trk":
+          type: file
+          description: Tractogram output file.
+          pattern: "*__local_tracking.{trk,tck}"
+          ontologies: []
+  config:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__local_tracking_config.json":
+          type: file
+          description: Json file containing tracking parameters.
+          pattern: "*__local_tracking_config.{json}"
+          ontologies:
+            - edam: http://edamontology.org/format_3464 # JSON
+  seedmask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__local_seeding_mask.nii.gz":
+          type: file
+          description: Nifti seeding mask for tracking.
+          pattern: "*__local_seeding_mask.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  trackmask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__local_tracking_mask.nii.gz":
+          type: file
+          description: Nifti tracking mask
+          pattern: "*__local_tracking_mask.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  mqc:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__local_tracking_mqc.png":
+          type: file
+          description: |
+            PNG file containing quality control image for tracking.
+            Made for use in MultiQC report.
+          pattern: "*__local_tracking_mqc.png"
+          ontologies: []
+  global_mqc:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__local_tracking_stats.json":
+          type: file
+          description: |
+            JSON file containing basic measurements of whole tractogram.
+            Made for use in MultiQC report.
+          pattern: "*__local_tracking_stats.json"
+          ontologies:
+            - edam: http://edamontology.org/format_3464 # JSON
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"
