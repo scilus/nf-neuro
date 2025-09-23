@@ -13,7 +13,7 @@ tools:
       identifier: ""
 args:
   - extraction_strategy:
-    type: string
+    type: choices
     description: |
       Extract either:
       all b0 (all),

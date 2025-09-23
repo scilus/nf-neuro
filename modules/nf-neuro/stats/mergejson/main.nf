@@ -4,9 +4,7 @@ process STATS_MERGEJSON {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_latest.sif':
-        'scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
     tuple val(meta), path(jsons)
@@ -32,19 +30,19 @@ process STATS_MERGEJSON {
     if $per_point;
         then
         for json in $jsons
-            do scil_json_merge_entries.py \$json \${json/.json/_avg.json} --remove_parent_key --recursive $average_last_layer
+            do scil_json_merge_entries \$json \${json/.json/_avg.json} --remove_parent_key --recursive $average_last_layer
         done
-            scil_json_merge_entries.py *_avg.json ${prefix}.json --recursive
+            scil_json_merge_entries *_avg.json ${prefix}.json --recursive
     else
-        scil_json_merge_entries.py $jsons ${prefix}.json $no_list $recursive
+        scil_json_merge_entries $jsons ${prefix}.json $no_list $recursive
     fi
 
-    scil_json_harmonize_entries.py ${prefix}.json ${prefix}_${suffix}.json -f -v --sort_keys
-    scil_json_convert_entries_to_xlsx.py ${prefix}_${suffix}.json ${prefix}_${suffix}.xlsx $stats_over_population
+    scil_json_harmonize_entries ${prefix}.json ${prefix}_${suffix}.json -f -v --sort_keys
+    scil_json_convert_entries_to_xlsx ${prefix}_${suffix}.json ${prefix}_${suffix}.xlsx $stats_over_population
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -53,16 +51,16 @@ process STATS_MERGEJSON {
     def prefix = task.ext.prefix ?: "${task.ext.prefix}"
 
     """
-    scil_json_merge_entries.py -h
-    scil_json_harmonize_entries.py -h
-    scil_json_convert_entries_to_xlsx.py -h
+    scil_json_merge_entries -h
+    scil_json_harmonize_entries -h
+    scil_json_convert_entries_to_xlsx -h
 
     touch ${prefix}_${suffix}.json
     touch ${prefix}_${suffix}.xlsx
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
