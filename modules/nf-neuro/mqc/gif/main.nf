@@ -2,9 +2,7 @@ process MQC_GIF {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
+    container "scilus/scilus:2.2.0"
 
     input:
     tuple val(meta), path(image1), path(image2)
@@ -21,8 +19,6 @@ process MQC_GIF {
     def title_image1 = task.ext.title_image1 ? task.ext.title_image1 : "image1"
     def title_image2 = task.ext.title_image2 ? task.ext.title_image2 : "image2"
     def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
-
-
 
     """
     if [[ -f "$image2" ]]; then
@@ -46,11 +42,11 @@ process MQC_GIF {
             viz_params="--display_slice_number --display_lr --size 256 256"
 
             basename=\$(basename \$image .nii.gz)
-            scil_viz_volume_screenshot.py \$image \${basename}_coronal.png \
+            scil_viz_volume_screenshot \$image \${basename}_coronal.png \
                 --slices \$coronal_dim --axis coronal \$viz_params
-            scil_viz_volume_screenshot.py \$image \${basename}_sagittal.png \
+            scil_viz_volume_screenshot \$image \${basename}_sagittal.png \
                 --slices \$sagittal_dim --axis sagittal \$viz_params
-            scil_viz_volume_screenshot.py \$image \${basename}_axial.png \
+            scil_viz_volume_screenshot \$image \${basename}_axial.png \
                 --slices \$axial_dim --axis axial \$viz_params
             if [ \$image = $image1 ];
             then
@@ -98,11 +94,11 @@ process MQC_GIF {
                 echo "Slice : \$slice"
                 mrconvert $image1 -coord 3 \${slice} -axes 0,1,2 image.nii.gz -force
 
-                scil_viz_volume_screenshot.py image.nii.gz \${basename}_coronal.png \
+                scil_viz_volume_screenshot image.nii.gz \${basename}_coronal.png \
                     --slices \$coronal_dim --axis coronal \$viz_params
-                scil_viz_volume_screenshot.py image.nii.gz \${basename}_sagittal.png \
+                scil_viz_volume_screenshot image.nii.gz \${basename}_sagittal.png \
                     --slices \$sagittal_dim --axis sagittal \$viz_params
-                scil_viz_volume_screenshot.py image.nii.gz \${basename}_axial.png \
+                scil_viz_volume_screenshot image.nii.gz \${basename}_axial.png \
                     --slices \$axial_dim --axis axial \$viz_params
 
                 title="${title_image1}_\$slice"
@@ -121,11 +117,9 @@ process MQC_GIF {
         fi
     fi
 
-
-
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
     END_VERSIONS
@@ -135,16 +129,24 @@ process MQC_GIF {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix_qc = task.ext.suffix_qc ? "${task.ext.suffix_qc}" : ""
     """
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
+
     mrinfo -h
     mrconvert -h
-    scil_viz_volume_screenshot.py -h
+    scil_viz_volume_screenshot -h
     convert -h
 
     touch ${prefix}_${suffix_qc}_screenshots_merged_mqc.gif
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
     END_VERSIONS
