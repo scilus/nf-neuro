@@ -26,8 +26,8 @@ main:
 
     // Combine bundles with FODF channel
     ch_fixel = ch_bundle_cleaned
-                 .combine( ch_fodf )
-                 .filter { bundle, fodf -> bundle && fodf }
+        .combine( ch_fodf )
+        .filter { bundle, fodf -> bundle && fodf }
 
     BUNDLE_FIXELAFD( ch_fixel )
     ch_versions = ch_versions.mix( BUNDLE_FIXELAFD.out.versions.first() )

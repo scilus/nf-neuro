@@ -160,21 +160,21 @@ output:
       type: file
       description: |
         Compute bundle volume per label in each lesions in mm3.
-         Structure: [ val(meta), path(volume_per_labels_lesions) ]
+        Structure: [ val(meta), path(volume_per_labels_lesions) ]
       pattern: "*__volume_per_label_lesions.json"
 
   - stats_mean_std_per_point:
       type: file
       description: |
         Average the metric values of all voxels occupied by the bundle per label.
-         Structure: [ val(meta), path(mean_std_per_point) ]
+        Structure: [ val(meta), path(mean_std_per_point) ]
       pattern: "*__mean_std_per_point.json"
 
   - stats_lesion_stats:
       type: file
       description: |
         File of the lesion-wise volume measure.
-         Structure: [ val(meta), path(lesion_stats) ]
+        Structure: [ val(meta), path(lesion_stats) ]
       pattern: "*_lesion_stats.json"
 
   - endpoints_head:
