@@ -11,6 +11,26 @@ tools:
         toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
+args:
+  - extraction_strategy:
+    type: string
+    description: |
+      Extract either:
+      all b0 (all),
+      mean b0 (mean),
+      mean of each continuous cluster of b0s (cluster-mean),
+      first b0 of each continuous cluster of b0s (cluster-first).
+    default: mean
+  - b0_threshold:
+    type: integer
+    description: Threshold under which b-values are considered to be b0s.
+    default: 20
+  - output_series:
+    type: boolean
+    description: |
+      If output b0 volume has multiple time points, only outputs a single
+      image instead of a numbered series of images.scil_dwi_extract_b0
+    default: false
 input:
   # Only when we have meta
   - - meta:
