@@ -286,7 +286,7 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-      - "*__endpoints_map_head.nii.gz":
+      - "*_endpoints_map_head.nii.gz":
           type: file
           description: |
             Endpoint head map of bundle. The endpoint head map is simply
@@ -300,7 +300,7 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-      - "*__endpoints_map_tail.nii.gz":
+      - "*_endpoints_map_tail.nii.gz":
           type: file
           description: |
             Endpoint tail map of bundle. The endpoint tail map is simply
@@ -314,7 +314,7 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-      - "*__lesion_map.nii.gz":
+      - "*_lesion_map.nii.gz":
           type: file
           description: Nifti files of labeled lesion(s) map for each bundles.
           pattern: "*__lesion_map.nii.gz"

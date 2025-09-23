@@ -52,10 +52,6 @@ args:
       type: int
       description: Seed for random number generator
       default: 0
-  - processes:
-      type: int
-      description: Number of sub-processes to start.
-      default: 1
   - outlier_alpha:
       type: float
       description: Percent of the length of the tree that clusters of individual streamlines
