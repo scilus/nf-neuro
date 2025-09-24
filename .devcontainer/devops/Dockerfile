@@ -10,6 +10,7 @@ ENV POETRY_VERSION=${POETRY_VERSION:-2.*}
 RUN apt update && apt install -y \
         curl \
         git \
+        jq \
         openjdk-17-jre \
         python3-venv \
         wget \
@@ -18,6 +19,15 @@ RUN apt update && apt install -y \
 RUN python3 -m pip install pipx && \
     python3 -m pipx ensurepath && \
     pipx install poetry==${POETRY_VERSION}
+
+# Install GitHub Actions testing tools
+RUN curl -fsSL https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
+
+# Install actionlint for workflow linting
+RUN ACTIONLINT_VERSION="1.7.7" && \
+    curl -fsSL "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" | \
+    tar xz -C /usr/local/bin actionlint && \
+    chmod +x /usr/local/bin/actionlint
 
 RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_MAJOR}.x | bash - &&\
     apt-get install -y nodejs && \

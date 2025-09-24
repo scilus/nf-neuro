@@ -1,0 +1,2 @@
+# Minimal act configuration
+-P ubuntu-latest=catthehacker/ubuntu:act-latest

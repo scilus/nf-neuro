@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 GIT_REMOTE=$(git remote get-url origin)
 CURRENT_BRANCH=
 # Get tracked remote branch associated to current branch (default to main)
