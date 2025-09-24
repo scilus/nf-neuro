@@ -28,7 +28,7 @@ args:
   - threshold:
     type: float
     description: Maximum distance between two points to be considered overlapping.
-    default:  0.001 mm
+    default: 0.001 mm
   - no_empty:
     type: boolean
     description: Do not save empty tractogram.
