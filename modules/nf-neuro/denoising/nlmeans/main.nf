@@ -9,7 +9,7 @@ process DENOISING_NLMEANS {
     tuple val(meta), path(image), path(mask), path(mask_sigma)
 
     output:
-    tuple val(meta), path("*__denoised.nii.gz")      , emit: image
+    tuple val(meta), path("*__denoised.nii.gz")     , emit: image
     tuple val(meta), path("*__piesno_mask.nii.gz")  , emit: piesno_mask, optional: true
     path "versions.yml"                             , emit: versions
 
