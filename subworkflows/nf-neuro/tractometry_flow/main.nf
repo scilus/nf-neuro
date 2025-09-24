@@ -36,19 +36,13 @@ main:
         .join( ch_fixelafd, remainder: true )
         .map { [ it[0], it[1], it[2] ?: [] ] }
 
-    // Channel des centroids non vides
-    ch_centroids_present = ch_centroids.filter { it != null && it[1] && it[1].size() > 0 }
-
-    // Channel des centroids vides ou absents
-    ch_centroids_empty = ch_centroids.filter { it == null || !it[1] || it[1].size() == 0 }
-
     // TRACTOGRAM_RESAMPLE si centroids présents
-    TRACTOGRAM_RESAMPLE(ch_centroids_present)
+    TRACTOGRAM_RESAMPLE(ch_centroids)
     ch_versions = ch_versions.mix(TRACTOGRAM_RESAMPLE.out.versions.first())
     ch_centroids_cleaned_from_input = TRACTOGRAM_RESAMPLE.out.tractograms
 
     // BUNDLE_CENTROID si centroids absents
-    BUNDLE_CENTROID(ch_bundle_cleaned.combine(ch_centroids_empty))
+    BUNDLE_CENTROID(ch_bundle_cleaned)
     ch_centroids_cleaned_from_generate = BUNDLE_CENTROID.out.centroids
     ch_versions = ch_versions.mix(BUNDLE_CENTROID.out.versions.first())
 

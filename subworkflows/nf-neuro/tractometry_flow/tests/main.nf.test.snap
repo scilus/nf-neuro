@@ -56,6 +56,7 @@
                 "15": [
                     "versions.yml:md5,38152ddd7c01b5fd3de1459bc58f46a7",
                     "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
+                    "versions.yml:md5,6610a2be8c244e00591e6dc991c68eb9",
                     "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
                     "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
                     "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
@@ -210,6 +211,7 @@
                 "versions": [
                     "versions.yml:md5,38152ddd7c01b5fd3de1459bc58f46a7",
                     "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
+                    "versions.yml:md5,6610a2be8c244e00591e6dc991c68eb9",
                     "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
                     "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
                     "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
@@ -220,43 +222,95 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-24T16:10:46.567387107"
+        "timestamp": "2025-09-24T16:47:44.036451204"
     },
     "tractometry_without_centroids": {
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__length_stats.json:md5,1c5fdbe42afdb914e473961a24e04205"
+                    ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_map_raw.json:md5,ffb7f43665dd9a53267d1fcd238b2059"
+                    ]
                 ],
                 "10": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std_per_point.json:md5,c094eaabe1d334ddf40145dc82cbb939"
+                    ]
                 ],
                 "11": [
                     
                 ],
                 "12": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__test__test__test__AF_L_labels_uniformized_endpoints_map_head.nii.gz:md5,c2502f56b8f177675b5706c3432faa02"
+                    ]
                 ],
                 "13": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__test__test__test__AF_L_labels_uniformized_endpoints_map_tail.nii.gz:md5,0e2d7b31cd37e3b57e0a20f2711fbb4e"
+                    ]
                 ],
                 "14": [
                     
                 ],
                 "15": [
-                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b"
+                    "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
+                    "versions.yml:md5,6610a2be8c244e00591e6dc991c68eb9",
+                    "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
+                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
+                    "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_metric_stats.json:md5,cd5920eb2c5921140f9dfce5914a5e88"
+                    ]
                 ],
                 "3": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std.json:md5,1afd9f0bf6b1eeb33842783835384a37"
+                    ]
                 ],
                 "4": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume.json:md5,f3ef3c5d3539d13481a442ffac91d4cd"
+                    ]
                 ],
                 "5": [
                     
@@ -268,37 +322,85 @@
                     
                 ],
                 "8": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_per_label.json:md5,358109e55912a06489c1aef754b4c53c"
+                    ]
                 ],
                 "9": [
                     
                 ],
                 "endpoints_head": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__test__test__test__AF_L_labels_uniformized_endpoints_map_head.nii.gz:md5,c2502f56b8f177675b5706c3432faa02"
+                    ]
                 ],
                 "endpoints_tail": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__test__test__test__AF_L_labels_uniformized_endpoints_map_tail.nii.gz:md5,0e2d7b31cd37e3b57e0a20f2711fbb4e"
+                    ]
                 ],
                 "lesion_map": [
                     
                 ],
                 "stat_endpoints_metric": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_metric_stats.json:md5,cd5920eb2c5921140f9dfce5914a5e88"
+                    ]
                 ],
                 "stat_endpoints_raw": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_map_raw.json:md5,ffb7f43665dd9a53267d1fcd238b2059"
+                    ]
                 ],
                 "stat_length": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__length_stats.json:md5,1c5fdbe42afdb914e473961a24e04205"
+                    ]
                 ],
                 "stat_lesion_stats": [
                     
                 ],
                 "stat_mean_std": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std.json:md5,1afd9f0bf6b1eeb33842783835384a37"
+                    ]
                 ],
                 "stat_mean_std_per_point": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std_per_point.json:md5,c094eaabe1d334ddf40145dc82cbb939"
+                    ]
                 ],
                 "stat_streamline_count": [
                     
@@ -307,19 +409,35 @@
                     
                 ],
                 "stat_volume": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume.json:md5,f3ef3c5d3539d13481a442ffac91d4cd"
+                    ]
                 ],
                 "stat_volume_lesions": [
                     
                 ],
                 "stat_volume_per_labels": [
-                    
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_per_label.json:md5,358109e55912a06489c1aef754b4c53c"
+                    ]
                 ],
                 "stat_volume_per_labels_lesions": [
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b"
+                    "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
+                    "versions.yml:md5,6610a2be8c244e00591e6dc991c68eb9",
+                    "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
+                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
+                    "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
                 ]
             }
         ],
@@ -327,6 +445,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-24T16:23:41.808850598"
+        "timestamp": "2025-09-24T16:49:41.585054645"
     }
 }
