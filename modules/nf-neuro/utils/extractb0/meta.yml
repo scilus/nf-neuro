@@ -21,8 +21,7 @@ args:
       mean of each continuous cluster of b0s (cluster-mean),
       first b0 of each continuous cluster of b0s (cluster-first).
     default: mean
-    choices:
-      all, mean, cluster-mean, cluster-first
+    choices: all, mean, cluster-mean, cluster-first
   - b0_threshold:
     type: integer
     description: Threshold under which b-values are considered to be b0s.
