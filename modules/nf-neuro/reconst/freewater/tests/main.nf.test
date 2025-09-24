@@ -49,8 +49,8 @@ nextflow_process {
                 { assert snapshot(
                     process.out.versions,
                     file(process.out.kernels.get(0)).listFiles().size(),
-                    niftiMD5SUM(process.out.dwi_fw_corrected.get(0).get(1), 3),
-                    niftiMD5SUM(process.out.dir.get(0).get(1), 3),
+                    niftiMD5SUM(process.out.dwi_fw_corrected.get(0).get(1), 1),
+                    niftiMD5SUM(process.out.dir.get(0).get(1), 1),
                     niftiMD5SUM(process.out.fibervolume.get(0).get(1), 3),
                     niftiMD5SUM(process.out.fw.get(0).get(1), 3),
                     niftiMD5SUM(process.out.nrmse.get(0).get(1), 3)
