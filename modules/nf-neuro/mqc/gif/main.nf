@@ -80,6 +80,8 @@ process MQC_GIF {
         echo "Dimension de l'image : \$dim"
         echo "Tailles des dimensions : \$extract_dim"
 
+        mrconvert $image1 base_image_viz.nii.gz -stride -1,2,3 -force
+
         if [ "\$dim" == 3 ]; then
             echo "Error: If you only use one input, it must be in 4D to create the gif." >&2
             exit 1
@@ -94,7 +96,7 @@ process MQC_GIF {
 
             for ((slice=0; slice<\$forth_dim; slice++)); do
                 echo "Slice : \$slice"
-                mrconvert $image1 -coord 3 \${slice} -axes 0,1,2 image.nii.gz -force
+                mrconvert base_image_viz.nii.gz -coord 3 \${slice} -axes 0,1,2 image.nii.gz -force
 
                 scil_viz_volume_screenshot image.nii.gz \${basename}_coronal.png \
                     --slices \$coronal_dim --axis coronal \$viz_params
@@ -121,9 +123,9 @@ process MQC_GIF {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(uv -q -n pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrinfo -version 2>&1 | sed -n 's/== mrinfo \\([0-9.]\\+\\).*/\\1/p')
-        imagemagick: \$(convert -version | sed -n 's/.*ImageMagick \\([0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\.[0-9]\\{1,\\}\\).*/\\1/p')
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
+        imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -139,17 +141,8 @@ process MQC_GIF {
     }
     trap 'handle_code' ERR
 
-    set +e
-    function handle_code () {
-    local code=\$?
-    ignore=( 1 )
-    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
-    }
-    trap 'handle_code' ERR
-
     mrinfo -h
     mrconvert -h
-    scil_viz_volume_screenshot -h
     scil_viz_volume_screenshot -h
     convert -h
 
