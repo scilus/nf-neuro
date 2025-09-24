@@ -1,34 +1,34 @@
-name: 'Merge Queue Status Check'
-description: 'Determines if checks should run in a merge queue based on PR status and base SHA changes'
-author: 'nf-neuro team'
+name: "Merge Queue Status Check"
+description: "Determines if checks should run in a merge queue based on PR status and base SHA changes"
+author: "nf-neuro team"
 
 inputs:
   token:
-    description: 'GitHub token for API access'
+    description: "GitHub token for API access"
     required: true
     default: ${{ github.token }}
   merge-group-event:
-    description: 'The complete merge_group event payload as JSON'
+    description: "The complete merge_group event payload as JSON"
     required: true
   pr-workflow-path:
-    description: 'Path to the PR workflow file (e.g., .github/workflows/update_pr.yml)'
+    description: "Path to the PR workflow file (e.g., .github/workflows/update_pr.yml)"
     required: false
-    default: '.github/workflows/update_pr.yml'
+    default: ".github/workflows/update_pr.yml"
   checks-job-name:
-    description: 'Name of the checks job to monitor'
+    description: "Name of the checks job to monitor"
     required: false
-    default: 'checks'
+    default: "checks"
 
 outputs:
   should-run-checks:
-    description: 'Whether checks should be run (true/false)'
+    description: "Whether checks should be run (true/false)"
     value: ${{ steps.determine.outputs.should_run_checks }}
   reason:
-    description: 'Reason for the decision'
+    description: "Reason for the decision"
     value: ${{ steps.determine.outputs.reason }}
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Extract PR number from merge group
       id: extract
@@ -143,5 +143,5 @@ runs:
         fi
 
 branding:
-  icon: 'git-merge'
-  color: 'blue'
+  icon: "git-merge"
+  color: "blue"

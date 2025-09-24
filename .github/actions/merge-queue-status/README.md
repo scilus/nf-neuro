@@ -47,6 +47,7 @@ jobs:
 ## Logic
 
 Runs checks if:
+
 1. Merge queue updated the PR base SHA, OR
 2. Latest checks job failed/was cancelled/timed out, OR
 3. Checks job not found (conservative fallback)
@@ -61,28 +62,28 @@ Runs checks if:
     token: ${{ secrets.GITHUB_TOKEN }}
     merge-group-event: ${{ toJSON(github.event.merge_group) }}
     # Customize these for your repository:
-    pr-workflow-path: '.github/workflows/custom_pr.yml'
-    checks-job-name: 'validation'
+    pr-workflow-path: ".github/workflows/custom_pr.yml"
+    checks-job-name: "validation"
 ```
 
 ## Inputs
 
-| Input | Description | Required | Default |
-|-------|-------------|----------|---------|
-| `token` | GitHub token for API access | Yes | `${{ github.token }}` |
-| `merge-group-event` | The complete merge_group event as JSON | Yes | - |
-| `pr-workflow-path` | Path to the PR workflow file | No | `.github/workflows/update_pr.yml` |
-| `checks-job-name` | Name of the checks job to monitor | No | `checks` |
+| Input               | Description                            | Required | Default                           |
+| ------------------- | -------------------------------------- | -------- | --------------------------------- |
+| `token`             | GitHub token for API access            | Yes      | `${{ github.token }}`             |
+| `merge-group-event` | The complete merge_group event as JSON | Yes      | -                                 |
+| `pr-workflow-path`  | Path to the PR workflow file           | No       | `.github/workflows/update_pr.yml` |
+| `checks-job-name`   | Name of the checks job to monitor      | No       | `checks`                          |
 
 ## Outputs
 
-| Output | Description | Type |
-|--------|-------------|------|
-| `should-run-checks` | Whether checks should be run | `boolean` |
-| `reason` | Human-readable reason for the decision | `string` |
-| `pr-number` | Extracted PR number | `string` |
-| `queue-updated-pr` | Whether merge queue updated PR base | `boolean` |
-| `checks-job-status` | Status of the monitored checks job | `string` |
+| Output              | Description                            | Type      |
+| ------------------- | -------------------------------------- | --------- |
+| `should-run-checks` | Whether checks should be run           | `boolean` |
+| `reason`            | Human-readable reason for the decision | `string`  |
+| `pr-number`         | Extracted PR number                    | `string`  |
+| `queue-updated-pr`  | Whether merge queue updated PR base    | `boolean` |
+| `checks-job-status` | Status of the monitored checks job     | `string`  |
 
 ## Decision Logic
 
