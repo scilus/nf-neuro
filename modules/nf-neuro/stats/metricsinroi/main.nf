@@ -2,9 +2,7 @@ process STATS_METRICSINROI {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_latest.sif':
-        'scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
     tuple val(meta), path(metrics), path(rois), path(rois_lut)  /* optional, input = [] */
@@ -34,11 +32,11 @@ process STATS_METRICSINROI {
             echo "ROI LUT is missing. Will fail."
         fi
 
-        scil_volume_stats_in_labels.py $rois $rois_lut \
+        scil_volume_stats_in_labels $rois $rois_lut \
             --metrics $metrics \
             --sort_keys > ${prefix}__${suffix}.json
     else
-        scil_volume_stats_in_ROI.py $rois \
+        scil_volume_stats_in_ROI $rois \
             --metrics $metrics \
             --sort_keys \
             $bin $normalize_weights > ${prefix}__${suffix}.json
@@ -46,7 +44,7 @@ process STATS_METRICSINROI {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -54,14 +52,14 @@ process STATS_METRICSINROI {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_stats" : "stats"
     """
-    scil_volume_stats_in_ROI.py -h
-    scil_volume_stats_in_labels.py -h
+    scil_volume_stats_in_ROI -h
+    scil_volume_stats_in_labels -h
 
     touch ${prefix}__${suffix}.json
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

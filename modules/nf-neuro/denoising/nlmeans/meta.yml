@@ -1,6 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: denoising_nlmeans
-description: denoise a dataset with the Non Local Means algorithm
+description: |
+  Denoise a dataset with the Non Local Means algorithm.
+
+  In order to denoise, we have three methods to estimate the noise available with their requirements:
+  - Sigma (needs: sigma)
+  - Basic sigma (needs: ncoils, optional: mask_sigma or sigma_from_all_voxels)
+  - Piesno (needs: ncoils)
 keywords:
   - nifti
   - denoising
@@ -32,25 +38,46 @@ input:
         mandatory: false
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
+    - mask_sigma:
+        type: file
+        description: |
+          Nifti binary image file used to mask the input image for --basic_sigma estimation.
+          Only the data inside the mask will be used to estimate sigma
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
 args:
-  - ncoils:
-      type: int
-      description: Number of coils used for the acquisition
-      default: 1
-  - gaussian:
-      type: bool
-      description: |
-        If your data contains gaussian noise, set this option.
-        Otherwise, Rician is assumed.
   - sigma:
       type: float
       description: |
         Provide your own standard deviation of the noise.
+  - basic_sigma:
+      type: bool
+      description: |
+        Estimate sigma using Use dipy's basic estimation of sigma.
   - piesno:
       type: bool
       description: |
         Estimate sigma using Piesno's method.
         If data is 4D, the noise is estimated for each slice (3rd dimension).
+  - gaussian:
+      type: bool
+      description: |
+        If your data contains gaussian noise, set this option.
+        Otherwise, Rician is assumed.
+  - sigma_from_all_voxels:
+      type: bool
+      description: |
+        If set, all voxels are used for the --basic_sigma estimation, even zeros.
+  - save_piesno_mask:
+      type: bool
+      description: If set with piesno option, it will save the piesno mask.
+  - ncoils:
+      type: int
+      description: Number of coils used for the acquisition
+      default: 1
+
 output:
   image:
     - - meta:
@@ -58,10 +85,16 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*_denoised.nii.gz":
+      - "*__denoised.nii.gz":
           type: file
           description: Denoised Nifti image file
           pattern: "*_denoised.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+      - "*__piesno_mask.nii.gz":
+          type: file
+          description: Piesno mask Nifti image file
+          pattern: "*__piesno_mask.{nii,nii.gz}"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
   versions:

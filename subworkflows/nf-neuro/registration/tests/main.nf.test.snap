@@ -122,15 +122,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,04d2203fd83e0422e103384bee7a1696"
+                    "versions.yml:md5,8805896edb4405a6c415e94796cc4853"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T20:59:34.81185618"
+        "timestamp": "2025-09-22T21:24:20.046469568"
     },
     "registration - SyNQuick": {
         "content": [
@@ -162,14 +162,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,806ff315748e1402954ef52cadb7e396"
+                    "versions.yml:md5,8b28f474ec25bfa9df8abedbe6bce396"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T20:59:41.187983313"
+        "timestamp": "2025-09-22T21:24:36.51483224"
     }
 }

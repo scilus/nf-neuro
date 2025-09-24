@@ -2,9 +2,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     tag "$meta.id"
     label 'process_low'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
+    container "scilus/scilus:2.2.0"
 
     input:
     tuple val(meta), path(image), path(reference), path(warp), path(affine)
@@ -66,11 +64,11 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
             # Iterate over images.
             for image in reference \${bname}${suffix};
             do
-                scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+                scil_viz_volume_screenshot *\${image}.nii.gz \${image}_coronal.png \
                     --slices \$coronal_dim --axis coronal \$viz_params
-                scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+                scil_viz_volume_screenshot *\${image}.nii.gz \${image}_sagittal.png \
                     --slices \$sagittal_dim --axis sagittal \$viz_params
-                scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+                scil_viz_volume_screenshot *\${image}.nii.gz \${image}_axial.png \
                     --slices \$axial_dim --axis axial \$viz_params
                 if [ \$image != reference ];
                 then
@@ -96,6 +94,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
@@ -107,7 +106,17 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}__warped" : "__warped"
 
     """
+    set +e
+    function handle_code () {
+    local code=\$?
+    ignore=( 1 )
+    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+    }
+    trap 'handle_code' ERR
+
     antsApplyTransforms -h
+    convert -h
+    scil_viz_volume_screenshot -h
 
     for image in $image;
         do \
@@ -119,6 +128,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')

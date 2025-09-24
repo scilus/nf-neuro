@@ -7,9 +7,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-05T15:15:33.805842111"
+        "timestamp": "2025-09-22T19:25:53.507196331"
     },
     "burnvoxels - two masks": {
         "content": [
@@ -66,8 +66,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-05T15:16:33.421580337"
+        "timestamp": "2025-09-22T19:25:46.625620408"
     }
 }

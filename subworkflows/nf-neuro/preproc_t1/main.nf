@@ -36,7 +36,7 @@ workflow PREPROC_T1 {
 
             ch_nlmeans = ch_image
                 .join(ch_ref_mask, remainder: true)
-                .map{ meta, image, mask -> [meta, image, mask ?: []] }
+                .map{ meta, image, mask -> [meta, image, mask ?: [], []] }
 
             DENOISING_NLMEANS ( ch_nlmeans )
             ch_versions = ch_versions.mix(DENOISING_NLMEANS.out.versions.first())

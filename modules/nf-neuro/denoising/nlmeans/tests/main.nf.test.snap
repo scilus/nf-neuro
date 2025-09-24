@@ -11,6 +11,9 @@
                     ]
                 ],
                 "1": [
+                    
+                ],
+                "2": [
                     "versions.yml:md5,ceabc00e745975c884a5ab0b435c93db"
                 ],
                 "image": [
@@ -21,6 +24,9 @@
                         "test__denoised.nii.gz:md5,4443314c19646ac7ae866ff1947cb665"
                     ]
                 ],
+                "piesno_mask": [
+                    
+                ],
                 "versions": [
                     "versions.yml:md5,ceabc00e745975c884a5ab0b435c93db"
                 ]
@@ -30,7 +36,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-22T18:05:49.734408259"
+        "timestamp": "2025-09-24T18:48:04.703922151"
     },
     "denoising - nlmeans - stub-run": {
         "content": [
@@ -42,6 +48,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-22T18:06:02.237693246"
+        "timestamp": "2025-09-24T18:52:31.125489656"
     }
 }
