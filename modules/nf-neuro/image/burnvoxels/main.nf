@@ -56,7 +56,7 @@ process IMAGE_BURNVOXELS {
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix \$(mrcalc -version | grep mrcalc | cut -d" " -f3)
-        scilpy: scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -72,7 +72,7 @@ process IMAGE_BURNVOXELS {
     "${task.process}":
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix \$(mrcalc -version | grep mrcalc | cut -d" " -f3)
-        scilpy: scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

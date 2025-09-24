@@ -41,7 +41,7 @@ process IO_READBIDS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
     stub:
@@ -74,7 +74,7 @@ process IO_READBIDS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

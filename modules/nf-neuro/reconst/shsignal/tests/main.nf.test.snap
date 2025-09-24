@@ -3,25 +3,25 @@
         "content": [
             "test__dwi_sh.nii.gz:md5:header,76a9953111f97786bd14a451c61529e7,data,9d8c694457c72375d075ce29838ec91e",
             [
-                "versions.yml:md5,173eabd26e11dab936f8e29ee3f01d8c"
+                "versions.yml:md5,b31dee07198d655bc73039659807fcbd"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-02-27T02:07:47.742388106"
+        "timestamp": "2025-09-22T20:23:58.775324753"
     },
     "fit sh - stub": {
         "content": [
             [
-                "versions.yml:md5,173eabd26e11dab936f8e29ee3f01d8c"
+                "versions.yml:md5,b31dee07198d655bc73039659807fcbd"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-02-26T21:48:34.631443809"
+        "timestamp": "2025-09-22T20:24:12.986333631"
     }
 }
