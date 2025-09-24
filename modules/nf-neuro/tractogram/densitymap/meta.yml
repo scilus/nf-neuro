@@ -13,15 +13,15 @@ tools:
       identifier: ""
 args:
   - binary:
-    type: integer
-    description: |
-      If set, will store the same value for all intersected voxels, creating a binary map.
-      When set without a value, 1 is used (and dtype uint8). If a value is given, will be used as the stored value.
-    default: 1
+      type: integer
+      description: |
+        If set, will store the same value for all intersected voxels, creating a binary map.
+        When set without a value, 1 is used (and dtype uint8). If a value is given, will be used as the stored value.
+      default: 1
   - endpoints_only:
-    type: boolean
-    description: If set, will only use the endpoints. To get a head and a tail maps, see scil_bundle_compute_endpoints_map.
-    default: false
+      type: boolean
+      description: If set, will only use the endpoints. To get a head and a tail maps, see scil_bundle_compute_endpoints_map.
+      default: false
 input:
   - - meta:
         type: map
