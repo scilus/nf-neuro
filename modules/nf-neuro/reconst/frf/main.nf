@@ -4,9 +4,7 @@ process RECONST_FRF {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.1.2.sif':
-        'scilus/scilus:2.1.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(wm_mask), path(gm_mask), path(csf_mask)
@@ -60,37 +58,37 @@ process RECONST_FRF {
     if [ "$set_method" = "ssst" ]
     then
 
-        scil_dwi_extract_shell.py $dwi $bval $bvec $dti_shells \
+        scil_dwi_extract_shell $dwi $bval $bvec $dti_shells \
                 dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells \
                 $dwi_shell_tolerance -f -v
 
-        scil_frf_ssst.py dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells ${prefix}__frf.txt \
+        scil_frf_ssst dwi_dti_shells.nii.gz bval_dti_shells bvec_dti_shells ${prefix}__frf.txt \
             $set_mask $fa $fa_min $nvox_min $roi_radius --b0_threshold $b0_thr_extract_b0 $precision -v
 
         if ( "$task.ext.set_frf" = true ); then
-            scil_frf_set_diffusivities.py ${prefix}__frf.txt "${fix_frf}" \
+            scil_frf_set_diffusivities ${prefix}__frf.txt "${fix_frf}" \
                 ${prefix}__frf.txt $precision -f -v
         fi
 
     elif [ "$set_method" = "msmt" ]
     then
 
-        scil_dwi_extract_shell.py $dwi $bval $bvec $fodf_shells \
+        scil_dwi_extract_shell $dwi $bval $bvec $fodf_shells \
             dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells \
             $dwi_shell_tolerance -f -v
 
-        scil_frf_msmt.py dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells \
+        scil_frf_msmt dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells \
             ${prefix}__wm_frf.txt ${prefix}__gm_frf.txt ${prefix}__csf_frf.txt \
             $set_mask $set_wm_mask $set_gm_mask $set_csf_mask $fa_thr_wm $fa_thr_gm \
             $fa_thr_csf $md_thr_wm $md_thr_gm $md_thr_csf $nvox_min $roi_radius \
             $dwi_shell_tolerance --dti_bval_limit $max_dti_shell_value $precision -v
 
         if ( "$task.ext.set_frf" = true ); then
-            scil_frf_set_diffusivities.py ${prefix}__wm_frf.txt "${fix_wm_frf}" \
+            scil_frf_set_diffusivities ${prefix}__wm_frf.txt "${fix_wm_frf}" \
                 ${prefix}__wm_frf.txt $precision -f -v
-            scil_frf_set_diffusivities.py ${prefix}__gm_frf.txt "${fix_gm_frf}" \
+            scil_frf_set_diffusivities ${prefix}__gm_frf.txt "${fix_gm_frf}" \
                 ${prefix}__gm_frf.txt $precision -f -v
-            scil_frf_set_diffusivities.py ${prefix}__csf_frf.txt "${fix_csf_frf}" \
+            scil_frf_set_diffusivities ${prefix}__csf_frf.txt "${fix_csf_frf}" \
                 ${prefix}__csf_frf.txt $precision -f -v
         fi
 
@@ -98,7 +96,7 @@ process RECONST_FRF {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -106,10 +104,10 @@ process RECONST_FRF {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_dwi_extract_shell.py -h
-    scil_frf_ssst.py -h
-    scil_frf_set_diffusivities.py -h
-    scil_frf_msmt.py -h
+    scil_dwi_extract_shell -h
+    scil_frf_ssst -h
+    scil_frf_set_diffusivities -h
+    scil_frf_msmt -h
 
     touch ${prefix}__frf.txt
     touch ${prefix}__wm_frf.txt
@@ -118,7 +116,7 @@ process RECONST_FRF {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
