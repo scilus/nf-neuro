@@ -8,7 +8,7 @@ A GitHub composite action that intelligently determines whether checks should be
 
 # Merge Queue Status Check Action
 
-Determines whether checks should be run when a PR is added to a merge queue by analyzing PR status and base SHA changes.
+Determines whether checks should be run when a PR is added to a merge queue by analyzing PR status and merge queue events.
 
 ## Usage
 
@@ -37,7 +37,7 @@ jobs:
 - `token` - GitHub token for API access (required)
 - `merge-group-event` - Complete merge_group event as JSON (required)
 - `pr-workflow-path` - Path to PR workflow file (default: `.github/workflows/update_pr.yml`)
-- `checks-job-name` - Name of checks job to monitor (default: `checks`)
+- `checks-job-name` - Name of checks job to monitor (default: `checks / status`)
 
 ## Outputs
 
@@ -46,11 +46,12 @@ jobs:
 
 ## Logic
 
-Runs checks if:
-
-1. Merge queue updated the PR base SHA, OR
-2. Latest checks job failed/was cancelled/timed out, OR
+Runs checks if either of :
+1. Most recent PR event (sync/force-push) was from `github-merge-queue[bot]`
+2. Latest checks job failed/was cancelled/timed out
 3. Checks job not found (conservative fallback)
+
+**Detection Method:** The action examines the most recent `synchronize` or `head_ref_force_pushed` event in the PR timeline. If this event was created by `github-merge-queue[bot]`, we know the merge queue just acted on the PR and checks should run. Otherwise, we check the status of the last workflow run.
 
 ### Advanced Usage with Custom Parameters
 

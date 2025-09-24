@@ -1,2 +1,4 @@
 # Minimal act configuration
 -P ubuntu-latest=catthehacker/ubuntu:act-latest
+# Bind events
+-e ./.github/events/merge_group.json

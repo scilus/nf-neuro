@@ -17,7 +17,7 @@ inputs:
   checks-job-name:
     description: "Name of the checks job to monitor"
     required: false
-    default: "checks"
+    default: "checks / status"
 
 outputs:
   should-run-checks:
@@ -31,7 +31,7 @@ runs:
   using: "composite"
   steps:
     - name: Extract PR number from merge group
-      id: extract
+      id: extract-pr-number
       shell: bash
       run: |
         # Extract PR number from the head_ref (format: refs/pull/123/merge)
@@ -46,9 +46,7 @@ runs:
       with:
         github-token: ${{ inputs.token }}
         script: |
-          const mergeGroupEvent = JSON.parse(`${{ inputs.merge-group-event }}`);
-          const prNumber = '${{ steps.extract.outputs.pr_number }}';
-          const mergeGroupBaseSha = mergeGroupEvent.base_sha;
+          const prNumber = '${{ steps.extract-pr-number.outputs.pr_number }}';
           const prWorkflowPath = '${{ inputs.pr-workflow-path }}';
           const checksJobName = '${{ inputs.checks-job-name }}';
 
@@ -59,37 +57,50 @@ runs:
           try {
             // Get PR details
             const { data: pr } = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner: 'scilus',
+              repo: 'nf-neuro',
               pull_number: prNumber
             });
 
-            // Check if merge queue updated the PR (base SHA changed)
-            const originalBaseSha = pr.base.sha;
-            const queueUpdatedPr = mergeGroupBaseSha !== originalBaseSha;
+            // Check if last event on the PR is synchronisation by the merge queue
+            const { data: events } = await github.rest.issues.listEventsForTimeline({
+              owner: 'scilus',
+              repo: 'nf-neuro',
+              issue_number: prNumber,
+              per_page: 50
+            });
 
-            // Get the latest workflow runs for the PR head SHA
+            const sortedEvents = events.sort(
+              (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+            );
+
+            const queueUpdatedPr = sortedEvents.length > 0 && (
+              sortedEvents[0].event === 'head_ref_force_pushed' ||
+              sortedEvents[0].event === 'synchronize'
+            ) && sortedEvents[0].actor.login === 'github-merge-queue[bot]';
+
+            // Check if the latest workflow run for the PR had a failed/cancelled checks job
             const { data: workflowRuns } = await github.rest.actions.listWorkflowRunsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head_sha: pr.head.sha,
+              owner: 'scilus',
+              repo: 'nf-neuro',
               per_page: 100
             });
 
-            // Find the most recent PR workflow run by path
-            const prRuns = workflowRuns.workflow_runs.filter(run =>
-              run.path === prWorkflowPath
-            ).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const relevantRuns = workflowRuns.workflow_runs.filter(run => {
+              return run.path === prWorkflowPath &&
+                     run.pull_requests &&
+                     run.pull_requests.some(pr => pr.number == prNumber);
+            }).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
             let hasFailedChecksJob = false;
             let checksJobStatus = 'not_found';
 
-            if (prRuns.length > 0) {
-              const latestRun = prRuns[0];
+            if (relevantRuns.length > 0) {
+              const latestRun = relevantRuns[0];
 
               const { data: jobs } = await github.rest.actions.listJobsForWorkflowRun({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+                owner: 'scilus',
+                repo: 'nf-neuro',
                 run_id: latestRun.id
               });
 
@@ -111,10 +122,15 @@ runs:
             const shouldRun = queueUpdatedPr || hasFailedChecksJob;
 
             let reason = [];
-            if (queueUpdatedPr) reason.push('merge queue updated PR base');
-            if (hasFailedChecksJob && checksJobStatus === 'not_found') reason.push(`${checksJobName} job not found in latest run of ${prWorkflowPath}`);
-            if (hasFailedChecksJob && checksJobStatus !== 'not_found') reason.push(`${checksJobName} job ${checksJobStatus} in latest run of ${prWorkflowPath}`);
-            if (reason.length === 0) reason.push(`${checksJobName} job passed and no queue updates`);
+            if (queueUpdatedPr) {
+              reason.push('most recent PR event was from merge queue bot');
+            } else if (hasFailedChecksJob && checksJobStatus === 'not_found') {
+              reason.push(`${checksJobName} job not found in latest run of ${prWorkflowPath}`);
+            } else if (hasFailedChecksJob && checksJobStatus !== 'not_found') {
+              reason.push(`${checksJobName} job ${checksJobStatus} in latest run of ${prWorkflowPath}`);
+            } else {
+              reason.push(`${checksJobName} job passed and no recent merge queue activity`);
+            }
 
             return {
               shouldRun,
@@ -122,7 +138,7 @@ runs:
             };
 
           } catch (error) {
-            return { shouldRun: true, reason: `API error: ${error.message}` };
+            return { shouldRun: true, reason: `API error: ${error}` };
           }
 
     - name: Set outputs
