@@ -3,9 +3,7 @@ process TRACKING_PFTTRACKING {
     tag "$meta.id"
     label 'process_high_memory'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(wm), path(gm), path(csf), path(fodf), path(fa)
@@ -53,7 +51,7 @@ process TRACKING_PFTTRACKING {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    scil_tracking_pft_maps.py $wm $gm $csf \
+    scil_tracking_pft_maps $wm $gm $csf \
         --include ${prefix}__map_include.nii.gz \
         --exclude ${prefix}__map_exclude.nii.gz \
         --interface ${prefix}__interface.nii.gz -f
@@ -61,9 +59,9 @@ process TRACKING_PFTTRACKING {
     cp $wm tmp_anat_qc.nii.gz
 
     if [ "${pft_seeding_mask}" == "wm" ]; then
-        scil_volume_math.py lower_threshold $wm $pft_wm_threshold ${prefix}__pft_seeding_mask.nii.gz \
+        scil_volume_math lower_threshold $wm $pft_wm_threshold ${prefix}__pft_seeding_mask.nii.gz \
             --data_type uint8 -f
-        scil_volume_math.py union ${prefix}__pft_seeding_mask.nii.gz \
+        scil_volume_math union ${prefix}__pft_seeding_mask.nii.gz \
             ${prefix}__interface.nii.gz ${prefix}__pft_seeding_mask.nii.gz \
             --data_type uint8 -f
 
@@ -71,11 +69,11 @@ process TRACKING_PFTTRACKING {
         mv ${prefix}__interface.nii.gz ${prefix}__pft_seeding_mask.nii.gz
 
     elif [ "${pft_seeding_mask}" == "fa" ]; then
-        scil_volume_math.py lower_threshold $fa $pft_fa_threshold \
+        scil_volume_math lower_threshold $fa $pft_fa_threshold \
             ${prefix}__pft_seeding_mask.nii.gz --data_type uint8 -f
     fi
 
-    scil_tracking_pft.py $fodf ${prefix}__pft_seeding_mask.nii.gz \
+    scil_tracking_pft $fodf ${prefix}__pft_seeding_mask.nii.gz \
         ${prefix}__map_include.nii.gz ${prefix}__map_exclude.nii.gz \
         ${prefix}__pft_tracking.trk \
         $pft_algo $pft_seeding_type $pft_nbr_seeds \
@@ -83,7 +81,7 @@ process TRACKING_PFTTRACKING {
         $pft_sfthres $pft_sfthres_init $pft_min_len $pft_max_len \
         $pft_particles $pft_back $pft_front $compress $basis -f
 
-    scil_tractogram_remove_invalid.py ${prefix}__pft_tracking.trk \
+    scil_tractogram_remove_invalid ${prefix}__pft_tracking.trk \
         ${prefix}__pft_tracking.trk \
         --remove_single_point -f
 
@@ -109,16 +107,15 @@ process TRACKING_PFTTRACKING {
 
     if $run_qc;
     then
-        scil_viz_bundle_screenshot_mosaic.py tmp_anat_qc.nii.gz ${prefix}__pft_tracking.trk\
+        scil_viz_bundle_screenshot_mosaic tmp_anat_qc.nii.gz ${prefix}__pft_tracking.trk\
             ${prefix}__pft_tracking_mqc.png --opacity_background 1 --light_screenshot
-        scil_tractogram_print_info.py ${prefix}__pft_tracking.trk >> ${prefix}__pft_tracking_stats.json
+        scil_tractogram_print_info ${prefix}__pft_tracking.trk >> ${prefix}__pft_tracking_stats.json
     fi
     rm -f tmp_anat_qc.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -126,12 +123,12 @@ process TRACKING_PFTTRACKING {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_tracking_pft.py -h
-    scil_tracking_pft_maps.py -h
-    scil_volume_math.py -h
-    scil_tractogram_remove_invalid.py -h
-    scil_viz_bundle_screenshot_mosaic.py -h
-    scil_tractogram_print_info.py -h
+    scil_tracking_pft -h
+    scil_tracking_pft_maps -h
+    scil_volume_math -h
+    scil_tractogram_remove_invalid -h
+    scil_viz_bundle_screenshot_mosaic -h
+    scil_tractogram_print_info -h
 
     touch ${prefix}__map_include.nii.gz
     touch ${prefix}__map_exclude.nii.gz
@@ -143,8 +140,7 @@ process TRACKING_PFTTRACKING {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }
