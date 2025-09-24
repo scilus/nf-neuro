@@ -1,0 +1,41 @@
+name: Merge Queue checks
+on:
+  merge_group:
+    types:
+      - checks_requested
+    branches:
+      - main
+
+# Cancel if a newer run is started
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-conditions:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run_checks: ${{ steps.status.outputs.should-run-checks }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check if checks should run
+        id: status
+        uses: ./.github/actions/merge-queue-status
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          merge-group-event: ${{ toJSON(github.event.merge_group) }}
+
+  checks:
+    needs: check-conditions
+    if: needs.check-conditions.outputs.should_run_checks == 'true'
+    uses: ./.github/workflows/run_checks_suite.yml
+    secrets: inherit
+
+  update-main:
+    needs: [check-conditions, checks]
+    if: always() && (!needs.check-conditions.outputs.should_run_checks || needs.checks.result == 'success')
+    uses: ./.github/workflows/update_main.yml
+    secrets: inherit
