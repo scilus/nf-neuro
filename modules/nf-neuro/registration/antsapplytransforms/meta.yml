@@ -88,29 +88,25 @@ input:
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'test', single_end:false ]`
-    - image:
-        type: file
-        description: Input image to register
+    - images:
+        type: list
+        description: Input images to transform onto reference.
         pattern: "*.{nii.nii.gz}"
-        ontologies: []
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format]
     - reference:
         type: file
-        description: Reference image for registration
+        description: Reference image for transformation.
         pattern: "*.{nii.nii.gz}"
-        ontologies: []
-    - warp:
-        type: file
-        description: Warp transformation file to warp image or trk.
-        pattern: "*.{nii,nii.gz}"
+        mandatory: true
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
-    - affine:
-        type: file
-        description: Affine or rigig transformation file to warp image or trk (*mat).
-          If a rigid or affine transformation needs to be inverted before being applied,
-          use antsApplyTransforms with the  -o Linear[inversedTransform,1], as this
-          module does not handles it.
-        pattern: "*.mat"
+    - transformations:
+        type: list
+        description: Transformation files (in the correct order).
+        pattern: "*.{nii.gz,mat}"
+        mandatory: true
         ontologies: []
 output:
   warped_image:
