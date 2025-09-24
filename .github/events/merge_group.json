@@ -1,6 +1,6 @@
 {
     "merge_group": {
-        "head_ref": "refs/pull/123/merge",
+        "head_ref": "refs/heads/gh-readonly-queue/main/pr-189-abc123def456",
         "head_sha": "abc123def456",
         "base_sha": "def456ghi789",
         "base_ref": "refs/heads/main"
