@@ -3,6 +3,229 @@
         "content": [
             {
                 "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__length_stats.json:md5,8ffb830856e9c6e4c5f6eca23fac61e0"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_map_raw.json:md5,c22e99c0f50d691267ca15f399f354a8"
+                    ]
+                ],
+                "10": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std_per_point.json:md5,df0008c1ebfe660505b21b66551eb95f"
+                    ]
+                ],
+                "11": [
+                    
+                ],
+                "12": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__test__test__test__AF_L_labels_uniformized_endpoints_map_head.nii.gz:md5,7963fc7ae81a72d26a1aa528ddcb28fb"
+                    ]
+                ],
+                "13": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__test__test__test__AF_L_labels_uniformized_endpoints_map_tail.nii.gz:md5,c573ab700ded6c3fa3dae95c0f4395dc"
+                    ]
+                ],
+                "14": [
+                    
+                ],
+                "15": [
+                    "versions.yml:md5,38152ddd7c01b5fd3de1459bc58f46a7",
+                    "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
+                    "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
+                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
+                    "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_metric_stats.json:md5,bba0c87e18c2e9ef02d0d77cc9858298"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std.json:md5,1f8d435a13f7509ff4091ff7a957afca"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume.json:md5,481e2f2ecf3d2a5e9b274018be429b34"
+                    ]
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    
+                ],
+                "7": [
+                    
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_per_label.json:md5,9ce93bf41ca875a4a31c685ff711244b"
+                    ]
+                ],
+                "9": [
+                    
+                ],
+                "endpoints_head": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__test__test__test__AF_L_labels_uniformized_endpoints_map_head.nii.gz:md5,7963fc7ae81a72d26a1aa528ddcb28fb"
+                    ]
+                ],
+                "endpoints_tail": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__test__test__test__AF_L_labels_uniformized_endpoints_map_tail.nii.gz:md5,c573ab700ded6c3fa3dae95c0f4395dc"
+                    ]
+                ],
+                "lesion_map": [
+                    
+                ],
+                "stat_endpoints_metric": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_metric_stats.json:md5,bba0c87e18c2e9ef02d0d77cc9858298"
+                    ]
+                ],
+                "stat_endpoints_raw": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_map_raw.json:md5,c22e99c0f50d691267ca15f399f354a8"
+                    ]
+                ],
+                "stat_length": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__length_stats.json:md5,8ffb830856e9c6e4c5f6eca23fac61e0"
+                    ]
+                ],
+                "stat_lesion_stats": [
+                    
+                ],
+                "stat_mean_std": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std.json:md5,1f8d435a13f7509ff4091ff7a957afca"
+                    ]
+                ],
+                "stat_mean_std_per_point": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std_per_point.json:md5,df0008c1ebfe660505b21b66551eb95f"
+                    ]
+                ],
+                "stat_streamline_count": [
+                    
+                ],
+                "stat_streamline_count_lesions": [
+                    
+                ],
+                "stat_volume": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume.json:md5,481e2f2ecf3d2a5e9b274018be429b34"
+                    ]
+                ],
+                "stat_volume_lesions": [
+                    
+                ],
+                "stat_volume_per_labels": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_per_label.json:md5,9ce93bf41ca875a4a31c685ff711244b"
+                    ]
+                ],
+                "stat_volume_per_labels_lesions": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,38152ddd7c01b5fd3de1459bc58f46a7",
+                    "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
+                    "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
+                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
+                    "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-24T16:10:46.567387107"
+    },
+    "tractometry_without_centroids": {
+        "content": [
+            {
+                "0": [
                     
                 ],
                 "1": [
@@ -24,10 +247,7 @@
                     
                 ],
                 "15": [
-                    "versions.yml:md5,6610a2be8c244e00591e6dc991c68eb9",
-                    "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
-                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
-                    "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
+                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b"
                 ],
                 "2": [
                     
@@ -99,10 +319,7 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,6610a2be8c244e00591e6dc991c68eb9",
-                    "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
-                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
-                    "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
+                    "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b"
                 ]
             }
         ],
@@ -110,6 +327,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-23T13:57:31.359688249"
+        "timestamp": "2025-09-24T16:23:41.808850598"
     }
 }

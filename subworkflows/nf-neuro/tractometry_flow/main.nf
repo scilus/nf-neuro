@@ -32,20 +32,38 @@ main:
     BUNDLE_FIXELAFD( ch_fixel )
     ch_versions = ch_versions.mix( BUNDLE_FIXELAFD.out.versions.first() )
     ch_fixelafd = BUNDLE_FIXELAFD.out.fixel_afd
-    ch_metrics  = ch_metrics.join( ch_fixelafd )
+    ch_metrics  = ch_metrics
+        .join( ch_fixelafd, remainder: true )
+        .map { [ it[0], it[1], it[2] ?: [] ] }
 
-    // ** Compute the centroids ** //
-    BUNDLE_CENTROID( TRACTOGRAM_REMOVEINVALID.out.tractograms )
-    ch_versions = ch_versions.mix(BUNDLE_CENTROID.out.versions)
+    // Channel des centroids non vides
+    ch_centroids_present = ch_centroids.filter { it != null && it[1] && it[1].size() > 0 }
 
-    // ** Compute label maps and uniformize the bundles ** //
-    ch_label_map = TRACTOGRAM_REMOVEINVALID.out.tractograms
-        .join( BUNDLE_CENTROID.out.centroids )
+    // Channel des centroids vides ou absents
+    ch_centroids_empty = ch_centroids.filter { it == null || !it[1] || it[1].size() == 0 }
+
+    // TRACTOGRAM_RESAMPLE si centroids présents
+    TRACTOGRAM_RESAMPLE(ch_centroids_present)
+    ch_versions = ch_versions.mix(TRACTOGRAM_RESAMPLE.out.versions.first())
+    ch_centroids_cleaned_from_input = TRACTOGRAM_RESAMPLE.out.tractograms
+
+    // BUNDLE_CENTROID si centroids absents
+    BUNDLE_CENTROID(ch_bundle_cleaned.combine(ch_centroids_empty))
+    ch_centroids_cleaned_from_generate = BUNDLE_CENTROID.out.centroids
+    ch_versions = ch_versions.mix(BUNDLE_CENTROID.out.versions.first())
+
+    // Merge des deux sorties (une seule sera alimentée)
+    ch_centroids_cleaned = ch_centroids_cleaned_from_input.mix(ch_centroids_cleaned_from_generate)
+
+    // Join final
+    ch_label_map = ch_bundle_cleaned.join(ch_centroids_cleaned)
 
     BUNDLE_LABELMAP ( ch_label_map )
     ch_versions = ch_versions.mix(BUNDLE_LABELMAP.out.versions.first())
     ch_labels_trk = BUNDLE_LABELMAP.out.labels_trk
-        .join( BUNDLE_CENTROID.out.centroids )
+        .join( ch_centroids_cleaned )
+
+    ch_labels_trk.view { "✅ label trk: $it" }
 
     BUNDLE_UNIFORMIZE ( ch_labels_trk )
     ch_versions = ch_versions.mix(BUNDLE_UNIFORMIZE.out.versions.first())
@@ -54,7 +72,7 @@ main:
         .join( BUNDLE_LABELMAP.out.labels )
         .join( ch_metrics )
         .join( ch_lesion_mask, remainder: true )
-        .map { [ it[0], it[1], it[2], it[3], it[4] ?: [] ] } // [ meta, bundle, metrics, lesion_mask ]
+        .map { [ it[0], it[1], it[2], it[3], it[4] ?: [] ] }
 
     BUNDLE_STATS ( ch_stats )
     ch_versions = ch_versions.mix(BUNDLE_STATS.out.versions.first())
