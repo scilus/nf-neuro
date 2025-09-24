@@ -4,7 +4,7 @@ def compute_noddi_priors ( fa, ad, rd, md, fa_min, fa_max, md_min, roi_radius, p
     """
     mkdir -p $output_directory
 
-    scil_NODDI_priors.py $fa $ad $rd $md $fa_min $fa_max $md_min $roi_radius \
+    scil_NODDI_priors $fa $ad $rd $md $fa_min $fa_max $md_min $roi_radius \
         --out_txt_1fiber_para $output_directory/${prefix}__para_diff.txt \
         --out_txt_1fiber_perp $output_directory/${prefix}__perp_diff.txt \
         --out_txt_ventricles $output_directory/${prefix}__iso_diff.txt
@@ -20,9 +20,7 @@ process RECONST_DIFFUSIVITYPRIORS {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(fa), path(ad), path(rd), path(md), path(priors)
@@ -67,7 +65,7 @@ process RECONST_DIFFUSIVITYPRIORS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -75,7 +73,7 @@ process RECONST_DIFFUSIVITYPRIORS {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_NODDI_priors.py -h
+    scil_NODDI_priors -h
 
     mkdir priors
     touch priors/${prefix}__para_diff.txt
@@ -86,10 +84,9 @@ process RECONST_DIFFUSIVITYPRIORS {
     touch "mean_perp_diff.txt"
     touch "mean_iso_diff.txt"
 
-
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

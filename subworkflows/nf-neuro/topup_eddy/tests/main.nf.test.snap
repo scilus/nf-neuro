@@ -57,8 +57,8 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
-                    "versions.yml:md5,81cfd1ed44fe6baf7c62ce30bdb4c143"
+                    "versions.yml:md5,81cfd1ed44fe6baf7c62ce30bdb4c143",
+                    "versions.yml:md5,ea2ab11e04c3353e065862217a342651"
                 ]
             }
         ],
@@ -66,7 +66,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-23T01:19:13.092133235"
+        "timestamp": "2025-09-24T13:07:58.922695156"
     },
     "topup_eddy - ONLY Eddy - AP DWI | PA sbref": {
         "content": [
@@ -126,8 +126,8 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
-                    "versions.yml:md5,81cfd1ed44fe6baf7c62ce30bdb4c143"
+                    "versions.yml:md5,81cfd1ed44fe6baf7c62ce30bdb4c143",
+                    "versions.yml:md5,ea2ab11e04c3353e065862217a342651"
                 ]
             }
         ],
@@ -135,7 +135,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-23T01:18:47.367087088"
+        "timestamp": "2025-09-24T13:07:33.621522283"
     },
     "topup_eddy - AP DWI+sbref | PA DWI+sbref": {
         "content": [
@@ -195,8 +195,8 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,4b74184cf640fe471fd336a12cd7d565",
-                    "versions.yml:md5,81cfd1ed44fe6baf7c62ce30bdb4c143"
+                    "versions.yml:md5,81cfd1ed44fe6baf7c62ce30bdb4c143",
+                    "versions.yml:md5,ea2ab11e04c3353e065862217a342651"
                 ]
             }
         ],
@@ -204,6 +204,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-23T01:19:38.392285798"
+        "timestamp": "2025-09-24T13:08:23.941067656"
     }
 }
