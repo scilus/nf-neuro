@@ -88,8 +88,8 @@ runs:
 
             const relevantRuns = workflowRuns.workflow_runs.filter(run => {
               return run.path === prWorkflowPath &&
-                     run.pull_requests &&
-                     run.pull_requests.some(pr => pr.number == prNumber);
+                    run.pull_requests &&
+                    run.pull_requests.some(pr => pr.number == prNumber);
             }).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
             let hasFailedChecksJob = false;

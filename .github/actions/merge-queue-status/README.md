@@ -47,6 +47,7 @@ jobs:
 ## Logic
 
 Runs checks if either of :
+
 1. Most recent PR event (sync/force-push) was from `github-merge-queue[bot]`
 2. Latest checks job failed/was cancelled/timed out
 3. Checks job not found (conservative fallback)
