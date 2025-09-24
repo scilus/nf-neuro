@@ -30,16 +30,16 @@
                 "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
             ],
             11,
-            "test__dwi_fw_corrected.nii.gz:md5:header,dd505581c2fa20ad1b7cc7c213245c9c,data,300c1ba7a237db24cd987d8f4e6d97f0",
-            "test__dir.nii.gz:md5:header,cdd1570ac5fe51b109eea3de58e196ae,data,d68e6ed58e2f7a88720d68c3b359ec32",
-            "test__FiberVolume.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,52a5d3f673b62036453736e89223751c",
-            "test__FW.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,799995bce132e09a5d463218311414b6",
-            "test__NRMSE.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,da927578fefaa43844d592150aafe6ad"
+            "test__dwi_fw_corrected.nii.gz:md5:header,dd505581c2fa20ad1b7cc7c213245c9c,data,7550a1643e21e62cc64627baf1e31388",
+            "test__dir.nii.gz:md5:header,cdd1570ac5fe51b109eea3de58e196ae,data,f55ddbfd1c9849352fb54f4315c278f5",
+            "test__FiberVolume.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,9aaac504776670be80de379990415fac",
+            "test__FW.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,f9e560e89999812ba4205a85019bd612",
+            "test__NRMSE.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,b7cca4f00472537b44abcbdb831ca6cb"
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-23T23:14:38.134685982"
+        "timestamp": "2025-09-23T23:56:33.433193498"
     }
 }
