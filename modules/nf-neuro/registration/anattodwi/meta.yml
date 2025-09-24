@@ -59,89 +59,89 @@ input:
           - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
   anat_warped:
-   - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
-     - "*_warped.{nii,nii.gz}":
-        type: file
-        description: Anatomical image warped to DWI space
-        pattern: "*_warped.{nii,nii.gz}"
-        ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_warped.{nii,nii.gz}":
+          type: file
+          description: Anatomical image warped to DWI space
+          pattern: "*_warped.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   affine:
-   - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
-     - "*__forward1_affine.mat":
-        type: file
-        description: Affine transformation matrix file.
-        pattern: "*__forward1_affine.mat"
-        ontologies: []
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__forward1_affine.mat":
+          type: file
+          description: Affine transformation matrix file.
+          pattern: "*__forward1_affine.mat"
+          ontologies: []
   warp:
-   - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
-     - "*__forward0_warp.nii.gz":
-        type: file
-        description: Deformation field file.
-        pattern: "*__forward0_warp.nii.gz"
-        ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__forward0_warp.nii.gz":
+          type: file
+          description: Deformation field file.
+          pattern: "*__forward0_warp.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   inverse_warp:
-   - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
-     - "*__backward1_warp.nii.gz":
-        type: file
-        description: Inverse deformation field file.
-        pattern: "*__backward1_warp.nii.gz"
-        ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__backward1_warp.nii.gz":
+          type: file
+          description: Inverse deformation field file.
+          pattern: "*__backward1_warp.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   inverse_affine:
-   - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
-     - "*__backward0_affine.mat":
-        type: file
-        description: Inverse affine transformation matrix file.
-        pattern: "*__backward0_affine.mat"
-        ontologies: []
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__backward0_affine.mat":
+          type: file
+          description: Inverse affine transformation matrix file.
+          pattern: "*__backward0_affine.mat"
+          ontologies: []
   image_transform:
-   - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
-     - "*__forward*.{nii,nii.gz,mat}":
-        type: list
-        description: |
-          Tuple, Transformation files to warp images in the correct order
-          for REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ warp, affine ] ].
-        pattern: "*__forward*.{nii,nii.gz,mat}"
-        ontologies: []
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__forward*.{nii,nii.gz,mat}":
+          type: list
+          description: |
+            Tuple, Transformation files to warp images in the correct order
+            for REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ warp, affine ] ].
+          pattern: "*__forward*.{nii,nii.gz,mat}"
+          ontologies: []
   inverse_image_transform:
-   - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
-     - "*__backward*.{nii,nii.gz,mat}":
-        type: list
-        description: |
-          Tuple, Transformation files to warp images in the correct order for
-          REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ inverse_affine, inverse_warp ] ].
-        pattern: "*__backward*.{nii,nii.gz,mat}"
-        ontologies: []
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__backward*.{nii,nii.gz,mat}":
+          type: list
+          description: |
+            Tuple, Transformation files to warp images in the correct order for
+            REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ inverse_affine, inverse_warp ] ].
+          pattern: "*__backward*.{nii,nii.gz,mat}"
+          ontologies: []
   tractogram_transform:
     - - meta:
           type: map
