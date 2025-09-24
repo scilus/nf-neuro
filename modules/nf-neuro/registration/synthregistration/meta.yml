@@ -98,7 +98,7 @@ output:
           description: Warped image
           pattern: "*_warped.{nii,nii.gz}"
           ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   affine:
     - - meta:
           type: map
@@ -123,7 +123,7 @@ output:
           pattern: "*__forward0_warp.nii.gz"
           optional: true
           ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   inverse_warp:
     - - meta:
           type: map
@@ -136,7 +136,7 @@ output:
           pattern: "*__backward1_warp.nii.gz"
           optional: true
           ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   inverse_affine:
     - - meta:
           type: map

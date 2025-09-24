@@ -70,7 +70,7 @@ output:
           description: Image warped onto the reference.
           pattern: "*_warped.nii.gz"
           ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   fixed_warped:
     - - meta:
           type: map
@@ -82,7 +82,7 @@ output:
           description: Reference warped.
           pattern: "*_warped_reference.nii.gz"
           ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   warp:
     - - meta:
           type: map
@@ -94,7 +94,7 @@ output:
           description: Forward deformation field, composed of all registration stages (affine+deformation).
           pattern: "*_forward0_warp.nii.gz"
           ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   inverse_warp:
     - - meta:
           type: map
@@ -106,7 +106,7 @@ output:
           description: Backward deformation field, composed of all registration stages (inv-deformation+inv-affine).
           pattern: "*_backward0_warp.nii.gz"
           ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   fixed_segmentation_warped:
     - - meta:
           type: map
@@ -120,7 +120,7 @@ output:
             Will produce image only if not passed as input.
           pattern: "*_warped_segmentation_reference.nii.gz"
           ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+            - edam: http://edamontology.org/format_4001 # NIFTI format
           optional: true
   segmentation_warped:
     - - meta:
@@ -135,7 +135,7 @@ output:
             Will produce image only if not passed as input.
           pattern: "*_warped_segmentation.nii.gz"
           ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+            - edam: http://edamontology.org/format_4001 # NIFTI format
           optional: true
   versions:
     - versions.yml:
