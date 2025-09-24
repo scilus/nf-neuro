@@ -1,13 +1,5 @@
 # Merge Queue Status Check Action
 
-A GitHub composite action that intelligently determines whether checks should be run when a PR is added to a merge queue.
-
-## Usage
-
-### Basic Usage
-
-# Merge Queue Status Check Action
-
 Determines whether checks should be run when a PR is added to a merge queue by analyzing PR status and merge queue events.
 
 ## Usage
@@ -83,17 +75,3 @@ Runs checks if either of :
 | ------------------- | -------------------------------------- | --------- |
 | `should-run-checks` | Whether checks should be run           | `boolean` |
 | `reason`            | Human-readable reason for the decision | `string`  |
-| `pr-number`         | Extracted PR number                    | `string`  |
-| `queue-updated-pr`  | Whether merge queue updated PR base    | `boolean` |
-| `checks-job-status` | Status of the monitored checks job     | `string`  |
-
-## Decision Logic
-
-The action will recommend running checks if **any** of the following conditions are true:
-
-1. **Merge queue updated the PR base** - The base SHA changed, indicating the PR was rebased onto a newer main branch
-2. **Latest checks job failed** - The most recent run of the monitored job had a `failure`, `cancelled`, or `timed_out` conclusion
-3. **Checks job not found** - Conservative fallback when the expected job cannot be located
-4. **API errors** - Conservative fallback when GitHub API calls fail
-
-**Note:** The action finds workflows by their file path, which uniquely identifies each workflow. The workflow name is automatically determined from the workflow file content.
