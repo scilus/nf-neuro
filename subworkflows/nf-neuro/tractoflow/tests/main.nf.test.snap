@@ -378,7 +378,7 @@
                 ],
                 "versions": [
                     "versions.yml:md5,21aeeda82df6de4b5bdd1c6bb9930eb0",
-                    "versions.yml:md5,4a7c801d46bade11523003b6bd06f8ed",
+                    "versions.yml:md5,5011203328febedfa9c5af5684bcc20c",
                     "versions.yml:md5,6f86cbe9b96fbefff47fe66fcb287678",
                     "versions.yml:md5,7cabc91ec64b5e824e9b8f60d7dcf930",
                     "versions.yml:md5,87e7cf85066fe87ee04330852a18b9a2",
@@ -425,6 +425,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-24T15:26:35.880061767"
+        "timestamp": "2025-09-24T18:57:46.919476351"
     }
 }
