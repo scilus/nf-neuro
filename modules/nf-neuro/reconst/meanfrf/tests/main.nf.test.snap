@@ -5,27 +5,27 @@
                 "0": [
                     [
                         "test",
-                        "test_mean_frf.txt:md5,92f823e2fb057161b9d6a046a589c0cc"
+                        "test_mean_frf.txt:md5,70e339a7ede1f4605c91fe80b150966f"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,0726c38b1e767e3e19f34b087306a364"
+                    "versions.yml:md5,b552ca0c54b99e4f5e26e5b1af5b0811"
                 ],
                 "meanfrf": [
                     [
                         "test",
-                        "test_mean_frf.txt:md5,92f823e2fb057161b9d6a046a589c0cc"
+                        "test_mean_frf.txt:md5,70e339a7ede1f4605c91fe80b150966f"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0726c38b1e767e3e19f34b087306a364"
+                    "versions.yml:md5,b552ca0c54b99e4f5e26e5b1af5b0811"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-12-17T01:44:09.840777788"
+        "timestamp": "2025-09-22T21:02:48.243194681"
     }
 }

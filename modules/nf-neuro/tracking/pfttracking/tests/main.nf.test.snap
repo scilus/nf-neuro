@@ -2,14 +2,14 @@
     "tracking - pfttracking - stub-run": {
         "content": [
             [
-                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
+                "versions.yml:md5,226960a499286abbacecad765eda5455"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T23:20:08.749601514"
+        "timestamp": "2025-09-22T22:44:03.727136167"
     },
     "tracking - pfttracking - fa": {
         "content": [
@@ -51,14 +51,14 @@
                 ]
             ],
             [
-                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
+                "versions.yml:md5,226960a499286abbacecad765eda5455"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T23:19:39.0658835"
+        "timestamp": "2025-09-22T22:43:08.144242921"
     },
     "tracking - pfttracking - interface": {
         "content": [
@@ -91,7 +91,7 @@
                 ]
             ],
             [
-                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
+                "versions.yml:md5,226960a499286abbacecad765eda5455"
             ],
             [
                 [
@@ -105,9 +105,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T23:19:55.217847185"
+        "timestamp": "2025-09-22T22:43:37.195808079"
     },
     "tracking - pfttracking - wm": {
         "content": [
@@ -149,13 +149,13 @@
                 ]
             ],
             [
-                "versions.yml:md5,2ae3399d07ef00610deae7988357dd55"
+                "versions.yml:md5,226960a499286abbacecad765eda5455"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T23:19:17.963971055"
+        "timestamp": "2025-09-22T22:42:31.874797843"
     }
 }

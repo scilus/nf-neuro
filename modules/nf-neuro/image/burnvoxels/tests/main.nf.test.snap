@@ -2,14 +2,14 @@
     "burnvoxels - stub-run": {
         "content": [
             [
-                "versions.yml:md5,7d1d3082eaa097f69bb1eeace9c2db5f"
+                "versions.yml:md5,de956775260cce25ab713779410f6175"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-22T17:28:47.842597589"
+        "timestamp": "2025-09-22T19:25:53.507196331"
     },
     "burnvoxels - two masks": {
         "content": [
@@ -36,7 +36,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,7d1d3082eaa097f69bb1eeace9c2db5f"
+                    "versions.yml:md5,de956775260cce25ab713779410f6175"
                 ],
                 "all_masks_burned": [
                     [
@@ -60,7 +60,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,7d1d3082eaa097f69bb1eeace9c2db5f"
+                    "versions.yml:md5,de956775260cce25ab713779410f6175"
                 ]
             }
         ],
@@ -68,6 +68,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-22T17:28:36.369245546"
+        "timestamp": "2025-09-22T19:25:46.625620408"
     }
 }

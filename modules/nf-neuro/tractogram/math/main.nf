@@ -3,9 +3,7 @@ process TRACTOGRAM_MATH {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(trks), path(reference)
@@ -34,7 +32,7 @@ process TRACTOGRAM_MATH {
     reference = reference ? "--reference ${reference}" : ""
 
     """
-    scil_tractogram_math.py $task.ext.operation $trks \
+    scil_tractogram_math $task.ext.operation $trks \
         ${prefix}__${suffix}.trk \
         $precision \
         $robust \
@@ -48,7 +46,7 @@ process TRACTOGRAM_MATH {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -58,11 +56,11 @@ process TRACTOGRAM_MATH {
     """
     touch ${prefix}__${suffix}.trk
 
-    scil_tractogram_math.py -h
+    scil_tractogram_math -h
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

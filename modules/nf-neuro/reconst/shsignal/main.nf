@@ -2,9 +2,7 @@ process RECONST_SHSIGNAL {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(mask) /* optional, value = [] */
@@ -34,17 +32,17 @@ process RECONST_SHSIGNAL {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    scil_dwi_extract_shell.py $dwi $bval $bvec $shell_to_fit \
+    scil_dwi_extract_shell $dwi $bval $bvec $shell_to_fit \
         dwi_sh_shells.nii.gz bval_sh_shells bvec_sh_shells -f
 
-    scil_dwi_to_sh.py dwi_sh_shells.nii.gz bval_sh_shells bvec_sh_shells \
+    scil_dwi_to_sh dwi_sh_shells.nii.gz bval_sh_shells bvec_sh_shells \
         ${prefix}__dwi_sh.nii.gz \
         $sh_order $sh_basis $smoothing \
         $attenuation_only $b0_threshold $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -52,14 +50,14 @@ process RECONST_SHSIGNAL {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_dwi_extract_shell.py -h
-    scil_dwi_to_sh.py -h
+    scil_dwi_extract_shell -h
+    scil_dwi_to_sh -h
 
     touch ${prefix}__dwi_sh.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

@@ -34,7 +34,7 @@ process REGISTRATION_TRACTOGRAM {
     for tractogram in ${tractogram};
         do \
         ext=\${tractogram#*.}
-        bname=\$(basename \${tractogram} .\${ext})
+        bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
 
         scil_tractogram_apply_transform \$tractogram $anat $transfo tmp.trk\
                         $in_deformation\
@@ -68,7 +68,7 @@ process REGISTRATION_TRACTOGRAM {
     for tractogram in ${tractogram};
         do \
         ext=\${tractogram#*.}
-        bname=\$(basename \${tractogram} .\${ext})
+        bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
 
         touch ${prefix}__\${bname}${suffix}.\${ext}
     done
