@@ -3,9 +3,7 @@ process REGISTRATION_ANTS {
     tag "$meta.id"
     label 'process_medium'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
+    container "scilus/scilus:2.2.0"
 
     input:
     tuple val(meta), path(fixedimage), path(movingimage), path(mask) /* optional, input = [] */
@@ -80,11 +78,11 @@ process REGISTRATION_ANTS {
         # Iterate over images.
         for image in fixedimage warped;
         do
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_coronal.png \
+            scil_viz_volume_screenshot *\${image}.nii.gz \${image}_coronal.png \
                 --slices \$coronal_dim --axis coronal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_sagittal.png \
+            scil_viz_volume_screenshot *\${image}.nii.gz \${image}_sagittal.png \
                 --slices \$sagittal_dim --axis sagittal \$viz_params
-            scil_viz_volume_screenshot.py *\${image}.nii.gz \${image}_axial.png \
+            scil_viz_volume_screenshot *\${image}.nii.gz \${image}_axial.png \
                 --slices \$axial_dim --axis axial \$viz_params
             if [ \$image != fixedimage ];
             then
@@ -109,6 +107,7 @@ process REGISTRATION_ANTS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
@@ -130,6 +129,8 @@ process REGISTRATION_ANTS {
 
     antsRegistrationSyNQuick.sh -h
     antsApplyTransforms -h
+    convert -h
+    scil_viz_volume_screenshot -h
 
     touch ${prefix}__t1_warped.nii.gz
     touch ${prefix}__output0GenericAffine.mat
@@ -139,6 +140,7 @@ process REGISTRATION_ANTS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
         imagemagick: \$(convert -version | grep "Version:" | sed -E 's/.*ImageMagick ([0-9.-]+).*/\\1/')
