@@ -1,5 +1,5 @@
 {
-    "rbx - base - no_atlas_folder": {
+    "rbx - download atlas - synthmorph registration": {
         "content": [
             {
                 "bundles": [
@@ -11,7 +11,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,2fbc09a51203e509d1a15a631168680e",
+                    "versions.yml:md5,a7e31b7279716126495bc494578461be",
                     "versions.yml:md5,afaf6c2953accc507d8777303eea8718"
                 ]
             }
@@ -20,6 +20,37 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-21T20:16:54.243026235"
+        "timestamp": "2025-09-24T04:08:08.946285268"
+    },
+    "rbx - download atlas - ants registration": {
+        "content": [
+            {
+                "bundles": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__AF_L_cleaned.trk"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__registration_ants_mqc.gif"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,40aa50ff3933b180cfb4512899515141",
+                    "versions.yml:md5,afaf6c2953accc507d8777303eea8718"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-24T04:06:48.347534304"
     }
 }

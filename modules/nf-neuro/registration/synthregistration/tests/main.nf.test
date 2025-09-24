@@ -45,10 +45,15 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    file(process.out.warped_image.get(0).get(1)).name,
-                    file(process.out.warp.get(0).get(1)).name,
-                    file(process.out.affine.get(0).get(1)).name,
-                    process.out.versions
+                    process.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
                 ).match() }
             )
         }
