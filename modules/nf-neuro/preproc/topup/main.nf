@@ -2,9 +2,7 @@ process PREPROC_TOPUP {
     tag "$meta.id"
     label 'process_medium'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        "https://scil.usherbrooke.ca/containers/scilus_latest.sif":
-        "scilus/scilus:19c87b72bcbc683fb827097dda7f917940fda123"}"
+    container "scilus/scilus:2.2.0"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(b0), path(rev_dwi), path(rev_bval), path(rev_bvec), path(rev_b0)
@@ -41,23 +39,23 @@ process PREPROC_TOPUP {
 
     if [[ -f "$b0" ]];
     then
-        scil_volume_math.py concatenate $b0 $b0 ${prefix}__concatenated_b0.nii.gz --data_type float32
-        scil_volume_math.py mean ${prefix}__concatenated_b0.nii.gz ${prefix}__b0_mean.nii.gz
+        scil_volume_math concatenate $b0 $b0 ${prefix}__concatenated_b0.nii.gz --data_type float32
+        scil_volume_math mean ${prefix}__concatenated_b0.nii.gz ${prefix}__b0_mean.nii.gz
     else
-        scil_dwi_extract_b0.py $dwi $bval $bvec ${prefix}__b0_mean.nii.gz --mean --b0_threshold $b0_thr_extract_b0 --skip_b0_check
+        scil_dwi_extract_b0 $dwi $bval $bvec ${prefix}__b0_mean.nii.gz --mean --b0_threshold $b0_thr_extract_b0 --skip_b0_check
     fi
 
     if [[ -f "$rev_b0" ]];
     then
-        scil_volume_math.py concatenate $rev_b0 $rev_b0 ${prefix}__concatenated_rev_b0.nii.gz --data_type float32
-        scil_volume_math.py mean ${prefix}__concatenated_rev_b0.nii.gz ${prefix}__rev_b0_mean.nii.gz
+        scil_volume_math concatenate $rev_b0 $rev_b0 ${prefix}__concatenated_rev_b0.nii.gz --data_type float32
+        scil_volume_math mean ${prefix}__concatenated_rev_b0.nii.gz ${prefix}__rev_b0_mean.nii.gz
     else
-        scil_dwi_extract_b0.py $rev_dwi $rev_bval $rev_bvec ${prefix}__rev_b0_mean.nii.gz --mean --b0_threshold $b0_thr_extract_b0 --skip_b0_check
+        scil_dwi_extract_b0 $rev_dwi $rev_bval $rev_bvec ${prefix}__rev_b0_mean.nii.gz --mean --b0_threshold $b0_thr_extract_b0 --skip_b0_check
     fi
 
     antsRegistrationSyNQuick.sh -d 3 -f ${prefix}__b0_mean.nii.gz -m ${prefix}__rev_b0_mean.nii.gz -o output -t r -e 1
     mv outputWarped.nii.gz ${prefix}__rev_b0_warped.nii.gz
-    scil_dwi_prepare_topup_command.py ${prefix}__b0_mean.nii.gz ${prefix}__rev_b0_warped.nii.gz\
+    scil_dwi_prepare_topup_command ${prefix}__b0_mean.nii.gz ${prefix}__rev_b0_warped.nii.gz\
         --config $config_topup\
         --encoding_direction $encoding\
         --readout $readout --out_prefix $prefix_topup\
@@ -81,10 +79,10 @@ process PREPROC_TOPUP {
         for image in b0_mean rev_b0_mean 0000 0001;
         do
             viz_params="--display_slice_number --display_lr --size 256 256"
-            scil_volume_math.py normalize_max ${prefix}__\${image}.nii.gz ${prefix}__\${image}_norm.nii.gz
-            scil_viz_volume_screenshot.py ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
-            scil_viz_volume_screenshot.py ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
-            scil_viz_volume_screenshot.py ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
+            scil_volume_math normalize_max ${prefix}__\${image}.nii.gz ${prefix}__\${image}_norm.nii.gz
+            scil_viz_volume_screenshot ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
+            scil_viz_volume_screenshot ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
+            scil_viz_volume_screenshot ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
 
             if [ \$image == "b0_mean" ] || [ \$image == "rev_b0_mean" ];
             then
@@ -114,7 +112,7 @@ process PREPROC_TOPUP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')
@@ -135,10 +133,10 @@ process PREPROC_TOPUP {
     }
     trap 'handle_code' ERR
 
-    scil_volume_math.py -h
-    scil_dwi_extract_b0.py -h
+    scil_volume_math -h
+    scil_dwi_extract_b0 -h
     antsRegistrationSyNQuick.sh
-    scil_dwi_prepare_topup_command.py -h
+    scil_dwi_prepare_topup_command -h
 
     touch ${prefix}__corrected_b0s.nii.gz
     touch ${prefix}__rev_b0_warped.nii.gz
@@ -151,7 +149,7 @@ process PREPROC_TOPUP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
         fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
         mrtrix: \$(mrinfo -version 2>&1 | grep "== mrinfo" | sed -E 's/== mrinfo ([0-9.]+).*/\\1/')

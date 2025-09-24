@@ -1,168 +1,45 @@
 {
-    "reconst - freewater_no_mask": {
-        "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    
-                ],
-                "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        "A_001.npy:md5,21363070a99f8b8e390f713642bdd580",
-                        "A_002.npy:md5,142af968949cc3a15766e3fe35be0bf6",
-                        "A_003.npy:md5,837697b75af5e2207151c0b8c5fe007b",
-                        "A_004.npy:md5,7bfdaf0b3ae6b2e25ec58b74edc3d87e",
-                        "A_005.npy:md5,994ce19ed55493bb96b7759a625b1891",
-                        "A_006.npy:md5,d100c9ee3b05b72a05b219a31dd3192f",
-                        "A_007.npy:md5,84d18ac92409ac364cc1b5809803e214",
-                        "A_008.npy:md5,5073410af3faf70a4ad8d011edb1bf1e",
-                        "A_009.npy:md5,0450dd684224c913794acf8534b12958",
-                        "A_010.npy:md5,6cd83ae58dd4b2b46239a4add9490d21",
-                        "A_011.npy:md5,11a85a7f246689c9f23022f9b1cd45a3"
-                    ]
-                ],
-                "6": [
-                    "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
-                ],
-                "dir": [
-                    
-                ],
-                "dwi_fw_corrected": [
-                    
-                ],
-                "fibervolume": [
-                    
-                ],
-                "fw": [
-                    
-                ],
-                "kernels": [
-                    [
-                        "A_001.npy:md5,21363070a99f8b8e390f713642bdd580",
-                        "A_002.npy:md5,142af968949cc3a15766e3fe35be0bf6",
-                        "A_003.npy:md5,837697b75af5e2207151c0b8c5fe007b",
-                        "A_004.npy:md5,7bfdaf0b3ae6b2e25ec58b74edc3d87e",
-                        "A_005.npy:md5,994ce19ed55493bb96b7759a625b1891",
-                        "A_006.npy:md5,d100c9ee3b05b72a05b219a31dd3192f",
-                        "A_007.npy:md5,84d18ac92409ac364cc1b5809803e214",
-                        "A_008.npy:md5,5073410af3faf70a4ad8d011edb1bf1e",
-                        "A_009.npy:md5,0450dd684224c913794acf8534b12958",
-                        "A_010.npy:md5,6cd83ae58dd4b2b46239a4add9490d21",
-                        "A_011.npy:md5,11a85a7f246689c9f23022f9b1cd45a3"
-                    ]
-                ],
-                "nrmse": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
-        },
-        "timestamp": "2025-06-04T03:07:01.063522624"
-    },
     "reconst - freewater - stub-run": {
         "content": [
             [
-                "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
+                "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-05-30T18:36:13.693510804"
+        "timestamp": "2025-09-23T18:05:08.029531192"
     },
-    "reconst - freewater": {
+    "reconst - freewater_no_mask_compute_only": {
         "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    
-                ],
-                "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        "A_001.npy:md5,21363070a99f8b8e390f713642bdd580",
-                        "A_002.npy:md5,142af968949cc3a15766e3fe35be0bf6",
-                        "A_003.npy:md5,837697b75af5e2207151c0b8c5fe007b",
-                        "A_004.npy:md5,7bfdaf0b3ae6b2e25ec58b74edc3d87e",
-                        "A_005.npy:md5,994ce19ed55493bb96b7759a625b1891",
-                        "A_006.npy:md5,d100c9ee3b05b72a05b219a31dd3192f",
-                        "A_007.npy:md5,84d18ac92409ac364cc1b5809803e214",
-                        "A_008.npy:md5,5073410af3faf70a4ad8d011edb1bf1e",
-                        "A_009.npy:md5,0450dd684224c913794acf8534b12958",
-                        "A_010.npy:md5,6cd83ae58dd4b2b46239a4add9490d21",
-                        "A_011.npy:md5,11a85a7f246689c9f23022f9b1cd45a3"
-                    ]
-                ],
-                "6": [
-                    "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
-                ],
-                "dir": [
-                    
-                ],
-                "dwi_fw_corrected": [
-                    
-                ],
-                "fibervolume": [
-                    
-                ],
-                "fw": [
-                    
-                ],
-                "kernels": [
-                    [
-                        "A_001.npy:md5,21363070a99f8b8e390f713642bdd580",
-                        "A_002.npy:md5,142af968949cc3a15766e3fe35be0bf6",
-                        "A_003.npy:md5,837697b75af5e2207151c0b8c5fe007b",
-                        "A_004.npy:md5,7bfdaf0b3ae6b2e25ec58b74edc3d87e",
-                        "A_005.npy:md5,994ce19ed55493bb96b7759a625b1891",
-                        "A_006.npy:md5,d100c9ee3b05b72a05b219a31dd3192f",
-                        "A_007.npy:md5,84d18ac92409ac364cc1b5809803e214",
-                        "A_008.npy:md5,5073410af3faf70a4ad8d011edb1bf1e",
-                        "A_009.npy:md5,0450dd684224c913794acf8534b12958",
-                        "A_010.npy:md5,6cd83ae58dd4b2b46239a4add9490d21",
-                        "A_011.npy:md5,11a85a7f246689c9f23022f9b1cd45a3"
-                    ]
-                ],
-                "nrmse": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,8c5d0f921a9f4a719aa37c7a45699960"
-                ]
-            }
+            [
+                "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
+            ],
+            11
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.3"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-06-04T03:04:53.630167199"
+        "timestamp": "2025-09-23T18:54:46.117963036"
+    },
+    "reconst - freewater": {
+        "content": [
+            [
+                "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
+            ],
+            11,
+            "test__dwi_fw_corrected.nii.gz",
+            "test__dir.nii.gz:md5:header,cdd1570ac5fe51b109eea3de58e196ae,data,13fca38aa5e4f153cb0a106814180d0b",
+            "test__FiberVolume.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,9aaac504776670be80de379990415fac",
+            "test__FW.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,f9e560e89999812ba4205a85019bd612",
+            "test__NRMSE.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,b7cca4f00472537b44abcbdb831ca6cb"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-24T01:00:13.785472199"
     }
 }
