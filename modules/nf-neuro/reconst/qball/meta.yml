@@ -81,6 +81,18 @@ input:
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
+  qball:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__qball.nii.gz":
+          type: file
+          description: Qball spherical harmonics coefficients.
+          pattern: "*__qball.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   gfa:
     - - meta:
           type: map
@@ -117,18 +129,6 @@ output:
           pattern: "*__peak_indices.{nii,nii.gz}"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NI
-  qball:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'test', single_end:false ]`
-      - "*__qball.nii.gz":
-          type: file
-          description: Qball spherical harmonics coefficients.
-          pattern: "*__qball.{nii,nii.gz}"
-          ontologies:
-            - edam: http://edamontology.org/format_4001 # NIFTI format
   nufo:
     - - meta:
           type: map
