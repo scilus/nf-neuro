@@ -56,7 +56,6 @@
                 "15": [
                     "versions.yml:md5,38152ddd7c01b5fd3de1459bc58f46a7",
                     "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
-                    "versions.yml:md5,6610a2be8c244e00591e6dc991c68eb9",
                     "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
                     "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
                     "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
@@ -211,7 +210,6 @@
                 "versions": [
                     "versions.yml:md5,38152ddd7c01b5fd3de1459bc58f46a7",
                     "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
-                    "versions.yml:md5,6610a2be8c244e00591e6dc991c68eb9",
                     "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
                     "versions.yml:md5,93c0e24a9ad11bf0a54332937c621c5b",
                     "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
@@ -222,7 +220,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-24T16:47:44.036451204"
+        "timestamp": "2025-09-25T14:12:03.70610205"
     },
     "tractometry_without_centroids": {
         "content": [
@@ -445,6 +443,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-24T16:49:41.585054645"
+        "timestamp": "2025-09-25T14:08:23.515036148"
     }
 }

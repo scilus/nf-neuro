@@ -19,12 +19,10 @@ main:
 
     ch_versions = Channel.empty()
 
-    // Remove invalid streamlines from bundles
     TRACTOGRAM_REMOVEINVALID( ch_bundles )
     ch_versions = ch_versions.mix( TRACTOGRAM_REMOVEINVALID.out.versions.first() )
     ch_bundle_cleaned = TRACTOGRAM_REMOVEINVALID.out.tractograms
 
-    // Combine bundles with FODF channel
     ch_fixel = ch_bundle_cleaned
         .combine( ch_fodf )
         .filter { bundle, fodf -> bundle && fodf }
@@ -36,28 +34,34 @@ main:
         .join( ch_fixelafd, remainder: true )
         .map { [ it[0], it[1], it[2] ?: [] ] }
 
-    // TRACTOGRAM_RESAMPLE si centroids présents
-    TRACTOGRAM_RESAMPLE(ch_centroids)
+    ch_centroids.view { "centroids: $it" }
+
+    ch_bundles_centroids = ch_bundle_cleaned
+        .join( ch_centroids, remainder: true )
+        .map { [ it[0], it[1], it[2] ?: [] ] }
+
+    ch_centroids_only = ch_bundles_centroids
+        .filter { it[2].size() > 0 }
+        .map { [ it[0], it[2] ] }
+
+    ch_bundles_for_centroids = ch_bundles_centroids
+        .filter { it[2].size() == 0 }
+        .map { [ it[0], it[1] ] }
+
+    TRACTOGRAM_RESAMPLE(ch_centroids_only)
     ch_versions = ch_versions.mix(TRACTOGRAM_RESAMPLE.out.versions.first())
     ch_centroids_cleaned_from_input = TRACTOGRAM_RESAMPLE.out.tractograms
 
-    // BUNDLE_CENTROID si centroids absents
-    BUNDLE_CENTROID(ch_bundle_cleaned)
-    ch_centroids_cleaned_from_generate = BUNDLE_CENTROID.out.centroids
+    BUNDLE_CENTROID(ch_bundles_for_centroids)
     ch_versions = ch_versions.mix(BUNDLE_CENTROID.out.versions.first())
-
-    // Merge des deux sorties (une seule sera alimentée)
+    ch_centroids_cleaned_from_generate = BUNDLE_CENTROID.out.centroids
     ch_centroids_cleaned = ch_centroids_cleaned_from_input.mix(ch_centroids_cleaned_from_generate)
-
-    // Join final
     ch_label_map = ch_bundle_cleaned.join(ch_centroids_cleaned)
 
     BUNDLE_LABELMAP ( ch_label_map )
     ch_versions = ch_versions.mix(BUNDLE_LABELMAP.out.versions.first())
     ch_labels_trk = BUNDLE_LABELMAP.out.labels_trk
         .join( ch_centroids_cleaned )
-
-    ch_labels_trk.view { "✅ label trk: $it" }
 
     BUNDLE_UNIFORMIZE ( ch_labels_trk )
     ch_versions = ch_versions.mix(BUNDLE_UNIFORMIZE.out.versions.first())
