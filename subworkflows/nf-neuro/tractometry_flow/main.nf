@@ -34,8 +34,6 @@ main:
         .join( ch_fixelafd, remainder: true )
         .map { [ it[0], it[1], it[2] ?: [] ] }
 
-    ch_centroids.view { "centroids: $it" }
-
     ch_bundles_centroids = ch_bundle_cleaned
         .join( ch_centroids, remainder: true )
         .map { [ it[0], it[1], it[2] ?: [] ] }
