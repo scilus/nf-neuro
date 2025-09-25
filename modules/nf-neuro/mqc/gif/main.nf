@@ -38,17 +38,17 @@ process MQC_GIF {
             coronal_dim=\$((\$coronal_dim / 2))
             axial_dim=\$((\$axial_dim / 2))
 
-            mrconvert \${image} \${image} -stride -1,2,3 -force
+            basename=\$(basename \$image .nii.gz)
+            mrconvert \${image} \${basename}_for_viz.nii.gz -stride -1,2,3 -force
 
             # Set viz params.
             viz_params="--display_slice_number --display_lr --size 256 256"
 
-            basename=\$(basename \$image .nii.gz)
-            scil_viz_volume_screenshot \$image \${basename}_coronal.png \
+            scil_viz_volume_screenshot \${basename}_for_viz.nii.gz \${basename}_coronal.png \
                 --slices \$coronal_dim --axis coronal \$viz_params
-            scil_viz_volume_screenshot \$image \${basename}_sagittal.png \
+            scil_viz_volume_screenshot \${basename}_for_viz.nii.gz \${basename}_sagittal.png \
                 --slices \$sagittal_dim --axis sagittal \$viz_params
-            scil_viz_volume_screenshot \$image \${basename}_axial.png \
+            scil_viz_volume_screenshot \${basename}_for_viz.nii.gz \${basename}_axial.png \
                 --slices \$axial_dim --axis axial \$viz_params
             if [ \$image = $image1 ];
             then
