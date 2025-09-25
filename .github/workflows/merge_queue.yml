@@ -6,11 +6,6 @@ on:
     branches:
       - main
 
-# Cancel if a newer run is started
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   check-conditions:
     runs-on: ubuntu-latest

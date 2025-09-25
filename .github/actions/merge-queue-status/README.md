@@ -46,6 +46,8 @@ Runs checks if either of :
 
 **Detection Method:** The action examines the most recent `synchronize` or `head_ref_force_pushed` event in the PR timeline. If this event was created by `github-merge-queue[bot]`, we know the merge queue just acted on the PR and checks should run. Otherwise, we check the status of the last workflow run.
 
+**Head Ref Format:** In merge queue events, the `head_ref` follows the format `refs/heads/gh-readonly-queue/main/pr-{number}-{sha}`, from which the PR number is extracted.
+
 ### Advanced Usage with Custom Parameters
 
 ```yaml
