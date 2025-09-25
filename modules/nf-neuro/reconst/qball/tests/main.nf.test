@@ -60,7 +60,7 @@ nextflow_process {
                     niftiMD5SUM(process.out.gfa.get(0).get(1), 6),
                     file(process.out.peaks.get(0).get(1)).name,
                     file(process.out.peak_indices.get(0).get(1)).name,
-                    niftiMD5SUM(process.out.sh.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.qball.get(0).get(1), 6),
                     niftiMD5SUM(process.out.nufo.get(0).get(1), 6),
                     niftiMD5SUM(process.out.a_power.get(0).get(1), 6),
                     process.out.versions

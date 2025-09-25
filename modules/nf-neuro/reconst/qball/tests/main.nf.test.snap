@@ -1,12 +1,12 @@
 {
     "reconst - qball_csa": {
         "content": [
-            "test__gfa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,776c03e1654897b87c29b9f940a255ca",
+            "test__gfa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,9aae9f383d12ea7a163997474ff6ece5",
             "test__peaks.nii.gz",
             "test__peak_indices.nii.gz",
-            "test__sh.nii.gz:md5:header,76a9953111f97786bd14a451c61529e7,data,bdd9a72f76558900d2750f3e88116bab",
-            "test__nufo.nii.gz:md5:header,ccd78a751ac6eddb4cc7e037e1c82a41,data,0c6a62153a737d93bbe86d86b418adbb",
-            "test__a_power.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,d6b4b3f81f9b7f15e6f8de4a4441d563",
+            "test__qball.nii.gz:md5:header,f279e7e8aedcf1d5a9b1fc181ee813cb,data,fb670dad2dd2cf1019b66f0b660334d3",
+            "test__nufo.nii.gz:md5:header,ccd78a751ac6eddb4cc7e037e1c82a41,data,7876c3df857741d222f366d9dcd18bb2",
+            "test__a_power.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,283381fc7b99bc2b7f6ba87a95f5950a",
             [
                 "versions.yml:md5,467924bf83804809033ee79becb0af51"
             ]
@@ -15,11 +15,11 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-22T03:40:39.803464351"
+        "timestamp": "2025-09-25T15:33:21.601263337"
     },
     "reconst - qball_gfa": {
         "content": [
-            "test__gfa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,776c03e1654897b87c29b9f940a255ca",
+            "test__gfa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,9aae9f383d12ea7a163997474ff6ece5",
             [
                 "versions.yml:md5,467924bf83804809033ee79becb0af51"
             ]
@@ -28,7 +28,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-22T02:58:44.76992447"
+        "timestamp": "2025-09-25T15:30:55.372130125"
     },
     "reconst - stub-run qball": {
         "content": [
