@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,f593a3a81a06f02aaa1ba17ba0baccfd"
+                    "versions.yml:md5,2ae2adf670d0bb7b1305cb119e1b86d2"
                 ],
                 "tractograms": [
                     [
@@ -24,40 +24,40 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,f593a3a81a06f02aaa1ba17ba0baccfd"
+                    "versions.yml:md5,2ae2adf670d0bb7b1305cb119e1b86d2"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-05-22T11:23:01.440528"
+        "timestamp": "2025-09-23T00:32:56.997650605"
     },
     "tractogram - resample - tractogram": {
         "content": [
             [
-                "versions.yml:md5,f593a3a81a06f02aaa1ba17ba0baccfd"
+                "versions.yml:md5,2ae2adf670d0bb7b1305cb119e1b86d2"
             ],
             "test_IFGWM_color_resampled.trk",
             "test_IFGWM_resampled.trk"
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.1"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-05-22T16:20:10.024974"
+        "timestamp": "2025-09-23T00:49:12.243663019"
     },
     "tractogram - resample - stub-run": {
         "content": [
             [
-                "versions.yml:md5,f593a3a81a06f02aaa1ba17ba0baccfd"
+                "versions.yml:md5,2ae2adf670d0bb7b1305cb119e1b86d2"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-05-30T18:58:46.051639016"
+        "timestamp": "2025-09-23T00:33:10.587137954"
     }
 }

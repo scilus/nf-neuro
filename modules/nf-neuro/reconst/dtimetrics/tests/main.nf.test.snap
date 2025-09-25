@@ -2,7 +2,7 @@
     "reconst - stub-run dtimetrics": {
         "content": [
             [
-                "versions.yml:md5,5ef369741c0802b8d5f2e91bf5bedcc8"
+                "versions.yml:md5,c27db7a9cddfc55690728e5684c81a20"
             ]
         ],
         "meta": {
@@ -15,7 +15,7 @@
         "content": [
             "test__fa.nii.gz:md5:header,c9e720b9a8acfe45a617e6486ebb8de0,data,cd80bf54bc8529c97cb042d49c50d4fc",
             [
-                "versions.yml:md5,5ef369741c0802b8d5f2e91bf5bedcc8"
+                "versions.yml:md5,c27db7a9cddfc55690728e5684c81a20"
             ]
         ],
         "meta": {
@@ -97,7 +97,7 @@
                 ]
             ],
             [
-                "versions.yml:md5,5ef369741c0802b8d5f2e91bf5bedcc8"
+                "versions.yml:md5,c27db7a9cddfc55690728e5684c81a20"
             ]
         ],
         "meta": {

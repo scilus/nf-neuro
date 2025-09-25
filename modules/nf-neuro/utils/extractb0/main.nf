@@ -2,9 +2,7 @@ process UTILS_EXTRACTB0 {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
     tuple val(meta), path(dwi), path(bval), path(bvec)
@@ -26,12 +24,12 @@ process UTILS_EXTRACTB0 {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    scil_dwi_extract_b0.py $dwi $bval $bvec ${prefix}_b0.nii.gz \
+    scil_dwi_extract_b0 $dwi $bval $bvec ${prefix}_b0.nii.gz \
         $output_series $extraction_strategy $b0_threshold --skip_b0_check
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.1
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -40,13 +38,13 @@ process UTILS_EXTRACTB0 {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_dwi_extract_b0.py -h
+    scil_dwi_extract_b0 -h
 
     touch ${prefix}_b0.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.1
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

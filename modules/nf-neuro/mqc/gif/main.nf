@@ -38,15 +38,17 @@ process MQC_GIF {
             coronal_dim=\$((\$coronal_dim / 2))
             axial_dim=\$((\$axial_dim / 2))
 
+            basename=\$(basename \$image .nii.gz)
+            mrconvert \${image} \${basename}_for_viz.nii.gz -stride -1,2,3 -force
+
             # Set viz params.
             viz_params="--display_slice_number --display_lr --size 256 256"
 
-            basename=\$(basename \$image .nii.gz)
-            scil_viz_volume_screenshot \$image \${basename}_coronal.png \
+            scil_viz_volume_screenshot \${basename}_for_viz.nii.gz \${basename}_coronal.png \
                 --slices \$coronal_dim --axis coronal \$viz_params
-            scil_viz_volume_screenshot \$image \${basename}_sagittal.png \
+            scil_viz_volume_screenshot \${basename}_for_viz.nii.gz \${basename}_sagittal.png \
                 --slices \$sagittal_dim --axis sagittal \$viz_params
-            scil_viz_volume_screenshot \$image \${basename}_axial.png \
+            scil_viz_volume_screenshot \${basename}_for_viz.nii.gz \${basename}_axial.png \
                 --slices \$axial_dim --axis axial \$viz_params
             if [ \$image = $image1 ];
             then
@@ -78,6 +80,8 @@ process MQC_GIF {
         echo "Dimension de l'image : \$dim"
         echo "Tailles des dimensions : \$extract_dim"
 
+        mrconvert $image1 base_image_viz.nii.gz -stride -1,2,3 -force
+
         if [ "\$dim" == 3 ]; then
             echo "Error: If you only use one input, it must be in 4D to create the gif." >&2
             exit 1
@@ -92,7 +96,7 @@ process MQC_GIF {
 
             for ((slice=0; slice<\$forth_dim; slice++)); do
                 echo "Slice : \$slice"
-                mrconvert $image1 -coord 3 \${slice} -axes 0,1,2 image.nii.gz -force
+                mrconvert base_image_viz.nii.gz -coord 3 \${slice} -axes 0,1,2 image.nii.gz -force
 
                 scil_viz_volume_screenshot image.nii.gz \${basename}_coronal.png \
                     --slices \$coronal_dim --axis coronal \$viz_params

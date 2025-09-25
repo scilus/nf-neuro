@@ -2,9 +2,7 @@ process TRACTOGRAM_REMOVEINVALID {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container "scilus/scilpy:2.2.0_cpu"
 
     input:
         tuple val(meta), path(tractogram)
@@ -20,7 +18,6 @@ process TRACTOGRAM_REMOVEINVALID {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.suffix ? "_${task.ext.suffix}" : ""
 
-    def force = task.ext.force ? "-f" : ""
     def cut_invalid = task.ext.cut_invalid ? "--cut_invalid" : ""
     def remove_single_point = task.ext.remove_single_point ? "--remove_single_point" : ""
     def remove_overlapping_points = task.ext.remove_overlapping_points ? "--remove_overlapping_points" : ""
@@ -33,19 +30,17 @@ process TRACTOGRAM_REMOVEINVALID {
         ext=\${tractogram#*.}
         bname=\$(basename \${tractogram} .\${ext})
 
-        scil_tractogram_remove_invalid.py \$tractogram ${prefix}__\${bname}${suffix}.\${ext}\
+        scil_tractogram_remove_invalid \$tractogram ${prefix}__\${bname}${suffix}.\${ext}\
                         $cut_invalid\
                         $remove_single_point\
                         $remove_overlapping_points\
                         $threshold\
-                        $no_empty\
-                        $force
-
+                        $no_empty -f
     done
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -54,7 +49,7 @@ process TRACTOGRAM_REMOVEINVALID {
     def suffix = task.ext.suffix ? "_${task.ext.suffix}" : ""
 
     """
-    scil_tractogram_remove_invalid.py -h
+    scil_tractogram_remove_invalid -h
 
     for tractogram in ${tractogram};
         do \
@@ -66,7 +61,7 @@ process TRACTOGRAM_REMOVEINVALID {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

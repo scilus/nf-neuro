@@ -1,0 +1,177 @@
+name: "Merge Queue Status Check"
+description: "Determines if checks should run in a merge queue based on PR status and base SHA changes"
+author: "nf-neuro team"
+
+inputs:
+  token:
+    description: "GitHub token for API access"
+    required: true
+    default: ${{ github.token }}
+  merge-group-event:
+    description: "The complete merge_group event payload as JSON"
+    required: true
+  pr-workflow-path:
+    description: "Path to the PR workflow file (e.g., .github/workflows/update_pr.yml)"
+    required: false
+    default: ".github/workflows/update_pr.yml"
+  checks-job-name:
+    description: "Name of the checks job to monitor"
+    required: false
+    default: "checks / status"
+
+outputs:
+  should-run-checks:
+    description: "Whether checks should be run (true/false)"
+    value: ${{ steps.determine.outputs.should_run_checks }}
+  reason:
+    description: "Reason for the decision"
+    value: ${{ steps.determine.outputs.reason }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Extract PR number from merge group
+      id: extract-pr-number
+      shell: bash
+      run: |
+        # Extract PR number from the merge queue head_ref
+        # Format: refs/heads/gh-readonly-queue/main/pr-123-<sha>
+        MERGE_GROUP_EVENT='${{ inputs.merge-group-event }}'
+        HEAD_REF=$(echo "$MERGE_GROUP_EVENT" | jq -r '.head_ref')
+        PR_NUMBER=$(echo "$HEAD_REF" | sed -n 's|^refs/heads/gh-readonly-queue/.*/pr-\([0-9]*\)-.*|\1|p')
+        echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
+    - name: Extract last workflow run status
+      id: extract-workflow-status
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.token }}
+        script: |
+          const prNumber = '${{ steps.extract-pr-number.outputs.pr_number }}';
+          const checksJobName = '${{ inputs.checks-job-name }}';
+
+          // Get PR details
+          const { data: pr } = await github.rest.pulls.get({
+            owner: 'scilus',
+            repo: 'nf-neuro',
+            pull_number: prNumber
+          });
+
+          // Get all workflow runs associated to PR's branch, sorted by most recently created
+          const workflowRuns = await github.paginate(
+            github.rest.actions.listWorkflowRunsForRepo.endpoint.merge({
+              owner: 'scilus',
+              repo: 'nf-neuro',
+              event: 'pull_request',
+              branch: pr.head.ref,
+              per_page: 100
+            })
+          );
+
+          try {
+            const latestRun = workflowRuns[0];
+
+            // Get jobs for the latest workflow run
+            const jobs = await github.paginate(
+              github.rest.actions.listJobsForWorkflowRun.endpoint.merge({
+                owner: 'scilus',
+                repo: 'nf-neuro',
+                run_id: latestRun.id,
+                per_page: 100
+              })
+            );
+
+            // Find the checks job by name and parse its status
+            const checksJob = jobs.find(job => job.name === checksJobName);
+
+            if (checksJob) {
+              checksJobStatus = checksJob.conclusion || checksJob.status;
+              hasFailedChecksJob = checksJob.conclusion === 'failure' ||
+                                  checksJob.conclusion === 'cancelled' ||
+                                  checksJob.conclusion === 'timed_out';
+
+              return { shouldRun: hasFailedChecksJob, reason: hasFailedChecksJob ? `${checksJobName} job ${checksJobStatus}` : 'Checks job passed' };
+            } else {
+              // Checks job supplied was not found in the latest run, so we should run checks
+              return { shouldRun: true, reason: `${checksJobName} job not found in latest run` };
+            }
+          } catch (error) {
+            // No workflow runs found, meaning we need to run checks
+            return { shouldRun: true, reason: 'No workflow runs found for PR' };
+          }
+
+    - name: Extract merge queue effect on PR
+      id: extract-merge-queue-effect
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.token }}
+        script: |
+          const prNumber = '${{ steps.extract-pr-number.outputs.pr_number }}';
+
+          // Get all events associated to the PR, sorted by most recently created
+          const events = await github.paginate(
+            github.rest.issues.listEventsForTimeline.endpoint.merge({
+              owner: 'scilus',
+              repo: 'nf-neuro',
+              issue_number: prNumber,
+              per_page: 100
+            })
+          );
+
+          try {
+            // Find last event that synchronized or force-pushed the PR
+            const lastSyncEvent = events.find(event => (
+              event.event === 'head_ref_force_pushed' ||
+              event.event === 'synchronize'
+            ))[0];
+
+            // If this last event is from the merge queue bot, we consider that the queue updated the PR
+            if (lastSyncEvent && lastSyncEvent.actor.login === 'github-merge-queue[bot]') {
+              return { shouldRun: true, reason: 'Most recent PR event was from merge queue bot' };
+            } else {
+              return { shouldRun: false, reason: 'No recent merge queue activity' };
+            }
+          } catch (error) {
+            // No events found, meaning we don't need to run checks here
+            return { shouldRun: false, reason: `No synchronisation or force push events found, no need to run checks` };
+          }
+
+    - name: Set outputs
+      id: determine
+      shell: bash
+      run: |
+        WORKFLOW_STATUS='${{ steps.extract-workflow-status.outputs.result }}'
+        MERGE_QUEUE_EFFECT='${{ steps.extract-merge-queue-effect.outputs.result }}'
+
+        # Extract shouldRun from both statuses
+        WORKFLOW_SHOULD_RUN=$(echo "$WORKFLOW_STATUS" | jq -r '.shouldRun')
+        MQ_SHOULD_RUN=$(echo "$MERGE_QUEUE_EFFECT" | jq -r '.shouldRun')
+        echo "Should run : Workflow=$WORKFLOW_SHOULD_RUN, Merge Queue=$MQ_SHOULD_RUN"
+        SHOULD_RUN=$([[ "$WORKFLOW_SHOULD_RUN" = "true" || "$MQ_SHOULD_RUN" = "true" ]] && echo "true" || echo "false")
+        echo "should_run_checks=$SHOULD_RUN" >> $GITHUB_OUTPUT
+
+        # Extract reason only if shouldRun is true for the specific status
+        REASON=()
+        if [ "$WORKFLOW_SHOULD_RUN" == "true" ]; then
+          REASON1=$(echo "$WORKFLOW_STATUS" | jq -r '.reason')
+          REASON+=("$REASON1")
+        fi
+        if [ "$MQ_SHOULD_RUN" == "true" ]; then
+          REASON2=$(echo "$MERGE_QUEUE_EFFECT" | jq -r '.reason')
+          REASON+=("$REASON2")
+        fi
+        REASON=$(IFS='; '; echo "${REASON[*]}")
+
+        echo "REASON: $REASON"
+        # Merge reasons from both checks
+        echo "reason=\"$REASON\"" >> $GITHUB_OUTPUT
+
+        if [[ "$SHOULD_RUN" == "true" ]]; then
+          echo "✅ Should run checks: $REASON"
+        else
+          echo "⏭️ Should skip checks: $REASON"
+        fi
+
+branding:
+  icon: "git-merge"
+  color: "blue"

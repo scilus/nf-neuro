@@ -68,15 +68,18 @@ process PREPROC_TOPUP {
     if $run_qc;
     then
         extract_dim=\$(mrinfo ${prefix}__b0_mean.nii.gz -size)
-        read sagittal_dim axial_dim coronal_dim <<< "\${extract_dim}"
+        mrconvert ${prefix}__b0_mean.nii.gz ${prefix}__b0_mean_viz.nii.gz -stride -1,2,3
+        mrconvert ${prefix}__rev_b0_mean.nii.gz ${prefix}__rev_b0_mean_viz.nii.gz -stride -1,2,3
+        mrconvert ${prefix}__corrected_b0s.nii.gz ${prefix}__corrected_b0s_viz.nii.gz -stride -1,2,3
 
         # Get the middle slice
+        read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
         coronal_dim=\$((\$coronal_dim / 2))
         axial_dim=\$((\$axial_dim / 2))
         sagittal_dim=\$((\$sagittal_dim / 2))
 
-        fslsplit ${prefix}__corrected_b0s.nii.gz ${prefix}__ -t
-        for image in b0_mean rev_b0_mean 0000 0001;
+        fslsplit ${prefix}__corrected_b0s_viz.nii.gz ${prefix}__ -t
+        for image in b0_mean_viz rev_b0_mean_viz 0000 0001;
         do
             viz_params="--display_slice_number --display_lr --size 256 256"
             scil_volume_math normalize_max ${prefix}__\${image}.nii.gz ${prefix}__\${image}_norm.nii.gz
@@ -84,7 +87,7 @@ process PREPROC_TOPUP {
             scil_viz_volume_screenshot ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
             scil_viz_volume_screenshot ${prefix}__\${image}_norm.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
 
-            if [ \$image == "b0_mean" ] || [ \$image == "rev_b0_mean" ];
+            if [ \$image == "b0_mean_viz" ] || [ \$image == "rev_b0_mean_viz" ];
             then
                 title="Before"
             else
@@ -99,11 +102,11 @@ process PREPROC_TOPUP {
         done
 
         convert -delay 10 -loop 0 -morph 10 \
-                ${prefix}__b0_mean.png ${prefix}__0000.png ${prefix}__b0_mean.png \
+                ${prefix}__b0_mean_viz.png ${prefix}__0000.png ${prefix}__b0_mean_viz.png \
                 ${prefix}__b0_topup_mqc.gif
 
         convert  -delay 10 -loop 0 -morph 10 \
-                ${prefix}__rev_b0_mean.png ${prefix}__0001.png ${prefix}__rev_b0_mean.png \
+                ${prefix}__rev_b0_mean_viz.png ${prefix}__0001.png ${prefix}__rev_b0_mean_viz.png \
                 ${prefix}__rev_b0_topup_mqc.gif
     fi
 

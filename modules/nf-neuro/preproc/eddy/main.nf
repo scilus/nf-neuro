@@ -129,9 +129,10 @@ process PREPROC_EDDY {
 
         for image in dwi_corrected dwi \${rev_dwi}
         do
-            scil_viz_volume_screenshot ${prefix}__\${image}_powder_average_norm.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
-            scil_viz_volume_screenshot ${prefix}__\${image}_powder_average_norm.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
-            scil_viz_volume_screenshot ${prefix}__\${image}_powder_average_norm.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
+            mrconvert ${prefix}__\${image}_powder_average_norm.nii.gz ${prefix}__\${image}_powder_average_norm_viz.nii.gz -stride -1,2,3
+            scil_viz_volume_screenshot ${prefix}__\${image}_powder_average_norm_viz.nii.gz ${prefix}__\${image}_coronal.png \${viz_params} --slices \${coronal_dim} --axis coronal
+            scil_viz_volume_screenshot ${prefix}__\${image}_powder_average_norm_viz.nii.gz ${prefix}__\${image}_axial.png \${viz_params} --slices \${axial_dim} --axis axial
+            scil_viz_volume_screenshot ${prefix}__\${image}_powder_average_norm_viz.nii.gz ${prefix}__\${image}_sagittal.png \${viz_params} --slices \${sagittal_dim} --axis sagittal
 
             if [ \$image == "dwi_corrected" ] || [ \$image == "rev_dwi" ]
             then

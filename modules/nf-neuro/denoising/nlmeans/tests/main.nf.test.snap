@@ -7,41 +7,47 @@
                         {
                             "id": "test"
                         },
-                        "test__denoised.nii.gz:md5,4f679ca8c49a82ad566a814a819c6117"
+                        "test__denoised.nii.gz:md5,4443314c19646ac7ae866ff1947cb665"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,9336a0abe0f0c988b89f895943b0a153"
+                    
+                ],
+                "2": [
+                    "versions.yml:md5,ceabc00e745975c884a5ab0b435c93db"
                 ],
                 "image": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__denoised.nii.gz:md5,4f679ca8c49a82ad566a814a819c6117"
+                        "test__denoised.nii.gz:md5,4443314c19646ac7ae866ff1947cb665"
                     ]
                 ],
+                "piesno_mask": [
+                    
+                ],
                 "versions": [
-                    "versions.yml:md5,9336a0abe0f0c988b89f895943b0a153"
+                    "versions.yml:md5,ceabc00e745975c884a5ab0b435c93db"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.0"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2024-11-05T18:28:29.498709866"
+        "timestamp": "2025-09-24T18:48:04.703922151"
     },
     "denoising - nlmeans - stub-run": {
         "content": [
             [
-                "versions.yml:md5,9336a0abe0f0c988b89f895943b0a153"
+                "versions.yml:md5,ceabc00e745975c884a5ab0b435c93db"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-05-30T18:21:46.960492646"
+        "timestamp": "2025-09-24T18:52:31.125489656"
     }
 }

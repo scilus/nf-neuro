@@ -49,6 +49,7 @@ nextflow_process {
                 }
                 input[0] = ch_b0
                     .join(ch_mask)
+                    .map{ it + [[]] }
                 """
             }
         }
@@ -87,6 +88,7 @@ nextflow_process {
                 }
                 input[0] = ch_b0
                     .join(ch_mask)
+                    .map{ it + [[]] }
                 """
             }
         }
