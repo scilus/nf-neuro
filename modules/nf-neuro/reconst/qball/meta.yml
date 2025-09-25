@@ -15,7 +15,7 @@ args:
   - b0_threshold:
       type: integer
       description: "Threshold for the b0 mask."
-      default: 0
+      default: 20
   - use_qball:
       type: boolean
       description: "If set, qball will be used as the odf reconstruction model instead of CSA."
@@ -23,27 +23,31 @@ args:
   - gfa:
       type: boolean
       description: "Compute the generalized fractional anisotropy."
-      default: true
+      default: false
   - peaks:
       type: boolean
       description: "Compute the peaks."
-      default: true
+      default: false
   - peaks_indices:
       type: boolean
       description: "Compute the peaks indices on the sphere."
-      default: true
-  - sh:
+      default: false
+  - qball:
       type: boolean
-      description: "Compute the spherical harmonics."
-      default: true
+      description: "Compute the qball spherical harmonics."
+      default: false
   - nufo:
       type: boolean
       description: "Compute the NUFO."
-      default: true
+      default: false
   - a_power:
       type: boolean
       description: "Compute the anisotropy power."
-      default: true
+      default: false
+  - sh_order:
+      type: integer
+      description: "Spherical harmonics order. Must be a positive even number."
+      default: 4
 input:
   - - meta:
         type: map
@@ -77,6 +81,18 @@ input:
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
+  qball:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__qball.nii.gz":
+          type: file
+          description: Qball spherical harmonics coefficients.
+          pattern: "*__qball.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   gfa:
     - - meta:
           type: map
@@ -113,18 +129,6 @@ output:
           pattern: "*__peak_indices.{nii,nii.gz}"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NI
-  sh:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'test', single_end:false ]`
-      - "*__sh.nii.gz":
-          type: file
-          description: Spherical harmonics coefficients.
-          pattern: "*__sh.{nii,nii.gz}"
-          ontologies:
-            - edam: http://edamontology.org/format_4001 # NIFTI format
   nufo:
     - - meta:
           type: map
