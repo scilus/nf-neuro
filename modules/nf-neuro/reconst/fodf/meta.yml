@@ -47,9 +47,9 @@ args:
         above min_fodf_shell_value will be used.
       default: None
   - sh_order:
-        type: integer
-        description: Spherical harmonics order to use for FODF fitting.
-        default: None
+      type: integer
+      description: Spherical harmonics order to use for FODF fitting.
+      default: None
   - sh_basis:
       type: string
       description: Spherical harmonics basis to use for FODF fitting.
