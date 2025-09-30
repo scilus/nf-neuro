@@ -2,14 +2,14 @@
     "betcrop - fslbetcrop - stub-run": {
         "content": [
             [
-                "versions.yml:md5,f7a713e92a5e0bc8cd501c8fe383eebc"
+                "versions.yml:md5,dc971e6f976ef949f2cf565392f3600e"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T05:09:39.813502057"
+        "timestamp": "2025-09-30T13:29:28.969954"
     },
     "betcrop - fslbetcrop - dwi": {
         "content": [
@@ -42,7 +42,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
                 ],
                 "bbox": [
                     [
@@ -72,15 +72,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T05:05:49.020085474"
+        "timestamp": "2025-09-30T13:27:23.817381"
     },
     "betcrop - fslbetcrop - t1": {
         "content": [
@@ -113,7 +113,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
                 ],
                 "bbox": [
                     [
@@ -143,15 +143,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T05:07:16.782304587"
+        "timestamp": "2025-09-30T13:28:12.176385"
     },
     "betcrop - fslbetcrop - t1 - dilate": {
         "content": [
@@ -184,7 +184,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
                 ],
                 "bbox": [
                     [
@@ -214,14 +214,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1b308a3de97ddd39682cecfd005d71aa"
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.4"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-04T05:08:48.202697985"
+        "timestamp": "2025-09-30T13:29:00.369918"
     }
 }
