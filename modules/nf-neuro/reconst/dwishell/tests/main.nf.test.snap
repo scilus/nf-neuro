@@ -1,0 +1,37 @@
+{
+    "dwishell - stub": {
+        "content": [
+            [
+                "versions.yml:md5,a77958e6a1f7e59f33a6efac6e39eb77"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-01T18:20:22.139824591"
+    },
+    "dwishell": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__dwi_sh_shells.nii.gz:md5,0e14081d7cc15740169186fb7df8ec20",
+                    "test__bval_sh_shells:md5,5e0381be0d5c8b3bb8bcd426d0d9cc16",
+                    "test__bvec_sh_shells:md5,529513ab12df505acd472fe8ebd2b94f"
+                ]
+            ],
+            [
+                "versions.yml:md5,a77958e6a1f7e59f33a6efac6e39eb77"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-01T18:20:18.474023782"
+    }
+}
