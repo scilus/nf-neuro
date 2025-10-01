@@ -2,9 +2,7 @@ process SEGMENTATION_FASTSEG {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container 'scilus/scilus:2.2.0'
 
     input:
         tuple val(meta), path(image), path(lesion)
@@ -31,21 +29,21 @@ process SEGMENTATION_FASTSEG {
 
     fast -t 1 -n 3\
         -H 0.1 -I 4 -l 20.0 -g -o t1.nii.gz $image
-    scil_volume_math.py convert t1_seg_2.nii.gz ${prefix}__mask_wm.nii.gz --data_type uint8
-    scil_volume_math.py convert t1_seg_1.nii.gz ${prefix}__mask_gm.nii.gz --data_type uint8
-    scil_volume_math.py convert t1_seg_0.nii.gz ${prefix}__mask_csf.nii.gz --data_type uint8
+    scil_volume_math convert t1_seg_2.nii.gz ${prefix}__mask_wm.nii.gz --data_type uint8
+    scil_volume_math convert t1_seg_1.nii.gz ${prefix}__mask_gm.nii.gz --data_type uint8
+    scil_volume_math convert t1_seg_0.nii.gz ${prefix}__mask_csf.nii.gz --data_type uint8
     mv t1_pve_2.nii.gz ${prefix}__map_wm.nii.gz
     mv t1_pve_1.nii.gz ${prefix}__map_gm.nii.gz
     mv t1_pve_0.nii.gz ${prefix}__map_csf.nii.gz
 
     if [[ -f "$lesion" ]];
     then
-        scil_volume_math.py union ${prefix}__mask_wm.nii.gz $lesion ${prefix}__mask_wm.nii.gz --data_type uint8 -f
+        scil_volume_math union ${prefix}__mask_wm.nii.gz $lesion ${prefix}__mask_wm.nii.gz --data_type uint8 -f
     fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.2
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
@@ -63,7 +61,7 @@ process SEGMENTATION_FASTSEG {
     trap 'handle_code' ERR
 
     fast -h
-    scil_volume_math.py -h
+    scil_volume_math -h
 
     touch ${prefix}__mask_wm.nii.gz
     touch ${prefix}__mask_gm.nii.gz
@@ -74,7 +72,7 @@ process SEGMENTATION_FASTSEG {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: 2.0.0
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
     END_VERSIONS
     """

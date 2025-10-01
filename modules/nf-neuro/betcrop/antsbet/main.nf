@@ -3,9 +3,7 @@ process BETCROP_ANTSBET {
     tag "$meta.id"
     label 'process_high'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container 'scilus/scilus:2.2.0'
 
     input:
     tuple val(meta), path(t1), path(template), path(tissues_probabilities), path(mask), path(initial_affine)
@@ -32,14 +30,14 @@ process BETCROP_ANTSBET {
 
     antsBrainExtraction.sh -d 3 -a $t1 -o bet/ -u 0 \
         -e $template -m $tissues_probabilities ${args.join(' ')}
-    scil_volume_math.py convert bet/BrainExtractionMask.nii.gz \
+    scil_volume_math convert bet/BrainExtractionMask.nii.gz \
         ${prefix}__t1_bet_mask.nii.gz --data_type uint8
-    scil_volume_math.py multiplication $t1 ${prefix}__t1_bet_mask.nii.gz \
+    scil_volume_math multiplication $t1 ${prefix}__t1_bet_mask.nii.gz \
         ${prefix}__t1_bet.nii.gz --data_type float32
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
     END_VERSIONS
     """
@@ -57,14 +55,14 @@ process BETCROP_ANTSBET {
     trap 'handle_code' ERR
 
     antsBrainExtraction.sh
-    scil_volume_math.py -h
+    scil_volume_math -h
 
     touch ${prefix}__t1_bet.nii.gz
     touch ${prefix}__t1_bet_mask.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
     END_VERSIONS
     """
