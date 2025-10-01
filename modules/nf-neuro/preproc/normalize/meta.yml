@@ -32,7 +32,7 @@ args:
       default: None
   - max_dti_shell_value:
       type: integer
-    description: |
+      description: |
       Maximum b-value to use for DTI fitting. All shells under this value will
       be used.
     default: 1600

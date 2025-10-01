@@ -60,10 +60,6 @@ args:
       description: FODF reconstruction method to use.
       default: "ssst"
       choices: "ssst, msmt"
-  - processes:
-      type: integer
-      description: Number of parallel processes to use for computation.
-      default: 1
   - relative_threshold:
       type: float
       description: Relative threshold to apply on FODF peaks.
@@ -85,6 +81,20 @@ args:
       description: |
         If set, the peak values are not max-normalized for each voxel, but
         kept as the actual fODF amplitude.
+      default: false
+  - wm_fodf:
+      type: boolean
+      description: If set, will output the white matter (WM) FODF map when using
+        the msmt method.
+      default: true
+  - gm_fodf:
+      type: boolean
+      description: If set, will output the grey matter (GM) FODF map when using
+        the msmt method.
+      default: false
+  - csf_fodf:
+      type: boolean
+      description: If set, will output the CSF FODF map when using the msmt method.
       default: false
   - vf:
       type: boolean
