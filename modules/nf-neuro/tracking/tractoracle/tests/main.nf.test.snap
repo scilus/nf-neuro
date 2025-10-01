@@ -1,0 +1,24 @@
+{
+    "tracking - tractoracle - interface": {
+        "content": [
+            "test__tracking.trk",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__interface.nii.gz:md5,4c9bb24b937fa8ee77923877f2ee6fd1"
+                ]
+            ],
+            [
+                "versions.yml:md5,86ab0b292829295d383f88531862e6cc"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-01T02:37:36.519402316"
+    }
+}
