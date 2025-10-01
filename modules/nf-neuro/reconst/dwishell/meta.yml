@@ -37,6 +37,18 @@ input:
         ontologies:
           - edam: http://edamontology.org/format_2330 # Plain text format
 args:
+  - b0_thr_extract_b0:
+      type: integer
+      description: Volumes with b-values up to this threshold are considered b0 (unweighted).
+      default: 10
+  - max_shell_bvalue:
+      type: integer
+      description: Maximum b-value to consider when extracting shells.
+      default: 1500
+  - shell_to_fit:
+      type: integer
+      description: Only use volumes with this b-value. Required if input is multi-shell.
+      default: null
   - out_indices:
       type: boolean
       default: false
