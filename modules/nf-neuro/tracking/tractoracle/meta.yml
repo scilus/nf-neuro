@@ -1,0 +1,86 @@
+name: tracking_tractoracle
+description: Compute the interface and generate a tractogram using TractOracle-IRT,
+  a deep RL-based tractography algorithm.
+keywords:
+  - Diffusion MRI
+  - Tractography
+  - Reinforcement Learning
+tools:
+  - "tractoracle-irt":
+      description: "TractOracle-IRT: Exploring the robustness of TractOracle methods in RL-based tractography."
+      homepage: "https://github.com/scil-vital/tractoracle_irt"
+      doi: "10.1016/j.media.2025.103743"
+      identifier: ""
+  - scilpy:
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - wm:
+        type: file
+        description: Nifti white matter probability map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - gm:
+        type: file
+        description: Nifti grey matter probability map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - csf:
+        type: file
+        description: Nifti cerebrospinal fuild probability map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fodf:
+        type: file
+        description: Nifti image of Spherical harmonic file (fodf).
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+
+output:
+  trk:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__tracking.trk":
+          type: file
+          description: Tractogram output file.
+          pattern: "*__tracking.{trk,tck}"
+          ontologies: []
+  interface_mask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__interface.nii.gz":
+          type: file
+          description: Nifti seeding/interface mask for tracking.
+          pattern: "*__interface.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+
+authors:
+  - "@levje"
+maintainers:
+  - "@levje"
