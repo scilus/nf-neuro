@@ -1,5 +1,5 @@
 process TRACKING_TRACTORACLE {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_single'
 
     container 'mrzarfir/tractoracle-irt:base'
@@ -25,7 +25,7 @@ process TRACKING_TRACTORACLE {
     def max_length = task.ext.max_length ? "${task.ext.max_length}" : "200"
 
     """
-    uv run scil_tracking_pft_maps.py $wm $gm $csf \
+    uv run scil_tracking_pft_maps.py ${wm} ${gm} ${csf} \
         --include ${prefix}__map_include.nii.gz \
         --exclude ${prefix}__map_exclude.nii.gz \
         --interface ${prefix}__interface.nii.gz -f
@@ -50,11 +50,9 @@ process TRACKING_TRACTORACLE {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    echo $args
 
     touch ${prefix}__interface.nii.gz
     touch ${prefix}__tracking.trk
