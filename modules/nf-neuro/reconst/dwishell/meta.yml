@@ -1,14 +1,12 @@
 name: "reconst_dwishell"
-description: Extracts the DWI volumes that are on specific b-value shells in
-  the same order as in the original file.
+description: Extracts the DWI volumes that are on specific b-value shells in the same order as in the original file.
 keywords:
   - dwi
   - extract
   - shell
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
 
@@ -56,20 +54,18 @@ args:
   - block_size:
       type: integer
       default: null
-      description: Useful when the data is too large to be loaded in memory. A
-        block size of X means that X DWI volumes are loaded at a time for
-        processing.
+      description: Useful when the data is too large to be loaded in memory. A block size of X means that X DWI volumes are loaded at a time for processing.
   - tolerance:
       type: integer
       default: 20
-      description: The tolerated gap between the b-values to extract and the
-        actual b-values.
+      description: The tolerated gap between the b-values to extract and the actual b-values.
 output:
   dwi_shells:
     - - meta:
-        type: map |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
       - "*__dwi_sh_shells.nii.gz":
           type: file
           description: DWI volume with shells fitted.
@@ -90,9 +86,10 @@ output:
             - edam: http://edamontology.org/format_2330 # Plain text format
   out_indices:
     - - meta:
-        type: map |
-          Groovy Map containing sample information
-          e.g. `[ id:'test', single_end:false ]`
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
       - "*__out_indices":
           type: file
           description: Text file containing indices of the fitted shells.
