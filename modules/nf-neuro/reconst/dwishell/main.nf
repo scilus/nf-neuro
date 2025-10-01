@@ -1,16 +1,16 @@
 process RECONST_DWISHELL {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_single'
 
     container "scilus/scilpy:2.2.0_cpu"
 
     input:
-        tuple val(meta), path(dwi), path(bval), path(bvec)
+    tuple val(meta), path(dwi), path(bval), path(bvec)
 
     output:
-        tuple val(meta), path("*__dwi_sh_shells.nii.gz"), path("*__bval_sh_shells"), path("*__bvec_sh_shells"), emit: dwi_shells
-        tuple val(meta), path("*__out_indices"), emit: out_indices, optional: true
-        path "versions.yml", emit: versions
+    tuple val(meta), path("*__dwi_sh_shells.nii.gz"), path("*__bval_sh_shells"), path("*__bvec_sh_shells"), emit: dwi_shells
+    tuple val(meta), path("*__out_indices"), emit: out_indices, optional: true
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -23,11 +23,11 @@ process RECONST_DWISHELL {
     def tolerance = task.ext.tolerance ? "--tolerance ${task.ext.tolerance}" : ''
     def max_shell_bvalue = task.ext.max_shell_bvalue ?: 1500
     def b0_thr_extract_b0 = task.ext.b0_thr_extract_b0 ?: 10
-    def shell_to_fit = task.ext.shell_to_fit ?: "\$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- $bval | awk -F' ' '{v=int(\$1)}{if(v<=$max_shell_bvalue|| v<=$b0_thr_extract_b0)print v}' | sort | uniq)"
+    def shell_to_fit = task.ext.shell_to_fit ?: "\$(cut -d ' ' --output-delimiter=\$'\\n' -f 1- ${bval} | awk -F' ' '{v=int(\$1)}{if(v<=${max_shell_bvalue}|| v<=${b0_thr_extract_b0})print v}' | sort | uniq)"
     def force = task.ext.force ? "-f" : ''
 
     """
-    scil_dwi_extract_shell $dwi $bval $bvec $shell_to_fit \
+    scil_dwi_extract_shell ${dwi} ${bval} ${bvec} ${shell_to_fit} \
         ${prefix}__dwi_sh_shells.nii.gz \
         ${prefix}__bval_sh_shells \
         ${prefix}__bvec_sh_shells \
