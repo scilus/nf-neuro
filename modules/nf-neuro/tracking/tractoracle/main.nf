@@ -8,7 +8,7 @@ process TRACKING_TRACTORACLE {
     tuple val(meta), path(wm), path(gm), path(csf), path(fodf)
 
     output:
-    tuple val(meta), path("*__tracking.trk"), emit: tractogram
+    tuple val(meta), path("*__tracking.trk"), emit: trk
     tuple val(meta), path("*__interface.nii.gz"), emit: interface_mask
     path "versions.yml", emit: versions
 
@@ -56,7 +56,8 @@ process TRACKING_TRACTORACLE {
     """
     echo $args
 
-    touch ${prefix}.bam
+    touch ${prefix}__interface.nii.gz
+    touch ${prefix}__tracking.trk
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

@@ -1,4 +1,16 @@
 {
+    "tracking - tractoracle - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,86ab0b292829295d383f88531862e6cc"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-01T03:06:21.555812467"
+    },
     "tracking - tractoracle - interface": {
         "content": [
             "test__tracking.trk",
@@ -19,6 +31,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-10-01T02:37:36.519402316"
+        "timestamp": "2025-10-01T03:06:18.890048765"
     }
 }
