@@ -19,12 +19,17 @@ process IMAGE_RESAMPLE {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.first_suffix ? "${task.ext.first_suffix}_resampled" : "resampled"
     def reference = "$ref" ? "--ref $ref" : ""
-    def voxel_size = task.ext.voxel_size ? "--voxel_size " + task.ext.voxel_size : ""
+    def voxel_size = task.ext.voxel_size && !ref ? "--voxel_size " + task.ext.voxel_size : ""
     def volume_size = task.ext.volume_size ? "--volume_size " + task.ext.volume_size : ""
     def iso_min = task.ext.iso_min ? "--iso_min" : ""
     def interp = task.ext.interp ? "--interp " + task.ext.interp : ""
     def f = task.ext.f ? "-f" : ""
     def enforce_dimensions = task.ext.enforce_dimensions ? "--enforce_dimensions" : ""
+
+    if (task.ext.voxel_size && "$ref") {
+        println "WARNING: Both voxel_size and reference image are provided." + \
+            " The reference image will be used for resampling."
+    }
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
