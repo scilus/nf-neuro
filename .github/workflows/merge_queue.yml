@@ -31,6 +31,6 @@ jobs:
 
   update-main:
     needs: [check-conditions, checks]
-    if: always() && (!needs.check-conditions.outputs.should_run_checks || needs.checks.result == 'success')
+    if: ${{ ! failure() && ! cancelled() }}
     uses: ./.github/workflows/update_main.yml
     secrets: inherit
