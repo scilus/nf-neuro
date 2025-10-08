@@ -35,14 +35,22 @@ args:
         e.g. `2` for 2D images, `3` for 3D images.
   - image_type:
       type: integer
-      description: Type of the input image.
+      description: |
+        Type of the input image :
+          - 0: scalar
+          - 1: vector
+          - 2: tensor
+          - 3: time series
+          - 4: multichannel
+          - 5: five-dimensional
+      default: 0
       choices:
-        - 0 (scalar)
-        - 1 (vector)
-        - 2 (tensor)
-        - 3 (time series)
-        - 4 (multichannel)
-        - 5 (five-dimensional)
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
   - interpolation:
       type: string
       description: |
@@ -132,6 +140,7 @@ output:
             .gif file containing quality control image for the registration process.
             Made for use in MultiQC report.
           pattern: "*_registration_antsapplytransforms_mqc.gif"
+          optional: true
           ontologies: []
   versions:
     - versions.yml:

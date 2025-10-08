@@ -7,6 +7,10 @@ keywords:
   - Bundles
   - Tractogram
 tools:
+  - ANTs:
+      description: perform registration using transform as input
+      homepage: https://antsx.github.io/ANTsRCore/reference/antsApplyTransforms.html
+      identifier: ""
   - scilpy:
       description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
         toolbox.
@@ -79,7 +83,7 @@ input:
         pattern: "*.{trk,tck}"
         mandatory: true
         ontologies: []
-    - ref:
+    - reference:
         type: file
         description: Reference anatomy for tck/vtk/fib/dpy file support (.nii or .nii.gz)
           (optional)

@@ -93,6 +93,7 @@ output:
           type: file
           description: Forward deformation field, composed of all registration stages (affine+deformation).
           pattern: "*_forward0_warp.nii.gz"
+          optional: true
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
   inverse_warp:
@@ -105,6 +106,7 @@ output:
           type: file
           description: Backward deformation field, composed of all registration stages (inv-deformation+inv-affine).
           pattern: "*_backward0_warp.nii.gz"
+          optional: true
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
   segmentation_warped:
@@ -119,9 +121,9 @@ output:
             SynthSeg v2 (non-robust) segmentation + parcellation on the warped image.
             Will produce image only if not passed as input.
           pattern: "*_warped_segmentation.nii.gz"
+          optional: true
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-          optional: true
   fixed_segmentation_warped:
     - - meta:
           type: map
@@ -134,9 +136,9 @@ output:
             SynthSeg v2 (non-robust) segmentation + parcellation on the reference image.
             Will produce image only if not passed as input.
           pattern: "*_warped_reference_segmentation.nii.gz"
+          optional: true
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-          optional: true
   versions:
     - versions.yml:
         type: file

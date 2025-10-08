@@ -74,7 +74,7 @@ process REGISTRATION_CONVERT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9.]+).*/\\1/')
+        freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -96,9 +96,9 @@ process REGISTRATION_CONVERT {
     """
     set +e
     function handle_code () {
-    local code=\$?
-    ignore=( 1 )
-    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+        local code=\$?
+        ignore=( 1 )
+        [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
     }
     trap 'handle_code' ERR
 
@@ -109,7 +109,7 @@ process REGISTRATION_CONVERT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        Freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9.]+).*/\\1/')
+        freesurfer: \$(mri_convert -version | grep "freesurfer" | sed -E 's/.* ([0-9.]+).*/\\1/')
     END_VERSIONS
     """
 }
