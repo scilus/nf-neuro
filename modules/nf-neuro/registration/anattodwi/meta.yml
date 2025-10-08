@@ -180,6 +180,7 @@ output:
             .gif file containing quality control image for the
             registration process. For use in MultiQC report.
           pattern: "*_registration_anattodwi_mqc.gif"
+          optional: true
           ontologies: []
   versions:
     - versions.yml:

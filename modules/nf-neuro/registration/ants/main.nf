@@ -58,13 +58,11 @@ process REGISTRATION_ANTS {
 
     mv outputWarped.nii.gz ${prefix}__\${moving_id}_warped.nii.gz
 
-    if [ $transform != "bo" ] && [ $transform != "so" ];
-    then
+    if [ $transform != "bo" ] && [ $transform != "so" ]; then
         mv output0GenericAffine.mat ${prefix}__forward1_affine.mat
     fi
 
-    if [ $transform != "t" ] && [ $transform != "r" ] && [ $transform != "a" ];
-    then
+    if [ $transform != "t" ] && [ $transform != "r" ] && [ $transform != "a" ]; then
         mv output1InverseWarp.nii.gz ${prefix}__backward1_warp.nii.gz
         mv output1Warp.nii.gz ${prefix}__forward0_warp.nii.gz
     fi
@@ -74,8 +72,7 @@ process REGISTRATION_ANTS {
         -t [${prefix}__forward1_affine.mat,1]
 
     ### ** QC ** ###
-    if $run_qc;
-    then
+    if $run_qc; then
         mv $fixed_image fixed_image.nii.gz
         extract_dim=\$(mrinfo fixed_image.nii.gz -size)
         read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
@@ -92,8 +89,7 @@ process REGISTRATION_ANTS {
         # Set viz params.
         viz_params="--display_slice_number --display_lr --size 256 256"
         # Iterate over images.
-        for image in fixed_image warped;
-        do
+        for image in fixed_image warped; do
             mrconvert *\${image}.nii.gz *\${image}_viz.nii.gz -stride -1,2,3
             scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_coronal.png \
                 --slices \$coronal_dim --axis coronal \$viz_params
@@ -101,23 +97,27 @@ process REGISTRATION_ANTS {
                 --slices \$sagittal_dim --axis sagittal \$viz_params
             scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_axial.png \
                 --slices \$axial_dim --axis axial \$viz_params
-            if [ \$image != fixed_image ];
-            then
+
+            if [ \$image != fixed_image ]; then
                 title="Warped \${moving_id^^}"
             else
                 title="Reference \${fixed_id^^}"
             fi
+
             convert +append \${image}_coronal*.png \${image}_axial*.png \
                 \${image}_sagittal*.png \${image}_mosaic.png
             convert -annotate +20+230 "\${title}" -fill white -pointsize 30 \
                 \${image}_mosaic.png \${image}_mosaic.png
+
             # Clean up.
             rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
         done
+
         # Create GIF.
         convert -delay 10 -loop 0 -morph 10 \
             warped_mosaic.png fixed_image_mosaic.png warped_mosaic.png \
             ${prefix}_${suffix_qc}_registration_ants_mqc.gif
+
         # Clean up.
         rm *_mosaic.png
     fi
@@ -134,13 +134,14 @@ process REGISTRATION_ANTS {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix_qc = task.ext.suffix_qc ?: ""
+    def run_qc = task.ext.run_qc as Boolean || false
 
     """
     set +e
     function handle_code () {
-    local code=\$?
-    ignore=( 1 )
-    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+        local code=\$?
+        ignore=( 1 )
+        [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
     }
     trap 'handle_code' ERR
 
@@ -154,7 +155,10 @@ process REGISTRATION_ANTS {
     touch ${prefix}__forward0_warp.nii.gz
     touch ${prefix}__backward1_warp.nii.gz
     touch ${prefix}__backward0_affine.mat
-    touch ${prefix}_${suffix_qc}_registration_ants_mqc.gif
+
+    if $run_qc; then
+        touch ${prefix}_${suffix_qc}_registration_ants_mqc.gif
+    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

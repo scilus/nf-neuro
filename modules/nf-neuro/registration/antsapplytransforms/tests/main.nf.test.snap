@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__b0b0__warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
+                        "test__b0b0__warped.nii.gz:md5,54f953b796f87bc0765d401ab32e6450"
                     ]
                 ],
                 "1": [
@@ -41,7 +41,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__b0b0__warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
+                        "test__b0b0__warped.nii.gz:md5,54f953b796f87bc0765d401ab32e6450"
                     ]
                 ]
             }

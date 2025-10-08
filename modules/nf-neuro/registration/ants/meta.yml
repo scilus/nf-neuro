@@ -79,7 +79,7 @@ args:
       description: Algorithmic initialization by geometric center, intensities, or origin.
       default: ""
       choices:
-        - geometric_center
+        - geometric center
         - intensities
         - origin
   - dimension:
@@ -171,6 +171,7 @@ output:
           type: file
           description: Affine transformation from moving to fixed
           pattern: "*__forward1_affine.mat"
+          optional: true
           ontologies: []
   warp:
     - - meta:
@@ -182,6 +183,7 @@ output:
           type: file
           description: Nifti volume containing warp field from moving to fixed
           pattern: "*__forward0_warp.nii.gz"
+          optional: true
           ontologies:
             - edam: http://edamontology.org/format_3989 # GZIP format
   inverse_warp:
@@ -194,6 +196,7 @@ output:
           type: file
           description: Nifti volume containing warp field from fixed to moving
           pattern: "*__backward1_warp.nii.gz"
+          optional: true
           ontologies:
             - edam: http://edamontology.org/format_3989 # GZIP format
   inverse_affine:
@@ -206,6 +209,7 @@ output:
           type: file
           description: Affine transformation from fixed to moving
           pattern: "*__backward0_affine.mat"
+          optional: true
           ontologies: []
   image_transform:
     - - meta:
@@ -270,6 +274,7 @@ output:
           description: .gif file containing quality control image for the registration
             process. Made for use in MultiQC report.
           pattern: "*_registration_ants_mqc.gif"
+          optional: true
           ontologies: []
   versions:
     - versions.yml:

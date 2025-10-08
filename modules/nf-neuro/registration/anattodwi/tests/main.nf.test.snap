@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        "test__T1w_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
                     ]
                 ],
                 "1": [
@@ -17,11 +17,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
+                        "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
                     ]
                 ],
                 "10": [
-                    "versions.yml:md5,f7d4a628967ea923c4ce688c43ad7f5f"
+                    "versions.yml:md5,4d59aa7132ca8851c32f00b29da08d34"
                 ],
                 "2": [
                     [
@@ -29,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1InverseWarp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
                     ]
                 ],
                 "3": [
@@ -38,7 +38,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
+                        "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
                     ]
                 ],
                 "4": [
@@ -47,7 +47,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_registration_anattodwi_mqc.gif:md5,687252d31b0109f99a174b4e3960e4e6"
+                        "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b"
                     ]
                 ],
                 "5": [
@@ -59,7 +59,61 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                    ]
+                ],
+                "anat_warped": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__T1w_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
+                    ]
+                ],
+                "image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        ]
+                    ]
+                ],
+                "inverse_affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b"
+                    ]
+                ],
+                "inverse_image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        ]
+                    ]
+                ],
+                "inverse_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        ]
                     ]
                 ],
                 "inverse_warp": [
@@ -68,7 +122,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1InverseWarp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
                     ]
                 ],
                 "mqc": [
@@ -77,7 +131,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_registration_anattodwi_mqc.gif:md5,687252d31b0109f99a174b4e3960e4e6"
+                        "test_registration_anattodwi_mqc.gif:md5,9cbc1ce8755821996dae18080cf0a23c"
                     ]
                 ],
                 "tractogram_transform": [
@@ -86,7 +140,10 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
+                        [
+                            "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        ]
                     ]
                 ],
                 "versions": [
@@ -98,7 +155,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
+                        "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
                     ]
                 ]
             }

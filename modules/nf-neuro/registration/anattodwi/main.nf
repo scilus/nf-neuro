@@ -65,8 +65,7 @@ process REGISTRATION_ANATTODWI {
         -t [${prefix}__forward1_affine.mat,1]
 
     ### ** QC ** ###
-    if $run_qc;
-    then
+    if $run_qc; then
         # Extract dimensions.
         dim=\$(mrinfo ${prefix}__\${moving_id}_warped.nii.gz -size)
         read sagittal_dim coronal_dim axial_dim <<< "\${dim}"
@@ -84,8 +83,7 @@ process REGISTRATION_ANATTODWI {
         fixed_id=\${fixed_id#${meta.id}__*}
 
         # Iterate over images.
-        for image in \${moving_id}_warped \${fixed_id};
-        do
+        for image in \${moving_id}_warped \${fixed_id}; do
             mrconvert *\${image}.nii.gz *\${image}_viz.nii.gz -stride -1,2,3
             scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_coronal.png \
                 --slices \$coronal_mid --axis coronal \$viz_params
@@ -94,8 +92,7 @@ process REGISTRATION_ANATTODWI {
             scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_axial.png \
                 --slices \$axial_mid --axis axial \$viz_params
 
-            if [ \$image != \${fixed_id} ];
-            then
+            if [ \$image != \${fixed_id} ]; then
                 title="Warped \${moving_id^^}"
             else
                 title="Reference \${fixed_id^^}"
@@ -130,13 +127,14 @@ process REGISTRATION_ANATTODWI {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def run_qc = task.ext.run_qc as Boolean || false
 
     """
     set +e
     function handle_code () {
-    local code=\$?
-    ignore=( 1 )
-    [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
+        local code=\$?
+        ignore=( 1 )
+        [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
     }
     trap 'handle_code' ERR
 
@@ -152,7 +150,10 @@ process REGISTRATION_ANATTODWI {
     touch ${prefix}__forward0_warp.nii.gz
     touch ${prefix}__backward1_warp.nii.gz
     touch ${prefix}__backward0_affine.mat
-    touch ${prefix}__registration_anattodwi_mqc.gif
+
+    if $run_qc; then
+        touch ${prefix}__registration_anattodwi_mqc.gif
+    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
