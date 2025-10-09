@@ -2,14 +2,14 @@
     "topup - stub-run": {
         "content": [
             [
-                "versions.yml:md5,9686d5724a965cb21e91e0a10f9cd79e"
+                "versions.yml:md5,5653b888fdf11c1e12c64cad22afc4b6"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-23T03:24:36.88373882"
+        "timestamp": "2025-10-09T19:52:44.496547608"
     },
     "topup - AP DWI+sbref | PA DWI+sbref": {
         "content": [
@@ -38,14 +38,14 @@
             "test__b0_topup_mqc.gif",
             "test__rev_b0_topup_mqc.gif",
             [
-                "versions.yml:md5,7462a97a81686bf4269546c1ce94acb0"
+                "versions.yml:md5,9b421f17f5937c838d561f765bda4df5"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-23T03:23:13.786659219"
+        "timestamp": "2025-10-09T19:52:08.727790622"
     },
     "topup - AP DWI | PA sbref": {
         "content": [
@@ -88,14 +88,14 @@
             "test1__b0_topup_mqc.gif",
             "test1__rev_b0_topup_mqc.gif",
             [
-                "versions.yml:md5,7462a97a81686bf4269546c1ce94acb0",
-                "versions.yml:md5,7462a97a81686bf4269546c1ce94acb0"
+                "versions.yml:md5,9b421f17f5937c838d561f765bda4df5",
+                "versions.yml:md5,9b421f17f5937c838d561f765bda4df5"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-23T03:24:22.082433334"
+        "timestamp": "2025-10-09T19:52:38.44642361"
     }
 }
