@@ -197,27 +197,6 @@ jobs:
           retention-days: 1
           compression-level: 9
 
-      - name: Collect test working directories
-        if: failure()
-        run: |
-          mkdir -p tests_workdir
-          for t in ${{ env.NXF_WORKDIR }}/.nf-test/tests/**/work/**/.command.log
-          do
-            tag=$(sed -n '3p' $(dirname $t)/.command.run | cut -d' ' -f3 | tr -d "'")
-            cp -R $(dirname $t) tests_workdir/$tag
-          done
-
-      - name: Upload test working directories
-        if: failure()
-        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
-        with:
-          name: tests-workdir-${{ steps.test-run-identifier.outputs.uid }}
-          path: tests_workdir/
-          overwrite: true
-          retention-days: 1
-          compression-level: 9
-          include-hidden-files: true
-
       - name: Clean up
         if: always()
         run: |
