@@ -1,6 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: registration_anattodwi
-description: Anatomical image registration on a diffusion image.
+description: |
+  Registration computing transformations moving images from anatomical space into diffusion space. The `moving_anat` image
+  represents the anatomical space, moving to diffusion space, onto its `fixed_reference` and its `metric` representations.
+
+  Configuration, direction and order of the registration follows the [tractoflow](https://doi.org/10.1016/j.neuroimage.2020.116889)
+  publication.
 keywords:
   - nifti
   - registration

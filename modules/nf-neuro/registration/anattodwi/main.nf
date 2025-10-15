@@ -60,9 +60,8 @@ process REGISTRATION_ANATTODWI {
     mv forward1Warp.nii.gz ${prefix}__forward0_warp.nii.gz
     mv forward1InverseWarp.nii.gz ${prefix}__backward1_warp.nii.gz
 
-    antsApplyTransforms -d 3 -i $moving_anat -r $fixed_reference \
-        -o Linear[${prefix}__backward0_affine.mat] \
-        -t [${prefix}__forward1_affine.mat,1]
+    antsApplyTransforms -d 3 -t [${prefix}__forward1_affine.mat,1] \
+        -o Linear[${prefix}__backward0_affine.mat]
 
     ### ** QC ** ###
     if $run_qc; then
