@@ -24,7 +24,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     def dimensionality = "-d ${task.ext.dimensionality ?: 3}"
     def image_type = "-e ${task.ext.image_type ?: 0}"
     def interpolation = "-n ${task.ext.interpolation ?: "Linear"}"
-    def default_val = "-f ${task.ext.default_val ?: 3}"
+    def default_val = "-f ${task.ext.default_val ?: 0}"
     def run_qc = task.ext.run_qc as Boolean || false
 
     """
