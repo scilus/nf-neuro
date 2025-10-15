@@ -12,8 +12,8 @@ process REGISTRATION_EASYREG {
     output:
     tuple val(meta), path("*_warped.nii.gz")                        , emit: image_warped
     tuple val(meta), path("*_warped_reference.nii.gz")              , emit: fixed_warped
-    tuple val(meta), path("*_forward0_warp.nii.gz")                 , emit: warp, optional: true
-    tuple val(meta), path("*_backward0_warp.nii.gz")                , emit: inverse_warp, optional: true
+    tuple val(meta), path("*_forward0_warp.nii.gz")                 , emit: forward_warp, optional: true
+    tuple val(meta), path("*_backward0_warp.nii.gz")                , emit: backward_warp, optional: true
     tuple val(meta), path("*_warped_segmentation.nii.gz")           , emit: segmentation_warped, optional: true
     tuple val(meta), path("*_warped_reference_segmentation.nii.gz") , emit: fixed_segmentation_warped, optional: true
     path "versions.yml"                                             , emit: versions

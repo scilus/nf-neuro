@@ -99,7 +99,7 @@ output:
           pattern: "*__warped.nii.gz"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-  affine:
+  forward_affine:
     - - meta:
           type: map
           description: |
@@ -107,11 +107,11 @@ output:
             e.g. `[ id:'test', single_end:false ]`
       - "*__forward{0,1,_standalone}_affine.lta":
           type: file
-          description: Affine transformation matrix file.
+          description: Affine transformation matrix to fixed space.
           pattern: "*__forward{0,1,_standalone}_affine.lta"
           optional: true
           ontologies: []
-  warp:
+  forward_warp:
     - - meta:
           type: map
           description: |
@@ -119,12 +119,12 @@ output:
             e.g. `[ id:'test', single_end:false ]`
       - "*__forward0_deform.nii.gz":
           type: file
-          description: Deformation field file.
+          description: Deformation field to fixed space.
           pattern: "*__forward0_deform.nii.gz"
           optional: true
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-  inverse_warp:
+  backward_warp:
     - - meta:
           type: map
           description: |
@@ -132,12 +132,12 @@ output:
             e.g. `[ id:'test', single_end:false ]`
       - "*__backward1_deform.nii.gz":
           type: file
-          description: Inverse deformation field file.
+          description: Deformation field to moving space.
           pattern: "*__backward1_deform.nii.gz"
           optional: true
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-  inverse_affine:
+  backward_affine:
     - - meta:
           type: map
           description: |
@@ -145,11 +145,11 @@ output:
             e.g. `[ id:'test', single_end:false ]`
       - "*__backward{0,_standalone}_affine.lta":
           type: file
-          description: Inverse affine transformation matrix file.
+          description: Affine transformation matrix to moving space.
           pattern: "*__backward{0,_standalone}_affine.lta"
           optional: true
           ontologies: []
-  image_transform:
+  forward_image_transform:
     - - meta:
           type: map
           description: |
@@ -158,11 +158,11 @@ output:
       - "*__forward[!_]*.{lta,nii.gz}":
           type: list
           description: |
-            Tuple, Transformation files to warp images in the correct order
-            for REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ warp, affine ] ].
+            Tuple, transformation files to warp images to fixed space, in the correct order
+            for REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ forward_warp, forward_affine ] ].
           pattern: "*__forward[!_]*.{lta,nii.gz}"
           ontologies: []
-  inverse_image_transform:
+  backward_image_transform:
     - - meta:
           type: map
           description: |
@@ -171,11 +171,11 @@ output:
       - "*__backward[!_]*.{lta,nii.gz}":
           type: list
           description: |
-            Tuple, Transformation files to warp images in the correct order for
-            REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ inverse_affine, inverse_warp ] ].
+            Tuple, transformation files to warp images to moving space, in the correct order for
+            REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ backward_affine, backward_warp ] ].
           pattern: "*__backward[!_]*.{lta,nii.gz}"
           ontologies: []
-  tractogram_transform:
+  forward_tractogram_transform:
     - - meta:
           type: map
           description: |
@@ -184,11 +184,11 @@ output:
       - "*__backward[!_]*.{lta,nii.gz}":
           type: list
           description: |
-            Tuple, Transformation files to warp tractograms in the correct order
-            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ inverse_affine, inverse_warp ] ].
+            Tuple, transformation files to warp tractograms to fixed space, in the correct order
+            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ backward_affine, backward_warp ] ].
           pattern: "*__backward[!_]*.{lta,nii.gz}"
           ontologies: []
-  inverse_tractogram_transform:
+  backward_tractogram_transform:
     - - meta:
           type: map
           description: |
@@ -197,8 +197,8 @@ output:
       - "*__forward[!_]*.{lta,nii.gz}":
           type: list
           description: |
-            Tuple, Transformation files to warp tractograms in the correct order
-            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ warp, affine ] ].
+            Tuple, transformation files to warp tractograms to moving space, in the correct order
+            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ forward_warp, forward_affine ] ].
           pattern: "*__forward[!_]*.{lta,nii.gz}"
           ontologies: []
   versions:

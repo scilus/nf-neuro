@@ -110,17 +110,9 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     def run_qc = task.ext.run_qc as Boolean || false
 
     """
-    set +e
-    function handle_code () {
-        local code=\$?
-        ignore=( 1 )
-        [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
-    }
-    trap 'handle_code' ERR
-
     antsApplyTransforms -h
-    convert -h
     scil_viz_volume_screenshot -h
+    convert -help .
 
     for image in $images; do
         ext=\${image#*.}

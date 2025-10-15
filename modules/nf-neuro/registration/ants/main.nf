@@ -10,14 +10,14 @@ process REGISTRATION_ANTS {
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                            , emit: image_warped
-        tuple val(meta), path("*__forward1_affine.mat")                     , emit: affine, optional: true
-        tuple val(meta), path("*__forward0_warp.nii.gz")                    , emit: warp, optional: true
-        tuple val(meta), path("*__backward1_warp.nii.gz")                   , emit: inverse_warp, optional: true
-        tuple val(meta), path("*__backward0_affine.mat")                    , emit: inverse_affine, optional: true
-        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: image_transform
-        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: inverse_image_transform
-        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: tractogram_transform
-        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: inverse_tractogram_transform
+        tuple val(meta), path("*__forward1_affine.mat")                     , emit: forward_affine, optional: true
+        tuple val(meta), path("*__forward0_warp.nii.gz")                    , emit: forward_warp, optional: true
+        tuple val(meta), path("*__backward1_warp.nii.gz")                   , emit: backward_warp, optional: true
+        tuple val(meta), path("*__backward0_affine.mat")                    , emit: backward_affine, optional: true
+        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: forward_image_transform
+        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: backward_image_transform
+        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: forward_tractogram_transform
+        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: backward_tractogram_transform
         tuple val(meta), path("*_registration_ants_mqc.gif")                , emit: mqc, optional: true
         path "versions.yml"                                                 , emit: versions
 
@@ -143,11 +143,15 @@ process REGISTRATION_ANTS {
         ignore=( 1 )
         [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
     }
-    trap 'handle_code' ERR
 
-    antsRegistrationSyNQuick.sh -h
+    # Local trap to ignore awaited non-zero exit codes
+    {
+        trap 'handle_code' ERR
+        antsRegistrationSyNQuick.sh -h
+    }
+
     antsApplyTransforms -h
-    convert -h
+    convert -help .
     scil_viz_volume_screenshot -h
 
     touch ${prefix}__t1_warped.nii.gz

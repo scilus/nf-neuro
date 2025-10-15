@@ -20,7 +20,7 @@ args:
   - inverse:
       type: boolean
       description: |
-        If true, the inverse affine transform will be applied to the tractogram.
+        If true, the affine transform will be inverted before being applied to the tractogram.
       default: false
   - reverse_operation:
       type: boolean

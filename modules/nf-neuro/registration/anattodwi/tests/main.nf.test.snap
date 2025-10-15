@@ -53,15 +53,6 @@
                 "5": [
                     "versions.yml:md5,f49f4ab58360830a5cdb39d7530b45b1"
                 ],
-                "affine": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
-                    ]
-                ],
                 "anat_warped": [
                     [
                         {
@@ -71,19 +62,7 @@
                         "test__T1w_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
                     ]
                 ],
-                "image_transform": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        [
-                            "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
-                            "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
-                        ]
-                    ]
-                ],
-                "inverse_affine": [
+                "backward_affine": [
                     [
                         {
                             "id": "test",
@@ -92,7 +71,7 @@
                         "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b"
                     ]
                 ],
-                "inverse_image_transform": [
+                "backward_image_transform": [
                     [
                         {
                             "id": "test",
@@ -104,7 +83,7 @@
                         ]
                     ]
                 ],
-                "inverse_tractogram_transform": [
+                "backward_tractogram_transform": [
                     [
                         {
                             "id": "test",
@@ -116,13 +95,55 @@
                         ]
                     ]
                 ],
-                "inverse_warp": [
+                "backward_warp": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
                         "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                    ]
+                ],
+                "forward_affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                    ]
+                ],
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        ]
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        ]
+                    ]
+                ],
+                "forward_warp": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
                     ]
                 ],
                 "mqc": [
@@ -132,18 +153,6 @@
                             "single_end": false
                         },
                         "test_registration_anattodwi_mqc.gif:md5,9cbc1ce8755821996dae18080cf0a23c"
-                    ]
-                ],
-                "tractogram_transform": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        [
-                            "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
-                            "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
-                        ]
                     ]
                 ],
                 "versions": [
@@ -174,7 +183,7 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
         "timestamp": "2025-10-09T20:08:45.279539751"
     }

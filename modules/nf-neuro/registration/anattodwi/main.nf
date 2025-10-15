@@ -9,14 +9,14 @@ process REGISTRATION_ANATTODWI {
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                            , emit: anat_warped
-        tuple val(meta), path("*__forward1_affine.mat")                     , emit: affine
-        tuple val(meta), path("*__forward0_warp.nii.gz")                    , emit: warp
-        tuple val(meta), path("*__backward1_warp.nii.gz")                   , emit: inverse_warp
-        tuple val(meta), path("*__backward0_affine.mat")                    , emit: inverse_affine
-        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: image_transform
-        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: inverse_image_transform
-        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: tractogram_transform
-        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: inverse_tractogram_transform
+        tuple val(meta), path("*__forward1_affine.mat")                     , emit: forward_affine
+        tuple val(meta), path("*__forward0_warp.nii.gz")                    , emit: forward_warp
+        tuple val(meta), path("*__backward1_warp.nii.gz")                   , emit: backward_warp
+        tuple val(meta), path("*__backward0_affine.mat")                    , emit: backward_affine
+        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: forward_image_transform
+        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: backward_image_transform
+        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: forward_tractogram_transform
+        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: backward_tractogram_transform
         tuple val(meta), path("*_registration_anattodwi_mqc.gif")           , emit: mqc, optional: true
         path "versions.yml"                                                 , emit: versions
 
@@ -34,7 +34,7 @@ process REGISTRATION_ANATTODWI {
     export ANTS_RANDOM_SEED=1234
 
     antsRegistration --dimensionality 3 --float 0\
-        --output [trans,warped.nii.gz]\
+        --output [forward,warped.nii.gz]\
         --interpolation Linear --use-histogram-matching 0\
         --winsorize-image-intensities [0.005,0.995]\
         --initial-moving-transform [$fixed_reference,$moving_anat,1]\
@@ -56,9 +56,9 @@ process REGISTRATION_ANATTODWI {
     moving_id=\${moving_id#${meta.id}__*}
 
     mv warped.nii.gz ${prefix}__\${moving_id}_warped.nii.gz
-    mv trans0GenericAffine.mat ${prefix}__forward1_affine.mat
-    mv trans1Warp.nii.gz ${prefix}__forward0_warp.nii.gz
-    mv trans1InverseWarp.nii.gz ${prefix}__backward1_warp.nii.gz
+    mv forward0GenericAffine.mat ${prefix}__forward1_affine.mat
+    mv forward1Warp.nii.gz ${prefix}__forward0_warp.nii.gz
+    mv forward1InverseWarp.nii.gz ${prefix}__backward1_warp.nii.gz
 
     antsApplyTransforms -d 3 -i $moving_anat -r $fixed_reference \
         -o Linear[${prefix}__backward0_affine.mat] \
@@ -130,17 +130,11 @@ process REGISTRATION_ANATTODWI {
     def run_qc = task.ext.run_qc as Boolean || false
 
     """
-    set +e
-    function handle_code () {
-        local code=\$?
-        ignore=( 1 )
-        [[ " \${ignore[@]} " =~ " \$code " ]] || exit \$code
-    }
-    trap 'handle_code' ERR
-
     antsRegistration -h
+    antsApplyTransforms -h
+    mrconvert -h
     scil_viz_volume_screenshot -h
-    convert -h
+    convert -help .
 
     moving_id=\$(basename $moving_anat .nii.gz)
     moving_id=\${moving_id#${meta.id}__*}

@@ -48,14 +48,14 @@ workflow REGISTRATION {
 
             // ** Set compulsory outputs ** //
             out_image_warped = REGISTRATION_EASYREG.out.image_warped
-            out_affine = Channel.empty()
-            out_warp = REGISTRATION_EASYREG.out.warp
-            out_inverse_affine = Channel.empty()
-            out_inverse_warp = REGISTRATION_EASYREG.out.inverse_warp
-            out_image_transform = REGISTRATION_EASYREG.out.warp
-            out_inverse_image_transform = REGISTRATION_EASYREG.out.inverse_warp
-            out_tractogram_transform = REGISTRATION_EASYREG.out.inverse_warp
-            out_inverse_tractogram_transform = REGISTRATION_EASYREG.out.warp
+            out_forward_affine = Channel.empty()
+            out_forward_warp = REGISTRATION_EASYREG.out.forward_warp
+            out_backward_affine = Channel.empty()
+            out_backward_warp = REGISTRATION_EASYREG.out.backward_warp
+            out_forward_image_transform = REGISTRATION_EASYREG.out.forward_warp
+            out_backward_image_transform = REGISTRATION_EASYREG.out.backward_warp
+            out_forward_tractogram_transform = REGISTRATION_EASYREG.out.backward_warp
+            out_backward_tractogram_transform = REGISTRATION_EASYREG.out.forward_warp
 
             // ** Set optional outputs. ** //
             // If segmentations are not provided as inputs,
@@ -74,30 +74,30 @@ workflow REGISTRATION {
 
             // Tag all synthmorph transforms per type, and index if in a chain. This info will be
             // used after conversion to sort out the transforms from the conversion module.
-            ch_convert_affine = REGISTRATION_SYNTHREGISTRATION.out.affine
-                .map{ meta, affine -> [meta, [tag: "affine"], affine] }
-            ch_convert_warp = REGISTRATION_SYNTHREGISTRATION.out.warp
-                .map{ meta, warp -> [meta, [tag: "warp"], warp] }
-            ch_convert_inverse_affine = REGISTRATION_SYNTHREGISTRATION.out.inverse_affine
-                .map{ meta, inverse_affine -> [meta, [tag: "inverse_affine"], inverse_affine] }
-            ch_convert_inverse_warp = REGISTRATION_SYNTHREGISTRATION.out.inverse_warp
-                .map{ meta, inverse_warp -> [meta, [tag: "inverse_warp"], inverse_warp] }
-            ch_convert_image_transform = REGISTRATION_SYNTHREGISTRATION.out.image_transform
-                .map{ meta, transforms -> [meta, [tag: "image_transform"], 0..<transforms.size(), transforms] }
+            ch_convert_forward_affine = REGISTRATION_SYNTHREGISTRATION.out.forward_affine
+                .map{ meta, forward_affine -> [meta, [tag: "forward_affine"], forward_affine] }
+            ch_convert_forward_warp = REGISTRATION_SYNTHREGISTRATION.out.forward_warp
+                .map{ meta, forward_warp -> [meta, [tag: "forward_warp"], forward_warp] }
+            ch_convert_backward_affine = REGISTRATION_SYNTHREGISTRATION.out.backward_affine
+                .map{ meta, backward_affine -> [meta, [tag: "backward_affine"], backward_affine] }
+            ch_convert_backward_warp = REGISTRATION_SYNTHREGISTRATION.out.backward_warp
+                .map{ meta, backward_warp -> [meta, [tag: "backward_warp"], backward_warp] }
+            ch_convert_forward_image_transform = REGISTRATION_SYNTHREGISTRATION.out.forward_image_transform
+                .map{ meta, transforms -> [meta, [tag: "forward_image_transform"], 0..<transforms.size(), transforms] }
                 .transpose()
                 .map{ meta, tag, idx, transform -> [meta, tag + [idx: idx], transform]}
-            ch_convert_inverse_image_transform = REGISTRATION_SYNTHREGISTRATION.out.inverse_image_transform
-                .map{ meta, transforms -> [meta, [tag: "inverse_image_transform"], 0..<transforms.size(), transforms] }
+            ch_convert_backward_image_transform = REGISTRATION_SYNTHREGISTRATION.out.backward_image_transform
+                .map{ meta, transforms -> [meta, [tag: "backward_image_transform"], 0..<transforms.size(), transforms] }
                 .transpose()
                 .map{ meta, tag, idx, transform -> [meta, tag + [idx: idx], transform]}
 
             // Mix all transforms into a single channel for conversion
-            ch_convert = ch_convert_affine
-                .mix(ch_convert_warp)
-                .mix(ch_convert_inverse_affine)
-                .mix(ch_convert_inverse_warp)
-                .mix(ch_convert_image_transform)
-                .mix(ch_convert_inverse_image_transform)
+            ch_convert = ch_convert_forward_affine
+                .mix(ch_convert_forward_warp)
+                .mix(ch_convert_backward_affine)
+                .mix(ch_convert_backward_warp)
+                .mix(ch_convert_forward_image_transform)
+                .mix(ch_convert_backward_image_transform)
                 .combine(ch_fixed_image, by: 0)
                 .combine(ch_moving_image, by: 0)
                 .map{ meta, tag, transform, fixed, moving ->
@@ -118,35 +118,34 @@ workflow REGISTRATION {
             // Un-mix conversion outputs using the tags. Save indexes for output sorting
             ch_conversion_outputs = REGISTRATION_CONVERT.out.transformation
                 .branch{ meta, transform ->
-                    affine: meta.tag == "affine"
+                    forward_affine: meta.tag == "forward_affine"
                         return [meta.cache, transform]
-                    warp: meta.tag == "warp"
+                    forward_warp: meta.tag == "forward_warp"
                         return [meta.cache, transform]
-                    inverse_affine: meta.tag == "inverse_affine"
+                    backward_affine: meta.tag == "backward_affine"
                         return [meta.cache, transform]
-                    inverse_warp: meta.tag == "inverse_warp"
+                    backward_warp: meta.tag == "backward_warp"
                         return [meta.cache, transform]
-                    image_transform: meta.tag == "image_transform"
+                    forward_image_transform: meta.tag == "forward_image_transform"
                         return [meta.cache, [idx: meta.idx, trans: transform]]
-                    inverse_image_transform: meta.tag == "inverse_image_transform"
+                    backward_image_transform: meta.tag == "backward_image_transform"
                         return [meta.cache, [idx: meta.idx, trans: transform]]
                 }
 
-
             // ** Set compulsory outputs ** //
             out_image_warped = REGISTRATION_SYNTHREGISTRATION.out.image_warped
-            out_affine = ch_conversion_outputs.affine
-            out_warp = ch_conversion_outputs.warp
-            out_inverse_affine = ch_conversion_outputs.inverse_affine
-            out_inverse_warp = ch_conversion_outputs.inverse_warp
-            out_image_transform = ch_conversion_outputs.image_transform
+            out_forward_affine = ch_conversion_outputs.forward_affine
+            out_forward_warp = ch_conversion_outputs.forward_warp
+            out_backward_affine = ch_conversion_outputs.backward_affine
+            out_backward_warp = ch_conversion_outputs.backward_warp
+            out_forward_image_transform = ch_conversion_outputs.forward_image_transform
                 .groupTuple()
                 .map{ meta, trans -> [meta, trans.sort{ t1, t2 -> t1.idx <=> t2.idx }.collect{ it.trans }] }
-            out_inverse_image_transform = ch_conversion_outputs.inverse_image_transform
+            out_backward_image_transform = ch_conversion_outputs.backward_image_transform
                 .groupTuple()
                 .map{ meta, trans -> [meta, trans.sort{ t1, t2 -> t1.idx <=> t2.idx }.collect{ it.trans }] }
-            out_tractogram_transform = out_inverse_image_transform
-            out_inverse_tractogram_transform = out_image_transform
+            out_forward_tractogram_transform = out_backward_image_transform
+            out_backward_tractogram_transform = out_forward_image_transform
             // ** and optional outputs. ** //
             out_ref_warped = Channel.empty()
             out_segmentation = Channel.empty()
@@ -178,14 +177,14 @@ workflow REGISTRATION {
 
             // ** Set compulsory outputs ** //
             out_image_warped = REGISTRATION_ANATTODWI.out.anat_warped
-            out_affine = REGISTRATION_ANATTODWI.out.affine
-            out_warp = REGISTRATION_ANATTODWI.out.warp
-            out_inverse_affine = REGISTRATION_ANATTODWI.out.inverse_affine
-            out_inverse_warp = REGISTRATION_ANATTODWI.out.inverse_warp
-            out_image_transform = REGISTRATION_ANATTODWI.out.image_transform
-            out_inverse_image_transform = REGISTRATION_ANATTODWI.out.inverse_image_transform
-            out_tractogram_transform = REGISTRATION_ANATTODWI.out.tractogram_transform
-            out_inverse_tractogram_transform = REGISTRATION_ANATTODWI.out.inverse_tractogram_transform
+            out_forward_affine = REGISTRATION_ANATTODWI.out.forward_affine
+            out_forward_warp = REGISTRATION_ANATTODWI.out.forward_warp
+            out_backward_affine = REGISTRATION_ANATTODWI.out.backward_affine
+            out_backward_warp = REGISTRATION_ANATTODWI.out.backward_warp
+            out_forward_image_transform = REGISTRATION_ANATTODWI.out.forward_image_transform
+            out_backward_image_transform = REGISTRATION_ANATTODWI.out.backward_image_transform
+            out_forward_tractogram_transform = REGISTRATION_ANATTODWI.out.forward_tractogram_transform
+            out_backward_tractogram_transform = REGISTRATION_ANATTODWI.out.backward_tractogram_transform
 
             // ** Registration using ANTS SYN SCRIPTS ** //
             // Registration using antsRegistrationSyN.sh or antsRegistrationSyNQuick.sh, has
@@ -204,14 +203,14 @@ workflow REGISTRATION {
 
             // ** Set compulsory outputs ** //
             out_image_warped = out_image_warped.mix(REGISTRATION_ANTS.out.image_warped)
-            out_affine = out_affine.mix(REGISTRATION_ANTS.out.affine)
-            out_warp = out_warp.mix(REGISTRATION_ANTS.out.warp)
-            out_inverse_affine = out_inverse_affine.mix(REGISTRATION_ANTS.out.inverse_affine)
-            out_inverse_warp = out_inverse_warp.mix(REGISTRATION_ANTS.out.inverse_warp)
-            out_image_transform = out_image_transform.mix(REGISTRATION_ANTS.out.image_transform)
-            out_inverse_image_transform = out_inverse_image_transform.mix(REGISTRATION_ANTS.out.inverse_image_transform)
-            out_tractogram_transform = out_tractogram_transform.mix(REGISTRATION_ANTS.out.tractogram_transform)
-            out_inverse_tractogram_transform = out_inverse_tractogram_transform.mix(REGISTRATION_ANTS.out.inverse_tractogram_transform)
+            out_forward_affine = out_forward_affine.mix(REGISTRATION_ANTS.out.forward_affine)
+            out_forward_warp = out_forward_warp.mix(REGISTRATION_ANTS.out.forward_warp)
+            out_backward_affine = out_backward_affine.mix(REGISTRATION_ANTS.out.backward_affine)
+            out_backward_warp = out_backward_warp.mix(REGISTRATION_ANTS.out.backward_warp)
+            out_forward_image_transform = out_forward_image_transform.mix(REGISTRATION_ANTS.out.forward_image_transform)
+            out_backward_image_transform = out_backward_image_transform.mix(REGISTRATION_ANTS.out.backward_image_transform)
+            out_forward_tractogram_transform = out_forward_tractogram_transform.mix(REGISTRATION_ANTS.out.forward_tractogram_transform)
+            out_backward_tractogram_transform = out_backward_tractogram_transform.mix(REGISTRATION_ANTS.out.backward_tractogram_transform)
 
             // **and optional outputs **//
             out_ref_warped = Channel.empty()
@@ -220,20 +219,20 @@ workflow REGISTRATION {
         }
     emit:
         image_warped                    = out_image_warped                  // channel: [ val(meta), image ]
-        ref_warped                      = out_ref_warped                    // channel: [ val(meta), ref ]
+        reference_warped                = out_ref_warped                    // channel: [ val(meta), ref ]
         // Individual transforms
-        affine                          = out_affine                        // channel: [ val(meta), <affine> ]
-        warp                            = out_warp                          // channel: [ val(meta), <warp> ]
-        inverse_warp                    = out_inverse_warp                  // channel: [ val(meta), <inverse-warp> ]
-        inverse_affine                  = out_inverse_affine                // channel: [ val(meta), <inverse-affine> ]
+        forward_affine                  = out_forward_affine                // channel: [ val(meta), <forward-affine> ]
+        forward_warp                    = out_forward_warp                  // channel: [ val(meta), <forward-warp> ]
+        backward_warp                   = out_backward_warp                 // channel: [ val(meta), <backward-warp> ]
+        backward_affine                 = out_backward_affine               // channel: [ val(meta), <backward-affine> ]
         // Combined transforms
-        image_transform                 = out_image_transform               // channel: [ val(meta), [ <warp>, <affine> ] ]
-        inverse_image_transform         = out_inverse_image_transform       // channel: [ val(meta), [ <inverse-affine>, <inverse-warp> ] ]
-        tractogram_transform            = out_tractogram_transform          // channel: [ val(meta), [ <inverse-affine>, <inverse-warp> ] ]
-        inverse_tractogram_transform    = out_inverse_tractogram_transform  // channel: [ val(meta), [ <warp>, <affine> ] ]
+        forward_image_transform         = out_forward_image_transform       // channel: [ val(meta), [ <forward-warp>, <forward-affine> ] ]
+        backward_image_transform        = out_backward_image_transform      // channel: [ val(meta), [ <backward-affine>, <backward-warp> ] ]
+        forward_tractogram_transform    = out_forward_tractogram_transform  // channel: [ val(meta), [ <forward-warp>, <forward-affine> ] ]
+        backward_tractogram_transform   = out_backward_tractogram_transform // channel: [ val(meta), [ <forward-warp>, <forward-affine> ] ]
         // Segmentations
         segmentation                    = out_segmentation                  // channel: [ val(meta), segmentation ]
-        ref_segmentation                = out_ref_segmentation              // channel: [ val(meta), ref-segmentation ]
+        reference_segmentation          = out_ref_segmentation              // channel: [ val(meta), ref-segmentation ]
 
         mqc                             = ch_mqc                            // channel: [ *mqc.*, ... ]
         versions                        = ch_versions                       // channel: [ versions.yml ]

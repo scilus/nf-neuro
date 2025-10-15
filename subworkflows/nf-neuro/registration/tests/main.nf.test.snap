@@ -171,7 +171,41 @@
     "registration - ANTs - SyNQuick": {
         "content": [
             {
-                "affine": [
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__backward0_affine.mat"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__backward0_affine.mat",
+                        "test__backward1_warp.nii.gz"
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward0_warp.nii.gz",
+                        "test__forward1_affine.mat"
+                    ]
+                ],
+                "backward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__backward1_warp.nii.gz"
+                    ]
+                ],
+                "forward_affine": [
                     [
                         {
                             "id": "test"
@@ -179,13 +213,30 @@
                         "test__forward1_affine.mat"
                     ]
                 ],
-                "image_transform": [
+                "forward_image_transform": [
                     [
                         {
                             "id": "test"
                         },
                         "test__forward0_warp.nii.gz",
                         "test__forward1_affine.mat"
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__backward0_affine.mat",
+                        "test__backward1_warp.nii.gz"
+                    ]
+                ],
+                "forward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__forward0_warp.nii.gz"
                     ]
                 ],
                 "image_warped": [
@@ -196,40 +247,6 @@
                         "test__t1_warped.nii.gz"
                     ]
                 ],
-                "inverse_affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__backward0_affine.mat"
-                    ]
-                ],
-                "inverse_image_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__backward0_affine.mat",
-                        "test__backward1_warp.nii.gz"
-                    ]
-                ],
-                "inverse_tractogram_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__forward0_warp.nii.gz",
-                        "test__forward1_affine.mat"
-                    ]
-                ],
-                "inverse_warp": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__backward1_warp.nii.gz"
-                    ]
-                ],
                 "mqc": [
                     [
                         {
@@ -238,25 +255,8 @@
                         "test__registration_ants_mqc.gif"
                     ]
                 ],
-                "tractogram_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__backward0_affine.mat",
-                        "test__backward1_warp.nii.gz"
-                    ]
-                ],
                 "versions": [
                     "versions.yml:md5,5f3f8c831b55885ffcc7bd976939dbad"
-                ],
-                "warp": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__forward0_warp.nii.gz"
-                    ]
                 ]
             }
         ],
@@ -264,7 +264,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-10-08T15:13:44.415238887"
+        "timestamp": "2025-10-14T22:14:12.754132943"
     },
     "registration - ANTs - Anat to DWI": {
         "content": [

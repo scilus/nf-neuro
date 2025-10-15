@@ -12,14 +12,14 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     output:
     tuple val(meta), path("*__warped.nii.gz")                               , emit: image_warped
-    tuple val(meta), path("*__forward{0,1,_standalone}_affine.lta")         , emit: affine, optional: true
-    tuple val(meta), path("*__forward0_deform.nii.gz")                      , emit: warp, optional: true
-    tuple val(meta), path("*__backward1_deform.nii.gz")                     , emit: inverse_warp, optional: true
-    tuple val(meta), path("*__backward{0,_standalone}_affine.lta")          , emit: inverse_affine, optional: true
-    tuple val(meta), path("*__forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: image_transform
-    tuple val(meta), path("*__backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: inverse_image_transform
-    tuple val(meta), path("*__backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: tractogram_transform
-    tuple val(meta), path("*__forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: inverse_tractogram_transform
+    tuple val(meta), path("*__forward{0,1,_standalone}_affine.lta")         , emit: forward_affine, optional: true
+    tuple val(meta), path("*__forward0_deform.nii.gz")                      , emit: forward_warp, optional: true
+    tuple val(meta), path("*__backward1_deform.nii.gz")                     , emit: backward_warp, optional: true
+    tuple val(meta), path("*__backward{0,_standalone}_affine.lta")          , emit: backward_affine, optional: true
+    tuple val(meta), path("*__forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: forward_image_transform
+    tuple val(meta), path("*__backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: backward_image_transform
+    tuple val(meta), path("*__backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: forward_tractogram_transform
+    tuple val(meta), path("*__forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: backward_tractogram_transform
     path "versions.yml"                                                     , emit: versions
 
     when:

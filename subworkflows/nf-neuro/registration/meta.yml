@@ -4,8 +4,11 @@ description: |
   It requires as input at least a moving (ch_image) and a reference (ch_ref) image to properly
   perform registration.
 
-  Output transformations curated for use with the REGISTRATION_ANTSAPPLYTRANSFORMS subworkflows
-  are available under the names image_transform and tractogram_transform, and their inverses.
+  Output transformations curated for images for use with the REGISTRATION_ANTSAPPLYTRANSFORMS module
+  are available under the names `forward_image_transform` and `backward_image_transform`. The same lists
+  are also available for tractograms (`forward_tractogram_transform` and `backward_tractogram_transform`).
+  However, to use the REGISTRATION_TRACTOGRAM module, you have to use the `backward_affine` and `backward_warp`
+  channels provided by this subworkflow.
 
   Registration suites:
   - EasyReg (ML): params.run_easyreg = true
@@ -96,64 +99,68 @@ output:
         Channel containing images warped in fixed space.
         Structure: [ val(meta), path(image) ]
       pattern: "*.{nii,nii.gz}"
-  - ref_warped:
+  - reference_warped:
       type: file
       description: |
         ONLY PROVIDED BY REGISTRATION_EASYREG. Channel containing the reference image warped in moving space.
         Structure: [ val(meta), path(image) ]
       pattern: "*.{nii,nii.gz}"
       optional: true
-  - affine:
+  - forward_affine:
       type: file
       description: |
-        Channel containing the affine forward transformation matrix file.
-        Structure: [ val(meta), path(affine) ]
+        Channel containing the affine transformation matrix to fixed space.
+        Structure: [ val(meta), path(forward_affine) ]
       pattern: "*__forward*.{lta,mat}"
       optional: true
-  - warp:
+  - forward_warp:
       type: file
       description: |
-        Channel containing the forward deformation field file.
-        Structure: [ val(meta), path(warp) ]
+        Channel containing the deformation field to fixed space.
+        Structure: [ val(meta), path(forward_warp) ]
       pattern: "*__forward*.{nii,nii.gz}"
       optional: true
-  - inverse_warp:
+  - backward_warp:
       type: file
       description: |
-        Channel containing the inverse deformation field file.
-        Structure: [ val(meta), path(inverse_warp) ]
+        Channel containing the deformation field to moving space.
+        Structure: [ val(meta), path(backward_warp) ]
       pattern: "*__backward*.{nii,nii.gz}"
       optional: true
-  - inverse_affine:
+  - backward_affine:
       type: file
       description: |
-        Channel containing the inverse affine transformation matrix file.
-        Structure: [ val(meta), path(inverse_affine) ]
+        Channel containing the affine transformation matrix to moving space.
+        Structure: [ val(meta), path(backward_affine) ]
       pattern: "*__backward*.{lta,mat}"
       optional: true
-  - image_transform:
+  - forward_image_transform:
       type: list
       description: |
-        Tuple, Transformation files to warp images in the correct order
-        for REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ warp, affine ] ].
+        Channel containing the transformation tuples to warp images to fixed space,
+        in the correct order for REGISTRATION_ANTSAPPLYTRANSFORMS.
+        Structure: [ val(meta), [ path(forward_warp), path(forward_affine) ] ].
       pattern: "*__forward*.{nii,nii.gz,mat,lta}"
-  - inverse_image_transform:
+  - backward_image_transform:
       type: list
       description: |
-        Tuple, Transformation files to warp images in the correct order for
-        REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ inverse_affine, inverse_warp ] ].
+        Channel containing the transformation tuples to warp images to moving space,
+        in the correct order for REGISTRATION_ANTSAPPLYTRANSFORMS.
+        Structure: [ val(meta), [ path(backward_affine), path(backward_warp) ] ].
       pattern: "*__backward*.{nii,nii.gz,mat,lta}"
-  - tractogram_transform:
+  - forward_tractogram_transform:
       type: list
       description: |
-        Tuple, Transformation files to warp tractograms in the correct order
-        for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ inverse_affine, inverse_warp ] ].
+        Channel containing the transformation tuples to warp tractograms to fixed space,
+        in the correct order for REGISTRATION_TRANSFORMTRACTOGRAM.
+        Structure: [ val(meta), [ path(backward_warp), path(backward_affine) ] ].
       pattern: "*__backward*.{nii,nii.gz,mat,lta}"
-  - inverse_tractogram_transform:
+  - backward_tractogram_transform:
       type: list
       description: |
-        Tuple, Transformation files to warp tractograms in the correct order
-        for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ warp, affine ] ].
+        Channel containing the transformation tuples to warp tractograms to moving space,
+        in the correct order for REGISTRATION_TRANSFORMTRACTOGRAM.
+        Structure: [ val(meta), [ path(forward_warp), path(forward_affine) ] ].
       pattern: "*__forward*.{nii,nii.gz,mat,lta}"
   - segmentation:
       type: file
@@ -163,12 +170,12 @@ output:
         Structure: [ val(meta), path(segmentation) ]
       pattern: "*.{nii,nii.gz}"
       optional: true
-  - ref_segmentation:
+  - reference_segmentation:
       type: file
       description: |
         ONLY PROVIDED BY REGISTRATION_SYNTHREGISTRATION. Channel containing the SynthSeg v2 (non-robust)
         segmentation + parcellation in fixed space (reference in Easyreg naming convention).
-        Structure: [ val(meta), path(ref_segmentation) ]
+        Structure: [ val(meta), path(reference_segmentation) ]
       pattern: "*.{nii,nii.gz}"
       optional: true
   - mqc:

@@ -83,7 +83,7 @@ output:
           pattern: "*_warped_reference.nii.gz"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-  warp:
+  forward_warp:
     - - meta:
           type: map
           description: |
@@ -96,7 +96,7 @@ output:
           optional: true
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-  inverse_warp:
+  backward_warp:
     - - meta:
           type: map
           description: |
