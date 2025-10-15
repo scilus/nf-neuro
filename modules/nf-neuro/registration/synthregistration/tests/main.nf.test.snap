@@ -2,7 +2,43 @@
     "registration - synthregistration": {
         "content": [
             {
-                "affine": [
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__backward_standalone_affine.lta"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__backward1_deform.nii.gz"
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__forward0_deform.nii.gz"
+                    ]
+                ],
+                "backward_warp": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__backward1_deform.nii.gz"
+                    ]
+                ],
+                "forward_affine": [
                     [
                         {
                             "id": "test",
@@ -11,7 +47,25 @@
                         "test__forward_standalone_affine.lta"
                     ]
                 ],
-                "image_transform": [
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__forward0_deform.nii.gz"
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__backward1_deform.nii.gz"
+                    ]
+                ],
+                "forward_warp": [
                     [
                         {
                             "id": "test",
@@ -29,70 +83,16 @@
                         "test__warped.nii.gz"
                     ]
                 ],
-                "inverse_affine": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__backward_standalone_affine.lta"
-                    ]
-                ],
-                "inverse_image_transform": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__backward1_deform.nii.gz"
-                    ]
-                ],
-                "inverse_tractogram_transform": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__forward0_deform.nii.gz"
-                    ]
-                ],
-                "inverse_warp": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__backward1_deform.nii.gz"
-                    ]
-                ],
-                "tractogram_transform": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__backward1_deform.nii.gz"
-                    ]
-                ],
                 "versions": [
                     "versions.yml:md5,c9f5ddf6ca4a08a71b117bdb7653c7f9"
-                ],
-                "warp": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__forward0_deform.nii.gz"
-                    ]
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-28T15:53:09.741422131"
+        "timestamp": "2025-10-14T21:29:05.976082158"
     },
     "registration - synthregistration - stub-run": {
         "content": [

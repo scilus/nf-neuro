@@ -96,7 +96,7 @@ workflow BUNDLE_SEG {
 
         // ** Perform bundle recognition and segmentation ** //
         ch_recognize_bundle = ch_tractogram
-            .join(REGISTRATION.out.affine)
+            .join(REGISTRATION.out.forward_affine)
             .combine(ch_atlas_config)
             .combine(ch_atlas_average)
 

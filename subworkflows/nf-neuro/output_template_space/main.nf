@@ -164,7 +164,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** Need to unpack the files and apply the transformation to each one ** //
     ch_files_to_transform = ch_nifti_files
         .join(REGISTRATION.out.image_warped)
-        .join(REGISTRATION.out.image_transform)
+        .join(REGISTRATION.out.forward_image_transform)
 
     WARPIMAGES ( ch_files_to_transform )
     ch_versions = ch_versions.mix(WARPIMAGES.out.versions)
@@ -173,7 +173,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** Same process for the masks ** //
     ch_masks_to_transform = ch_mask_files
         .join(REGISTRATION.out.image_warped)
-        .join(REGISTRATION.out.image_transform)
+        .join(REGISTRATION.out.forward_image_transform)
     WARPMASK ( ch_masks_to_transform )
     ch_versions = ch_versions.mix(WARPMASK.out.versions)
     ch_mqc = ch_mqc.mix(WARPMASK.out.mqc)
@@ -181,7 +181,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** Same process for the labels ** //
     ch_labels_to_transform = ch_labels_files
         .join(REGISTRATION.out.image_warped)
-        .join(REGISTRATION.out.image_transform)
+        .join(REGISTRATION.out.forward_image_transform)
     WARPLABELS ( ch_labels_to_transform )
     ch_versions = ch_versions.mix(WARPLABELS.out.versions)
     ch_mqc = ch_mqc.mix(WARPLABELS.out.mqc)
@@ -189,8 +189,8 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** Apply the transformation to the tractograms ** //
     ch_tractograms_to_transform = ch_trk_files
         .join(REGISTRATION.out.image_warped)
-        .join(REGISTRATION.out.inverse_affine)
-        .join(REGISTRATION.out.inverse_warp, remainder: true)
+        .join(REGISTRATION.out.backward_affine)
+        .join(REGISTRATION.out.backward_warp, remainder: true)
         .map{ meta, trk, image, affine, warp ->
             [meta, image, affine, trk, [], warp ?: []]
         }

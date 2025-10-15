@@ -70,7 +70,7 @@ output:
           pattern: "*_warped.nii.gz"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-  affine:
+  forward_affine:
     - - meta:
           type: map
           description: |
@@ -78,10 +78,10 @@ output:
             e.g. `[ id:'test', single_end:false ]`
       - "*__forward1_affine.mat":
           type: file
-          description: Affine transformation matrix file.
+          description: Affine transformation matrix to fixed space.
           pattern: "*__forward1_affine.mat"
           ontologies: []
-  warp:
+  forward_warp:
     - - meta:
           type: map
           description: |
@@ -89,11 +89,11 @@ output:
             e.g. `[ id:'test', single_end:false ]`
       - "*__forward0_warp.nii.gz":
           type: file
-          description: Deformation field file.
+          description: Deformation field to fixed space.
           pattern: "*__forward0_warp.nii.gz"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-  inverse_warp:
+  backward_warp:
     - - meta:
           type: map
           description: |
@@ -101,11 +101,11 @@ output:
             e.g. `[ id:'test', single_end:false ]`
       - "*__backward1_warp.nii.gz":
           type: file
-          description: Inverse deformation field file.
+          description: Deformation field to moving space.
           pattern: "*__backward1_warp.nii.gz"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
-  inverse_affine:
+  backward_affine:
     - - meta:
           type: map
           description: |
@@ -113,10 +113,10 @@ output:
             e.g. `[ id:'test', single_end:false ]`
       - "*__backward0_affine.mat":
           type: file
-          description: Inverse affine transformation matrix file.
+          description: Affine transformation matrix to moving space.
           pattern: "*__backward0_affine.mat"
           ontologies: []
-  image_transform:
+  forward_image_transform:
     - - meta:
           type: map
           description: |
@@ -125,11 +125,11 @@ output:
       - "*__forward*.{nii.gz,mat}":
           type: list
           description: |
-            Tuple, Transformation files to warp images in the correct order
-            for REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ warp, affine ] ].
+            Tuple, Transformation files to warp images in fixed space, in the correct order
+            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ forward_warp, forward_affine ] ].
           pattern: "*__forward*.{nii.gz,mat}"
           ontologies: []
-  inverse_image_transform:
+  backward_image_transform:
     - - meta:
           type: map
           description: |
@@ -138,11 +138,11 @@ output:
       - "*__backward*.{nii.gz,mat}":
           type: list
           description: |
-            Tuple, Transformation files to warp images in the correct order for
-            REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ inverse_affine, inverse_warp ] ].
+            Tuple, transformation files to warp images in moving space, in the correct order
+            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ backward_affine, backward_warp ] ].
           pattern: "*__backward*.{nii.gz,mat}"
           ontologies: []
-  tractogram_transform:
+  forward_tractogram_transform:
     - - meta:
           type: map
           description: |
@@ -151,11 +151,11 @@ output:
       - "*__backward*.{nii.gz,mat}":
           type: list
           description: |
-            Tuple, Transformation files to warp tractograms in the correct order
-            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ inverse_affine, inverse_warp ] ].
+            Tuple, transformation files to warp tractograms into fixed space, in the correct order
+            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ backward_affine, backward_warp ] ].
           pattern: "*__backward*.{nii.gz,mat}"
           ontologies: []
-  inverse_tractogram_transform:
+  backward_tractogram_transform:
     - - meta:
           type: map
           description: |
@@ -164,8 +164,8 @@ output:
       - "*__forward*.{nii.gz,mat}":
           type: list
           description: |
-            Tuple, Transformation files to warp tractograms in the correct order
-            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ warp, affine ] ].
+            Tuple, transformation files to warp tractograms into moving space, in the correct order
+            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ forward_affine, forward_warp ] ].
           pattern: "*__forward*.{nii.gz,mat}"
           ontologies: []
   mqc:

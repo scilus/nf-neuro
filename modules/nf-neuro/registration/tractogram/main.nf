@@ -8,8 +8,8 @@ process REGISTRATION_TRACTOGRAM {
     tuple val(meta), path(anat), path(affine), path(tractogram), path(reference), path(deformation)
 
     output:
-    tuple val(meta), path("*__*.{trk,tck}"), emit: tractogram
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*__*.{trk,tck}") , emit: tractogram
+    path "versions.yml"                     , emit: versions
 
     when:
     task.ext.when == null || task.ext.when

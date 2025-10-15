@@ -61,8 +61,8 @@ nextflow_process {
                     file(process.out.segmentation_warped.get(0).get(1)).name,
                     niftiMD5SUM(process.out.fixed_warped.get(0).get(1), 6),
                     niftiMD5SUM(process.out.image_warped.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.warp.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.inverse_warp.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.forward_warp.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.backward_warp.get(0).get(1), 6),
                     process.out.versions
                 ).match() }
             )
