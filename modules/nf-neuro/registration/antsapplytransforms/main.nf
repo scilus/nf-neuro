@@ -8,7 +8,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     tuple val(meta), path(images, arity: '1..*'), path(reference), path(transformations, arity: '1..*')
 
     output:
-    tuple val(meta), path("*.nii.gz")                                   , emit: warped_image
+    tuple val(meta), path("*.{nii.nii.gz}")                             , emit: warped_image
     tuple val(meta), path("*_registration_antsapplytransforms_mqc.gif") , emit: mqc, optional: true
     path "versions.yml"                                                 , emit: versions
 
