@@ -64,7 +64,7 @@
                 ],
                 "versions": [
                     "versions.yml:md5,300199ef2ea6dd6438553c3ec2615e58",
-                    "versions.yml:md5,f0fa799dd0d27d1974ea409d9c9e5da7"
+                    "versions.yml:md5,5bc0d347809508f4b94ebe433b0f21b9"
                 ]
             }
         ],
@@ -72,7 +72,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-16T15:28:24.402873254"
+        "timestamp": "2025-10-16T20:51:47.326447932"
     },
     "registration - easyreg": {
         "content": [
