@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Subworkflow REGISTRATION"
     script "../main.nf"
     workflow "REGISTRATION"
+    config "./nextflow.config"
 
     tag "subworkflows"
     tag "subworkflows_nfneuro"
@@ -12,8 +13,9 @@ nextflow_workflow {
     tag "registration/anattodwi"
     tag "registration"
     tag "registration/ants"
+    tag "registration/convert"
     tag "registration/easyreg"
-    tag "registration/synthregistration"
+    tag "registration/synthmorph"
 
     tag "load_test_data"
 
@@ -25,15 +27,15 @@ nextflow_workflow {
             script "../../load_test_data/main.nf"
             process {
                 """
-                input[0] = Channel.from( [ "T1w.zip", "b0.zip", "dti.zip" ] )
+                input[0] = Channel.from( [ "freesurfer.zip", "T1w.zip", "b0.zip", "dti.zip", "others.zip" ] )
                 input[1] = "test.load-test-data"
                 """
             }
         }
     }
 
-    test("registration - antsRegistration") {
-        config "./nextflow.config"
+    test("registration - ANTs - Anat to DWI") {
+        config "./ants.config"
         when {
             workflow {
                 """
@@ -43,16 +45,16 @@ nextflow_workflow {
                         b0: it.simpleName == "b0"
                         dti: it.simpleName == "dti"
                     }
-                input[0] = ch_split_test_data.t1w.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/T1w.nii.gz")
-                    ]
-                }
-                input[1] = ch_split_test_data.b0.map{
+                input[0] = ch_split_test_data.b0.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/b0.nii.gz")
+                    ]
+                }
+                input[1] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz")
                     ]
                 }
                 input[2] = ch_split_test_data.dti.map{
@@ -64,6 +66,7 @@ nextflow_workflow {
                 input[3] = Channel.empty()
                 input[4] = Channel.empty()
                 input[5] = Channel.empty()
+                input[6] = Channel.empty()
                 """
             }
         }
@@ -78,7 +81,7 @@ nextflow_workflow {
                             [(channel.key): ["versions"].contains(channel.key)
                                 ? channel.value
                                 : channel.value.collect{ subject ->
-                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
                 ).match() },
@@ -95,31 +98,35 @@ nextflow_workflow {
         }
     }
 
-    test("registration - SyNQuick") {
-        config "./nextflow.config"
+    test("registration - ANTs - SyNQuick") {
+        config "./ants.config"
         when {
             workflow {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         t1w: it.simpleName == "T1w"
-                        b0: it.simpleName == "b0"
-                        dti: it.simpleName == "dti"
+                        moving: it.simpleName == "others"
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
                         [ id:'test' ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]}
-                input[1] = ch_split_test_data.b0.map{
+                input[1] = ch_split_test_data.moving.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/b0.nii.gz")
+                        file("\${test_data_directory}/t1.nii.gz")
                     ]}
                 input[2] = Channel.empty()
-                input[3] = Channel.empty()
+                input[3] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w_mask.nii.gz")
+                    ]}
                 input[4] = Channel.empty()
                 input[5] = Channel.empty()
+                input[6] = Channel.empty()
                 """
             }
         }
@@ -134,7 +141,7 @@ nextflow_workflow {
                             [(channel.key): ["versions"].contains(channel.key)
                                 ? channel.value
                                 : channel.value.collect{ subject ->
-                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
                 ).match() },
@@ -152,7 +159,7 @@ nextflow_workflow {
     }
 
     test("registration - easyreg") {
-        config "./nextflow_easyreg.config"
+        config "./easyreg.config"
         when {
             workflow {
                 """
@@ -160,7 +167,6 @@ nextflow_workflow {
                     .branch{
                         t1w: it.simpleName == "T1w"
                         b0: it.simpleName == "b0"
-                        dti: it.simpleName == "dti"
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
@@ -178,6 +184,7 @@ nextflow_workflow {
                 input[3] = Channel.empty()
                 input[4] = Channel.empty()
                 input[5] = Channel.empty()
+                input[6] = Channel.empty()
                 """
             }
         }
@@ -192,15 +199,16 @@ nextflow_workflow {
                             [(channel.key): ["versions"].contains(channel.key)
                                 ? channel.value
                                 : channel.value.collect{ subject ->
-                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
                 ).match() }
             )
         }
     }
-    test("registration - synthregistration") {
-        config "./nextflow_synthregistration.config"
+
+    test("registration - Synthmorph") {
+        config "./synthmorph.config"
         when {
             workflow {
                 """
@@ -208,7 +216,7 @@ nextflow_workflow {
                     .branch{
                         t1w: it.simpleName == "T1w"
                         b0: it.simpleName == "b0"
-                        dti: it.simpleName == "dti"
+                        freesurfer: it.simpleName == "freesurfer"
                     }
                 input[0] = ch_split_test_data.t1w.map{
                     test_data_directory -> [
@@ -226,6 +234,9 @@ nextflow_workflow {
                 input[3] = Channel.empty()
                 input[4] = Channel.empty()
                 input[5] = Channel.empty()
+                input[6] = ch_split_test_data.freesurfer.map{
+                    test_data_directory -> file("\${test_data_directory}/license.txt")
+                }
                 """
             }
         }
@@ -240,14 +251,13 @@ nextflow_workflow {
                             [(channel.key): ["versions"].contains(channel.key)
                                 ? channel.value
                                 : channel.value.collect{ subject ->
-                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
                 ).match() },
                 { assert workflow.out
                     .findAll{ channel -> !channel.key.isInteger() }
                     .every{ channel -> ["ref_warped",
-                                        "transfo_trk",
                                         "segmentation",
                                         "ref_segmentation"].contains(channel.key)
                         ? channel.value.size() == 0

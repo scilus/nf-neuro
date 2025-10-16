@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Subworkflow ANATOMICAL_SEGMENTATION"
     script "../main.nf"
     workflow "ANATOMICAL_SEGMENTATION"
+    config "./nextflow.config"
 
     tag "subworkflows"
     tag "subworkflows_nfneuro"
@@ -31,7 +32,6 @@ nextflow_workflow {
     }
 
     test("anatomical_segmentation - fslfast") {
-        config "./nextflow.config"
         when {
             workflow {
                 """
@@ -86,7 +86,6 @@ nextflow_workflow {
     }
 
     test("anatomical_segmentation - freesurferseg") {
-        config "./nextflow.config"
         when {
             workflow {
                 """
@@ -139,7 +138,6 @@ nextflow_workflow {
     }
 
     test("anatomical_segmentation - both") {
-        config "./nextflow.config"
         when {
             workflow {
                 """
@@ -200,11 +198,8 @@ nextflow_workflow {
     }
 
     test("anatomical_segmentation - synthseg") {
-        config "./nextflow.config"
+        config "./synthseg.config"
         when {
-            params {
-                run_synthseg = true
-            }
             workflow {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
