@@ -123,10 +123,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__warped.nii.gz":
+      - "*_warped.nii.gz":
           type: file
-          description: Warped image.
-          pattern: "*__warped.{nii.nii.gz}"
+          description: Warped image(s).
+          pattern: "*_warped.{nii.nii.gz}"
           ontologies: []
   mqc:
     - - meta:

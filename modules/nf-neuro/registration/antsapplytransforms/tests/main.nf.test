@@ -53,7 +53,7 @@ nextflow_process {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory
                     .map{ test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
+                        [ id:'test' ], // meta map
                         file("\${test_data_directory}/b0.nii.gz"),
                         file("\${test_data_directory}/mni_masked_2x2x2.nii.gz"),
                         [
@@ -78,7 +78,7 @@ nextflow_process {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory
                     .map{ test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
+                        [ id:'test' ], // meta map
                         [
                             file("\${test_data_directory}/b0.nii.gz"),
                             file("\${test_data_directory}/b0.nii.gz").copyTo(
@@ -110,7 +110,7 @@ nextflow_process {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory
                     .map{ test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
+                        [ id:'test' ], // meta map
                         file("\${test_data_directory}/b0.nii.gz"),
                         file("\${test_data_directory}/mni_masked_2x2x2.nii.gz"),
                         [

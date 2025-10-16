@@ -19,7 +19,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz:md5,5534f8cb21fcc44f577d520e6083bb83"
+                        "test_t1_warped.nii.gz:md5,5534f8cb21fcc44f577d520e6083bb83"
                     ]
                 ],
                 "1": [
@@ -27,7 +27,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
+                        "test_forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
                     ]
                 ],
                 "10": [
@@ -38,7 +38,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe"
+                        "test_forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe"
                     ]
                 ],
                 "3": [
@@ -46,7 +46,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
+                        "test_backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
                     ]
                 ],
                 "4": [
@@ -54,7 +54,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30"
+                        "test_backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30"
                     ]
                 ],
                 "5": [
@@ -63,8 +63,8 @@
                             "id": "test"
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe",
-                            "test__forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
+                            "test_forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe",
+                            "test_forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
                         ]
                     ]
                 ],
@@ -74,8 +74,8 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30",
-                            "test__backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
+                            "test_backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30",
+                            "test_backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
                         ]
                     ]
                 ],
@@ -85,8 +85,8 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30",
-                            "test__backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
+                            "test_backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30",
+                            "test_backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
                         ]
                     ]
                 ],
@@ -96,8 +96,8 @@
                             "id": "test"
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe",
-                            "test__forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
+                            "test_forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe",
+                            "test_forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
                         ]
                     ]
                 ],
@@ -114,7 +114,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30"
+                        "test_backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30"
                     ]
                 ],
                 "backward_image_transform": [
@@ -123,8 +123,8 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30",
-                            "test__backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
+                            "test_backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30",
+                            "test_backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
                         ]
                     ]
                 ],
@@ -134,8 +134,8 @@
                             "id": "test"
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe",
-                            "test__forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
+                            "test_forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe",
+                            "test_forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
                         ]
                     ]
                 ],
@@ -144,7 +144,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
+                        "test_backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
                     ]
                 ],
                 "forward_affine": [
@@ -152,7 +152,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
+                        "test_forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
                     ]
                 ],
                 "forward_image_transform": [
@@ -161,8 +161,8 @@
                             "id": "test"
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe",
-                            "test__forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
+                            "test_forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe",
+                            "test_forward1_affine.mat:md5,dde4de8a1ca4ff1647e55dc1fece402c"
                         ]
                     ]
                 ],
@@ -172,8 +172,8 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30",
-                            "test__backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
+                            "test_backward0_affine.mat:md5,8cc894275b42e3b78efca499caf22e30",
+                            "test_backward1_warp.nii.gz:md5,28f58437d878a6ea0c81c0e780e2333f"
                         ]
                     ]
                 ],
@@ -182,7 +182,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe"
+                        "test_forward0_warp.nii.gz:md5,96b2d18c7537db76366e4557b44f24fe"
                     ]
                 ],
                 "image_warped": [
@@ -190,7 +190,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz:md5,5534f8cb21fcc44f577d520e6083bb83"
+                        "test_t1_warped.nii.gz:md5,5534f8cb21fcc44f577d520e6083bb83"
                     ]
                 ],
                 "mqc": [
@@ -208,9 +208,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-14T20:59:45.201385555"
+        "timestamp": "2025-10-16T14:41:26.158874708"
     },
     "registration - ants - SyN": {
         "content": [
@@ -220,7 +220,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz:md5,8d9c289924c4d2c8edab3feae669d1c3"
+                        "test_t1_warped.nii.gz:md5,8d9c289924c4d2c8edab3feae669d1c3"
                     ]
                 ],
                 "1": [
@@ -228,7 +228,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
+                        "test_forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
                     ]
                 ],
                 "10": [
@@ -239,7 +239,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9"
+                        "test_forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9"
                     ]
                 ],
                 "3": [
@@ -247,7 +247,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
+                        "test_backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
                     ]
                 ],
                 "4": [
@@ -255,7 +255,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9"
+                        "test_backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9"
                     ]
                 ],
                 "5": [
@@ -264,8 +264,8 @@
                             "id": "test"
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9",
-                            "test__forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
+                            "test_forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9",
+                            "test_forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
                         ]
                     ]
                 ],
@@ -275,8 +275,8 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9",
-                            "test__backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
+                            "test_backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9",
+                            "test_backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
                         ]
                     ]
                 ],
@@ -286,8 +286,8 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9",
-                            "test__backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
+                            "test_backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9",
+                            "test_backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
                         ]
                     ]
                 ],
@@ -297,8 +297,8 @@
                             "id": "test"
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9",
-                            "test__forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
+                            "test_forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9",
+                            "test_forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
                         ]
                     ]
                 ],
@@ -310,7 +310,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9"
+                        "test_backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9"
                     ]
                 ],
                 "backward_image_transform": [
@@ -319,8 +319,8 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9",
-                            "test__backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
+                            "test_backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9",
+                            "test_backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
                         ]
                     ]
                 ],
@@ -330,8 +330,8 @@
                             "id": "test"
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9",
-                            "test__forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
+                            "test_forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9",
+                            "test_forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
                         ]
                     ]
                 ],
@@ -340,7 +340,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
+                        "test_backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
                     ]
                 ],
                 "forward_affine": [
@@ -348,7 +348,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
+                        "test_forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
                     ]
                 ],
                 "forward_image_transform": [
@@ -357,8 +357,8 @@
                             "id": "test"
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9",
-                            "test__forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
+                            "test_forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9",
+                            "test_forward1_affine.mat:md5,16a42a74c35c9fda7786250b333bef86"
                         ]
                     ]
                 ],
@@ -368,8 +368,8 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9",
-                            "test__backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
+                            "test_backward0_affine.mat:md5,317e067757768c8e75de9d12f84563c9",
+                            "test_backward1_warp.nii.gz:md5,3f2d23cce4fbcf970099eecd629d4019"
                         ]
                     ]
                 ],
@@ -378,7 +378,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9"
+                        "test_forward0_warp.nii.gz:md5,9a3b969b74ac82ab0940b8b94677c7b9"
                     ]
                 ],
                 "image_warped": [
@@ -386,7 +386,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz:md5,8d9c289924c4d2c8edab3feae669d1c3"
+                        "test_t1_warped.nii.gz:md5,8d9c289924c4d2c8edab3feae669d1c3"
                     ]
                 ],
                 "mqc": [
@@ -399,9 +399,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-14T20:57:44.032854537"
+        "timestamp": "2025-10-16T14:39:57.505140798"
     },
     "registration - ants - no warps": {
         "content": [
@@ -411,7 +411,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz:md5,c13330e3f71c57f2517dcd6f59f64ff1"
+                        "test_t1_warped.nii.gz:md5,c13330e3f71c57f2517dcd6f59f64ff1"
                     ]
                 ],
                 "1": [
@@ -419,7 +419,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
+                        "test_forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
                     ]
                 ],
                 "10": [
@@ -436,7 +436,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
+                        "test_backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
                     ]
                 ],
                 "5": [
@@ -445,7 +445,7 @@
                             "id": "test"
                         },
                         [
-                            "test__forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
+                            "test_forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
                         ]
                     ]
                 ],
@@ -455,7 +455,7 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
+                            "test_backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
                         ]
                     ]
                 ],
@@ -465,7 +465,7 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
+                            "test_backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
                         ]
                     ]
                 ],
@@ -475,7 +475,7 @@
                             "id": "test"
                         },
                         [
-                            "test__forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
+                            "test_forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
                         ]
                     ]
                 ],
@@ -487,7 +487,7 @@
                         {
                             "id": "test"
                         },
-                        "test__backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
+                        "test_backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
                     ]
                 ],
                 "backward_image_transform": [
@@ -496,7 +496,7 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
+                            "test_backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
                         ]
                     ]
                 ],
@@ -506,7 +506,7 @@
                             "id": "test"
                         },
                         [
-                            "test__forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
+                            "test_forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
                         ]
                     ]
                 ],
@@ -518,7 +518,7 @@
                         {
                             "id": "test"
                         },
-                        "test__forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
+                        "test_forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
                     ]
                 ],
                 "forward_image_transform": [
@@ -527,7 +527,7 @@
                             "id": "test"
                         },
                         [
-                            "test__forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
+                            "test_forward1_affine.mat:md5,7387bc8f93dd29d2a0aadb9d5dc06d5b"
                         ]
                     ]
                 ],
@@ -537,7 +537,7 @@
                             "id": "test"
                         },
                         [
-                            "test__backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
+                            "test_backward0_affine.mat:md5,733babe33e1656d0f85064caf24d6f82"
                         ]
                     ]
                 ],
@@ -549,7 +549,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz:md5,c13330e3f71c57f2517dcd6f59f64ff1"
+                        "test_t1_warped.nii.gz:md5,c13330e3f71c57f2517dcd6f59f64ff1"
                     ]
                 ],
                 "mqc": [
@@ -562,8 +562,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-14T21:00:18.228077675"
+        "timestamp": "2025-10-16T14:41:43.438352276"
     }
 }

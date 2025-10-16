@@ -33,7 +33,7 @@ process REGISTRATION_CONVERT {
     }
 
     def out_extension = transform_types[transform_type][output_type]
-    def output_name = "${prefix}__out_${transform_type}.${out_extension}"
+    def output_name = "${prefix}_out_${transform_type}.${out_extension}"
     def command = transform_type == "affine" ? "lta_convert" : "mri_warp_convert"
 
     if ( transform_type == "affine" ) {
@@ -92,7 +92,7 @@ process REGISTRATION_CONVERT {
     }
 
     def out_extension = transform_types[transform_type][output_type]
-    def output_name = "${prefix}__out_${transform_type}.${out_extension}"
+    def output_name = "${prefix}_out_${transform_type}.${out_extension}"
     """
     set +e
     function handle_code () {

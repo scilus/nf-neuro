@@ -8,7 +8,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     tuple val(meta), path(images, arity: '1..*'), path(reference), path(transformations, arity: '1..*')
 
     output:
-    tuple val(meta), path("*__warped.nii.gz")                           , emit: warped_image
+    tuple val(meta), path("*_warped.nii.gz")                           , emit: warped_image
     tuple val(meta), path("*_registration_antsapplytransforms_mqc.gif") , emit: mqc, optional: true
     path "versions.yml"                                                 , emit: versions
 
@@ -17,8 +17,8 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = "${task.ext.first_suffix ?: ""}__warped"
-    def suffix_qc = task.ext.suffix_qc ?: ""
+    def suffix = "_${[task.ext.first_suffix, "warped"].findAll().join("_")}"
+    def suffix_qc = task.ext.suffix_qc ? "_${task.ext.suffix_qc}" : ""
 
     def output_dtype = "-u ${task.ext.output_dtype ?: "default"}"
     def dimensionality = "-d ${task.ext.dimensionality ?: 3}"
@@ -39,7 +39,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
         antsApplyTransforms $dimensionality \
             -i \$image \
             -r $reference \
-            -o ${prefix}__\${bname}${suffix}.nii.gz \
+            -o ${prefix}_\${bname}${suffix}.nii.gz \
             $interpolation \
             ${transformations.collect{ t -> "-t $t" }.join(" ")} \
             $output_dtype \
@@ -49,7 +49,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
         ### ** QC ** ###
         if $run_qc; then
             ln -sf $reference reference.nii.gz
-            extract_dim=\$(mrinfo ${prefix}__\${bname}${suffix}.nii.gz -size)
+            extract_dim=\$(mrinfo ${prefix}_\${bname}${suffix}.nii.gz -size)
             read sagittal_dim coronal_dim axial_dim <<< "\${extract_dim}"
 
             # Get the middle slice
@@ -105,7 +105,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = "${task.ext.first_suffix ?: ""}__warped"
+    def suffix = "${task.ext.first_suffix ?: ""}_warped"
     def suffix_qc = task.ext.suffix_qc ?: ""
     def run_qc = task.ext.run_qc as Boolean || false
 
@@ -118,7 +118,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
         ext=\${image#*.}
         bname=\$(basename \${image} .\${ext})
 
-        touch ${prefix}__\${bname}${suffix}.nii.gz
+        touch ${prefix}_\${bname}${suffix}.nii.gz
 
         if $run_qc; then
             touch ${prefix}_\${bname}${suffix_qc}_registration_antsapplytransforms_mqc.gif

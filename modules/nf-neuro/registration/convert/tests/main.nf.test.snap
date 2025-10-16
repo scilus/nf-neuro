@@ -13,16 +13,16 @@
     },
     "registration - convert - affine - to lta (needs source)": {
         "content": [
-            "test__out_affine.lta",
+            "test_out_affine.lta",
             [
                 "versions.yml:md5,8fa42279d7793bb057cd5680bcb241e7"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-02T20:44:27.597924954"
+        "timestamp": "2025-10-16T15:03:48.505663297"
     },
     "registration - convert - affine - lta to fsl": {
         "content": [
@@ -32,7 +32,7 @@
                         {
                             "id": "test"
                         },
-                        "test__out_affine.mat:md5,c88fcae39c94d8af95ca00592c2f2634"
+                        "test_out_affine.mat:md5,c88fcae39c94d8af95ca00592c2f2634"
                     ]
                 ],
                 "1": [
@@ -43,7 +43,7 @@
                         {
                             "id": "test"
                         },
-                        "test__out_affine.mat:md5,c88fcae39c94d8af95ca00592c2f2634"
+                        "test_out_affine.mat:md5,c88fcae39c94d8af95ca00592c2f2634"
                     ]
                 ],
                 "versions": [
@@ -53,9 +53,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-02T20:44:05.956240243"
+        "timestamp": "2025-10-16T15:03:28.499786859"
     },
     "registration - convert - mixed - to itk": {
         "content": [
@@ -65,7 +65,7 @@
                         {
                             "id": "test1"
                         },
-                        "test1__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                        "test1_out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
                     ]
                 ],
                 "1": [
@@ -76,7 +76,7 @@
                         {
                             "id": "test1"
                         },
-                        "test1__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                        "test1_out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
                     ]
                 ],
                 "versions": [
@@ -86,9 +86,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-02T20:44:17.27523449"
+        "timestamp": "2025-10-16T15:03:38.467678996"
     },
     "registration - convert - deformation - ras to itk (lps)": {
         "content": [
@@ -98,7 +98,7 @@
                         {
                             "id": "test"
                         },
-                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                        "test_out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
                     ]
                 ],
                 "1": [
@@ -109,7 +109,7 @@
                         {
                             "id": "test"
                         },
-                        "test__out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                        "test_out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
                     ]
                 ],
                 "versions": [
@@ -119,8 +119,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-02T20:43:52.34178625"
+        "timestamp": "2025-10-16T15:03:18.528152956"
     }
 }
