@@ -25,14 +25,10 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Setup Python
-        uses: Wandalen/wretry.action@v3.7.2
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
-          attempt_delay: 5000
-          time_out: 600000
-          action: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
-          with: |
-            python-version: "3.11"
-            cache: "pip"
+          python-version: "3.11"
+          cache: "pip"
 
       - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
         # FIXME Flip this off once we get to less than a couple hundred. Adding
@@ -47,14 +43,10 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Setup Node
-        uses: Wandalen/wretry.action@v3.7.2
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          attempt_delay: 5000
-          time_out: 600000
-          action: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-          with: |
-            node-version: "20"
-            cache: "npm"
+          node-version: "20"
+          cache: "npm"
 
       - name: Install Prettier
         run: npm ci
@@ -68,14 +60,10 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Setup Node
-        uses: Wandalen/wretry.action@v3.7.2
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          attempt_delay: 5000
-          time_out: 600000
-          action: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-          with: |
-            node-version: "20"
-            cache: "npm"
+          node-version: "20"
+          cache: "npm"
 
       - name: Install editorconfig-checker
         run: npm ci
