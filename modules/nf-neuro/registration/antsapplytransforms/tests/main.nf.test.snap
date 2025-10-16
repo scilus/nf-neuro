@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "test_b0_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
+                        "test_b0_to_template.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
                     ]
                 ],
                 "1": [
@@ -37,7 +37,7 @@
                         {
                             "id": "test"
                         },
-                        "test_b0_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
+                        "test_b0_to_template.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
                     ]
                 ]
             }
@@ -56,7 +56,7 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
         "timestamp": "2025-10-09T20:09:58.870177157"
     }

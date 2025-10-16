@@ -15,14 +15,14 @@ args:
       type: string
       description: |
         Prefix to add to the output file name.
-        e.g. `warped_` will result in `warped_image.nii.gz`.
+        e.g. `warped` will result in `warped_image.nii.gz`.
       default: "${meta.id}"
   - suffix:
       type: string
       description: |
-        Suffix to add to the output file name.
-        e.g. `_warped` will result in `image_warped.nii.gz`.
-      default: "__warped"
+        Obligatory suffix to add to the output file name to prevent overwrite
+        of input files. e.g. : the suffix `warped` will result in the name `image_warped.nii.gz`.
+      default: "warped"
   - suffix_qc:
       type: string
       description: |
@@ -33,6 +33,7 @@ args:
       description: |
         Dimensionality of input images.
         e.g. `2` for 2D images, `3` for 3D images.
+      default: 3
   - image_type:
       type: integer
       description: |
@@ -57,6 +58,7 @@ args:
         Interpolation method to use for the transformation. Content
         in `[...]` is optional. Refer the the antsApplyTransforms
         documentation for more details.
+      default: Linear
       choices:
         - Linear
         - NearestNeighbor
@@ -71,6 +73,7 @@ args:
   - output_dtype:
       type: string
       description: Output data type for the warped image.
+      default: default
       choices:
         - char
         - uchar
@@ -84,6 +87,7 @@ args:
       description: |
         Default value to use for the input image. It specifies the voxel value when the input
         point maps outside the output domain.
+      default: 0
   - run_qc:
       type: boolean
       description: |

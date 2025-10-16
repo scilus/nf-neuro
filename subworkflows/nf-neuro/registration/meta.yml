@@ -21,7 +21,7 @@ description: |
 
   - Synthmorph (ML): params.run_synthmorph = true
 
-    module: REGISTRATION_SYNTHREGISTRATION
+    module: REGISTRATION_SYNTHMORPH
 
     Run SynthMorph any-to-any modality registration. By default, the algorithm is configured to
     run a chain of affin+deformable transformations, making it suitable for use with most modules
@@ -46,7 +46,7 @@ components:
   - registration/ants
   - registration/convert
   - registration/easyreg
-  - registration/synthregistration
+  - registration/synthmorph
 input:
   - ch_fixed_image:
       type: file
@@ -165,7 +165,7 @@ output:
   - segmentation:
       type: file
       description: |
-        ONLY PROVIDED BY REGISTRATION_SYNTHREGISTRATION. Channel containing the SynthSeg v2 (non-robust)
+        ONLY PROVIDED BY REGISTRATION_SYNTHMORPH. Channel containing the SynthSeg v2 (non-robust)
         segmentation + parcellation in moving space (floating in Easyreg naming convention).
         Structure: [ val(meta), path(segmentation) ]
       pattern: "*.{nii,nii.gz}"
@@ -173,7 +173,7 @@ output:
   - reference_segmentation:
       type: file
       description: |
-        ONLY PROVIDED BY REGISTRATION_SYNTHREGISTRATION. Channel containing the SynthSeg v2 (non-robust)
+        ONLY PROVIDED BY REGISTRATION_SYNTHMORPH. Channel containing the SynthSeg v2 (non-robust)
         segmentation + parcellation in fixed space (reference in Easyreg naming convention).
         Structure: [ val(meta), path(reference_segmentation) ]
       pattern: "*.{nii,nii.gz}"

@@ -1,13 +1,13 @@
 nextflow_process {
 
-    name "Test Process REGISTRATION_SYNTHREGISTRATION"
+    name "Test Process REGISTRATION_SYNTHMORPH"
     script "../main.nf"
-    process "REGISTRATION_SYNTHREGISTRATION"
+    process "REGISTRATION_SYNTHMORPH"
 
     tag "modules"
     tag "modules_nfneuro"
     tag "registration"
-    tag "registration/synthregistration"
+    tag "registration/synthmorph"
 
     tag "subworkflows"
     tag "subworkflows/load_test_data"
@@ -27,7 +27,7 @@ nextflow_process {
             }
         }
 
-    test("registration - synthregistration") {
+    test("registration - synthmorph") {
         config "./nextflow.config"
         when {
             process {
@@ -59,7 +59,7 @@ nextflow_process {
         }
     }
 
-    test("registration - synthregistration - stub-run") {
+    test("registration - synthmorph - stub-run") {
         tag "stub"
         options "-stub-run"
         when {

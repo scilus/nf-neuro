@@ -193,7 +193,7 @@ jobs:
           - runner: scilus-docker-large
             path: modules/nf-neuro/betcrop/synthbet
           - runner: scilus-docker-large
-            path: modules/nf-neuro/registration/synthregistration
+            path: modules/nf-neuro/registration/synthmorph
         exclude:
           - path: subworkflows/nf-neuro/load_test_data
     uses: ./.github/workflows/test_component.yml
