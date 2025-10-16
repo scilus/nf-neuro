@@ -8,8 +8,8 @@ process REGISTRATION_TRACTOGRAM {
     tuple val(meta), path(anat), path(affine), path(tractogram), path(reference), path(deformation)
 
     output:
-    tuple val(meta), path("*__*.{trk,tck}") , emit: tractogram
-    path "versions.yml"                     , emit: versions
+    tuple val(meta), path("*.{trk,tck}") , emit: tractogram
+    path "versions.yml"                  , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -41,7 +41,7 @@ process REGISTRATION_TRACTOGRAM {
     for tractogram in ${tractogram}; do
         ext=\${tractogram#*.}
         bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
-        name=${prefix}__\${bname}${suffix}.\${ext}
+        name=${prefix}_\${bname}${suffix}.\${ext}
 
         scil_tractogram_apply_transform \$tractogram $anat \$affine \$name \
             $in_deformation \
@@ -81,7 +81,7 @@ process REGISTRATION_TRACTOGRAM {
     for tractogram in ${tractogram}; do
         ext=\${tractogram#*.}
         bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
-        name=${prefix}__\${bname}${suffix}.\${ext}
+        name=${prefix}_\${bname}${suffix}.\${ext}
         touch \$name
     done
 

@@ -167,10 +167,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__forward1_affine.mat":
+      - "*_forward1_affine.mat":
           type: file
           description: Affine transformation from moving to fixed
-          pattern: "*__forward1_affine.mat"
+          pattern: "*_forward1_affine.mat"
           optional: true
           ontologies: []
   forward_warp:
@@ -179,10 +179,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__forward0_warp.nii.gz":
+      - "*_forward0_warp.nii.gz":
           type: file
           description: Nifti volume containing warp field from moving to fixed
-          pattern: "*__forward0_warp.nii.gz"
+          pattern: "*_forward0_warp.nii.gz"
           optional: true
           ontologies:
             - edam: http://edamontology.org/format_3989 # GZIP format
@@ -192,10 +192,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__backward1_warp.nii.gz":
+      - "*_backward1_warp.nii.gz":
           type: file
           description: Nifti volume containing warp field from fixed to moving
-          pattern: "*__backward1_warp.nii.gz"
+          pattern: "*_backward1_warp.nii.gz"
           optional: true
           ontologies:
             - edam: http://edamontology.org/format_3989 # GZIP format
@@ -205,10 +205,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__backward0_affine.mat":
+      - "*_backward0_affine.mat":
           type: file
           description: Affine transformation from fixed to moving
-          pattern: "*__backward0_affine.mat"
+          pattern: "*_backward0_affine.mat"
           optional: true
           ontologies: []
   forward_image_transform:
@@ -217,12 +217,12 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__forward*.{nii.gz,mat}":
+      - "*_forward*.{nii.gz,mat}":
           type: list
           description: |
             Tuple, Transformation files to warp images in fixed space, in the correct order
             for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ forward_warp, forward_affine ] ].
-          pattern: "*__forward*.{nii.gz,mat}"
+          pattern: "*_forward*.{nii.gz,mat}"
           ontologies: []
   backward_image_transform:
     - - meta:
@@ -230,12 +230,12 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__backward*.{nii.gz,mat}":
+      - "*_backward*.{nii.gz,mat}":
           type: list
           description: |
             Tuple, transformation files to warp images in moving space, in the correct order
             for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ backward_affine, backward_warp ] ].
-          pattern: "*__backward*.{nii.gz,mat}"
+          pattern: "*_backward*.{nii.gz,mat}"
           ontologies: []
   forward_tractogram_transform:
     - - meta:
@@ -243,12 +243,12 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__backward*.{nii.gz,mat}":
+      - "*_backward*.{nii.gz,mat}":
           type: list
           description: |
             Tuple, transformation files to warp tractograms into fixed space, in the correct order
             for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ backward_affine, backward_warp ] ].
-          pattern: "*__backward*.{nii.gz,mat}"
+          pattern: "*_backward*.{nii.gz,mat}"
           ontologies: []
   backward_tractogram_transform:
     - - meta:
@@ -256,12 +256,12 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__forward*.{nii.gz,mat}":
+      - "*_forward*.{nii.gz,mat}":
           type: list
           description: |
             Tuple, transformation files to warp tractograms into moving space, in the correct order
             for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ forward_affine, forward_warp ] ].
-          pattern: "*__forward*.{nii.gz,mat}"
+          pattern: "*_forward*.{nii.gz,mat}"
           ontologies: []
   mqc:
     - - meta:

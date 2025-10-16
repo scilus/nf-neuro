@@ -24,8 +24,8 @@ process REGISTRATION_EASYREG {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def affine_only = task.ext.affine_only ? "--affine_only " : ""
-    fixed_segmentation = "--ref_seg ${fixed_segmentation ?: "${prefix}__warped_segmentation.nii.gz" }"
-    moving_segmentation = "--flo_seg ${moving_segmentation ?: "${prefix}__warped_reference_segmentation.nii.gz" }"
+    fixed_segmentation = "--ref_seg ${fixed_segmentation ?: "${prefix}_warped_segmentation.nii.gz" }"
+    moving_segmentation = "--flo_seg ${moving_segmentation ?: "${prefix}_warped_reference_segmentation.nii.gz" }"
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1

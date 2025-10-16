@@ -104,10 +104,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__*.{trk,tck}":
+      - "*.{trk,tck}":
           type: file
           description: Warped tractogram(s).
-          pattern: "*__*.{trk,tck}"
+          pattern: "*.{trk,tck}"
           ontologies: []
   versions:
     - versions.yml:

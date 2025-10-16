@@ -9,14 +9,14 @@ process REGISTRATION_ANATTODWI {
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                            , emit: anat_warped
-        tuple val(meta), path("*__forward1_affine.mat")                     , emit: forward_affine
-        tuple val(meta), path("*__forward0_warp.nii.gz")                    , emit: forward_warp
-        tuple val(meta), path("*__backward1_warp.nii.gz")                   , emit: backward_warp
-        tuple val(meta), path("*__backward0_affine.mat")                    , emit: backward_affine
-        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: forward_image_transform
-        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: backward_image_transform
-        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: forward_tractogram_transform
-        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: backward_tractogram_transform
+        tuple val(meta), path("*_forward1_affine.mat")                      , emit: forward_affine
+        tuple val(meta), path("*_forward0_warp.nii.gz")                     , emit: forward_warp
+        tuple val(meta), path("*_backward1_warp.nii.gz")                    , emit: backward_warp
+        tuple val(meta), path("*_backward0_affine.mat")                     , emit: backward_affine
+        tuple val(meta), path("*_forward*.{nii.gz,mat}", arity: '1..2')     , emit: forward_image_transform
+        tuple val(meta), path("*_backward*.{nii.gz,mat}", arity: '1..2')    , emit: backward_image_transform
+        tuple val(meta), path("*_backward*.{nii.gz,mat}", arity: '1..2')    , emit: forward_tractogram_transform
+        tuple val(meta), path("*_forward*.{nii.gz,mat}", arity: '1..2')     , emit: backward_tractogram_transform
         tuple val(meta), path("*_registration_anattodwi_mqc.gif")           , emit: mqc, optional: true
         path "versions.yml"                                                 , emit: versions
 
@@ -53,20 +53,20 @@ process REGISTRATION_ANATTODWI {
         --smoothing-sigmas 3x2x1
 
     moving_id=\$(basename $moving_anat .nii.gz)
-    moving_id=\${moving_id#${meta.id}__*}
+    moving_id=\${moving_id#${meta.id}_*}
 
-    mv warped.nii.gz ${prefix}__\${moving_id}_warped.nii.gz
-    mv forward0GenericAffine.mat ${prefix}__forward1_affine.mat
-    mv forward1Warp.nii.gz ${prefix}__forward0_warp.nii.gz
-    mv forward1InverseWarp.nii.gz ${prefix}__backward1_warp.nii.gz
+    mv warped.nii.gz ${prefix}_\${moving_id}_warped.nii.gz
+    mv forward0GenericAffine.mat ${prefix}_forward1_affine.mat
+    mv forward1Warp.nii.gz ${prefix}_forward0_warp.nii.gz
+    mv forward1InverseWarp.nii.gz ${prefix}_backward1_warp.nii.gz
 
-    antsApplyTransforms -d 3 -t [${prefix}__forward1_affine.mat,1] \
-        -o Linear[${prefix}__backward0_affine.mat]
+    antsApplyTransforms -d 3 -t [${prefix}_forward1_affine.mat,1] \
+        -o Linear[${prefix}_backward0_affine.mat]
 
     ### ** QC ** ###
     if $run_qc; then
         # Extract dimensions.
-        dim=\$(mrinfo ${prefix}__\${moving_id}_warped.nii.gz -size)
+        dim=\$(mrinfo ${prefix}_\${moving_id}_warped.nii.gz -size)
         read sagittal_dim coronal_dim axial_dim <<< "\${dim}"
 
         # Get middle slices.
@@ -79,7 +79,7 @@ process REGISTRATION_ANATTODWI {
 
         # Get fixed ID, moving ID already computed
         fixed_id=\$(basename $fixed_reference .nii.gz)
-        fixed_id=\${fixed_id#${meta.id}__*}
+        fixed_id=\${fixed_id#${meta.id}_*}
 
         # Iterate over images.
         for image in \${moving_id}_warped \${fixed_id}; do
@@ -136,16 +136,16 @@ process REGISTRATION_ANATTODWI {
     convert -help .
 
     moving_id=\$(basename $moving_anat .nii.gz)
-    moving_id=\${moving_id#${meta.id}__*}
+    moving_id=\${moving_id#${meta.id}_*}
 
-    touch ${prefix}__\${moving_id}_warped.nii.gz
-    touch ${prefix}__forward1_affine.mat
-    touch ${prefix}__forward0_warp.nii.gz
-    touch ${prefix}__backward1_warp.nii.gz
-    touch ${prefix}__backward0_affine.mat
+    touch ${prefix}_\${moving_id}_warped.nii.gz
+    touch ${prefix}_forward1_affine.mat
+    touch ${prefix}_forward0_warp.nii.gz
+    touch ${prefix}_backward1_warp.nii.gz
+    touch ${prefix}_backward0_affine.mat
 
     if $run_qc; then
-        touch ${prefix}__registration_anattodwi_mqc.gif
+        touch ${prefix}_registration_anattodwi_mqc.gif
     fi
 
     cat <<-END_VERSIONS > versions.yml

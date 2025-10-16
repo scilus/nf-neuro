@@ -10,14 +10,14 @@ process REGISTRATION_ANTS {
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                            , emit: image_warped
-        tuple val(meta), path("*__forward1_affine.mat")                     , emit: forward_affine, optional: true
-        tuple val(meta), path("*__forward0_warp.nii.gz")                    , emit: forward_warp, optional: true
-        tuple val(meta), path("*__backward1_warp.nii.gz")                   , emit: backward_warp, optional: true
-        tuple val(meta), path("*__backward0_affine.mat")                    , emit: backward_affine, optional: true
-        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: forward_image_transform
-        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: backward_image_transform
-        tuple val(meta), path("*__backward*.{nii.gz,mat}", arity: '1..2')   , emit: forward_tractogram_transform
-        tuple val(meta), path("*__forward*.{nii.gz,mat}", arity: '1..2')    , emit: backward_tractogram_transform
+        tuple val(meta), path("*_forward1_affine.mat")                     , emit: forward_affine, optional: true
+        tuple val(meta), path("*_forward0_warp.nii.gz")                    , emit: forward_warp, optional: true
+        tuple val(meta), path("*_backward1_warp.nii.gz")                   , emit: backward_warp, optional: true
+        tuple val(meta), path("*_backward0_affine.mat")                    , emit: backward_affine, optional: true
+        tuple val(meta), path("*_forward*.{nii.gz,mat}", arity: '1..2')    , emit: forward_image_transform
+        tuple val(meta), path("*_backward*.{nii.gz,mat}", arity: '1..2')   , emit: backward_image_transform
+        tuple val(meta), path("*_backward*.{nii.gz,mat}", arity: '1..2')   , emit: forward_tractogram_transform
+        tuple val(meta), path("*_forward*.{nii.gz,mat}", arity: '1..2')    , emit: backward_tractogram_transform
         tuple val(meta), path("*_registration_ants_mqc.gif")                , emit: mqc, optional: true
         path "versions.yml"                                                 , emit: versions
 
@@ -54,21 +54,21 @@ process REGISTRATION_ANTS {
     $ants $dimension -f $fixed_image -m $moving_image -o output -t $transform $args $seed
 
     moving_id=\$(basename $moving_image .nii.gz)
-    moving_id=\${moving_id#${meta.id}__*}
+    moving_id=\${moving_id#${meta.id}_*}
 
-    mv outputWarped.nii.gz ${prefix}__\${moving_id}_warped.nii.gz
+    mv outputWarped.nii.gz ${prefix}_\${moving_id}_warped.nii.gz
 
     if [ $transform != "bo" ] && [ $transform != "so" ]; then
-        mv output0GenericAffine.mat ${prefix}__forward1_affine.mat
+        mv output0GenericAffine.mat ${prefix}_forward1_affine.mat
     fi
 
     if [ $transform != "t" ] && [ $transform != "r" ] && [ $transform != "a" ]; then
-        mv output1InverseWarp.nii.gz ${prefix}__backward1_warp.nii.gz
-        mv output1Warp.nii.gz ${prefix}__forward0_warp.nii.gz
+        mv output1InverseWarp.nii.gz ${prefix}_backward1_warp.nii.gz
+        mv output1Warp.nii.gz ${prefix}_forward0_warp.nii.gz
     fi
 
-    antsApplyTransforms -d 3 -t [${prefix}__forward1_affine.mat,1] \
-        -o Linear[${prefix}__backward0_affine.mat]
+    antsApplyTransforms -d 3 -t [${prefix}_forward1_affine.mat,1] \
+        -o Linear[${prefix}_backward0_affine.mat]
 
     ### ** QC ** ###
     if $run_qc; then
@@ -83,7 +83,7 @@ process REGISTRATION_ANTS {
 
         # Get fixed ID, moving ID already computed
         fixed_id=\$(basename $fixed_image .nii.gz)
-        fixed_id=\${fixed_id#${meta.id}__*}
+        fixed_id=\${fixed_id#${meta.id}_*}
 
         # Set viz params.
         viz_params="--display_slice_number --display_lr --size 256 256"
@@ -153,11 +153,11 @@ process REGISTRATION_ANTS {
     convert -help .
     scil_viz_volume_screenshot -h
 
-    touch ${prefix}__t1_warped.nii.gz
-    touch ${prefix}__forward1_affine.mat
-    touch ${prefix}__forward0_warp.nii.gz
-    touch ${prefix}__backward1_warp.nii.gz
-    touch ${prefix}__backward0_affine.mat
+    touch ${prefix}_t1_warped.nii.gz
+    touch ${prefix}_forward1_affine.mat
+    touch ${prefix}_forward0_warp.nii.gz
+    touch ${prefix}_backward1_warp.nii.gz
+    touch ${prefix}_backward0_affine.mat
 
     if $run_qc; then
         touch ${prefix}_${suffix_qc}_registration_ants_mqc.gif

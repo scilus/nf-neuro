@@ -34,8 +34,8 @@ process BUNDLE_RECOGNIZE {
         -v DEBUG $minimal_vote_ratio $seed $rbx_processes
 
     for bundle_file in recobundles/*.trk; do
-        bname=\$(basename \${bundle_file} .trk)
-        out_cleaned=${prefix}__\${bname}_cleaned.trk
+        bname=\$(basename \${bundle_file} .trk | sed 's/${prefix}_\\+//')
+        out_cleaned=${prefix}_\${bname}_cleaned.trk
         scil_bundle_reject_outliers \${bundle_file} "\${out_cleaned}" ${outlier_alpha}
     done
 
@@ -52,7 +52,7 @@ process BUNDLE_RECOGNIZE {
     scil_bundle_reject_outliers -h
 
     # dummy output for single bundle
-    touch ${prefix}__AF_L_cleaned.trk
+    touch ${prefix}_AF_L_cleaned.trk
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

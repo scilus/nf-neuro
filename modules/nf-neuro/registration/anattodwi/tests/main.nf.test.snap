@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__T1w_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
+                        "test_T1w_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
                     ]
                 ],
                 "1": [
@@ -17,7 +17,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
                     ]
                 ],
                 "10": [
@@ -29,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
+                        "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
                     ]
                 ],
                 "3": [
@@ -38,7 +38,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
                     ]
                 ],
                 "4": [
@@ -47,7 +47,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b"
+                        "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b"
                     ]
                 ],
                 "5": [
@@ -59,7 +59,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__T1w_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
+                        "test_T1w_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
                     ]
                 ],
                 "backward_affine": [
@@ -68,7 +68,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b"
+                        "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b"
                     ]
                 ],
                 "backward_image_transform": [
@@ -78,8 +78,8 @@
                             "single_end": false
                         },
                         [
-                            "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
-                            "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                            "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
                         ]
                     ]
                 ],
@@ -90,8 +90,8 @@
                             "single_end": false
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
-                            "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                            "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
                         ]
                     ]
                 ],
@@ -101,7 +101,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
                     ]
                 ],
                 "forward_affine": [
@@ -110,7 +110,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
                     ]
                 ],
                 "forward_image_transform": [
@@ -120,8 +120,8 @@
                             "single_end": false
                         },
                         [
-                            "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
-                            "test__forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                            "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
                         ]
                     ]
                 ],
@@ -132,8 +132,8 @@
                             "single_end": false
                         },
                         [
-                            "test__backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
-                            "test__backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                            "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
                         ]
                     ]
                 ],
@@ -143,7 +143,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
+                        "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
                     ]
                 ],
                 "mqc": [
@@ -171,7 +171,7 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
         "timestamp": "2025-10-09T20:08:38.758050028"
     },

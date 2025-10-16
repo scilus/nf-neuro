@@ -5,19 +5,17 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__b0b0__warped.nii.gz:md5,54f953b796f87bc0765d401ab32e6450"
+                        "test_b0_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
                     ]
                 ],
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test_b0b0_to_template_registration_antsapplytransforms_mqc.gif:md5,f92266ae3c705c11fb3f552ca44f8fe2"
+                        "test_b0_to_template_registration_antsapplytransforms_mqc.gif:md5,f92266ae3c705c11fb3f552ca44f8fe2"
                     ]
                 ],
                 "2": [
@@ -26,10 +24,9 @@
                 "mqc": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test_b0b0_to_template_registration_antsapplytransforms_mqc.gif:md5,f92266ae3c705c11fb3f552ca44f8fe2"
+                        "test_b0_to_template_registration_antsapplytransforms_mqc.gif:md5,f92266ae3c705c11fb3f552ca44f8fe2"
                     ]
                 ],
                 "versions": [
@@ -38,17 +35,16 @@
                 "warped_image": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test__b0b0__warped.nii.gz:md5,54f953b796f87bc0765d401ab32e6450"
+                        "test_b0_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
                     ]
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
         "timestamp": "2025-10-09T20:09:53.057544388"
     },

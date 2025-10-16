@@ -11,16 +11,16 @@ process REGISTRATION_SYNTHREGISTRATION {
     tuple val(meta), path(fixed_image), path(moving_image)
 
     output:
-    tuple val(meta), path("*__warped.nii.gz")                               , emit: image_warped
-    tuple val(meta), path("*__forward{0,1,_standalone}_affine.lta")         , emit: forward_affine, optional: true
-    tuple val(meta), path("*__forward0_deform.nii.gz")                      , emit: forward_warp, optional: true
-    tuple val(meta), path("*__backward1_deform.nii.gz")                     , emit: backward_warp, optional: true
-    tuple val(meta), path("*__backward{0,_standalone}_affine.lta")          , emit: backward_affine, optional: true
-    tuple val(meta), path("*__forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: forward_image_transform
-    tuple val(meta), path("*__backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: backward_image_transform
-    tuple val(meta), path("*__backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: forward_tractogram_transform
-    tuple val(meta), path("*__forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: backward_tractogram_transform
-    path "versions.yml"                                                     , emit: versions
+    tuple val(meta), path("*_warped.nii.gz")                               , emit: image_warped
+    tuple val(meta), path("*_forward{0,1,_standalone}_affine.lta")         , emit: forward_affine, optional: true
+    tuple val(meta), path("*_forward0_deform.nii.gz")                      , emit: forward_warp, optional: true
+    tuple val(meta), path("*_backward1_deform.nii.gz")                     , emit: backward_warp, optional: true
+    tuple val(meta), path("*_backward{0,_standalone}_affine.lta")          , emit: backward_affine, optional: true
+    tuple val(meta), path("*_forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: forward_image_transform
+    tuple val(meta), path("*_backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: backward_image_transform
+    tuple val(meta), path("*_backward[!_]*.{lta,nii.gz}", arity: '1..*')   , emit: forward_tractogram_transform
+    tuple val(meta), path("*_forward[!_]*.{lta,nii.gz}", arity: '1..*')    , emit: backward_tractogram_transform
+    path "versions.yml"                                                    , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -92,8 +92,8 @@ process REGISTRATION_SYNTHREGISTRATION {
         fi
 
         mri_synthmorph register \$moving fixed.nii.gz -v -m \$model \$weight \$args \
-            -t ${prefix}__forward\${j}_\$model.\${extension[\$model]} \
-            -T ${prefix}__backward\${i}_\$model.\${extension[\$model]} \
+            -t ${prefix}_forward\${j}_\$model.\${extension[\$model]} \
+            -T ${prefix}_backward\${i}_\$model.\${extension[\$model]} \
             -o warped.nii.gz -j $task.cpus $extent $use_gpu
 
         if [ \$initializer ]; then
@@ -104,8 +104,8 @@ process REGISTRATION_SYNTHREGISTRATION {
         fi
 
         if [ \${extension[\$model]} = "lta" ]; then
-            initializer=${prefix}__forward\${j}_\$model.\${extension[\$model]}
-            init_assoc=${prefix}__backward\${i}_\$model.\${extension[\$model]}
+            initializer=${prefix}_forward\${j}_\$model.\${extension[\$model]}
+            init_assoc=${prefix}_backward\${i}_\$model.\${extension[\$model]}
         else
             moving=warped.nii.gz
         fi
@@ -115,7 +115,7 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     done
 
-    mv warped.nii.gz ${prefix}__warped.nii.gz
+    mv warped.nii.gz ${prefix}_warped.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -129,11 +129,11 @@ process REGISTRATION_SYNTHREGISTRATION {
     """
     mri_synthmorph -h
 
-    touch ${prefix}__warped.nii.gz
-    touch ${prefix}__forward1_affine.lta
-    touch ${prefix}__forward0_warp.nii.gz
-    touch ${prefix}__backward1_warp.nii.gz
-    touch ${prefix}__backward0_affine.lta
+    touch ${prefix}_warped.nii.gz
+    touch ${prefix}_forward1_affine.lta
+    touch ${prefix}_forward0_warp.nii.gz
+    touch ${prefix}_backward1_warp.nii.gz
+    touch ${prefix}_backward0_affine.lta
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
