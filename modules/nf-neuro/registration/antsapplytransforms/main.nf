@@ -8,7 +8,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
     tuple val(meta), path(images, arity: '1..*'), path(reference), path(transformations, arity: '1..*')
 
     output:
-    tuple val(meta), path("*_warped.nii.gz")                           , emit: warped_image
+    tuple val(meta), path("*.nii.gz")                                   , emit: warped_image
     tuple val(meta), path("*_registration_antsapplytransforms_mqc.gif") , emit: mqc, optional: true
     path "versions.yml"                                                 , emit: versions
 
@@ -17,13 +17,13 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = "_${[task.ext.first_suffix, "warped"].findAll().join("_")}"
+    def suffix = "_${task.ext.suffix ?: "warped"}"
     def suffix_qc = task.ext.suffix_qc ? "_${task.ext.suffix_qc}" : ""
 
-    def output_dtype = "-u ${task.ext.output_dtype ?: "default"}"
     def dimensionality = "-d ${task.ext.dimensionality ?: 3}"
     def image_type = "-e ${task.ext.image_type ?: 0}"
     def interpolation = "-n ${task.ext.interpolation ?: "Linear"}"
+    def output_dtype = "-u ${task.ext.output_dtype ?: "default"}"
     def default_val = "-f ${task.ext.default_val ?: 0}"
     def run_qc = task.ext.run_qc as Boolean || false
 
@@ -82,6 +82,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
                     \${image}_mosaic.png \${image}_mosaic.png
                 # Clean up.
                 rm \${image}_coronal*.png \${image}_sagittal*.png \${image}_axial*.png
+                rm *\${image}_viz.nii.gz
             done
 
             # Create GIF.
@@ -91,6 +92,7 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
             # Clean up.
             rm *_mosaic.png
+            rm reference.nii.gz
         fi
     done
 
@@ -105,8 +107,8 @@ process REGISTRATION_ANTSAPPLYTRANSFORMS {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = "${task.ext.first_suffix ?: ""}_warped"
-    def suffix_qc = task.ext.suffix_qc ?: ""
+    def suffix = "_${task.ext.suffix ?: "warped"}"
+    def suffix_qc = task.ext.suffix_qc ? "_${task.ext.suffix_qc}" : ""
     def run_qc = task.ext.run_qc as Boolean || false
 
     """

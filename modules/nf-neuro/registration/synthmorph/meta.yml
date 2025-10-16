@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: registration_synthregistration
+name: registration_synthmorph
 description: Perform registration using SynthMorph from Freesurfer. Outputs transforms
   in Freesurfer format .lta for affine and .nii.gz (synthmorph also supports .mgz)
   for deform, both in RAS orientation. Conversion to other formats is done using lta_convert

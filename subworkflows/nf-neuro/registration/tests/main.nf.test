@@ -15,7 +15,7 @@ nextflow_workflow {
     tag "registration/ants"
     tag "registration/convert"
     tag "registration/easyreg"
-    tag "registration/synthregistration"
+    tag "registration/synthmorph"
 
     tag "load_test_data"
 
@@ -208,7 +208,7 @@ nextflow_workflow {
     }
 
     test("registration - Synthmorph") {
-        config "./synthregistration.config"
+        config "./synthmorph.config"
         when {
             workflow {
                 """

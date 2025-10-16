@@ -1,4 +1,4 @@
-process REGISTRATION_SYNTHREGISTRATION {
+process REGISTRATION_SYNTHMORPH {
     tag "$meta.id"
     label 'process_high'
 

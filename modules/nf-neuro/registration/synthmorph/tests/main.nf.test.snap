@@ -1,5 +1,5 @@
 {
-    "registration - synthregistration": {
+    "registration - synthmorph": {
         "content": [
             {
                 "backward_affine": [
@@ -94,7 +94,7 @@
         },
         "timestamp": "2025-10-16T15:22:15.176985467"
     },
-    "registration - synthregistration - stub-run": {
+    "registration - synthmorph - stub-run": {
         "content": [
             [
                 "versions.yml:md5,c9f5ddf6ca4a08a71b117bdb7653c7f9"

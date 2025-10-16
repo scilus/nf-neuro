@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "test_b0_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
+                        "test_b0_to_template.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
                     ]
                 ],
                 "1": [
@@ -37,7 +37,7 @@
                         {
                             "id": "test"
                         },
-                        "test_b0_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
+                        "test_b0_to_template.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
                     ]
                 ]
             }
@@ -46,7 +46,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-16T14:59:45.920855085"
+        "timestamp": "2025-10-16T18:09:54.627164263"
     },
     "registration - antsapplytransforms": {
         "content": [
@@ -57,7 +57,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_b0_to_template_warped.nii.gz:md5,9e2bcde0e32d10aa9bfbfedfddb65dc3"
+                        "test_b0_to_template.nii.gz:md5,9e2bcde0e32d10aa9bfbfedfddb65dc3"
                     ]
                 ],
                 "1": [
@@ -90,7 +90,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_b0_to_template_warped.nii.gz:md5,9e2bcde0e32d10aa9bfbfedfddb65dc3"
+                        "test_b0_to_template.nii.gz:md5,9e2bcde0e32d10aa9bfbfedfddb65dc3"
                     ]
                 ]
             }
@@ -99,7 +99,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-16T14:58:46.735667298"
+        "timestamp": "2025-10-16T18:09:04.771251839"
     },
     "registration - antsapplytransforms - stub-run": {
         "content": [
@@ -109,9 +109,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-02T20:43:35.176693721"
+        "timestamp": "2025-10-16T18:11:35.91977629"
     },
     "registration - antsapplytransforms - multiple images": {
         "content": [
@@ -122,8 +122,8 @@
                             "id": "test"
                         },
                         [
-                            "test_b0_copy_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7",
-                            "test_b0_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
+                            "test_b0_copy_to_template.nii.gz:md5,00916b78f727d65a811774f932aa9ce7",
+                            "test_b0_to_template.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
                         ]
                     ]
                 ],
@@ -161,8 +161,8 @@
                             "id": "test"
                         },
                         [
-                            "test_b0_copy_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7",
-                            "test_b0_to_template_warped.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
+                            "test_b0_copy_to_template.nii.gz:md5,00916b78f727d65a811774f932aa9ce7",
+                            "test_b0_to_template.nii.gz:md5,00916b78f727d65a811774f932aa9ce7"
                         ]
                     ]
                 ]
@@ -172,6 +172,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-16T15:00:54.858027369"
+        "timestamp": "2025-10-16T18:11:01.740371415"
     }
 }

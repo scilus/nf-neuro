@@ -74,7 +74,7 @@ nextflow_workflow {
     }
 
     test("rbx - download atlas - synthmorph registration") {
-        config "./synthregistration.config"
+        config "./synthmorph.config"
 
         when {
             workflow {

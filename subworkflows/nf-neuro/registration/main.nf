@@ -1,7 +1,7 @@
 include { REGISTRATION_ANATTODWI  } from '../../../modules/nf-neuro/registration/anattodwi/main'
 include { REGISTRATION_ANTS   } from '../../../modules/nf-neuro/registration/ants/main'
 include { REGISTRATION_EASYREG   } from '../../../modules/nf-neuro/registration/easyreg/main'
-include { REGISTRATION_SYNTHREGISTRATION } from '../../../modules/nf-neuro/registration/synthregistration/main'
+include { REGISTRATION_SYNTHMORPH } from '../../../modules/nf-neuro/registration/synthmorph/main'
 include { REGISTRATION_CONVERT } from '../../../modules/nf-neuro/registration/convert/main'
 
 params.run_easyreg      = false
@@ -69,24 +69,24 @@ workflow REGISTRATION {
             ch_register = ch_fixed_image
                 .join(ch_moving_image)
 
-            REGISTRATION_SYNTHREGISTRATION ( ch_register )
-            ch_versions = ch_versions.mix(REGISTRATION_SYNTHREGISTRATION.out.versions.first())
+            REGISTRATION_SYNTHMORPH ( ch_register )
+            ch_versions = ch_versions.mix(REGISTRATION_SYNTHMORPH.out.versions.first())
 
             // Tag all synthmorph transforms per type, and index if in a chain. This info will be
             // used after conversion to sort out the transforms from the conversion module.
-            ch_convert_forward_affine = REGISTRATION_SYNTHREGISTRATION.out.forward_affine
+            ch_convert_forward_affine = REGISTRATION_SYNTHMORPH.out.forward_affine
                 .map{ meta, forward_affine -> [meta, [tag: "forward_affine"], forward_affine] }
-            ch_convert_forward_warp = REGISTRATION_SYNTHREGISTRATION.out.forward_warp
+            ch_convert_forward_warp = REGISTRATION_SYNTHMORPH.out.forward_warp
                 .map{ meta, forward_warp -> [meta, [tag: "forward_warp"], forward_warp] }
-            ch_convert_backward_affine = REGISTRATION_SYNTHREGISTRATION.out.backward_affine
+            ch_convert_backward_affine = REGISTRATION_SYNTHMORPH.out.backward_affine
                 .map{ meta, backward_affine -> [meta, [tag: "backward_affine"], backward_affine] }
-            ch_convert_backward_warp = REGISTRATION_SYNTHREGISTRATION.out.backward_warp
+            ch_convert_backward_warp = REGISTRATION_SYNTHMORPH.out.backward_warp
                 .map{ meta, backward_warp -> [meta, [tag: "backward_warp"], backward_warp] }
-            ch_convert_forward_image_transform = REGISTRATION_SYNTHREGISTRATION.out.forward_image_transform
+            ch_convert_forward_image_transform = REGISTRATION_SYNTHMORPH.out.forward_image_transform
                 .map{ meta, transforms -> [meta, [tag: "forward_image_transform"], 0..<transforms.size(), transforms] }
                 .transpose()
                 .map{ meta, tag, idx, transform -> [meta, tag + [idx: idx], transform]}
-            ch_convert_backward_image_transform = REGISTRATION_SYNTHREGISTRATION.out.backward_image_transform
+            ch_convert_backward_image_transform = REGISTRATION_SYNTHMORPH.out.backward_image_transform
                 .map{ meta, transforms -> [meta, [tag: "backward_image_transform"], 0..<transforms.size(), transforms] }
                 .transpose()
                 .map{ meta, tag, idx, transform -> [meta, tag + [idx: idx], transform]}
@@ -133,7 +133,7 @@ workflow REGISTRATION {
                 }
 
             // ** Set compulsory outputs ** //
-            out_image_warped = REGISTRATION_SYNTHREGISTRATION.out.image_warped
+            out_image_warped = REGISTRATION_SYNTHMORPH.out.image_warped
             out_forward_affine = ch_conversion_outputs.forward_affine
             out_forward_warp = ch_conversion_outputs.forward_warp
             out_backward_affine = ch_conversion_outputs.backward_affine
