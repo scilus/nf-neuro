@@ -2,7 +2,7 @@ process PREPROC_NORMALIZE {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilus:2.1.0"
+    container "scilus/scilus:2.2.0"
 
     input:
     tuple val(meta), path(dwi), path(bval), path(bvec), path(mask)
@@ -27,10 +27,10 @@ process PREPROC_NORMALIZE {
     export OMP_NUM_THREADS=$task.cpus
     export OPENBLAS_NUM_THREADS=1
 
-    scil_dwi_extract_shell.py $dwi $bval $bvec $dti_info dwi_dti.nii.gz \
+    scil_dwi_extract_shell $dwi $bval $bvec $dti_info dwi_dti.nii.gz \
         bval_dti bvec_dti $dwi_shell_tolerance
 
-    scil_dti_metrics.py dwi_dti.nii.gz bval_dti bvec_dti --mask $mask \
+    scil_dti_metrics dwi_dti.nii.gz bval_dti bvec_dti --mask $mask \
         --not_all --fa fa.nii.gz --skip_b0_check
 
     mrthreshold fa.nii.gz ${prefix}_fa_wm_mask.nii.gz $fa_mask_threshold \
@@ -41,18 +41,17 @@ process PREPROC_NORMALIZE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_dwi_extract_shell.py -h
-    scil_dti_metrics.py -h
+    scil_dwi_extract_shell -h
+    scil_dti_metrics -h
     mrthreshold -h
     dwinormalise -h
 
@@ -61,7 +60,7 @@ process PREPROC_NORMALIZE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(dwidenoise -version 2>&1 | sed -n 's/== dwidenoise \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """

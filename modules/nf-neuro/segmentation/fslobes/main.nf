@@ -2,9 +2,7 @@ process SEGMENTATION_FSLOBES {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.1.0.sif':
-        'scilus/scilus:2.1.0' }"
+    container 'scilus/scilus:2.2.0'
 
     input:
         tuple val(meta), path(fs_folder)
@@ -27,18 +25,18 @@ process SEGMENTATION_FSLOBES {
     mrconvert ${fs_folder}/mri/wmparc.mgz wmparc.nii.gz
     mrconvert ${fs_folder}/mri/brainmask.mgz brain_mask.nii.gz
 
-    scil_volume_reslice_to_reference.py wmparc.nii.gz rawavg.nii.gz \
+    scil_volume_reslice_to_reference wmparc.nii.gz rawavg.nii.gz \
         wmparc.nii.gz --interpolation nearest -f
-    scil_volume_math.py convert wmparc.nii.gz wmparc.nii.gz --data_type uint16 -f
+    scil_volume_math convert wmparc.nii.gz wmparc.nii.gz --data_type uint16 -f
 
-    scil_volume_math.py lower_threshold brain_mask.nii.gz 0.001 brain_mask.nii.gz \
+    scil_volume_math lower_threshold brain_mask.nii.gz 0.001 brain_mask.nii.gz \
         --data_type uint8 -f
-    scil_volume_math.py dilation brain_mask.nii.gz 1 brain_mask.nii.gz -f
-    scil_volume_reslice_to_reference.py brain_mask.nii.gz rawavg.nii.gz \
+    scil_volume_math dilation brain_mask.nii.gz 1 brain_mask.nii.gz -f
+    scil_volume_reslice_to_reference brain_mask.nii.gz rawavg.nii.gz \
         brain_mask.nii.gz --interpolation nearest \
         --interpolation nearest --keep_dtype -f
 
-    scil_labels_combine.py ${prefix}__atlas_lobes.nii.gz \
+    scil_labels_combine ${prefix}__atlas_lobes.nii.gz \
         --volume_ids wmparc.nii.gz 1003 1012 1014 1017 1018 1019 1020 1024 1027 1028 1032 \
         --volume_ids wmparc.nii.gz 1008 1022 1025 1029 1031 \
         --volume_ids wmparc.nii.gz 1005 1011 1013 1021 \
@@ -54,14 +52,14 @@ process SEGMENTATION_FSLOBES {
         --volume_ids wmparc.nii.gz 49 50 51 52 53 54 58 60 \
         --volume_ids wmparc.nii.gz 47 \
         --volume_ids wmparc.nii.gz 16 --merge
-    scil_labels_dilate.py ${prefix}__atlas_lobes.nii.gz ${prefix}__atlas_lobes_dilate.nii.gz \
+    scil_labels_dilate ${prefix}__atlas_lobes.nii.gz ${prefix}__atlas_lobes_dilate.nii.gz \
         --distance 2 --labels_to_dilate 1 2 3 4 5 6 8 9 10 11 12 14 15 \
         --mask brain_mask.nii.gz
 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(mrconvert -version 2>&1 | sed -n 's/== mrconvert \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """
@@ -70,17 +68,17 @@ process SEGMENTATION_FSLOBES {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     mrconvert -h
-    scil_volume_math.py -h
-    scil_volume_reshape_to_reference.py -h
-    scil_labels_dilate.py -h
-    scil_labels_combine.py -h
+    scil_volume_math -h
+    scil_volume_reslice_to_reference -h
+    scil_labels_dilate -h
+    scil_labels_combine -h
 
     touch ${prefix}__atlas_lobes.nii.gz
     touch ${prefix}__atlas_lobes_dilate.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(mrconvert -version 2>&1 | sed -n 's/== mrconvert \\([0-9.]\\+\\).*/\\1/p')
     END_VERSIONS
     """

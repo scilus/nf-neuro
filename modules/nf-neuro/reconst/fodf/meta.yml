@@ -22,6 +22,126 @@ tools:
         toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
+args:
+  - dwi_shell_tolerance:
+      type: integer
+      description: |
+        Tolerance in s/mm2 for grouping b-values into shells.
+        E.g. with a tolerance of 20, b-values between 0 and 20 will be considered
+        as b=0.
+      default: None
+  - min_fodf_shell_value:
+      type: integer
+      description: |
+        Minimum b-value to use for FODF fitting. All shells above this value will
+        be used.
+      default: 100
+  - b0_thr_extract_b0:
+      type: integer
+      description: Threshold under which b-values are considered to be b0s.
+      default: 10
+  - fodf_shells:
+      type: string
+      description: |
+        Space separated list of b-values to use for FODF fitting. If None, all shells
+        above min_fodf_shell_value will be used.
+      default: None
+  - sh_order:
+      type: integer
+      description: Spherical harmonics order to use for FODF fitting.
+      default: None
+  - sh_basis:
+      type: string
+      description: Spherical harmonics basis to use for FODF fitting.
+      default: None
+      choices: "tournier07, descoteaux07, descoteaux07_legacy, tournier07_legacy"
+  - method:
+      type: string
+      description: FODF reconstruction method to use.
+      default: "ssst"
+      choices: "ssst, msmt"
+  - relative_threshold:
+      type: float
+      description: Relative threshold to apply on FODF peaks.
+      default: None
+  - fodf_metrics_a_factor:
+      type: float
+      description: Absolute threshold to apply on FODF peaks.
+      default: 2.0
+  - fa_threshold:
+      type: float
+      description: Threshold to apply on the FA map to extract voxels in ventricles.
+      default: None
+  - md_threshold:
+      type: float
+      description: Threshold to apply on the MD map to extract voxels in ventricles.
+      default: None
+  - absolute_peaks:
+      type: boolean
+      description: |
+        If set, the peak values are not max-normalized for each voxel, but
+        kept as the actual fODF amplitude.
+      default: false
+  - wm_fodf:
+      type: boolean
+      description: If set, will output the white matter (WM) FODF map when using
+        the msmt method.
+      default: true
+  - gm_fodf:
+      type: boolean
+      description: If set, will output the grey matter (GM) FODF map when using
+        the msmt method.
+      default: false
+  - csf_fodf:
+      type: boolean
+      description: If set, will output the CSF FODF map when using the msmt method.
+      default: false
+  - vf:
+      type: boolean
+      description: If set, will output the volume fraction (vf) maps when using the
+        msmt method.
+      default: false
+  - vf_rgb:
+      type: boolean
+      description: If set, will output the volume fraction (vf) maps in rgb when using
+        the msmt method.
+      default: false
+  - peaks:
+      type: boolean
+      description: If set, will output the peaks file.
+      default: false
+  - peak_values:
+      type: boolean
+      description: If set, will output the peak values file.
+      default: false
+  - peak_indices:
+      type: boolean
+      description: If set, will output the peak indices file.
+      default: false
+  - afd_max:
+      type: boolean
+      description: If set, will output the maximum Apparent Fiber Density (AFDmax)
+        map.
+      default: false
+  - afd_total:
+      type: boolean
+      description: If set, will output the total Apparent Fiber Density (AFDtotal)
+        map.
+      default: false
+  - afd_sum:
+      type: boolean
+      description: If set, will output the sum of all Apparent Fiber Density (Afdsum)
+        map.
+      default: false
+  - nufo:
+      type: boolean
+      description: If set, will output the Number of Fiber Orientation (NuFO) map.
+      default: false
+  - ventricles_mask:
+      type: boolean
+      description: If set, will output the ventricle mask estimated from an MD and
+        FA threshold.
+      default: false
 input:
   - - meta:
         type: map
