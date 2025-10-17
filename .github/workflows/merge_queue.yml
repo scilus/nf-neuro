@@ -31,6 +31,24 @@ jobs:
 
   update-main:
     needs: [check-conditions, checks]
-    if: always() && (!needs.check-conditions.outputs.should_run_checks || needs.checks.result == 'success')
+    if: ${{ ! failure() && ! cancelled() }}
     uses: ./.github/workflows/update_main.yml
     secrets: inherit
+
+  checkmark:
+    runs-on: ubuntu-latest
+    needs: [checks, update-main]
+    if: ${{ !cancelled() }}
+    steps:
+      - name: All jobs ok
+        if: ${{ success() || !contains(needs.*.result, 'failure') }}
+        run: exit 0
+      - name: One or more jobs failed
+        if: ${{ contains(needs.*.result, 'failure') }}
+        run: exit 1
+
+      - name: debug-print
+        if: ${{ !cancelled() }}
+        run: |
+          echo "toJSON(needs) = ${{ toJSON(needs) }}"
+          echo "toJSON(needs.*.result) = ${{ toJSON(needs.*.result) }}"

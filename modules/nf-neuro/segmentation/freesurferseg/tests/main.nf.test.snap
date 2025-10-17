@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_wm.nii.gz:md5,2dc635526adb6ef185300acc326ead13"
+                        "test__mask_wm.nii.gz:md5,0771113b8a34511a2d89532e3d10c8b6"
                     ]
                 ],
                 "1": [
@@ -17,7 +17,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_gm.nii.gz:md5,247106ed727133078fe262b0b8244071"
+                        "test__mask_gm.nii.gz:md5,e32a7076278321b90376b08c1ac7a0d4"
                     ]
                 ],
                 "2": [
@@ -26,11 +26,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_csf.nii.gz:md5,b92db7e454c95afadea320a143912ce8"
+                        "test__mask_csf.nii.gz:md5,2e291970479651f014b702f296cc0dd5"
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+                    "versions.yml:md5,b6820832ff438ceefbbfb461980ef7e9"
                 ],
                 "csf_mask": [
                     [
@@ -38,7 +38,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_csf.nii.gz:md5,b92db7e454c95afadea320a143912ce8"
+                        "test__mask_csf.nii.gz:md5,2e291970479651f014b702f296cc0dd5"
                     ]
                 ],
                 "gm_mask": [
@@ -47,11 +47,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_gm.nii.gz:md5,247106ed727133078fe262b0b8244071"
+                        "test__mask_gm.nii.gz:md5,e32a7076278321b90376b08c1ac7a0d4"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+                    "versions.yml:md5,b6820832ff438ceefbbfb461980ef7e9"
                 ],
                 "wm_mask": [
                     [
@@ -59,28 +59,28 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_wm.nii.gz:md5,2dc635526adb6ef185300acc326ead13"
+                        "test__mask_wm.nii.gz:md5,0771113b8a34511a2d89532e3d10c8b6"
                     ]
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-11T23:47:46.765364092"
+        "timestamp": "2025-09-30T16:45:27.502526"
     },
     "segmentation - freesurferseg - stub-run": {
         "content": [
             [
-                "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+                "versions.yml:md5,b6820832ff438ceefbbfb461980ef7e9"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-08-15T21:42:26.994320087"
+        "timestamp": "2025-09-30T16:45:43.222485"
     },
     "segmentation - freesurferseg": {
         "content": [
@@ -91,7 +91,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_wm.nii.gz:md5,2dc635526adb6ef185300acc326ead13"
+                        "test__mask_wm.nii.gz:md5,0771113b8a34511a2d89532e3d10c8b6"
                     ]
                 ],
                 "1": [
@@ -100,7 +100,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_gm.nii.gz:md5,247106ed727133078fe262b0b8244071"
+                        "test__mask_gm.nii.gz:md5,e32a7076278321b90376b08c1ac7a0d4"
                     ]
                 ],
                 "2": [
@@ -109,11 +109,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_csf.nii.gz:md5,b92db7e454c95afadea320a143912ce8"
+                        "test__mask_csf.nii.gz:md5,2e291970479651f014b702f296cc0dd5"
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+                    "versions.yml:md5,b6820832ff438ceefbbfb461980ef7e9"
                 ],
                 "csf_mask": [
                     [
@@ -121,7 +121,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_csf.nii.gz:md5,b92db7e454c95afadea320a143912ce8"
+                        "test__mask_csf.nii.gz:md5,2e291970479651f014b702f296cc0dd5"
                     ]
                 ],
                 "gm_mask": [
@@ -130,11 +130,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_gm.nii.gz:md5,247106ed727133078fe262b0b8244071"
+                        "test__mask_gm.nii.gz:md5,e32a7076278321b90376b08c1ac7a0d4"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25b7ff70970aba310ab898ce904c988d"
+                    "versions.yml:md5,b6820832ff438ceefbbfb461980ef7e9"
                 ],
                 "wm_mask": [
                     [
@@ -142,15 +142,15 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mask_wm.nii.gz:md5,2dc635526adb6ef185300acc326ead13"
+                        "test__mask_wm.nii.gz:md5,0771113b8a34511a2d89532e3d10c8b6"
                     ]
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-07-11T23:42:49.898656938"
+        "timestamp": "2025-09-30T16:41:32.722761"
     }
 }
