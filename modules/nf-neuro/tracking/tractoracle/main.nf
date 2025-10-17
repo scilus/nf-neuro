@@ -57,6 +57,9 @@ process TRACKING_TRACTORACLE {
     touch ${prefix}__interface.nii.gz
     touch ${prefix}__tracking.trk
 
+    uv run scil_tracking_pft_maps.py -h
+    uv run /tractoracle_irt/tractoracle_irt/runners/ttl_track.py -h
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         tractoracle-irt: \$(uv pip -q -n list | grep tractoracle-irt | tr -s ' ' | cut -d' ' -f2)
