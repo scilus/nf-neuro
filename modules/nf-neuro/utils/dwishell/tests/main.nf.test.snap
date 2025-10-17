@@ -1,0 +1,92 @@
+{
+    "dwishell - extract two shells": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__dwi_sh_shells.nii.gz:md5,021c3fdc96d8ab0311efa0e3e17e8309",
+                    "test__bval_sh_shells:md5,4068ac4e3f4893fd9f63fe7be83229a0",
+                    "test__bvec_sh_shells:md5,d4ddf35e80a7d2caa8e77505a729ceb8"
+                ]
+            ],
+            [
+                "versions.yml:md5,e0f2705d122d83d3a6625951bcbfd464"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-17T18:18:32.468286353"
+    },
+    "dwishell - extract single shell": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__dwi_sh_shells.nii.gz:md5,e714c303160c86434672e57a3ef2c0c7",
+                    "test__bval_sh_shells:md5,ad6aa09708a6772442779d6f80b0a2a1",
+                    "test__bvec_sh_shells:md5,d2253329eeb22ab5f60f360f6bb40a72"
+                ]
+            ],
+            [
+                "versions.yml:md5,e0f2705d122d83d3a6625951bcbfd464"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-17T18:18:26.426012816"
+    },
+    "dwishell - stub": {
+        "content": [
+            [
+                "versions.yml:md5,e0f2705d122d83d3a6625951bcbfd464"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-17T18:18:45.238848259"
+    },
+    "dwishell - extract out indices": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__dwi_sh_shells.nii.gz:md5,664892dc7a55f15dc9f92be1762fa3f8",
+                    "test__bval_sh_shells:md5,fd3db13552e55a8ee6c7e8f11d7698eb",
+                    "test__bvec_sh_shells:md5,2c1de45ddc899932e289a8eeb397380a"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test__out_indices:md5,b2fcd56b5ae04dce90945c030520ae3f"
+                ]
+            ],
+            [
+                "versions.yml:md5,e0f2705d122d83d3a6625951bcbfd464"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-17T18:18:39.253713807"
+    }
+}

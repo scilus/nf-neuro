@@ -1,0 +1,2 @@
+utils/dwishell:
+  - "modules/nf-neuro/utils/dwishell/**"
