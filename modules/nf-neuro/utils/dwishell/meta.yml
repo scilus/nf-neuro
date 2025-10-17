@@ -1,4 +1,4 @@
-name: "reconst_dwishell"
+name: "utils_dwishell"
 description: Extracts the DWI volumes that are on specific b-value shells in the same order as in the original file.
 keywords:
   - dwi

@@ -1,4 +1,4 @@
-process RECONST_DWISHELL {
+process UTILS_DWISHELL {
     tag "${meta.id}"
     label 'process_single'
 
@@ -46,6 +46,7 @@ process RECONST_DWISHELL {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+    scil_dwi_extract_shell -h
     touch ${prefix}__dwi_sh_shells.nii.gz
     touch ${prefix}__bval_sh_shells
     touch ${prefix}__bvec_sh_shells
