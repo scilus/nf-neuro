@@ -34,7 +34,7 @@ repository = "https://github.com/scilus/nf-neuro.git"
 
 [tool.poetry.dependencies]
 
-python = "<3.11,>=3.9"
+python = "<3.13,>=3.9"
 nf-core = "^3.3.2"
 black = "^24.1.1"
 isort = "^5.13.2"

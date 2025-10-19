@@ -16,6 +16,10 @@
     "containerEnv": {
         "WORKSPACE": "${containerWorkspaceFolder}"
     },
+    "remoteEnv": {
+        "XDG_CONFIG_HOME": "/home/neuro/.config"
+    },
+    "remoteUser": "neuro",
     "features": {
         "ghcr.io/devcontainers/features/git:1": {},
         "ghcr.io/devcontainers/features/github-cli:1": {},
@@ -23,11 +27,8 @@
             "dockerDashComposeVersion": "none",
             "installDockerComposeSwitch": false
         },
-        "ghcr.io/devcontainers-extra/features/apt-get-packages:1": {},
         "ghcr.io/robsyme/features/nextflow:1": {},
-        "ghcr.io/devcontainers-extra/features/curl-apt-get:1": {},
-        "ghcr.io/devcontainers-extra/features/tmux-apt-get:1": {},
-        "ghcr.io/devcontainers-extra/features/wget-apt-get:1": {}
+        "ghcr.io/devcontainers-extra/features/tmux-apt-get:1": {}
     },
     "mounts": [
         {
@@ -57,7 +58,7 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "prettier.prettierPath": "/usr/lib/node_modules/prettier",
+                "prettier.prettierPath": "/usr/local/lib/node_modules/prettier",
                 "python": {
                     "analysis.exclude": [
                         "${containerWorkspaceFolder}/.dvc",
@@ -79,7 +80,6 @@
                     ],
                     "createEnvironment.trigger": "off",
                     "interpreter.infoVisibility": "always",
-                    "poetryPath": "/root/.local/bin/poetry",
                     "defaultInterpreterPath": "${containerWorkspaceFolder}/.venv",
                     "terminal.activateEnvironment": true,
                     "terminal.activateEnvInCurrentTerminal": true,
@@ -89,6 +89,5 @@
             "extensions": ["nf-neuro.nf-neuro-extensionpack"]
         }
     },
-    "init": true,
-    "privileged": true
+    "init": true
 }

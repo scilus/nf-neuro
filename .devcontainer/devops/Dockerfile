@@ -1,7 +1,10 @@
-FROM scilus/scilus:2.0.2
+FROM python:3.13-slim-bookworm
 
 ARG NFTEST_VERSION
 ARG POETRY_VERSION
+ARG USERNAME=neuro
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
 
 ENV NODE_MAJOR=20
 ENV NFTEST_VERSION=${NFTEST_VERSION:-0.9.0-rc1}
@@ -12,13 +15,10 @@ RUN apt update && apt install -y \
         git \
         jq \
         openjdk-17-jre \
-        python3-venv \
+        pipx \
+        sudo \
         wget \
     && rm -rf /var/lib/apt/lists/*
-
-RUN python3 -m pip install pipx && \
-    python3 -m pipx ensurepath && \
-    pipx install poetry==${POETRY_VERSION}
 
 # Install GitHub Actions testing tools
 RUN curl -fsSL https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
@@ -38,5 +38,23 @@ RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_MAJOR}.x | bash - &&\
 RUN mkdir /generated && chown yeoman:yeoman /generated
 WORKDIR /generated
 
+# Create neuro user inside the container
+RUN groupadd --gid $USER_GID $USERNAME && \
+    groupadd --gid 1010 nodeusers && \
+    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
+    usermod -s /bin/bash -aG nodeusers $USERNAME && \
+    echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME && \
+    chmod 0440 /etc/sudoers.d/$USERNAME && \
+    echo "prefix=/usr/local" >> /home/$USERNAME/.npmrc && \
+    mkdir -p -m 0775 /usr/local/lib/node_modules && \
+    chown -R root:nodeusers /usr/local/lib/node_modules
+
+USER $USERNAME
+
+# Install Poetry using pipx in user environment
+RUN pipx ensurepath && \
+    pipx install poetry==${POETRY_VERSION}
+
+# Export history for saving between container sessions
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
-    && echo "$SNIPPET" >> "/root/.bashrc"
+    && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
