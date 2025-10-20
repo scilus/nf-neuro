@@ -8,7 +8,9 @@ process UTILS_DWISHELL {
     tuple val(meta), path(dwi), path(bval), path(bvec)
 
     output:
-    tuple val(meta), path("*__dwi_sh_shells.nii.gz"), path("*__bval_sh_shells"), path("*__bvec_sh_shells"), emit: dwi_shells
+    tuple val(meta), path("*__dwi_sh_shells.nii.gz"), emit: dwi
+    tuple val(meta), path("*__bval_sh_shells"), emit: bval
+    tuple val(meta), path("*__bvec_sh_shells"), emit: bvec
     tuple val(meta), path("*__out_indices"), emit: out_indices, optional: true
     path "versions.yml", emit: versions
 
