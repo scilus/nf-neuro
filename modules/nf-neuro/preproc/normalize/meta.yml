@@ -18,6 +18,30 @@ tools:
       homepage: https://www.mrtrix.org/
       doi: 10.1016/j.neuroimage.2019.116137
       identifier: ""
+args:
+  - dwi_shell_tolerance:
+      type: integer
+      description: |
+        Tolerance in s/mm2 for grouping b-values into shells.
+        E.g. with a tolerance of 20, b-values between 0 and 20 will be considered
+        as b=0.
+      default: None
+  - fa_mask_threshold:
+      type: float
+      description: Threshold to apply on the FA map to create a white matter mask.
+      default: None
+  - max_dti_shell_value:
+      type: integer
+      description: |
+        Maximum b-value to use for DTI fitting. All shells under this value will
+        be used.
+    default: 1600
+  - dti_shells:
+      type: string
+      description: |
+        Space separated list of b-values to use for DTI fitting. If None, all shells
+        under max_dti_shell_value will be used.
+      default: None
 input:
   - - meta:
         type: map
