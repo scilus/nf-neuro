@@ -1,12 +1,14 @@
 name: "utils_dwishell"
-description: Extracts the DWI volumes that are on specific b-value shells in the same order as in the original file.
+description: Extracts the DWI volumes that are on specific b-value shells in the
+  same order as in the original file.
 keywords:
   - dwi
   - extract
   - shell
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI
+        processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
 
@@ -37,7 +39,8 @@ input:
 args:
   - b0_thr_extract_b0:
       type: integer
-      description: Volumes with b-values up to this threshold are considered b0 (unweighted).
+      description: Volumes with b-values up to this threshold are considered b0
+        (unweighted).
       default: 10
   - max_shell_bvalue:
       type: integer
@@ -45,7 +48,8 @@ args:
       default: 1500
   - shell_to_fit:
       type: integer
-      description: Only use volumes with this b-value. Required if input is multi-shell.
+      description: Only use volumes with this b-value. Required if input is
+        multi-shell.
       default: null
   - out_indices:
       type: boolean
@@ -54,13 +58,16 @@ args:
   - block_size:
       type: integer
       default: null
-      description: Useful when the data is too large to be loaded in memory. A block size of X means that X DWI volumes are loaded at a time for processing.
+      description: Useful when the data is too large to be loaded in memory. A
+        block size of X means that X DWI volumes are loaded at a time for
+        processing.
   - tolerance:
       type: integer
       default: 20
-      description: The tolerated gap between the b-values to extract and the actual b-values.
+      description: The tolerated gap between the b-values to extract and the
+        actual b-values.
 output:
-  dwi_shells:
+  dwi:
     - - meta:
           type: map
           description: |
@@ -72,12 +79,25 @@ output:
           pattern: "*__dwi_sh_shells.nii.gz"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIfTI format
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  bval:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
       - "*__bval_sh_shells":
           type: file
           description: B-values of the fitted shells in FSL format.
           pattern: "*__bval_sh_shells"
           ontologies:
             - edam: http://edamontology.org/format_2330 # Plain text format
+  bvec:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
       - "*__bvec_sh_shells":
           type: file
           description: B-vectors of the fitted shells in FSL format.
