@@ -1,0 +1,130 @@
+name: tracking_tractoracle
+description: |
+  Compute the interface between white matter (WM) and grey matter (GM) for seeding and
+  generate a tractogram using TractOracle-IRT, a deep Reinforcement Learning (RL) based
+  tractography algorithm. Through this module, we provide the best(s) pre-trained agent(s)
+  available for tractography using this RL-based method.
+keywords:
+  - Diffusion MRI
+  - Tractography
+  - Reinforcement Learning
+tools:
+  - "tractoracle-irt":
+      description: "TractOracle-IRT: Exploring the robustness of TractOracle methods in RL-based tractography."
+      homepage: "https://github.com/scil-vital/tractoracle_irt"
+      doi: "10.1016/j.media.2025.103743"
+      identifier: ""
+  - scilpy:
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - wm:
+        type: file
+        description: Nifti white matter probability map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - gm:
+        type: file
+        description: Nifti grey matter probability map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - csf:
+        type: file
+        description: Nifti cerebrospinal fuild probability map.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fodf:
+        type: file
+        description: Nifti image of Spherical harmonic file (fodf).
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+
+args:
+  - compress:
+      type: float
+      description: |
+        The distance threshold for compression of streamlines in mm.
+      default: 0.1
+  - n_actor:
+      type: integer
+      description: |
+        Number of actors to use during tracking. This represents the
+        number of streamlines which are propagated in parallel. A
+        higher value will speed up the tracking process, up to a certain
+        point (depending on the number of GPU cores and VRM available).
+        We suggest to use a value between 5000 and 50000.
+      default: 10000
+  - npv:
+      type: integer
+      description: |
+        Number of seeds per voxel to use. This directly impacts the total
+        number of streamlines generated. A higher value will result in more
+        streamlines, but also in a longer processing time.
+      default: 1
+  - agent_checkpoint:
+      type: string
+      description: |
+        Path to the TractOracle-IRT agent checkpoint that is available within
+        the container. The following checkpoints are available: "sac_irt_inferno",
+        "sac_irt_hcp", "crossq_irt_inferno" and "crossq_irt_hcp". You should not
+        have to change this as the default checkpoint is the best model available
+        for most cases. For more details about those checkpoints, please refer to
+        the TractOracle-IRT documentation: https://github.com/scil-vital/tractoracle_irt.
+      default: "public://sac_irt_inferno"
+  - min_length:
+      type: float
+      description: "Minimum length of streamlines in mm."
+      default: 20.0
+  - max_length:
+      type: float
+      description: "Maximum length of streamlines in mm."
+      default: 250.0
+
+output:
+  trk:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__tracking.trk":
+          type: file
+          description: Tractogram output file.
+          pattern: "*__tracking.{trk,tck}"
+          ontologies: []
+  interface_mask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__interface.nii.gz":
+          type: file
+          description: Nifti seeding/interface mask for tracking.
+          pattern: "*__interface.{nii,nii.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+
+authors:
+  - "@levje"
+maintainers:
+  - "@levje"
