@@ -18,9 +18,6 @@ echo "export PATH=$PATH:/nf-test/bin" >> ~/.bashrc
 # Setup GitHub Actions testing environment
 echo "🎭 Setting up GitHub Actions testing tools..."
 
-# Add act and actionlint to PATH (already installed in Dockerfile)
-echo "export PATH=$PATH:/usr/local/bin" >> ~/.bashrc
-
 # Add GitHub Actions aliases to bashrc
 cat <<'EOF' >> ~/.bashrc
 

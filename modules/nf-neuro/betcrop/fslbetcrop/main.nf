@@ -3,7 +3,7 @@ process BETCROP_FSLBETCROP {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilus:2.1.0"
+    container "scilus/scilus:2.2.0"
 
     input:
         tuple val(meta), path(image), path(bval), path(bvec)
@@ -33,35 +33,35 @@ process BETCROP_FSLBETCROP {
 
     if [[ -f "$bval" ]]
     then
-        scil_dwi_extract_b0.py $image $bval $bvec ${prefix}__b0.nii.gz --mean \
+        scil_dwi_extract_b0 $image $bval $bvec ${prefix}__b0.nii.gz --mean \
             $b0_thr --skip_b0_check
 
         bet ${prefix}__b0.nii.gz ${prefix}__image_bet.nii.gz -m -R $bet_f
-        scil_volume_math.py convert ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
+        scil_volume_math convert ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
         mrcalc $image ${prefix}__image_bet_mask.nii.gz -mult ${prefix}__image_bet.nii.gz -quiet -nthreads 1 -force
     else
         bet $image ${prefix}__image_bet.nii.gz -m -R $bet_f
-        scil_volume_math.py convert ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
+        scil_volume_math convert ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
     fi
 
     if [ "$crop" = "true" ];
     then
-        scil_volume_crop.py ${prefix}__image_bet.nii.gz ${prefix}__image_bet.nii.gz -f \
+        scil_volume_crop ${prefix}__image_bet.nii.gz ${prefix}__image_bet.nii.gz -f \
             --output_bbox ${prefix}__image_boundingBox.pkl
-        scil_volume_crop.py ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz -f\
+        scil_volume_crop ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz -f\
             --input_bbox ${prefix}__image_boundingBox.pkl
-        scil_volume_math.py convert ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz \
+        scil_volume_math convert ${prefix}__image_bet_mask.nii.gz ${prefix}__image_bet_mask.nii.gz \
             --data_type uint8 -f
     fi
 
     if [ "$dilate" = "true" ];
     then
-        scil_volume_math.py dilation ${prefix}__image_bet_mask.nii.gz $size_dil ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
+        scil_volume_math dilation ${prefix}__image_bet_mask.nii.gz $size_dil ${prefix}__image_bet_mask.nii.gz --data_type uint8 -f
     fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
         fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
 
@@ -80,10 +80,10 @@ process BETCROP_FSLBETCROP {
     trap 'handle_code' ERR
 
     bet
-    scil_dwi_extract_b0.py -h
-    scil_volume_math.py -h
+    scil_dwi_extract_b0 -h
+    scil_volume_math -h
     mrcalc -h
-    scil_volume_crop.py -h
+    scil_volume_crop -h
 
     touch ${prefix}__image_bet.nii.gz
     touch ${prefix}__image_bet_mask.nii.gz
@@ -91,7 +91,7 @@ process BETCROP_FSLBETCROP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
         mrtrix: \$(mrcalc -version 2>&1 | sed -n 's/== mrcalc \\([0-9.]\\+\\).*/\\1/p')
         fsl: \$(flirt -version 2>&1 | sed -E 's/.*version ([0-9.]+).*/\\1/')
     END_VERSIONS

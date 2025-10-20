@@ -3,9 +3,7 @@ process RECONST_FODF {
     tag "$meta.id"
     label 'process_high'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://scil.usherbrooke.ca/containers/scilus_2.0.2.sif':
-        'scilus/scilus:2.0.2' }"
+    container 'scilus/scilpy:2.2.0_cpu'
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(fa), path(md), path(wm_frf), path(gm_frf), path(csf_frf)
@@ -62,7 +60,7 @@ process RECONST_FODF {
     if ( task.ext.afd_total ) afd_total = "--afd_total ${prefix}__afd_total.nii.gz" else afd_total = ""
     if ( task.ext.afd_sum ) afd_sum = "--afd_sum ${prefix}__afd_sum.nii.gz" else afd_sum = ""
     if ( task.ext.nufo ) nufo = "--nufo ${prefix}__nufo.nii.gz" else nufo = ""
-    if ( task.ext.ventricles_mask ) vent_mask = "--mask_output ${prefix}__ventricles_mask.nii.gz" else vent_mask = ""
+    if ( task.ext.ventricles_mask ) vent_mask = "--out_mask ${prefix}__ventricles_mask.nii.gz" else vent_mask = ""
 
     def run_fodf_metrics = [
         task.ext.peaks, task.ext.peak_values, task.ext.peak_indices, task.ext.afd_max,
@@ -74,21 +72,21 @@ process RECONST_FODF {
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
 
-    scil_dwi_extract_shell.py $dwi $bval $bvec $fodf_shells \
+    scil_dwi_extract_shell $dwi $bval $bvec $fodf_shells \
         dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells \
         $dwi_shell_tolerance -f
 
     if [ "$set_method" = "ssst" ]
     then
 
-        scil_fodf_ssst.py dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells $wm_frf ${prefix}__fodf.nii.gz \
+        scil_fodf_ssst dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells $wm_frf ${prefix}__fodf.nii.gz \
             $sh_order $sh_basis --b0_threshold $b0_thr_extract_b0 \
             $set_mask $processes
 
     elif [ "$set_method" = "msmt" ]
     then
 
-        scil_fodf_msmt.py dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells \
+        scil_fodf_msmt dwi_fodf_shells.nii.gz bval_fodf_shells bvec_fodf_shells \
             $wm_frf $gm_frf $csf_frf \
             $sh_order $sh_basis $set_mask $processes $dwi_shell_tolerance \
             --not_all $wm_fodf $gm_fodf $csf_fodf $vf $vf_rgb
@@ -100,7 +98,7 @@ process RECONST_FODF {
     if $run_fodf_metrics
     then
 
-        scil_fodf_max_in_ventricles.py ${prefix}__fodf.nii.gz $fa $md \
+        scil_fodf_max_in_ventricles ${prefix}__fodf.nii.gz $fa $md \
         --max_value_output ventricles_fodf_max_value.txt $sh_basis \
         $fa_threshold $md_threshold $vent_mask -f
 
@@ -110,15 +108,12 @@ process RECONST_FODF {
         v_max=\$(sed -E 's/([+-]?[0-9.]+)[eE]\\+?(-?)([0-9]+)/(\\1*10^\\2\\3)/g' <<<"\$(cat ventricles_fodf_max_value.txt)")
 
         echo "Maximal peak value in ventricles : \${v_max}"
-
-        a_threshold=\$(echo "scale=10; \${a_factor} * \${v_max}" | bc)
-        if (( \$(echo "\${a_threshold} <= 0" | bc -l) )); then
-            a_threshold=1E-10
-        fi
+        result=\$(awk "BEGIN {result = \${a_factor} * \${v_max}; if (result <= 0) result = 1e-10; print result}")
+        a_threshold=\$(printf "%.10g" \$result)
 
         echo "Computing fodf metrics with absolute threshold : \${a_threshold}"
 
-        scil_fodf_metrics.py ${prefix}__fodf.nii.gz \
+        scil_fodf_metrics ${prefix}__fodf.nii.gz \
             $set_mask $sh_basis $absolute_peaks \
             $peaks $peak_values $peak_indices \
             $afd_max $afd_total \
@@ -128,7 +123,7 @@ process RECONST_FODF {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 
@@ -136,11 +131,11 @@ process RECONST_FODF {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    scil_dwi_extract_shell.py -h
-    scil_fodf_ssst.py -h
-    scil_fodf_msmt.py -h
-    scil_fodf_max_in_ventricles.py -h
-    scil_fodf_metrics.py -h
+    scil_dwi_extract_shell -h
+    scil_fodf_ssst -h
+    scil_fodf_msmt -h
+    scil_fodf_max_in_ventricles -h
+    scil_fodf_metrics -h
 
     touch ${prefix}__fodf.nii.gz
     touch ${prefix}__wm_fodf.nii.gz
@@ -159,7 +154,7 @@ process RECONST_FODF {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scilpy: \$(pip list --disable-pip-version-check --no-python-version-warning | grep scilpy | tr -s ' ' | cut -d' ' -f2)
+        scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
 }

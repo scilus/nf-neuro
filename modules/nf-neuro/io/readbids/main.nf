@@ -37,7 +37,7 @@ process IO_READBIDS {
             if contains("/") then
                 scan("^.*/($bids_folder/.*)") | first
             else . end
-        else . end ))' bids_struct.json) > bids_struct.json
+        else . end ))' bids_struct.json) >| bids_struct.json
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
