@@ -1,9 +1,9 @@
 name: tracking_tractoracle
 description: |
-  Compute the interface and generate a tractogram using TractOracle-IRT,
-  a deep RL-based tractography algorithm. As this is a RL-based method,
-  we provide through this module the best(s) pre-trained agent(s) available
-  for tractography.
+  Compute the interface between white matter (WM) and grey matter (GM) for seeding and
+  generate a tractogram using TractOracle-IRT, a deep Reinforcement Learning (RL) based
+  tractography algorithm. Through this module, we provide the best(s) pre-trained agent(s)
+  available for tractography using this RL-based method.
 keywords:
   - Diffusion MRI
   - Tractography
