@@ -30,3 +30,8 @@ EOF
 
 echo "✅ GitHub Actions testing environment setup complete!"
 echo "Run 'ga-test' to see available testing commands."
+
+# Change bind mounts ownership
+sudo chown -R neuro:neuro $WORKSPACE/.venv
+sudo chown -R neuro:neuro $WORKSPACE/tests/.runs
+sudo chown -R neuro:neuro /home/neuro/commandhistory

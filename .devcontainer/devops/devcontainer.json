@@ -43,7 +43,7 @@
         },
         {
             "source": "nf-neuro-bash-history",
-            "target": "/commandhistory",
+            "target": "/home/neuro/commandhistory",
             "type": "volume"
         },
         {

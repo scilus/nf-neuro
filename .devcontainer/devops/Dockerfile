@@ -56,5 +56,5 @@ RUN pipx ensurepath && \
     pipx install poetry==${POETRY_VERSION}
 
 # Export history for saving between container sessions
-RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
+RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/home/$USERNAME/commandhistory/.bash_history" \
     && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
