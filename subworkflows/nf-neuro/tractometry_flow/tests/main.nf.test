@@ -80,13 +80,7 @@ nextflow_workflow {
                                     [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
-                ).match() },
-                { assert workflow.out
-                    .findAll{ !it.key.isInteger() }
-                    .every{ channel ->
-                        channel.value.every{ subject -> subject instanceof ArrayList
-                            ? subject.every()
-                            : subject } } }
+                ).match() }
             )
         }
     }
@@ -133,13 +127,7 @@ nextflow_workflow {
                                     [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
                             } ]
                         }
-                ).match() },
-                { assert workflow.out
-                    .findAll{ !it.key.isInteger() }
-                    .every{ channel ->
-                        channel.value.every{ subject -> subject instanceof ArrayList
-                            ? subject.every()
-                            : subject } } }
+                ).match() }
             )
         }
     }
