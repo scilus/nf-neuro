@@ -2,7 +2,7 @@ process BUNDLE_STATS {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilpy:2.2.0_cpu"
+    container "scilus/scilus:2.2.0"
 
     input:
     tuple val(meta), path(bundles), path(labels_map), path(metrics), path(lesions)
@@ -23,6 +23,7 @@ process BUNDLE_STATS {
     tuple val(meta), path("*_endpoints_map_head.nii.gz")        , emit: endpoints_head, optional: true
     tuple val(meta), path("*_endpoints_map_tail.nii.gz")        , emit: endpoints_tail, optional: true
     tuple val(meta), path("*_lesion_map.nii.gz")                , emit: lesion_map, optional: true
+    tuple val(meta), path("*_QC.tsv")                           , emit: QC_stats, optional: true
     path "versions.yml"                                         , emit: versions
 
     when:
@@ -193,42 +194,33 @@ process BUNDLE_STATS {
     ### ** QC ** ###
     if $run_qc;
     then
-        echo " QC summary: extracting global means for each metric"
+        mean_std_file="${prefix}__mean_std.json"
+        echo "QC summary: extracting mean values from \${mean_std_file}"
 
-        echo "Metric,Mean" > QC_summary.csv
+        # Récupérer tous les bundles (2ème clé) et toutes les métriques (3ème clé)
+        bundles=(\$(jq -r ".\"${prefix}\" | keys[]" "\$mean_std_file"))
+        metrics=(\$(jq -r ".\"${prefix}\" | .[] | keys[]" "\$mean_std_file" | sort -u))
 
-        for json_file in ${prefix}__*.json; do
-            if [[ -f "\${json_file}" ]]; then
-                metric_name=\$(basename "\${json_file}" .json)
+        for metric in "\${metrics[@]}"; do
+            echo "Processing metric: \$metric"
 
-                # Extract all fields explicitly named "mean"
-                means=\$(jq -r '..|.mean? // empty' "\${json_file}")
+            # Créer l'en-tête TSV
+            header="sample"
+            for bundle in "\${bundles[@]}"; do
+                header="\$header,\$bundle"
+            done
+            echo "\$header" | tr ',' '\t' > "${prefix}_\${metric}_QC.tsv"
 
-                # Extract possible alternative mean fields: mean_length, volume, lesion_total_volume
-                extra=\$(jq -r '..|.mean_length? // .volume? // .lesion_total_volume? // empty' "\${json_file}")
 
-                # Merge all extracted mean-like values
-                all_means=\$(echo -e "\${means}\n\${extra}" | grep -E '^[0-9.+-eE]+$' || true)
+            row="${prefix}"
+            for bundle in "\${bundles[@]}"; do
+                value=\$(jq -r ".\"${prefix}\".\"\${bundle}\".\"\${metric}\".mean // empty" "\$mean_std_file")
+                row="\$row \$value"
+            done
 
-                # If we found numeric values, compute their average
-                if [[ -n "\${all_means}" ]]; then
-                    total=0
-                    count=0
-                    while read -r val; do
-                        if [[ \${val} =~ ^[0-9.+-eE]+$ ]]; then
-                            total=\$(awk "BEGIN {print \${total} + \${val}}")
-                            count=\$((count + 1))
-                        fi
-                    done <<< "\${all_means}"
-
-                    # Compute the mean value and append to CSV
-                    if (( count > 0 )); then
-                        avg=\$(awk "BEGIN {print \${total} / \${count}}")
-                        echo "\${metric_name},\${avg}" >> QC_summary.csv
-                    fi
-                fi
-            fi
+            echo "\$row" | tr ',' '\t' >> "${prefix}_\${metric}_QC.tsv"
         done
+
     fi
 
     cat <<-END_VERSIONS > versions.yml
@@ -266,6 +258,7 @@ process BUNDLE_STATS {
     touch ${prefix}_endpoints_map_tail.nii.gz
     touch ${prefix}__lesion_stats.json
     touch ${prefix}_lesion_map.nii.gz
+    touch ${prefix}_QC.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
