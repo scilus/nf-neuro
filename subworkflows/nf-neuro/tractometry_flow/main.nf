@@ -37,23 +37,20 @@ main:
     ch_bundles_centroids = ch_bundle_cleaned
         .join( ch_centroids, remainder: true )
         .map { [ it[0], it[1], it[2] ?: [] ] }
+        .branch {
+            centroids_only: it[2].size() > 0
+                return [ it[0], it[2] ]
+            for_centroid: it[2].size() == 0
+                return [ it[0], it[1] ]
+        }
 
-    ch_centroids_only = ch_bundles_centroids
-        .filter { it[2].size() > 0 }
-        .map { [ it[0], it[2] ] }
-
-    ch_bundles_for_centroids = ch_bundles_centroids
-        .filter { it[2].size() == 0 }
-        .map { [ it[0], it[1] ] }
-
-    TRACTOGRAM_RESAMPLE(ch_centroids_only)
+    TRACTOGRAM_RESAMPLE(ch_bundles_centroids.centroids_only )
     ch_versions = ch_versions.mix(TRACTOGRAM_RESAMPLE.out.versions.first())
     ch_centroids_cleaned_from_input = TRACTOGRAM_RESAMPLE.out.tractograms
 
-    BUNDLE_CENTROID(ch_bundles_for_centroids)
+    BUNDLE_CENTROID(ch_bundles_centroids.for_centroid)
     ch_versions = ch_versions.mix(BUNDLE_CENTROID.out.versions.first())
-    ch_centroids_cleaned_from_generate = BUNDLE_CENTROID.out.centroids
-    ch_centroids_cleaned = ch_centroids_cleaned_from_input.mix(ch_centroids_cleaned_from_generate)
+    ch_centroids_cleaned = ch_centroids_cleaned_from_input.mix(BUNDLE_CENTROID.out.centroids)
     ch_label_map = ch_bundle_cleaned.join(ch_centroids_cleaned)
 
     BUNDLE_LABELMAP ( ch_label_map )
