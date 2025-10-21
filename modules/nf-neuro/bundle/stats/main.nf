@@ -41,6 +41,7 @@ process BUNDLE_STATS {
     def streamline_count = task.ext.streamline_count ?: ""
     def volume_per_labels = task.ext.volume_per_labels ?: ""
     def mean_std_per_point = task.ext.mean_std_per_point ?: ""
+    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
     """
     bundles=( ${bundles.join(" ")} )
@@ -187,6 +188,47 @@ process BUNDLE_STATS {
         echo "Merging Bundle_Mean_Std_Per_Point"
         scil_json_merge_entries *_std_per_point.json ${prefix}__mean_std_per_point.json --no_list \
             --add_parent_key ${prefix}
+    fi
+
+    ### ** QC ** ###
+    if $run_qc;
+    then
+        echo " QC summary: extracting global means for each metric"
+
+        echo "Metric,Mean" > QC_summary.csv
+
+        for json_file in ${prefix}__*.json; do
+            if [[ -f "\${json_file}" ]]; then
+                metric_name=\$(basename "\${json_file}" .json)
+
+                # Extract all fields explicitly named "mean"
+                means=\$(jq -r '..|.mean? // empty' "\${json_file}")
+
+                # Extract possible alternative mean fields: mean_length, volume, lesion_total_volume
+                extra=\$(jq -r '..|.mean_length? // .volume? // .lesion_total_volume? // empty' "\${json_file}")
+
+                # Merge all extracted mean-like values
+                all_means=\$(echo -e "\${means}\n\${extra}" | grep -E '^[0-9.+-eE]+$' || true)
+
+                # If we found numeric values, compute their average
+                if [[ -n "\${all_means}" ]]; then
+                    total=0
+                    count=0
+                    while read -r val; do
+                        if [[ \${val} =~ ^[0-9.+-eE]+$ ]]; then
+                            total=\$(awk "BEGIN {print \${total} + \${val}}")
+                            count=\$((count + 1))
+                        fi
+                    done <<< "\${all_means}"
+
+                    # Compute the mean value and append to CSV
+                    if (( count > 0 )); then
+                        avg=\$(awk "BEGIN {print \${total} / \${count}}")
+                        echo "\${metric_name},\${avg}" >> QC_summary.csv
+                    fi
+                fi
+            fi
+        done
     fi
 
     cat <<-END_VERSIONS > versions.yml
