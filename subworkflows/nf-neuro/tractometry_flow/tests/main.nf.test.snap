@@ -1,0 +1,308 @@
+{
+    "tractometry_with_centroids": {
+        "content": [
+            {
+                "endpoints_head": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_endpoints_map_head.nii.gz"
+                    ]
+                ],
+                "endpoints_tail": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_endpoints_map_tail.nii.gz"
+                    ]
+                ],
+                "lesion_map": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_lesion_map.nii.gz"
+                    ]
+                ],
+                "stat_endpoints_metric": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_metric_stats.json"
+                    ]
+                ],
+                "stat_endpoints_raw": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_map_raw.json"
+                    ]
+                ],
+                "stat_length": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__length_stats.json"
+                    ]
+                ],
+                "stat_lesion_stats": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__lesion_stats.json"
+                    ]
+                ],
+                "stat_mean_std": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std.json"
+                    ]
+                ],
+                "stat_mean_std_per_point": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std_per_point.json"
+                    ]
+                ],
+                "stat_streamline_count": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__streamline_count.json"
+                    ]
+                ],
+                "stat_streamline_count_lesions": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__streamline_count_lesions.json"
+                    ]
+                ],
+                "stat_volume": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume.json"
+                    ]
+                ],
+                "stat_volume_lesions": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_lesions.json"
+                    ]
+                ],
+                "stat_volume_per_labels": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_per_label.json"
+                    ]
+                ],
+                "stat_volume_per_labels_lesions": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_per_label_lesions.json"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,434a5ba11a61cf19801b33f5fe4b468f",
+                    "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
+                    "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
+                    "versions.yml:md5,7325f00db4777499de91568807c6c848",
+                    "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-20T12:18:45.958434085"
+    },
+    "tractometry_without_centroids": {
+        "content": [
+            {
+                "endpoints_head": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_endpoints_map_head.nii.gz"
+                    ]
+                ],
+                "endpoints_tail": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_endpoints_map_tail.nii.gz"
+                    ]
+                ],
+                "lesion_map": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_lesion_map.nii.gz"
+                    ]
+                ],
+                "stat_endpoints_metric": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_metric_stats.json"
+                    ]
+                ],
+                "stat_endpoints_raw": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__endpoints_map_raw.json"
+                    ]
+                ],
+                "stat_length": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__length_stats.json"
+                    ]
+                ],
+                "stat_lesion_stats": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__lesion_stats.json"
+                    ]
+                ],
+                "stat_mean_std": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std.json"
+                    ]
+                ],
+                "stat_mean_std_per_point": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__mean_std_per_point.json"
+                    ]
+                ],
+                "stat_streamline_count": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__streamline_count.json"
+                    ]
+                ],
+                "stat_streamline_count_lesions": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__streamline_count_lesions.json"
+                    ]
+                ],
+                "stat_volume": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume.json"
+                    ]
+                ],
+                "stat_volume_lesions": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_lesions.json"
+                    ]
+                ],
+                "stat_volume_per_labels": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_per_label.json"
+                    ]
+                ],
+                "stat_volume_per_labels_lesions": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__volume_per_label_lesions.json"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,434a5ba11a61cf19801b33f5fe4b468f",
+                    "versions.yml:md5,6137537d13d6adb95aeb4d7337221958",
+                    "versions.yml:md5,6610a2be8c244e00591e6dc991c68eb9",
+                    "versions.yml:md5,6fe99080ba0463a6e242eb3a652d7763",
+                    "versions.yml:md5,e3eeffaf36ce9dd3240bb02ffaa665be"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-20T12:19:17.911289143"
+    }
+}

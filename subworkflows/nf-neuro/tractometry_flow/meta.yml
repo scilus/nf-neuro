@@ -1,0 +1,203 @@
+name: "tractometry_flow"
+description:
+  "This workflow processes tractograms and associated data to clean, resample, and extract meaningful statistics.
+  It requires three mandatory inputs and two optional : a set of tractogram bundles, centroids used for resampling or identification,
+  various diffusion metrics associated with the tractography, a lesion probability mask (optional) and fixel-based FODF data (optional).
+  The workflow performs key preprocessing and analysis steps such as invalid streamline removal, resampling,
+  label map creation, uniformization, and statistical extraction. The final output includes various tractography-related statistics, which can be used for further analysis.
+  You can retrieve intermediate outputs, but the subworkflow will run in its entirety nonetheless.
+
+  -----------  Steps  -----------
+
+  1. Remove invalid streamlines from bundles
+  Ensures that bundles are cleaned before further processing.
+
+  2. Fixel-Based Apparent Fiber Density
+  Use fodf to compute mean apparent fiber density (AFD) and mean radial radial fODF (radfODF) maps along a bundle.
+  Requires both the cleaned tractogram and FODF data.
+
+  3. Centroid Processing or Resampling
+  If centroids are available, resamples the centroids.
+  If centroids are missing, computes centroids from cleaned bundles.
+
+  4. Label Map Generation
+  Compute the label image (Nifti) from a centroid and tractograms (all representing the same bundle).
+  The label image represents the coverage of the bundle, segmented into regions labelled from 0 to --nb_pts,
+  starting from the head, ending in the tail. Each voxel will have the label of its nearest centroid point.
+  The number of labels will be the same as the centroid's number of points.
+  Generates labeled tractograms and individual bundle masks.
+
+  5. Streamline Uniformization
+  Normalizes the labeled tractograms to ensure consistency.
+
+  6. Statistical Analysis
+  Computes various statistics, including
+  Streamline length distributions.
+  Endpoint-based metrics.
+  Volume measurements, both global and lesion-specific.
+  Mean and standard deviation of diffusion metrics per bundle.
+
+  Output
+  The final outputs include various statistics relevant to tractometry analysis,
+  which can be used for further exploration or reporting."
+
+keywords:
+  - Tractometry
+  - Profile
+  - Segmentation
+  - Bundles
+  - Statistics
+components:
+  - tractogram/removeinvalid
+  - bundle/fixelafd
+  - tractogram/resample
+  - bundle/centroid
+  - bundle/labelmap
+  - bundle/uniformize
+  - bundle/stats
+input:
+  - ch_bundles:
+      type: file
+      description: |
+        Channel containing all the segmented bundle files.
+        Structure: [ val(meta), path(bundles) ]
+      pattern: "*.trk"
+
+  - ch_centroids:
+      type: file
+      description: |
+        Channel containing all the segmented centroids files.
+        Structure: [ val(meta), path(centroids) ]
+      pattern: "*.trk"
+
+  - ch_metrics:
+      type: file
+      description: |
+        Channel containing nifti file to compute statistics on. Probably some tractometry measure(s) such as FA, MD, RD, ...
+        The metrics has to follow a specific naming convention.
+        Structure: [ val(meta), path(metrics) ]
+      pattern: "*.nii.gz"
+
+  - ch_lesion_mask:
+      type: file
+      description: |
+        Channel containing  lesion volume to compute statistics on. The lesion mask must be a binary mask.
+        Structure: [ val(meta), path(lesion) ]
+      pattern: "*.nii.gz"
+
+  - ch_fodf:
+      type: file
+      description: |
+        Channel containing fODF file to extract fixel measurements from.
+        Structure: [ val(meta), path(fodf) ]
+      pattern: "*.nii.gz"
+
+output:
+  - stats_length:
+      type: file
+      description: |
+        Information on a tractogram, number of streamlines, mean / min / max / std of length in number of points, length in mm and step size.
+        Structure: [ val(meta), path(length) ]
+      pattern: "*__length_stats.json"
+
+  - stats_endpoints_raw:
+      type: file
+      description: |
+        Estimation of the cortical area affected by the bundle (assuming streamlines start/end in the cortex).
+        Structure: [ val(meta), path(endpoints_raw) ]
+      pattern: "*__endpoints_map_raw.json"
+
+  - stats_endpoints_metric:
+      type: file
+      description: |
+        Compute the statistics of metrics at the bundle endpoint map.
+        Structure: [ val(meta), path(endpoints_metric) ]
+      pattern: "*__endpoints_metric_stats.json"
+
+  - stats_mean_std:
+      type: file
+      description: |
+        Average the metric values of all voxels occupied by the bundle.
+        Structure: [ val(meta), path(mean_std) ]
+      pattern: "*__mean_std.json"
+
+  - stats_volume:
+      type: file
+      description: |
+        Evaluate basic measurements of bundle(s).
+        Structure: [ val(meta), path(volume) ]
+      pattern: "*__volume.json"
+
+  - stats_volume_lesions:
+      type: file
+      description: |
+        Compute bundle volume in each lesions in mm3.
+        Structure: [ val(meta), path(volume_lesions) ]
+      pattern: "*__volume_lesion.json"
+
+  - stats_streamline_count:
+      type: file
+      description: |
+        Return the number of streamlines in a tractogram.
+        Structure: [ val(meta), path(streamline_count) ]
+      pattern: "*__streamline_count.json"
+
+  - stats_streamline_count_lesions:
+      type: file
+      description: |
+        Return the number of streamlines in each lesions.
+        Structure: [ val(meta), path(streamline_count_lesions) ]
+      pattern: "*__streamline_count_lesions.json"
+
+  - stats_volume_per_labels:
+      type: file
+      description: |
+        Compute bundle volume per label in mm3. This script supports anisotropic voxels resolution. Volume is estimated by counting the number of voxel occupied by each label and multiplying it by the volume of a single voxel.
+        Structure: [ val(meta), path(volume_per_labels) ]
+      pattern: "*__volume_per_label.json"
+
+  - stats_volume_per_labels_lesions:
+      type: file
+      description: |
+        Compute bundle volume per label in each lesions in mm3.
+        Structure: [ val(meta), path(volume_per_labels_lesions) ]
+      pattern: "*__volume_per_label_lesions.json"
+
+  - stats_mean_std_per_point:
+      type: file
+      description: |
+        Average the metric values of all voxels occupied by the bundle per label.
+        Structure: [ val(meta), path(mean_std_per_point) ]
+      pattern: "*__mean_std_per_point.json"
+
+  - stats_lesion_stats:
+      type: file
+      description: |
+        File of the lesion-wise volume measure.
+        Structure: [ val(meta), path(lesion_stats) ]
+      pattern: "*_lesion_stats.json"
+
+  - endpoints_head:
+      type: file
+      description: |
+        Endpoint head map of bundle. The endpoint head map is simply a count of the number of streamlines that start in each voxel.
+        Structure: [ val(meta), path(endpoints_head) ]
+      pattern: "*.nii.gz"
+
+  - endpoints_tail:
+      type: file
+      description: |
+        Endpoint tail map of bundle. The endpoint tail map is simply a count of the number of streamlines that end in each voxel.
+        Structure: [ val(meta), path(endpoints_tail) ]
+      pattern: "*.nii.gz"
+
+  - lesion_map:
+      type: file
+      description: |
+        Nifti files of labelized lesion(s) map for each bundles.
+        Structure: [ val(meta), path(lesion_map) ]
+      pattern: "*.nii.gz"
+authors:
+  - "@ThoumyreStanislas"
+maintainers:
+  - "@ThoumyreStanislas"
