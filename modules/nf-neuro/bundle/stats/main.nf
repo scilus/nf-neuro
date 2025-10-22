@@ -195,32 +195,22 @@ process BUNDLE_STATS {
     if $run_qc;
     then
         mean_std_file="${prefix}__mean_std.json"
+        output_file="${prefix}_tractometry_QC.tsv"
+
         echo "QC summary: extracting mean values from \${mean_std_file}"
+        echo -e "sample\tbundle\tmetric\tvalue" > "\${output_file}"
 
-        # Récupérer tous les bundles (2ème clé) et toutes les métriques (3ème clé)
-        bundles=(\$(jq -r ".\"${prefix}\" | keys[]" "\$mean_std_file"))
-        metrics=(\$(jq -r ".\"${prefix}\" | .[] | keys[]" "\$mean_std_file" | sort -u))
+        bundles=(\$(jq -r ".\"${prefix}\" | keys[]" "\${mean_std_file}"))
+        metrics=(\$(jq -r ".\"${prefix}\" | .[] | keys[]" "\${mean_std_file}" | sort -u))
 
-        for metric in "\${metrics[@]}"; do
-            echo "Processing metric: \$metric"
-
-            # Créer l'en-tête TSV
-            header="sample"
-            for bundle in "\${bundles[@]}"; do
-                header="\$header,\$bundle"
+        for bundle in "\${bundles[@]}"; do
+            for metric in "\${metrics[@]}"; do
+                value=\$(jq -r ".\"${prefix}\".\"\${bundle}\".\"\${metric}\".mean // empty" "\${mean_std_file}")
+                if [[ -n "\${value}" ]]; then
+                    echo -e "${prefix}\t\${bundle}\t\${metric}\t\${value}" >> "\${output_file}"
+                fi
             done
-            echo "\$header" | tr ',' '\t' > "${prefix}_\${metric}_QC.tsv"
-
-
-            row="${prefix}"
-            for bundle in "\${bundles[@]}"; do
-                value=\$(jq -r ".\"${prefix}\".\"\${bundle}\".\"\${metric}\".mean // empty" "\$mean_std_file")
-                row="\$row \$value"
-            done
-
-            echo "\$row" | tr ',' '\t' >> "${prefix}_\${metric}_QC.tsv"
         done
-
     fi
 
     cat <<-END_VERSIONS > versions.yml

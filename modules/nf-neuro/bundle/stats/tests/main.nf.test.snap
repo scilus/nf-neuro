@@ -177,7 +177,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mean_std_per_point.json:md5,efcac000fb6c0f607b7377154e68854c"
+                        "test__mean_std_per_point.json:md5,811ff59ac345b475d9528af4f2462822"
                     ]
                 ],
                 "11": [
@@ -210,7 +210,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_mni_masked_QC.tsv:md5,71432360bd7db8d3fe478c4b749141ca"
+                        "test_tractometry_QC.tsv:md5,b740883e0f7255cfc2d998acae85994f"
                     ]
                 ],
                 "16": [
@@ -222,7 +222,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__endpoints_metric_stats.json:md5,37ef94482f4aaff07ad982a622976abf"
+                        "test__endpoints_metric_stats.json:md5,f61a0aa763565927f5eb8e8dc777697e"
                     ]
                 ],
                 "3": [
@@ -231,7 +231,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mean_std.json:md5,f7463e5519063f7e0f32709d0dfdc1a2"
+                        "test__mean_std.json:md5,3e5f23039ee3cfa8c794611225a22bca"
                     ]
                 ],
                 "4": [
@@ -264,7 +264,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_mni_masked_QC.tsv:md5,71432360bd7db8d3fe478c4b749141ca"
+                        "test_tractometry_QC.tsv:md5,b740883e0f7255cfc2d998acae85994f"
                     ]
                 ],
                 "endpoints_head": [
@@ -282,7 +282,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__endpoints_metric_stats.json:md5,37ef94482f4aaff07ad982a622976abf"
+                        "test__endpoints_metric_stats.json:md5,f61a0aa763565927f5eb8e8dc777697e"
                     ]
                 ],
                 "endpoints_raw": [
@@ -324,7 +324,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mean_std.json:md5,f7463e5519063f7e0f32709d0dfdc1a2"
+                        "test__mean_std.json:md5,3e5f23039ee3cfa8c794611225a22bca"
                     ]
                 ],
                 "mean_std_per_point": [
@@ -333,7 +333,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mean_std_per_point.json:md5,efcac000fb6c0f607b7377154e68854c"
+                        "test__mean_std_per_point.json:md5,811ff59ac345b475d9528af4f2462822"
                     ]
                 ],
                 "streamline_count": [
@@ -369,7 +369,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-21T15:46:51.273073274"
+        "timestamp": "2025-10-22T08:33:15.073824397"
     },
     "bundle - stats - light": {
         "content": [
