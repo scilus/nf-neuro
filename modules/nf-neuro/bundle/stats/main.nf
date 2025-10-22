@@ -248,7 +248,7 @@ process BUNDLE_STATS {
     touch ${prefix}_endpoints_map_tail.nii.gz
     touch ${prefix}__lesion_stats.json
     touch ${prefix}_lesion_map.nii.gz
-    touch ${prefix}_QC.tsv
+    touch ${prefix}__tractometry_mqc.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
