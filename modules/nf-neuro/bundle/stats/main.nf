@@ -23,7 +23,7 @@ process BUNDLE_STATS {
     tuple val(meta), path("*_endpoints_map_head.nii.gz")        , emit: endpoints_head, optional: true
     tuple val(meta), path("*_endpoints_map_tail.nii.gz")        , emit: endpoints_tail, optional: true
     tuple val(meta), path("*_lesion_map.nii.gz")                , emit: lesion_map, optional: true
-    tuple val(meta), path("*tractometry_mqc.tsv")               , emit: mqc, optional: true
+    tuple val(meta), path("*__tractometry_mqc.tsv")               , emit: mqc, optional: true
     path "versions.yml"                                         , emit: versions
 
     when:
