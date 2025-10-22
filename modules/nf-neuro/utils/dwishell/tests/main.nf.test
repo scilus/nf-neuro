@@ -1,0 +1,143 @@
+// nf-core modules test utils/dwishell
+nextflow_process {
+
+    name "Test Process UTILS_DWISHELL"
+    script "../main.nf"
+    process "UTILS_DWISHELL"
+
+    tag "modules"
+    tag "modules_nfneuro"
+    tag "utils"
+    tag "utils/dwishell"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "DWIms1000-2000-dir10-10.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("dwishell - extract single shell") {
+
+        config "./nextflow_single_shell.config"
+
+        when {
+            process {
+            """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]}
+            """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.dwi,
+                    process.out.bval,
+                    process.out.bvec,
+                    process.out.versions).match() }
+            )
+        }
+    }
+
+    test("dwishell - extract two shells") {
+
+        config "./nextflow_two_shells.config"
+
+        when {
+            process {
+            """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]}
+            """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.dwi,
+                    process.out.bval,
+                    process.out.bvec,
+                    process.out.versions).match() }
+            )
+        }
+    }
+
+    test("dwishell - extract out indices") {
+
+        config "./nextflow_out_indices.config"
+
+        when {
+            process {
+            """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]}
+            """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.dwi,
+                    process.out.bval,
+                    process.out.bvec,
+                    process.out.out_indices,
+                    process.out.versions).match() }
+            )
+        }
+    }
+
+    test("dwishell - stub") {
+
+        tag "stub"
+        options "-stub-run"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+}
