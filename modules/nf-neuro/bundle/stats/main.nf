@@ -23,7 +23,7 @@ process BUNDLE_STATS {
     tuple val(meta), path("*_endpoints_map_head.nii.gz")        , emit: endpoints_head, optional: true
     tuple val(meta), path("*_endpoints_map_tail.nii.gz")        , emit: endpoints_tail, optional: true
     tuple val(meta), path("*_lesion_map.nii.gz")                , emit: lesion_map, optional: true
-    tuple val(meta), path("*_QC.tsv")                           , emit: QC_stats, optional: true
+    tuple val(meta), path("*tractometry_mqc.tsv")               , emit: mqc, optional: true
     path "versions.yml"                                         , emit: versions
 
     when:
@@ -195,7 +195,7 @@ process BUNDLE_STATS {
     if $run_qc;
     then
         mean_std_file="${prefix}__mean_std.json"
-        output_file="${prefix}_tractometry_QC.tsv"
+        output_file="${prefix}__tractometry_mqc.tsv"
 
         echo "QC summary: extracting mean values from \${mean_std_file}"
         echo -e "sample\tbundle\tmetric\tvalue" > "\${output_file}"

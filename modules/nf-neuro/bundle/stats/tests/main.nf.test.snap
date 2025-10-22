@@ -210,7 +210,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_tractometry_QC.tsv:md5,b740883e0f7255cfc2d998acae85994f"
+                        "test__tractometry_mqc.tsv:md5,b740883e0f7255cfc2d998acae85994f"
                     ]
                 ],
                 "16": [
@@ -257,15 +257,6 @@
                 ],
                 "9": [
                     
-                ],
-                "QC_stats": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test_tractometry_QC.tsv:md5,b740883e0f7255cfc2d998acae85994f"
-                    ]
                 ],
                 "endpoints_head": [
                     [
@@ -336,6 +327,15 @@
                         "test__mean_std_per_point.json:md5,811ff59ac345b475d9528af4f2462822"
                     ]
                 ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__tractometry_mqc.tsv:md5,b740883e0f7255cfc2d998acae85994f"
+                    ]
+                ],
                 "streamline_count": [
                     
                 ],
@@ -369,7 +369,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-22T08:33:15.073824397"
+        "timestamp": "2025-10-22T09:03:56.1800152"
     },
     "bundle - stats - light": {
         "content": [
@@ -431,9 +431,6 @@
                 "9": [
                     
                 ],
-                "QC_stats": [
-                    
-                ],
                 "endpoints_head": [
                     
                 ],
@@ -459,6 +456,9 @@
                     
                 ],
                 "mean_std_per_point": [
+                    
+                ],
+                "mqc": [
                     
                 ],
                 "streamline_count": [
@@ -494,6 +494,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-21T15:07:25.136756914"
+        "timestamp": "2025-10-22T09:00:04.784763777"
     }
 }
