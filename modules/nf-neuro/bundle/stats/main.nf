@@ -2,7 +2,7 @@ process BUNDLE_STATS {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilpy:2.2.0_cpu"
+    container "scilus/scilus:2.2.0"
 
     input:
     tuple val(meta), path(bundles), path(labels_map), path(metrics), path(lesions)
@@ -23,6 +23,7 @@ process BUNDLE_STATS {
     tuple val(meta), path("*_endpoints_map_head.nii.gz")        , emit: endpoints_head, optional: true
     tuple val(meta), path("*_endpoints_map_tail.nii.gz")        , emit: endpoints_tail, optional: true
     tuple val(meta), path("*_lesion_map.nii.gz")                , emit: lesion_map, optional: true
+    tuple val(meta), path("*__tractometry_mqc.tsv")               , emit: mqc, optional: true
     path "versions.yml"                                         , emit: versions
 
     when:
@@ -41,6 +42,7 @@ process BUNDLE_STATS {
     def streamline_count = task.ext.streamline_count ?: ""
     def volume_per_labels = task.ext.volume_per_labels ?: ""
     def mean_std_per_point = task.ext.mean_std_per_point ?: ""
+    def run_qc = task.ext.run_qc ? task.ext.run_qc : false
 
     """
     bundles=( ${bundles.join(" ")} )
@@ -189,6 +191,28 @@ process BUNDLE_STATS {
             --add_parent_key ${prefix}
     fi
 
+    ### ** QC ** ###
+    if $run_qc;
+    then
+        mean_std_file="${prefix}__mean_std.json"
+        output_file="${prefix}__tractometry_mqc.tsv"
+
+        echo "QC summary: extracting mean values from \${mean_std_file}"
+        echo -e "sample\tbundle\tmetric\tvalue" > "\${output_file}"
+
+        bundles=(\$(jq -r ".\"${prefix}\" | keys[]" "\${mean_std_file}"))
+        metrics=(\$(jq -r ".\"${prefix}\" | .[] | keys[]" "\${mean_std_file}" | sort -u))
+
+        for bundle in "\${bundles[@]}"; do
+            for metric in "\${metrics[@]}"; do
+                value=\$(jq -r ".\"${prefix}\".\"\${bundle}\".\"\${metric}\".mean // empty" "\${mean_std_file}")
+                if [[ -n "\${value}" ]]; then
+                    echo -e "${prefix}\t\${bundle}\t\${metric}\t\${value}" >> "\${output_file}"
+                fi
+            done
+        done
+    fi
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
@@ -224,6 +248,7 @@ process BUNDLE_STATS {
     touch ${prefix}_endpoints_map_tail.nii.gz
     touch ${prefix}__lesion_stats.json
     touch ${prefix}_lesion_map.nii.gz
+    touch ${prefix}__tractometry_mqc.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
