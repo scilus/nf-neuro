@@ -38,7 +38,7 @@ process BETCROP_ANTSBET {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*: v?([0-9.a-zA-Z-]+).*/\\1/')
     END_VERSIONS
     """
 
@@ -63,7 +63,7 @@ process BETCROP_ANTSBET {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*: v?([0-9.a-zA-Z-]+).*/\\1/')
     END_VERSIONS
     """
 }

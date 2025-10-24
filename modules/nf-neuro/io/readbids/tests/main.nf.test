@@ -14,6 +14,8 @@ nextflow_process {
 
     test("io - readbids - folder") {
 
+        config "./nextflow.config"
+
         setup {
             run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
