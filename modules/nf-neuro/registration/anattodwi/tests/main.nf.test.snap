@@ -21,7 +21,7 @@
                     ]
                 ],
                 "10": [
-                    "versions.yml:md5,4d59aa7132ca8851c32f00b29da08d34"
+                    "versions.yml:md5,f7db1ae1e2dd017daa92c91fbd41a28f"
                 ],
                 "2": [
                     [
@@ -210,26 +210,26 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,4d59aa7132ca8851c32f00b29da08d34"
+                    "versions.yml:md5,f7db1ae1e2dd017daa92c91fbd41a28f"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.9.3",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-16T14:27:47.808746358"
+        "timestamp": "2025-10-24T15:03:01.941434536"
     },
     "registration - anattodwi -stub-run": {
         "content": [
             [
-                "versions.yml:md5,4d59aa7132ca8851c32f00b29da08d34"
+                "versions.yml:md5,f7db1ae1e2dd017daa92c91fbd41a28f"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.9.3",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-15T17:09:36.808361337"
+        "timestamp": "2025-10-24T15:03:21.500981627"
     }
 }

@@ -256,15 +256,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,5f3f8c831b55885ffcc7bd976939dbad"
+                    "versions.yml:md5,2740f4407177a63180822db9890b82fc"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.9.3",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-16T15:27:00.460253907"
+        "timestamp": "2025-10-24T16:25:08.767472444"
     },
     "registration - ANTs - Anat to DWI": {
         "content": [
@@ -354,14 +354,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,31a23ba7e50f484acbc7d56ef3c35bc6"
+                    "versions.yml:md5,21ba9553a13abb65e62caa26aa079736"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.9.3",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-16T15:26:26.198373393"
+        "timestamp": "2025-10-24T16:24:49.652975478"
     }
 }
