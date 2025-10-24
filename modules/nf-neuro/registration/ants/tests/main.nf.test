@@ -3,6 +3,7 @@ nextflow_process {
     name "Test Process REGISTRATION_ANTS"
     script "../main.nf"
     process "REGISTRATION_ANTS"
+    config "./nextflow.config"
 
     tag "modules"
     tag "modules_nfneuro"
@@ -17,22 +18,21 @@ nextflow_process {
                 script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
                 process {
                     """
-                    input[0] = Channel.from( [ "T1w.zip", "b0.zip" ] )
+                    input[0] = Channel.from( [ "T1w.zip", "others.zip" ] )
                     input[1] = "test.load-test-data"
                     """
                 }
             }
         }
 
-    test("registration - ants") {
-        config "./nextflow.config"
+    test("registration - ants - SyN") {
         when {
             process {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         T1w: it.simpleName == "T1w"
-                        b0: it.simpleName == "b0"
+                        moving: it.simpleName == "others"
                     }
                 ch_T1w = ch_split_test_data.T1w.map{
                     test_data_directory -> [
@@ -40,15 +40,21 @@ nextflow_process {
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]
                 }
-                ch_b0 = ch_split_test_data.b0.map{
+                ch_moving = ch_split_test_data.moving.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/b0.nii.gz")
+                        file("\${test_data_directory}/t1.nii.gz")
                     ]
                 }
-                input[0] = ch_b0
-                    .join(ch_T1w)
-                    .map{ it + [[]] }
+                ch_T1w_mask = ch_split_test_data.T1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w_mask.nii.gz")
+                    ]
+                }
+                input[0] = ch_T1w
+                    .join(ch_moving)
+                    .join(ch_T1w_mask)
                 """
             }
         }
@@ -60,7 +66,7 @@ nextflow_process {
         }
     }
 
-    test("registration - ants - quick") {
+    test("registration - ants - SyN quick") {
         config "./nextflow_quick.config"
         when {
             process {
@@ -68,7 +74,7 @@ nextflow_process {
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         T1w: it.simpleName == "T1w"
-                        b0: it.simpleName == "b0"
+                        moving: it.simpleName == "others"
                     }
                 ch_T1w = ch_split_test_data.T1w.map{
                     test_data_directory -> [
@@ -76,15 +82,21 @@ nextflow_process {
                         file("\${test_data_directory}/T1w.nii.gz")
                     ]
                 }
-                ch_b0 = ch_split_test_data.b0.map{
+                ch_moving = ch_split_test_data.moving.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/b0.nii.gz")
+                        file("\${test_data_directory}/t1.nii.gz")
                     ]
                 }
-                input[0] = ch_b0
-                    .join(ch_T1w)
-                    .map{ it + [[]] }
+                ch_T1w_mask = ch_split_test_data.T1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w_mask.nii.gz")
+                    ]
+                }
+                input[0] = ch_T1w
+                    .join(ch_moving)
+                    .join(ch_T1w_mask)
                 """
             }
         }
@@ -96,31 +108,37 @@ nextflow_process {
         }
     }
 
-    test("registration - ants - options") {
-        config "./nextflow_options.config"
+    test("registration - ants - no warps") {
+        config "./nextflow_no_warp.config"
         when {
             process {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         T1w: it.simpleName == "T1w"
-                        b0: it.simpleName == "b0"
+                        moving: it.simpleName == "others"
                     }
                 ch_T1w = ch_split_test_data.T1w.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/T1w.nii.gz"),
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]
+                }
+                ch_moving = ch_split_test_data.moving.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1.nii.gz")
+                    ]
+                }
+                ch_T1w_mask = ch_split_test_data.T1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w_mask.nii.gz")
                     ]
                 }
-                ch_b0 = ch_split_test_data.b0.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/b0.nii.gz")
-                    ]
-                }
-                input[0] = ch_b0
-                    .join(ch_T1w)
+                input[0] = ch_T1w
+                    .join(ch_moving)
+                    .join(ch_T1w_mask)
                 """
             }
         }
@@ -141,23 +159,29 @@ nextflow_process {
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
                     .branch{
                         T1w: it.simpleName == "T1w"
-                        b0: it.simpleName == "b0"
+                        moving: it.simpleName == "others"
                     }
                 ch_T1w = ch_split_test_data.T1w.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/T1w.nii.gz"),
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]
+                }
+                ch_moving = ch_split_test_data.moving.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1.nii.gz")
+                    ]
+                }
+                ch_T1w_mask = ch_split_test_data.T1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
                         file("\${test_data_directory}/T1w_mask.nii.gz")
                     ]
                 }
-                ch_b0 = ch_split_test_data.b0.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/b0.nii.gz")
-                    ]
-                }
-                input[0] = ch_b0
-                    .join(ch_T1w)
+                input[0] = ch_T1w
+                    .join(ch_moving)
+                    .join(ch_T1w_mask)
                 """
             }
         }

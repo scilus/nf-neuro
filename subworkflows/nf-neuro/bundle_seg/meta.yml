@@ -8,18 +8,44 @@ description: |
       Diffusion MRI. Cham: Springer Nature Switzerland (2023)
 
   ---------  Steps  --------------------
-  Antomical Registration (ANTs)
+  Anatomical Registration (ANTs)
       Use the FA map from the subject to register the atlas anatomical file and compute the transformations.
   Bundle Recognition (scilpy)
       Perform bundle recognition and extraction using BundleSeg.
+
+  ---------  Experimental features -----
+  !!! DISCLAIMER !!!
+      The following features are experimental and may not work as expected. While we run tests to ensure
+      computational stability of the subworkflow, we cannot guarantee the correctness of the results.
+  Anatomical Registration (SynthMorph) : params.run_synthmorph = true
+      Synthmorph is a machine learning-based registration method developed by the Freesurfer team. It is made
+      available in this subworkflow by the REGISTRATION subworkflow, please refer to its documentation for
+      more details.
 keywords:
   - BundleSeg
   - WM bundles
   - Tractogram
   - Segmentation
 components:
-  - registration/ants
   - bundle/recognize
+  - registration
+args:
+  - run_synthmorph:
+      type: boolean
+      description: "Run SynthMorph registration instead of ANTs."
+      default: false
+  - atlas_directory:
+      type: directory
+      default: ""
+      description: |
+        Use an alternative atlas to the default BundleSeg one available on Zenodo (https://zenodo.org/records/10103446).
+        The folder MUST follow this specific structure:
+              atlas_directory
+              ├── atlas
+              │   └── pop_average
+              ├── centroids
+              ├── *.json          (config file)
+              └── *.{nii,nii.gz}  (atlas anatomical file)
 input:
   - ch_fa:
       type: file
@@ -28,25 +54,21 @@ input:
         space and the subject's space.
         Structure: [ val(meta), path(fa) ]
       pattern: "*.{nii,nii.gz}"
+      mandatory: true
   - ch_tractogram:
       type: file
       description: |
         The input channel containing the whole-brain tractogram to be segmented.
         Structure: [ val(meta), path(tractogram) ]
       pattern: "*.trk"
-  - atlas_directory:
-      type: directory
+      mandatory: true
+  - ch_freesurfer_license:
+      type: file
       description: |
-        The input channel containing the atlas directory. The folder MUST follow this specific structure:
-              atlas_directory
-              ├── atlas
-              │   └── pop_average
-              ├── centroids
-              ├── *.json          (config file)
-              └── *.{nii,nii.gz}  (atlas anatomical file)
-        If no directory is provided, the subworkflow will automatically fetch the atlas archive available on
-        Zenodo (https://zenodo.org/records/10103446).
-        Structure: [ path(directory) ]
+        ONLY USED WITH SYNTHMORPH REGISTRATION. The input channel containing the Freesurfer license file.
+        Structure: [ val(meta), path(license) ]
+      pattern: "*.txt"
+      mandatory: false
 output:
   - bundles:
       type: file
@@ -54,6 +76,13 @@ output:
         Channel containing all the segmented bundle files.
         Structure: [ val(meta), path(bundles) ]
       pattern: "*.trk"
+  - mqc:
+      type: file
+      description: |
+        Channel containing QC data for MultiQC reports.
+        Structure: [ *mqc.* ]
+      pattern: "*mqc.*"
+      optional: true
   - versions:
       type: file
       description: |
@@ -62,5 +91,6 @@ output:
       pattern: "versions.yml"
 authors:
   - "@gagnonanthony"
+  - "@AlexVCaron"
 maintainers:
   - "@gagnonanthony"

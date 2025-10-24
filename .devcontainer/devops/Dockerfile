@@ -1,4 +1,4 @@
-FROM scilus/scilus:2.0.2
+FROM scilus/scilus:2.2.0
 
 ARG NFTEST_VERSION
 ARG POETRY_VERSION
@@ -12,12 +12,11 @@ RUN apt update && apt install -y \
         git \
         jq \
         openjdk-17-jre \
-        python3-venv \
+        pipx \
         wget \
     && rm -rf /var/lib/apt/lists/*
 
-RUN python3 -m pip install pipx && \
-    python3 -m pipx ensurepath && \
+RUN pipx ensurepath && \
     pipx install poetry==${POETRY_VERSION}
 
 # Install GitHub Actions testing tools
@@ -40,3 +39,5 @@ WORKDIR /generated
 
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
     && echo "$SNIPPET" >> "/root/.bashrc"
+
+ENTRYPOINT ["/bin/sh", "-lc", "pipx ensurepath && exec \"$@\""]
