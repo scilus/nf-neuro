@@ -29,12 +29,13 @@ workflow OUTPUT_TEMPLATE_SPACE {
     // ** or default to $outdir/../templateflow)                     ** //
     if ( !file("${params.templateflow_home}/tpl-${params.template}").exists() ) {
         log.info("Template ${params.template} not found in " +
-                "${params.templateflow_home}. Will be downloaded." +
-                "If you do not have access to the internet while running" +
-                "this pipeline, please download the template manually" +
+                "${params.templateflow_home}. Will be downloaded. " +
+                "If you do not have access to the internet while running " +
+                "this pipeline, please download the template manually " +
                 "and provide the location using --templateflow_home.")
-        log.info("${params.template} will be downloaded at resolution " +
-                "${params.templateflow_res} from cohort ${params.templateflow_cohort}.")
+        log.info("Downloading ${params.template} :")
+        log.info(" - Resolution : ${params.templateflow_res}mm ")
+        log.info(" - Cohort : ${params.templateflow_cohort ?: "none"}")
 
         UTILS_TEMPLATEFLOW (
             [

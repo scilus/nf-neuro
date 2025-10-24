@@ -256,135 +256,20 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,5f3f8c831b55885ffcc7bd976939dbad"
+                    "versions.yml:md5,2740f4407177a63180822db9890b82fc"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.9.3",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-16T15:27:00.460253907"
+        "timestamp": "2025-10-24T16:25:08.767472444"
     },
     "registration - ANTs - Anat to DWI": {
         "content": [
             {
-                "affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__forward1_affine.mat"
-                    ]
-                ],
-                "image_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__forward0_warp.nii.gz",
-                        "test__forward1_affine.mat"
-                    ]
-                ],
-                "image_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__T1w_warped.nii.gz"
-                    ]
-                ],
-                "inverse_affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__backward0_affine.mat"
-                    ]
-                ],
-                "inverse_image_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__backward0_affine.mat",
-                        "test__backward1_warp.nii.gz"
-                    ]
-                ],
-                "inverse_tractogram_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__forward0_warp.nii.gz",
-                        "test__forward1_affine.mat"
-                    ]
-                ],
-                "inverse_warp": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__backward1_warp.nii.gz"
-                    ]
-                ],
-                "mqc": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__registration_anattodwi_mqc.gif"
-                    ]
-                ],
-                "tractogram_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__backward0_affine.mat",
-                        "test__backward1_warp.nii.gz"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,0f0af6043cb0549dd850d1f59d0c7190"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
-        },
-        "timestamp": "2025-10-17T17:41:51.560683985"
-    },
-    "registration - SyNQuick": {
-        "content": [
-            {
-                "affine": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__forward1_affine.mat"
-                    ]
-                ],
-                "image_transform": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__forward0_warp.nii.gz",
-                        "test__forward1_affine.mat"
-                    ]
-                ],
-                "image_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__t1_warped.nii.gz"
-                    ]
-                ],
-                "inverse_affine": [
+                "backward_affine": [
                     [
                         {
                             "id": "test"
@@ -469,14 +354,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,42f2dcb95a2cf29b157dbaebf162d2dd"
+                    "versions.yml:md5,21ba9553a13abb65e62caa26aa079736"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.8"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-17T17:41:57.285829729"
+        "timestamp": "2025-10-28T16:02:30.217450739"
     }
 }

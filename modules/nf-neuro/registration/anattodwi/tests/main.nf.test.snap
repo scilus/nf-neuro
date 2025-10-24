@@ -21,7 +21,7 @@
                     ]
                 ],
                 "10": [
-                    "versions.yml:md5,4d59aa7132ca8851c32f00b29da08d34"
+                    "versions.yml:md5,f7db1ae1e2dd017daa92c91fbd41a28f"
                 ],
                 "2": [
                     [
@@ -51,7 +51,61 @@
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,f49f4ab58360830a5cdb39d7530b45b1"
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        ]
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        ]
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        ]
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        ]
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_registration_anattodwi_mqc.gif:md5,9cbc1ce8755821996dae18080cf0a23c"
+                    ]
                 ],
                 "anat_warped": [
                     [
@@ -156,35 +210,26 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,f49f4ab58360830a5cdb39d7530b45b1"
-                ],
-                "warp": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
-                    ]
+                    "versions.yml:md5,f7db1ae1e2dd017daa92c91fbd41a28f"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.8"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-09T20:08:38.758050028"
+        "timestamp": "2025-10-28T12:57:20.84201822"
     },
     "registration - anattodwi -stub-run": {
         "content": [
             [
-                "versions.yml:md5,f49f4ab58360830a5cdb39d7530b45b1"
+                "versions.yml:md5,f7db1ae1e2dd017daa92c91fbd41a28f"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.8"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-09T20:08:45.279539751"
+        "timestamp": "2025-10-28T12:57:40.842368795"
     }
 }

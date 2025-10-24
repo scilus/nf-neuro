@@ -58,20 +58,21 @@
                 ],
                 "versions": [
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                    "versions.yml:md5,4e02408f236932635d1e7585d80d16a1",
+                    "versions.yml:md5,5091055c3aacdbd4dccc294cc841b8b3",
                     "versions.yml:md5,513f314aaedec96c49c67ed0bd3bbf4b",
                     "versions.yml:md5,53e0a593f56efd67061357b22888233f",
-                    "versions.yml:md5,a8806981919b9cc22e2e1b374119a4e6",
-                    "versions.yml:md5,cc26da22b51bd5b3e2a161a9b30c4f0c",
-                    "versions.yml:md5,d6bae503d4e56ee4c5c8f9f951394aec",
-                    "versions.yml:md5,e9d4549cb032979391719cd59bcfae59"
+                    "versions.yml:md5,837bc1b10db6cb6c459b8871725ba254",
+                    "versions.yml:md5,9013974da5ab5a7ae91e580948968e75",
+                    "versions.yml:md5,957fd24bd8b559411e3a565ac7313f40"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.8"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-17T17:39:24.646305544"
+        "timestamp": "2025-10-28T15:51:42.158522262"
     },
     "Template MNI152NLin2009aAsym - no brain mask": {
         "content": [
@@ -138,20 +139,20 @@
                 ],
                 "versions": [
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                    "versions.yml:md5,2b72cc481686daf9f4a00587bbf1efa3",
+                    "versions.yml:md5,4e02408f236932635d1e7585d80d16a1",
+                    "versions.yml:md5,5091055c3aacdbd4dccc294cc841b8b3",
                     "versions.yml:md5,513f314aaedec96c49c67ed0bd3bbf4b",
                     "versions.yml:md5,53e0a593f56efd67061357b22888233f",
-                    "versions.yml:md5,a8806981919b9cc22e2e1b374119a4e6",
-                    "versions.yml:md5,cc26da22b51bd5b3e2a161a9b30c4f0c",
-                    "versions.yml:md5,d6bae503d4e56ee4c5c8f9f951394aec",
-                    "versions.yml:md5,e9d4549cb032979391719cd59bcfae59"
+                    "versions.yml:md5,957fd24bd8b559411e3a565ac7313f40"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.8"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-16T15:53:24.130917882"
+        "timestamp": "2025-10-28T15:50:40.403026792"
     },
     "Template MNI152NLin2009cAsym - local templates": {
         "content": [
@@ -218,19 +219,19 @@
                 ],
                 "versions": [
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                    "versions.yml:md5,2b72cc481686daf9f4a00587bbf1efa3",
                     "versions.yml:md5,4e02408f236932635d1e7585d80d16a1",
+                    "versions.yml:md5,5091055c3aacdbd4dccc294cc841b8b3",
                     "versions.yml:md5,513f314aaedec96c49c67ed0bd3bbf4b",
                     "versions.yml:md5,53e0a593f56efd67061357b22888233f",
-                    "versions.yml:md5,82fa7e33467013d6fb309385e7a70aba",
-                    "versions.yml:md5,e5d4ec0205b4e948c5e5c3e4579ce5d0",
-                    "versions.yml:md5,ea689c85377dd23d74af147457113bf6"
+                    "versions.yml:md5,957fd24bd8b559411e3a565ac7313f40"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.9.3",
             "nextflow": "25.04.8"
         },
-        "timestamp": "2025-10-16T15:51:15.187833232"
+        "timestamp": "2025-10-24T14:50:02.140523373"
     }
 }
