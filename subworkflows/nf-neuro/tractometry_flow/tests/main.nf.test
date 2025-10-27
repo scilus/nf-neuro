@@ -1,0 +1,134 @@
+nextflow_workflow {
+
+    name "Test Subworkflow TRACTOMETRY_FLOW"
+    script "../main.nf"
+    workflow "TRACTOMETRY_FLOW"
+
+    tag "subworkflows"
+    tag "subworkflows_nfneuro"
+    tag "subworkflows/tractometry_flow"
+
+
+    tag "load_test_data"
+    tag  "tractogram/removeinvalid"
+    tag  "bundle/fixelafd"
+    tag  "tractogram/resample"
+    tag  "bundle/centroid"
+    tag  "bundle/labelmap"
+    tag  "bundle/uniformize"
+    tag  "bundle/stats"
+
+    tag "stub"
+    options "-stub-run"
+
+    setup {
+        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = Channel.from( [ "WB-segmentation.zip" , "WB-diffusion.zip" , "WB-tractogram.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
+    }
+
+    test("tractometry_with_centroids") {
+        config "./nextflow.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        segmentation: it.simpleName == "WB-segmentation"
+                        diffusion: it.simpleName == "WB-diffusion"
+                        tractogram: it.simpleName == "WB-tractogram"
+                    }
+                input[0] = ch_split_test_data.tractogram.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/bundles/AF_L.trk")
+                    ]}
+                input[1] = ch_split_test_data.tractogram.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/centroids/AF_L.trk")
+                    ]}
+                input[2] = ch_split_test_data.diffusion.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dti/ad.nii.gz"),
+                        file("\${test_data_directory}/dti/fa.nii.gz"),
+                        file("\${test_data_directory}/dti/md.nii.gz"),
+                        file("\${test_data_directory}/dti/rd.nii.gz")
+                    ]}
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
+            )
+        }
+    }
+        test("tractometry_without_centroids") {
+        config "./nextflow.config"
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        segmentation: it.simpleName == "WB-segmentation"
+                        diffusion: it.simpleName == "WB-diffusion"
+                        tractogram: it.simpleName == "WB-tractogram"
+                    }
+                input[0] = ch_split_test_data.tractogram.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/bundles/AF_L.trk")
+                    ]}
+                input[1] = Channel.empty()
+                input[2] = ch_split_test_data.diffusion.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ],
+                        file("\${test_data_directory}/dti/ad.nii.gz"),
+                        file("\${test_data_directory}/dti/fa.nii.gz"),
+                        file("\${test_data_directory}/dti/md.nii.gz"),
+                        file("\${test_data_directory}/dti/rd.nii.gz")
+                    ]}
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
+            )
+        }
+    }
+}
