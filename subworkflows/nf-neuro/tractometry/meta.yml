@@ -1,4 +1,4 @@
-name: "tractometry_flow"
+name: "tractometry"
 description:
   "This workflow processes tractograms and associated data to clean, resample, and extract meaningful statistics.
   It requires three mandatory inputs and two optional : a set of tractogram bundles, centroids used for resampling or identification,
@@ -60,14 +60,14 @@ input:
       type: file
       description: |
         Channel containing all the segmented bundle files.
-        Structure: [ val(meta), path(bundles) ]
+        Structure: [ val(meta), [ path(bundle1), path(bundle2), ... ] ]
       pattern: "*.trk"
 
   - ch_centroids:
       type: file
       description: |
         Channel containing all the segmented centroids files.
-        Structure: [ val(meta), path(centroids) ]
+        Structure: [ val(meta), [ path(centroid1), path(centroid2), ... ] ]
       pattern: "*.trk"
 
   - ch_metrics:
@@ -75,7 +75,7 @@ input:
       description: |
         Channel containing nifti file to compute statistics on. Probably some tractometry measure(s) such as FA, MD, RD, ...
         The metrics has to follow a specific naming convention.
-        Structure: [ val(meta), path(metrics) ]
+        Structure: [ val(meta), [ path(metric1), path(metric2), ... ] ]
       pattern: "*.nii.gz"
 
   - ch_lesion_mask:

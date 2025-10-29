@@ -1,0 +1,2 @@
+subworkflows/tractometry:
+  - subworkflows/nf-neuro/tractometry/**

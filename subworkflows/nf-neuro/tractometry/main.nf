@@ -6,7 +6,7 @@ include { BUNDLE_LABELMAP             } from '../../../modules/nf-neuro/bundle/l
 include { BUNDLE_UNIFORMIZE           } from '../../../modules/nf-neuro/bundle/uniformize/main'
 include { BUNDLE_STATS                } from '../../../modules/nf-neuro/bundle/stats/main'
 
-workflow TRACTOMETRY_FLOW {
+workflow TRACTOMETRY {
 
 take:
     ch_bundles
@@ -21,20 +21,21 @@ main:
 
     TRACTOGRAM_REMOVEINVALID( ch_bundles )
     ch_versions = ch_versions.mix( TRACTOGRAM_REMOVEINVALID.out.versions.first() )
-    ch_bundle_cleaned = TRACTOGRAM_REMOVEINVALID.out.tractograms
 
-    ch_fixel = ch_bundle_cleaned
-        .combine( ch_fodf )
-        .filter { bundle, fodf -> bundle && fodf }
+    ch_fixel = TRACTOGRAM_REMOVEINVALID.out.tractograms
+        .join( ch_fodf )
+        .filter { it[1].size() > 0 }
 
     BUNDLE_FIXELAFD( ch_fixel )
     ch_versions = ch_versions.mix( BUNDLE_FIXELAFD.out.versions.first() )
-    ch_fixelafd = BUNDLE_FIXELAFD.out.fixel_afd
-    ch_metrics  = ch_metrics
-        .join( ch_fixelafd, remainder: true )
-        .map { [ it[0], it[1], it[2] ?: [] ] }
 
-    ch_bundles_centroids = ch_bundle_cleaned
+    // ** Append fixel AFD metrics to metrics channel ** //
+    ch_metrics  = ch_metrics
+        .mix( BUNDLE_FIXELAFD.out.fixel_afd )
+        .groupTuple(by: 0)
+        .map { meta, metrics -> [ meta, metrics.flatten() ] }
+
+    ch_bundles_centroids = TRACTOGRAM_REMOVEINVALID.out.tractograms
         .join( ch_centroids, remainder: true )
         .map { [ it[0], it[1], it[2] ?: [] ] }
         .branch {
@@ -51,7 +52,8 @@ main:
     BUNDLE_CENTROID(ch_bundles_centroids.for_centroid)
     ch_versions = ch_versions.mix(BUNDLE_CENTROID.out.versions.first())
     ch_centroids_cleaned = ch_centroids_cleaned_from_input.mix(BUNDLE_CENTROID.out.centroids)
-    ch_label_map = ch_bundle_cleaned.join(ch_centroids_cleaned)
+    ch_label_map = TRACTOGRAM_REMOVEINVALID.out.tractograms
+        .join(ch_centroids_cleaned)
 
     BUNDLE_LABELMAP ( ch_label_map )
     ch_versions = ch_versions.mix(BUNDLE_LABELMAP.out.versions.first())
