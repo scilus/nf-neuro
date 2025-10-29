@@ -28,16 +28,26 @@
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_out_affine.mat:md5,c88fcae39c94d8af95ca00592c2f2634"
+                    ]
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,8fa42279d7793bb057cd5680bcb241e7"
                 ],
                 "transformation": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_out_affine.mat:md5,c88fcae39c94d8af95ca00592c2f2634"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,8fa42279d7793bb057cd5680bcb241e7"
                 ]
             }
         ],
@@ -45,22 +55,32 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-28T13:36:01.430079972"
+        "timestamp": "2025-10-29T11:13:34.703328482"
     },
     "registration - convert - mixed - to itk": {
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test1"
+                        },
+                        "test1_out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                    ]
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,8fa42279d7793bb057cd5680bcb241e7"
                 ],
                 "transformation": [
-                    
+                    [
+                        {
+                            "id": "test1"
+                        },
+                        "test1_out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,8fa42279d7793bb057cd5680bcb241e7"
                 ]
             }
         ],
@@ -68,22 +88,32 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-28T13:36:10.32322425"
+        "timestamp": "2025-10-29T11:13:43.762952295"
     },
     "registration - convert - deformation - ras to itk (lps)": {
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                    ]
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,8fa42279d7793bb057cd5680bcb241e7"
                 ],
                 "transformation": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_out_warp.nii.gz:md5,69052e6226da946bad1f9466285cbb89"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,8fa42279d7793bb057cd5680bcb241e7"
                 ]
             }
         ],
@@ -91,6 +121,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-28T13:35:51.861013613"
+        "timestamp": "2025-10-29T11:13:25.855140969"
     }
 }
