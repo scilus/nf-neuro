@@ -1,12 +1,12 @@
 nextflow_workflow {
 
-    name "Test Subworkflow TRACTOMETRY_FLOW"
+    name "Test Subworkflow TRACTOMETRY"
     script "../main.nf"
-    workflow "TRACTOMETRY_FLOW"
+    workflow "TRACTOMETRY"
 
     tag "subworkflows"
     tag "subworkflows_nfneuro"
-    tag "subworkflows/tractometry_flow"
+    tag "subworkflows/tractometry"
 
 
     tag "load_test_data"

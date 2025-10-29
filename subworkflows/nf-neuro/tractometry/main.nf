@@ -6,7 +6,7 @@ include { BUNDLE_LABELMAP             } from '../../../modules/nf-neuro/bundle/l
 include { BUNDLE_UNIFORMIZE           } from '../../../modules/nf-neuro/bundle/uniformize/main'
 include { BUNDLE_STATS                } from '../../../modules/nf-neuro/bundle/stats/main'
 
-workflow TRACTOMETRY_FLOW {
+workflow TRACTOMETRY {
 
 take:
     ch_bundles

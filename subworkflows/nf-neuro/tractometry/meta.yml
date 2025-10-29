@@ -1,4 +1,4 @@
-name: "tractometry_flow"
+name: "tractometry"
 description:
   "This workflow processes tractograms and associated data to clean, resample, and extract meaningful statistics.
   It requires three mandatory inputs and two optional : a set of tractogram bundles, centroids used for resampling or identification,
