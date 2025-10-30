@@ -1,0 +1,213 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: registration_synthmorph
+description: Perform registration using SynthMorph from Freesurfer. Outputs transforms
+  in Freesurfer format .lta for affine and .nii.gz (synthmorph also supports .mgz)
+  for deform, both in RAS orientation. Conversion to other formats is done using lta_convert
+  and mri_warp_convert respectively, which support a wide range of conversion formats
+  and orientations, such as ANTs ans FSL. To convert the output of this module, use
+  the registration/convert module successively to it. Note that tests using synthmorph
+  are non-reproductible.
+keywords:
+  - Registration
+  - Brain imaging
+  - MRI
+  - Synthetic
+  - AI
+  - CNN
+tools:
+  - Freesurfer:
+      description: |
+        Open source neuroimaging toolkit for processing, analyzing, and visualizing human brain MR images.
+      homepage: https://surfer.nmr.mgh.harvard.edu/
+      doi: 10.1016/j.neuroimage.2012.01.021
+      identifier: ""
+  - SynthMorph:
+      description: "Synthmorph registration method"
+      homepage: "https://martinos.org/malte/synthmorph/"
+      doi: 10.1109/TMI.2021.3116879
+      identifier: ""
+args:
+  - models:
+      type: list
+      description: List of transformation models to apply to the moving image in series.
+      default: '["affine", "deform"]'
+      choices:
+        - rigid
+        - affine
+        - deform
+        - joint
+  - weights:
+      type: list
+      description: |
+        List of weights to apply to each model. Must supply one per model on none.
+        Use "none" to specify no weight for a given model. When using the "joint"
+        model, you must add 2 weights in the list for affine and warp.
+      default: ""
+  - use_gpu:
+      type: boolean
+      description: Use GPU to accelerate computations (must enable GPU support).
+      default: false
+  - regularization:
+      type: float
+      description: Regularizationto add to deformation steps.
+      default: 0.5
+  - steps:
+      type: integer
+      description: Number of iteration for the optimisation of deformations.
+      default: 7
+  - extent:
+      type: integer
+      description: Size of the deformation grid in voxels.
+      default: 256
+      choices:
+        - 192
+        - 256
+  - disable_resampling:
+      type: boolean
+      description: Update image header instead of performing resampling of the image grid.
+      default: false
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - fixed_image:
+        type: file
+        description: Nifti volume fixed for registration
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001
+    - moving_image:
+        type: file
+        description: Nifti volume moving for registration
+        pattern: "*.{nii,nii.gz}"
+        mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001
+output:
+  image_warped:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_warped.nii.gz":
+          type: file
+          description: Warped image
+          pattern: "*_warped.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  forward_affine:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_forward{0,1,_standalone}_affine.lta":
+          type: file
+          description: Affine transformation matrix to fixed space.
+          pattern: "*_forward{0,1,_standalone}_affine.lta"
+          optional: true
+          ontologies: []
+  forward_warp:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_forward0_deform.nii.gz":
+          type: file
+          description: Deformation field to fixed space.
+          pattern: "*_forward0_deform.nii.gz"
+          optional: true
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  backward_warp:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_backward1_deform.nii.gz":
+          type: file
+          description: Deformation field to moving space.
+          pattern: "*_backward1_deform.nii.gz"
+          optional: true
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
+  backward_affine:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_backward{0,_standalone}_affine.lta":
+          type: file
+          description: Affine transformation matrix to moving space.
+          pattern: "*_backward{0,_standalone}_affine.lta"
+          optional: true
+          ontologies: []
+  forward_image_transform:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_forward[!_]*.{lta,nii.gz}":
+          type: list
+          description: |
+            Tuple, transformation files to warp images to fixed space, in the correct order
+            for REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ forward_warp, forward_affine ] ].
+          pattern: "*_forward[!_]*.{lta,nii.gz}"
+          ontologies: []
+  backward_image_transform:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_backward[!_]*.{lta,nii.gz}":
+          type: list
+          description: |
+            Tuple, transformation files to warp images to moving space, in the correct order for
+            REGISTRATION_ANTSAPPLYTRANSFORMS : [ meta, [ backward_affine, backward_warp ] ].
+          pattern: "*_backward[!_]*.{lta,nii.gz}"
+          ontologies: []
+  forward_tractogram_transform:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_backward[!_]*.{lta,nii.gz}":
+          type: list
+          description: |
+            Tuple, transformation files to warp tractograms to fixed space, in the correct order
+            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ backward_affine, backward_warp ] ].
+          pattern: "*_backward[!_]*.{lta,nii.gz}"
+          ontologies: []
+  backward_tractogram_transform:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_forward[!_]*.{lta,nii.gz}":
+          type: list
+          description: |
+            Tuple, transformation files to warp tractograms to moving space, in the correct order
+            for REGISTRATION_TRANSFORMTRACTOGRAM : [ meta, [ forward_warp, forward_affine ] ].
+          pattern: "*_forward[!_]*.{lta,nii.gz}"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@anroy1"
+  - "@AlexVCaron"

@@ -1,5 +1,5 @@
 {
-    "output to template MNI152NLin2009aAsym - without brain mask": {
+    "Template MNI152NLin2009aAsym - using synthmorph registration": {
         "content": [
             {
                 "ch_registered_anat": [
@@ -7,7 +7,33 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz"
+                        "test_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_labels_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_labels_map_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_nifti_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_trk_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM.trk",
+                        "test_IFGWM_color.trk",
+                        "test_IFGWM_uni.trk"
                     ]
                 ],
                 "ch_t1w_tpl": [
@@ -16,50 +42,39 @@
                 "ch_t2w_tpl": [
                     "template__image_bet.nii.gz"
                 ],
-                "ch_warped_labels_files": [
+                "mqc": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__IFGWM_labels_map__warped.nii.gz"
-                    ]
-                ],
-                "ch_warped_nifti_files": [
+                        "test_IFGWM_labels_map_registration_antsapplytransforms_mqc.gif"
+                    ],
                     [
                         {
                             "id": "test"
                         },
-                        "test__IFGWM__warped.nii.gz"
-                    ]
-                ],
-                "ch_warped_trk_files": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__IFGWM.trk",
-                        "test__IFGWM_color.trk",
-                        "test__IFGWM_uni.trk"
+                        "test_IFGWM_registration_antsapplytransforms_mqc.gif"
                     ]
                 ],
                 "versions": [
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                    "versions.yml:md5,4e02408f236932635d1e7585d80d16a1",
+                    "versions.yml:md5,5091055c3aacdbd4dccc294cc841b8b3",
                     "versions.yml:md5,513f314aaedec96c49c67ed0bd3bbf4b",
                     "versions.yml:md5,53e0a593f56efd67061357b22888233f",
-                    "versions.yml:md5,a8806981919b9cc22e2e1b374119a4e6",
-                    "versions.yml:md5,cc26da22b51bd5b3e2a161a9b30c4f0c",
-                    "versions.yml:md5,d6bae503d4e56ee4c5c8f9f951394aec",
-                    "versions.yml:md5,e9d4549cb032979391719cd59bcfae59"
+                    "versions.yml:md5,837bc1b10db6cb6c459b8871725ba254",
+                    "versions.yml:md5,9013974da5ab5a7ae91e580948968e75",
+                    "versions.yml:md5,957fd24bd8b559411e3a565ac7313f40"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-17T17:39:24.646305544"
+        "timestamp": "2025-10-28T15:51:42.158522262"
     },
-    "output to template MNI152NLin2009cAsym with local folder": {
+    "Template MNI152NLin2009aAsym - no brain mask": {
         "content": [
             {
                 "ch_registered_anat": [
@@ -67,7 +82,33 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz"
+                        "test_t1_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_labels_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_labels_map_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_nifti_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_trk_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM.trk",
+                        "test_IFGWM_color.trk",
+                        "test_IFGWM_uni.trk"
                     ]
                 ],
                 "ch_t1w_tpl": [
@@ -76,47 +117,121 @@
                 "ch_t2w_tpl": [
                     "template__image_bet.nii.gz"
                 ],
-                "ch_warped_labels_files": [
+                "mqc": [
                     [
                         {
                             "id": "test"
                         },
-                        "test__IFGWM_labels_map__warped.nii.gz"
-                    ]
-                ],
-                "ch_warped_nifti_files": [
+                        "test_IFGWM_labels_map_registration_antsapplytransforms_mqc.gif"
+                    ],
                     [
                         {
                             "id": "test"
                         },
-                        "test__IFGWM__warped.nii.gz"
-                    ]
-                ],
-                "ch_warped_trk_files": [
+                        "test_IFGWM_registration_antsapplytransforms_mqc.gif"
+                    ],
                     [
                         {
                             "id": "test"
                         },
-                        "test__IFGWM.trk",
-                        "test__IFGWM_color.trk",
-                        "test__IFGWM_uni.trk"
+                        "test__registration_ants_mqc.gif"
                     ]
                 ],
                 "versions": [
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                    "versions.yml:md5,2b72cc481686daf9f4a00587bbf1efa3",
+                    "versions.yml:md5,4e02408f236932635d1e7585d80d16a1",
+                    "versions.yml:md5,5091055c3aacdbd4dccc294cc841b8b3",
                     "versions.yml:md5,513f314aaedec96c49c67ed0bd3bbf4b",
                     "versions.yml:md5,53e0a593f56efd67061357b22888233f",
-                    "versions.yml:md5,a8806981919b9cc22e2e1b374119a4e6",
-                    "versions.yml:md5,cc26da22b51bd5b3e2a161a9b30c4f0c",
-                    "versions.yml:md5,d6bae503d4e56ee4c5c8f9f951394aec",
-                    "versions.yml:md5,e9d4549cb032979391719cd59bcfae59"
+                    "versions.yml:md5,957fd24bd8b559411e3a565ac7313f40"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-17T17:39:09.650176125"
+        "timestamp": "2025-10-28T15:50:40.403026792"
+    },
+    "Template MNI152NLin2009cAsym - local templates": {
+        "content": [
+            {
+                "ch_registered_anat": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_labels_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_labels_map_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_nifti_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_trk_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM.trk",
+                        "test_IFGWM_color.trk",
+                        "test_IFGWM_uni.trk"
+                    ]
+                ],
+                "ch_t1w_tpl": [
+                    "template__image_bet.nii.gz"
+                ],
+                "ch_t2w_tpl": [
+                    "template__image_bet.nii.gz"
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_labels_map_registration_antsapplytransforms_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_registration_antsapplytransforms_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__registration_ants_mqc.gif"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                    "versions.yml:md5,2b72cc481686daf9f4a00587bbf1efa3",
+                    "versions.yml:md5,4e02408f236932635d1e7585d80d16a1",
+                    "versions.yml:md5,5091055c3aacdbd4dccc294cc841b8b3",
+                    "versions.yml:md5,513f314aaedec96c49c67ed0bd3bbf4b",
+                    "versions.yml:md5,53e0a593f56efd67061357b22888233f",
+                    "versions.yml:md5,957fd24bd8b559411e3a565ac7313f40"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.8"
+        },
+        "timestamp": "2025-10-24T14:50:02.140523373"
     }
 }

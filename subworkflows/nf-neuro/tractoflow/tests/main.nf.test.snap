@@ -31,8 +31,8 @@
                         {
                             "id": "test"
                         },
-                        "test__output1Warp.nii.gz",
-                        "test__output0GenericAffine.mat"
+                        "test_forward0_warp.nii.gz",
+                        "test_forward1_affine.mat"
                     ]
                 ],
                 "csf_fodf": [
@@ -64,8 +64,8 @@
                         {
                             "id": "test"
                         },
-                        "test__output0GenericAffine.mat",
-                        "test__output1InverseWarp.nii.gz"
+                        "test_backward0_affine.mat",
+                        "test_backward1_warp.nii.gz"
                     ]
                 ],
                 "dti_ad": [
@@ -195,9 +195,7 @@
                         {
                             "id": "test"
                         },
-                        "test__frf.txt",
-                        "",
-                        ""
+                        "test__frf.txt"
                     ],
                     [
                         {
@@ -365,7 +363,7 @@
                         {
                             "id": "test"
                         },
-                        "test__t1_warped.nii.gz"
+                        "test_b0_warped.nii.gz"
                     ]
                 ],
                 "t1_native": [
@@ -383,7 +381,7 @@
                     "versions.yml:md5,5011203328febedfa9c5af5684bcc20c",
                     "versions.yml:md5,6f86cbe9b96fbefff47fe66fcb287678",
                     "versions.yml:md5,7cabc91ec64b5e824e9b8f60d7dcf930",
-                    "versions.yml:md5,91878ccc28dd256f9f90600fc048c99f",
+                    "versions.yml:md5,91bb720c5b6b219ae9d7e0f671592381",
                     "versions.yml:md5,955e704dfd97848e196333d0cecf0451",
                     "versions.yml:md5,ee0cb6ae187add67175c9997ef1a5fd1"
                 ],
@@ -422,8 +420,8 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.8"
         },
         "timestamp": "2025-10-17T17:43:41.279576493"
     }

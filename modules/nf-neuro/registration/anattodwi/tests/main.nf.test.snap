@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        "test_T1w_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
                     ]
                 ],
                 "1": [
@@ -17,8 +17,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1Warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
+                        "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
                     ]
+                ],
+                "10": [
+                    "versions.yml:md5,f7db1ae1e2dd017daa92c91fbd41a28f"
                 ],
                 "2": [
                     [
@@ -26,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1InverseWarp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
                     ]
                 ],
                 "3": [
@@ -35,7 +38,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__t1_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
+                        "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
                     ]
                 ],
                 "4": [
@@ -44,28 +47,157 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_registration_anattodwi_mqc.gif:md5,687252d31b0109f99a174b4e3960e4e6"
+                        "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b"
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,f49f4ab58360830a5cdb39d7530b45b1"
-                ],
-                "affine": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output0GenericAffine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        [
+                            "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        ]
                     ]
                 ],
-                "inverse_warp": [
+                "6": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test__output1InverseWarp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        [
+                            "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        ]
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        ]
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        ]
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_registration_anattodwi_mqc.gif:md5,9cbc1ce8755821996dae18080cf0a23c"
+                    ]
+                ],
+                "anat_warped": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_T1w_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
+                    ]
+                ],
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        ]
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        ]
+                    ]
+                ],
+                "backward_warp": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                    ]
+                ],
+                "forward_affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                    ]
+                ],
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5",
+                            "test_forward1_affine.mat:md5,18d03f6c1fd587b00b3bc9363eb8ed4f"
+                        ]
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,13ea200e4b163f8a47038ff61524cb1b",
+                            "test_backward1_warp.nii.gz:md5,6a04d7c100075b4ba7a276a55a4094bd"
+                        ]
+                    ]
+                ],
+                "forward_warp": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_forward0_warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
                     ]
                 ],
                 "mqc": [
@@ -74,48 +206,30 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_registration_anattodwi_mqc.gif:md5,687252d31b0109f99a174b4e3960e4e6"
-                    ]
-                ],
-                "t1_warped": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__t1_warped.nii.gz:md5,39c30c6251cba224989bc74a31540121"
+                        "test_registration_anattodwi_mqc.gif:md5,9cbc1ce8755821996dae18080cf0a23c"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,f49f4ab58360830a5cdb39d7530b45b1"
-                ],
-                "warp": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test__output1Warp.nii.gz:md5,aa42d4dd6f227d986cd99df45425d5c5"
-                    ]
+                    "versions.yml:md5,f7db1ae1e2dd017daa92c91fbd41a28f"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-09T20:08:38.758050028"
+        "timestamp": "2025-10-28T12:57:20.84201822"
     },
     "registration - anattodwi -stub-run": {
         "content": [
             [
-                "versions.yml:md5,f49f4ab58360830a5cdb39d7530b45b1"
+                "versions.yml:md5,f7db1ae1e2dd017daa92c91fbd41a28f"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-09T20:08:45.279539751"
+        "timestamp": "2025-10-28T12:57:40.842368795"
     }
 }

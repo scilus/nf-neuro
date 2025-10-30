@@ -67,3 +67,5 @@ RUN pipx ensurepath && \
 # Export history for saving between container sessions
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/home/$USERNAME/commandhistory/.bash_history" \
     && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
+
+ENTRYPOINT ["/bin/sh", "-lc", "pipx ensurepath && exec \"$@\""]

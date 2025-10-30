@@ -44,13 +44,12 @@ nextflow_process {
                 ch_b0 = ch_split_test_data.b0.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/b0.nii.gz"),
-                        [],
-                        []
+                        file("\${test_data_directory}/b0.nii.gz")
                     ]
                 }
                 input[0] = ch_t1
                     .join(ch_b0)
+                    .map{ meta, t1, b0 -> [meta, t1, b0, [], []] }
                 """
             }
         }
@@ -58,12 +57,12 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    file(process.out.ref_seg.get(0).get(1)).name,
-                    file(process.out.flo_seg.get(0).get(1)).name,
-                    niftiMD5SUM(process.out.ref_reg.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.flo_reg.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.fwd_field.get(0).get(1), 6),
-                    niftiMD5SUM(process.out.bak_field.get(0).get(1), 6),
+                    file(process.out.fixed_segmentation_warped.get(0).get(1)).name,
+                    file(process.out.segmentation_warped.get(0).get(1)).name,
+                    niftiMD5SUM(process.out.fixed_warped.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.image_warped.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.forward_warp.get(0).get(1), 6),
+                    niftiMD5SUM(process.out.backward_warp.get(0).get(1), 6),
                     process.out.versions
                 ).match() }
             )
@@ -90,13 +89,12 @@ nextflow_process {
                 ch_b0 = ch_split_test_data.b0.map{
                     test_data_directory -> [
                         [ id:'test' ],
-                        file("\${test_data_directory}/b0.nii.gz"),
-                        [],
-                        []
+                        file("\${test_data_directory}/b0.nii.gz")
                     ]
                 }
                 input[0] = ch_t1
                     .join(ch_b0)
+                    .map{ meta, t1, b0 -> [meta, t1, b0, [], []] }
                 """
             }
         }

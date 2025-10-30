@@ -1,0 +1,109 @@
+{
+    "registration - synthmorph": {
+        "content": [
+            {
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_backward_standalone_affine.lta"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_backward1_deform.nii.gz"
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_forward0_deform.nii.gz"
+                    ]
+                ],
+                "backward_warp": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_backward1_deform.nii.gz"
+                    ]
+                ],
+                "forward_affine": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_forward_standalone_affine.lta"
+                    ]
+                ],
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_forward0_deform.nii.gz"
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_backward1_deform.nii.gz"
+                    ]
+                ],
+                "forward_warp": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_forward0_deform.nii.gz"
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_warped.nii.gz"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0375426411588cd1712e84ad66aab5ca"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.8"
+        },
+        "timestamp": "2025-10-16T19:51:21.67628815"
+    },
+    "registration - synthmorph - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,0375426411588cd1712e84ad66aab5ca"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.8"
+        },
+        "timestamp": "2025-10-16T19:51:37.175530527"
+    }
+}

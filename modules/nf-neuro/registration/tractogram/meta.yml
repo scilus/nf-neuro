@@ -7,11 +7,57 @@ keywords:
   - Bundles
   - Tractogram
 tools:
+  - ANTs:
+      description: perform registration using transform as input
+      homepage: https://antsx.github.io/ANTsRCore/reference/antsApplyTransforms.html
+      identifier: ""
   - scilpy:
       description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
         toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
+args:
+  - inverse:
+      type: boolean
+      description: |
+        If true, the affine transform will be inverted before being applied to the tractogram.
+      default: false
+  - reverse_operation:
+      type: boolean
+      description: |
+        If true, applies affine and deformation in reverse order (deformation first).
+      default: false
+  - invalid_streamlines:
+      type: string
+      description: |
+        How to manage invalid streamlines after applying the transform. Either 'keep' invalid
+        streamlines in the tractogram, 'cut' invalid segments and keep the remainder or 'remove'
+        invalid streamlines entierly. NOTE : selecting 'keep' disables overlapping and single-point
+        streamlines detection.
+      default: "cut"
+      choices:
+        - keep
+        - cut
+        - remove
+  - remove_single_point:
+      type: boolean
+      description: |
+        If true, removes single-point streamlines after applying the transform.
+      default: false
+  - remove_overlapping_points:
+      type: boolean
+      description: |
+        If true, remove streamlines with overlapping points after applying the transform.
+      default: false
+  - no_empty:
+      type: boolean
+      description: Don't save empty tractograms.
+      default: false
+  - threshold:
+      type: float
+      description: |
+        Maximum distance between two points to be considered overlapping, in mm.
+      default: 0.001
 input:
   - - meta:
         type: map
@@ -22,41 +68,46 @@ input:
         type: file
         description: FA nifti format as anatomical image
         pattern: "*.{nii,nii.gz}"
+        mandatory: true
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
-    - transfo:
+    - affine:
         type: file
         description: ANTs affine transform
         pattern: "*.mat"
+        mandatory: true
         ontologies: []
     - tractogram:
         type: file
         description: Tractogram or list of tractograms to register
         pattern: "*.{trk,tck}"
+        mandatory: true
         ontologies: []
-    - ref:
+    - reference:
         type: file
         description: Reference anatomy for tck/vtk/fib/dpy file support (.nii or .nii.gz)
           (optional)
         pattern: "*.{tck,vtk,fib,dpy}"
+        mandatory: false
         ontologies: []
     - deformation:
         type: file
         description: Path to the file containing a deformation field (optional)
         pattern: "*.{nii,nii.gz}"
+        mandatory: false
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  warped_tractogram:
+  tractogram:
     - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__*.{trk,tck}":
+      - "*.{trk,tck}":
           type: file
           description: Warped tractogram(s).
-          pattern: "*__*.{trk,tck}"
+          pattern: "*.{trk,tck}"
           ontologies: []
   versions:
     - versions.yml:
@@ -67,3 +118,4 @@ output:
           - edam: http://edamontology.org/format_3750 # YAML
 authors:
   - "@scilus"
+  - "@AlexVCaron"
