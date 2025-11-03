@@ -230,7 +230,7 @@
                         "test__vf_rgb.nii.gz"
                     ]
                 ],
-                "global_mqc_files": [
+                "global_mqc": [
                     [
                         {
                             "id": "test"
@@ -475,6 +475,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-03T19:08:51.115776414"
+        "timestamp": "2025-11-03T19:20:06.170026745"
     }
 }
