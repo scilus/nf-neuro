@@ -46,7 +46,7 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     process.out.versions,
-                    file(process.out.kernels.get(0).get(1)).listFiles().size()
+                    file(process.out.kernels.get(0)).listFiles().size()
                 ).match() }
             )
         }
@@ -80,7 +80,7 @@ nextflow_process {
                     file(process.out.ecvf.get(0).get(1)).name,
                     file(process.out.odi.get(0).get(1)).name,
                     process.out.versions,
-                    file(process.out.kernels.get(0).get(1)).listFiles().size()
+                    file(process.out.kernels.get(0)).listFiles().size()
                 ).match() }
             )
         }
