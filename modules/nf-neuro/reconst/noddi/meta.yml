@@ -114,10 +114,15 @@ output:
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
   kernels:
-    - kernels:
-        type: directory
-        description: Folder containing kernels.
-        pattern: kernels
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - kernels:
+          type: directory
+          description: Folder containing kernels.
+          pattern: kernels
   versions:
     - versions.yml:
         type: file
