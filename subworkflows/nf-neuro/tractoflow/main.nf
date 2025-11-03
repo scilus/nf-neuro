@@ -332,7 +332,7 @@ workflow TRACTOFLOW {
 
         // QC
         mqc                     = ch_mqc_files
-        global_mqc_files        = ch_global_mqc_files
+        global_mqc              = ch_global_mqc_files
         nonphysical_voxels      = RECONST_DTIMETRICS.out.nonphysical
         pulsation_in_dwi        = RECONST_DTIMETRICS.out.pulsation_std_dwi
         pulsation_in_b0         = RECONST_DTIMETRICS.out.pulsation_std_b0
