@@ -2,14 +2,14 @@ process REGISTRATION_TRACTOGRAM {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilus:2.2.0"
+    container "scilus/scilus:2.2.1"
 
     input:
     tuple val(meta), path(anat), path(affine), path(tractogram), path(reference), path(deformation)
 
     output:
-    tuple val(meta), path("*.{trk,tck}") , emit: tractogram
-    path "versions.yml"                  , emit: versions
+    tuple val(meta), path("*.{trk,tck,h5}") , emit: tractogram
+    path "versions.yml"                     , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -43,30 +43,45 @@ process REGISTRATION_TRACTOGRAM {
         bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
         name=${prefix}_\${bname}${suffix}.\${ext}
 
-        scil_tractogram_apply_transform \$tractogram $anat \$affine \$name \
-            $in_deformation \
-            $inverse \
-            $reverse_operation \
-            $reference \
-            --keep_invalid -f
+        if [[ \$ext == "h5" ]]; then
 
-        if [[ "$invalid_management" == "keep" ]]; then
-            echo "Skip invalid streamline detection: \$name"
-            continue
+            scil_tractogram_apply_transform_to_hdf5 \$tractogram \
+                $anat \
+                \$affine \
+                \$name \
+                $in_deformation \
+                $inverse \
+                $reverse_operation \
+                $reference \
+                $cut_invalid -f
+
+        else
+
+            scil_tractogram_apply_transform \$tractogram $anat \$affine \$name \
+                $in_deformation \
+                $inverse \
+                $reverse_operation \
+                $reference \
+                --keep_invalid -f
+
+            if [[ "$invalid_management" == "keep" ]]; then
+                echo "Skip invalid streamline detection: \$name"
+                continue
+            fi
+
+            scil_tractogram_remove_invalid \$name \$name \
+                $cut_invalid\
+                $remove_single_point\
+                $remove_overlapping_points\
+                $threshold\
+                $no_empty\
+                -f
         fi
-
-        scil_tractogram_remove_invalid \$name \$name \
-            $cut_invalid\
-            $remove_single_point\
-            $remove_overlapping_points\
-            $threshold\
-            $no_empty\
-            -f
     done
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*Version: ([0-9.]+).*/\\1/')
         scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
@@ -87,7 +102,7 @@ process REGISTRATION_TRACTOGRAM {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*v([0-9.a-zA-Z-]+).*/\\1/')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*Version: ([0-9.]+).*/\\1/')
         scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
