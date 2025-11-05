@@ -2,7 +2,7 @@ process BUNDLE_LABELMAP {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilpy:2.2.0_cpu"
+    container "scilus/scilpy:2.2.1_cpu"
 
     input:
         tuple val(meta), path(bundles), path(centroids)
@@ -21,6 +21,12 @@ process BUNDLE_LABELMAP {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def nb_points = task.ext.nb_points ? "--nb_pts ${task.ext.nb_points} ": ""
     def colormap = task.ext.colormap ? "--colormap ${task.ext.colormap} ": ""
+    def threshold = task.ext.threshold ? "--threshold ${task.ext.threshold} ": ""
+    def streamline_threshold = task.ext.streamline_threshold ? "--streamlines_thr ${task.ext.streamline_threshold} ": ""
+    def hyperplane = task.ext.hyperplane ? "--hyperplane": ""
+    def use_manhattan = task.ext.use_manhattan ? "--use_manhattan": ""
+    def skip_uniformize = task.ext.skip_uniformize ? "--skip_uniformize": ""
+    def correlation_threshold = task.ext.correlation_threshold ? "--correlation_thr ${task.ext.correlation_threshold} ": ""
 
     """
     bundles=(${bundles.join(" ")})
@@ -28,10 +34,22 @@ process BUNDLE_LABELMAP {
 
     for index in \${!bundles[@]};
         do ext=\${bundles[index]#*.}
-        bname=\$(basename \${bundles[index]} .\${ext})
+        pos=\$((\$(echo \${bundles[index]} | grep -b -o __ | cut -d: -f1)+2))
+        bname=\${bundles[index]:\$pos}
+        bname=\$(basename \${bname} .\${ext})
 
-        scil_bundle_label_map \${bundles[index]} \${centroids[index]} \
-            tmp_out $nb_points $colormap -f
+        scil_bundle_label_map \${bundles[index]} \
+            \${centroids[index]} \
+            tmp_out \
+            $nb_points \
+            $colormap \
+            $threshold \
+            $streamline_threshold \
+            $hyperplane \
+            $use_manhattan \
+            $skip_uniformize \
+            $correlation_threshold \
+            -f
 
         mv tmp_out/labels_map.nii.gz ${prefix}__\${bname}_labels.nii.gz
         mv tmp_out/distance_map.nii.gz ${prefix}__\${bname}_distances.nii.gz
@@ -51,9 +69,12 @@ process BUNDLE_LABELMAP {
     scil_bundle_label_map -h
 
     bundles=(${bundles.join(" ")})
+
     for index in \${!bundles[@]};
         do ext=\${bundles[index]#*.}
-        bname=\$(basename \${bundles[index]} .\${ext})
+        pos=\$((\$(echo \${bundles[index]} | grep -b -o __ | cut -d: -f1)+2))
+        bname=\${bundles[index]:\$pos}
+        bname=\$(basename \${bname} .\${ext})
 
         touch ${prefix}__\${bname}_labels.nii.gz
         touch ${prefix}__\${bname}_labels.trk
