@@ -33,6 +33,11 @@ process RECONST_NODDI {
     def compute_only = task.ext.compute_only && !kernels ? "--compute_only" : ""
 
     """
+    # Set home directory. This is problematic if the container is run
+    # with non-root user which does not create a home directory, whilst
+    # AMICO attempts to write in the home directory, raising an error.
+    export HOME=/tmp
+
     scil_NODDI_maps $dwi $bval $bvec $para_diff $iso_diff $lambda1 \
         $lambda2 $nb_threads $b_thr $set_mask $set_kernels --skip_b0_check $compute_only
 

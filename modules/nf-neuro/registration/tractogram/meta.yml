@@ -1,6 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: registration_tractogram
-description: Apply a transform to a tractogram or multiple tractograms
+description: |
+  Apply a transform to a tractogram or multiple tractograms. Supports .trk, .tck,
+  and .h5 formats. Please note that removing single or overlapping points is only supported
+  for .trk or .tck files.
 keywords:
   - Diffusion MRI
   - Registration
@@ -80,7 +83,7 @@ input:
     - tractogram:
         type: file
         description: Tractogram or list of tractograms to register
-        pattern: "*.{trk,tck}"
+        pattern: "*.{trk,tck,h5}"
         mandatory: true
         ontologies: []
     - reference:
@@ -104,7 +107,7 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*.{trk,tck}":
+      - "*.{trk,tck,h5}":
           type: file
           description: Warped tractogram(s).
           pattern: "*.{trk,tck}"
