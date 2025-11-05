@@ -152,7 +152,7 @@ workflow TRACTOFLOW {
             Channel.empty()
         )
         ch_versions = ch_versions.mix(ANATOMICAL_SEGMENTATION.out.versions.first())
-        ch_mqc_files = ch_mqc_files.mix(ANATOMICAL_SEGMENTATION.out.qc_score)
+        ch_global_mqc_files = ch_global_mqc_files.mix(ANATOMICAL_SEGMENTATION.out.qc_score)
 
         /* RECONSTRUCTION - PART II - needs anatomy */
 
