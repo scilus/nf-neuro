@@ -1,6 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: registration_tractogram
-description: Apply a transform to a tractogram or multiple tractograms
+description: |
+  Apply a transform to a tractogram or multiple tractograms. Supports .trk, .tck,
+  and .h5 formats. Please note that removing single or overlapping points is only supported
+  for .trk or .tck files.
 keywords:
   - Diffusion MRI
   - Registration

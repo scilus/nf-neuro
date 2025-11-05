@@ -25,6 +25,8 @@ process REGISTRATION_TRACTOGRAM {
 
     def invalid_management = task.ext.invalid_streamlines ?: "cut"
     def cut_invalid = invalid_management == "cut" ? "--cut_invalid" : ""
+    def keep_invalid = invalid_management == "keep" ? "--keep_invalid" : ""
+    def remove_invalid = invalid_management == "remove" ? "--remove_invalid" : ""
     def remove_single_point = task.ext.remove_single_point ? "--remove_single_point" : ""
     def remove_overlapping_points = task.ext.remove_overlapping_points ? "--remove_overlapping_points" : ""
     def threshold = task.ext.threshold ? "--threshold " + task.ext.threshold : ""
@@ -53,6 +55,8 @@ process REGISTRATION_TRACTOGRAM {
                 $inverse \
                 $reverse_operation \
                 $reference \
+                $remove_invalid \
+                $keep_invalid \
                 $cut_invalid -f
 
         else
@@ -81,7 +85,7 @@ process REGISTRATION_TRACTOGRAM {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*Version: ([0-9.]+).*/\\1/')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*: v?([0-9.a-zA-Z-]+).*/\\1/')
         scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
@@ -102,7 +106,7 @@ process REGISTRATION_TRACTOGRAM {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*Version: ([0-9.]+).*/\\1/')
+        ants: \$(antsRegistration --version | grep "Version" | sed -E 's/.*: v?([0-9.a-zA-Z-]+).*/\\1/')
         scilpy: \$(uv pip -q -n list | grep scilpy | tr -s ' ' | cut -d' ' -f2)
     END_VERSIONS
     """
