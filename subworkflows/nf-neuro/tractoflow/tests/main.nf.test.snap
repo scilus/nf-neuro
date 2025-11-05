@@ -230,6 +230,20 @@
                         "test__vf_rgb.nii.gz"
                     ]
                 ],
+                "global_mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__local_tracking_stats.json"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__pft_tracking_stats.json"
+                    ]
+                ],
                 "gm_fodf": [
                     [
                         {
@@ -284,6 +298,44 @@
                             "id": "test"
                         },
                         "test__local_tracking.trk"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dti_mqc.png"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__local_tracking_mqc.png"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__pft_tracking_mqc.png"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__residual_residuals_stats.png"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__rev_dwi_eddy_mqc.gif"
                     ]
                 ],
                 "nonphysical_voxels": [
@@ -421,8 +473,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.8"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-17T17:43:41.279576493"
+        "timestamp": "2025-11-03T19:20:06.170026745"
     }
 }

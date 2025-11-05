@@ -45,6 +45,8 @@ workflow TRACTOFLOW {
     main:
 
         ch_versions = Channel.empty()
+        ch_mqc_files = Channel.empty()
+        ch_global_mqc_files = Channel.empty()
 
         /* PREPROCESSING */
 
@@ -59,6 +61,7 @@ workflow TRACTOFLOW {
             ch_topup_config
         )
         ch_versions = ch_versions.mix(PREPROC_DWI.out.versions.first())
+        ch_mqc_files = ch_mqc_files.mix(PREPROC_DWI.out.mqc)
 
         //
         // SUBWORKFLOW: Run PREPROC_T1
@@ -87,7 +90,7 @@ workflow TRACTOFLOW {
 
         RECONST_DTIMETRICS( ch_dti_metrics )
         ch_versions = ch_versions.mix(RECONST_DTIMETRICS.out.versions.first())
-
+        ch_mqc_files = ch_mqc_files.mix(RECONST_DTIMETRICS.out.mqc, RECONST_DTIMETRICS.out.residual_residuals_stats)
 
         //
         // SUBWORKFLOW: Run REGISTRATION
@@ -102,6 +105,7 @@ workflow TRACTOFLOW {
             Channel.empty()
         )
         ch_versions = ch_versions.mix(T1_REGISTRATION.out.versions.first())
+        ch_mqc_files = ch_mqc_files.mix(T1_REGISTRATION.out.mqc)
 
         /* SEGMENTATION */
 
@@ -114,6 +118,7 @@ workflow TRACTOFLOW {
                 .join(T1_REGISTRATION.out.forward_image_transform)
         )
         ch_versions = ch_versions.mix(TRANSFORM_WMPARC.out.versions.first())
+        ch_mqc_files = ch_mqc_files.mix(TRANSFORM_WMPARC.out.mqc)
 
         //
         // MODULE: Run REGISTRATION_ANTSAPPLYTRANSFORMS (TRANSFORM_APARC_ASEG)
@@ -124,6 +129,7 @@ workflow TRACTOFLOW {
                 .join(T1_REGISTRATION.out.forward_image_transform)
         )
         ch_versions = ch_versions.mix(TRANSFORM_APARC_ASEG.out.versions.first())
+        ch_mqc_files = ch_mqc_files.mix(TRANSFORM_APARC_ASEG.out.mqc)
 
         //
         // Module: Run REGISTRATION_ANTSAPPLYTRANSFORMS (TRANSFORM_LESION_MASK)
@@ -133,6 +139,7 @@ workflow TRACTOFLOW {
                 .join(T1_REGISTRATION.out.forward_image_transform)
         )
         ch_versions = ch_versions.mix(TRANSFORM_LESION_MASK.out.versions.first())
+        ch_mqc_files = ch_mqc_files.mix(TRANSFORM_LESION_MASK.out.mqc)
 
         //
         // SUBWORKFLOW: Run ANATOMICAL_SEGMENTATION
@@ -145,6 +152,7 @@ workflow TRACTOFLOW {
             Channel.empty()
         )
         ch_versions = ch_versions.mix(ANATOMICAL_SEGMENTATION.out.versions.first())
+        ch_global_mqc_files = ch_global_mqc_files.mix(ANATOMICAL_SEGMENTATION.out.qc_score)
 
         /* RECONSTRUCTION - PART II - needs anatomy */
 
@@ -227,7 +235,10 @@ workflow TRACTOFLOW {
                 .join(RECONST_FODF.out.fodf)
                 .join(RECONST_DTIMETRICS.out.fa)
             TRACKING_PFTTRACKING( ch_input_pft_tracking )
+
             ch_versions = ch_versions.mix(TRACKING_PFTTRACKING.out.versions.first())
+            ch_mqc_files = ch_mqc_files.mix(TRACKING_PFTTRACKING.out.mqc)
+            ch_global_mqc_files = ch_global_mqc_files.mix(TRACKING_PFTTRACKING.out.global_mqc)
 
             ch_pft_tracking = TRACKING_PFTTRACKING.out.trk
                 .join(TRACKING_PFTTRACKING.out.config)
@@ -245,7 +256,10 @@ workflow TRACTOFLOW {
                 .join(RECONST_FODF.out.fodf)
                 .join(RECONST_DTIMETRICS.out.fa)
             TRACKING_LOCALTRACKING( ch_input_local_tracking )
+
             ch_versions = ch_versions.mix(TRACKING_LOCALTRACKING.out.versions.first())
+            ch_mqc_files = ch_mqc_files.mix(TRACKING_LOCALTRACKING.out.mqc)
+            ch_global_mqc_files = ch_global_mqc_files.mix(TRACKING_LOCALTRACKING.out.global_mqc)
 
             ch_local_tracking = TRACKING_LOCALTRACKING.out.trk
                 .join(TRACKING_LOCALTRACKING.out.config)
@@ -317,6 +331,8 @@ workflow TRACTOFLOW {
         local_tracking_mask     = ch_local_tracking.map{ [it[0], it[4]] }
 
         // QC
+        mqc                     = ch_mqc_files
+        global_mqc              = ch_global_mqc_files
         nonphysical_voxels      = RECONST_DTIMETRICS.out.nonphysical
         pulsation_in_dwi        = RECONST_DTIMETRICS.out.pulsation_std_dwi
         pulsation_in_b0         = RECONST_DTIMETRICS.out.pulsation_std_b0
