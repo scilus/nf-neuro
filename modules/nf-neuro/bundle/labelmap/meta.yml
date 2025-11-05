@@ -51,7 +51,7 @@ args:
       type: float
       description: Threshold for the minimum number of streamlines in a voxel to be included.
       default: 2
-  - hyperplane:
+  - use_hyperplane:
       type: boolean
       description: Use hyperplane method (multi-centroids) instead of the euclidean method (single-centroid).
       default: false

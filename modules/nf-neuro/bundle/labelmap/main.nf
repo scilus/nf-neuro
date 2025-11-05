@@ -23,7 +23,7 @@ process BUNDLE_LABELMAP {
     def colormap = task.ext.colormap ? "--colormap ${task.ext.colormap} ": ""
     def threshold = task.ext.threshold ? "--threshold ${task.ext.threshold} ": ""
     def streamline_threshold = task.ext.streamline_threshold ? "--streamlines_thr ${task.ext.streamline_threshold} ": ""
-    def hyperplane = task.ext.hyperplane ? "--hyperplane": ""
+    def use_hyperplane = task.ext.use_hyperplane ? "--hyperplane": ""
     def use_manhattan = task.ext.use_manhattan ? "--use_manhattan": ""
     def skip_uniformize = task.ext.skip_uniformize ? "--skip_uniformize": ""
     def correlation_threshold = task.ext.correlation_threshold ? "--correlation_thr ${task.ext.correlation_threshold} ": ""
@@ -39,7 +39,7 @@ process BUNDLE_LABELMAP {
             bname=\${bundles[index]:\$pos}
             bname=\$(basename \${bname} .\${ext})
         else
-            bname=\$(basename \${bundles[index]} .\${ext})
+            bname=\$(basename \${bundles[index]} .\${ext} | sed 's/${prefix}_\\+//')
         fi
         if [[ "\$bname" == *"_cleaned"* ]]; then
             bname=\${bname%_cleaned*}
@@ -61,7 +61,7 @@ process BUNDLE_LABELMAP {
             $colormap \
             $threshold \
             $streamline_threshold \
-            $hyperplane \
+            $use_hyperplane \
             $use_manhattan \
             $skip_uniformize \
             $correlation_threshold \
@@ -93,7 +93,7 @@ process BUNDLE_LABELMAP {
             bname=\${bundles[index]:\$pos}
             bname=\$(basename \${bname} .\${ext})
         else
-            bname=\$(basename \${bundles[index]} .\${ext})
+            bname=\$(basename \${bundles[index]} .\${ext} | sed 's/${prefix}_\\+//')
         fi
         if [[ "\$bname" == *"_cleaned"* ]]; then
             bname=\${bname%_cleaned*}

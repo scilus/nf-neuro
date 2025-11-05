@@ -34,7 +34,7 @@ process TRACTOGRAM_REMOVEINVALID {
             bname=\$tractogram:\$pos
             bname=\$(basename \${bname} .\${ext})
         else
-            bname=\$(basename \${tractogram} .\${ext})
+            bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
         fi
 
         scil_tractogram_remove_invalid \$tractogram ${prefix}__\${bname}${suffix}.\${ext}\
@@ -73,7 +73,7 @@ process TRACTOGRAM_REMOVEINVALID {
             bname=\$tractogram:\$pos
             bname=\$(basename \${bname} .\${ext})
         else
-            bname=\$(basename \${tractogram} .\${ext})
+            bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
         fi
 
         touch ${prefix}__\${bname}${suffix}.\${ext}
