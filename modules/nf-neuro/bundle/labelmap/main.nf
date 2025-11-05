@@ -34,12 +34,28 @@ process BUNDLE_LABELMAP {
 
     for index in \${!bundles[@]};
         do ext=\${bundles[index]#*.}
-        pos=\$((\$(echo \${bundles[index]} | grep -b -o __ | cut -d: -f1)+2))
-        bname=\${bundles[index]:\$pos}
-        bname=\$(basename \${bname} .\${ext})
+        if [[ \${bundles[index]} == *"__"* ]]; then
+            pos=\$((\$(echo \${bundles[index]} | grep -b -o __ | cut -d: -f1)+2))
+            bname=\${bundles[index]:\$pos}
+            bname=\$(basename \${bname} .\${ext})
+        else
+            bname=\$(basename \${bundles[index]} .\${ext})
+        fi
+        if [[ "\$bname" == *"_cleaned"* ]]; then
+            bname=\${bname%_cleaned*}
+        fi
+
+        centroid=\$(find . -name "*\${bname}_centroid*")
+        if [[ -z "\$centroid" ]]; then
+            echo "Centroid file for bundle \${bundles[index]} not found. Using the one matching bundle index."
+            centroid=\${centroids[index]}
+        elif [[ \$(echo "\$centroid" | wc -l) -gt 1 ]]; then
+            echo "Multiple centroid files found for bundle \${bundles[index]}. Using the first one."
+            centroid=\$(echo "\$centroid" | head -n 1)
+        fi
 
         scil_bundle_label_map \${bundles[index]} \
-            \${centroids[index]} \
+            \$centroid \
             tmp_out \
             $nb_points \
             $colormap \
@@ -72,9 +88,16 @@ process BUNDLE_LABELMAP {
 
     for index in \${!bundles[@]};
         do ext=\${bundles[index]#*.}
-        pos=\$((\$(echo \${bundles[index]} | grep -b -o __ | cut -d: -f1)+2))
-        bname=\${bundles[index]:\$pos}
-        bname=\$(basename \${bname} .\${ext})
+        if [[ \${bundles[index]} == *"__"* ]]; then
+            pos=\$((\$(echo \${bundles[index]} | grep -b -o __ | cut -d: -f1)+2))
+            bname=\${bundles[index]:\$pos}
+            bname=\$(basename \${bname} .\${ext})
+        else
+            bname=\$(basename \${bundles[index]} .\${ext})
+        fi
+        if [[ "\$bname" == *"_cleaned"* ]]; then
+            bname=\${bname%_cleaned*}
+        fi
 
         touch ${prefix}__\${bname}_labels.nii.gz
         touch ${prefix}__\${bname}_labels.trk
