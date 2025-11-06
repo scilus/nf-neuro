@@ -43,10 +43,31 @@ args:
       type: string
       description: Select the colormap for colored trk (data_per_point).
       default: "jet"
-  - new_labelling:
+  - threshold:
+      type: float
+      description: Maximum distance between two points to be considered overlapping.
+      default: 0.001
+  - streamline_threshold:
+      type: float
+      description: Threshold for the minimum number of streamlines in a voxel to be included.
+      default: 2
+  - use_hyperplane:
       type: boolean
-      description: Use the new labelling method (multi-centroids).
+      description: Use hyperplane method (multi-centroids) instead of the euclidean method (single-centroid).
       default: false
+  - use_manhattan:
+      type: boolean
+      description: Use the Manhattan distance instead of the Euclidean distance.
+      default: false
+  - skip_uniformize:
+      type: boolean
+      description: Skip the uniformization of the bundles orientation.
+      default: false
+  - correlation_threshold:
+      type: float
+      description: Threshold for the correlation map. Only for the multi-bundle case.
+      default: 0.0
+
 output:
   labels:
     - - meta:
