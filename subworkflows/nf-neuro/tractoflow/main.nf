@@ -96,8 +96,8 @@ workflow TRACTOFLOW {
         // SUBWORKFLOW: Run REGISTRATION
         //
         T1_REGISTRATION(
-            PREPROC_T1.out.t1_final,
             PREPROC_DWI.out.b0,
+            PREPROC_T1.out.t1_final,
             RECONST_DTIMETRICS.out.fa,
             Channel.empty(),
             Channel.empty(),
