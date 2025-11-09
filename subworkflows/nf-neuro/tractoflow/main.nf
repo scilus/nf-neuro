@@ -273,6 +273,7 @@ workflow TRACTOFLOW {
         dwi                     = PREPROC_DWI.out.dwi
                                     .join(PREPROC_DWI.out.bval)
                                     .join(PREPROC_DWI.out.bvec)
+        b0_mask                 = PREPROC_DWI.out.b0_mask
         t1                      = T1_REGISTRATION.out.image_warped
         wm_mask                 = ANATOMICAL_SEGMENTATION.out.wm_mask
         gm_mask                 = ANATOMICAL_SEGMENTATION.out.gm_mask
