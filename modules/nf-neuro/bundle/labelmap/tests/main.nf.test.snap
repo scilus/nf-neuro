@@ -2,19 +2,19 @@
     "bundle - labelmap - stub-run": {
         "content": [
             [
-                "versions.yml:md5,56ae2d0622ad277071f5a17544c20679"
+                "versions.yml:md5,8af3bf7d98f87096a035eb140d2b85b1"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-09-17T17:38:58.207102218"
+        "timestamp": "2025-11-04T20:37:40.395775"
     },
     "bundle - labelmap": {
         "content": [
             [
-                "versions.yml:md5,56ae2d0622ad277071f5a17544c20679"
+                "versions.yml:md5,8af3bf7d98f87096a035eb140d2b85b1"
             ],
             "test__IFGWM_labels.nii.gz",
             "test__IFGWM_labels.trk",
@@ -22,9 +22,9 @@
             "test__IFGWM_distances.trk"
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-09-17T17:38:43.319913922"
+        "timestamp": "2025-11-05T09:27:11.227486"
     }
 }
