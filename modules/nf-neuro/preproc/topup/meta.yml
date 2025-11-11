@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-neuro/modules/main/modules/meta-schema.json
 name: "preproc_topup"
 description: |
   Run magnetic susceptibility distortions correction using FSL Topup. The module can take either

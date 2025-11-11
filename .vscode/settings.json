@@ -14,7 +14,7 @@
     "git.branchProtection": ["main"],
     "git.branchProtectionPrompt": "alwaysPrompt",
     "github.branchProtection": true,
-    "testDataExplorer.repository": "scilus/nf-neuro",
+    "testDataExplorer.repository": "nf-neuro/modules",
     "testDataExplorer.branch": "main",
     "testDataExplorer.dataserver": "scil.usherbrooke.ca",
     "testDataExplorer.serverdatalocation": "scil_test_data/dvc-store/files/md5",
