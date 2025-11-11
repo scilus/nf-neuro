@@ -52,16 +52,16 @@ runs:
 
           // Get PR details
           const { data: pr } = await github.rest.pulls.get({
-            owner: 'scilus',
-            repo: 'nf-neuro',
+            owner: 'nf-neuro',
+            repo: 'modules',
             pull_number: prNumber
           });
 
           // Get all workflow runs associated to PR's branch, sorted by most recently created
           const workflowRuns = await github.paginate(
             github.rest.actions.listWorkflowRunsForRepo.endpoint.merge({
-              owner: 'scilus',
-              repo: 'nf-neuro',
+              owner: 'nf-neuro',
+              repo: 'modules',
               event: 'pull_request',
               branch: pr.head.ref,
               per_page: 100
@@ -74,8 +74,8 @@ runs:
             // Get jobs for the latest workflow run
             const jobs = await github.paginate(
               github.rest.actions.listJobsForWorkflowRun.endpoint.merge({
-                owner: 'scilus',
-                repo: 'nf-neuro',
+                owner: 'nf-neuro',
+                repo: 'modules',
                 run_id: latestRun.id,
                 per_page: 100
               })
@@ -111,8 +111,8 @@ runs:
           // Get all events associated to the PR, sorted by most recently created
           const events = await github.paginate(
             github.rest.issues.listEventsForTimeline.endpoint.merge({
-              owner: 'scilus',
-              repo: 'nf-neuro',
+              owner: 'nf-neuro',
+              repo: 'modules',
               issue_number: prNumber,
               per_page: 100
             })

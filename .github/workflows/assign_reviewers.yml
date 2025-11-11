@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    if: ${{ github.repository == 'scilus/nf-neuro' }}
+    if: ${{ github.repository == 'nf-neuro/modules' }}
     steps:
       - name: Get review assignment token
         id: generate-token

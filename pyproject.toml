@@ -30,7 +30,7 @@ classifiers = [
 
 homepage = "https://scil.usherbrooke.ca/"
 
-repository = "https://github.com/scilus/nf-neuro.git"
+repository = "https://github.com/nf-neuro/modules.git"
 
 [tool.poetry.dependencies]
 

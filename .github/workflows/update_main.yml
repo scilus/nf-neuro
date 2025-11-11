@@ -10,12 +10,18 @@ concurrency:
 
 jobs:
   publish-documentation:
-    if: github.repository == 'scilus/nf-neuro'
-    uses: scilus/nf-neuro-documentation/.github/workflows/deploy.yml@main
+    if: github.repository == 'nf-neuro/modules'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: nf-neuro/website/.github/workflows/deploy.yml@main
     secrets: inherit
 
   publish-extension-package:
-    if: github.repository == 'scilus/nf-neuro'
+    if: github.repository == 'nf-neuro/modules'
+    permissions:
+      contents: read
     uses: ./.github/workflows/publish_extension.yml
     with:
       name: "extension-package"

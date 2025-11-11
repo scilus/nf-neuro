@@ -21,6 +21,8 @@ on:
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
@@ -39,6 +41,8 @@ jobs:
 
   prettier:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
@@ -56,6 +60,7 @@ jobs:
 
   editorconfig:
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
@@ -75,6 +80,8 @@ jobs:
     name: lint - changes
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
+    permissions:
+      contents: read
     outputs:
       paths: ${{ steps.changes.outputs.components }}
       modules: ${{ steps.components.outputs.modules }}
@@ -107,6 +114,8 @@ jobs:
     name: test - changes
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
+    permissions:
+      contents: read
     outputs:
       paths: ${{ steps.changes.outputs.components }}
       modules: ${{ steps.components.outputs.modules }}
@@ -140,6 +149,8 @@ jobs:
     name: lint - modules
     needs: [lint-changes]
     if: ${{ (needs.lint-changes.outputs.modules != '[]') }}
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -155,6 +166,8 @@ jobs:
     name: lint - subworkflows
     needs: [lint-changes]
     if: ${{ ( needs.lint-changes.outputs.subworkflows != '[]') }}
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -169,7 +182,9 @@ jobs:
   nf-test:
     name: test
     needs: [nf-test-changes]
-    if: ${{ ( github.repository == 'scilus/nf-neuro' ) && ( needs.nf-test-changes.outputs.paths != '[]' ) }}
+    if: ${{ ( github.repository == 'nf-neuro/modules' ) && ( needs.nf-test-changes.outputs.paths != '[]' ) }}
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -201,6 +216,8 @@ jobs:
     needs: [nf-test-changes, nf-test]
     if: ${{ ( needs.nf-test-changes.outputs.paths != '[]' ) }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/upload-artifact/merge@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
@@ -218,6 +235,7 @@ jobs:
     needs:
       [prettier, editorconfig, nf-test-changes, lint-changes, lint-modules, lint-subworkflows, nf-test, upload-reports]
     if: ${{ !cancelled() }}
+    permissions: {}
     steps:
       - name: All tests ok
         if: ${{ success() || !contains(needs.*.result, 'failure') }}
