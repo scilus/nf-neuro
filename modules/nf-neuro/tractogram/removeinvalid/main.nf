@@ -31,7 +31,7 @@ process TRACTOGRAM_REMOVEINVALID {
         ext=\${tractogram#*.}
         if [[ \$tractogram == *"__"* ]]; then
             pos=\$((\$(echo \$tractogram | grep -b -o __ | cut -d: -f1)+2))
-            bname=\$tractogram:\$pos
+            bname=\${tractogram:\$pos}
             bname=\$(basename \${bname} .\${ext})
         else
             bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
@@ -70,7 +70,7 @@ process TRACTOGRAM_REMOVEINVALID {
         ext=\${tractogram#*.}
         if [[ \$tractogram == *"__"* ]]; then
             pos=\$((\$(echo \$tractogram | grep -b -o __ | cut -d: -f1)+2))
-            bname=\$tractogram:\$pos
+            bname=\${tractogram:\$pos}
             bname=\$(basename \${bname} .\${ext})
         else
             bname=\$(basename \${tractogram} .\${ext} | sed 's/${prefix}_\\+//')
