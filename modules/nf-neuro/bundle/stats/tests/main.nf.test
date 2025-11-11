@@ -34,7 +34,7 @@ nextflow_process {
                         [ id:'test', single_end:false ], // meta map
                         file("\${test_data_directory}/IFGWM.trk"),
                         file("\${test_data_directory}/IFGWM_labels_map.nii.gz"),
-                        file("\${test_data_directory}/mni_masked.nii.gz"),
+                        file("\${test_data_directory}/{mni_masked,head}.nii.gz"),
                         []
                     ]}
                 """

@@ -7,9 +7,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-09-22T13:27:27.673028317"
+        "timestamp": "2025-10-21T15:08:07.573602223"
     },
     "bundle - stats - lesions": {
         "content": [
@@ -146,9 +146,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-09-22T16:12:23.154412962"
+        "timestamp": "2025-10-21T15:27:56.34609402"
     },
     "bundle - stats": {
         "content": [
@@ -177,7 +177,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mean_std_per_point.json:md5,efcac000fb6c0f607b7377154e68854c"
+                        "test__mean_std_per_point.json:md5,811ff59ac345b475d9528af4f2462822"
                     ]
                 ],
                 "11": [
@@ -205,6 +205,15 @@
                     
                 ],
                 "15": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__tractometry_mqc.tsv:md5,b740883e0f7255cfc2d998acae85994f"
+                    ]
+                ],
+                "16": [
                     "versions.yml:md5,2a73062ec9856a8e64adff5aa950661b"
                 ],
                 "2": [
@@ -213,7 +222,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__endpoints_metric_stats.json:md5,37ef94482f4aaff07ad982a622976abf"
+                        "test__endpoints_metric_stats.json:md5,f61a0aa763565927f5eb8e8dc777697e"
                     ]
                 ],
                 "3": [
@@ -222,7 +231,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mean_std.json:md5,f7463e5519063f7e0f32709d0dfdc1a2"
+                        "test__mean_std.json:md5,3e5f23039ee3cfa8c794611225a22bca"
                     ]
                 ],
                 "4": [
@@ -264,7 +273,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__endpoints_metric_stats.json:md5,37ef94482f4aaff07ad982a622976abf"
+                        "test__endpoints_metric_stats.json:md5,f61a0aa763565927f5eb8e8dc777697e"
                     ]
                 ],
                 "endpoints_raw": [
@@ -306,7 +315,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mean_std.json:md5,f7463e5519063f7e0f32709d0dfdc1a2"
+                        "test__mean_std.json:md5,3e5f23039ee3cfa8c794611225a22bca"
                     ]
                 ],
                 "mean_std_per_point": [
@@ -315,7 +324,16 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test__mean_std_per_point.json:md5,efcac000fb6c0f607b7377154e68854c"
+                        "test__mean_std_per_point.json:md5,811ff59ac345b475d9528af4f2462822"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__tractometry_mqc.tsv:md5,b740883e0f7255cfc2d998acae85994f"
                     ]
                 ],
                 "streamline_count": [
@@ -349,9 +367,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-09-22T15:41:49.239587021"
+        "timestamp": "2025-10-22T09:03:56.1800152"
     },
     "bundle - stats - light": {
         "content": [
@@ -378,6 +396,9 @@
                     
                 ],
                 "15": [
+                    
+                ],
+                "16": [
                     "versions.yml:md5,2a73062ec9856a8e64adff5aa950661b"
                 ],
                 "2": [
@@ -437,6 +458,9 @@
                 "mean_std_per_point": [
                     
                 ],
+                "mqc": [
+                    
+                ],
                 "streamline_count": [
                     [
                         {
@@ -468,8 +492,8 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.8"
         },
-        "timestamp": "2025-09-22T15:42:03.885411778"
+        "timestamp": "2025-10-22T09:00:04.784763777"
     }
 }
