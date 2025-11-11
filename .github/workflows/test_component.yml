@@ -66,6 +66,8 @@ jobs:
     runs-on: ${{ inputs.runner }}
     name: test - ${{ inputs.paths }}
     if: inputs.paths != '' && inputs.profile != ''
+    permissions:
+      contents: read
     env:
       NXF_ANSI_LOG: false
       NXF_DISABLE_CHECK_LATEST: true

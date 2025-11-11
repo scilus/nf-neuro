@@ -6,7 +6,7 @@ import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-DOC_URL_BASE="https://scilus.github.io/nf-neuro"
+DOC_URL_BASE="https://nf-neuro.github.io"
 
 
 def channel_description_format(description):

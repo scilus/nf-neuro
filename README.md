@@ -10,14 +10,14 @@
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 
-# [Learn more on the nf-neuro website !](https://scilus.github.io/nf-neuro)
+# [Learn more on the nf-neuro website !](https://nf-neuro.github.io)
 
-Welcome to the [nf-neuro](https://scilus.github.io/nf-neuro) project ! An **_open-source_
+Welcome to the [nf-neuro](https://nf-neuro.github.io) project ! An **_open-source_
 [Nextflow](https://nextflow.io) modules and workflows repository for neuroimaging** maintained by the
 [SCIL team](https://scil-documentation.readthedocs.io/en/latest/). Our goal is to **provide
 _Nextflow DSL2_ optimized processing modules and workflows tailored to neuroimaging data**.
 
-**[nf-neuro](https://scilus.github.io/nf-neuro) aligns with the [nf-core](https://nf-co.re) framework
+**[nf-neuro](https://nf-neuro.github.io) aligns with the [nf-core](https://nf-co.re) framework
 to streamline the development of neuroimaging pipelines !**
 
 - Extensive [guidelines](https://nf-co.re/docs/guidelines/components/overview) for the development of

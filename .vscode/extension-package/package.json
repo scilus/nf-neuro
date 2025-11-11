@@ -4,7 +4,7 @@
     "description": "Extension pack for VS Code development of nf-neuro",
     "repository": {
         "type": "git",
-        "url": "https://github.com/scilus/nf-neuro.git"
+        "url": "https://github.com/nf-neuro/modules.git"
     },
     "icon": "icon.avif",
     "version": "1.0.2",
