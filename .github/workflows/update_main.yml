@@ -11,12 +11,18 @@ concurrency:
 jobs:
   publish-documentation:
     if: github.repository == 'nf-neuro/modules'
+    runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
-    uses: nf-neuro/website/.github/workflows/deploy.yml@main
-    secrets: inherit
+    steps:
+      - name: dispatch documentation deployment
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          token: ${{ secrets.DOCUMENTATION_PUBLISHING }}
+          repository: nf-neuro/nf-neuro.github.io
+          event-type: publish-documentation
 
   publish-extension-package:
     if: github.repository == 'nf-neuro/modules'
