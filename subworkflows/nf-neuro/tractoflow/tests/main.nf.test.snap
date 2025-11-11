@@ -35,6 +35,22 @@
                         "test_forward1_affine.mat"
                     ]
                 ],
+                "b0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_b0.nii.gz"
+                    ]
+                ],
+                "b0_mask": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_dwi_mask_resampled.nii.gz"
+                    ]
+                ],
                 "csf_fodf": [
                     [
                         {
@@ -415,7 +431,7 @@
                         {
                             "id": "test"
                         },
-                        "test_b0_warped.nii.gz"
+                        "test_t1_cropped_warped.nii.gz"
                     ]
                 ],
                 "t1_native": [
@@ -473,8 +489,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-03T19:20:06.170026745"
+        "timestamp": "2025-11-10T22:14:47.066726"
     }
 }

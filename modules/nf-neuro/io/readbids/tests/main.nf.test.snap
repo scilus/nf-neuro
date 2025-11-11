@@ -3,35 +3,35 @@
         "content": [
             {
                 "0": [
-                    "bids_struct.json:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    "bids_struct.json:md5,309f00ae14abe9ac3ed2dd239652ce90"
                 ],
                 "1": [
-                    "versions.yml:md5,405a3c97eec15b6a45f00f05c33b6cde"
+                    "versions.yml:md5,a78a38d7759876402da38f069eef87f1"
                 ],
                 "bidsstructure": [
-                    "bids_struct.json:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    "bids_struct.json:md5,309f00ae14abe9ac3ed2dd239652ce90"
                 ],
                 "versions": [
-                    "versions.yml:md5,405a3c97eec15b6a45f00f05c33b6cde"
+                    "versions.yml:md5,a78a38d7759876402da38f069eef87f1"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-08T16:17:26.818532751"
+        "timestamp": "2025-11-10T22:18:02.381605"
     },
     "io - readbids - stub-run": {
         "content": [
             [
-                "versions.yml:md5,405a3c97eec15b6a45f00f05c33b6cde"
+                "versions.yml:md5,a78a38d7759876402da38f069eef87f1"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-08T16:17:31.561965268"
+        "timestamp": "2025-11-10T22:18:11.038253"
     }
 }

@@ -96,8 +96,8 @@ workflow TRACTOFLOW {
         // SUBWORKFLOW: Run REGISTRATION
         //
         T1_REGISTRATION(
-            PREPROC_T1.out.t1_final,
             PREPROC_DWI.out.b0,
+            PREPROC_T1.out.t1_final,
             RECONST_DTIMETRICS.out.fa,
             Channel.empty(),
             Channel.empty(),
@@ -273,6 +273,8 @@ workflow TRACTOFLOW {
         dwi                     = PREPROC_DWI.out.dwi
                                     .join(PREPROC_DWI.out.bval)
                                     .join(PREPROC_DWI.out.bvec)
+        b0                      = PREPROC_DWI.out.b0
+        b0_mask                 = PREPROC_DWI.out.b0_mask
         t1                      = T1_REGISTRATION.out.image_warped
         wm_mask                 = ANATOMICAL_SEGMENTATION.out.wm_mask
         gm_mask                 = ANATOMICAL_SEGMENTATION.out.gm_mask

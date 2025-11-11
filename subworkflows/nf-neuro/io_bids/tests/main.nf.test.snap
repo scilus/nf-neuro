@@ -80,15 +80,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,16e6ba9307d1814d6305d08c7fee5f0f"
+                    "versions.yml:md5,c4e12ebde2417a53c3f1136c2fb522cb"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-22T19:27:30.272414707"
+        "timestamp": "2025-11-10T22:18:28.528269"
     },
     "Read BIDS directory - without .bidsignore": {
         "content": [
@@ -171,14 +171,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,16e6ba9307d1814d6305d08c7fee5f0f"
+                    "versions.yml:md5,c4e12ebde2417a53c3f1136c2fb522cb"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-22T19:27:19.285475041"
+        "timestamp": "2025-11-10T22:18:19.855872"
     }
 }
