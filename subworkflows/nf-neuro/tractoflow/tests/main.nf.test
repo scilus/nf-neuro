@@ -47,6 +47,78 @@ nextflow_workflow {
                 pft_number_of_particles = 4
                 lt_seeding_strategy = "nt"
                 lt_number_of_seeds = 4000
+                run_qball = true
+                use_qball_for_tracking = true
+            }
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                    .branch{
+                        dwi: it.simpleName == "raw_DWIss1000-dir32"
+                        t1w: it.simpleName == "raw_T1w"
+                        template: it.simpleName == "antsbet"
+                    }
+                input[0] = ch_split_test_data.dwi.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec")
+                    ]}
+                input[1] = ch_split_test_data.t1w.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ]}
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                input[6] = Channel.empty()
+                input[7] = Channel.empty()
+                input[8] = ch_split_test_data.template.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_template.nii.gz")
+                    ]}
+                input[9] = ch_split_test_data.template.map{
+                    test_data_directory -> [
+                        [ id:'test' ],
+                        file("\${test_data_directory}/t1_brain_probability_map.nii.gz")
+                    ]}
+                input[10] = Channel.empty()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry ? file(entry).name : "" }
+                            } ]
+                        }
+                ).match() }
+            )
+        }
+    },
+
+    test("tractoflow - qball tracking") {
+        when {
+            params {
+                pft_seeding_strategy = "nt"
+                pft_number_of_seeds = 4000
+                pft_number_of_particles = 4
+                lt_seeding_strategy = "nt"
+                lt_number_of_seeds = 4000
+                run_qball = true
+                use_qball_for_tracking = true
             }
             workflow {
                 """

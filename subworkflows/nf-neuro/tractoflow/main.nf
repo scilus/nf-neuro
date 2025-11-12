@@ -13,6 +13,7 @@ include { RECONST_FRF        } from '../../../modules/nf-neuro/reconst/frf/main'
 include { RECONST_MEANFRF    } from '../../../modules/nf-neuro/reconst/meanfrf/main'
 include { RECONST_DTIMETRICS } from '../../../modules/nf-neuro/reconst/dtimetrics/main'
 include { RECONST_FODF       } from '../../../modules/nf-neuro/reconst/fodf/main'
+include { RECONST_QBALL      } from '../../../modules/nf-neuro/reconst/qball/main'
 
 // TRACKING
 include { TRACKING_PFTTRACKING   } from '../../../modules/nf-neuro/tracking/pfttracking/main'
@@ -224,6 +225,24 @@ workflow TRACTOFLOW {
         RECONST_FODF( ch_reconst_fodf )
         ch_versions = ch_versions.mix(RECONST_FODF.out.versions.first())
 
+        ch_diffusion_model = RECONST_FODF.out.fodf
+        //
+        // MODULE: Run RECONST/QBALL
+        //
+        if (params.run_qball) {
+            ch_qball_input = PREPROC_DWI.out.dwi
+                .join(PREPROC_DWI.out.bval)
+                .join(PREPROC_DWI.out.bvec)
+                .join(PREPROC_DWI.out.b0_mask)
+            RECONST_QBALL( ch_qball_input )
+
+            ch_versions = ch_versions.mix(RECONST_QBALL.out.versions.first())
+
+            if (params.use_qball_for_tracking) {
+                ch_diffusion_model = RECONST_QBALL.out.qball
+            }
+        }
+
         //
         // MODULE: Run TRACKING/PFTTRACKING
         //
@@ -232,7 +251,7 @@ workflow TRACTOFLOW {
             ch_input_pft_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
                 .join(ANATOMICAL_SEGMENTATION.out.gm_mask)
                 .join(ANATOMICAL_SEGMENTATION.out.csf_mask)
-                .join(RECONST_FODF.out.fodf)
+                .join(ch_diffusion_model)
                 .join(RECONST_DTIMETRICS.out.fa)
             TRACKING_PFTTRACKING( ch_input_pft_tracking )
 
@@ -253,7 +272,7 @@ workflow TRACTOFLOW {
         ch_local_tracking = Channel.empty()
         if ( params.run_local_tracking ) {
             ch_input_local_tracking = ANATOMICAL_SEGMENTATION.out.wm_mask
-                .join(RECONST_FODF.out.fodf)
+                .join(ch_diffusion_model)
                 .join(RECONST_DTIMETRICS.out.fa)
             TRACKING_LOCALTRACKING( ch_input_local_tracking )
 
@@ -320,6 +339,14 @@ workflow TRACTOFLOW {
         afd_sum                 = RECONST_FODF.out.afd_sum
         nufo                    = RECONST_FODF.out.nufo
         volume_fraction         = RECONST_FODF.out.vf
+
+        // Q-BALL
+        qball                   = RECONST_QBALL.out.qball
+        qball_a_power           = RECONST_QBALL.out.a_power
+        qball_peaks             = RECONST_QBALL.out.peaks
+        qball_gfa               = RECONST_QBALL.out.peak_indices
+        qball_rdi               = RECONST_QBALL.out.gfa
+        qball_nufo              = RECONST_QBALL.out.nufo
 
         // TRACKING
         pft_tractogram          = ch_pft_tracking.map{ [it[0], it[1]] }

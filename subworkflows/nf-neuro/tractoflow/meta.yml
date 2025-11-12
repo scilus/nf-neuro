@@ -251,6 +251,14 @@ args:
       type: float
       description: Minimum MD value for ventricle mask creation.
       default: 0.003
+  - run_qball:
+      type: boolean
+      description: Enable Q-Ball modeling.
+      default: false
+  - use_qball_for_tracking:
+      type: boolean
+      description: Use Q-Ball model for tractography instead of fODFs.
+      default: false
   - run_pft:
       type: boolean
       description: Enable Particle Filtering Tractography.
