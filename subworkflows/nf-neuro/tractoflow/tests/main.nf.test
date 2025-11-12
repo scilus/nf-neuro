@@ -19,6 +19,7 @@ nextflow_workflow {
     tag "reconst/dtimetrics"
     tag "reconst/frf"
     tag "reconst/fodf"
+    tag "reconst/qball"
     tag "reconst/meanfrf"
     tag "registration/antsapplytransforms"
     tag "tracking/localtracking"

@@ -344,8 +344,8 @@ workflow TRACTOFLOW {
         qball                   = RECONST_QBALL.out.qball
         qball_a_power           = RECONST_QBALL.out.a_power
         qball_peaks             = RECONST_QBALL.out.peaks
-        qball_gfa               = RECONST_QBALL.out.peak_indices
-        qball_rdi               = RECONST_QBALL.out.gfa
+        qball_peak_indices      = RECONST_QBALL.out.peak_indices
+        qball_gfa               = RECONST_QBALL.out.gfa
         qball_nufo              = RECONST_QBALL.out.nufo
 
         // TRACKING
