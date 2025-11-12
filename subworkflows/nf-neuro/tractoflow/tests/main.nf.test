@@ -108,7 +108,7 @@ nextflow_workflow {
                 ).match() }
             )
         }
-    },
+    }
 
     test("tractoflow - qball tracking") {
         when {
