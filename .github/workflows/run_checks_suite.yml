@@ -191,14 +191,14 @@ jobs:
         path: ["${{ fromJson(needs.nf-test-changes.outputs.paths) }}"]
         include:
           - profile: docker
-          - runner: scilus-docker
-          - runner: scilus-docker-large
+          - runner: nf-neuro-docker
+          - runner: nf-neuro-docker-large
             path: modules/nf-neuro/registration/easyreg
-          - runner: scilus-docker-large
+          - runner: nf-neuro-docker-large
             path: modules/nf-neuro/segmentation/synthseg
-          - runner: scilus-docker-large
+          - runner: nf-neuro-docker-large
             path: modules/nf-neuro/betcrop/synthbet
-          - runner: scilus-docker-large
+          - runner: nf-neuro-docker-large
             path: modules/nf-neuro/registration/synthmorph
         exclude:
           - path: subworkflows/nf-neuro/load_test_data
