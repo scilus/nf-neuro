@@ -1,0 +1,77 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: reconst_diffusivitypriors
+description: |
+  Compute the mean of the diffusivity priors (iso_diff, para_diff
+  & perp_diff). This is most often used following the computation of
+  diffusivity priors using the reconst/diffusivitypriors module.
+
+keywords:
+  - diffusivity
+  - axial
+  - isotropic
+  - radial
+tools:
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+input:
+  - iso_diff_list:
+      type: list
+      description: |
+        List of text files containing isotropic diffusivity values.
+      pattern: "*.txt"
+      ontologies: []
+  - para_diff_list:
+      type: list
+      description: |
+        List of text files containing parallel diffusivity values.
+      pattern: "*.txt"
+      ontologies: []
+  - perp_diff_list:
+      type: list
+      description: |
+        List of text files containing perpendicular diffusivity values.
+      pattern: "*.txt"
+      ontologies: []
+output:
+  mean_para_diff:
+    - mean_para_diff.txt:
+        type: file
+        description: Text file for average parallel diffusivity value.
+        pattern: "mean_para_diff.txt"
+        ontologies: []
+  mean_perp_diff:
+    - mean_perp_diff.txt:
+        type: file
+        description: Text file for average perpendicular diffusivity value.
+        pattern: "mean_perp_diff.txt"
+        ontologies: []
+  mean_iso_diff:
+    - mean_iso_diff.txt:
+        type: file
+        description: Text file for average isotropic diffusivity value.
+        pattern: "mean_iso_diff.txt"
+        ontologies: []
+  mean_para_diff_val:
+    - mean_para_diff:
+        type: string
+        description: String containing the average parallel diffusivity value.
+  mean_perp_diff_val:
+    - mean_perp_diff:
+        type: string
+        description: String containing the average perpendicular diffusivity value.
+  mean_iso_diff_val:
+    - mean_iso_diff:
+        type: string
+        description: String containing the average isotropic diffusivity value.
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@levje"
