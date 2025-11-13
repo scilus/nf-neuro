@@ -2,19 +2,30 @@ process RECONST_DIFFUSIVITYPRIORS {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilpy:2.2.0_cpu"
+    container "mrzarfir/scilpy:2.2.1.1" // TODO: Replace this container with an official one once available.
 
     input:
         tuple val(meta), path(fa), path(ad), path(rd), path(md)
 
     output:
-        tuple val(meta), path("*_para_diff.txt")        , emit: para_diff
-        tuple val(meta), path("*_iso_diff.txt")         , emit: iso_diff
-        tuple val(meta), path("*_perp_diff.txt")        , emit: perp_diff, optional: true
-        tuple val(meta), env("para_diff")               , emit: para_diff_val
-        tuple val(meta), env("iso_diff")                , emit: iso_diff_val
-        tuple val(meta), env("perp_diff")               , emit: perp_diff_val, optional: true
-        path "versions.yml"                             , emit: versions
+        tuple val(meta), path("*_para_diff.txt")  , emit: para_diff_file
+        tuple val(meta), path("*_iso_diff.txt")   , emit: iso_diff_file
+        tuple val(meta), path("*_perp_diff.txt")  , emit: perp_diff_file, optional: true
+
+        tuple val(meta), env('mean_para_diff')    , emit: mean_para_diff
+        tuple val(meta), env('std_para_diff')     , emit: std_para_diff
+        tuple val(meta), env('min_para_diff')     , emit: min_para_diff
+        tuple val(meta), env('max_para_diff')     , emit: max_para_diff
+        tuple val(meta), env('mean_iso_diff')     , emit: mean_iso_diff
+        tuple val(meta), env('std_iso_diff')      , emit: std_iso_diff
+        tuple val(meta), env('min_iso_diff')      , emit: min_iso_diff
+        tuple val(meta), env('max_iso_diff')      , emit: max_iso_diff
+        tuple val(meta), env('mean_perp_diff')    , emit: mean_perp_diff, optional: true
+        tuple val(meta), env('std_perp_diff')     , emit: std_perp_diff, optional: true
+        tuple val(meta), env('min_perp_diff')     , emit: min_perp_diff, optional: true
+        tuple val(meta), env('max_perp_diff')     , emit: max_perp_diff, optional: true
+
+        path "versions.yml"                       , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -22,23 +33,28 @@ process RECONST_DIFFUSIVITYPRIORS {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def fa_min_single_fiber = task.ext.fa_min_single_fiber ? "--fa_min_single_fiber " + task.ext.fa_min_single_fiber : ""
-    def fa_max_ventricles = task.ext.fa_max_ventricles ? "--fa_max_ventricles " + task.ext.fa_max_ventricles : ""
-    def md_min_ventricles = task.ext.md_min_ventricles ? "--md_min_ventricles " + task.ext.md_min_ventricles : ""
+    def fa_min = task.ext.fa_min ? "--fa_min " + task.ext.fa_min : ""
+    def fa_max = task.ext.fa_max ? "--fa_max " + task.ext.fa_max : ""
+    def md_min = task.ext.md_min ? "--md_min " + task.ext.md_min : ""
     def roi_radius = task.ext.roi_radius ? "--roi_radius " + task.ext.roi_radius : ""
 
     """
-    scil_NODDI_priors $fa $ad $rd $md $fa_min_single_fiber $fa_max_ventricles $md_min_ventricles $roi_radius \
+
+    scil_NODDI_priors $fa $ad $rd $md $fa_min $fa_max $md_min $roi_radius \
         --out_txt_1fiber_para ${prefix}_para_diff.txt \
         --out_txt_1fiber_perp ${prefix}_perp_diff.txt \
         --out_txt_ventricles ${prefix}_iso_diff.txt
 
     # Set output environment variables
-    para_diff=\$(cat ${prefix}_para_diff.txt)
-    iso_diff=\$(cat ${prefix}_iso_diff.txt)
+    echo "Setting output environment variables"
+    read mean_para_diff std_para_diff min_para_diff max_para_diff < <(awk 'NR==2' ${prefix}_para_diff.txt)
+    echo "Done para"
+    read mean_iso_diff std_iso_diff min_iso_diff max_iso_diff < <(awk 'NR==2' ${prefix}_iso_diff.txt)
+    echo "Done iso"
     if [[ -e ${prefix}_perp_diff.txt ]]
     then
-        perp_diff=\$(cat ${prefix}_perp_diff.txt)
+        read mean_perp_diff std_perp_diff min_perp_diff max_perp_diff < <(awk 'NR==2' ${prefix}_perp_diff.txt)
+        echo "Done perp"
     fi
 
     cat <<-END_VERSIONS > versions.yml

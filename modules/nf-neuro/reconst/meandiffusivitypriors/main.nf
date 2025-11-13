@@ -5,41 +5,60 @@ process RECONST_MEANDIFFUSIVITYPRIORS {
     container "scilus/scilpy:2.2.0_cpu"
 
     input:
-        path(iso_diff_list)
         path(para_diff_list)
+        path(iso_diff_list)
         path(perp_diff_list) //** optional, input = [] **//
 
     output:
-        path "mean_iso_diff.txt"     , emit: mean_iso_diff
-        path "mean_para_diff.txt"    , emit: mean_para_diff
-        path "mean_perp_diff.txt"    , emit: mean_perp_diff, optional: true
-        env  'mean_iso_diff'         , emit: mean_iso_diff_val
-        env  'mean_para_diff'        , emit: mean_para_diff_val
-        env  'mean_perp_diff'        , emit: mean_perp_diff_val, optional: true
-        path "versions.yml"          , emit: versions
+        path "mean_para_diff.txt", emit: mean_para_diff_file
+        path "mean_iso_diff.txt" , emit: mean_iso_diff_file
+        path "mean_perp_diff.txt", emit: mean_perp_diff_file, optional: true
+
+        env  'mean_para_diff'    , emit: mean_para_diff
+        env  'std_para_diff'     , emit: std_para_diff
+        env  'min_para_diff'     , emit: min_para_diff
+        env  'max_para_diff'     , emit: max_para_diff
+        env  'mean_iso_diff'     , emit: mean_iso_diff
+        env  'std_iso_diff'      , emit: std_iso_diff
+        env  'min_iso_diff'      , emit: min_iso_diff
+        env  'max_iso_diff'      , emit: max_iso_diff
+        env  'mean_perp_diff'    , emit: mean_perp_diff, optional: true
+        env  'std_perp_diff'     , emit: std_perp_diff, optional: true
+        env  'min_perp_diff'     , emit: min_perp_diff, optional: true
+        env  'max_perp_diff'     , emit: max_perp_diff, optional: true
+
+        path "versions.yml"      , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     """
-    cat ${para_diff_list} > all_para_diff.txt
-    awk '{ total += \$1; count++ } END { print total/count }' all_para_diff.txt > mean_para_diff.txt
-    cat ${iso_diff_list} > all_iso_diff.txt
-    awk '{ total += \$1; count++ } END { print total/count }' all_iso_diff.txt > mean_iso_diff.txt
+
+    average_files() {
+        awk 'FNR==1 && NR==1 {header=\$0; next}  # Save header from first file
+            FNR>1 {for (i=1; i<=NF; i++) sum[i]+=\$i; n++}  # Sum all numeric values
+            END {
+                print header;
+                for (i=1; i<=NF; i++) printf "%g%s", sum[i]/n, (i==NF?ORS:OFS)
+            }' "\$@"
+    }
+
+    average_files ${para_diff_list} > mean_para_diff.txt
+    average_files ${iso_diff_list} > mean_iso_diff.txt
 
     if [[ -e ${perp_diff_list} ]]
     then
-        cat ${perp_diff_list} > all_perp_diff.txt
-        awk '{ total += \$1; count++ } END { print total/count }' all_perp_diff.txt > mean_perp_diff.txt
+        average_files ${perp_diff_list} > mean_perp_diff.txt
     fi
 
     # Set output environment variables
-    mean_iso_diff=\$(cat mean_iso_diff.txt)
-    mean_para_diff=\$(cat mean_para_diff.txt)
+    read mean_para_diff std_para_diff min_para_diff max_para_diff < <(awk 'NR==2' mean_para_diff.txt)
+    read mean_iso_diff std_iso_diff min_iso_diff max_iso_diff < <(awk 'NR==2' mean_iso_diff.txt)
+
     if [[ -e mean_perp_diff.txt ]]
     then
-        mean_perp_diff=\$(cat mean_perp_diff.txt)
+        read mean_perp_diff std_perp_diff min_perp_diff max_perp_diff < <(awk 'NR==2' mean_perp_diff.txt)
     fi
 
     # NOTE: We don't actually run scilpy here, but this module was designed to
@@ -52,13 +71,23 @@ process RECONST_MEANDIFFUSIVITYPRIORS {
 
     stub:
     """
-    touch all_para_diff.txt
-    touch all_perp_diff.txt
-    touch all_iso_diff.txt
-
     touch mean_para_diff.txt
     touch mean_perp_diff.txt
     touch mean_iso_diff.txt
+
+    # Set output environment variables
+    mean_para_diff=0
+    std_para_diff=0
+    min_para_diff=0
+    max_para_diff=0
+    mean_iso_diff=0
+    std_iso_diff=0
+    min_iso_diff=0
+    max_iso_diff=0
+    mean_perp_diff=0
+    std_perp_diff=0
+    min_perp_diff=0
+    max_perp_diff=0
 
     # NOTE: We don't actually run scilpy here, but this module was designed to
     # complement the diffusivity priors computation, which does use this scilpy version.
