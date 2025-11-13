@@ -72,7 +72,7 @@ input:
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
-  para_diff:
+  para_diff_file:
     - - meta:
           type: map
           description: |
@@ -83,7 +83,7 @@ output:
           description: Text file for parallel diffusivity value.
           pattern: "*_para_diff.txt"
           ontologies: []
-  iso_diff:
+  iso_diff_file:
     - - meta:
           type: map
           description: |
@@ -94,7 +94,7 @@ output:
           description: Text file for isotropic diffusivity value.
           pattern: "*_iso_diff.txt"
           ontologies: []
-  perp_diff:
+  perp_diff_file:
     - - meta:
           type: map
           description: |
@@ -105,33 +105,114 @@ output:
           description: Text file for perpendicular diffusivity value.
           pattern: "*_perp_diff.txt"
           ontologies: []
-  para_diff_val:
+  mean_para_diff:
     - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - para_diff:
+      - mean_para_diff:
           type: string
-          description: The parallel diffusivity value.
-  iso_diff_val:
+          description: String containing the average parallel diffusivity value.
+  std_para_diff:
     - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - iso_diff:
+      - std_para_diff:
           type: string
-          description: The isotropic diffusivity value.
-  perp_diff_val:
+          description: String containing the standard deviation of the parallel diffusivity value.
+  min_para_diff:
     - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - perp_diff:
+      - min_para_diff:
           type: string
-          description: The perpendicular diffusivity value.
+          description: String containing the minimum parallel diffusivity value.
+  max_para_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - max_para_diff:
+          type: string
+          description: String containing the maximum parallel diffusivity value.
+  mean_iso_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - mean_iso_diff:
+          type: string
+          description: String containing the average isotropic diffusivity value.
+  std_iso_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - std_iso_diff:
+          type: string
+          description: String containing the standard deviation of the isotropic diffusivity value.
+  min_iso_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - min_iso_diff:
+          type: string
+          description: String containing the minimum isotropic diffusivity value.
+  max_iso_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - max_iso_diff:
+          type: string
+          description: String containing the maximum isotropic diffusivity value.
+  mean_perp_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - mean_perp_diff:
+          type: string
+          description: String containing the average perpendicular diffusivity value.
+  std_perp_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - std_perp_diff:
+          type: string
+          description: String containing the standard deviation of the perpendicular diffusivity value.
+  min_perp_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - min_perp_diff:
+          type: string
+          description: String containing the minimum perpendicular diffusivity value.
+  max_perp_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - max_perp_diff:
+          type: string
+          description: String containing the maximum perpendicular diffusivity value.
   versions:
     - versions.yml:
         type: file
