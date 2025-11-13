@@ -1,4 +1,439 @@
 {
+    "tractoflow - qball tracking": {
+        "content": [
+            {
+                "afd_max": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__afd_max.nii.gz"
+                    ]
+                ],
+                "afd_sum": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__afd_sum.nii.gz"
+                    ]
+                ],
+                "afd_total": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__afd_total.nii.gz"
+                    ]
+                ],
+                "anatomical_to_diffusion": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz",
+                        "test_forward1_affine.mat"
+                    ]
+                ],
+                "b0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_b0.nii.gz"
+                    ]
+                ],
+                "b0_mask": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_dwi_mask_resampled.nii.gz"
+                    ]
+                ],
+                "csf_fodf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__csf_fodf.nii.gz"
+                    ]
+                ],
+                "csf_map": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__map_csf.nii.gz"
+                    ]
+                ],
+                "csf_mask": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__mask_csf.nii.gz"
+                    ]
+                ],
+                "diffusion_to_anatomical": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat",
+                        "test_backward1_warp.nii.gz"
+                    ]
+                ],
+                "dti_ad": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__ad.nii.gz"
+                    ]
+                ],
+                "dti_evals": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__evals.nii.gz"
+                    ]
+                ],
+                "dti_evecs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__evecs.nii.gz"
+                    ]
+                ],
+                "dti_fa": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__fa.nii.gz"
+                    ]
+                ],
+                "dti_ga": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__ga.nii.gz"
+                    ]
+                ],
+                "dti_md": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__md.nii.gz"
+                    ]
+                ],
+                "dti_mode": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__mode.nii.gz"
+                    ]
+                ],
+                "dti_norm": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__norm.nii.gz"
+                    ]
+                ],
+                "dti_peaks": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__evecs_v1.nii.gz"
+                    ]
+                ],
+                "dti_rd": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__rd.nii.gz"
+                    ]
+                ],
+                "dti_residual": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__residual.nii.gz"
+                    ]
+                ],
+                "dti_residual_stats": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__residual_residuals_stats.png"
+                    ]
+                ],
+                "dti_rgb": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__rgb.nii.gz"
+                    ]
+                ],
+                "dti_tensor": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__tensor.nii.gz"
+                    ]
+                ],
+                "dwi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_dwi_resampled.nii.gz",
+                        "test__dwi_eddy_corrected.bval",
+                        "test__dwi_eddy_corrected.bvec"
+                    ]
+                ],
+                "fiber_response": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__frf.txt"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__wm_frf.txt",
+                        "test__gm_frf.txt",
+                        "test__csf_frf.txt"
+                    ]
+                ],
+                "fodf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__fodf.nii.gz"
+                    ]
+                ],
+                "fodf_peaks": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__peaks.nii.gz"
+                    ]
+                ],
+                "fodf_rgb": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__vf_rgb.nii.gz"
+                    ]
+                ],
+                "gm_fodf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__gm_fodf.nii.gz"
+                    ]
+                ],
+                "gm_map": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__map_gm.nii.gz"
+                    ]
+                ],
+                "gm_mask": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__mask_gm.nii.gz"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dti_mqc.png"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__dwi_eddy_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__residual_residuals_stats.png"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__rev_dwi_eddy_mqc.gif"
+                    ]
+                ],
+                "nonphysical_voxels": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__nonphysical.nii.gz"
+                    ]
+                ],
+                "nufo": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__nufo.nii.gz"
+                    ]
+                ],
+                "pulsation_in_b0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__pulsation_std_b0.nii.gz"
+                    ]
+                ],
+                "pulsation_in_dwi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__pulsation_std_dwi.nii.gz"
+                    ]
+                ],
+                "qball_a_power": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__a_power.nii.gz"
+                    ]
+                ],
+                "qball_gfa": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__gfa.nii.gz"
+                    ]
+                ],
+                "qball_nufo": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__nufo.nii.gz"
+                    ]
+                ],
+                "qball_peak_indices": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__peak_indices.nii.gz"
+                    ]
+                ],
+                "qball_peaks": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__peaks.nii.gz"
+                    ]
+                ],
+                "t1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_cropped_warped.nii.gz"
+                    ]
+                ],
+                "t1_native": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_cropped.nii.gz"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0db65009e955d16a3cf997ed4401166d",
+                    "versions.yml:md5,46756f8a550da8585f854b45afd1036d",
+                    "versions.yml:md5,5011203328febedfa9c5af5684bcc20c",
+                    "versions.yml:md5,6f86cbe9b96fbefff47fe66fcb287678",
+                    "versions.yml:md5,7cabc91ec64b5e824e9b8f60d7dcf930",
+                    "versions.yml:md5,91bb720c5b6b219ae9d7e0f671592381",
+                    "versions.yml:md5,c784f14b81e713630c079355ef37c71c",
+                    "versions.yml:md5,ee0cb6ae187add67175c9997ef1a5fd1"
+                ],
+                "volume_fraction": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__vf.nii.gz"
+                    ]
+                ],
+                "wm_fodf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__wm_fodf.nii.gz"
+                    ]
+                ],
+                "wm_map": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__map_wm.nii.gz"
+                    ]
+                ],
+                "wm_mask": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__mask_wm.nii.gz"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-13T10:24:59.447824126"
+    },
     "tractoflow - no rev": {
         "content": [
             {
@@ -491,6 +926,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-10T22:14:47.066726"
+        "timestamp": "2025-11-13T10:34:14.97675753"
     }
 }

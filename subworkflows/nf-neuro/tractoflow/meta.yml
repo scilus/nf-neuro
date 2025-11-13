@@ -47,6 +47,7 @@ components:
   - reconst/dtimetrics
   - reconst/frf
   - reconst/fodf
+  - reconst/qball
   - reconst/meanfrf
   - registration/antsapplytransforms
   - tracking/localtracking
@@ -251,6 +252,14 @@ args:
       type: float
       description: Minimum MD value for ventricle mask creation.
       default: 0.003
+  - run_qball:
+      type: boolean
+      description: Enable Q-Ball modeling.
+      default: false
+  - use_qball_for_tracking:
+      type: boolean
+      description: Use Q-Ball model for tractography instead of fODFs.
+      default: false
   - run_pft:
       type: boolean
       description: Enable Particle Filtering Tractography.
@@ -647,6 +656,36 @@ output:
       description: |
         Tissues volume fraction map.
         Structure: [ val(meta), path(volume_fraction) ]
+  - qball:
+      type: file
+      description: |
+        Qball spherical harmonics coefficients.
+        Structure: [ val(meta), path(qball) ]
+  - qball_a_power:
+      type: file
+      description: |
+        Anisotropic power map.
+        Structure: [ val(meta), path(qball_a_power) ]
+  - qball_peaks:
+      type: file
+      description: |
+        Extracted peaks from Qball model.
+        Structure: [ val(meta), path(qball_peaks) ]
+  - qball_peaks_indices:
+      type: file
+      description: |
+        Generated peaks indices on the sphere from Qball model.
+        Structure: [ val(meta), path(qball_peak_indices) ]
+  - qball_gfa:
+      type: file
+      description: |
+        Generalized fractional anisotropy.
+        Structure: [ val(meta), path(qball_gfa) ]
+  - qball_nufo:
+      type: file
+      description: |
+        NUFO map from Qball model.
+        Structure: [ val(meta), path(qball_nufo) ]
   - pft_tractogram:
       type: file
       description: |
