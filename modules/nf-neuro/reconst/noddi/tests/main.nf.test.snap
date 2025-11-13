@@ -12,10 +12,28 @@
             145
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-23T17:29:54.574203564"
+        "timestamp": "2025-11-13T16:58:45.520925691"
+    },
+    "reconst - noddi - with priors": {
+        "content": [
+            "test__fit_dir.nii.gz",
+            "test__fit_FWF.nii.gz",
+            "test__fit_NDI.nii.gz",
+            "test__fit_ECVF.nii.gz",
+            "test__fit_ODI.nii.gz",
+            [
+                "versions.yml:md5,3c8accc418234ecdbf36f805b000818c"
+            ],
+            145
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-13T17:04:38.216060503"
     },
     "reconst - noddi - save_kernels - no mask": {
         "content": [
@@ -25,10 +43,10 @@
             145
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-23T17:25:48.813572984"
+        "timestamp": "2025-11-13T16:57:47.687670943"
     },
     "reconst - noddi - stub-run": {
         "content": [
@@ -37,9 +55,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-23T17:30:14.878809087"
+        "timestamp": "2025-11-13T16:58:51.218060667"
     }
 }
