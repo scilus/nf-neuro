@@ -7,7 +7,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test_para_diff.txt:md5,8942c91713e155a00bad625911d62f8c"
+                    "test_para_diff.txt:md5,43a5245820986c766ec0ef28e4d6cfa2"
                 ]
             ],
             [
@@ -16,7 +16,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test_iso_diff.txt:md5,25f392784831f9db656192dafebc52f3"
+                    "test_iso_diff.txt:md5,0921682e728b68611bd41c49f45ed8ba"
                 ]
             ],
             [
@@ -25,7 +25,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test_perp_diff.txt:md5,2a3e67c24683a946ff3d3be7edd86135"
+                    "test_perp_diff.txt:md5,5552b173556ce9af33b972775b0635af"
                 ]
             ],
             [
@@ -43,7 +43,61 @@
                         "id": "test",
                         "single_end": false
                     },
+                    "0.000463"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "0.000053"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "0.002362"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
                     "0.003080"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "0.000057"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "0.003005"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "0.003170"
                 ]
             ],
             [
@@ -56,25 +110,52 @@
                 ]
             ],
             [
-                "versions.yml:md5,abbe1846f955bae78acffb8931188bf2"
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "0.000101"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "0.000003"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "0.000674"
+                ]
+            ],
+            [
+                "versions.yml:md5,81f780d3d557fd27e4724ea81fbe6f1a"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-13T13:08:44.468435538"
+        "timestamp": "2025-11-13T16:44:07.093819819"
     },
     "reconst - diffusivitypriors - stub-run": {
         "content": [
             [
-                "versions.yml:md5,abbe1846f955bae78acffb8931188bf2"
+                "versions.yml:md5,81f780d3d557fd27e4724ea81fbe6f1a"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-13T13:08:48.80815081"
+        "timestamp": "2025-11-13T16:44:11.426187538"
     }
 }
