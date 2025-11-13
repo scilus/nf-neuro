@@ -49,12 +49,21 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    process.out.para_diff,
-                    process.out.iso_diff,
-                    process.out.perp_diff,
-                    process.out.para_diff_val,
-                    process.out.iso_diff_val,
-                    process.out.perp_diff_val,
+                    process.out.para_diff_file,
+                    process.out.iso_diff_file,
+                    process.out.perp_diff_file,
+                    process.out.mean_para_diff,
+                    process.out.std_para_diff,
+                    process.out.min_para_diff,
+                    process.out.max_para_diff,
+                    process.out.mean_iso_diff,
+                    process.out.std_iso_diff,
+                    process.out.min_iso_diff,
+                    process.out.max_iso_diff,
+                    process.out.mean_perp_diff,
+                    process.out.std_perp_diff,
+                    process.out.min_perp_diff,
+                    process.out.max_perp_diff,
                     process.out.versions).match() }
             )
         }

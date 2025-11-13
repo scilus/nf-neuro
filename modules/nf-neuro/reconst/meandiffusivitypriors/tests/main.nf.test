@@ -51,13 +51,13 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = RECONST_DIFFUSIVITYPRIORS.out.para_diff
+                input[0] = RECONST_DIFFUSIVITYPRIORS.out.para_diff_file
                     .map{ _meta, path -> path }
                     .collect()
-                input[1] = RECONST_DIFFUSIVITYPRIORS.out.iso_diff
+                input[1] = RECONST_DIFFUSIVITYPRIORS.out.iso_diff_file
                     .map{ _meta, path -> path }
                     .collect()
-                input[2] = RECONST_DIFFUSIVITYPRIORS.out.perp_diff
+                input[2] = RECONST_DIFFUSIVITYPRIORS.out.perp_diff_file
                     .map{ _meta, path -> path }
                     .collect()
                 """
@@ -67,12 +67,21 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    process.out.mean_para_diff,
+                    process.out.mean_para_diff_file,
+                    process.out.mean_iso_diff_file,
+                    process.out.mean_perp_diff_file,
                     process.out.mean_iso_diff,
+                    process.out.std_iso_diff,
+                    process.out.min_iso_diff,
+                    process.out.max_iso_diff,
+                    process.out.mean_para_diff,
+                    process.out.std_para_diff,
+                    process.out.min_para_diff,
+                    process.out.max_para_diff,
                     process.out.mean_perp_diff,
-                    process.out.mean_iso_diff_val,
-                    process.out.mean_para_diff_val,
-                    process.out.mean_perp_diff_val,
+                    process.out.std_perp_diff,
+                    process.out.min_perp_diff,
+                    process.out.max_perp_diff,
                     process.out.versions).match() }
             )
         }
@@ -84,13 +93,13 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = RECONST_DIFFUSIVITYPRIORS.out.para_diff
+                input[0] = RECONST_DIFFUSIVITYPRIORS.out.para_diff_file
                     .map{ _meta, path -> path }
                     .collect()
-                input[1] = RECONST_DIFFUSIVITYPRIORS.out.iso_diff
+                input[1] = RECONST_DIFFUSIVITYPRIORS.out.iso_diff_file
                     .map{ _meta, path -> path }
                     .collect()
-                input[2] = RECONST_DIFFUSIVITYPRIORS.out.perp_diff
+                input[2] = RECONST_DIFFUSIVITYPRIORS.out.perp_diff_file
                     .map{ _meta, path -> path }
                     .collect()
                 """
