@@ -48,8 +48,6 @@ nextflow_workflow {
                 pft_number_of_particles = 4
                 lt_seeding_strategy = "nt"
                 lt_number_of_seeds = 4000
-                run_qball = true
-                use_qball_for_tracking = true
             }
             workflow {
                 """

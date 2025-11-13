@@ -229,6 +229,12 @@ workflow TRACTOFLOW {
         //
         // MODULE: Run RECONST/QBALL
         //
+        ch_qball               = Channel.empty()
+        ch_qball_a_power       = Channel.empty()
+        ch_qball_peaks         = Channel.empty()
+        ch_qball_peak_indices  = Channel.empty()
+        ch_qball_gfa           = Channel.empty()
+        ch_qball_nufo          = Channel.empty()
         if (params.run_qball) {
             ch_qball_input = PREPROC_DWI.out.dwi
                 .join(PREPROC_DWI.out.bval)
@@ -241,6 +247,14 @@ workflow TRACTOFLOW {
             if (params.use_qball_for_tracking) {
                 ch_diffusion_model = RECONST_QBALL.out.qball
             }
+
+            // Set output channels
+            ch_qball                   = RECONST_QBALL.out.qball
+            ch_qball_a_power           = RECONST_QBALL.out.a_power
+            ch_qball_peaks             = RECONST_QBALL.out.peaks
+            ch_qball_peak_indices      = RECONST_QBALL.out.peak_indices
+            ch_qball_gfa               = RECONST_QBALL.out.gfa
+            ch_qball_nufo              = RECONST_QBALL.out.nufo
         }
 
         //
@@ -341,12 +355,12 @@ workflow TRACTOFLOW {
         volume_fraction         = RECONST_FODF.out.vf
 
         // Q-BALL
-        qball                   = RECONST_QBALL.out.qball
-        qball_a_power           = RECONST_QBALL.out.a_power
-        qball_peaks             = RECONST_QBALL.out.peaks
-        qball_peak_indices      = RECONST_QBALL.out.peak_indices
-        qball_gfa               = RECONST_QBALL.out.gfa
-        qball_nufo              = RECONST_QBALL.out.nufo
+        qball                   = ch_qball
+        qball_a_power           = ch_qball_a_power
+        qball_peaks             = ch_qball_peaks
+        qball_peak_indices      = ch_qball_peak_indices
+        qball_gfa               = ch_qball_gfa
+        qball_nufo              = ch_qball_nufo
 
         // TRACKING
         pft_tractogram          = ch_pft_tracking.map{ [it[0], it[1]] }

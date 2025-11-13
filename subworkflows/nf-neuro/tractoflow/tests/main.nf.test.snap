@@ -432,7 +432,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-12T14:26:51.49212564"
+        "timestamp": "2025-11-13T10:24:59.447824126"
     },
     "tractoflow - no rev": {
         "content": [
@@ -681,6 +681,20 @@
                         "test__vf_rgb.nii.gz"
                     ]
                 ],
+                "global_mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__local_tracking_stats.json"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__pft_tracking_stats.json"
+                    ]
+                ],
                 "gm_fodf": [
                     [
                         {
@@ -705,6 +719,38 @@
                         "test__mask_gm.nii.gz"
                     ]
                 ],
+                "local_config": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__local_tracking_config.json"
+                    ]
+                ],
+                "local_seeding_mask": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__local_seeding_mask.nii.gz"
+                    ]
+                ],
+                "local_tracking_mask": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__local_tracking_mask.nii.gz"
+                    ]
+                ],
+                "local_tractogram": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__local_tracking.trk"
+                    ]
+                ],
                 "mqc": [
                     [
                         {
@@ -717,6 +763,18 @@
                             "id": "test"
                         },
                         "test__dwi_eddy_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__local_tracking_mqc.png"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__pft_tracking_mqc.png"
                     ],
                     [
                         {
@@ -747,6 +805,46 @@
                         "test__nufo.nii.gz"
                     ]
                 ],
+                "pft_config": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__pft_tracking_config.json"
+                    ]
+                ],
+                "pft_map_exclude": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__map_exclude.nii.gz"
+                    ]
+                ],
+                "pft_map_include": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__map_include.nii.gz"
+                    ]
+                ],
+                "pft_seeding_mask": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__pft_seeding_mask.nii.gz"
+                    ]
+                ],
+                "pft_tractogram": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__pft_tracking.trk"
+                    ]
+                ],
                 "pulsation_in_b0": [
                     [
                         {
@@ -761,46 +859,6 @@
                             "id": "test"
                         },
                         "test__pulsation_std_dwi.nii.gz"
-                    ]
-                ],
-                "qball_a_power": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__a_power.nii.gz"
-                    ]
-                ],
-                "qball_gfa": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__gfa.nii.gz"
-                    ]
-                ],
-                "qball_nufo": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__nufo.nii.gz"
-                    ]
-                ],
-                "qball_peak_indices": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__peak_indices.nii.gz"
-                    ]
-                ],
-                "qball_peaks": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test__peaks.nii.gz"
                     ]
                 ],
                 "t1": [
@@ -821,12 +879,13 @@
                 ],
                 "versions": [
                     "versions.yml:md5,0db65009e955d16a3cf997ed4401166d",
+                    "versions.yml:md5,21aeeda82df6de4b5bdd1c6bb9930eb0",
                     "versions.yml:md5,46756f8a550da8585f854b45afd1036d",
                     "versions.yml:md5,5011203328febedfa9c5af5684bcc20c",
                     "versions.yml:md5,6f86cbe9b96fbefff47fe66fcb287678",
                     "versions.yml:md5,7cabc91ec64b5e824e9b8f60d7dcf930",
                     "versions.yml:md5,91bb720c5b6b219ae9d7e0f671592381",
-                    "versions.yml:md5,c784f14b81e713630c079355ef37c71c",
+                    "versions.yml:md5,955e704dfd97848e196333d0cecf0451",
                     "versions.yml:md5,ee0cb6ae187add67175c9997ef1a5fd1"
                 ],
                 "volume_fraction": [
@@ -867,6 +926,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-12T14:25:40.992509173"
+        "timestamp": "2025-11-13T10:34:14.97675753"
     }
 }
