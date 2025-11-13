@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: reconst_diffusivitypriors
+name: reconst_meandiffusivitypriors
 description: |
   Compute the mean of the diffusivity priors (iso_diff, para_diff
   & perp_diff). This is most often used following the computation of
@@ -12,8 +12,8 @@ keywords:
   - radial
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI
+        processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
 input:
@@ -61,7 +61,8 @@ output:
   mean_perp_diff_val:
     - mean_perp_diff:
         type: string
-        description: String containing the average perpendicular diffusivity value.
+        description: String containing the average perpendicular diffusivity
+          value.
   mean_iso_diff_val:
     - mean_iso_diff:
         type: string

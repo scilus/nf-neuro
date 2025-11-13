@@ -12,8 +12,8 @@ keywords:
   - radial
 tools:
   - scilpy:
-      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
-        toolbox.
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI
+        processing toolbox.
       homepage: https://github.com/scilus/scilpy.git
       identifier: ""
 args:
@@ -83,17 +83,6 @@ output:
           description: Text file for parallel diffusivity value.
           pattern: "*_para_diff.txt"
           ontologies: []
-  perp_diff:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'test', single_end:false ]`
-      - "*_perp_diff.txt":
-          type: file
-          description: Text file for perpendicular diffusivity value.
-          pattern: "*_perp_diff.txt"
-          ontologies: []
   iso_diff:
     - - meta:
           type: map
@@ -105,6 +94,44 @@ output:
           description: Text file for isotropic diffusivity value.
           pattern: "*_iso_diff.txt"
           ontologies: []
+  perp_diff:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_perp_diff.txt":
+          type: file
+          description: Text file for perpendicular diffusivity value.
+          pattern: "*_perp_diff.txt"
+          ontologies: []
+  para_diff_val:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - para_diff:
+          type: string
+          description: The parallel diffusivity value.
+  iso_diff_val:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - iso_diff:
+          type: string
+          description: The isotropic diffusivity value.
+  perp_diff_val:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - perp_diff:
+          type: string
+          description: The perpendicular diffusivity value.
   versions:
     - versions.yml:
         type: file
