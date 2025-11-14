@@ -51,6 +51,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
         ch_t1w_tpl = UTILS_TEMPLATEFLOW.out.T1w
         ch_t2w_tpl = UTILS_TEMPLATEFLOW.out.T2w
         ch_brain_mask = UTILS_TEMPLATEFLOW.out.brain_mask
+        ch_t2w_tpl.view()
     } else {
         // ** If the template exists, we will not download it again. ** //
         log.info("Template ${params.template} found in " +
@@ -87,56 +88,61 @@ workflow OUTPUT_TEMPLATE_SPACE {
         }
     }
 
-    ch_brain_mask = ch_brain_mask
-        .branch {
-            TRUE: it[0] != []
-            FALSE: false
-        }
-
-    // ** If the template has a brain mask, we will use it ** //
-    if ( ! ch_brain_mask.FALSE ) {
-        ch_bet_tpl_t1w = ch_t1w_tpl
-            .combine(ch_brain_mask)
-            .map{ t1w, mask -> [ [id: "template"], t1w, mask ] }
-
-        MASK_T1W ( ch_bet_tpl_t1w )
-        ch_versions = ch_versions.mix(MASK_T1W.out.versions)
-
-        // ** Strip the template from the meta field so we can combine it ** //
-        ch_t1w_tpl = MASK_T1W.out.image
-            .map{ _meta, image -> image }
-
-        ch_bet_tpl_t2w = ch_t2w_tpl
-            .combine(ch_brain_mask)
-            .map{ t2w, mask -> [ [id: "template"], t2w, mask ] }
-
-        MASK_T2W ( ch_bet_tpl_t2w )
-        ch_versions = ch_versions.mix(MASK_T2W.out.versions)
-
-        // ** Strip the template from the meta field so we can combine it ** //
-        ch_t2w_tpl = MASK_T2W.out.image
-            .map{ _meta, image -> image }
-    } else {
-        // ** The template may not have a brain mask, so we will ** //
-        // ** run BET by default (bit painful, but necessary)    ** //
-        ch_bet_tpl_t1w = ch_t1w_tpl
-            .map{ t1w -> [ [id: "template"], t1w, [], [] ] }
-
-        BET_T1W ( ch_bet_tpl_t1w )
-        ch_versions = ch_versions.mix(BET_T1W.out.versions)
-        // ** Strip the template from the meta field so we can combine it ** //
-        ch_t1w_tpl = BET_T1W.out.image
-            .map{ _meta, image -> image }
-
-        ch_bet_tpl_t2w = ch_t2w_tpl
-            .map{ t2w -> [ [id: "template"], t2w, [], [] ] }
-
-        BET_T2W ( ch_bet_tpl_t2w )
-        ch_versions = ch_versions.mix(BET_T2W.out.versions)
-        // ** Strip the template from the meta field so we can combine it ** //
-        ch_t2w_tpl = BET_T2W.out.image
-            .map{ _meta, image -> image }
+    ch_brain_mask = ch_brain_mask.ifEmpty(null)
+    ch_brain_mask = ch_brain_mask.branch {
+        with_mask : it != null
+        no_mask   : true
     }
+
+    ////////////////////////////////////////////////////////////
+    // ** If the template has a brain mask, we will use it ** //
+    ch_bet_tpl_t1w = ch_t1w_tpl
+        .combine(ch_brain_mask.with_mask)
+        .map{ t1w, mask -> [ [id: "template"], t1w, mask ] }
+
+    MASK_T1W ( ch_bet_tpl_t1w )
+    ch_versions = ch_versions.mix(MASK_T1W.out.versions)
+
+    // ** Strip the template from the meta field so we can combine it ** //
+    ch_t1w_tpl_out = MASK_T1W.out.image
+        .map{ _meta, image -> image }
+
+    ch_bet_tpl_t2w = ch_t2w_tpl
+        .combine(ch_brain_mask.with_mask)
+        .map{ t2w, mask -> [ [id: "template"], t2w, mask ] }
+
+    MASK_T2W ( ch_bet_tpl_t2w )
+    ch_versions = ch_versions.mix(MASK_T2W.out.versions)
+
+    // ** Strip the template from the meta field so we can combine it ** //
+    ch_t2w_tpl_out = MASK_T2W.out.image
+        .map{ _meta, image -> image }
+
+    // ** If the template does not have a brain mask ** //
+    // ** The template may not have a brain mask, so we will ** //
+    // ** run BET by default (bit painful, but necessary)    ** //
+    ch_bet_tpl_t1w = ch_t1w_tpl
+        .combine(ch_brain_mask.no_mask)
+    ch_bet_tpl_t1w = ch_bet_tpl_t1w
+        .map{ t1w, _no_mask -> [ [id: "template"], t1w, [], [] ] }
+
+    BET_T1W ( ch_bet_tpl_t1w )
+    ch_versions = ch_versions.mix(BET_T1W.out.versions)
+    // ** Strip the template from the meta field so we can combine it ** //
+    ch_t1w_tpl_out = ch_t1w_tpl_out.mix(BET_T1W.out.image
+        .map{ _meta, image -> image })
+
+    ch_t2w_tpl.view()
+    ch_bet_tpl_t2w = ch_t2w_tpl
+        .combine(ch_brain_mask.no_mask)
+        .map{ t2w, _no_mask -> [ [id: "template"], t2w, [], [] ] }
+
+    ch_bet_tpl_t2w.view()
+    BET_T2W ( ch_bet_tpl_t2w )
+    ch_versions = ch_versions.mix(BET_T2W.out.versions)
+    // ** Strip the template from the meta field so we can combine it ** //
+    ch_t2w_tpl_out = ch_t2w_tpl_out.mix(BET_T2W.out.image
+        .map{ _meta, image -> image })
 
     ch_template = ch_anat
         .map{ meta, _anat -> meta }
@@ -144,11 +150,12 @@ workflow OUTPUT_TEMPLATE_SPACE {
 
     ch_brain_mask = ch_anat
         .map{ meta, _anat -> meta }
-        .combine(ch_brain_mask.TRUE)
+        .combine(ch_brain_mask.with_mask)
+
     // ** Register the subject to the template space ** //
     REGISTRATION(
-        ch_anat,
         ch_template,
+        ch_anat,
         Channel.empty(),
         ch_brain_mask,
         Channel.empty(),
@@ -191,7 +198,8 @@ workflow OUTPUT_TEMPLATE_SPACE {
     ch_tractograms_to_transform = ch_trk_files
         .join(REGISTRATION.out.image_warped)
         .join(REGISTRATION.out.backward_affine)
-        .join(REGISTRATION.out.backward_warp)
+        .join(REGISTRATION.out.backward_warp, remainder: true)
+        .filter{ it.size() > 4 }
         .map{ meta, trk, image, affine, warp ->
             [meta, image, affine, trk, [], warp ?: []]
         }
