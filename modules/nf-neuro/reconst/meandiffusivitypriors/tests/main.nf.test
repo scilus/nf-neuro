@@ -1,13 +1,14 @@
 nextflow_process {
 
-    name "Test Process RECONST_DIFFUSIVITYPRIORS"
+    name "Test Process RECONST_MEANDIFFUSIVITYPRIORS"
     script "../main.nf"
-    process "RECONST_DIFFUSIVITYPRIORS"
+    process "RECONST_MEANDIFFUSIVITYPRIORS"
 
     tag "modules"
     tag "modules_nfneuro"
     tag "reconst"
     tag "reconst/diffusivitypriors"
+    tag "reconst/meandiffusivitypriors"
 
     tag "subworkflows"
     tag "subworkflows/load_test_data"
@@ -22,10 +23,9 @@ nextflow_process {
                 """
             }
         }
-    }
 
-    test("reconst - diffusivitypriors") {
-        when {
+        run("RECONST_DIFFUSIVITYPRIORS", alias: "RECONST_DIFFUSIVITYPRIORS") {
+            script "../../diffusivitypriors/main.nf"
             process {
                 """
                 ch_split_test_data = LOAD_DATA.out.test_data_directory
@@ -45,21 +45,39 @@ nextflow_process {
                 """
             }
         }
+    }
+
+    test("reconst - meandiffusivitypriors") {
+        when {
+            process {
+                """
+                input[0] = RECONST_DIFFUSIVITYPRIORS.out.para_diff_file
+                    .map{ _meta, path -> path }
+                    .collect()
+                input[1] = RECONST_DIFFUSIVITYPRIORS.out.iso_diff_file
+                    .map{ _meta, path -> path }
+                    .collect()
+                input[2] = RECONST_DIFFUSIVITYPRIORS.out.perp_diff_file
+                    .map{ _meta, path -> path }
+                    .collect()
+                """
+            }
+        }
         then {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    process.out.para_diff_file,
-                    process.out.iso_diff_file,
-                    process.out.perp_diff_file,
-                    process.out.mean_para_diff,
-                    process.out.std_para_diff,
-                    process.out.min_para_diff,
-                    process.out.max_para_diff,
+                    process.out.mean_para_diff_file,
+                    process.out.mean_iso_diff_file,
+                    process.out.mean_perp_diff_file,
                     process.out.mean_iso_diff,
                     process.out.std_iso_diff,
                     process.out.min_iso_diff,
                     process.out.max_iso_diff,
+                    process.out.mean_para_diff,
+                    process.out.std_para_diff,
+                    process.out.min_para_diff,
+                    process.out.max_para_diff,
                     process.out.mean_perp_diff,
                     process.out.std_perp_diff,
                     process.out.min_perp_diff,
@@ -75,20 +93,15 @@ nextflow_process {
         when {
             process {
                 """
-                ch_split_test_data = LOAD_DATA.out.test_data_directory
-                    .branch{
-                        processing: it.simpleName == "processing"
-                        light: it.simpleName == "light"
-                    }
-
-                input[0] = ch_split_test_data.processing
-                    .map{ test_data_directory -> [
-                        [ id:'test', single_end:false ], // meta map
-                        file("\${test_data_directory}/fa.nii.gz"),
-                        file("\${test_data_directory}/ad.nii.gz"),
-                        file("\${test_data_directory}/rd.nii.gz"),
-                        file("\${test_data_directory}/md.nii.gz")
-                    ]}
+                input[0] = RECONST_DIFFUSIVITYPRIORS.out.para_diff_file
+                    .map{ _meta, path -> path }
+                    .collect()
+                input[1] = RECONST_DIFFUSIVITYPRIORS.out.iso_diff_file
+                    .map{ _meta, path -> path }
+                    .collect()
+                input[2] = RECONST_DIFFUSIVITYPRIORS.out.perp_diff_file
+                    .map{ _meta, path -> path }
+                    .collect()
                 """
             }
         }

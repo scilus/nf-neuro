@@ -1,0 +1,71 @@
+{
+    "reconst - meandiffusivitypriors": {
+        "content": [
+            [
+                "mean_para_diff.txt:md5,94851d558c5866af3a92255c4549a25a"
+            ],
+            [
+                "mean_iso_diff.txt:md5,855f3b6188391b92dab26d3f85fc327e"
+            ],
+            [
+                "mean_perp_diff.txt:md5,38c8172557a85ec6733f7a8ee45d43e3"
+            ],
+            [
+                "0.00308"
+            ],
+            [
+                "5.7e-05"
+            ],
+            [
+                "0.003005"
+            ],
+            [
+                "0.00317"
+            ],
+            [
+                "0.001387"
+            ],
+            [
+                "0.000463"
+            ],
+            [
+                "5.3e-05"
+            ],
+            [
+                "0.002362"
+            ],
+            [
+                "0.000274"
+            ],
+            [
+                "0.000101"
+            ],
+            [
+                "3e-06"
+            ],
+            [
+                "0.000674"
+            ],
+            [
+                "versions.yml:md5,173a289151d0c143f9f85c42bd9e0fdf"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-14T15:19:21.667053044"
+    },
+    "reconst - diffusivitypriors - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,173a289151d0c143f9f85c42bd9e0fdf"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-14T15:19:26.429304418"
+    }
+}

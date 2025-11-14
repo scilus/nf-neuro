@@ -38,6 +38,10 @@ nextflow_process {
                         file("\${test_data_directory}/dwi.bvec", checkIfExists: true),
                         file("\${test_data_directory}/mask.nii.gz", checkIfExists: true),
                         []
+                        // para_diff (non specified -> null)
+                        // iso_diff (non specified -> null)
+                        // perp_diff_min (non specified -> null)
+                        // perp_diff_max (non specified -> null)
                     ]}
                 """
             }
@@ -57,7 +61,45 @@ nextflow_process {
                 ).match() }
             )
         }
+    }
 
+    test("reconst - freewater - with priors") {
+
+        when {
+            config "./nextflow_priors.config"
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz", checkIfExists: true),
+                        file("\${test_data_directory}/dwi.bval", checkIfExists: true),
+                        file("\${test_data_directory}/dwi.bvec", checkIfExists: true),
+                        file("\${test_data_directory}/mask.nii.gz", checkIfExists: true),
+                        [],
+                        0.0017e-3,  // para_diff
+                        0.003,      // iso_diff
+                        0.001,      // perp_diff_min
+                        0.007       // perp_diff_max
+                    ]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    file(process.out.kernels.get(0)).listFiles().size(),
+                    file(process.out.dwi_fw_corrected.get(0).get(1)).name,
+                    niftiMD5SUM(process.out.dir.get(0).get(1), 1),
+                    niftiMD5SUM(process.out.fibervolume.get(0).get(1), 3),
+                    niftiMD5SUM(process.out.fw.get(0).get(1), 3),
+                    niftiMD5SUM(process.out.nrmse.get(0).get(1), 3)
+                ).match() }
+            )
+        }
     }
 
     test("reconst - freewater_no_mask_compute_only") {
@@ -73,7 +115,11 @@ nextflow_process {
                         file("\${test_data_directory}/dwi.bval", checkIfExists: true),
                         file("\${test_data_directory}/dwi.bvec", checkIfExists: true),
                         [],
-                        []
+                        [],
+                        [], // para_diff (as empty list)
+                        [], // iso_diff (as empty list)
+                        [], // perp_diff_min (as empty list)
+                        [], // perp_diff_max (as empty list)
                     ]}
                 """
             }

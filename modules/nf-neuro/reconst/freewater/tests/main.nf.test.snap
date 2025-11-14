@@ -41,5 +41,23 @@
             "nextflow": "25.04.7"
         },
         "timestamp": "2025-09-24T01:00:13.785472199"
+    },
+    "reconst - freewater - with priors": {
+        "content": [
+            [
+                "versions.yml:md5,b7348842aae4271b2d6831f596bae6f3"
+            ],
+            11,
+            "test__dwi_fw_corrected.nii.gz",
+            "test__dir.nii.gz:md5:header,cdd1570ac5fe51b109eea3de58e196ae,data,13fca38aa5e4f153cb0a106814180d0b",
+            "test__FiberVolume.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,9aaac504776670be80de379990415fac",
+            "test__FW.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,f9e560e89999812ba4205a85019bd612",
+            "test__NRMSE.nii.gz:md5:header,1a990130273ad871a33b3bee1beac9be,data,b7cca4f00472537b44abcbdb831ca6cb"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-13T17:21:27.211485782"
     }
 }

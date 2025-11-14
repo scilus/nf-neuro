@@ -37,6 +37,8 @@ nextflow_process {
                         file("\${test_data_directory}/dwi.bvec"),
                         [],
                         []
+                        // para_diff (non specified -> null)
+                        // iso_diff (non specified -> null)
                 ]}
             """
             }
@@ -50,7 +52,6 @@ nextflow_process {
                 ).match() }
             )
         }
-
     }
 
     test("reconst - noddi - extract_metrics") {
@@ -65,7 +66,44 @@ nextflow_process {
                         file("\${test_data_directory}/dwi.bval"),
                         file("\${test_data_directory}/dwi.bvec"),
                         file("\${test_data_directory}/mask.nii.gz"),
-                        []
+                        [],
+                        [], // para_diff (as empty list)
+                        []  // iso_diff (as empty list)
+                ]}
+            """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    file(process.out.dir.get(0).get(1)).name,
+                    file(process.out.fwf.get(0).get(1)).name,
+                    file(process.out.ndi.get(0).get(1)).name,
+                    file(process.out.ecvf.get(0).get(1)).name,
+                    file(process.out.odi.get(0).get(1)).name,
+                    process.out.versions,
+                    file(process.out.kernels.get(0)).listFiles().size()
+                ).match() }
+            )
+        }
+    }
+
+    test("reconst - noddi - with priors") {
+        when {
+            config "./nextflow_extract_metrics.config"
+            process {
+            """
+                input[0] = LOAD_DATA.out.test_data_directory
+                        .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi.bval"),
+                        file("\${test_data_directory}/dwi.bvec"),
+                        file("\${test_data_directory}/mask.nii.gz"),
+                        [],
+                        0.0017, // para_diff
+                        0.003   // iso_diff
                 ]}
             """
             }

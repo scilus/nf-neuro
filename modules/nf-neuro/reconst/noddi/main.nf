@@ -5,7 +5,7 @@ process RECONST_NODDI {
     container "scilus/scilpy:2.2.0_cpu"
 
     input:
-        tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(kernels)
+        tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(kernels), val(para_diff), val(iso_diff)
 
     output:
         tuple val(meta), path("*__fit_dir.nii.gz")      , emit: dir, optional: true
@@ -22,8 +22,8 @@ process RECONST_NODDI {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def para_diff = task.ext.para_diff ? "--para_diff " + task.ext.para_diff : ""
-    def iso_diff = task.ext.iso_diff ? "--iso_diff " + task.ext.iso_diff : ""
+    def para_diff_str = task.ext.para_diff ? "--para_diff " + task.ext.para_diff : para_diff ? "--para_diff " + para_diff : ""
+    def iso_diff_str = task.ext.iso_diff ? "--iso_diff " + task.ext.iso_diff : iso_diff ? "--iso_diff " + iso_diff : ""
     def lambda1 = task.ext.lambda1 ? "--lambda1 " + task.ext.lambda1 : ""
     def lambda2 = task.ext.lambda2 ? "--lambda2 " + task.ext.lambda2 : ""
     def nb_threads = task.ext.nb_threads ? "--processes " + task.ext.nb_threads : ""
@@ -38,7 +38,7 @@ process RECONST_NODDI {
     # AMICO attempts to write in the home directory, raising an error.
     export HOME=/tmp
 
-    scil_NODDI_maps $dwi $bval $bvec $para_diff $iso_diff $lambda1 \
+    scil_NODDI_maps $dwi $bval $bvec $para_diff_str $iso_diff_str $lambda1 \
         $lambda2 $nb_threads $b_thr $set_mask $set_kernels --skip_b0_check $compute_only
 
     if [ -z "${compute_only}" ];

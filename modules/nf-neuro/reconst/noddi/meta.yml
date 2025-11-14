@@ -52,6 +52,15 @@ input:
         type: directory
         description: Folder containg kernels.
         pattern: kernels
+    - para_diff:
+        type: float
+        description: Parallel diffusivity value (diff prior).
+        optional: true
+    - iso_diff:
+        type: float
+        description: Isotropic diffusivity value (diff prior).
+        optional: true
+
 output:
   dir:
     - - meta:

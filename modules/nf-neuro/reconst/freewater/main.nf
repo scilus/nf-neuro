@@ -6,7 +6,7 @@ process RECONST_FREEWATER {
     container "scilus/scilpy:2.2.0_cpu"
 
     input:
-        tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(kernels)
+        tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(kernels), val(para_diff), val(iso_diff), val(perp_diff_min), val(perp_diff_max)
 
     output:
         tuple val(meta), path("*__dwi_fw_corrected.nii.gz")  , emit: dwi_fw_corrected, optional: true
@@ -23,10 +23,10 @@ process RECONST_FREEWATER {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def para_diff = task.ext.para_diff ? "--para_diff " + task.ext.para_diff : ""
-    def perp_diff_min = task.ext.perp_diff_min ? "--perp_diff_min " + task.ext.perp_diff_min : ""
-    def perp_diff_max = task.ext.perp_diff_max ? "--perp_diff_max " + task.ext.perp_diff_max : ""
-    def iso_diff = task.ext.iso_diff ? "--iso_diff " + task.ext.iso_diff : ""
+    def para_diff_str = task.ext.para_diff ? "--para_diff " + task.ext.para_diff : para_diff ? "--para_diff " + para_diff : ""
+    def iso_diff_str = task.ext.iso_diff ? "--iso_diff " + task.ext.iso_diff : iso_diff ? "--iso_diff " + iso_diff : ""
+    def perp_diff_min_str = task.ext.perp_diff_min ? "--perp_diff_min " + task.ext.perp_diff_min : perp_diff_min ? "--perp_diff_min " + perp_diff_min : ""
+    def perp_diff_max_str = task.ext.perp_diff_max ? "--perp_diff_max " + task.ext.perp_diff_max : perp_diff_max ? "--perp_diff_max " + perp_diff_max : ""
     def lambda1 = task.ext.lambda1 ? "--lambda1 " + task.ext.lambda1 : ""
     def lambda2 = task.ext.lambda2 ? "--lambda2 " + task.ext.lambda2 : ""
     def nb_threads = task.ext.nb_threads ? "--processes " + task.ext.nb_threads : ""
@@ -41,8 +41,8 @@ process RECONST_FREEWATER {
     # AMICO attempts to write in the home directory, raising an error.
     export HOME=/tmp
 
-    scil_freewater_maps $dwi $bval $bvec $para_diff $perp_diff_min \
-        $perp_diff_max $iso_diff $lambda1 $lambda2 $nb_threads $b_thr \
+    scil_freewater_maps $dwi $bval $bvec $para_diff_str $perp_diff_min_str \
+        $perp_diff_max_str $iso_diff_str $lambda1 $lambda2 $nb_threads $b_thr \
         $set_mask $set_kernels $compute_only
 
     if [ -z "${compute_only}" ]; then

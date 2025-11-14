@@ -1,0 +1,115 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: reconst_meandiffusivitypriors
+description: |
+  Compute the mean of the diffusivity priors (iso_diff, para_diff
+  & perp_diff). This is most often used following the computation of
+  diffusivity priors using the reconst/diffusivitypriors module.
+
+keywords:
+  - diffusivity
+  - axial
+  - isotropic
+  - radial
+tools:
+  - scilpy:
+      description: The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI
+        processing toolbox.
+      homepage: https://github.com/scilus/scilpy.git
+      identifier: ""
+input:
+  - para_diff_list:
+      type: list
+      description: |
+        List of text files containing parallel diffusivity values.
+      pattern: "*.txt"
+      ontologies: []
+  - iso_diff_list:
+      type: list
+      description: |
+        List of text files containing isotropic diffusivity values.
+      pattern: "*.txt"
+      ontologies: []
+  - perp_diff_list:
+      type: list
+      description: |
+        List of text files containing perpendicular diffusivity values.
+      pattern: "*.txt"
+      ontologies: []
+output:
+  mean_para_diff_file:
+    - mean_para_diff.txt:
+        type: file
+        description: Text file for average parallel diffusivity value.
+        pattern: "mean_para_diff.txt"
+        ontologies: []
+  mean_iso_diff_file:
+    - mean_iso_diff.txt:
+        type: file
+        description: Text file for average isotropic diffusivity value.
+        pattern: "mean_iso_diff.txt"
+        ontologies: []
+  mean_perp_diff_file:
+    - mean_perp_diff.txt:
+        type: file
+        description: Text file for average perpendicular diffusivity value.
+        pattern: "mean_perp_diff.txt"
+        ontologies: []
+  mean_para_diff:
+    - mean_para_diff:
+        type: string
+        description: String containing the average parallel diffusivity value.
+  std_para_diff:
+    - std_para_diff:
+        type: string
+        description: String containing the std of the parallel diffusivity values.
+  min_para_diff:
+    - min_para_diff:
+        type: string
+        description: String containing the minimum parallel diffusivity value.
+  max_para_diff:
+    - max_para_diff:
+        type: string
+        description: String containing the maximum parallel diffusivity value.
+  mean_iso_diff:
+    - mean_iso_diff:
+        type: string
+        description: String containing the average isotropic diffusivity value.
+  std_iso_diff:
+    - std_iso_diff:
+        type: string
+        description: String containing the std of the isotropic diffusivity values.
+  min_iso_diff:
+    - min_iso_diff:
+        type: string
+        description: String containing the minimum isotropic diffusivity value.
+  max_iso_diff:
+    - max_iso_diff:
+        type: string
+        description: String containing the maximum isotropic diffusivity value.
+  mean_perp_diff:
+    - mean_perp_diff:
+        type: string
+        description: String containing the average perpendicular diffusivity
+          value.
+  std_perp_diff:
+    - std_perp_diff:
+        type: string
+        description: String containing the std of the perpendicular diffusivity
+          values.
+  min_perp_diff:
+    - min_perp_diff:
+        type: string
+        description: String containing the minimum perpendicular diffusivity value.
+  max_perp_diff:
+    - max_perp_diff:
+        type: string
+        description: String containing the maximum perpendicular diffusivity value.
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@levje"
