@@ -144,7 +144,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-13T16:44:07.093819819"
+        "timestamp": "2025-11-14T15:18:34.825370539"
     },
     "reconst - diffusivitypriors - stub-run": {
         "content": [
@@ -156,6 +156,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-13T16:44:11.426187538"
+        "timestamp": "2025-11-14T15:18:39.245577816"
     }
 }
