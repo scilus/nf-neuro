@@ -11,8 +11,8 @@ description: |
     - params.templateflow_home: the path to the templateflow home directory.
       will be used to store the templateflow templates or to fetch them if
       they were already downloaded.
-    - params.template_res: the resolution of the template (e.g., 1)
-    - params.template_cohort: the cohort of the template (e.g., 1)
+    - params.templateflow_res: the resolution of the template (e.g., 1)
+    - params.templateflow_cohort: the cohort of the template (e.g., 1)
 
   An example of how to set the module's ext.args can be find in the
   `test/nextflow.config` file. Additional configuration for local templates
@@ -42,10 +42,10 @@ args:
   - templateflow_home:
       type: string
       description: Path to the templateflow local home directory where files are located and/or downloaded.
-  - template_res:
+  - templateflow_res:
       type: int
       description: Template resolution to use or download.
-  - template_cohort:
+  - templateflow_cohort:
       type: string
       description: Name/type of the cohort to use.
   - run_easyreg:
