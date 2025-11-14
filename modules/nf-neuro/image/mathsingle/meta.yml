@@ -1,0 +1,89 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+name: "image_mathsingle"
+description: Simple mathematical operations on a single image (with or without a single value).
+keywords:
+  - image
+  - math
+  - scilpy
+  - operations
+  - threshold
+  - clip
+  - absolute
+  - round
+  - ceil
+  - floor
+  - normalize
+  - log
+  - convert
+  - invert
+  - dilation
+  - erosion
+  - closing
+  - opening
+  - blur
+
+tools:
+  - "scilpy":
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing toolbox."
+      homepage: "https://github.com/scilus/scilpy.git" # This can also be a link to a documentation website.
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti image file to do the mathematical operation on
+      pattern: "*.{nii,nii.gz}"
+
+args:
+  - prefix:
+      type: string
+      description: Prefix for the output image file
+      default: "${meta.id}"
+
+  - suffix:
+      type: string
+      description: Suffix for the output image file
+      default: "output"
+
+  - value:
+      type: string
+      description: Value to use for the mathematical operation (e.g., threshold, clip, etc.)
+      default: ""
+
+  - data_type:
+      type: string
+      description: Data type for the output image (e.g., float32, int16, etc.)
+      default: "float32"
+
+  - exclude_background:
+      type: boolean
+      description: Whether to exclude the background from the operation
+      default: false
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test', single_end:false ]`
+
+  - image:
+      type: file
+      description: Nifti image file with the result of the mathematical operation
+      pattern: "*.{nii,nii.gz}"
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@scilus"
+maintainers:
+  - "@scilus"
