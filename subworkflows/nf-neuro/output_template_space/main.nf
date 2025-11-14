@@ -191,7 +191,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
     ch_tractograms_to_transform = ch_trk_files
         .join(REGISTRATION.out.image_warped)
         .join(REGISTRATION.out.backward_affine)
-        .join(REGISTRATION.out.backward_warp, remainder: true)
+        .join(REGISTRATION.out.backward_warp)
         .map{ meta, trk, image, affine, warp ->
             [meta, image, affine, trk, [], warp ?: []]
         }
