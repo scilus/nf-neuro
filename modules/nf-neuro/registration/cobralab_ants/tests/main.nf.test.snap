@@ -1,0 +1,569 @@
+{
+    "registration - cobralab_ants - stub": {
+        "content": [
+            [
+                "versions.yml:md5,fade610633cb2889d7608994412cb9d1"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2026-06-01T20:27:53.507807183"
+    },
+    "registration - cobralab_ants - SyN quick": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz:md5,251df364ff0159975fb478837a14ebf2"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,075f81dc68b1029823df393b7c529f09"
+                    ]
+                ],
+                "10": [
+                    "versions.yml:md5,fade610633cb2889d7608994412cb9d1"
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz:md5,409f8d6e8456f739ba57365edec91404"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward1_warp.nii.gz:md5,1e94d029a2ab34cfed15360649d8e631"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,7e4bcdeba4072df66b4634c686d7321f"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,409f8d6e8456f739ba57365edec91404",
+                            "test_forward1_affine.mat:md5,075f81dc68b1029823df393b7c529f09"
+                        ]
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,7e4bcdeba4072df66b4634c686d7321f",
+                            "test_backward1_warp.nii.gz:md5,1e94d029a2ab34cfed15360649d8e631"
+                        ]
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,7e4bcdeba4072df66b4634c686d7321f",
+                            "test_backward1_warp.nii.gz:md5,1e94d029a2ab34cfed15360649d8e631"
+                        ]
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,409f8d6e8456f739ba57365edec91404",
+                            "test_forward1_affine.mat:md5,075f81dc68b1029823df393b7c529f09"
+                        ]
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,2cf4d372c3c6e3a2d0d609f30417cd0d"
+                    ]
+                ],
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,7e4bcdeba4072df66b4634c686d7321f"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,7e4bcdeba4072df66b4634c686d7321f",
+                            "test_backward1_warp.nii.gz:md5,1e94d029a2ab34cfed15360649d8e631"
+                        ]
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,409f8d6e8456f739ba57365edec91404",
+                            "test_forward1_affine.mat:md5,075f81dc68b1029823df393b7c529f09"
+                        ]
+                    ]
+                ],
+                "backward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward1_warp.nii.gz:md5,1e94d029a2ab34cfed15360649d8e631"
+                    ]
+                ],
+                "forward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,075f81dc68b1029823df393b7c529f09"
+                    ]
+                ],
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,409f8d6e8456f739ba57365edec91404",
+                            "test_forward1_affine.mat:md5,075f81dc68b1029823df393b7c529f09"
+                        ]
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,7e4bcdeba4072df66b4634c686d7321f",
+                            "test_backward1_warp.nii.gz:md5,1e94d029a2ab34cfed15360649d8e631"
+                        ]
+                    ]
+                ],
+                "forward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz:md5,409f8d6e8456f739ba57365edec91404"
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz:md5,251df364ff0159975fb478837a14ebf2"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,2cf4d372c3c6e3a2d0d609f30417cd0d"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,fade610633cb2889d7608994412cb9d1"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2026-06-04T15:11:15.281672876"
+    },
+    "registration - cobralab_ants - SyN": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz:md5,16427678de29639812ba8d45ab06cb55"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,7599899766c24369a972b558d780b11d"
+                    ]
+                ],
+                "10": [
+                    "versions.yml:md5,fade610633cb2889d7608994412cb9d1"
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz:md5,301fc34d0477c991e0c92a0dd7123898"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward1_warp.nii.gz:md5,bc4f4c050b3cf86b6afe90c84639bfd4"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,b109ceb4cf5c8960e8daab2f35ffca2e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,301fc34d0477c991e0c92a0dd7123898",
+                            "test_forward1_affine.mat:md5,7599899766c24369a972b558d780b11d"
+                        ]
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,b109ceb4cf5c8960e8daab2f35ffca2e",
+                            "test_backward1_warp.nii.gz:md5,bc4f4c050b3cf86b6afe90c84639bfd4"
+                        ]
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,b109ceb4cf5c8960e8daab2f35ffca2e",
+                            "test_backward1_warp.nii.gz:md5,bc4f4c050b3cf86b6afe90c84639bfd4"
+                        ]
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,301fc34d0477c991e0c92a0dd7123898",
+                            "test_forward1_affine.mat:md5,7599899766c24369a972b558d780b11d"
+                        ]
+                    ]
+                ],
+                "9": [
+                    
+                ],
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,b109ceb4cf5c8960e8daab2f35ffca2e"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,b109ceb4cf5c8960e8daab2f35ffca2e",
+                            "test_backward1_warp.nii.gz:md5,bc4f4c050b3cf86b6afe90c84639bfd4"
+                        ]
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,301fc34d0477c991e0c92a0dd7123898",
+                            "test_forward1_affine.mat:md5,7599899766c24369a972b558d780b11d"
+                        ]
+                    ]
+                ],
+                "backward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward1_warp.nii.gz:md5,bc4f4c050b3cf86b6afe90c84639bfd4"
+                    ]
+                ],
+                "forward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,7599899766c24369a972b558d780b11d"
+                    ]
+                ],
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,301fc34d0477c991e0c92a0dd7123898",
+                            "test_forward1_affine.mat:md5,7599899766c24369a972b558d780b11d"
+                        ]
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,b109ceb4cf5c8960e8daab2f35ffca2e",
+                            "test_backward1_warp.nii.gz:md5,bc4f4c050b3cf86b6afe90c84639bfd4"
+                        ]
+                    ]
+                ],
+                "forward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz:md5,301fc34d0477c991e0c92a0dd7123898"
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz:md5,16427678de29639812ba8d45ab06cb55"
+                    ]
+                ],
+                "mqc": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,fade610633cb2889d7608994412cb9d1"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2026-06-04T15:10:12.33587054"
+    },
+    "registration - cobralab_ants - no warps": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz:md5,0bb3a94c1006ca121c1850f8e8b0f2ff"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,bcb3f5a67b2b7972a4580caf550de668"
+                    ]
+                ],
+                "10": [
+                    "versions.yml:md5,fade610633cb2889d7608994412cb9d1"
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,aa2ac6458276be35d966c1792106eabe"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward1_affine.mat:md5,bcb3f5a67b2b7972a4580caf550de668"
+                        ]
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,aa2ac6458276be35d966c1792106eabe"
+                        ]
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,aa2ac6458276be35d966c1792106eabe"
+                        ]
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward1_affine.mat:md5,bcb3f5a67b2b7972a4580caf550de668"
+                        ]
+                    ]
+                ],
+                "9": [
+                    
+                ],
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,aa2ac6458276be35d966c1792106eabe"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,aa2ac6458276be35d966c1792106eabe"
+                        ]
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward1_affine.mat:md5,bcb3f5a67b2b7972a4580caf550de668"
+                        ]
+                    ]
+                ],
+                "backward_warp": [
+                    
+                ],
+                "forward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,bcb3f5a67b2b7972a4580caf550de668"
+                    ]
+                ],
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward1_affine.mat:md5,bcb3f5a67b2b7972a4580caf550de668"
+                        ]
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,aa2ac6458276be35d966c1792106eabe"
+                        ]
+                    ]
+                ],
+                "forward_warp": [
+                    
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz:md5,0bb3a94c1006ca121c1850f8e8b0f2ff"
+                    ]
+                ],
+                "mqc": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,fade610633cb2889d7608994412cb9d1"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2026-06-04T15:11:31.970595368"
+    }
+}
