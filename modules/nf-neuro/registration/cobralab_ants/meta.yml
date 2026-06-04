@@ -206,9 +206,16 @@ input:
         mandatory: true
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
-    - mask:
+    - fixed_mask:
         type: file
         description: Mask for the fixed image
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - moving_mask:
+        type: file
+        description: Mask for the moving image
         pattern: "*.{nii,nii.gz}"
         mandatory: false
         ontologies:

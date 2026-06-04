@@ -6,7 +6,7 @@ process REGISTRATION_COBRALABANTS {
     container "scilus/scilus:dev"
 
     input:
-        tuple val(meta), path(fixed_image), path(moving_image), path(mask) //** optional, input = [] **//
+        tuple val(meta), path(fixed_image), path(moving_image), path(fixed_mask), path(moving_mask) //** optional, input = [] **//
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                           , emit: image_warped
@@ -30,7 +30,8 @@ process REGISTRATION_COBRALABANTS {
     def suffix_qc = task.ext.suffix_qc ?: ""
     def run_qc = task.ext.run_qc as Boolean || false
 
-    if ( mask ) args += " --fixed-mask $mask"
+    if ( fixed_mask ) args += " --fixed-mask $fixed_mask"
+    if ( moving_mask ) args += " --moving-mask $moving_mask"
     if ( task.ext.initial_transform ) args += " --initial-transform $task.ext.initial_transform"
     if ( task.ext.float ) args += " --float"
     if ( task.ext.float_linear ) args += " --float-linear"
