@@ -69,10 +69,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.8"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-10-16T20:51:47.326447932"
+        "timestamp": "2026-06-04T13:33:58.944010211"
     },
     "registration - easyreg": {
         "content": [
@@ -163,10 +163,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "25.04.8"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-10-15T18:55:55.830874285"
+        "timestamp": "2026-06-04T13:33:44.280377972"
     },
     "registration - ANTs - SyNQuick": {
         "content": [
@@ -256,6 +256,7 @@
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,8f4cb1a55910da303007d7c2202e62f0",
                     "versions.yml:md5,a338911f46f2c623d87eab600c524ffb"
                 ]
             }
@@ -264,7 +265,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-06-02T20:05:53.555032692"
+        "timestamp": "2026-06-04T13:33:26.753578263"
     },
     "registration - ANTs - Anat to DWI": {
         "content": [
@@ -362,6 +363,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-02-26T22:46:42.344818522"
+        "timestamp": "2026-06-04T13:33:13.90620864"
     }
 }

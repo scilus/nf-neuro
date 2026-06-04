@@ -6,10 +6,10 @@ process REGISTRATION_ANTS {
     container "scilus/scilus:2.2.2"
 
     input:
-        tuple val(meta), path(fixed_image), path(moving_image), path(fixed_mask), path(moving_mask) //** optional, input = [] **//
+        tuple val(meta), path(fixed_image), path(moving_image)
 
     output:
-        tuple val(meta), path("*_warped.nii.gz")                            , emit: image_warped
+        tuple val(meta), path("*_warped.nii.gz")                           , emit: image_warped
         tuple val(meta), path("*_forward1_affine.mat")                     , emit: forward_affine, optional: true
         tuple val(meta), path("*_forward0_warp.nii.gz")                    , emit: forward_warp, optional: true
         tuple val(meta), path("*_backward1_warp.nii.gz")                   , emit: backward_warp, optional: true
@@ -18,8 +18,8 @@ process REGISTRATION_ANTS {
         tuple val(meta), path("*_backward*.{nii.gz,mat}", arity: '1..2')   , emit: backward_image_transform
         tuple val(meta), path("*_backward*.{nii.gz,mat}", arity: '1..2')   , emit: forward_tractogram_transform
         tuple val(meta), path("*_forward*.{nii.gz,mat}", arity: '1..2')    , emit: backward_tractogram_transform
-        tuple val(meta), path("*_registration_ants_mqc.gif")                , emit: mqc, optional: true
-        path "versions.yml"                                                 , emit: versions
+        tuple val(meta), path("*_registration_ants_mqc.gif")               , emit: mqc, optional: true
+        path "versions.yml"                                                , emit: versions
 
     when:
         task.ext.when == null || task.ext.when
@@ -35,10 +35,6 @@ process REGISTRATION_ANTS {
     def run_qc = task.ext.run_qc as Boolean || false
     def nthreads = task.ext.single_thread ? 1 : task.cpus
     args += " -n $nthreads"
-
-    if ( fixed_mask || moving_mask ) {
-        args += " -x \"${fixed_mask ?: 'NULL'},${moving_mask ?: 'NULL'}\""
-    }
 
     if ( task.ext.initial_transform ) args += " -i [$fixed_image,$moving_image,${initialization_types[task.ext.initial_transform]}]"
     if ( task.ext.histogram_bins ) args += " -r $task.ext.histogram_bins"

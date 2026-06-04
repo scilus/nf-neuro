@@ -46,16 +46,8 @@ nextflow_process {
                         file("\${test_data_directory}/t1.nii.gz")
                     ]
                 }
-                ch_T1w_mask = ch_split_test_data.T1w.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/T1w_mask.nii.gz")
-                    ]
-                }
                 input[0] = ch_T1w
                     .join(ch_moving)
-                    .join(ch_T1w_mask)
-                    .map{ meta, T1w, t1, T1w_mask -> [meta, T1w, t1, T1w_mask, []] }
                 """
             }
         }
@@ -89,16 +81,8 @@ nextflow_process {
                         file("\${test_data_directory}/t1.nii.gz")
                     ]
                 }
-                ch_T1w_mask = ch_split_test_data.T1w.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/T1w_mask.nii.gz")
-                    ]
-                }
                 input[0] = ch_T1w
                     .join(ch_moving)
-                    .join(ch_T1w_mask)
-                    .map{ meta, T1w, t1, T1w_mask -> [meta, T1w, t1, T1w_mask, []] }
                 """
             }
         }
@@ -132,16 +116,8 @@ nextflow_process {
                         file("\${test_data_directory}/t1.nii.gz")
                     ]
                 }
-                ch_T1w_mask = ch_split_test_data.T1w.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/T1w_mask.nii.gz")
-                    ]
-                }
                 input[0] = ch_T1w
                     .join(ch_moving)
-                    .join(ch_T1w_mask)
-                    .map{ meta, T1w, t1, T1w_mask -> [meta, T1w, t1, T1w_mask, []] }
                 """
             }
         }
@@ -176,16 +152,8 @@ nextflow_process {
                         file("\${test_data_directory}/t1.nii.gz")
                     ]
                 }
-                ch_T1w_mask = ch_split_test_data.T1w.map{
-                    test_data_directory -> [
-                        [ id:'test' ],
-                        file("\${test_data_directory}/T1w_mask.nii.gz")
-                    ]
-                }
                 input[0] = ch_T1w
                     .join(ch_moving)
-                    .join(ch_T1w_mask)
-                    .map{ meta, T1w, t1, T1w_mask -> [meta, T1w, t1, T1w_mask, []] }
                 """
             }
         }

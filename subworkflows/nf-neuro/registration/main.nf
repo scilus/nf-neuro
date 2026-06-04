@@ -4,7 +4,8 @@ include { REGISTRATION_EASYREG   } from '../../../modules/nf-neuro/registration/
 include { REGISTRATION_SYNTHMORPH } from '../../../modules/nf-neuro/registration/synthmorph/main'
 include { REGISTRATION_CONVERT } from '../../../modules/nf-neuro/registration/convert/main'
 include { UTILS_OPTIONS } from '../utils_options/main'
-
+include { IMAGE_APPLYMASK as MASK_FIXED_IMAGE} from '../../../modules/nf-neuro/image/applymask/main'
+include { IMAGE_APPLYMASK as MASK_MOVING_IMAGE} from '../../../modules/nf-neuro/image/applymask/main'
 
 workflow REGISTRATION {
 
@@ -33,6 +34,16 @@ workflow REGISTRATION {
         // Merge options with defaults from meta.yml
         UTILS_OPTIONS("${moduleDir}/meta.yml", options, true)
         options = UTILS_OPTIONS.out.options.value
+
+        MASK_FIXED_IMAGE ( ch_fixed_image.join(ch_fixed_mask) )
+        ch_fixed_image = ch_fixed_image.join(MASK_FIXED_IMAGE.out.image, remainder: true)
+                            .map({ meta, orig, fixed -> [meta, fixed?: orig] })
+        ch_versions = ch_versions.mix(MASK_FIXED_IMAGE.out.versions.first())
+
+        MASK_MOVING_IMAGE ( ch_moving_image.join(ch_moving_mask) )
+        ch_moving_image = ch_moving_image.join(MASK_MOVING_IMAGE.out.image, remainder: true)
+                            .map({ meta, orig, moving -> [meta, moving?: orig] })
+        ch_versions = ch_versions.mix(MASK_MOVING_IMAGE.out.versions.first())
 
         if ( options.run_easyreg ) {
             // ** Registration using Easyreg ** //
@@ -201,7 +212,6 @@ workflow REGISTRATION {
             ch_register = ch_register.ants_syn
                 .join(ch_fixed_mask, remainder: true)
                 .join(ch_moving_mask, remainder: true)
-                .map{ it[0..2] + [it[4] ?: []] + [it[5] ?: []] }
 
             REGISTRATION_ANTS ( ch_register )
             ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions.first())

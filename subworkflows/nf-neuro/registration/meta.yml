@@ -93,7 +93,7 @@ input:
   - ch_fixed_mask:
       type: file
       description: |
-        FOR USE WITH ANTS SYN REGISTRATION ONLY. The input channel containing the mask file in fixed image space.
+        Fixed mask will be use to mask the fixed image during registration.
       structure:
         - meta:
             type: map
@@ -106,7 +106,7 @@ input:
   - ch_moving_mask:
       type: file
       description: |
-        FOR USE WITH ANTS SYN REGISTRATION ONLY. The input channel containing the mask file in moving image space.
+        Moving mask will be use to mask the moving image during registration.
       structure:
         - meta:
             type: map
