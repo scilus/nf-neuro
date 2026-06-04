@@ -47,6 +47,7 @@ components:
   - registration/convert
   - registration/easyreg
   - registration/synthmorph
+  - image/applymask
   - utils_options
 input:
   - ch_fixed_image:

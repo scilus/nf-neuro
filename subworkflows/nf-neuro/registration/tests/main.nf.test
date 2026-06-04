@@ -16,6 +16,7 @@ nextflow_workflow {
     tag "registration/convert"
     tag "registration/easyreg"
     tag "registration/synthmorph"
+    tag "image/applymask"
 
     tag "subworkflows/utils_options"
 
