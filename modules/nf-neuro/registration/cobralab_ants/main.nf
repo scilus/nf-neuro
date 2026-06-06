@@ -3,7 +3,7 @@ process REGISTRATION_COBRALABANTS {
     tag "$meta.id"
     label 'process_medium'
 
-    container "scilus/scilus:dev"
+    container "scilus/scilus@sha256:6274eaf3b773019cd789e844c5aed591c50ed760b32e0ae03819cca4b8be66b9"
 
     input:
         tuple val(meta), path(fixed_image), path(moving_image), path(fixed_mask), path(moving_mask) //** optional, input = [] **//
@@ -64,11 +64,12 @@ process REGISTRATION_COBRALABANTS {
     if ( task.ext.clobber ) args += " --clobber"
     if ( task.ext.verbose == false ) args += " --no-verbose"
     if ( task.ext.debug ) args += " --debug"
-
+    if ( task.ext.reproducibility ) args += " --reproducibility"
+    if ( task.ext.ants_rng_seed ) args += " --random-seed $task.ext.ants_rng_seed"
     """
-    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$task.cpus
-    export OMP_NUM_THREADS=1
-    export OPENBLAS_NUM_THREADS=1
+    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=${task.ext.single_thread ? 1 : task.cpus}
+    export ANTS_RANDOM_SEED=${task.ext.ants_rng_seed ?: 1234}
+    export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}
 
     moving_id=\$(basename $moving_image .nii.gz)
     moving_id=\${moving_id#${meta.id}_*}

@@ -186,6 +186,18 @@ args:
       type: boolean
       description: "Show all internal commands and logic for debug"
       default: false
+  - reproducibility:
+      type: boolean
+      description: "Use reproducible registration: GC metric for linear stages and fixed random seed."
+      default: false
+  - ants_rng_seed:
+      type: integer
+      description: "Random seed for ANTs registration. Setting a fixed seed can help with reproducibility of results."
+      default: 1234
+  - single_thread:
+      type: boolean
+      description: If true, the command will be run in single-threaded mode. By default, the command will use multiple threads based on the number of CPUs allocated to the task.
+      default: false
 input:
   - - meta:
         type: map
