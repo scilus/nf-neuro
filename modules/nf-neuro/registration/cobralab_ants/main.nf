@@ -3,7 +3,7 @@ process REGISTRATION_COBRALABANTS {
     tag "$meta.id"
     label 'process_medium'
 
-    container "scilus/scilus@sha256:6274eaf3b773019cd789e844c5aed591c50ed760b32e0ae03819cca4b8be66b9"
+    container "scilus/scilus:2.3.0"
 
     input:
         tuple val(meta), path(fixed_image), path(moving_image), path(fixed_mask), path(moving_mask) //** optional, input = [] **//
