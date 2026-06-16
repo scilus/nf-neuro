@@ -6,6 +6,8 @@ include { REGISTRATION_CONVERT } from '../../../modules/nf-neuro/registration/co
 include { UTILS_OPTIONS } from '../utils_options/main'
 include { IMAGE_APPLYMASK as MASK_FIXED_IMAGE} from '../../../modules/nf-neuro/image/applymask/main'
 include { IMAGE_APPLYMASK as MASK_MOVING_IMAGE} from '../../../modules/nf-neuro/image/applymask/main'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARP_IMAGE_TO_FIXED } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
+include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARP_IMAGE_TO_MOVING } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
 
 workflow REGISTRATION {
 
@@ -36,13 +38,13 @@ workflow REGISTRATION {
         options = UTILS_OPTIONS.out.options.value
 
         MASK_FIXED_IMAGE ( ch_fixed_image.join(ch_fixed_mask) )
-        ch_fixed_image = ch_fixed_image.join(MASK_FIXED_IMAGE.out.image, remainder: true)
-                            .map({ meta, orig, fixed -> [meta, fixed?: orig] })
+        ch_fixed_image_ready = ch_fixed_image.join(MASK_FIXED_IMAGE.out.image, remainder: true)
+                            .map({ meta, orig, masked -> [meta, masked?: orig] })
         ch_versions = ch_versions.mix(MASK_FIXED_IMAGE.out.versions.first())
 
         MASK_MOVING_IMAGE ( ch_moving_image.join(ch_moving_mask) )
-        ch_moving_image = ch_moving_image.join(MASK_MOVING_IMAGE.out.image, remainder: true)
-                            .map({ meta, orig, moving -> [meta, moving?: orig] })
+        ch_moving_image_ready = ch_moving_image.join(MASK_MOVING_IMAGE.out.image, remainder: true)
+                            .map({ meta, orig, masked -> [meta, masked?: orig] })
         ch_versions = ch_versions.mix(MASK_MOVING_IMAGE.out.versions.first())
 
         if ( options.run_easyreg ) {
@@ -53,8 +55,8 @@ workflow REGISTRATION {
             //   - join [ meta, reference, image | null, ref-segmentation | null ]
             //   - join [ meta, reference, image | null, ref-segmentation | null, segmentation | null ]
             //   -  map [ meta, reference, image | [], ref-segmentation | [], segmentation | [] ]
-            ch_register = ch_moving_image
-                .join(ch_fixed_image, remainder: true)
+            ch_register = ch_moving_image_ready
+                .join(ch_fixed_image_ready, remainder: true)
                 .join(ch_moving_segmentation, remainder: true)
                 .join(ch_segmentation, remainder: true)
                 .map{ it[0..1] + [it[2] ?: [], it[3] ?: [], it[4] ?: []] }
@@ -82,8 +84,8 @@ workflow REGISTRATION {
         }
         else if ( options.run_synthmorph ) {
             // ** Registration using synthmorph ** //
-            ch_register = ch_fixed_image
-                .join(ch_moving_image)
+            ch_register = ch_fixed_image_ready
+                .join(ch_moving_image_ready)
 
             REGISTRATION_SYNTHMORPH ( ch_register )
             ch_versions = ch_versions.mix(REGISTRATION_SYNTHMORPH.out.versions.first())
@@ -177,8 +179,8 @@ workflow REGISTRATION {
             // Branches :
             //   - anat_to_dwi : has a metric at index 3
             //   - ants_syn    : doesn't have a metric at index 3 ( [] or null )
-            ch_register = ch_fixed_image
-                .join(ch_moving_image)
+            ch_register = ch_fixed_image_ready
+                .join(ch_moving_image_ready)
                 .join(ch_metric, remainder: true)
                 .map{ it[0..2] + [it[3] ?: []] }
                 .branch{
@@ -208,12 +210,9 @@ workflow REGISTRATION {
             // Result : [ meta, image, mask | [] ]
             //  Steps :
             //   - join [ meta, image, metric | [], mask | null ]
-            //   - map  [ meta, image, mask | [] ]
-            ch_register = ch_register.ants_syn
-                .join(ch_fixed_mask, remainder: true)
-                .join(ch_moving_mask, remainder: true)
+            //   - map  [ meta, image ]
 
-            REGISTRATION_ANTS ( ch_register )
+            REGISTRATION_ANTS ( ch_register.ants_syn )
             ch_versions = ch_versions.mix(REGISTRATION_ANTS.out.versions.first())
             ch_mqc = ch_mqc.mix(REGISTRATION_ANTS.out.mqc)
 
@@ -233,9 +232,42 @@ workflow REGISTRATION {
             out_segmentation = channel.empty()
             out_ref_segmentation = channel.empty()
         }
+
+        out_image_warped_masked = out_image_warped
+            .join(ch_moving_mask)
+            .map{ meta, warped, mask -> mask ? [meta, warped] : [] }
+
+        out_ref_warped_masked = out_ref_warped
+            .join(ch_fixed_mask)
+            .map{ meta, warped, mask -> mask ? [meta, warped] : [] }
+
+        // Register original moving image
+        WARP_IMAGE_TO_FIXED ( ch_moving_image
+                                .join(ch_fixed_image)
+                                .join(out_forward_image_transform)
+                                .join(ch_moving_mask)
+                                .map{ meta, moving, fixed, transform, mask -> mask ? [meta, moving, fixed, transform] : [] } )
+        out_image_warped = out_image_warped
+            .join(WARP_IMAGE_TO_FIXED.out.warped_image)
+            .map{ meta, warped, masked_warped -> masked_warped :[meta, masked_warped ?: warped] }
+        ch_versions = ch_versions.mix(WARP_IMAGE_TO_FIXED.out.versions.first())
+
+        // Register original ref image
+        WARP_IMAGE_TO_MOVING ( ch_fixed_image
+                                .join(ch_moving_image)
+                                .join(out_backward_image_transform)
+                                .join(ch_fixed_mask)
+                                .map{ meta, moving, fixed, transform, mask -> mask ? [meta, moving, fixed, transform] : [] } )
+        out_ref_warped = out_ref_warped
+            .join(WARP_IMAGE_TO_MOVING.out.warped_image)
+            .map{ meta, warped, masked_warped -> [meta, masked_warped ?: warped] }
+        ch_versions = ch_versions.mix(WARP_IMAGE_TO_MOVING.out.versions.first())
+cd
     emit:
         image_warped                    = out_image_warped                  // channel: [ val(meta), image ]
         reference_warped                = out_ref_warped                    // channel: [ val(meta), ref ]
+        image_warped_masked             = out_image_warped_masked           // channel: [ val(meta), image ]
+        reference_warped_masked         = out_ref_warped_masked             // channel: [ val(meta), ref ]
         // Individual transforms
         forward_affine                  = out_forward_affine                // channel: [ val(meta), <forward-affine> ]
         forward_warp                    = out_forward_warp                  // channel: [ val(meta), <forward-warp> ]

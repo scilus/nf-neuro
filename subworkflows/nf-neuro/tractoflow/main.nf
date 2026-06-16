@@ -187,10 +187,6 @@ workflow TRACTOFLOW {
             ch_fa_for_registration = RECONST_DTIMETRICS.out.fa
         }
 
-        PREPROC_DWI.out.b0.view()
-        PREPROC_T1.out.t1_final.view()
-        ch_fa_for_registration.view()
-
         T1_REGISTRATION(
             PREPROC_DWI.out.b0,
             PREPROC_T1.out.t1_final,
