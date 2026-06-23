@@ -5,7 +5,7 @@ process PYDEFACE {
     container {
         workflow.containerEngine in ['singularity', 'apptainer'] && !(task.ext.singularity_pull_docker_container ?: false)
             ? 'docker://poldracklab/pydeface:latest'
-            : 'poldracklab/pydeface:latest'
+            : 'docker.io/poldracklab/pydeface:latest'
     }
 
     containerOptions {
@@ -22,6 +22,7 @@ process PYDEFACE {
     output:
     tuple val(meta), path("sub-${meta.subject}/ses-${meta.session}/anat/*_defaced.nii.gz"), emit: defaced
     path("logs/*.log"), emit: logs
+    path "versions.yml", emit: versions, topic: "versions"
 
     script:
     """
@@ -53,30 +54,36 @@ process PYDEFACE {
         echo
     } | tee -a "\$out_log"
 
-    if [[ "\$base" == *"_defaced" ]]; then
+        if [[ "\$base" == *"_defaced" ]]; then
         echo "[SKIP] Input already looks defaced: \$base" | tee -a "\$out_log"
         cp "${nifti}" "\$out_file"
-        : >> "\$err_log"
-        exit 0
-    fi
-
-    if [[ -f /shell-hook.sh ]]; then
-        /bin/bash /shell-hook.sh pydeface "${nifti}" --outfile "\$out_file" \\
-            1> >(tee -a "\$out_log") \\
-            2> >(tee >(grep -i -e "warning" -e "error" >> "\$err_log") >&2)
-    elif command -v pydeface >/dev/null 2>&1; then
-        pydeface "${nifti}" --outfile "\$out_file" \\
-            1> >(tee -a "\$out_log") \\
-            2> >(tee >(grep -i -e "warning" -e "error" >> "\$err_log") >&2)
-    elif command -v python3 >/dev/null 2>&1; then
-        python3 -m pydeface "${nifti}" --outfile "\$out_file" \\
-            1> >(tee -a "\$out_log") \\
-            2> >(tee >(grep -i -e "warning" -e "error" >> "\$err_log") >&2)
     else
-        echo "ERROR: Neither /shell-hook.sh, pydeface nor python3 available in container" >&2
-        exit 127
+        if [[ -f /shell-hook.sh ]]; then
+            /bin/bash /shell-hook.sh pydeface "${nifti}" --outfile "\$out_file" \\
+                1> >(tee -a "\$out_log") \\
+                2> >(tee >(grep -i -e "warning" -e "error" >> "\$err_log") >&2)
+        elif command -v pydeface >/dev/null 2>&1; then
+            pydeface "${nifti}" --outfile "\$out_file" \\
+                1> >(tee -a "\$out_log") \\
+                2> >(tee >(grep -i -e "warning" -e "error" >> "\$err_log") >&2)
+        elif command -v python3 >/dev/null 2>&1; then
+            python3 -m pydeface "${nifti}" --outfile "\$out_file" \\
+                1> >(tee -a "\$out_log") \\
+                2> >(tee >(grep -i -e "warning" -e "error" >> "\$err_log") >&2)
+        else
+            echo "ERROR: Neither /shell-hook.sh, pydeface nor python3 available in container" >&2
+            exit 127
+        fi
     fi
 
     : >> "\$err_log"
+
+    PYDEFACE_VERSION="\$(pydeface --version 2>&1 | grep -oE '[0-9]+[.][0-9]+([.][0-9]+)?' | head -n 1 || true)"
+    [ -z "\$PYDEFACE_VERSION" ] && PYDEFACE_VERSION="unknown"
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        pydeface: "\$PYDEFACE_VERSION"
+    END_VERSIONS
     """
 }

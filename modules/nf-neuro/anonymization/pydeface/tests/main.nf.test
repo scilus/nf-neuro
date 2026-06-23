@@ -6,8 +6,14 @@ nextflow_process {
     config "./nextflow.config"
 
     tag "modules"
-    tag "modules_local"
+    tag "modules_nfneuro"
     tag "pydeface"
+    tag "anonymization"
+    tag "anonymization/pydeface"
+
+    tag "subworkflows"
+    tag "subworkflows/load_test_data"
+
 
     test("single T1w nifti creates defaces image and logs") {
         setup {

@@ -1,77 +1,71 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-# # TODO nf-core: Add a description of the module and list keywords
 name: "pydeface"
-description: write your description here
+description: Remove facial structures from MRI NIfTI images using PyDeface.
 keywords:
-  - sort
-  - example
-  - genomics
-tools:
-  ## TODO nf-core: Add a description and other details for the software below
-  - "pydeface":
-      description: ""
-      homepage: ""
-      documentation: ""
-      tool_dev_url: ""
-      doi: ""
-      licence: null
-      identifier: null
-
-input:
-  ### TODO nf-core: Add a description of all of the variables used as input
-  - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'sample1' ]`
-    - bam:
-        type: file
-        description: Sorted BAM/CRAM/SAM file
-        pattern: "*.{bam,cram,sam}"
-        ontologies:
-          - edam: "http://edamontology.org/format_2572" # BAM
-          - edam: "http://edamontology.org/format_2573" # CRAM
-          - edam: "http://edamontology.org/format_3462" # SAM
-
-output:
-  ### TODO nf-core: Add a description of all of the variables used as output
-  bam:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'sample1' ]`
-      - "*.bam":
-          type: file
-          description: Sorted BAM/CRAM/SAM file
-          pattern: "*.{bam,cram,sam}"
-          ontologies:
-            - edam: "http://edamontology.org/format_2572" # BAM
-            - edam: "http://edamontology.org/format_2573" # CRAM
-            - edam: "http://edamontology.org/format_3462" # SAM
-  versions_pydeface:
-    - - "${task.process}":
-          type: string
-          description: The name of the process
-      - "pydeface":
-          type: string
-          description: The name of the tool
-      - "pydeface --version":
-          type: eval
-          description: The expression to obtain the version of the tool
-
-topics:
-  versions:
-    - - ${task.process}:
-          type: string
-          description: The name of the process
-      - pydeface:
-          type: string
-          description: The name of the tool
-      - pydeface --version:
-          type: eval
-          description: The expression to obtain the version of the tool
+  - neuroimaging
+  - MRI
+  - NIfTI
+  - anonymization
+  - defacing
 authors:
   - "@loboehme1"
 maintainers:
   - "@loboehme1"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          Expected keys for this module currently include `subject` and `session`,
+          for example `[ subject: '01', session: '001' ]`.
+    - nifti:
+        type: file
+        description: |
+          Input anatomical MRI image in NIfTI format.
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001
+output:
+  defaced:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information.
+            Expected keys for this module currently include `subject` and `session`,
+            for example `[ subject: '01', session: '001' ]`.
+      - sub-${meta.subject}/ses-${meta.session}/anat/*_defaced.nii.gz: {}
+  logs:
+    - logs/*.log: {}
+  versions_pydeface:
+    - - "${task.process}":
+          type: string
+          description: The name of the process.
+      - "pydeface":
+          type: string
+          description: The name of the tool.
+      - "pydeface_version":
+          type: string
+          description: The version of PyDeface used by the process.
+  versions:
+    - versions.yml: {}
+tools:
+  - "pydeface":
+      description: "A tool to remove facial structure from MRI images."
+      homepage: "https://www.poldracklab.org"
+      documentation: "https://github.com/poldracklab/pydeface"
+      tool_dev_url: "https://github.com/poldracklab/pydeface"
+      doi: "10.5281/zenodo.6856482"
+      licence:
+        - "MIT"
+      identifier: ""
+topics:
+  versions:
+    - - "${task.process}":
+          type: string
+          description: The name of the process.
+      - "pydeface":
+          type: string
+          description: The name of the tool.
+  '"versions"':
+    - versions.yml:
+        type: string
+        description: The name of the process.
