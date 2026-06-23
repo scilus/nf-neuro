@@ -1,0 +1,24 @@
+{
+    "pydeface_outputs": {
+        "content": [
+            {
+                "meta": {
+                    "subject": "01",
+                    "session": "001"
+                },
+                "defaced": [
+                    "T1w_defaced.nii.gz"
+                ],
+                "logs": [
+                    "sub-01_ses-001_T1w_err.log",
+                    "sub-01_ses-001_T1w_out.log"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "26.04.4"
+        },
+        "timestamp": "2026-06-23T15:55:55.012676904"
+    }
+}

@@ -1,0 +1,109 @@
+nextflow_process {
+
+    name "Test Process PYDEFACE"
+    script "../main.nf"
+    process "PYDEFACE"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_local"
+    tag "pydeface"
+
+    test("single T1w nifti creates defaces image and logs") {
+        setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = channel.from( ["T1w.zip"] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
+
+
+        when {
+            process {
+                """
+                ch_t1w = LOAD_DATA.out.test_data_directory
+                    .filter{ it.simpleName == "T1w" }
+                    .map{ test_data_directory -> [
+                        [ subject: '01', session: '001' ],
+                        file("\${test_data_directory}/T1w.nii.gz")
+                    ] }
+
+                input[0] = ch_t1w
+                """
+
+            }
+        }
+
+        then {
+
+            // check if test case succeeded
+            assert process.success
+
+            // exactly one file per input nifti for normal output and publish output
+            assert process.out.defaced.size() == 1
+
+            // logs should exist
+            assert process.out.logs.size() >= 1
+
+            // helper functions
+            def asList = { x ->
+                x instanceof Collection ? x as List : [x]
+            }
+
+            def flatten = { xs ->
+                xs.collectMany { it instanceof Collection ? it as List : [it] }
+            }
+
+            def basename = { x ->
+                new File(x.toString()).name
+            }
+
+            def exists = { x ->
+                new File(x.toString()).exists()
+            }
+
+            def fileSize = { x ->
+                new File(x.toString()).length()
+            }
+
+            // get all module outputs
+            def meta = process.out.defaced[0][0]
+            def defacedFiles = asList(process.out.defaced[0][1])
+            def logFiles = flatten(process.out.logs)
+
+            // check meta data
+            assert meta.subject == '01'
+            assert meta.session == '001'
+
+            // defaced output check
+            assert defacedFiles.size() == 1
+            assert basename(defacedFiles[0]) == 'T1w_defaced.nii.gz'
+            assert exists(defacedFiles[0])
+            assert fileSize(defacedFiles[0]) > 0
+
+            // logs check
+            assert logFiles.collect { basename(it) }.sort() == [
+                'sub-01_ses-001_T1w_err.log',
+                'sub-01_ses-001_T1w_out.log'
+            ]
+
+            assert logFiles.every { exists(it) }
+
+            assert snapshot(
+                [
+                    meta: [
+                        subject: meta.subject,
+                        session: meta.session
+                    ],
+                    defaced: defacedFiles.collect { basename(it) }.sort(),
+                    logs: logFiles.collect { basename(it) }.sort()
+                ]
+            ).match("pydeface_outputs")
+        }
+    }
+}
