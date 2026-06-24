@@ -22,8 +22,6 @@ input:
         description: |
           Input anatomical MRI image in NIfTI format.
         pattern: "*.{nii,nii.gz}"
-        ontologies:
-          - edam: http://edamontology.org/format_4001
 output:
   defaced:
     - - meta:
@@ -33,8 +31,6 @@ output:
             Expected keys for this module currently include `subject` and `session`,
             for example `[ subject: '01', session: '001' ]`.
       - sub-${meta.subject}/ses-${meta.session}/anat/*_defaced.nii.gz: {}
-  logs:
-    - logs/*.log: {}
   versions_pydeface:
     - - "${task.process}":
           type: string
@@ -45,8 +41,6 @@ output:
       - "pydeface_version":
           type: string
           description: The version of PyDeface used by the process.
-  versions:
-    - versions.yml: {}
 tools:
   - "pydeface":
       description: "A tool to remove facial structure from MRI images."
