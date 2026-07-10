@@ -219,6 +219,7 @@ workflow REGISTRATION {
                 .branch{
                     anat_to_dwi : it[3]
                     ants_syn: true
+                        return it[0..2] + it[4..5]
                 }
 
             // ** Registration using ANAT TO DWI ** //
