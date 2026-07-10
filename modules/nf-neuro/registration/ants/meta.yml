@@ -125,6 +125,10 @@ args:
       type: boolean
       description: If true, the command will be run in single-threaded mode. By default, the command will use multiple threads based on the number of CPUs allocated to the task.
       default: false
+  - masking_strategy:
+      type: string
+      description: Masking strategy to use for registration. Options are 'none', 'apriori', 'both'.
+      default: "none"
 input:
   - - meta:
         type: map
@@ -143,6 +147,20 @@ input:
         description: Moving image(s) or target image(s)
         pattern: "*.{nii,nii.gz}"
         mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fixed_mask:
+        type: file
+        description: Fixed image mask
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - moving_mask:
+        type: file
+        description: Moving image mask
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
 output:

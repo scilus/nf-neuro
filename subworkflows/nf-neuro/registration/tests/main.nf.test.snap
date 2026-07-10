@@ -54,27 +54,9 @@
                         "test_out_warp.nii.gz"
                     ]
                 ],
-                "image_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_b0_warped.nii.gz"
-                    ]
-                ],
-                "reference_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_T1w_warped.nii.gz"
-                    ]
-                ],
                 "versions": [
                     "versions.yml:md5,300199ef2ea6dd6438553c3ec2615e58",
-                    "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
-                    "versions.yml:md5,5bc0d347809508f4b94ebe433b0f21b9",
-                    "versions.yml:md5,8d90eba5eb0cfe9c82c7280c1b6e66a8"
+                    "versions.yml:md5,5bc0d347809508f4b94ebe433b0f21b9"
                 ]
             }
         ],
@@ -82,7 +64,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-06-04T15:29:09.626057948"
+        "timestamp": "2026-07-10T12:17:50.130253183"
     },
     "registration - easyreg": {
         "content": [
@@ -135,28 +117,12 @@
                         "test_forward0_warp.nii.gz"
                     ]
                 ],
-                "image_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_b0_warped.nii.gz"
-                    ]
-                ],
                 "reference_segmentation": [
                     [
                         {
                             "id": "test"
                         },
                         "test_warped_reference_segmentation.nii.gz"
-                    ]
-                ],
-                "reference_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_T1w_warped.nii.gz"
                     ]
                 ],
                 "segmentation": [
@@ -168,9 +134,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
-                    "versions.yml:md5,3f38c911476c605480c02e484fcf6e9f",
-                    "versions.yml:md5,8d90eba5eb0cfe9c82c7280c1b6e66a8"
+                    "versions.yml:md5,3f38c911476c605480c02e484fcf6e9f"
                 ]
             }
         ],
@@ -178,7 +142,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-06-04T15:28:51.999584319"
+        "timestamp": "2026-07-10T12:17:39.385111058"
     },
     "registration - ANTs - SyNQuick": {
         "content": [
@@ -251,14 +215,6 @@
                         "test_forward0_warp.nii.gz"
                     ]
                 ],
-                "image_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_t1_warped.nii.gz"
-                    ]
-                ],
                 "mqc": [
                     [
                         {
@@ -267,18 +223,8 @@
                         "test__registration_ants_mqc.gif"
                     ]
                 ],
-                "reference_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_test_masked_warped.nii.gz"
-                    ]
-                ],
                 "versions": [
                     "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
-                    "versions.yml:md5,8d90eba5eb0cfe9c82c7280c1b6e66a8",
-                    "versions.yml:md5,8f4cb1a55910da303007d7c2202e62f0",
                     "versions.yml:md5,a338911f46f2c623d87eab600c524ffb"
                 ]
             }
@@ -287,7 +233,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-06-04T15:28:29.794849703"
+        "timestamp": "2026-07-10T12:17:25.989995681"
     },
     "registration - ANTs - Anat to DWI": {
         "content": [
@@ -360,14 +306,6 @@
                         "test_forward0_warp.nii.gz"
                     ]
                 ],
-                "image_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_T1w_warped.nii.gz"
-                    ]
-                ],
                 "mqc": [
                     [
                         {
@@ -376,18 +314,8 @@
                         "test_registration_anattodwi_mqc.gif"
                     ]
                 ],
-                "reference_warped": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_b0_warped.nii.gz"
-                    ]
-                ],
                 "versions": [
-                    "versions.yml:md5,03b958f14a890b541bb76c73f7a72847",
-                    "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
-                    "versions.yml:md5,8d90eba5eb0cfe9c82c7280c1b6e66a8"
+                    "versions.yml:md5,03b958f14a890b541bb76c73f7a72847"
                 ]
             }
         ],
@@ -395,6 +323,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-06-04T15:28:03.979362405"
+        "timestamp": "2026-07-10T12:17:07.629766386"
     }
 }

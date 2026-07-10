@@ -137,6 +137,10 @@ input:
       description: Map of options for the registration subworkflow.
       mandatory: false
       entries:
+        masking_strategy:
+          type: string
+          description: Masking strategy to use for registration. Options are 'none', 'apriori', 'both'.
+          default: "none"
         run_easyreg:
           type: boolean
           description: Run EasyReg for registration. If false, SynthMorph will be used if `run_synthmorph` is true, and ANTs SyN will be used if `run_synthmorph` is false.

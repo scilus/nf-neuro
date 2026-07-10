@@ -5,7 +5,7 @@ process REGISTRATION_ANATTODWI {
     container "scilus/scilus:2.2.2"
 
     input:
-        tuple val(meta), path(fixed_reference), path(moving_anat), path(metric)
+        tuple val(meta), path(fixed_reference), path(moving_anat), path(metric), path(fixed_mask), path(moving_mask)
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                            , emit: anat_warped
@@ -26,7 +26,9 @@ process REGISTRATION_ANATTODWI {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def run_qc = task.ext.run_qc as Boolean || false
+    def args = task.ext.args ?: ''
 
+    if ( task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal" ) args += " -x $fixed_mask?:NULL,$moving_mask?:NULL"
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=${task.ext.single_thread ? 1 : task.cpus}
     export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}
@@ -49,7 +51,8 @@ process REGISTRATION_ANATTODWI {
         --metric MI[$fixed_reference,$moving_anat,1,32]\
         --metric CC[$metric,$moving_anat,1,4]\
         --convergence [50x25x10,1e-6,10] --shrink-factors 4x2x1\
-        --smoothing-sigmas 3x2x1
+        --smoothing-sigmas 3x2x1\
+        $args
 
     moving_base=\$(basename "${moving_anat}")
     ext=\${moving_base#*.}

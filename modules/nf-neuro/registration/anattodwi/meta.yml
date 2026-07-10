@@ -43,6 +43,10 @@ args:
       type: integer
       description: Random seed for ANTs registration. Setting a fixed seed can help with reproducibility of results.
       default: 1234
+  - masking_strategy:
+      type: string
+      description: Masking strategy to use for registration. Options are 'none', 'apriori', 'both'.
+      default: "none"
 input:
   - - meta:
         type: map
@@ -68,6 +72,20 @@ input:
         description: Nifti image file - additional fixed metric (usually FA)
         pattern: "*.{nii,nii.gz}"
         mandatory: true
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - fixed_mask:
+        type: file
+        description: Fixed image mask
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+    - moving_mask:
+        type: file
+        description: Moving image mask
+        pattern: "*.{nii,nii.gz}"
+        mandatory: false
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
 output:
