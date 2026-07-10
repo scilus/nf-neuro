@@ -44,7 +44,7 @@ process REGISTRATION_ANTS {
     if ( task.ext.histogram_matching ) args += " -j $task.ext.histogram_matching"
     if ( task.ext.repro_mode ) args += " -y $task.ext.repro_mode"
     if ( task.ext.collapse_output ) args += " -z $task.ext.collapse_output"
-    if ( task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal" ) args += " -x $fixed_mask?:NULL,$moving_mask?:NULL"
+    if ( task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal" ) args += " -x ${fixed_mask ?: 'NULL'},${moving_mask ?: 'NULL'}"
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=${task.ext.single_thread ? 1 : task.cpus}

@@ -1,4 +1,205 @@
 {
+    "registration - ants - both - moving mask": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1w_warped.nii.gz:md5,92e339e7f93c24437b216cb2dde4f0cb"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,032d3bda1e72c7f1c7224aa6783e9cf0"
+                    ]
+                ],
+                "10": [
+                    "versions.yml:md5,0b121e44c28b1c3efb04ae0dfc9ec76c"
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz:md5,174b5b43c2e91ea804756d0d4cd15bad"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward1_warp.nii.gz:md5,8948e3dab061e31afd3e0b36d76e6031"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,723a9c3ccffc3ed835a5657739e09134"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,174b5b43c2e91ea804756d0d4cd15bad",
+                            "test_forward1_affine.mat:md5,032d3bda1e72c7f1c7224aa6783e9cf0"
+                        ]
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,723a9c3ccffc3ed835a5657739e09134",
+                            "test_backward1_warp.nii.gz:md5,8948e3dab061e31afd3e0b36d76e6031"
+                        ]
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,723a9c3ccffc3ed835a5657739e09134",
+                            "test_backward1_warp.nii.gz:md5,8948e3dab061e31afd3e0b36d76e6031"
+                        ]
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,174b5b43c2e91ea804756d0d4cd15bad",
+                            "test_forward1_affine.mat:md5,032d3bda1e72c7f1c7224aa6783e9cf0"
+                        ]
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,f479eff30517367afb88c0974436d23b"
+                    ]
+                ],
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,723a9c3ccffc3ed835a5657739e09134"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,723a9c3ccffc3ed835a5657739e09134",
+                            "test_backward1_warp.nii.gz:md5,8948e3dab061e31afd3e0b36d76e6031"
+                        ]
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,174b5b43c2e91ea804756d0d4cd15bad",
+                            "test_forward1_affine.mat:md5,032d3bda1e72c7f1c7224aa6783e9cf0"
+                        ]
+                    ]
+                ],
+                "backward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward1_warp.nii.gz:md5,8948e3dab061e31afd3e0b36d76e6031"
+                    ]
+                ],
+                "forward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,032d3bda1e72c7f1c7224aa6783e9cf0"
+                    ]
+                ],
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,174b5b43c2e91ea804756d0d4cd15bad",
+                            "test_forward1_affine.mat:md5,032d3bda1e72c7f1c7224aa6783e9cf0"
+                        ]
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,723a9c3ccffc3ed835a5657739e09134",
+                            "test_backward1_warp.nii.gz:md5,8948e3dab061e31afd3e0b36d76e6031"
+                        ]
+                    ]
+                ],
+                "forward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz:md5,174b5b43c2e91ea804756d0d4cd15bad"
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1w_warped.nii.gz:md5,92e339e7f93c24437b216cb2dde4f0cb"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,f479eff30517367afb88c0974436d23b"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0b121e44c28b1c3efb04ae0dfc9ec76c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-07-10T13:58:41.627501355"
+    },
     "registration - ants - stub": {
         "content": [
             [
@@ -402,6 +603,207 @@
             "nextflow": "25.10.2"
         },
         "timestamp": "2026-07-10T10:48:35.425395985"
+    },
+    "registration - ants - both - fixed mask": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz:md5,ea7f1bc0540975d6484a15c7a74fb115"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,3f5500ed1d3e896ab2b53a5c92cd3f76"
+                    ]
+                ],
+                "10": [
+                    "versions.yml:md5,0b121e44c28b1c3efb04ae0dfc9ec76c"
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz:md5,e815d27e3d69c9337919a3ad76815806"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward1_warp.nii.gz:md5,6f16542b188b1bfe068c12e9ce6ee8f8"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,0f1af73ef9da3e722592701432a1a340"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,e815d27e3d69c9337919a3ad76815806",
+                            "test_forward1_affine.mat:md5,3f5500ed1d3e896ab2b53a5c92cd3f76"
+                        ]
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,0f1af73ef9da3e722592701432a1a340",
+                            "test_backward1_warp.nii.gz:md5,6f16542b188b1bfe068c12e9ce6ee8f8"
+                        ]
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,0f1af73ef9da3e722592701432a1a340",
+                            "test_backward1_warp.nii.gz:md5,6f16542b188b1bfe068c12e9ce6ee8f8"
+                        ]
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,e815d27e3d69c9337919a3ad76815806",
+                            "test_forward1_affine.mat:md5,3f5500ed1d3e896ab2b53a5c92cd3f76"
+                        ]
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,3de94aa1d262a96423c0415846d3a7db"
+                    ]
+                ],
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat:md5,0f1af73ef9da3e722592701432a1a340"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,0f1af73ef9da3e722592701432a1a340",
+                            "test_backward1_warp.nii.gz:md5,6f16542b188b1bfe068c12e9ce6ee8f8"
+                        ]
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,e815d27e3d69c9337919a3ad76815806",
+                            "test_forward1_affine.mat:md5,3f5500ed1d3e896ab2b53a5c92cd3f76"
+                        ]
+                    ]
+                ],
+                "backward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward1_warp.nii.gz:md5,6f16542b188b1bfe068c12e9ce6ee8f8"
+                    ]
+                ],
+                "forward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,3f5500ed1d3e896ab2b53a5c92cd3f76"
+                    ]
+                ],
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,e815d27e3d69c9337919a3ad76815806",
+                            "test_forward1_affine.mat:md5,3f5500ed1d3e896ab2b53a5c92cd3f76"
+                        ]
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_backward0_affine.mat:md5,0f1af73ef9da3e722592701432a1a340",
+                            "test_backward1_warp.nii.gz:md5,6f16542b188b1bfe068c12e9ce6ee8f8"
+                        ]
+                    ]
+                ],
+                "forward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz:md5,e815d27e3d69c9337919a3ad76815806"
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz:md5,ea7f1bc0540975d6484a15c7a74fb115"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,3de94aa1d262a96423c0415846d3a7db"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0b121e44c28b1c3efb04ae0dfc9ec76c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-07-10T14:00:10.265843278"
     },
     "registration - ants - no warps": {
         "content": [
