@@ -2,6 +2,40 @@
     "Template MNI152NLin2009bSym - no brain mask": {
         "content": [
             {
+                "ch_registered_anat": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_labels_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_labels_map_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_nifti_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_trk_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_color_warped.trk",
+                        "test_IFGWM_uni_warped.trk",
+                        "test_IFGWM_warped.trk"
+                    ]
+                ],
                 "ch_t1w_tpl": [
                     "MNI152NLin2009bSym_T1w.nii.gz"
                 ],
@@ -13,13 +47,28 @@
                         {
                             "id": "test"
                         },
+                        "test_IFGWM_labels_map_registration_antsapplytransforms_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_registration_antsapplytransforms_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
                         "test__registration_ants_mqc.gif"
                     ]
                 ],
                 "versions": [
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                    "versions.yml:md5,16dbf59818dee83cc2d0df98ab8bca83",
+                    "versions.yml:md5,1eb68be05dd453a43bd7e4c84aa65435",
                     "versions.yml:md5,596d9223aafe3b087eff98891aa55207",
                     "versions.yml:md5,cd1137ba5811cb376ecce1e90a8f3461",
+                    "versions.yml:md5,ce9c7ec52ed86a19d0a7ee301e444344",
                     "versions.yml:md5,fe45b823234eb14a9e13fa03cca099d1"
                 ]
             }
@@ -28,22 +77,73 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T16:07:51.293391383"
+        "timestamp": "2026-07-10T22:36:55.080186253"
     },
     "Template MNI152NLin2009aAsym - using synthmorph registration": {
         "content": [
             {
+                "ch_registered_anat": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_labels_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_labels_map_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_nifti_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_trk_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_color_warped.trk",
+                        "test_IFGWM_uni_warped.trk",
+                        "test_IFGWM_warped.trk"
+                    ]
+                ],
                 "ch_t1w_tpl": [
                     "MNI152NLin2009bSym_T1w.nii.gz"
                 ],
                 "ch_t2w_tpl": [
                     "MNI152NLin2009bSym_T2w.nii.gz"
                 ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_labels_map_registration_antsapplytransforms_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_registration_antsapplytransforms_mqc.gif"
+                    ]
+                ],
                 "versions": [
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                    "versions.yml:md5,16dbf59818dee83cc2d0df98ab8bca83",
+                    "versions.yml:md5,1eb68be05dd453a43bd7e4c84aa65435",
                     "versions.yml:md5,837bc1b10db6cb6c459b8871725ba254",
                     "versions.yml:md5,9013974da5ab5a7ae91e580948968e75",
                     "versions.yml:md5,cd1137ba5811cb376ecce1e90a8f3461",
+                    "versions.yml:md5,ce9c7ec52ed86a19d0a7ee301e444344",
                     "versions.yml:md5,fe45b823234eb14a9e13fa03cca099d1"
                 ]
             }
@@ -52,11 +152,45 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T15:43:07.339463531"
+        "timestamp": "2026-07-10T22:37:33.271078795"
     },
     "Template MNI152NLin2009cAsym - local templates": {
         "content": [
             {
+                "ch_registered_anat": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_t1_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_labels_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_labels_map_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_nifti_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_warped.nii.gz"
+                    ]
+                ],
+                "ch_registered_trk_files": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_color_warped.trk",
+                        "test_IFGWM_uni_warped.trk",
+                        "test_IFGWM_warped.trk"
+                    ]
+                ],
                 "ch_t1w_tpl": [
                     "MNI152NLin2009cAsym_T1w.nii.gz"
                 ],
@@ -68,13 +202,28 @@
                         {
                             "id": "test"
                         },
+                        "test_IFGWM_labels_map_registration_antsapplytransforms_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_IFGWM_registration_antsapplytransforms_mqc.gif"
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
                         "test__registration_ants_mqc.gif"
                     ]
                 ],
                 "versions": [
                     "versions.yml:md5,08c023826481c9130c3914096cda7f63",
+                    "versions.yml:md5,16dbf59818dee83cc2d0df98ab8bca83",
+                    "versions.yml:md5,1eb68be05dd453a43bd7e4c84aa65435",
                     "versions.yml:md5,596d9223aafe3b087eff98891aa55207",
                     "versions.yml:md5,cd1137ba5811cb376ecce1e90a8f3461",
+                    "versions.yml:md5,ce9c7ec52ed86a19d0a7ee301e444344",
                     "versions.yml:md5,fe45b823234eb14a9e13fa03cca099d1"
                 ]
             }
@@ -83,6 +232,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T16:07:24.77429114"
+        "timestamp": "2026-07-10T22:36:13.853694569"
     }
 }

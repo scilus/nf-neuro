@@ -273,6 +273,7 @@ workflow REGISTRATION {
             .map{ meta, warped, _mask -> [meta, warped] }
 
         out_ref_warped_masked = out_ref_warped
+            .join(ch_fixed_mask)
             .filter{ _meta, _warped, mask -> mask }
             .map{ meta, warped, _mask -> [meta, warped] }
 
