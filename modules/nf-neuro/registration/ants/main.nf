@@ -151,11 +151,16 @@ process REGISTRATION_ANTS {
         antsRegistrationSyNQuick.sh -h
     }
 
+    moving_base=\$(basename "${moving_image}")
+    ext=\${moving_base#*.}
+    moving_id=\${moving_base%.\${ext}}
+    moving_id=\${moving_id#${prefix}_*}
+
     antsApplyTransforms -h
     convert -help .
     scil_viz_volume_screenshot -h
 
-    touch ${prefix}_t1_warped.nii.gz
+    touch ${prefix}_\${moving_id}_warped.nii.gz
     touch ${prefix}_forward1_affine.mat
     touch ${prefix}_forward0_warp.nii.gz
     touch ${prefix}_backward1_warp.nii.gz

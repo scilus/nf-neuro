@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "test_t1_warped.nii.gz"
+                        "test_mni_masked_warped.nii.gz"
                     ]
                 ],
                 "ch_registered_labels_files": [
@@ -77,7 +77,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T22:36:55.080186253"
+        "timestamp": "2026-07-11T00:51:58.045151125"
     },
     "Template MNI152NLin2009aAsym - using synthmorph registration": {
         "content": [
@@ -162,7 +162,7 @@
                         {
                             "id": "test"
                         },
-                        "test_t1_warped.nii.gz"
+                        "test_mni_masked_warped.nii.gz"
                     ]
                 ],
                 "ch_registered_labels_files": [
@@ -232,6 +232,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T22:36:13.853694569"
+        "timestamp": "2026-07-11T00:51:24.259893277"
     }
 }
