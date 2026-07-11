@@ -6,13 +6,13 @@
                     "bids_struct.json:md5,309f00ae14abe9ac3ed2dd239652ce90"
                 ],
                 "1": [
-                    "versions.yml:md5,8e607521e426286998b30a4ef0e6cbee"
+                    "versions.yml:md5,04805468c701051f3c079a61207e10a3"
                 ],
                 "bidsstructure": [
                     "bids_struct.json:md5,309f00ae14abe9ac3ed2dd239652ce90"
                 ],
                 "versions": [
-                    "versions.yml:md5,8e607521e426286998b30a4ef0e6cbee"
+                    "versions.yml:md5,04805468c701051f3c079a61207e10a3"
                 ]
             }
         ],
@@ -20,18 +20,18 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-02-26T13:39:21.325645242"
+        "timestamp": "2026-06-23T12:00:03.403755489"
     },
     "io - readbids - stub-run": {
         "content": [
             [
-                "versions.yml:md5,8e607521e426286998b30a4ef0e6cbee"
+                "versions.yml:md5,04805468c701051f3c079a61207e10a3"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-02-26T13:39:26.13176698"
+        "timestamp": "2026-06-23T12:00:14.29007378"
     }
 }

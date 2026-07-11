@@ -28,6 +28,7 @@ process REGISTRATION_ANTS {
     def initialization_types = ["geometric center": 0, "intensities": 1, "origin": 2]
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def suffix = task.ext.suffix ? "${task.ext.suffix}_warped" : "warped"
     def suffix_qc = task.ext.suffix_qc ?: ""
     def ants = task.ext.quick ? "antsRegistrationSyNQuick.sh" : "antsRegistrationSyN.sh"
     def dimension = "-d ${task.ext.dimension ?: 3}"
@@ -58,7 +59,7 @@ process REGISTRATION_ANTS {
     moving_id=\${moving_base%.\${ext}}
     moving_id=\${moving_id#${prefix}_*}
 
-    mv outputWarped.nii.gz ${prefix}_\${moving_id}_warped.nii.gz
+    mv outputWarped.nii.gz ${prefix}_\${moving_id}_${suffix}.nii.gz
 
     if [ $transform != "bo" ] && [ $transform != "so" ]; then
         mv output0GenericAffine.mat ${prefix}_forward1_affine.mat
@@ -134,6 +135,7 @@ process REGISTRATION_ANTS {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def suffix = task.ext.suffix ? "${task.ext.suffix}_warped" : "warped"
     def suffix_qc = task.ext.suffix_qc ?: ""
     def run_qc = task.ext.run_qc as Boolean || false
 
