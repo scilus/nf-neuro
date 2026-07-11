@@ -5,8 +5,8 @@ include { REGISTRATION_SYNTHMORPH } from '../../../modules/nf-neuro/registration
 include { REGISTRATION_CONVERT } from '../../../modules/nf-neuro/registration/convert/main'
 include { UTILS_OPTIONS } from '../utils_options/main'
 include { IMAGE_APPLYMASK as MASK_FIXED_IMAGE} from '../../../modules/nf-neuro/image/applymask/main'
+include { IMAGE_APPLYMASK as MASK_FIXED_METRIC} from '../../../modules/nf-neuro/image/applymask/main'
 include { IMAGE_APPLYMASK as MASK_MOVING_IMAGE} from '../../../modules/nf-neuro/image/applymask/main'
-include { IMAGE_APPLYMASK as MASK_MOVING_METRIC} from '../../../modules/nf-neuro/image/applymask/main'
 include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARP_IMAGE_TO_FIXED } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
 include { REGISTRATION_ANTSAPPLYTRANSFORMS as WARP_IMAGE_TO_MOVING } from '../../../modules/nf-neuro/registration/antsapplytransforms/main'
 
@@ -44,6 +44,16 @@ workflow REGISTRATION {
                 ch_fixed_image_ready = ch_fixed_image.join(MASK_FIXED_IMAGE.out.image, remainder: true)
                                         .map({ meta, orig, masked -> [meta, masked?: orig] })
                 ch_versions = ch_versions.mix(MASK_FIXED_IMAGE.out.versions.first())
+
+                if ( ch_metric ) {
+                    MASK_FIXED_METRIC ( ch_metric.join(ch_fixed_mask) )
+                    ch_fixed_metric_ready = ch_metric.join(MASK_FIXED_METRIC.out.image, remainder: true)
+                                                .map({ meta, orig, masked -> [meta, masked?: orig] })
+                    ch_versions = ch_versions.mix(MASK_FIXED_METRIC.out.versions.first())
+                }
+                else {
+                    ch_fixed_metric_ready = ch_metric
+                }
             }
             else {
                 ch_fixed_image_ready = ch_fixed_image
@@ -53,16 +63,6 @@ workflow REGISTRATION {
                 ch_moving_image_ready = ch_moving_image.join(MASK_MOVING_IMAGE.out.image, remainder: true)
                                         .map({ meta, orig, masked -> [meta, masked?: orig] })
                 ch_versions = ch_versions.mix(MASK_MOVING_IMAGE.out.versions.first())
-
-                if ( ch_metric ) {
-                    MASK_MOVING_METRIC ( ch_metric.join(ch_moving_mask) )
-                    ch_moving_metric_ready = ch_metric.join(MASK_MOVING_METRIC.out.image, remainder: true)
-                                                .map({ meta, orig, masked -> [meta, masked?: orig] })
-                    ch_versions = ch_versions.mix(MASK_MOVING_METRIC.out.versions.first())
-                }
-                else {
-                    ch_moving_metric_ready = ch_metric
-                }
             }
             else {
                 ch_moving_image_ready = ch_moving_image
@@ -71,7 +71,7 @@ workflow REGISTRATION {
         else {
             ch_fixed_image_ready = ch_fixed_image
             ch_moving_image_ready = ch_moving_image
-            ch_moving_metric_ready = ch_metric
+            ch_fixed_metric_ready = ch_metric
         }
 
         if ( ( options.masking_strategy == "both" || options.masking_strategy == "internal" ) && ( options.run_easyreg || options.run_synthmorph ) ) {
@@ -212,7 +212,7 @@ workflow REGISTRATION {
             //   - ants_syn    : doesn't have a metric at index 3 ( [] or null )
             ch_register = ch_fixed_image_ready
                 .join(ch_moving_image_ready)
-                .join(ch_moving_metric_ready, remainder: true)
+                .join(ch_fixed_metric_ready, remainder: true)
                 .join(ch_fixed_mask, remainder: true)
                 .join(ch_moving_mask, remainder: true)
                 .map{ it[0..2] + [it[3] ?: []] + [it[4] ?: [], it[5] ?: []] }
@@ -269,19 +269,23 @@ workflow REGISTRATION {
 
         out_image_warped_masked = out_image_warped
             .join(ch_moving_mask)
-            .map{ meta, warped, mask -> mask ? [meta, warped] : [] }
+            .filter{ _meta, _warped, mask -> mask }
+            .map{ meta, warped, _mask -> [meta, warped] }
+
         out_ref_warped_masked = out_ref_warped
-            .join(ch_fixed_mask)
-            .map{ meta, warped, mask -> mask ? [meta, warped] : [] }
+            .filter{ _meta, _warped, mask -> mask }
+            .map{ meta, warped, _mask -> [meta, warped] }
+
         // Register original moving image
         WARP_IMAGE_TO_FIXED ( ch_moving_image
                                 .join(ch_fixed_image)
                                 .join(out_forward_image_transform)
                                 .join(ch_moving_mask)
-                                .map{ meta, moving, fixed, transform, mask -> mask ? [meta, moving, fixed, transform] : [] } )
+                                .filter{ _meta, _moving, _fixed, _transform, mask -> mask }
+                                .map{ meta, moving, fixed, transform, _mask -> [meta, moving, fixed, transform] } )
         out_image_warped = out_image_warped
-            .join(WARP_IMAGE_TO_FIXED.out.warped_image)
-            .map{ meta, warped, masked_warped -> masked_warped :[meta, masked_warped ?: warped] }
+            .join(WARP_IMAGE_TO_FIXED.out.warped_image, remainder: true)
+            .map{ meta, warped, warped_from_mask -> [meta, (warped_from_mask ?: warped)] }
         ch_versions = ch_versions.mix(WARP_IMAGE_TO_FIXED.out.versions.first())
 
         // Register original ref image
@@ -289,10 +293,11 @@ workflow REGISTRATION {
                                 .join(ch_moving_image)
                                 .join(out_backward_image_transform)
                                 .join(ch_fixed_mask)
-                                .map{ meta, moving, fixed, transform, mask -> mask ? [meta, moving, fixed, transform] : [] } )
+                                .filter{ _meta, _moving, _fixed, _transform, mask -> mask }
+                                .map{ meta, moving, fixed, transform, _mask -> [meta, moving, fixed, transform] } )
         out_ref_warped = out_ref_warped
-            .join(WARP_IMAGE_TO_MOVING.out.warped_image)
-            .map{ meta, warped, masked_warped -> [meta, masked_warped ?: warped] }
+            .join(WARP_IMAGE_TO_MOVING.out.warped_image, remainder: true)
+            .map{ meta, warped, warped_from_mask -> [meta, (warped_from_mask ?: warped)] }
         ch_versions = ch_versions.mix(WARP_IMAGE_TO_MOVING.out.versions.first())
 
     emit:

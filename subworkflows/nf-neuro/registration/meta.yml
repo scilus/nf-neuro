@@ -95,7 +95,7 @@ input:
   - ch_fixed_mask:
       type: file
       description: |
-        Fixed mask will be use to mask the fixed image during registration.
+        Fixed mask will be used to mask the fixed image during registration.
       structure:
         - meta:
             type: map
@@ -108,7 +108,7 @@ input:
   - ch_moving_mask:
       type: file
       description: |
-        Moving mask will be use to mask the moving image during registration.
+        Moving mask will be used to mask the moving image during registration.
       structure:
         - meta:
             type: map
@@ -139,7 +139,7 @@ input:
       entries:
         masking_strategy:
           type: string
-          description: Masking strategy to use for registration. Options are 'none', 'apriori', 'both'.
+          description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
           default: "none"
         run_easyreg:
           type: boolean

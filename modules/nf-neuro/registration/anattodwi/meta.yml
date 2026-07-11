@@ -45,7 +45,7 @@ args:
       default: 1234
   - masking_strategy:
       type: string
-      description: Masking strategy to use for registration. Options are 'none', 'apriori', 'both'.
+      description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
       default: "none"
 input:
   - - meta:

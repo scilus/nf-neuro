@@ -28,7 +28,7 @@ process REGISTRATION_ANATTODWI {
     def run_qc = task.ext.run_qc as Boolean || false
     def args = task.ext.args ?: ''
 
-    if ( task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal" ) args += " -x ${fixed_mask ?: 'NULL'},${moving_mask ?: 'NULL'}"
+    if ( task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal" ) args += " -x \"${fixed_mask ?: 'NULL'},${moving_mask ?: 'NULL'}\""
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=${task.ext.single_thread ? 1 : task.cpus}
     export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}
