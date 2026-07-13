@@ -59,7 +59,15 @@
                         {
                             "id": "test"
                         },
-                        "test_warped.nii.gz"
+                        "test_b0_warped.nii.gz"
+                    ]
+                ],
+                "reference_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz"
                     ]
                 ],
                 "versions": [
@@ -72,7 +80,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T22:38:54.809065239"
+        "timestamp": "2026-07-13T10:29:59.551538877"
     },
     "registration - easyreg": {
         "content": [
@@ -130,7 +138,7 @@
                         {
                             "id": "test"
                         },
-                        "test_warped.nii.gz"
+                        "test_T1w_warped.nii.gz"
                     ]
                 ],
                 "reference_segmentation": [
@@ -166,7 +174,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T22:38:45.322600977"
+        "timestamp": "2026-07-13T10:29:45.268529864"
     },
     "registration - ANTs - SyNQuick": {
         "content": [
@@ -263,6 +271,14 @@
                         "test_T1w_warped.nii.gz"
                     ]
                 ],
+                "reference_warped_masked": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz"
+                    ]
+                ],
                 "versions": [
                     "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
                     "versions.yml:md5,a338911f46f2c623d87eab600c524ffb"
@@ -273,7 +289,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T22:38:31.882107231"
+        "timestamp": "2026-07-13T11:21:06.660214686"
     },
     "registration - ANTs - Anat to DWI": {
         "content": [
@@ -362,6 +378,14 @@
                         "test_registration_anattodwi_mqc.gif"
                     ]
                 ],
+                "reference_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz"
+                    ]
+                ],
                 "versions": [
                     "versions.yml:md5,03b958f14a890b541bb76c73f7a72847"
                 ]
@@ -371,6 +395,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T22:38:14.73218299"
+        "timestamp": "2026-07-13T11:20:24.201960901"
     }
 }

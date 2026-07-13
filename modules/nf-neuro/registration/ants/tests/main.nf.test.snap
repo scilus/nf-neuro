@@ -15,10 +15,18 @@
                         {
                             "id": "test"
                         },
-                        "test_forward1_affine.mat:md5,3bc315e13074f374dda32e29e13f201a"
+                        "test_warped_reference.nii.gz:md5,aecd2a8b83026219078af73aaa0fdeb7"
                     ]
                 ],
                 "10": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,6cb6f9efc4910087b32943da4f579ee4"
+                    ]
+                ],
+                "11": [
                     "versions.yml:md5,0b121e44c28b1c3efb04ae0dfc9ec76c"
                 ],
                 "2": [
@@ -26,7 +34,7 @@
                         {
                             "id": "test"
                         },
-                        "test_forward0_warp.nii.gz:md5,384082f9f4c14f3235abc5d572dc8336"
+                        "test_forward1_affine.mat:md5,3bc315e13074f374dda32e29e13f201a"
                     ]
                 ],
                 "3": [
@@ -34,7 +42,7 @@
                         {
                             "id": "test"
                         },
-                        "test_backward1_warp.nii.gz:md5,06e37e91eb8b489cb41e8f8501e9ecc8"
+                        "test_forward0_warp.nii.gz:md5,384082f9f4c14f3235abc5d572dc8336"
                     ]
                 ],
                 "4": [
@@ -42,7 +50,7 @@
                         {
                             "id": "test"
                         },
-                        "test_backward0_affine.mat:md5,9344bac7ae2d83e4e45367377bc37455"
+                        "test_backward1_warp.nii.gz:md5,06e37e91eb8b489cb41e8f8501e9ecc8"
                     ]
                 ],
                 "5": [
@@ -50,10 +58,7 @@
                         {
                             "id": "test"
                         },
-                        [
-                            "test_forward0_warp.nii.gz:md5,384082f9f4c14f3235abc5d572dc8336",
-                            "test_forward1_affine.mat:md5,3bc315e13074f374dda32e29e13f201a"
-                        ]
+                        "test_backward0_affine.mat:md5,9344bac7ae2d83e4e45367377bc37455"
                     ]
                 ],
                 "6": [
@@ -62,8 +67,8 @@
                             "id": "test"
                         },
                         [
-                            "test_backward0_affine.mat:md5,9344bac7ae2d83e4e45367377bc37455",
-                            "test_backward1_warp.nii.gz:md5,06e37e91eb8b489cb41e8f8501e9ecc8"
+                            "test_forward0_warp.nii.gz:md5,384082f9f4c14f3235abc5d572dc8336",
+                            "test_forward1_affine.mat:md5,3bc315e13074f374dda32e29e13f201a"
                         ]
                     ]
                 ],
@@ -84,8 +89,8 @@
                             "id": "test"
                         },
                         [
-                            "test_forward0_warp.nii.gz:md5,384082f9f4c14f3235abc5d572dc8336",
-                            "test_forward1_affine.mat:md5,3bc315e13074f374dda32e29e13f201a"
+                            "test_backward0_affine.mat:md5,9344bac7ae2d83e4e45367377bc37455",
+                            "test_backward1_warp.nii.gz:md5,06e37e91eb8b489cb41e8f8501e9ecc8"
                         ]
                     ]
                 ],
@@ -94,7 +99,10 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,6cb6f9efc4910087b32943da4f579ee4"
+                        [
+                            "test_forward0_warp.nii.gz:md5,384082f9f4c14f3235abc5d572dc8336",
+                            "test_forward1_affine.mat:md5,3bc315e13074f374dda32e29e13f201a"
+                        ]
                     ]
                 ],
                 "backward_affine": [
@@ -133,6 +141,14 @@
                             "id": "test"
                         },
                         "test_backward1_warp.nii.gz:md5,06e37e91eb8b489cb41e8f8501e9ecc8"
+                    ]
+                ],
+                "fixed_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz:md5,aecd2a8b83026219078af73aaa0fdeb7"
                     ]
                 ],
                 "forward_affine": [
@@ -198,7 +214,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T17:35:19.380059833"
+        "timestamp": "2026-07-13T09:01:12.623392808"
     },
     "registration - ants - stub": {
         "content": [
@@ -210,7 +226,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-02-26T22:31:18.974318044"
+        "timestamp": "2026-07-13T09:14:31.190460359"
     },
     "registration - ants - SyN quick": {
         "content": [
@@ -228,10 +244,18 @@
                         {
                             "id": "test"
                         },
-                        "test_forward1_affine.mat:md5,41afa6fa72a013820a3d3d8ce4986002"
+                        "test_warped_reference.nii.gz:md5,3cbad0d0163e9bd59b3f6b865e464ffb"
                     ]
                 ],
                 "10": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,b685aa586e6b61196b442740c1056eb5"
+                    ]
+                ],
+                "11": [
                     "versions.yml:md5,0b121e44c28b1c3efb04ae0dfc9ec76c"
                 ],
                 "2": [
@@ -239,7 +263,7 @@
                         {
                             "id": "test"
                         },
-                        "test_forward0_warp.nii.gz:md5,806c26fdf31077d4b035a2009db54c95"
+                        "test_forward1_affine.mat:md5,41afa6fa72a013820a3d3d8ce4986002"
                     ]
                 ],
                 "3": [
@@ -247,7 +271,7 @@
                         {
                             "id": "test"
                         },
-                        "test_backward1_warp.nii.gz:md5,4cca843970b2ed3d02ecf43a31502857"
+                        "test_forward0_warp.nii.gz:md5,806c26fdf31077d4b035a2009db54c95"
                     ]
                 ],
                 "4": [
@@ -255,7 +279,7 @@
                         {
                             "id": "test"
                         },
-                        "test_backward0_affine.mat:md5,9b6845301aaeaf43a1cf9da4e4cb671f"
+                        "test_backward1_warp.nii.gz:md5,4cca843970b2ed3d02ecf43a31502857"
                     ]
                 ],
                 "5": [
@@ -263,10 +287,7 @@
                         {
                             "id": "test"
                         },
-                        [
-                            "test_forward0_warp.nii.gz:md5,806c26fdf31077d4b035a2009db54c95",
-                            "test_forward1_affine.mat:md5,41afa6fa72a013820a3d3d8ce4986002"
-                        ]
+                        "test_backward0_affine.mat:md5,9b6845301aaeaf43a1cf9da4e4cb671f"
                     ]
                 ],
                 "6": [
@@ -275,8 +296,8 @@
                             "id": "test"
                         },
                         [
-                            "test_backward0_affine.mat:md5,9b6845301aaeaf43a1cf9da4e4cb671f",
-                            "test_backward1_warp.nii.gz:md5,4cca843970b2ed3d02ecf43a31502857"
+                            "test_forward0_warp.nii.gz:md5,806c26fdf31077d4b035a2009db54c95",
+                            "test_forward1_affine.mat:md5,41afa6fa72a013820a3d3d8ce4986002"
                         ]
                     ]
                 ],
@@ -297,8 +318,8 @@
                             "id": "test"
                         },
                         [
-                            "test_forward0_warp.nii.gz:md5,806c26fdf31077d4b035a2009db54c95",
-                            "test_forward1_affine.mat:md5,41afa6fa72a013820a3d3d8ce4986002"
+                            "test_backward0_affine.mat:md5,9b6845301aaeaf43a1cf9da4e4cb671f",
+                            "test_backward1_warp.nii.gz:md5,4cca843970b2ed3d02ecf43a31502857"
                         ]
                     ]
                 ],
@@ -307,7 +328,10 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,b685aa586e6b61196b442740c1056eb5"
+                        [
+                            "test_forward0_warp.nii.gz:md5,806c26fdf31077d4b035a2009db54c95",
+                            "test_forward1_affine.mat:md5,41afa6fa72a013820a3d3d8ce4986002"
+                        ]
                     ]
                 ],
                 "backward_affine": [
@@ -346,6 +370,14 @@
                             "id": "test"
                         },
                         "test_backward1_warp.nii.gz:md5,4cca843970b2ed3d02ecf43a31502857"
+                    ]
+                ],
+                "fixed_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz:md5,3cbad0d0163e9bd59b3f6b865e464ffb"
                     ]
                 ],
                 "forward_affine": [
@@ -411,7 +443,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T17:32:31.640927711"
+        "timestamp": "2026-07-13T08:57:44.546094663"
     },
     "registration - ants - SyN": {
         "content": [
@@ -429,10 +461,13 @@
                         {
                             "id": "test"
                         },
-                        "test_forward1_affine.mat:md5,0fb5879b315f32bb8e06aa2993009115"
+                        "test_warped_reference.nii.gz:md5,8d9d3bd39214d9b4fd0cedfc2458d093"
                     ]
                 ],
                 "10": [
+                    
+                ],
+                "11": [
                     "versions.yml:md5,0b121e44c28b1c3efb04ae0dfc9ec76c"
                 ],
                 "2": [
@@ -440,7 +475,7 @@
                         {
                             "id": "test"
                         },
-                        "test_forward0_warp.nii.gz:md5,a32206a00e93b79054e9b8fa0f7c8015"
+                        "test_forward1_affine.mat:md5,0fb5879b315f32bb8e06aa2993009115"
                     ]
                 ],
                 "3": [
@@ -448,7 +483,7 @@
                         {
                             "id": "test"
                         },
-                        "test_backward1_warp.nii.gz:md5,4e85fa2257f7364fde205adfa1b3c8d3"
+                        "test_forward0_warp.nii.gz:md5,a32206a00e93b79054e9b8fa0f7c8015"
                     ]
                 ],
                 "4": [
@@ -456,7 +491,7 @@
                         {
                             "id": "test"
                         },
-                        "test_backward0_affine.mat:md5,ff00be1483698e5478bfa94abf2b42b2"
+                        "test_backward1_warp.nii.gz:md5,4e85fa2257f7364fde205adfa1b3c8d3"
                     ]
                 ],
                 "5": [
@@ -464,10 +499,7 @@
                         {
                             "id": "test"
                         },
-                        [
-                            "test_forward0_warp.nii.gz:md5,a32206a00e93b79054e9b8fa0f7c8015",
-                            "test_forward1_affine.mat:md5,0fb5879b315f32bb8e06aa2993009115"
-                        ]
+                        "test_backward0_affine.mat:md5,ff00be1483698e5478bfa94abf2b42b2"
                     ]
                 ],
                 "6": [
@@ -476,8 +508,8 @@
                             "id": "test"
                         },
                         [
-                            "test_backward0_affine.mat:md5,ff00be1483698e5478bfa94abf2b42b2",
-                            "test_backward1_warp.nii.gz:md5,4e85fa2257f7364fde205adfa1b3c8d3"
+                            "test_forward0_warp.nii.gz:md5,a32206a00e93b79054e9b8fa0f7c8015",
+                            "test_forward1_affine.mat:md5,0fb5879b315f32bb8e06aa2993009115"
                         ]
                     ]
                 ],
@@ -498,13 +530,21 @@
                             "id": "test"
                         },
                         [
-                            "test_forward0_warp.nii.gz:md5,a32206a00e93b79054e9b8fa0f7c8015",
-                            "test_forward1_affine.mat:md5,0fb5879b315f32bb8e06aa2993009115"
+                            "test_backward0_affine.mat:md5,ff00be1483698e5478bfa94abf2b42b2",
+                            "test_backward1_warp.nii.gz:md5,4e85fa2257f7364fde205adfa1b3c8d3"
                         ]
                     ]
                 ],
                 "9": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward0_warp.nii.gz:md5,a32206a00e93b79054e9b8fa0f7c8015",
+                            "test_forward1_affine.mat:md5,0fb5879b315f32bb8e06aa2993009115"
+                        ]
+                    ]
                 ],
                 "backward_affine": [
                     [
@@ -542,6 +582,14 @@
                             "id": "test"
                         },
                         "test_backward1_warp.nii.gz:md5,4e85fa2257f7364fde205adfa1b3c8d3"
+                    ]
+                ],
+                "fixed_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz:md5,8d9d3bd39214d9b4fd0cedfc2458d093"
                     ]
                 ],
                 "forward_affine": [
@@ -602,7 +650,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T17:31:29.622156975"
+        "timestamp": "2026-07-13T08:56:23.888876135"
     },
     "registration - ants - both - fixed mask": {
         "content": [
@@ -620,10 +668,18 @@
                         {
                             "id": "test"
                         },
-                        "test_forward1_affine.mat:md5,18c2ec8b5cf3fb4e038cce665eb53e7c"
+                        "test_warped_reference.nii.gz:md5,e29b6d5f67b52afa7ab5b6ae90afd375"
                     ]
                 ],
                 "10": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,fba29c34dd2cebde98e9c72e5c991550"
+                    ]
+                ],
+                "11": [
                     "versions.yml:md5,0b121e44c28b1c3efb04ae0dfc9ec76c"
                 ],
                 "2": [
@@ -631,7 +687,7 @@
                         {
                             "id": "test"
                         },
-                        "test_forward0_warp.nii.gz:md5,d1f0ce951610683042aab377c665295d"
+                        "test_forward1_affine.mat:md5,18c2ec8b5cf3fb4e038cce665eb53e7c"
                     ]
                 ],
                 "3": [
@@ -639,7 +695,7 @@
                         {
                             "id": "test"
                         },
-                        "test_backward1_warp.nii.gz:md5,e5324ab5af8cceda46e0bb642dfc02aa"
+                        "test_forward0_warp.nii.gz:md5,d1f0ce951610683042aab377c665295d"
                     ]
                 ],
                 "4": [
@@ -647,7 +703,7 @@
                         {
                             "id": "test"
                         },
-                        "test_backward0_affine.mat:md5,ba4cdd24110970c8d08b8df39ee4fd95"
+                        "test_backward1_warp.nii.gz:md5,e5324ab5af8cceda46e0bb642dfc02aa"
                     ]
                 ],
                 "5": [
@@ -655,10 +711,7 @@
                         {
                             "id": "test"
                         },
-                        [
-                            "test_forward0_warp.nii.gz:md5,d1f0ce951610683042aab377c665295d",
-                            "test_forward1_affine.mat:md5,18c2ec8b5cf3fb4e038cce665eb53e7c"
-                        ]
+                        "test_backward0_affine.mat:md5,ba4cdd24110970c8d08b8df39ee4fd95"
                     ]
                 ],
                 "6": [
@@ -667,8 +720,8 @@
                             "id": "test"
                         },
                         [
-                            "test_backward0_affine.mat:md5,ba4cdd24110970c8d08b8df39ee4fd95",
-                            "test_backward1_warp.nii.gz:md5,e5324ab5af8cceda46e0bb642dfc02aa"
+                            "test_forward0_warp.nii.gz:md5,d1f0ce951610683042aab377c665295d",
+                            "test_forward1_affine.mat:md5,18c2ec8b5cf3fb4e038cce665eb53e7c"
                         ]
                     ]
                 ],
@@ -689,8 +742,8 @@
                             "id": "test"
                         },
                         [
-                            "test_forward0_warp.nii.gz:md5,d1f0ce951610683042aab377c665295d",
-                            "test_forward1_affine.mat:md5,18c2ec8b5cf3fb4e038cce665eb53e7c"
+                            "test_backward0_affine.mat:md5,ba4cdd24110970c8d08b8df39ee4fd95",
+                            "test_backward1_warp.nii.gz:md5,e5324ab5af8cceda46e0bb642dfc02aa"
                         ]
                     ]
                 ],
@@ -699,7 +752,10 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,fba29c34dd2cebde98e9c72e5c991550"
+                        [
+                            "test_forward0_warp.nii.gz:md5,d1f0ce951610683042aab377c665295d",
+                            "test_forward1_affine.mat:md5,18c2ec8b5cf3fb4e038cce665eb53e7c"
+                        ]
                     ]
                 ],
                 "backward_affine": [
@@ -738,6 +794,14 @@
                             "id": "test"
                         },
                         "test_backward1_warp.nii.gz:md5,e5324ab5af8cceda46e0bb642dfc02aa"
+                    ]
+                ],
+                "fixed_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz:md5,e29b6d5f67b52afa7ab5b6ae90afd375"
                     ]
                 ],
                 "forward_affine": [
@@ -803,7 +867,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T17:36:45.524357151"
+        "timestamp": "2026-07-13T09:02:40.930435009"
     },
     "registration - ants - no warps": {
         "content": [
@@ -821,34 +885,35 @@
                         {
                             "id": "test"
                         },
-                        "test_forward1_affine.mat:md5,72aee9284d5e624be5dbc15cfce8151c"
+                        "test_warped_reference.nii.gz:md5,0636f939cf940ac053f86286797c0982"
                     ]
                 ],
                 "10": [
+                    
+                ],
+                "11": [
                     "versions.yml:md5,0b121e44c28b1c3efb04ae0dfc9ec76c"
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat:md5,72aee9284d5e624be5dbc15cfce8151c"
+                    ]
                 ],
                 "3": [
                     
                 ],
                 "4": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_backward0_affine.mat:md5,862976c1966b1af64acd7b40d0f922e4"
-                    ]
+                    
                 ],
                 "5": [
                     [
                         {
                             "id": "test"
                         },
-                        [
-                            "test_forward1_affine.mat:md5,72aee9284d5e624be5dbc15cfce8151c"
-                        ]
+                        "test_backward0_affine.mat:md5,862976c1966b1af64acd7b40d0f922e4"
                     ]
                 ],
                 "6": [
@@ -857,7 +922,7 @@
                             "id": "test"
                         },
                         [
-                            "test_backward0_affine.mat:md5,862976c1966b1af64acd7b40d0f922e4"
+                            "test_forward1_affine.mat:md5,72aee9284d5e624be5dbc15cfce8151c"
                         ]
                     ]
                 ],
@@ -877,12 +942,19 @@
                             "id": "test"
                         },
                         [
-                            "test_forward1_affine.mat:md5,72aee9284d5e624be5dbc15cfce8151c"
+                            "test_backward0_affine.mat:md5,862976c1966b1af64acd7b40d0f922e4"
                         ]
                     ]
                 ],
                 "9": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_forward1_affine.mat:md5,72aee9284d5e624be5dbc15cfce8151c"
+                        ]
+                    ]
                 ],
                 "backward_affine": [
                     [
@@ -914,6 +986,14 @@
                 ],
                 "backward_warp": [
                     
+                ],
+                "fixed_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz:md5,0636f939cf940ac053f86286797c0982"
+                    ]
                 ],
                 "forward_affine": [
                     [
@@ -966,6 +1046,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T17:32:43.930354571"
+        "timestamp": "2026-07-13T08:58:13.291148166"
     }
 }

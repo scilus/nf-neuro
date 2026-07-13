@@ -10,6 +10,7 @@ process REGISTRATION_ANTS {
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                           , emit: image_warped
+        tuple val(meta), path("*_warped_reference.nii.gz")                 , emit: fixed_warped
         tuple val(meta), path("*_forward1_affine.mat")                     , emit: forward_affine, optional: true
         tuple val(meta), path("*_forward0_warp.nii.gz")                    , emit: forward_warp, optional: true
         tuple val(meta), path("*_backward1_warp.nii.gz")                   , emit: backward_warp, optional: true
@@ -44,7 +45,7 @@ process REGISTRATION_ANTS {
     if ( task.ext.histogram_matching ) args += " -j $task.ext.histogram_matching"
     if ( task.ext.repro_mode ) args += " -y $task.ext.repro_mode"
     if ( task.ext.collapse_output ) args += " -z $task.ext.collapse_output"
-    if ( task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal" ) args += " -x \"${fixed_mask ?: 'NULL'},${moving_mask ?: 'NULL'}\""
+    if ( (task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal") && (fixed_mask || moving_mask) ) args += " -x \"${fixed_mask ?: 'NULL'},${moving_mask ?: 'NULL'}\""
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=${task.ext.single_thread ? 1 : task.cpus}
@@ -59,6 +60,7 @@ process REGISTRATION_ANTS {
     moving_id=\${moving_id#${prefix}_*}
 
     mv outputWarped.nii.gz ${prefix}_\${moving_id}_warped.nii.gz
+    mv outputInverseWarped.nii.gz ${prefix}_warped_reference.nii.gz
 
     if [ $transform != "bo" ] && [ $transform != "so" ]; then
         mv output0GenericAffine.mat ${prefix}_forward1_affine.mat
@@ -161,6 +163,7 @@ process REGISTRATION_ANTS {
     scil_viz_volume_screenshot -h
 
     touch ${prefix}_\${moving_id}_warped.nii.gz
+    touch ${prefix}_warped_reference.nii.gz
     touch ${prefix}_forward1_affine.mat
     touch ${prefix}_forward0_warp.nii.gz
     touch ${prefix}_backward1_warp.nii.gz

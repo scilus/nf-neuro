@@ -183,6 +183,7 @@ workflow REGISTRATION {
 
             // ** Set compulsory outputs ** //
             out_image_warped = REGISTRATION_SYNTHMORPH.out.image_warped
+            out_ref_warped = REGISTRATION_SYNTHMORPH.out.fixed_warped
             out_forward_affine = ch_conversion_outputs.forward_affine
             out_forward_warp = ch_conversion_outputs.forward_warp
             out_backward_affine = ch_conversion_outputs.backward_affine
@@ -196,7 +197,6 @@ workflow REGISTRATION {
             out_forward_tractogram_transform = out_backward_image_transform
             out_backward_tractogram_transform = out_forward_image_transform
             // ** and optional outputs. ** //
-            out_ref_warped = channel.empty()
             out_segmentation = channel.empty()
             out_ref_segmentation = channel.empty()
         }
@@ -229,6 +229,7 @@ workflow REGISTRATION {
 
             // ** Set compulsory outputs ** //
             out_image_warped = REGISTRATION_ANATTODWI.out.anat_warped
+            out_ref_warped = REGISTRATION_ANATTODWI.out.fixed_warped
             out_forward_affine = REGISTRATION_ANATTODWI.out.forward_affine
             out_forward_warp = REGISTRATION_ANATTODWI.out.forward_warp
             out_backward_affine = REGISTRATION_ANATTODWI.out.backward_affine
@@ -252,6 +253,7 @@ workflow REGISTRATION {
 
             // ** Set compulsory outputs ** //
             out_image_warped = out_image_warped.mix(REGISTRATION_ANTS.out.image_warped)
+            out_ref_warped = out_ref_warped.mix(REGISTRATION_ANTS.out.fixed_warped)
             out_forward_affine = out_forward_affine.mix(REGISTRATION_ANTS.out.forward_affine)
             out_forward_warp = out_forward_warp.mix(REGISTRATION_ANTS.out.forward_warp)
             out_backward_affine = out_backward_affine.mix(REGISTRATION_ANTS.out.backward_affine)
@@ -262,7 +264,6 @@ workflow REGISTRATION {
             out_backward_tractogram_transform = out_backward_tractogram_transform.mix(REGISTRATION_ANTS.out.backward_tractogram_transform)
 
             // **and optional outputs **//
-            out_ref_warped = channel.empty()
             out_segmentation = channel.empty()
             out_ref_segmentation = channel.empty()
         }

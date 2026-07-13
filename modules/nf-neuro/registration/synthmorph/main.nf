@@ -10,6 +10,7 @@ process REGISTRATION_SYNTHMORPH {
 
     output:
     tuple val(meta), path("*_warped.nii.gz")                               , emit: image_warped
+    tuple val(meta), path("*_warped_reference.nii.gz")                     , emit: fixed_warped
     tuple val(meta), path("*_forward{0,1,_standalone}_affine.lta")         , emit: forward_affine, optional: true
     tuple val(meta), path("*_forward0_deform.nii.gz")                      , emit: forward_warp, optional: true
     tuple val(meta), path("*_backward1_deform.nii.gz")                     , emit: backward_warp, optional: true
@@ -38,6 +39,11 @@ process REGISTRATION_SYNTHMORPH {
     """
     export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}
     export CUDA_VISIBLE_DEVICES="-1"
+
+    moving_base=\$(basename "${moving_image}")
+    ext=\${moving_base#*.}
+    moving_id=\${moving_base%.\${ext}}
+    moving_id=\${moving_id#${prefix}_*}
 
     echo "Available memory : ${task.memory}"
 
@@ -91,7 +97,9 @@ process REGISTRATION_SYNTHMORPH {
         mri_synthmorph register \$moving fixed.nii.gz -v -m \$model \$weight \$args \
             -t ${prefix}_forward\${j}_\$model.\${extension[\$model]} \
             -T ${prefix}_backward\${i}_\$model.\${extension[\$model]} \
-            -o warped.nii.gz -j ${nthreads} $extent $use_gpu
+            -o warped.nii.gz \
+            -O fixed_warped.nii.gz \
+            -j ${nthreads} $extent $use_gpu
 
         if [ \$initializer ]; then
             # Retag initializer file to standalone using sed
@@ -112,7 +120,8 @@ process REGISTRATION_SYNTHMORPH {
 
     done
 
-    mv warped.nii.gz ${prefix}_warped.nii.gz
+    mv warped.nii.gz ${prefix}_\${moving_id}_warped.nii.gz
+    mv fixed_warped.nii.gz ${prefix}_warped_reference.nii.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -126,7 +135,13 @@ process REGISTRATION_SYNTHMORPH {
     """
     mri_synthmorph -h
 
-    touch ${prefix}_warped.nii.gz
+    moving_base=\$(basename "${moving_image}")
+    ext=\${moving_base#*.}
+    moving_id=\${moving_base%.\${ext}}
+    moving_id=\${moving_id#${prefix}_*}
+
+    touch ${prefix}_\${moving_id}_warped.nii.gz
+    touch ${prefix}_warped_reference.nii.gz
     touch ${prefix}_forward1_affine.lta
     touch ${prefix}_forward0_warp.nii.gz
     touch ${prefix}_backward1_warp.nii.gz

@@ -9,6 +9,7 @@ process REGISTRATION_ANATTODWI {
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                            , emit: anat_warped
+        tuple val(meta), path("*_warped_reference.nii.gz")                  , emit: fixed_warped
         tuple val(meta), path("*_forward1_affine.mat")                      , emit: forward_affine
         tuple val(meta), path("*_forward0_warp.nii.gz")                     , emit: forward_warp
         tuple val(meta), path("*_backward1_warp.nii.gz")                    , emit: backward_warp
@@ -28,14 +29,14 @@ process REGISTRATION_ANATTODWI {
     def run_qc = task.ext.run_qc as Boolean || false
     def args = task.ext.args ?: ''
 
-    if ( task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal" ) args += " -x \"${fixed_mask ?: 'NULL'},${moving_mask ?: 'NULL'}\""
+    if (( task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal" ) && (fixed_mask || moving_mask)) args += " -x \"${fixed_mask ?: 'NULL'},${moving_mask ?: 'NULL'}\""
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=${task.ext.single_thread ? 1 : task.cpus}
     export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}
     export ANTS_RANDOM_SEED=${task.ext.ants_rng_seed ? task.ext.ants_rng_seed : "1234"}
 
     antsRegistration --dimensionality 3 --float 0\
-        --output [forward,warped.nii.gz]\
+        --output [forward,warped.nii.gz,InverseWarped.nii.gz]\
         --interpolation Linear --use-histogram-matching 0\
         --winsorize-image-intensities [0.005,0.995]\
         --initial-moving-transform [$fixed_reference,$moving_anat,1]\
@@ -54,12 +55,11 @@ process REGISTRATION_ANATTODWI {
         --smoothing-sigmas 3x2x1\
         $args
 
-    moving_base=\$(basename "${moving_anat}")
-    ext=\${moving_base#*.}
-    moving_id=\${moving_base%.\${ext}}
+    moving_id=\$(basename $moving_anat .nii.gz)
     moving_id=\${moving_id#${prefix}_*}
 
     mv warped.nii.gz ${prefix}_\${moving_id}_warped.nii.gz
+    mv InverseWarped.nii.gz ${prefix}_warped_reference.nii.gz
     mv forward0GenericAffine.mat ${prefix}_forward1_affine.mat
     mv forward1Warp.nii.gz ${prefix}_forward0_warp.nii.gz
     mv forward1InverseWarp.nii.gz ${prefix}_backward1_warp.nii.gz
@@ -143,6 +143,7 @@ process REGISTRATION_ANATTODWI {
     moving_id=\${moving_id#${prefix}_*}
 
     touch ${prefix}_\${moving_id}_warped.nii.gz
+    touch ${prefix}_warped_reference.nii.gz
     touch ${prefix}_forward1_affine.mat
     touch ${prefix}_forward0_warp.nii.gz
     touch ${prefix}_backward1_warp.nii.gz
