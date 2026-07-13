@@ -139,6 +139,11 @@ input:
       entries:
         masking_strategy:
           type: string
+          choices:
+            - none
+            - apriori
+            - internal
+            - both
           description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
           default: "none"
         run_easyreg:
@@ -165,7 +170,7 @@ output:
   - reference_warped:
       type: file
       description: |
-        ONLY PROVIDED BY REGISTRATION_EASYREG. Channel containing the reference image warped in moving space.
+        Channel containing the reference image warped in moving space.
       structure:
         - meta:
             type: map
@@ -173,6 +178,31 @@ output:
         - image:
             type: file
             description: Warped reference image in moving space.
+      pattern: "*.{nii,nii.gz}"
+      mandatory: false
+  - image_warped_masked:
+      type: file
+      description: |
+        Channel containing images warped in fixed space.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - image:
+            type: file
+            description: Warped image masked in fixed space.
+      pattern: "*.{nii,nii.gz}"
+  - reference_warped_masked:
+      type: file
+      description: |
+        Channel containing the reference image warped in moving space.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - image:
+            type: file
+            description: Warped reference image masked in moving space.
       pattern: "*.{nii,nii.gz}"
       mandatory: false
   - forward_affine:

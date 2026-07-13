@@ -133,6 +133,11 @@ args:
       default: false
   - masking_strategy:
       type: string
+      choices:
+        - none
+        - apriori
+        - internal
+        - both
       description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
       default: "none"
 input:

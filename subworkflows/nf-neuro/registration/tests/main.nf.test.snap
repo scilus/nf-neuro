@@ -271,14 +271,6 @@
                         "test_T1w_warped.nii.gz"
                     ]
                 ],
-                "reference_warped_masked": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_warped_reference.nii.gz"
-                    ]
-                ],
                 "versions": [
                     "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
                     "versions.yml:md5,a338911f46f2c623d87eab600c524ffb"
@@ -289,7 +281,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-13T11:21:06.660214686"
+        "timestamp": "2026-07-13T16:59:05.118623545"
     },
     "registration - ANTs - Anat to DWI": {
         "content": [
@@ -395,6 +387,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-13T11:20:24.201960901"
+        "timestamp": "2026-07-13T17:02:40.341565686"
     }
 }

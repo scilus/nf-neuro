@@ -18,7 +18,7 @@ process IMAGE_APPLYMASK {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = task.ext.first_suffix ? task.ext.first_suffix + "_masked"  : "masked"
     def nthreads_mrtrix = task.ext.single_thread ? "-nthreads 0" : "-nthreads ${task.cpus}"
-    def data_type = task.ext.data_type ? "-datatype ${task.ext.data_type}" : " -datatype float32"
+    def data_type = task.ext.data_type ? "-datatype ${task.ext.data_type}" : "-datatype float32"
 
     """
     export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}

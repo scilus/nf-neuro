@@ -56,6 +56,7 @@ workflow REGISTRATION {
                 }
             }
             else {
+                ch_fixed_metric_ready = ch_metric
                 ch_fixed_image_ready = ch_fixed_image
             }
             if ( ch_moving_mask ) {
@@ -270,12 +271,12 @@ workflow REGISTRATION {
 
         out_image_warped_masked = out_image_warped
             .join(ch_moving_mask)
-            .filter{ _meta, _warped, mask -> mask }
+            .filter{ _meta, _warped, mask -> options.masking_strategy in ["both", "apriori"] && mask }
             .map{ meta, warped, _mask -> [meta, warped] }
 
         out_ref_warped_masked = out_ref_warped
             .join(ch_fixed_mask)
-            .filter{ _meta, _warped, mask -> mask }
+            .filter{ _meta, _warped, mask -> options.masking_strategy in ["both", "apriori"] && mask }
             .map{ meta, warped, _mask -> [meta, warped] }
 
         // Register original moving image
