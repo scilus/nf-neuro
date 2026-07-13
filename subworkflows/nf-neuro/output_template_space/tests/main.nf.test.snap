@@ -87,7 +87,7 @@
                         {
                             "id": "test"
                         },
-                        "test_warped.nii.gz"
+                        "test_mni_masked_warped.nii.gz"
                     ]
                 ],
                 "ch_registered_labels_files": [
@@ -152,7 +152,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-10T22:37:33.271078795"
+        "timestamp": "2026-07-13T14:12:45.301916755"
     },
     "Template MNI152NLin2009cAsym - local templates": {
         "content": [

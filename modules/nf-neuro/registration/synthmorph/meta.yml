@@ -109,10 +109,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*_fixed_warped.nii.gz":
+      - "*_warped_reference.nii.gz":
           type: file
           description: Fixed/Reference warped image
-          pattern: "*_fixed_warped.nii.gz"
+          pattern: "*_warped_reference.nii.gz"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
   forward_affine:
