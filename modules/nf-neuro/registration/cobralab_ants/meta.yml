@@ -69,7 +69,7 @@ args:
       default: ""
   - mask_extract:
       type: boolean
-      description: "Use masks to extract input images, only works with both images masked"
+      description: "Use masks to extract input images, only works with both images masked. Requires masks to be forwarded to the tool (masking_strategy = 'internal' or 'both')."
       default: false
   - keep_mask_after_extract:
       type: boolean
@@ -198,6 +198,10 @@ args:
       type: boolean
       description: If true, the command will be run in single-threaded mode. By default, the command will use multiple threads based on the number of CPUs allocated to the task.
       default: false
+  - masking_strategy:
+      type: string
+      description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
+      default: "none"
 input:
   - - meta:
         type: map
@@ -220,14 +224,14 @@ input:
           - edam: http://edamontology.org/format_4001 # NIFTI format
     - fixed_mask:
         type: file
-        description: Mask for the fixed image
+        description: Fixed image mask
         pattern: "*.{nii,nii.gz}"
         mandatory: false
         ontologies:
           - edam: http://edamontology.org/format_4001 # NIFTI format
     - moving_mask:
         type: file
-        description: Mask for the moving image
+        description: Moving image mask
         pattern: "*.{nii,nii.gz}"
         mandatory: false
         ontologies:
@@ -243,6 +247,18 @@ output:
           type: file
           description: Nifti volume after registration.
           pattern: "*_warped.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  fixed_warped:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_warped_reference.nii.gz":
+          type: file
+          description: Reference image warped to moving space.
+          pattern: "*_warped_reference.nii.gz"
           ontologies:
             - edam: http://edamontology.org/format_3989 # GZIP format
   forward_affine:

@@ -10,6 +10,7 @@ process REGISTRATION_COBRALABANTS {
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                           , emit: image_warped
+        tuple val(meta), path("*_warped_reference.nii.gz")                 , emit: fixed_warped
         tuple val(meta), path("*_forward1_affine.mat")                     , emit: forward_affine, optional: true
         tuple val(meta), path("*_forward0_warp.nii.gz")                    , emit: forward_warp, optional: true
         tuple val(meta), path("*_backward1_warp.nii.gz")                   , emit: backward_warp, optional: true
@@ -30,8 +31,10 @@ process REGISTRATION_COBRALABANTS {
     def suffix_qc = task.ext.suffix_qc ?: ""
     def run_qc = task.ext.run_qc as Boolean || false
 
-    if ( fixed_mask ) args += " --fixed-mask $fixed_mask"
-    if ( moving_mask ) args += " --moving-mask $moving_mask"
+    if ( (task.ext.masking_strategy == "both" || task.ext.masking_strategy == "internal") && (fixed_mask || moving_mask) ) {
+        if ( fixed_mask ) args += " --fixed-mask $fixed_mask"
+        if ( moving_mask ) args += " --moving-mask $moving_mask"
+    }
     if ( task.ext.initial_transform ) args += " --initial-transform $task.ext.initial_transform"
     if ( task.ext.float ) args += " --float"
     if ( task.ext.float_linear ) args += " --float-linear"
@@ -85,6 +88,17 @@ process REGISTRATION_COBRALABANTS {
 
     antsApplyTransforms -d 3 -t [${prefix}_forward1_affine.mat,1] \
         -o Linear[${prefix}_backward0_affine.mat]
+
+    if [ "${task.ext.skip_nonlinear}" != "true" ]; then
+        antsApplyTransforms -d 3 -i $fixed_image -r $moving_image -n Linear \
+            -t [${prefix}_backward0_affine.mat,1] \
+            -t ${prefix}_backward1_warp.nii.gz \
+            -o ${prefix}_warped_reference.nii.gz
+    else
+        antsApplyTransforms -d 3 -i $fixed_image -r $moving_image -n Linear \
+            -t [${prefix}_backward0_affine.mat,1] \
+            -o ${prefix}_warped_reference.nii.gz
+    fi
 
     ### ** QC ** ###
     if $run_qc; then
@@ -170,6 +184,7 @@ process REGISTRATION_COBRALABANTS {
     scil_viz_volume_screenshot -h
 
     touch ${prefix}_t1_warped.nii.gz
+    touch ${prefix}_warped_reference.nii.gz
     touch ${prefix}_forward1_affine.mat
     touch ${prefix}_forward0_warp.nii.gz
     touch ${prefix}_backward1_warp.nii.gz
