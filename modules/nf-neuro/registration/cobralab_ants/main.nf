@@ -74,8 +74,10 @@ process REGISTRATION_COBRALABANTS {
     export ANTS_RANDOM_SEED=${task.ext.ants_rng_seed ?: 1234}
     export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}
 
-    moving_id=\$(basename $moving_image .nii.gz)
-    moving_id=\${moving_id#${meta.id}_*}
+    moving_base=\$(basename "${moving_image}")
+    ext=\${moving_base#*.}
+    moving_id=\${moving_base%.\${ext}}
+    moving_id=\${moving_id#${prefix}_*}
 
     antsRegistration_affine_SyN.sh $args --resampled-output ${prefix}_\${moving_id}_warped.nii.gz $moving_image $fixed_image output
 
@@ -112,19 +114,21 @@ process REGISTRATION_COBRALABANTS {
         sagittal_dim=\$((\$sagittal_dim / 2))
 
         # Get fixed ID, moving ID already computed
-        fixed_id=\$(basename $fixed_image .nii.gz)
-        fixed_id=\${fixed_id#${meta.id}_*}
+        fixed_base=\$(basename "${fixed_image}")
+        ext=\${fixed_base#*.}
+        fixed_id=\${fixed_base%.\${ext}}
+        fixed_id=\${fixed_id#${prefix}_*}
 
         # Set viz params.
         viz_params="--display_slice_number --display_lr --size 256 256"
         # Iterate over images.
         for image in fixed_image warped; do
-            mrconvert *\${image}.nii.gz *\${image}_viz.nii.gz -stride -1,2,3
-            scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_coronal.png \
+            mrconvert *\${image}.nii.gz \${image}_viz.nii.gz -stride -1,2,3
+            scil_viz_volume_screenshot \${image}_viz.nii.gz \${image}_coronal.png \
                 --slices \$coronal_dim --axis coronal \$viz_params
-            scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_sagittal.png \
+            scil_viz_volume_screenshot \${image}_viz.nii.gz \${image}_sagittal.png \
                 --slices \$sagittal_dim --axis sagittal \$viz_params
-            scil_viz_volume_screenshot *\${image}_viz.nii.gz \${image}_axial.png \
+            scil_viz_volume_screenshot \${image}_viz.nii.gz \${image}_axial.png \
                 --slices \$axial_dim --axis axial \$viz_params
 
             if [ \$image != fixed_image ]; then
