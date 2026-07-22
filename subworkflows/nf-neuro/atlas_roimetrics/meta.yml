@@ -75,6 +75,18 @@ input:
           type: boolean
           description: If 'true', the IIT bundle masks will be thresholded to create binary masks before extracting the metrics.
           default: false
+        run_gm_roimetrics:
+          type: boolean
+          description: If 'true', also extract metrics per IIT GM Desikan parcellation region, reusing the WM atlas B0 registration.
+          default: false
+        run_roi_volumes:
+          type: boolean
+          description: If 'true', compute voxel count and volume (mm3) for each WM bundle mask and GM region using mrstats.
+          default: false
+        run_roi_metrics:
+          type: boolean
+          description: If 'false', skip STATS_METRICSINROI and STATS_GM_ROIMETRICS (diffusion metric extraction). Useful when only volumes are needed. Defaults to true.
+          default: true
       mandatory: true
 output:
   - json:
