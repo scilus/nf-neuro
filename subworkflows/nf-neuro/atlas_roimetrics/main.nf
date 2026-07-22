@@ -65,18 +65,28 @@ workflow ATLAS_ROIMETRICS {
         ch_versions = ch_versions.mix(TRANSFORM_ATLAS_BUNDLES.out.versions)
 
         //
-        // EXTRACT ROI DIFFUSION METRICS STATISTICS
+        // EXTRACT ROI DIFFUSION METRICS STATISTICS (optional, default: true)
         //
-        // Input: [meta, [metrics_list], [masks]]
-        ch_input_metricsinroi = ch_metrics
-            .join(TRANSFORM_ATLAS_BUNDLES.out.warped_image)
-            .map {
-                meta, metrics, masks ->
-                    [meta, metrics, masks, []]
-            }
+        ch_stats_json = channel.empty()
+        ch_stats_mean = channel.empty()
+        ch_stats_std  = channel.empty()
 
-        STATS_METRICSINROI(ch_input_metricsinroi)
-        ch_versions = ch_versions.mix(STATS_METRICSINROI.out.versions)
+        if (options.run_roi_metrics != false) {
+            // Input: [meta, [metrics_list], [masks]]
+            ch_input_metricsinroi = ch_metrics
+                .join(TRANSFORM_ATLAS_BUNDLES.out.warped_image)
+                .map {
+                    meta, metrics, masks ->
+                        [meta, metrics, masks, []]
+                }
+
+            STATS_METRICSINROI(ch_input_metricsinroi)
+            ch_versions = ch_versions.mix(STATS_METRICSINROI.out.versions)
+
+            ch_stats_json = STATS_METRICSINROI.out.stats_json
+            ch_stats_mean = STATS_METRICSINROI.out.stats_mean
+            ch_stats_std  = STATS_METRICSINROI.out.stats_std
+        }
 
         //
         // COMPUTE WM BUNDLE VOLUMES (optional)
@@ -110,17 +120,19 @@ workflow ATLAS_ROIMETRICS {
             TRANSFORM_GM_ATLAS(ch_transform_gm)
             ch_versions = ch_versions.mix(TRANSFORM_GM_ATLAS.out.versions)
 
-            ch_gm_input = ch_metrics
-                .join(TRANSFORM_GM_ATLAS.out.warped_image)
-                .combine(ATLAS_IIT.out.gm_lut)
-                .map { meta, metrics, gm_warped, lut -> [meta, metrics, gm_warped, lut] }
+            if (options.run_roi_metrics != false) {
+                ch_gm_input = ch_metrics
+                    .join(TRANSFORM_GM_ATLAS.out.warped_image)
+                    .combine(ATLAS_IIT.out.gm_lut)
+                    .map { meta, metrics, gm_warped, lut -> [meta, metrics, gm_warped, lut] }
 
-            STATS_GM_ROIMETRICS(ch_gm_input)
-            ch_versions = ch_versions.mix(STATS_GM_ROIMETRICS.out.versions)
+                STATS_GM_ROIMETRICS(ch_gm_input)
+                ch_versions = ch_versions.mix(STATS_GM_ROIMETRICS.out.versions)
 
-            ch_gm_stats_json = STATS_GM_ROIMETRICS.out.stats_json
-            ch_gm_stats_mean = STATS_GM_ROIMETRICS.out.stats_mean
-            ch_gm_stats_std  = STATS_GM_ROIMETRICS.out.stats_std
+                ch_gm_stats_json = STATS_GM_ROIMETRICS.out.stats_json
+                ch_gm_stats_mean = STATS_GM_ROIMETRICS.out.stats_mean
+                ch_gm_stats_std  = STATS_GM_ROIMETRICS.out.stats_std
+            }
 
             //
             // COMPUTE GM REGION VOLUMES (optional, only when run_roi_volumes also active)
@@ -136,9 +148,9 @@ workflow ATLAS_ROIMETRICS {
         }
 
     emit:
-        stats_json        = STATS_METRICSINROI.out.stats_json
-        stats_tab_mean    = STATS_METRICSINROI.out.stats_mean
-        stats_tab_std     = STATS_METRICSINROI.out.stats_std
+        stats_json        = ch_stats_json
+        stats_tab_mean    = ch_stats_mean
+        stats_tab_std     = ch_stats_std
 
         wm_volumes        = ch_wm_volumes
 
