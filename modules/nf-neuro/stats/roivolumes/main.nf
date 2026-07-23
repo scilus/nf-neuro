@@ -80,13 +80,12 @@ else:
             count   = int(np.sum(data > 0))
             vol_mm3 = count * vox_vol
             out.write(f"{prefix},{region},{count},{vol_mm3:.4f}\\n")
-PYEOF
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        nibabel: \$(python3 -c "import nibabel; print(nibabel.__version__)")
-        numpy: \$(python3 -c "import numpy; print(numpy.__version__)")
-    END_VERSIONS
+with open("versions.yml", "w") as v:
+    v.write('"${task.process}":\\n')
+    v.write(f"    nibabel: {nib.__version__}\\n")
+    v.write(f"    numpy: {np.__version__}\\n")
+PYEOF
     """
 
     stub:
@@ -95,10 +94,12 @@ PYEOF
     """
     touch ${prefix}_${suffix}.csv
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        nibabel: \$(python3 -c "import nibabel; print(nibabel.__version__)")
-        numpy: \$(python3 -c "import numpy; print(numpy.__version__)")
-    END_VERSIONS
+    python3 -c "
+with open('versions.yml', 'w') as v:
+    import nibabel, numpy
+    v.write('\"${task.process}\":\\n')
+    v.write(f'    nibabel: {nibabel.__version__}\\n')
+    v.write(f'    numpy: {numpy.__version__}\\n')
+"
     """
 }
