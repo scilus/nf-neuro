@@ -86,10 +86,8 @@ process STATS_METRICSINROI {
                 if test("^desc-[a-zA-Z0-9]+__") then
                     capture("^desc-(?<d>[a-zA-Z0-9]+)__(?<rest>.+)$") |
                     .rest + "_" + .d
-                elif startswith("_") then
-                    ltrimstr("_")
                 else
-                    .
+                    if startswith("_") then ltrimstr("_") else . end
                 end
             )
         )
