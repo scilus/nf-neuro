@@ -49,6 +49,17 @@ process STATS_METRICSINROI {
         scil_volume_stats_in_labels $rois $rois_lut \
             --metrics $metrics \
             --sort_keys > ${prefix}_${suffix}.json
+
+        # scil_volume_stats_in_labels outputs metric-centric JSON {metric:{region:{mean,std}}}.
+        # Transpose to region-centric {region:{metric:{mean,std}}} so the rest of the
+        # pipeline (key/value cleaning, header generation) works identically to WM mode.
+        jq -r '
+            [to_entries[] | .key as \$metric | .value | to_entries[] | {k: .key, mk: \$metric, v: .value}] |
+            group_by(.k) |
+            map({key: .[0].k, value: (map({key: .mk, value: .v}) | from_entries)}) |
+            from_entries
+        ' ${prefix}_${suffix}.json > ${prefix}_${suffix}_tmp.json
+        mv ${prefix}_${suffix}_tmp.json ${prefix}_${suffix}.json
     else
         scil_volume_stats_in_ROI $rois \
             --metrics $metrics \
@@ -66,6 +77,24 @@ process STATS_METRICSINROI {
         ' ${prefix}_${suffix}.json > ${prefix}_${suffix}_tmp.json
         mv ${prefix}_${suffix}_tmp.json ${prefix}_${suffix}.json
     done
+
+    # Normalize outer keys: strip leading '_' (artifact of double-__ file naming convention
+    # after prefix removal) and convert 'desc-xxx__metric' to 'metric_xxx'.
+    jq -r '
+        with_entries(
+            .key |= (
+                if test("^desc-[a-zA-Z0-9]+__") then
+                    capture("^desc-(?<d>[a-zA-Z0-9]+)__(?<rest>.+)$") |
+                    .rest + "_" + .d
+                elif startswith("_") then
+                    ltrimstr("_")
+                else
+                    .
+                end
+            )
+        )
+    ' ${prefix}_${suffix}.json > ${prefix}_${suffix}_tmp.json
+    mv ${prefix}_${suffix}_tmp.json ${prefix}_${suffix}.json
 
     # Extract 'desc' substring from keys and store it temporarily in values
     # This allows us to remove the substring from the key now and append it later
@@ -126,8 +155,8 @@ process STATS_METRICSINROI {
 
     # Create the CSV/TSV headers
     # (subject_id, session, run, roi, meta_columns..., metric1, metric2, ..., metricN)
-    header_mean="subject_id${sep}session${sep}run${sep}roi"
-    header_std="subject_id${sep}session${sep}run${sep}roi"
+    header_mean="sid${sep}session${sep}run${sep}roi"
+    header_std="sid${sep}session${sep}run${sep}roi"
 
     # Create the meta columns
     for meta_col in ${meta_columns.join(' ')}; do

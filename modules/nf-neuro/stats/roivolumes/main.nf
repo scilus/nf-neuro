@@ -57,7 +57,7 @@ if use_label:
         lut = json.load(f)
 
     with open(output_file, 'w') as out:
-        out.write("subject_id,session,run,region,volume_voxels,volume_mm3\\n")
+        out.write("sid,session,run,region,volume_voxels,volume_mm3\\n")
         for label_id, label_name in sorted(lut.items(), key=lambda x: int(x[0])):
             count   = int(np.sum(data_int == int(label_id)))
             vol_mm3 = count * vox_vol
@@ -70,18 +70,18 @@ else:
     mask_files = sorted("${rois_str}".split())
 
     with open(output_file, 'w') as out:
-        out.write("subject_id,session,run,bundle,volume_voxels,volume_mm3\\n")
+        out.write("sid,session,run,bundle,volume_voxels,volume_mm3\\n")
         for mask_file in mask_files:
             bundle = os.path.basename(mask_file)
             for ext in ('.nii.gz', '.nii'):
                 if bundle.endswith(ext):
                     bundle = bundle[:-len(ext)]
                     break
-            # Strip the session prefix that ANTSAPPLYTRANSFORMS adds to output filenames
-            if session_id and bundle.startswith(session_id + "_"):
-                bundle = bundle[len(session_id) + 1:]
             for s in substrs:
                 bundle = bundle.removeprefix(s).removesuffix(s)
+            # Strip the session prefix after subject prefix is already removed
+            if session_id and bundle.startswith(session_id + "_"):
+                bundle = bundle[len(session_id) + 1:]
 
             img     = nib.load(mask_file)
             data    = img.get_fdata()
