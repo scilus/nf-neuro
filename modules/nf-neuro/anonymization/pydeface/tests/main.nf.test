@@ -35,7 +35,7 @@ nextflow_process {
                 ch_t1w = LOAD_DATA.out.test_data_directory
                     .filter{ it.simpleName == "T1w" }
                     .map{ test_data_directory -> [
-                        [ subject: '01', session: '001' ],
+                        [ id: "sub-01_ses-001" ],
                         file("\${test_data_directory}/T1w.nii.gz")
                     ] }
 
@@ -83,8 +83,7 @@ nextflow_process {
             def logFiles = flatten(process.out.logs)
 
             // check meta data
-            assert meta.subject == '01'
-            assert meta.session == '001'
+            assert meta.id == 'sub-01_ses-001'
 
             // defaced output check
             assert defacedFiles.size() == 1
@@ -103,8 +102,7 @@ nextflow_process {
             assert snapshot(
                 [
                     meta: [
-                        subject: meta.subject,
-                        session: meta.session
+                        id: meta.id
                     ],
                     defaced: defacedFiles.collect { basename(it) }.sort(),
                     logs: logFiles.collect { basename(it) }.sort()
