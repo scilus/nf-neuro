@@ -38,6 +38,10 @@ workflow REGISTRATION {
         UTILS_OPTIONS("${moduleDir}/meta.yml", options, true)
         options = UTILS_OPTIONS.out.options.value
 
+        // Initialize channels
+        ch_fixed_image_ready  = ch_fixed_image
+        ch_moving_image_ready = ch_moving_image
+        ch_fixed_metric_ready = ch_metric
         if ( ( options.masking_strategy == "apriori" || options.masking_strategy == "both" ) && ( ch_fixed_mask || ch_moving_mask || ch_metric ) ) {
             if ( ch_fixed_mask ) {
                 MASK_FIXED_IMAGE ( ch_fixed_image.join(ch_fixed_mask) )
@@ -51,13 +55,6 @@ workflow REGISTRATION {
                                                 .map({ meta, orig, masked -> [meta, masked?: orig] })
                     ch_versions = ch_versions.mix(MASK_FIXED_METRIC.out.versions.first())
                 }
-                else {
-                    ch_fixed_metric_ready = ch_metric
-                }
-            }
-            else {
-                ch_fixed_metric_ready = ch_metric
-                ch_fixed_image_ready = ch_fixed_image
             }
             if ( ch_moving_mask ) {
                 MASK_MOVING_IMAGE ( ch_moving_image.join(ch_moving_mask) )
@@ -65,14 +62,6 @@ workflow REGISTRATION {
                                         .map({ meta, orig, masked -> [meta, masked?: orig] })
                 ch_versions = ch_versions.mix(MASK_MOVING_IMAGE.out.versions.first())
             }
-            else {
-                ch_moving_image_ready = ch_moving_image
-            }
-        }
-        else {
-            ch_fixed_image_ready = ch_fixed_image
-            ch_moving_image_ready = ch_moving_image
-            ch_fixed_metric_ready = ch_metric
         }
 
         if ( ( options.masking_strategy == "both" || options.masking_strategy == "internal" ) && ( options.run_easyreg || options.run_synthmorph ) ) {
