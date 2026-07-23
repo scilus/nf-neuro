@@ -25,6 +25,7 @@ process STATS_ROIVOLUMES {
     def rois_str          = rois instanceof List ? rois.join(' ') : "${rois}"
     def subject_id        = meta.id ?: ""
     def session_id        = meta.session ?: ""
+    def run_id            = meta.run ?: ""
     """
     python3 << 'PYEOF'
 import nibabel as nib
@@ -38,6 +39,7 @@ use_label  = ${use_label_py}
 substrs    = ${substrs_json}
 subject_id = "${subject_id}"
 session_id = "${session_id}"
+run_id     = "${run_id}"
 
 output_file = f"{prefix}_{suffix}.csv"
 
@@ -55,11 +57,11 @@ if use_label:
         lut = json.load(f)
 
     with open(output_file, 'w') as out:
-        out.write("subject_id,session,region,volume_voxels,volume_mm3\\n")
+        out.write("subject_id,session,run,region,volume_voxels,volume_mm3\\n")
         for label_id, label_name in sorted(lut.items(), key=lambda x: int(x[0])):
             count   = int(np.sum(data_int == int(label_id)))
             vol_mm3 = count * vox_vol
-            out.write(f"{subject_id},{session_id},{label_name},{count},{vol_mm3:.4f}\\n")
+            out.write(f"{subject_id},{session_id},{run_id},{label_name},{count},{vol_mm3:.4f}\\n")
 else:
     # WM mode: list of binary/TDI masks.
     # Equivalent per mask to:
@@ -68,7 +70,7 @@ else:
     mask_files = sorted("${rois_str}".split())
 
     with open(output_file, 'w') as out:
-        out.write("subject_id,session,bundle,volume_voxels,volume_mm3\\n")
+        out.write("subject_id,session,run,bundle,volume_voxels,volume_mm3\\n")
         for mask_file in mask_files:
             bundle = os.path.basename(mask_file)
             for ext in ('.nii.gz', '.nii'):
@@ -86,7 +88,7 @@ else:
             vox_vol = float(np.prod(img.header.get_zooms()[:3]))
             count   = int(np.sum(data > 0))
             vol_mm3 = count * vox_vol
-            out.write(f"{subject_id},{session_id},{bundle},{count},{vol_mm3:.4f}\\n")
+            out.write(f"{subject_id},{session_id},{run_id},{bundle},{count},{vol_mm3:.4f}\\n")
 
 with open("versions.yml", "w") as v:
     v.write('"${task.process}":\\n')

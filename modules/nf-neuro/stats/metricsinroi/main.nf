@@ -35,6 +35,7 @@ process STATS_METRICSINROI {
     def sep = output_format == 'tsv' ? '\t' : ','
     def subject_id_col = meta.id ?: ""
     def session_id_col = meta.session ?: ""
+    def run_id_col     = meta.run ?: ""
     """
     export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}
 
@@ -124,9 +125,9 @@ process STATS_METRICSINROI {
     metrics=\$(FIRST_ROI="\$first_roi" jq -r ".\\"\$first_roi\\" | keys[]" ${prefix}_${suffix}.json)
 
     # Create the CSV/TSV headers
-    # (subject_id, session, roi, meta_columns..., metric1, metric2, ..., metricN)
-    header_mean="subject_id${sep}session${sep}roi"
-    header_std="subject_id${sep}session${sep}roi"
+    # (subject_id, session, run, roi, meta_columns..., metric1, metric2, ..., metricN)
+    header_mean="subject_id${sep}session${sep}run${sep}roi"
+    header_std="subject_id${sep}session${sep}run${sep}roi"
 
     # Create the meta columns
     for meta_col in ${meta_columns.join(' ')}; do
@@ -144,9 +145,9 @@ process STATS_METRICSINROI {
 
     for roi in \$rois;
     do
-        # Initialize lines with subject_id, session, and roi
-        line_mean="${subject_id_col}${sep}${session_id_col}${sep}\${roi}"
-        line_std="${subject_id_col}${sep}${session_id_col}${sep}\${roi}"
+        # Initialize lines with subject_id, session, run, and roi
+        line_mean="${subject_id_col}${sep}${session_id_col}${sep}${run_id_col}${sep}\${roi}"
+        line_std="${subject_id_col}${sep}${session_id_col}${sep}${run_id_col}${sep}\${roi}"
 
         # Add meta columns values if specified
         for meta_val in ${meta_columns_values.join(' ')}; do
