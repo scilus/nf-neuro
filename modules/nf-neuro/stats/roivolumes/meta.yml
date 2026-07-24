@@ -1,6 +1,7 @@
 name: "stats_roivolumes"
-description: Module to compute voxel counts and volumes (mm³) of ROI masks or label
-  regions from a label atlas, using nibabel and numpy (no external tools required).
+description: Module to compute voxel counts and volumes (mm³) of ROI masks or
+  label regions from a label atlas, using nibabel and numpy (no external tools
+  required).
 keywords:
   - nifti
   - volume
@@ -9,7 +10,8 @@ keywords:
   - labels
 tools:
   - nibabel:
-      description: Python package for reading and writing neuroimaging file formats.
+      description: Python package for reading and writing neuroimaging file
+        formats.
       homepage: https://nipy.org/nibabel/
       identifier: ""
   - numpy:
@@ -30,7 +32,7 @@ input:
           each integer value corresponds to a region defined in the LUT.
         pattern: "*.{nii,nii.gz}"
         ontologies:
-          - edam: http://edamontology.org/format_4001 # NIFTI format
+          - edam: http://edamontology.org/format_4001
     - rois_lut:
         type: file
         description: |
@@ -40,7 +42,36 @@ input:
         pattern: "*.json"
         mandatory: false
         ontologies:
-          - edam: http://edamontology.org/format_3464 # JSON
+          - edam: http://edamontology.org/format_3464
+output:
+  volumes:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_volumes.csv":
+          type: file
+          description: |
+            CSV file with columns: subject_id, region, volume_voxels, volume_mm3.
+            One row per bundle (WM mode) or per label (GM mode).
+          pattern: "*_volumes.csv"
+          ontologies:
+            - edam: http://edamontology.org/format_3752
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750
+topics:
+  versions:
+    - versions.yml:
+        type: string
+        description: The name of the process
+authors:
+  - "@baptisp"
 args:
   - use_label:
       type: boolean
@@ -62,27 +93,3 @@ args:
         Applied via removeprefix/removesuffix to strip subject ID prefix and
         warp suffixes, e.g. ["sub-01_", "_mask_warped", "_warped"].
       default: []
-output:
-  volumes:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'test', single_end:false ]`
-      - "*_volumes.csv":
-          type: file
-          description: |
-            CSV file with columns: subject_id, region, volume_voxels, volume_mm3.
-            One row per bundle (WM mode) or per label (GM mode).
-          pattern: "*_volumes.csv"
-          ontologies:
-            - edam: http://edamontology.org/format_3752 # CSV
-  versions:
-    - versions.yml:
-        type: file
-        description: File containing software versions
-        pattern: "versions.yml"
-        ontologies:
-          - edam: http://edamontology.org/format_3750 # YAML
-authors:
-  - "@baptisp"
