@@ -2,7 +2,7 @@ process STATS_ROIVOLUMES {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilpy:2.2.2_cpu"
+    container "docker.io/scilus/scilpy:2.2.2_cpu"
 
     input:
     tuple val(meta), path(rois), path(rois_lut)  /* optional, input = [] */

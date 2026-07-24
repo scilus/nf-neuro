@@ -4,4 +4,3 @@ channels:
 dependencies:
   - nibabel>=4.0.0
   - numpy>=1.24.0
-name: stats_roivolumes
