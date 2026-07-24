@@ -79,9 +79,6 @@ else:
                     break
             for s in substrs:
                 bundle = bundle.removeprefix(s).removesuffix(s)
-            # Strip the session prefix after subject prefix is already removed
-            if session_id and bundle.startswith(session_id + "_"):
-                bundle = bundle[len(session_id) + 1:]
 
             img     = nib.load(mask_file)
             data    = img.get_fdata()
