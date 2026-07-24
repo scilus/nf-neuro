@@ -43,7 +43,8 @@ process STATS_METRICSINROI {
     then
         if [[ ! -f "$rois_lut" ]];
         then
-            echo "ROI LUT is missing. Will fail."
+            echo "ROI LUT is missing. Aborting." >&2
+            exit 1
         fi
 
         scil_volume_stats_in_labels $rois $rois_lut \
@@ -140,15 +141,15 @@ process STATS_METRICSINROI {
     ' ${prefix}_${suffix}.json > ${prefix}_${suffix}_tmp.json
     mv ${prefix}_${suffix}_tmp.json ${prefix}_${suffix}.json
 
-    # Get all ROIs names from the JSON
-    rois=\$(jq -r "keys[]" ${prefix}_${suffix}.json)
+    # Get all ROI names from the JSON (renamed to avoid shadowing the input path variable)
+    roi_names=\$(jq -r "keys[]" ${prefix}_${suffix}.json)
 
-    # All ROIs have the same metrics. To get the metrics names from
+    # All ROIs have the same metrics. To get the metric names from
     # the JSON, we can just fetch them from the first ROI.
-    first_roi=\$(printf '%s\\n' \$rois | head -n 1)
+    first_roi=\$(printf '%s\\n' \$roi_names | head -n 1)
 
-    # Extract the metrics names from this first roi
-    metrics=\$(FIRST_ROI="\$first_roi" jq -r ".\\"\$first_roi\\" | keys[]" ${prefix}_${suffix}.json)
+    # Extract the metric names from this first roi (renamed to avoid shadowing the input path variable)
+    metric_names=\$(FIRST_ROI="\$first_roi" jq -r ".\\"\$first_roi\\" | keys[]" ${prefix}_${suffix}.json)
 
     # Create the CSV/TSV headers
     # (subject_id, session, run, roi, meta_columns..., metric1, metric2, ..., metricN)
@@ -162,14 +163,14 @@ process STATS_METRICSINROI {
     done
 
     # Add the metric columns
-    for metric in \$metrics; do
+    for metric in \$metric_names; do
         header_mean="\${header_mean}${sep}\${metric}"
         header_std="\${header_std}${sep}\${metric}"
     done
     echo "\$header_mean" > ${prefix}_desc-mean_${suffix}.${output_format}
     echo "\$header_std" > ${prefix}_desc-std_${suffix}.${output_format}
 
-    for roi in \$rois;
+    for roi in \$roi_names;
     do
         # Initialize lines with subject_id, session, run, and roi
         line_mean="${subject_id_col}${sep}${session_id_col}${sep}${run_id_col}${sep}\${roi}"
@@ -186,7 +187,7 @@ process STATS_METRICSINROI {
             fi
         done
 
-        for metric in \$metrics;
+        for metric in \$metric_names;
         do
             # Fetch the "mean" and "std" values from each roi/metric
             # pair from the JSON
