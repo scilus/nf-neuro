@@ -1,0 +1,107 @@
+{
+    "stats - roi volumes - GM label atlas": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_atlas-brainnetome_volumes.csv:md5,6eeeeb6e95ee5800557ac7c48f6dc5c1"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,3905b6375ddd03a381e56dd2d0f7914f"
+                ],
+                "versions": [
+                    "versions.yml:md5,3905b6375ddd03a381e56dd2d0f7914f"
+                ],
+                "volumes": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_atlas-brainnetome_volumes.csv:md5,6eeeeb6e95ee5800557ac7c48f6dc5c1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-24T16:16:41.185081644",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "stats - roi volumes - WM binary masks": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_volumes.csv:md5,2ce81edb22441d2338562ac25fa0d8b5"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,3905b6375ddd03a381e56dd2d0f7914f"
+                ],
+                "versions": [
+                    "versions.yml:md5,3905b6375ddd03a381e56dd2d0f7914f"
+                ],
+                "volumes": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_volumes.csv:md5,2ce81edb22441d2338562ac25fa0d8b5"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-24T16:16:37.763908436",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "stats - roi volumes - stub-run": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_volumes.csv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,dc45e28ef07a1823d8e8adc5a8b07651"
+                ],
+                "versions": [
+                    "versions.yml:md5,dc45e28ef07a1823d8e8adc5a8b07651"
+                ],
+                "volumes": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_volumes.csv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-24T16:16:44.456168199",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    }
+}
