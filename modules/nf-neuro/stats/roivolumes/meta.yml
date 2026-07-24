@@ -29,15 +29,15 @@ input:
         description: |
           In WM mode (use_label = false): list of binary or weighted NIfTI mask files,
           one per bundle. In GM mode (use_label = true): single NIfTI label atlas where
-          each integer value corresponds to a region defined in the LUT.
+          each integer value corresponds to a region defined in the Look-Up Table (LUT).
         pattern: "*.{nii,nii.gz}"
         ontologies:
           - edam: http://edamontology.org/format_4001
     - rois_lut:
         type: file
         description: |
-          JSON LUT mapping integer label indices (as strings) to region names.
-          Required when use_label = true, otherwise pass [].
+          JSON Look-Up Table (LUT) mapping integer label indices (as strings) to
+          region names. Required when use_label = true, otherwise pass [].
           e.g. {"17": "Left-Hippocampus", "53": "Right-Hippocampus"}
         pattern: "*.json"
         mandatory: false
