@@ -1,23 +1,35 @@
 {
-    "pydeface_outputs": {
+    "single T1w nifti creates defaces image and logs": {
         "content": [
             {
-                "meta": {
-                    "id": "sub-01_ses-001"
-                },
-                "defaced": [
-                    "T1w_defaced.nii.gz"
+                "0": [
+                    [
+                        {
+                            "id": "sub-test"
+                        },
+                        "sub-test_defaced.nii.gz:md5,5d1d1fd150bc9e7651569ebd89a33f86"
+                    ]
                 ],
-                "logs": [
-                    "sub-01_ses-001_T1w_err.log",
-                    "sub-01_ses-001_T1w_out.log"
+                "1": [
+                    "versions.yml:md5,7166e1007a783ebcb49923704f616d63"
+                ],
+                "defaced": [
+                    [
+                        {
+                            "id": "sub-test"
+                        },
+                        "sub-test_defaced.nii.gz:md5,5d1d1fd150bc9e7651569ebd89a33f86"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,7166e1007a783ebcb49923704f616d63"
                 ]
             }
         ],
+        "timestamp": "2026-07-28T15:12:02.228379",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.5",
             "nextflow": "26.04.4"
-        },
-        "timestamp": "2026-07-10T05:29:01.838136093"
+        }
     }
 }
