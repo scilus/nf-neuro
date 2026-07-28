@@ -2,7 +2,7 @@ process BUNDLE_BUNDLEPARC {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilpy:dev"
+    container "scilus/scilpy:2.3.0_gpu"
 
     input:
     tuple val(meta), path(fodf), path(checkpoint)

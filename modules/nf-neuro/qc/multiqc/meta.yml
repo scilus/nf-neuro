@@ -30,12 +30,11 @@ args:
         If true, generates a subject-specific MultiQC report. If false, generates a global report.
         This will change which module are run within MultiQC.
       mandatory: false
-  - cortical_rois:
+  - atlas_name:
       type: string
       description: |
-        Range of ROIs to consider as cortical. Can be supplied either as
-        a hyphenated range (e.g., "1-100") or multiple hyphenated ranges
-        separated by commas (e.g., "1-100,101-200").
+        Name of the atlas to use for cortical ROIs. This will be used to fetch the
+        freesurfer annotation file from the `freesurfer` output folder.
       mandatory: false
   - subcortical_rois:
       type: string

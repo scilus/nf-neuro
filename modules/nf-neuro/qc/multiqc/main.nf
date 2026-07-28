@@ -3,7 +3,7 @@ process QC_MULTIQC {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "gagnonanthony/multiqc-neuroimaging:0.1.3"
+    container "gagnonanthony/multiqc-neuroimaging:0.1.4"
         containerOptions((workflow.containerEngine == 'docker') ? '--entrypoint "" --user $(id -u):$(id -g)' : '')
 
     input:
@@ -34,7 +34,7 @@ process QC_MULTIQC {
     def replace = replace_names ? "--replace-names ${replace_names}" : ''
     def samples = sample_names ? "--sample-names ${sample_names}" : ''
     def single_subject = task.ext.single_subject ? "--single-subject-report" : ""
-    def cortical_rois = task.ext.cortical_rois ? "--cortical-rois ${task.ext.cortical_rois}" : ''
+    def atlas_name = task.ext.atlas_name ? "--atlas-name ${task.ext.atlas_name}" : ''
     def subcortical_rois = task.ext.subcortical_rois ? "--subcortical-rois ${task.ext.subcortical_rois}" : ''
 
     """
@@ -48,7 +48,7 @@ process QC_MULTIQC {
         $replace \\
         $samples \\
         $single_subject \\
-        $cortical_rois \\
+        $atlas_name \\
         $subcortical_rois \\
         .
 
