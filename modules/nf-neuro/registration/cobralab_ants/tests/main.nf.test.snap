@@ -35,7 +35,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,38c677f86df720fee58c2d55535e0bed"
+                        "test_T1_to_T1_slab_registration_cobralabants_mqc.gif:md5,38c677f86df720fee58c2d55535e0bed"
                     ]
                 ],
                 "11": [
@@ -214,7 +214,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,38c677f86df720fee58c2d55535e0bed"
+                        "test_T1_to_T1_slab_registration_cobralabants_mqc.gif:md5,38c677f86df720fee58c2d55535e0bed"
                     ]
                 ],
                 "versions": [
@@ -226,7 +226,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2026-07-14T02:40:07.086687964"
+        "timestamp": "2026-08-03T20:29:46.153657755"
     },
     "registration - cobralab_ants - SyN quick": {
         "content": [
@@ -252,7 +252,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,5a8f41ebffe76bd5557f5a4687b6a2d6"
+                        "test_T1_to_T1_slab_registration_cobralabants_mqc.gif:md5,5a8f41ebffe76bd5557f5a4687b6a2d6"
                     ]
                 ],
                 "11": [
@@ -431,7 +431,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,5a8f41ebffe76bd5557f5a4687b6a2d6"
+                        "test_T1_to_T1_slab_registration_cobralabants_mqc.gif:md5,5a8f41ebffe76bd5557f5a4687b6a2d6"
                     ]
                 ],
                 "versions": [
@@ -443,7 +443,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2026-07-13T19:56:14.362414532"
+        "timestamp": "2026-08-03T20:14:20.62929481"
     },
     "registration - cobralab_ants - both - moving mask": {
         "content": [
@@ -469,7 +469,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,5a9cf37a4c3c85d7b6ab18b849da347d"
+                        "test_T1_to_T1_slab_registration_cobralabants_mqc.gif:md5,5a9cf37a4c3c85d7b6ab18b849da347d"
                     ]
                 ],
                 "11": [
@@ -648,7 +648,7 @@
                         {
                             "id": "test"
                         },
-                        "test_T1_to_T1_slab_registration_ants_mqc.gif:md5,5a9cf37a4c3c85d7b6ab18b849da347d"
+                        "test_T1_to_T1_slab_registration_cobralabants_mqc.gif:md5,5a9cf37a4c3c85d7b6ab18b849da347d"
                     ]
                 ],
                 "versions": [
@@ -660,7 +660,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2026-07-14T02:37:47.419265731"
+        "timestamp": "2026-08-03T20:27:24.677221947"
     },
     "registration - cobralab_ants - SyN": {
         "content": [

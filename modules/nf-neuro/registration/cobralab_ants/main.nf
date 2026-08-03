@@ -19,7 +19,7 @@ process REGISTRATION_COBRALABANTS {
         tuple val(meta), path("*_backward*.{nii.gz,mat}", arity: '1..2')   , emit: backward_image_transform
         tuple val(meta), path("*_backward*.{nii.gz,mat}", arity: '1..2')   , emit: forward_tractogram_transform
         tuple val(meta), path("*_forward*.{nii.gz,mat}", arity: '1..2')    , emit: backward_tractogram_transform
-        tuple val(meta), path("*_registration_ants_mqc.gif")               , emit: mqc, optional: true
+        tuple val(meta), path("*_registration_cobralabants_mqc.gif")       , emit: mqc, optional: true
         path "versions.yml"                                                , emit: versions
 
     when:
@@ -28,6 +28,7 @@ process REGISTRATION_COBRALABANTS {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def suffix = task.ext.suffix ? "${task.ext.suffix}_warped" : "warped"
     def suffix_qc = task.ext.suffix_qc ?: ""
     def run_qc = task.ext.run_qc as Boolean || false
 
@@ -79,26 +80,26 @@ process REGISTRATION_COBRALABANTS {
     moving_id=\${moving_base%.\${ext}}
     moving_id=\${moving_id#${prefix}_*}
 
-    antsRegistration_affine_SyN.sh $args --resampled-output ${prefix}_\${moving_id}_warped.nii.gz $moving_image $fixed_image output
+    antsRegistration_affine_SyN.sh $args --resampled-output ${prefix}_\${moving_id}_${suffix}.nii.gz $moving_image $fixed_image output
 
-        mv output0GenericAffine.mat ${prefix}_forward1_affine.mat
+    mv output0GenericAffine.mat ${prefix}_forward1_affine.mat
 
     if [ "${task.ext.skip_nonlinear}" != "true" ]; then
         mv output1InverseWarp.nii.gz ${prefix}_backward1_warp.nii.gz
         mv output1Warp.nii.gz ${prefix}_forward0_warp.nii.gz
     fi
 
-    antsApplyTransforms -d 3 -t [${prefix}_forward1_affine.mat,1] \
-        -o Linear[${prefix}_backward0_affine.mat]
+    antsApplyTransforms -d 3 -t "[${prefix}_forward1_affine.mat,1]" \
+        -o "Linear[${prefix}_backward0_affine.mat]"
 
     if [ "${task.ext.skip_nonlinear}" != "true" ]; then
         antsApplyTransforms -d 3 -i $fixed_image -r $moving_image -n Linear \
-            -t [${prefix}_backward0_affine.mat,1] \
+            -t "[${prefix}_backward0_affine.mat,1]" \
             -t ${prefix}_backward1_warp.nii.gz \
             -o ${prefix}_warped_reference.nii.gz
     else
         antsApplyTransforms -d 3 -i $fixed_image -r $moving_image -n Linear \
-            -t [${prefix}_backward0_affine.mat,1] \
+            -t "[${prefix}_backward0_affine.mat,1]" \
             -o ${prefix}_warped_reference.nii.gz
     fi
 
@@ -149,7 +150,7 @@ process REGISTRATION_COBRALABANTS {
         # Create GIF.
         convert -delay 10 -loop 0 -morph 10 \
             warped_mosaic.png fixed_image_mosaic.png warped_mosaic.png \
-            ${prefix}_${suffix_qc}_registration_ants_mqc.gif
+            ${prefix}_${suffix_qc}_registration_cobralabants_mqc.gif
 
         # Clean up.
         rm *_mosaic.png
@@ -166,6 +167,7 @@ process REGISTRATION_COBRALABANTS {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def suffix = task.ext.suffix ? "${task.ext.suffix}_warped" : "warped"
     def suffix_qc = task.ext.suffix_qc ?: ""
     def run_qc = task.ext.run_qc as Boolean || false
 
@@ -187,7 +189,12 @@ process REGISTRATION_COBRALABANTS {
     convert -help .
     scil_viz_volume_screenshot -h
 
-    touch ${prefix}_t1_warped.nii.gz
+    moving_base=\$(basename "${moving_image}")
+    ext=\${moving_base#*.}
+    moving_id=\${moving_base%.\${ext}}
+    moving_id=\${moving_id#${prefix}_*}
+
+    touch ${prefix}_\${moving_id}_${suffix}.nii.gz
     touch ${prefix}_warped_reference.nii.gz
     touch ${prefix}_forward1_affine.mat
     touch ${prefix}_forward0_warp.nii.gz
@@ -195,7 +202,7 @@ process REGISTRATION_COBRALABANTS {
     touch ${prefix}_backward0_affine.mat
 
     if $run_qc; then
-        touch ${prefix}_${suffix_qc}_registration_ants_mqc.gif
+        touch ${prefix}_${suffix_qc}_registration_cobralabants_mqc.gif
     fi
 
     cat <<-END_VERSIONS > versions.yml

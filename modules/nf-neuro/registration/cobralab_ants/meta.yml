@@ -59,6 +59,12 @@ args:
         - cov
         - origin
         - none
+  - suffix:
+      type: string
+      description: |
+        Obligatory suffix to add to the output file name to prevent overwrite
+        of input files. e.g. : the suffix `warped` will result in the name `image_warped.nii.gz`.
+      default: "warped"
   - run_qc:
       type: boolean
       description: "Run quality control (QC) to generate a MultiQC report."
@@ -200,6 +206,11 @@ args:
       default: false
   - masking_strategy:
       type: string
+      choices:
+        - none
+        - apriori
+        - internal
+        - both
       description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
       default: "none"
 input:
@@ -369,11 +380,11 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*_registration_ants_mqc.gif":
+      - "*_registration_cobralabants_mqc.gif":
           type: file
           description: .gif file containing quality control image for the registration
             process. Made for use in MultiQC report.
-          pattern: "*_registration_ants_mqc.gif"
+          pattern: "*_registration_cobralabants_mqc.gif"
           mandatory: false
           ontologies: []
   versions:
