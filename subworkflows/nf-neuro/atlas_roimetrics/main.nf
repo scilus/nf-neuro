@@ -29,10 +29,10 @@ workflow ATLAS_ROIMETRICS {
         if (options.use_atlas_iit) {
             ATLAS_IIT(
                 [
-                    threshold_bundles: options.use_binary_masks ?: false,
+                    threshold_bundles: options.use_binary_masks,
                     atlas_iit_b0: options.atlas_iit_b0,
                     atlas_iit_bundle_masks_dir: options.atlas_iit_bundle_masks_dir,
-                    run_gm_roimetrics: options.run_gm_roimetrics ?: false,
+                    run_gm_roimetrics: options.run_gm_roimetrics,
                     atlas_iit_gm_atlas: options.atlas_iit_gm_atlas,
                     atlas_iit_gm_lut: options.atlas_iit_gm_lut
                 ]
@@ -71,7 +71,7 @@ workflow ATLAS_ROIMETRICS {
         ch_stats_mean = channel.empty()
         ch_stats_std  = channel.empty()
 
-        if (options.run_roi_metrics != false) {
+        if (options.run_roi_metrics) {
             // Input: [meta, [metrics_list], [masks]]
             ch_input_metricsinroi = ch_metrics
                 .join(TRANSFORM_ATLAS_BUNDLES.out.warped_image)
@@ -120,7 +120,7 @@ workflow ATLAS_ROIMETRICS {
             TRANSFORM_GM_ATLAS(ch_transform_gm)
             ch_versions = ch_versions.mix(TRANSFORM_GM_ATLAS.out.versions)
 
-            if (options.run_roi_metrics != false) {
+            if (options.run_roi_metrics) {
                 ch_gm_input = ch_metrics
                     .join(TRANSFORM_GM_ATLAS.out.warped_image)
                     .combine(ATLAS_IIT.out.gm_lut)

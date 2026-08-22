@@ -2,7 +2,8 @@ process STATS_ROIVOLUMES {
     tag "$meta.id"
     label 'process_single'
 
-    container "docker.io/scilus/scilpy:2.2.2_cpu"
+    conda "${moduleDir}/environment.yml"
+    container "${ 'community.wave.seqera.io/library/nibabel_numpy:4148b92a8cbc6976' }"
 
     input:
     tuple val(meta), path(rois), path(rois_lut)  /* optional, input = [] */
@@ -21,7 +22,7 @@ process STATS_ROIVOLUMES {
     def use_label_py      = use_label ? "True" : "False"
     def substrs_to_remove = task.ext.key_substrs_to_remove ?: []
     def substrs_json      = groovy.json.JsonOutput.toJson(substrs_to_remove)
-    // For WM mode: rois is a list; join paths as space-separated string for Python to split
+    // For labels mode: rois is a list; join paths as space-separated string for Python to split
     def rois_str          = rois instanceof List ? rois.join(' ') : "${rois}"
     def subject_id        = meta.id ?: ""
     def session_id        = meta.session ?: ""
@@ -44,7 +45,7 @@ run_id     = "${run_id}"
 output_file = f"{prefix}_{suffix}.csv"
 
 if use_label:
-    # GM mode: single label atlas — load once, count all labels in one pass.
+    # Labelmap mode: single atlas/labelmap image — load once, count all labels in one pass.
     # Equivalent per label to:
     #   mrcalc atlas <label_id> -eq mask + mrstats mask -mask mask -output count
     img  = nib.load("${rois}")
@@ -63,7 +64,7 @@ if use_label:
             vol_mm3 = count * vox_vol
             out.write(f"{subject_id},{session_id},{run_id},{label_name},{count},{vol_mm3:.4f}\\n")
 else:
-    # WM mode: list of binary/TDI masks.
+    # Labels mode: list of binary/weighted ROI masks, one file per label.
     # Equivalent per mask to:
     #   mrstats mask -mask mask -output count
     # np.sum(data > 0) counts finite non-zero voxels (NaN > 0 == False, excluded).

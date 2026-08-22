@@ -1,5 +1,5 @@
 {
-    "stats - roi volumes - GM label atlas": {
+    "stats - roi volumes - labels mode": {
         "content": [
             {
                 "0": [
@@ -8,14 +8,14 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_atlas-brainnetome_volumes.csv:md5,6eeeeb6e95ee5800557ac7c48f6dc5c1"
+                        "test_volumes.csv:md5,2ce81edb22441d2338562ac25fa0d8b5"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,3905b6375ddd03a381e56dd2d0f7914f"
+                    "versions.yml:md5,849ae3467d1ff56248e9388878ac2b48"
                 ],
                 "versions": [
-                    "versions.yml:md5,3905b6375ddd03a381e56dd2d0f7914f"
+                    "versions.yml:md5,849ae3467d1ff56248e9388878ac2b48"
                 ],
                 "volumes": [
                     [
@@ -23,18 +23,18 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_atlas-brainnetome_volumes.csv:md5,6eeeeb6e95ee5800557ac7c48f6dc5c1"
+                        "test_volumes.csv:md5,2ce81edb22441d2338562ac25fa0d8b5"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-07-24T16:16:41.185081644",
+        "timestamp": "2026-08-22T14:22:13.510833899",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
         }
     },
-    "stats - roi volumes - WM binary masks": {
+    "stats - roi volumes - atlas labelmap mode": {
         "content": [
             {
                 "0": [
@@ -43,14 +43,14 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_volumes.csv:md5,2ce81edb22441d2338562ac25fa0d8b5"
+                        "test_atlas-brainnetome_volumes.csv:md5,6eeeeb6e95ee5800557ac7c48f6dc5c1"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,3905b6375ddd03a381e56dd2d0f7914f"
+                    "versions.yml:md5,849ae3467d1ff56248e9388878ac2b48"
                 ],
                 "versions": [
-                    "versions.yml:md5,3905b6375ddd03a381e56dd2d0f7914f"
+                    "versions.yml:md5,849ae3467d1ff56248e9388878ac2b48"
                 ],
                 "volumes": [
                     [
@@ -58,12 +58,12 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_volumes.csv:md5,2ce81edb22441d2338562ac25fa0d8b5"
+                        "test_atlas-brainnetome_volumes.csv:md5,6eeeeb6e95ee5800557ac7c48f6dc5c1"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-07-24T16:16:37.763908436",
+        "timestamp": "2026-08-22T14:22:16.846349724",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
@@ -82,10 +82,10 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,dc45e28ef07a1823d8e8adc5a8b07651"
+                    "versions.yml:md5,5f4cc6ba9cd16c9dc450e14ad64ae246"
                 ],
                 "versions": [
-                    "versions.yml:md5,dc45e28ef07a1823d8e8adc5a8b07651"
+                    "versions.yml:md5,5f4cc6ba9cd16c9dc450e14ad64ae246"
                 ],
                 "volumes": [
                     [
@@ -98,7 +98,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-24T16:16:44.456168199",
+        "timestamp": "2026-08-22T14:22:19.887529693",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

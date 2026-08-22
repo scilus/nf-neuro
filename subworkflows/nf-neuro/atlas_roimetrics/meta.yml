@@ -20,6 +20,7 @@ components:
   - atlas_iit
   - registration/ants
   - stats/metricsinroi
+  - stats/roivolumes
   - registration/antsapplytransforms
   - utils_options
 input:
@@ -79,9 +80,17 @@ input:
           type: boolean
           description: If 'true', also extract metrics per IIT GM Desikan parcellation region, reusing the WM atlas B0 registration.
           default: false
+        atlas_iit_gm_atlas:
+          type: string
+          description: Path to the IIT GM Desikan atlas (IIT_GM_Desikan_atlas.nii.gz). This input will be used instead of downloading the atlas if `run_gm_roimetrics` is set to 'true'.
+          default: null
+        atlas_iit_gm_lut:
+          type: string
+          description: Path to the IIT GM Desikan Look-Up Table. Accepts either a pre-converted JSON file or the raw tab-separated TXT distributed by NITRC (LUT_GM_Desikan_0to1.txt). This input will be used instead of downloading the LUT if `run_gm_roimetrics` is set to 'true'.
+          default: null
         run_roi_volumes:
           type: boolean
-          description: If 'true', compute voxel count and volume (mm3) for each WM bundle mask and GM region using mrstats.
+          description: If 'true', compute voxel count and volume (mm3) for each WM bundle mask and GM region using stats/roivolumes.
           default: false
         run_roi_metrics:
           type: boolean
@@ -89,19 +98,19 @@ input:
           default: true
       mandatory: true
 output:
-  - json:
+  - stats_json:
       type: file
-      description: List of binary bundle masks.
+      description: Per-bundle metrics statistics, as JSON.
       structure:
         - meta:
             type: map
             description: Metadata map.
-        - img:
+        - stats_json:
             type: file
-            description: List of binary bundle masks in the subject's DWI space.
-      pattern: "*.nii.gz"
+            description: JSON statistics file for the WM bundle masks.
+      pattern: "*.json"
       ontologies:
-        - edam: http://edamontology.org/format_4001 # NIFTI format
+        - edam: http://edamontology.org/format_3464 # JSON format
   - stats_tab_mean:
       type: file
       description: |
@@ -133,6 +142,81 @@ output:
             description: Standard deviation statistics table file.
       pattern: "*_desc-std_*.{csv,tsv}"
       ontologies: []
+  - wm_volumes:
+      type: file
+      description: |
+        CSV holding the voxel count and volume (mm3) of each WM bundle mask,
+        in the subject's DWI space. Empty unless `run_roi_volumes` is enabled.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - wm_volumes:
+            type: file
+            description: WM bundle volumes table.
+      pattern: "*_volumes.csv"
+      ontologies:
+        - edam: http://edamontology.org/format_3752 # CSV format
+  - gm_stats_json:
+      type: file
+      description: |
+        Per-region GM metrics statistics, as JSON. Empty unless
+        `run_gm_roimetrics` is enabled.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - gm_stats_json:
+            type: file
+            description: JSON statistics file for the GM Desikan regions.
+      pattern: "*.json"
+      ontologies:
+        - edam: http://edamontology.org/format_3464 # JSON format
+  - gm_stats_tab_mean:
+      type: file
+      description: |
+        Structured tabular (TSV or CSV) file holding MEAN metrics values for
+        each GM Desikan region. Empty unless `run_gm_roimetrics` is enabled.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - gm_tab_mean:
+            type: file
+            description: Mean statistics table file for the GM Desikan regions.
+      pattern: "*_desc-mean_*.{csv,tsv}"
+      ontologies: []
+  - gm_stats_tab_std:
+      type: file
+      description: |
+        Structured tabular (TSV or CSV) file holding STANDARD DEVIATION metrics
+        values for each GM Desikan region. Empty unless `run_gm_roimetrics` is
+        enabled.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - gm_tab_std:
+            type: file
+            description: Standard deviation statistics table file for the GM Desikan regions.
+      pattern: "*_desc-std_*.{csv,tsv}"
+      ontologies: []
+  - gm_volumes:
+      type: file
+      description: |
+        CSV holding the voxel count and volume (mm3) of each GM Desikan region,
+        in the subject's DWI space. Empty unless both `run_gm_roimetrics` and
+        `run_roi_volumes` are enabled.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - gm_volumes:
+            type: file
+            description: GM Desikan region volumes table.
+      pattern: "*_volumes.csv"
+      ontologies:
+        - edam: http://edamontology.org/format_3752 # CSV format
   - versions:
       type: file
       description: |

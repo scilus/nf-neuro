@@ -1,7 +1,8 @@
 name: "stats_roivolumes"
-description: Module to compute voxel counts and volumes (mm³) of ROI masks or
-  label regions from a label atlas, using nibabel and numpy (no external tools
-  required).
+description: Module to compute voxel counts and volumes (mm³) of ROIs, either from a
+  list of individual mask files (labels mode) or from a single atlas/labelmap image
+  paired with a Look-Up Table (atlas/labelmap mode), using nibabel and numpy (no
+  external tools required).
 keywords:
   - nifti
   - volume
@@ -27,9 +28,23 @@ input:
     - rois:
         type: file
         description: |
-          In WM mode (use_label = false): list of binary or weighted NIfTI mask files,
-          one per bundle. In GM mode (use_label = true): single NIfTI label atlas where
-          each integer value corresponds to a region defined in the Look-Up Table (LUT).
+          The module operates in one of two modes, selected with the `use_label` arg.
+
+          **Labels mode** (use_label = false): a list of binary or weighted NIfTI mask
+          files, one file per ROI (e.g. bundle masks, tissue masks, TDI maps). One row
+          is emitted per input file. The ROI name written to the CSV is derived from the
+          filename: the directory and the `.nii`/`.nii.gz` extension are stripped, then
+          every substring listed in `key_substrs_to_remove` is removed from the start
+          and the end of the remaining basename. Rows are sorted by input file path.
+          e.g. with key_substrs_to_remove = ["sub-01_", "_warped"], the input file
+          `sub-01_AF_L_warped.nii.gz` yields the ROI name `AF_L`.
+
+          **Atlas/labelmap mode** (use_label = true): a single NIfTI atlas (labelmap)
+          image where each integer voxel value identifies a region. One row is emitted
+          per entry of the Look-Up Table (LUT), named after the LUT value and ordered by
+          ascending integer label index. Values are rounded to the nearest integer
+          before counting, so a labelmap resampled or warped with a MultiLabel
+          interpolator can be passed directly.
         pattern: "*.{nii,nii.gz}"
         ontologies:
           - edam: http://edamontology.org/format_4001
@@ -37,7 +52,10 @@ input:
         type: file
         description: |
           JSON Look-Up Table (LUT) mapping integer label indices (as strings) to
-          region names. Required when use_label = true, otherwise pass [].
+          region names. Required in atlas/labelmap mode (use_label = true); it defines
+          both which labels are reported and the name given to each one. Not used in
+          labels mode (use_label = false), where names come from the filenames —
+          pass [] instead.
           e.g. {"17": "Left-Hippocampus", "53": "Right-Hippocampus"}
         pattern: "*.json"
         mandatory: false
@@ -53,8 +71,12 @@ output:
       - "*_volumes.csv":
           type: file
           description: |
-            CSV file with columns: subject_id, region, volume_voxels, volume_mm3.
-            One row per bundle (WM mode) or per label (GM mode).
+            CSV file with columns: sid, session, run, <roi>, volume_voxels, volume_mm3.
+            One row per input mask file in labels mode (use_label = false, ROI column
+            named `bundle`), or one row per LUT entry in atlas/labelmap mode
+            (use_label = true, ROI column named `region`).
+            The filename is `{prefix}_volumes.csv`, or `{prefix}_{first_suffix}_volumes.csv`
+            when the `first_suffix` arg is set.
           pattern: "*_volumes.csv"
           ontologies:
             - edam: http://edamontology.org/format_3752
@@ -76,9 +98,11 @@ args:
   - use_label:
       type: boolean
       description: |
-        If true, rois is interpreted as a label atlas and rois_lut must be provided.
-        Volumes are computed per label. If false, rois is a list of binary masks and
-        volume is computed per mask file (number of non-zero voxels × voxel volume).
+        Selects the mode. If true (atlas/labelmap mode), rois is interpreted as a
+        single atlas/labelmap image and rois_lut must be provided; one volume is
+        computed per LUT entry, counting voxels whose rounded value equals the label
+        index. If false (labels mode), rois is a list of mask files and one volume is
+        computed per file (number of non-zero voxels × voxel volume).
       default: false
   - first_suffix:
       type: string
@@ -89,7 +113,10 @@ args:
   - key_substrs_to_remove:
       type: list
       description: |
-        List of substrings to remove from region names (WM mode only).
-        Applied via removeprefix/removesuffix to strip subject ID prefix and
-        warp suffixes, e.g. ["sub-01_", "_mask_warped", "_warped"].
+        List of substrings to strip from the ROI names derived from the input
+        filenames (labels mode only; ignored in atlas/labelmap mode, where names
+        come from the LUT). Each substring is removed from both the start and the
+        end of the extension-stripped basename, so it is meant for subject ID
+        prefixes and processing suffixes,
+        e.g. ["sub-01_", "_mask_warped", "_warped"].
       default: []

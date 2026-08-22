@@ -24,7 +24,7 @@ nextflow_process {
         }
     }
 
-    test("stats - roi volumes - WM binary masks") {
+    test("stats - roi volumes - labels mode") {
 
         config "./nextflow.config"
 
@@ -56,7 +56,7 @@ nextflow_process {
         }
     }
 
-    test("stats - roi volumes - GM label atlas") {
+    test("stats - roi volumes - atlas labelmap mode") {
 
         config "./nextflow_label.config"
 

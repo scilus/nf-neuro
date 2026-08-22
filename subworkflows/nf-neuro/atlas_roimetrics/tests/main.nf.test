@@ -13,6 +13,7 @@ nextflow_workflow {
     tag "subworkflows/atlas_roimetrics"
 
     tag "stats/metricsinroi"
+    tag "stats/roivolumes"
     tag "registration/ants"
     tag "registration/antsapplytransforms"
 
@@ -100,6 +101,99 @@ nextflow_workflow {
             }
         }
 
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
+                ).match() }
+            )
+        }
+    }
+
+    test("atlas_roimetrics - IIT atlas - gm roimetrics and volumes") {
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+
+                input[0] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/b0.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/ad.nii.gz"),
+                        file("\${test_data_directory}/rd.nii.gz"),
+                        file("\${test_data_directory}/md.nii.gz")]
+                    ]}
+                input[2] = [
+                    use_atlas_iit: true,
+                    use_binary_masks: true,
+                    run_gm_roimetrics: true,
+                    run_roi_volumes: true
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
+                ).match() }
+            )
+        }
+    }
+
+    test("atlas_roimetrics - IIT atlas - volumes only") {
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+
+                input[0] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/b0.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${test_data_directory}/fa.nii.gz")]
+                    ]}
+                input[2] = [
+                    use_atlas_iit: true,
+                    use_binary_masks: true,
+                    run_roi_metrics: false,
+                    run_roi_volumes: true
+                ]
+                """
+            }
+        }
         then {
             assertAll(
                 { assert workflow.success },

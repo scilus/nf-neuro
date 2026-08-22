@@ -36,11 +36,130 @@
                 ]
             }
         ],
+        "timestamp": "2026-06-02T20:47:31.389116538",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-06-02T20:47:31.389116538"
+        }
+    },
+    "atlas_roimetrics - IIT atlas - volumes only": {
+        "content": [
+            {
+                "versions": [
+                    "versions.yml:md5,10c3c16a89dcab69d4b036e0569aa826",
+                    "versions.yml:md5,4b945b03a70d84217c7916069100e024",
+                    "versions.yml:md5,5aab53e71beaecf093af3c8c77d28e9e",
+                    "versions.yml:md5,b0a567e19a5f8c519a85b6d279843b70"
+                ],
+                "wm_volumes": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_volumes.csv"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-08-22T15:31:46.218779404",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "atlas_roimetrics - IIT atlas - gm roimetrics and volumes": {
+        "content": [
+            {
+                "gm_stats_json": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_stats.json"
+                    ]
+                ],
+                "gm_stats_tab_mean": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_desc-mean_stats.tsv"
+                    ]
+                ],
+                "gm_stats_tab_std": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_desc-std_stats.tsv"
+                    ]
+                ],
+                "gm_volumes": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_volumes.csv"
+                    ]
+                ],
+                "stats_json": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_stats.json"
+                    ]
+                ],
+                "stats_tab_mean": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_desc-mean_stats.tsv"
+                    ]
+                ],
+                "stats_tab_std": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_desc-std_stats.tsv"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,10c3c16a89dcab69d4b036e0569aa826",
+                    "versions.yml:md5,3866571f819aa78d2b2d019c8df1a88b",
+                    "versions.yml:md5,4b945b03a70d84217c7916069100e024",
+                    "versions.yml:md5,5aab53e71beaecf093af3c8c77d28e9e",
+                    "versions.yml:md5,76e845b49b32f6cc7dda4948025fbafd",
+                    "versions.yml:md5,a319f96104afdbcac16ab317e7de4c7f",
+                    "versions.yml:md5,b0a567e19a5f8c519a85b6d279843b70",
+                    "versions.yml:md5,ddc926908b33b73b0269fedbc1fe5eb2"
+                ],
+                "wm_volumes": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_volumes.csv"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-08-22T15:30:51.541691214",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
     },
     "atlas_roimetrics - IIT atlas - binary": {
         "content": [
@@ -80,10 +199,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-06-02T20:47:03.44657253",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-06-02T20:47:03.44657253"
+        }
     }
 }
