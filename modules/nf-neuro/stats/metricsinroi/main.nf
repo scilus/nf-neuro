@@ -53,7 +53,7 @@ process STATS_METRICSINROI {
 
         # scil_volume_stats_in_labels outputs metric-centric JSON {metric:{region:{mean,std}}}.
         # Transpose to region-centric {region:{metric:{mean,std}}} so the rest of the
-        # pipeline (key/value cleaning, header generation) works identically to WM mode.
+        # pipeline (key/value cleaning, header generation) works identically to labels mode.
         jq -r '
             [to_entries[] | .key as \$metric | .value | to_entries[] | {k: .key, mk: \$metric, v: .value}] |
             group_by(.k) |

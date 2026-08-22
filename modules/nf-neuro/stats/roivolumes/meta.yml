@@ -109,7 +109,7 @@ args:
       type: string
       description: |
         Optional string inserted before "_volumes" in the output filename.
-        e.g. "atlas-iit-gm" produces "{prefix}_atlas-iit-gm_volumes.csv".
+        e.g. "atlas-brainnetome" produces "{prefix}_atlas-brainnetome_volumes.csv".
       default: ""
   - key_substrs_to_remove:
       type: list

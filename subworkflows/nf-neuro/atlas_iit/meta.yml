@@ -48,7 +48,7 @@ input:
           type: string
           description: Path to a directory containing IIT bundle masks. If provided, these inputs will be used instead of downloading and processing the bundle masks.
           default: null
-        run_gm_roimetrics:
+        fetch_gm_desikan:
           type: boolean
           description: If 'true', also fetch the IIT GM Desikan parcellation atlas and its Look-Up Table, emitted on the `gm_atlas` and `gm_lut` channels. Both channels stay empty when this is 'false'.
           default: false
@@ -87,7 +87,7 @@ output:
       type: file
       description: |
         IIT GM Desikan parcellation atlas, in the atlas' template space.
-        Empty unless `run_gm_roimetrics` is enabled.
+        Empty unless `fetch_gm_desikan` is enabled.
       structure:
         - gm_atlas:
             type: file
@@ -99,7 +99,7 @@ output:
       type: file
       description: |
         JSON Look-Up Table mapping the GM Desikan label indices to region names.
-        Empty unless `run_gm_roimetrics` is enabled.
+        Empty unless `fetch_gm_desikan` is enabled.
       structure:
         - gm_lut:
             type: file

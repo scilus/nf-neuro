@@ -271,7 +271,7 @@ workflow ATLAS_IIT {
         ch_gm_atlas = channel.empty()
         ch_gm_lut   = channel.empty()
 
-        if (options.run_gm_roimetrics) {
+        if (options.fetch_gm_desikan) {
             def gm_dest = "${workflow.workDir}/atlas_iit/gm"
             new File(gm_dest).mkdirs()
 

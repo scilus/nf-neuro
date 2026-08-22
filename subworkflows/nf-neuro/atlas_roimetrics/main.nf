@@ -53,7 +53,7 @@ workflow ATLAS_ROIMETRICS {
                     threshold_bundles: options.use_binary_masks,
                     atlas_iit_b0: options.atlas_iit_b0,
                     atlas_iit_bundle_masks_dir: options.atlas_iit_bundle_masks_dir,
-                    run_gm_roimetrics: want_labelmap,
+                    fetch_gm_desikan: want_labelmap,
                     atlas_iit_gm_atlas: options.atlas_iit_gm_atlas,
                     atlas_iit_gm_lut: options.atlas_iit_gm_lut
                 ]
