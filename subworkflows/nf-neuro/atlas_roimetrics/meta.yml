@@ -111,6 +111,28 @@ input:
             subject's space. No atlas is downloaded and no registration is performed. Mutually
             exclusive with `use_atlas_iit`; exactly one of the two must be enabled.
           default: false
+        roi_sources:
+          type: list
+          description: |
+            How the ROIs are represented. `masks` means one image file per ROI (the IIT WM
+            bundles, or the mask list of `ch_registered_atlas`); `labelmap` means a single
+            image whose integer voxel values identify regions, paired with a Look-Up Table
+            (the IIT GM Desikan parcellation, or the labelmap of `ch_registered_atlas`).
+
+            Accepts either or both. Only the representations listed here are warped into
+            subject space and fed to the statistics, so leaving one out skips its work
+            entirely. Orthogonal to `roi_outputs`: any combination of the two is valid.
+          default: ["masks"]
+        roi_outputs:
+          type: list
+          description: |
+            What to compute for every representation named in `roi_sources`. `metrics` runs
+            stats/metricsinroi to extract the mean and standard deviation of each input metric
+            map; `volumes` runs stats/roivolumes to count voxels and convert them to mm3.
+
+            Accepts either or both. Orthogonal to `roi_sources`: any combination of the two
+            is valid.
+          default: ["metrics"]
         atlas_iit_b0:
           type: string
           description: Path to a Mean B0 map of the IIT Human Brain Atlas. This input will be used instead of downloading the Mean B0 map if `use_atlas_iit` is set to 'true'.
@@ -123,148 +145,140 @@ input:
           type: boolean
           description: If 'true', the IIT bundle masks will be thresholded to create binary masks before extracting the metrics.
           default: false
-        run_gm_roimetrics:
-          type: boolean
-          description: If 'true', also extract metrics per IIT GM Desikan parcellation region, reusing the WM atlas B0 registration.
-          default: false
         atlas_iit_gm_atlas:
           type: string
-          description: Path to the IIT GM Desikan atlas (IIT_GM_Desikan_atlas.nii.gz). This input will be used instead of downloading the atlas if `run_gm_roimetrics` is set to 'true'.
+          description: Path to the IIT GM Desikan atlas (IIT_GM_Desikan_atlas.nii.gz). This input will be used instead of downloading the atlas when `roi_sources` includes 'labelmap'.
           default: null
         atlas_iit_gm_lut:
           type: string
-          description: Path to the IIT GM Desikan Look-Up Table. Accepts either a pre-converted JSON file or the raw tab-separated TXT distributed by NITRC (LUT_GM_Desikan_0to1.txt). This input will be used instead of downloading the LUT if `run_gm_roimetrics` is set to 'true'.
+          description: Path to the IIT GM Desikan Look-Up Table. Accepts either a pre-converted JSON file or the raw tab-separated TXT distributed by NITRC (LUT_GM_Desikan_0to1.txt). This input will be used instead of downloading the LUT when `roi_sources` includes 'labelmap'.
           default: null
-        run_roi_volumes:
-          type: boolean
-          description: If 'true', compute voxel count and volume (mm3) for each WM bundle mask and GM region using stats/roivolumes.
-          default: false
-        run_roi_metrics:
-          type: boolean
-          description: If 'false', skip STATS_METRICSINROI and STATS_GM_ROIMETRICS (diffusion metric extraction). Useful when only volumes are needed. Defaults to true.
-          default: true
       mandatory: true
 output:
-  - stats_json:
+  - mask_stats_json:
       type: file
-      description: Per-bundle metrics statistics, as JSON.
+      description: |
+        Per-ROI metrics statistics over the individual masks, as JSON. Empty unless
+        `roi_sources` includes 'masks' and `roi_outputs` includes 'metrics'.
       structure:
         - meta:
             type: map
             description: Metadata map.
-        - stats_json:
+        - mask_stats_json:
             type: file
-            description: JSON statistics file for the WM bundle masks.
+            description: JSON statistics file for the individual ROI masks.
       pattern: "*.json"
       ontologies:
         - edam: http://edamontology.org/format_3464 # JSON format
-  - stats_tab_mean:
+  - mask_stats_tab_mean:
       type: file
       description: |
-        Structured tabular (TSV or CSV) file holding MEAN metrics
-        values for each bundle mask. The tabular file has the following
-        column structure: (sample, roi, metric1, metric2, ..., metricN).
+        Structured tabular (TSV or CSV) file holding MEAN metrics values for each
+        individual ROI mask. The tabular file has the following column structure:
+        (sample, roi, metric1, metric2, ..., metricN). Empty unless `roi_sources`
+        includes 'masks' and `roi_outputs` includes 'metrics'.
       structure:
         - meta:
             type: map
             description: Metadata map.
-        - tab_mean:
+        - mask_tab_mean:
             type: file
-            description: Mean statistics table file.
+            description: Mean statistics table file for the individual ROI masks.
       pattern: "*_desc-mean_*.{csv,tsv}"
       ontologies: []
-  - stats_tab_std:
+  - mask_stats_tab_std:
       type: file
       description: |
-        Structured tabular (TSV or CSV) file holding STANDARD
-        DEVIATION metrics values for each bundle mask. The
-        tabular file has the following column structure:
-        (sample, roi, metric1, metric2, ..., metricN).
+        Structured tabular (TSV or CSV) file holding STANDARD DEVIATION metrics values
+        for each individual ROI mask. The tabular file has the following column
+        structure: (sample, roi, metric1, metric2, ..., metricN). Empty unless
+        `roi_sources` includes 'masks' and `roi_outputs` includes 'metrics'.
       structure:
         - meta:
             type: map
             description: Metadata map.
-        - tab_std:
+        - mask_tab_std:
             type: file
-            description: Standard deviation statistics table file.
+            description: Standard deviation statistics table file for the individual ROI masks.
       pattern: "*_desc-std_*.{csv,tsv}"
       ontologies: []
-  - wm_volumes:
+  - mask_volumes:
       type: file
       description: |
-        CSV holding the voxel count and volume (mm3) of each individual ROI mask,
-        in the subject's DWI space — the IIT WM bundles under `use_atlas_iit`, or the
-        masks supplied through `ch_registered_atlas` under `use_registered_atlas`.
-        Empty unless `run_roi_volumes` is enabled.
+        CSV holding the voxel count and volume (mm3) of each individual ROI mask, in the
+        subject's DWI space -- the IIT WM bundles under `use_atlas_iit`, or the masks
+        supplied through `ch_registered_atlas` under `use_registered_atlas`. Empty unless
+        `roi_sources` includes 'masks' and `roi_outputs` includes 'volumes'.
       structure:
         - meta:
             type: map
             description: Metadata map.
-        - wm_volumes:
+        - mask_volumes:
             type: file
-            description: WM bundle volumes table.
+            description: Individual ROI mask volumes table.
       pattern: "*_volumes.csv"
       ontologies:
         - edam: http://edamontology.org/format_3752 # CSV format
-  - gm_stats_json:
+  - labelmap_stats_json:
       type: file
       description: |
-        Per-region GM metrics statistics, as JSON. Empty unless
-        `run_gm_roimetrics` is enabled.
+        Per-region metrics statistics over the labelmap, as JSON. Empty unless
+        `roi_sources` includes 'labelmap' and `roi_outputs` includes 'metrics'.
       structure:
         - meta:
             type: map
             description: Metadata map.
-        - gm_stats_json:
+        - labelmap_stats_json:
             type: file
-            description: JSON statistics file for the GM Desikan regions.
+            description: JSON statistics file for the labelmap regions.
       pattern: "*.json"
       ontologies:
         - edam: http://edamontology.org/format_3464 # JSON format
-  - gm_stats_tab_mean:
+  - labelmap_stats_tab_mean:
       type: file
       description: |
-        Structured tabular (TSV or CSV) file holding MEAN metrics values for
-        each GM Desikan region. Empty unless `run_gm_roimetrics` is enabled.
+        Structured tabular (TSV or CSV) file holding MEAN metrics values for each
+        labelmap region. Empty unless `roi_sources` includes 'labelmap' and
+        `roi_outputs` includes 'metrics'.
       structure:
         - meta:
             type: map
             description: Metadata map.
-        - gm_tab_mean:
+        - labelmap_tab_mean:
             type: file
-            description: Mean statistics table file for the GM Desikan regions.
+            description: Mean statistics table file for the labelmap regions.
       pattern: "*_desc-mean_*.{csv,tsv}"
       ontologies: []
-  - gm_stats_tab_std:
+  - labelmap_stats_tab_std:
       type: file
       description: |
-        Structured tabular (TSV or CSV) file holding STANDARD DEVIATION metrics
-        values for each GM Desikan region. Empty unless `run_gm_roimetrics` is
-        enabled.
+        Structured tabular (TSV or CSV) file holding STANDARD DEVIATION metrics values
+        for each labelmap region. Empty unless `roi_sources` includes 'labelmap' and
+        `roi_outputs` includes 'metrics'.
       structure:
         - meta:
             type: map
             description: Metadata map.
-        - gm_tab_std:
+        - labelmap_tab_std:
             type: file
-            description: Standard deviation statistics table file for the GM Desikan regions.
+            description: Standard deviation statistics table file for the labelmap regions.
       pattern: "*_desc-std_*.{csv,tsv}"
       ontologies: []
-  - gm_volumes:
+  - labelmap_volumes:
       type: file
       description: |
         CSV holding the voxel count and volume (mm3) of each labelmap region, in the
-        subject's DWI space — the GM Desikan regions under `use_atlas_iit`, or the
+        subject's DWI space -- the IIT GM Desikan regions under `use_atlas_iit`, or the
         regions of the labelmap supplied through `ch_registered_atlas` under
-        `use_registered_atlas`. Empty unless `run_roi_volumes` is enabled, and — with
-        the IIT atlas — `run_gm_roimetrics` as well.
+        `use_registered_atlas`. Empty unless `roi_sources` includes 'labelmap' and
+        `roi_outputs` includes 'volumes'.
       structure:
         - meta:
             type: map
             description: Metadata map.
-        - gm_volumes:
+        - labelmap_volumes:
             type: file
-            description: GM Desikan region volumes table.
+            description: Labelmap region volumes table.
       pattern: "*_volumes.csv"
       ontologies:
         - edam: http://edamontology.org/format_3752 # CSV format

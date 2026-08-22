@@ -134,7 +134,7 @@ nextflow_workflow {
         }
     }
 
-    test("atlas_roimetrics - IIT atlas - gm roimetrics and volumes") {
+    test("atlas_roimetrics - IIT atlas - both sources, both outputs") {
         when {
             workflow {
                 """
@@ -157,8 +157,8 @@ nextflow_workflow {
                 input[3] = [
                     use_atlas_iit: true,
                     use_binary_masks: true,
-                    run_gm_roimetrics: true,
-                    run_roi_volumes: true
+                    roi_sources: ["masks", "labelmap"],
+                    roi_outputs: ["metrics", "volumes"]
                 ]
                 """
             }
@@ -183,7 +183,7 @@ nextflow_workflow {
         }
     }
 
-    test("atlas_roimetrics - IIT atlas - volumes only") {
+    test("atlas_roimetrics - IIT atlas - masks, volumes only") {
         when {
             workflow {
                 """
@@ -203,8 +203,7 @@ nextflow_workflow {
                 input[3] = [
                     use_atlas_iit: true,
                     use_binary_masks: true,
-                    run_roi_metrics: false,
-                    run_roi_volumes: true
+                    roi_outputs: ["volumes"]
                 ]
                 """
             }
@@ -212,6 +211,61 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
+                ).match() }
+            )
+        }
+    }
+
+    test("atlas_roimetrics - IIT atlas - labelmap only skips the bundle transform") {
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+
+                input[0] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/b0.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${test_data_directory}/fa.nii.gz")]
+                    ]}
+                input[2] = channel.empty()
+                input[3] = [
+                    use_atlas_iit: true,
+                    roi_sources: ["labelmap"],
+                    roi_outputs: ["metrics", "volumes"]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                // The mask side is not requested, so neither the bundle warp nor any
+                // mask statistics may run. The registration is still needed for the labelmap.
+                { assert workflow.trace.tasks().every { task ->
+                    !task.name.contains("TRANSFORM_IIT_BUNDLES") &&
+                    !task.name.contains("STATS_MASK_") } },
+                { assert workflow.trace.tasks().any { task ->
+                    task.name.contains("TRANSFORM_IIT_GM_ATLAS") } },
+                { assert workflow.out.mask_stats_tab_mean.size() == 0 },
+                { assert workflow.out.mask_volumes.size() == 0 },
+                { assert workflow.out.labelmap_volumes.size() == 1 },
                 { assert snapshot(
                     workflow.out
                         .findAll{ channel -> !channel.key.isInteger() && channel.value  }
@@ -257,7 +311,7 @@ nextflow_workflow {
                     ]}
                 input[3] = [
                     use_registered_atlas: true,
-                    run_roi_volumes: true
+                    roi_outputs: ["volumes"]
                 ]
                 """
             }
@@ -266,8 +320,8 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert workflow.trace.tasks().every { task ->
-                    !task.name.contains("REGISTER_ATLAS_REF") &&
-                    !task.name.contains("TRANSFORM_ATLAS_BUNDLES") } },
+                    !task.name.contains("REGISTER_IIT_REF") &&
+                    !task.name.contains("TRANSFORM_IIT_BUNDLES") } },
                 { assert snapshot(
                     workflow.out
                         .findAll{ channel -> !channel.key.isInteger() && channel.value  }
@@ -315,8 +369,8 @@ nextflow_workflow {
                     ]}
                 input[3] = [
                     use_registered_atlas: true,
-                    run_roi_metrics: false,
-                    run_roi_volumes: true
+                    roi_sources: ["masks", "labelmap"],
+                    roi_outputs: ["volumes"]
                 ]
                 """
             }
@@ -325,8 +379,8 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 // Both volume outputs must be populated from the single input tuple.
-                { assert workflow.out.wm_volumes.size() == 1 },
-                { assert workflow.out.gm_volumes.size() == 1 },
+                { assert workflow.out.mask_volumes.size() == 1 },
+                { assert workflow.out.labelmap_volumes.size() == 1 },
                 { assert snapshot(
                     workflow.out
                         .findAll{ channel -> !channel.key.isInteger() && channel.value  }
@@ -365,6 +419,32 @@ nextflow_workflow {
                     ]}
                 input[2] = channel.empty()
                 input[3] = [ use_atlas_iit: false ]
+                """
+            }
+        }
+        then {
+            assert workflow.failed
+        }
+    }
+
+    test("atlas_roimetrics - invalid roi_sources value") {
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+
+                input[0] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/b0.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${test_data_directory}/fa.nii.gz")]
+                    ]}
+                input[2] = channel.empty()
+                input[3] = [ use_atlas_iit: true, roi_sources: ["bundles"] ]
                 """
             }
         }
