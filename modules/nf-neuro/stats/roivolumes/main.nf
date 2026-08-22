@@ -58,7 +58,7 @@ if use_label:
         lut = json.load(f)
 
     with open(output_file, 'w') as out:
-        out.write("sid,session,run,region,volume_voxels,volume_mm3\\n")
+        out.write("sid,session,run,roi,volume_voxels,volume_mm3\\n")
         for label_id, label_name in sorted(lut.items(), key=lambda x: int(x[0])):
             count   = int(np.sum(data_int == int(label_id)))
             vol_mm3 = count * vox_vol
@@ -71,22 +71,22 @@ else:
     mask_files = sorted("${rois_str}".split())
 
     with open(output_file, 'w') as out:
-        out.write("sid,session,run,bundle,volume_voxels,volume_mm3\\n")
+        out.write("sid,session,run,roi,volume_voxels,volume_mm3\\n")
         for mask_file in mask_files:
-            bundle = os.path.basename(mask_file)
+            roi_name = os.path.basename(mask_file)
             for ext in ('.nii.gz', '.nii'):
-                if bundle.endswith(ext):
-                    bundle = bundle[:-len(ext)]
+                if roi_name.endswith(ext):
+                    roi_name = roi_name[:-len(ext)]
                     break
             for s in substrs:
-                bundle = bundle.removeprefix(s).removesuffix(s)
+                roi_name = roi_name.removeprefix(s).removesuffix(s)
 
             img     = nib.load(mask_file)
             data    = img.get_fdata()
             vox_vol = float(np.prod(img.header.get_zooms()[:3]))
             count   = int(np.sum(data > 0))
             vol_mm3 = count * vox_vol
-            out.write(f"{subject_id},{session_id},{run_id},{bundle},{count},{vol_mm3:.4f}\\n")
+            out.write(f"{subject_id},{session_id},{run_id},{roi_name},{count},{vol_mm3:.4f}\\n")
 
 with open("versions.yml", "w") as v:
     v.write('"${task.process}":\\n')

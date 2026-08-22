@@ -71,10 +71,11 @@ output:
       - "*_volumes.csv":
           type: file
           description: |
-            CSV file with columns: sid, session, run, <roi>, volume_voxels, volume_mm3.
-            One row per input mask file in labels mode (use_label = false, ROI column
-            named `bundle`), or one row per LUT entry in atlas/labelmap mode
-            (use_label = true, ROI column named `region`).
+            CSV file with columns: sid, session, run, roi, volume_voxels, volume_mm3.
+            The column set is identical in both modes: one row per input mask file in
+            labels mode (use_label = false, `roi` holding the name derived from the
+            filename), or one row per LUT entry in atlas/labelmap mode
+            (use_label = true, `roi` holding the LUT region name).
             The filename is `{prefix}_volumes.csv`, or `{prefix}_{first_suffix}_volumes.csv`
             when the `first_suffix` arg is set.
           pattern: "*_volumes.csv"
