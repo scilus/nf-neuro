@@ -56,6 +56,46 @@ input:
       pattern: "*.nii.gz"
       ontologies:
         - edam: http://edamontology.org/format_4001 # NIFTI format
+  - ch_registered_atlas:
+      type: file
+      description: |
+        Atlas already registered into each subject's space, supplied by the caller instead of
+        being downloaded and registered by this subworkflow. Only read when
+        `use_registered_atlas` is 'true'; pass `channel.empty()` otherwise.
+
+        Each entry carries both possible ROI representations, and either may be empty:
+        a list of individual ROI mask files, and a single labelmap image paired with its
+        Look-Up Table. Entries whose mask list is empty are skipped for the mask-based
+        statistics, and entries missing either the labelmap or the LUT are skipped for the
+        labelmap-based statistics.
+
+        Supplying this instead of `use_atlas_iit` lets the caller choose its own registration
+        strategy, reuse a transform computed earlier in the pipeline, or work from an atlas
+        this subworkflow does not know how to fetch.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - rois:
+            type: file
+            description: |
+              List of ROI mask files in the subject's space, one file per ROI. Pass [] to
+              compute labelmap statistics only.
+        - labelmap:
+            type: file
+            description: |
+              Single labelmap image in the subject's space, whose integer voxel values
+              identify regions. Pass [] to compute mask statistics only.
+        - labelmap_lut:
+            type: file
+            description: |
+              JSON Look-Up Table mapping the labelmap's integer indices to region names.
+              Required whenever `labelmap` is provided.
+      pattern: "*.{nii.gz,json}"
+      mandatory: false
+      ontologies:
+        - edam: http://edamontology.org/format_4001 # NIFTI format
+        - edam: http://edamontology.org/format_3464 # JSON format
   - options:
       type: map
       description: Map of options for the subworkflow.
@@ -63,6 +103,13 @@ input:
         use_atlas_iit:
           type: boolean
           description: If 'true', the IIT Human Brain Atlas will be used for ROI metrics extraction.
+          default: false
+        use_registered_atlas:
+          type: boolean
+          description: |
+            If 'true', the atlas is taken from the `ch_registered_atlas` input, already in each
+            subject's space. No atlas is downloaded and no registration is performed. Mutually
+            exclusive with `use_atlas_iit`; exactly one of the two must be enabled.
           default: false
         atlas_iit_b0:
           type: string
@@ -145,8 +192,10 @@ output:
   - wm_volumes:
       type: file
       description: |
-        CSV holding the voxel count and volume (mm3) of each WM bundle mask,
-        in the subject's DWI space. Empty unless `run_roi_volumes` is enabled.
+        CSV holding the voxel count and volume (mm3) of each individual ROI mask,
+        in the subject's DWI space — the IIT WM bundles under `use_atlas_iit`, or the
+        masks supplied through `ch_registered_atlas` under `use_registered_atlas`.
+        Empty unless `run_roi_volumes` is enabled.
       structure:
         - meta:
             type: map
@@ -204,9 +253,11 @@ output:
   - gm_volumes:
       type: file
       description: |
-        CSV holding the voxel count and volume (mm3) of each GM Desikan region,
-        in the subject's DWI space. Empty unless both `run_gm_roimetrics` and
-        `run_roi_volumes` are enabled.
+        CSV holding the voxel count and volume (mm3) of each labelmap region, in the
+        subject's DWI space — the GM Desikan regions under `use_atlas_iit`, or the
+        regions of the labelmap supplied through `ch_registered_atlas` under
+        `use_registered_atlas`. Empty unless `run_roi_volumes` is enabled, and — with
+        the IIT atlas — `run_gm_roimetrics` as well.
       structure:
         - meta:
             type: map

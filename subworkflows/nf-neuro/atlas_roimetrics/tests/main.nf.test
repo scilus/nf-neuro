@@ -32,6 +32,17 @@ nextflow_workflow {
                 """
             }
         }
+        // Separate alias so the channel above keeps emitting a single directory
+        // and the existing tests are unaffected.
+        run("LOAD_TEST_DATA", alias: "LOAD_PLOT") {
+            script "../../load_test_data/main.nf"
+            process {
+                """
+                input[0] = channel.from( [ "plot.zip" ] )
+                input[1] = "test.load-test-data"
+                """
+            }
+        }
     }
 
     test("atlas_roimetrics - IIT atlas - binary") {
@@ -53,7 +64,8 @@ nextflow_workflow {
                         file("\${test_data_directory}/rd.nii.gz"),
                         file("\${test_data_directory}/md.nii.gz")]
                     ]}
-                input[2] = [use_atlas_iit: true, use_binary_masks: true]
+                input[2] = channel.empty()
+                input[3] = [use_atlas_iit: true, use_binary_masks: true]
                 """
             }
         }
@@ -96,7 +108,8 @@ nextflow_workflow {
                         file("\${test_data_directory}/rd.nii.gz"),
                         file("\${test_data_directory}/md.nii.gz")]
                     ]}
-                input[2] = [use_atlas_iit: true] // use_binary_mask: false
+                input[2] = channel.empty()
+                input[3] = [use_atlas_iit: true] // use_binary_mask: false
                 """
             }
         }
@@ -140,7 +153,8 @@ nextflow_workflow {
                         file("\${test_data_directory}/rd.nii.gz"),
                         file("\${test_data_directory}/md.nii.gz")]
                     ]}
-                input[2] = [
+                input[2] = channel.empty()
+                input[3] = [
                     use_atlas_iit: true,
                     use_binary_masks: true,
                     run_gm_roimetrics: true,
@@ -185,7 +199,8 @@ nextflow_workflow {
                         [ id:'test', single_end:false ], // meta map
                         [file("\${test_data_directory}/fa.nii.gz")]
                     ]}
-                input[2] = [
+                input[2] = channel.empty()
+                input[3] = [
                     use_atlas_iit: true,
                     use_binary_masks: true,
                     run_roi_metrics: false,
@@ -197,6 +212,121 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
+                ).match() }
+            )
+        }
+    }
+
+    test("atlas_roimetrics - pre-registered atlas - no download or registration") {
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+
+                input[0] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/b0.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${test_data_directory}/fa.nii.gz"),
+                        file("\${test_data_directory}/md.nii.gz")]
+                    ]}
+                // ROI masks already in the subject's space, no labelmap supplied
+                input[2] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${test_data_directory}/fa_thr.nii.gz"),
+                        file("\${test_data_directory}/seed.nii.gz")],
+                        [],
+                        []
+                    ]}
+                input[3] = [
+                    use_registered_atlas: true,
+                    run_roi_volumes: true
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.tasks().every { task ->
+                    !task.name.contains("REGISTER_ATLAS_REF") &&
+                    !task.name.contains("TRANSFORM_ATLAS_BUNDLES") } },
+                { assert snapshot(
+                    workflow.out
+                        .findAll{ channel -> !channel.key.isInteger() && channel.value  }
+                        .collectEntries{ channel ->
+                            [(channel.key): ["versions"].contains(channel.key)
+                                ? channel.value
+                                : channel.value.collect{ subject ->
+                                    [ subject[0] ] + subject[1..-1].flatten().collect{ entry -> entry
+                                        ? file(entry).name
+                                        : "" }
+                            } ]
+                        }
+                ).match() }
+            )
+        }
+    }
+
+    test("atlas_roimetrics - pre-registered atlas - masks and labelmap together") {
+        when {
+            workflow {
+                """
+                ch_split_test_data = LOAD_DATA.out.test_data_directory
+                ch_plot_test_data  = LOAD_PLOT.out.test_data_directory
+
+                input[0] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                    [ id:'test', single_end:false ], // meta map
+                    file("\${test_data_directory}/b0.nii.gz")
+                    ]}
+                input[1] = ch_split_test_data
+                    .map{ test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${test_data_directory}/fa.nii.gz")]
+                    ]}
+                // Both representations in the same entry: the tuple is read twice
+                // internally, once for the masks and once for the labelmap.
+                input[2] = ch_split_test_data
+                    .combine(ch_plot_test_data)
+                    .map{ processing_dir, plot_dir -> [
+                        [ id:'test', single_end:false ], // meta map
+                        [file("\${processing_dir}/fa_thr.nii.gz"),
+                        file("\${processing_dir}/seed.nii.gz")],
+                        file("\${plot_dir}/atlas_brainnetome.nii.gz"),
+                        file("\${plot_dir}/atlas_brainnetome.json")
+                    ]}
+                input[3] = [
+                    use_registered_atlas: true,
+                    run_roi_metrics: false,
+                    run_roi_volumes: true
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                // Both volume outputs must be populated from the single input tuple.
+                { assert workflow.out.wm_volumes.size() == 1 },
+                { assert workflow.out.gm_volumes.size() == 1 },
                 { assert snapshot(
                     workflow.out
                         .findAll{ channel -> !channel.key.isInteger() && channel.value  }
@@ -233,7 +363,8 @@ nextflow_workflow {
                         file("\${test_data_directory}/rd.nii.gz"),
                         file("\${test_data_directory}/md.nii.gz")]
                     ]}
-                input[2] = [ use_atlas_iit: false ]
+                input[2] = channel.empty()
+                input[3] = [ use_atlas_iit: false ]
                 """
             }
         }
