@@ -159,8 +159,7 @@ workflow OUTPUT_TEMPLATE_SPACE {
             channel.empty(),
             ch_freesurfer_license,
             [
-                "run_easyreg": options.run_easyreg,
-                "run_synthmorph": options.run_synthmorph,
+                "method": options.method,
                 "masking_strategy": options.masking_strategy
             ]
         )

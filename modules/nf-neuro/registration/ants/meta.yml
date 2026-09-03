@@ -131,15 +131,6 @@ args:
       type: boolean
       description: If true, the command will be run in single-threaded mode. By default, the command will use multiple threads based on the number of CPUs allocated to the task.
       default: false
-  - masking_strategy:
-      type: string
-      choices:
-        - none
-        - apriori
-        - internal
-        - both
-      description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
-      default: "none"
 input:
   - - meta:
         type: map

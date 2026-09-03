@@ -146,14 +146,11 @@ input:
             - both
           description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
           default: "none"
-        run_easyreg:
-          type: boolean
-          description: Run EasyReg for registration. If false, SynthMorph will be used if `run_synthmorph` is true, and ANTs SyN will be used if `run_synthmorph` is false.
-          default: false
-        run_synthmorph:
-          type: boolean
-          description: Run SynthMorph for registration. If false, EasyReg will be used if `run_easyreg` is true, and ANTs SyN will be used if `run_easyreg` is false.
-          default: false
+        method:
+          type: string
+          choices: [ants, easyreg, synthmorph]
+          description: Registration method to use. Options are 'ants', 'easyreg', or 'synthmorph'.
+          default: ants
 output:
   - image_warped:
       type: file

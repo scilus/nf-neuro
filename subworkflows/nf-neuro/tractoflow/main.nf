@@ -196,10 +196,7 @@ workflow TRACTOFLOW {
             channel.empty(),
             channel.empty(),
             channel.empty(),
-            [
-                "run_easyreg": options.run_easyreg,
-                "run_synthmorph": options.run_synthmorph,
-            ]
+            [:]
         )
         ch_versions = ch_versions.mix(T1_REGISTRATION.out.versions.first())
         ch_mqc_files = ch_mqc_files.mix(T1_REGISTRATION.out.mqc)

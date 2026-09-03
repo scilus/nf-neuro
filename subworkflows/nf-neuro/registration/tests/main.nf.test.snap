@@ -80,7 +80,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-23T10:57:52.364469596"
+        "timestamp": "2026-09-02T16:54:47.939543114"
     },
     "registration - easyreg": {
         "content": [
@@ -174,7 +174,133 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-13T10:29:45.268529864"
+        "timestamp": "2026-09-02T10:54:24.51083055"
+    },
+    "registration - ANTs - SyNQuick - apriori - two masks": {
+        "content": [
+            {
+                "backward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat"
+                    ]
+                ],
+                "backward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat",
+                        "test_backward1_warp.nii.gz"
+                    ]
+                ],
+                "backward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz",
+                        "test_forward1_affine.mat"
+                    ]
+                ],
+                "backward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward1_warp.nii.gz"
+                    ]
+                ],
+                "forward_affine": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward1_affine.mat"
+                    ]
+                ],
+                "forward_image_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz",
+                        "test_forward1_affine.mat"
+                    ]
+                ],
+                "forward_tractogram_transform": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_backward0_affine.mat",
+                        "test_backward1_warp.nii.gz"
+                    ]
+                ],
+                "forward_warp": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_forward0_warp.nii.gz"
+                    ]
+                ],
+                "image_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_moving_warped.nii.gz"
+                    ]
+                ],
+                "image_warped_masked": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_moving_image_masked_warped.nii.gz"
+                    ]
+                ],
+                "mqc": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test__registration_ants_mqc.gif"
+                    ]
+                ],
+                "reference_warped": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_fixed_warped.nii.gz"
+                    ]
+                ],
+                "reference_warped_masked": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_warped_reference.nii.gz"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,17bd535afe87cfe8fd4ed5dc814a4a1a",
+                    "versions.yml:md5,2ccd5abf931050d2e7d10740d964dc56",
+                    "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
+                    "versions.yml:md5,8d90eba5eb0cfe9c82c7280c1b6e66a8",
+                    "versions.yml:md5,8f4cb1a55910da303007d7c2202e62f0"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-09-02T16:53:38.091491741"
     },
     "registration - ANTs - SyNQuick": {
         "content": [
@@ -280,9 +406,9 @@
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,17bd535afe87cfe8fd4ed5dc814a4a1a",
                     "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
-                    "versions.yml:md5,8f4cb1a55910da303007d7c2202e62f0",
-                    "versions.yml:md5,a338911f46f2c623d87eab600c524ffb"
+                    "versions.yml:md5,8f4cb1a55910da303007d7c2202e62f0"
                 ]
             }
         ],
@@ -290,7 +416,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-08-31T14:32:23.371037671"
+        "timestamp": "2026-09-02T16:53:16.217753096"
     },
     "registration - ANTs - SyNQuick - both": {
         "content": [
@@ -376,7 +502,7 @@
                         {
                             "id": "test"
                         },
-                        "test_moving_image_masked_both_warped.nii.gz"
+                        "test_moving_image_masked_warped.nii.gz"
                     ]
                 ],
                 "mqc": [
@@ -404,11 +530,11 @@
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,17bd535afe87cfe8fd4ed5dc814a4a1a",
                     "versions.yml:md5,2ccd5abf931050d2e7d10740d964dc56",
                     "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
                     "versions.yml:md5,8d90eba5eb0cfe9c82c7280c1b6e66a8",
-                    "versions.yml:md5,8f4cb1a55910da303007d7c2202e62f0",
-                    "versions.yml:md5,a338911f46f2c623d87eab600c524ffb"
+                    "versions.yml:md5,8f4cb1a55910da303007d7c2202e62f0"
                 ]
             }
         ],
@@ -416,7 +542,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-08-31T16:46:33.073568278"
+        "timestamp": "2026-09-02T16:54:21.371527679"
     },
     "registration - ANTs - Anat to DWI": {
         "content": [
@@ -514,7 +640,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,03b958f14a890b541bb76c73f7a72847"
+                    "versions.yml:md5,e387017f3bb8f7bc50efb907d9e8e73f"
                 ]
             }
         ],
@@ -522,7 +648,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-07-13T17:02:40.341565686"
+        "timestamp": "2026-09-02T16:52:54.453797415"
     },
     "registration - ANTs - SyNQuick - internal": {
         "content": [
@@ -620,9 +746,9 @@
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,17bd535afe87cfe8fd4ed5dc814a4a1a",
                     "versions.yml:md5,3764dd2f067db355da3536c1b0c94619",
-                    "versions.yml:md5,8d90eba5eb0cfe9c82c7280c1b6e66a8",
-                    "versions.yml:md5,a338911f46f2c623d87eab600c524ffb"
+                    "versions.yml:md5,8d90eba5eb0cfe9c82c7280c1b6e66a8"
                 ]
             }
         ],
@@ -630,6 +756,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-08-31T15:08:34.874007201"
+        "timestamp": "2026-09-02T16:53:59.60692071"
     }
 }

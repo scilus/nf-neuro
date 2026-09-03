@@ -64,11 +64,11 @@ workflow REGISTRATION {
             }
         }
 
-        if ( ( options.masking_strategy == "both" || options.masking_strategy == "internal" ) && ( options.run_easyreg || options.run_synthmorph ) ) {
-            error "The \${options.masking_strategy} masking strategy is not compatible with the easyreg or synthmorph registration methods."
+        if ( ( options.masking_strategy == "both" || options.masking_strategy == "internal" ) && ( options.method == "easyreg" || options.method == "synthmorph" ) ) {
+            error "The ${options.masking_strategy} masking strategy is not compatible with the easyreg or synthmorph registration methods."
         }
 
-        if ( options.run_easyreg ) {
+        if ( options.method == "easyreg" ) {
             // ** Registration using Easyreg ** //
             // Result : [ meta, reference, image | [], ref-segmentation | [], segmentation | [] ]
             //  Steps :
@@ -103,7 +103,7 @@ workflow REGISTRATION {
             out_segmentation = ch_segmentation.mix( REGISTRATION_EASYREG.out.segmentation_warped )
             out_ref_segmentation = ch_moving_segmentation.mix( REGISTRATION_EASYREG.out.fixed_segmentation_warped )
         }
-        else if ( options.run_synthmorph ) {
+        else if ( options.method == "synthmorph" ) {
             // ** Registration using synthmorph ** //
             ch_register = ch_fixed_image_ready
                 .join(ch_moving_image_ready)
@@ -203,9 +203,17 @@ workflow REGISTRATION {
             ch_register = ch_fixed_image_ready
                 .join(ch_moving_image_ready)
                 .join(ch_fixed_metric_ready, remainder: true)
-                .join(ch_fixed_mask, remainder: true)
-                .join(ch_moving_mask, remainder: true)
-                .map{ it[0..2] + [it[3] ?: []] + [it[4] ?: [], it[5] ?: []] }
+                    if ( options.masking_strategy == "both" || options.masking_strategy == "internal" ) {
+                        ch_register = ch_register
+                            .join(ch_fixed_mask, remainder: true)
+                            .join(ch_moving_mask, remainder: true)
+                            .map{ it[0..2] + [it[3] ?: [], it[4] ?: [], it[5] ?: []] }
+                    }
+                    else {
+                        ch_register = ch_register
+                            .map{ it[0..2] + [it[3] ?: [], [], []] }
+                    }
+                    ch_register = ch_register
                 .branch{
                     anat_to_dwi : it[3]
                     ants_syn: true
