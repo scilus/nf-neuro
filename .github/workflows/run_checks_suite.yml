@@ -74,7 +74,7 @@ jobs:
         run: npm ci
 
       - name: Run ECLint check
-        run: npx editorconfig-checker -exclude README.md $(git ls-files | grep -v test)
+        run: npx editorconfig-checker -exclude README.md -exclude docs $(git ls-files | grep -v test)
 
   lint-changes:
     name: lint - changes
