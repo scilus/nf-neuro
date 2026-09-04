@@ -2,13 +2,14 @@ process REGISTRATION_ANATTODWI {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilus:2.2.2"
+    container "scilus/scilus:2.3.0"
 
     input:
-        tuple val(meta), path(fixed_reference), path(moving_anat), path(metric)
+        tuple val(meta), path(fixed_reference), path(moving_anat), path(metric), path(fixed_mask), path(moving_mask)
 
     output:
         tuple val(meta), path("*_warped.nii.gz")                            , emit: anat_warped
+        tuple val(meta), path("*_warped_reference.nii.gz")                  , emit: fixed_warped
         tuple val(meta), path("*_forward1_affine.mat")                      , emit: forward_affine
         tuple val(meta), path("*_forward0_warp.nii.gz")                     , emit: forward_warp
         tuple val(meta), path("*_backward1_warp.nii.gz")                    , emit: backward_warp
@@ -25,15 +26,18 @@ process REGISTRATION_ANATTODWI {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def suffix = task.ext.suffix ? "${task.ext.suffix}_warped" : "warped"
     def run_qc = task.ext.run_qc as Boolean || false
+    def args = task.ext.args ?: ''
 
+    if (fixed_mask || moving_mask) args += " -x \"[${fixed_mask ?: 'NULL'},${moving_mask ?: 'NULL'}]\""
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=${task.ext.single_thread ? 1 : task.cpus}
     export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}
     export ANTS_RANDOM_SEED=${task.ext.ants_rng_seed ? task.ext.ants_rng_seed : "1234"}
 
     antsRegistration --dimensionality 3 --float 0\
-        --output [forward,warped.nii.gz]\
+        --output [forward,warped.nii.gz,InverseWarped.nii.gz]\
         --interpolation Linear --use-histogram-matching 0\
         --winsorize-image-intensities [0.005,0.995]\
         --initial-moving-transform [$fixed_reference,$moving_anat,1]\
@@ -49,14 +53,16 @@ process REGISTRATION_ANATTODWI {
         --metric MI[$fixed_reference,$moving_anat,1,32]\
         --metric CC[$metric,$moving_anat,1,4]\
         --convergence [50x25x10,1e-6,10] --shrink-factors 4x2x1\
-        --smoothing-sigmas 3x2x1
+        --smoothing-sigmas 3x2x1\
+        $args
 
-    moving_base=\$(basename "${moving_anat}")
+    moving_base=\$(basename $moving_anat .nii.gz)
     ext=\${moving_base#*.}
     moving_id=\${moving_base%.\${ext}}
     moving_id=\${moving_id#${prefix}_*}
 
-    mv warped.nii.gz ${prefix}_\${moving_id}_warped.nii.gz
+    mv warped.nii.gz ${prefix}_\${moving_id}_${suffix}.nii.gz
+    mv InverseWarped.nii.gz ${prefix}_warped_reference.nii.gz
     mv forward0GenericAffine.mat ${prefix}_forward1_affine.mat
     mv forward1Warp.nii.gz ${prefix}_forward0_warp.nii.gz
     mv forward1InverseWarp.nii.gz ${prefix}_backward1_warp.nii.gz
@@ -67,7 +73,7 @@ process REGISTRATION_ANATTODWI {
     ### ** QC ** ###
     if $run_qc; then
         # Extract dimensions.
-        dim=\$(mrinfo ${prefix}_\${moving_id}_warped.nii.gz -size)
+        dim=\$(mrinfo ${prefix}_\${moving_id}_${suffix}.nii.gz -size)
         read sagittal_dim coronal_dim axial_dim <<< "\${dim}"
 
         # Get middle slices.
@@ -83,7 +89,7 @@ process REGISTRATION_ANATTODWI {
         fixed_id=\${fixed_id#${prefix}_*}
 
         # Iterate over images.
-        for image in \${moving_id}_warped \${fixed_id}; do
+        for image in \${moving_id}_${suffix} \${fixed_id}; do
             mrconvert *\${image}.nii.gz \${image}_viz.nii.gz -stride -1,2,3
             scil_viz_volume_screenshot \${image}_viz.nii.gz \${image}_coronal.png \
                 --slices \$coronal_mid --axis coronal \$viz_params
@@ -109,11 +115,11 @@ process REGISTRATION_ANATTODWI {
 
         # Create GIF.
         convert -delay 10 -loop 0 -morph 10 \
-            \${moving_id}_warped_mosaic.png \${fixed_id}_mosaic.png \${moving_id}_warped_mosaic.png \
+            \${moving_id}_${suffix}_mosaic.png \${fixed_id}_mosaic.png \${moving_id}_${suffix}_mosaic.png \
             ${prefix}_registration_anattodwi_mqc.gif
 
         # Clean up.
-        rm \${moving_id}_warped_mosaic.png \${fixed_id}_mosaic.png
+        rm \${moving_id}_${suffix}_mosaic.png \${fixed_id}_mosaic.png
     fi
 
     cat <<-END_VERSIONS > versions.yml
@@ -128,7 +134,7 @@ process REGISTRATION_ANATTODWI {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def run_qc = task.ext.run_qc as Boolean || false
-
+    def suffix = task.ext.suffix ? "${task.ext.suffix}_warped" : "warped"
     """
     antsRegistration -h
     antsApplyTransforms -h
@@ -136,10 +142,13 @@ process REGISTRATION_ANATTODWI {
     scil_viz_volume_screenshot -h
     convert -help .
 
-    moving_id=\$(basename $moving_anat .nii.gz)
+    moving_base=\$(basename $moving_anat .nii.gz)
+    ext=\${moving_base#*.}
+    moving_id=\${moving_base%.\${ext}}
     moving_id=\${moving_id#${prefix}_*}
 
-    touch ${prefix}_\${moving_id}_warped.nii.gz
+    touch ${prefix}_\${moving_id}_${suffix}.nii.gz
+    touch ${prefix}_warped_reference.nii.gz
     touch ${prefix}_forward1_affine.mat
     touch ${prefix}_forward0_warp.nii.gz
     touch ${prefix}_backward1_warp.nii.gz

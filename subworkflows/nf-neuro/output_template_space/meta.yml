@@ -137,14 +137,16 @@ input:
           type: string
           description: Name/type of the cohort to use.
           default: null
-        run_easyreg:
-          type: boolean
-          description: Use Easyreg any-to-any registration model.
-          default: false
-        run_synthmorph:
-          type: boolean
-          description: Use Synthmorph ML registration model.
-          default: false
+        method:
+          type: string
+          choices: [ants, easyreg, synthmorph]
+          description: Registration method to use. Options are 'ants', 'easyreg', or 'synthmorph'.
+          default: ants
+        masking_strategy:
+          type: string
+          choices: [none, apriori, internal, both]
+          description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
+          default: "none"
 output:
   - ch_t1w_tpl:
       type: file

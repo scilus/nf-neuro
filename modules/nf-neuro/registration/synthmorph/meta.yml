@@ -103,6 +103,18 @@ output:
           pattern: "*_warped.nii.gz"
           ontologies:
             - edam: http://edamontology.org/format_4001 # NIFTI format
+  fixed_warped:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*_warped_reference.nii.gz":
+          type: file
+          description: Fixed/Reference warped image
+          pattern: "*_warped_reference.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_4001 # NIFTI format
   forward_affine:
     - - meta:
           type: map

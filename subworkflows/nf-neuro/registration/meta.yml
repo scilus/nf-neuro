@@ -44,9 +44,11 @@ keywords:
 components:
   - registration/anattodwi
   - registration/ants
+  - registration/antsapplytransforms
   - registration/convert
   - registration/easyreg
   - registration/synthmorph
+  - image/applymask
   - utils_options
 input:
   - ch_fixed_image:
@@ -93,7 +95,7 @@ input:
   - ch_fixed_mask:
       type: file
       description: |
-        FOR USE WITH ANTS SYN REGISTRATION ONLY. The input channel containing the mask file in fixed image space.
+        Fixed mask will be used to mask the fixed image during registration.
       structure:
         - meta:
             type: map
@@ -106,7 +108,7 @@ input:
   - ch_moving_mask:
       type: file
       description: |
-        FOR USE WITH ANTS SYN REGISTRATION ONLY. The input channel containing the mask file in moving image space.
+        Moving mask will be used to mask the moving image during registration.
       structure:
         - meta:
             type: map
@@ -135,14 +137,20 @@ input:
       description: Map of options for the registration subworkflow.
       mandatory: false
       entries:
-        run_easyreg:
-          type: boolean
-          description: Run EasyReg for registration. If false, SynthMorph will be used if `run_synthmorph` is true, and ANTs SyN will be used if `run_synthmorph` is false.
-          default: false
-        run_synthmorph:
-          type: boolean
-          description: Run SynthMorph for registration. If false, EasyReg will be used if `run_easyreg` is true, and ANTs SyN will be used if `run_easyreg` is false.
-          default: false
+        masking_strategy:
+          type: string
+          choices:
+            - none
+            - apriori
+            - internal
+            - both
+          description: Masking strategy to use for registration. Options are 'none', 'apriori', 'internal' or 'both'.
+          default: "none"
+        method:
+          type: string
+          choices: [ants, easyreg, synthmorph]
+          description: Registration method to use. Options are 'ants', 'easyreg', or 'synthmorph'.
+          default: ants
 output:
   - image_warped:
       type: file
@@ -159,7 +167,7 @@ output:
   - reference_warped:
       type: file
       description: |
-        ONLY PROVIDED BY REGISTRATION_EASYREG. Channel containing the reference image warped in moving space.
+        Channel containing the reference image warped in moving space.
       structure:
         - meta:
             type: map
@@ -167,6 +175,31 @@ output:
         - image:
             type: file
             description: Warped reference image in moving space.
+      pattern: "*.{nii,nii.gz}"
+      mandatory: false
+  - image_warped_masked:
+      type: file
+      description: |
+        Channel containing images warped in fixed space.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - image:
+            type: file
+            description: Warped image masked in fixed space.
+      pattern: "*.{nii,nii.gz}"
+  - reference_warped_masked:
+      type: file
+      description: |
+        Channel containing the reference image warped in moving space.
+      structure:
+        - meta:
+            type: map
+            description: Metadata map.
+        - image:
+            type: file
+            description: Warped reference image masked in moving space.
       pattern: "*.{nii,nii.gz}"
       mandatory: false
   - forward_affine:
