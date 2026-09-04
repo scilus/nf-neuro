@@ -259,7 +259,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_T1w_warped.nii.gz:md5,9f2eda1485017da83b5fcd6871cdcb74"
+                        "test_T1w_warped.nii.gz:md5,7bf2e1cf5c6df2d7bc4efd8529e5d7bc"
                     ]
                 ],
                 "1": [
@@ -268,7 +268,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_warped_reference.nii.gz:md5,f6969de8c75d8e4a5a6d264c3ac50ab1"
+                        "test_warped_reference.nii.gz:md5,889bc5027dfc6e26c812d834a112cd0e"
                     ]
                 ],
                 "10": [
@@ -277,7 +277,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_registration_anattodwi_mqc.gif:md5,9cbc1ce8755821996dae18080cf0a23c"
+                        "test_registration_anattodwi_mqc.gif:md5,da4f8bb6fcc6f9768a2035e9f10eada5"
                     ]
                 ],
                 "11": [
@@ -289,7 +289,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_forward1_affine.mat:md5,984ac5023aca49f513af811d0f1e3e89"
+                        "test_forward1_affine.mat:md5,035d194bd4068828bbc7ded19d1b1523"
                     ]
                 ],
                 "3": [
@@ -298,7 +298,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_forward0_warp.nii.gz:md5,464d7b291ab9c9aaead7ecbfec6a6693"
+                        "test_forward0_warp.nii.gz:md5,0f292cc2a69b115ef5a23dae9116c25d"
                     ]
                 ],
                 "4": [
@@ -307,7 +307,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_backward1_warp.nii.gz:md5,4ea6f41a8246f3cb0b1ad39c94028c1f"
+                        "test_backward1_warp.nii.gz:md5,6f0cc0dd97f276fd0a64af98ea8a1787"
                     ]
                 ],
                 "5": [
@@ -316,7 +316,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_backward0_affine.mat:md5,177325d18b5a5fa457bd3a2e052463d9"
+                        "test_backward0_affine.mat:md5,50fef7c5c184a6fc228f6b29244d5690"
                     ]
                 ],
                 "6": [
@@ -326,8 +326,8 @@
                             "single_end": false
                         },
                         [
-                            "test_forward0_warp.nii.gz:md5,464d7b291ab9c9aaead7ecbfec6a6693",
-                            "test_forward1_affine.mat:md5,984ac5023aca49f513af811d0f1e3e89"
+                            "test_forward0_warp.nii.gz:md5,0f292cc2a69b115ef5a23dae9116c25d",
+                            "test_forward1_affine.mat:md5,035d194bd4068828bbc7ded19d1b1523"
                         ]
                     ]
                 ],
@@ -338,8 +338,8 @@
                             "single_end": false
                         },
                         [
-                            "test_backward0_affine.mat:md5,177325d18b5a5fa457bd3a2e052463d9",
-                            "test_backward1_warp.nii.gz:md5,4ea6f41a8246f3cb0b1ad39c94028c1f"
+                            "test_backward0_affine.mat:md5,50fef7c5c184a6fc228f6b29244d5690",
+                            "test_backward1_warp.nii.gz:md5,6f0cc0dd97f276fd0a64af98ea8a1787"
                         ]
                     ]
                 ],
@@ -350,8 +350,8 @@
                             "single_end": false
                         },
                         [
-                            "test_backward0_affine.mat:md5,177325d18b5a5fa457bd3a2e052463d9",
-                            "test_backward1_warp.nii.gz:md5,4ea6f41a8246f3cb0b1ad39c94028c1f"
+                            "test_backward0_affine.mat:md5,50fef7c5c184a6fc228f6b29244d5690",
+                            "test_backward1_warp.nii.gz:md5,6f0cc0dd97f276fd0a64af98ea8a1787"
                         ]
                     ]
                 ],
@@ -362,8 +362,8 @@
                             "single_end": false
                         },
                         [
-                            "test_forward0_warp.nii.gz:md5,464d7b291ab9c9aaead7ecbfec6a6693",
-                            "test_forward1_affine.mat:md5,984ac5023aca49f513af811d0f1e3e89"
+                            "test_forward0_warp.nii.gz:md5,0f292cc2a69b115ef5a23dae9116c25d",
+                            "test_forward1_affine.mat:md5,035d194bd4068828bbc7ded19d1b1523"
                         ]
                     ]
                 ],
@@ -373,7 +373,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_T1w_warped.nii.gz:md5,9f2eda1485017da83b5fcd6871cdcb74"
+                        "test_T1w_warped.nii.gz:md5,7bf2e1cf5c6df2d7bc4efd8529e5d7bc"
                     ]
                 ],
                 "backward_affine": [
@@ -382,7 +382,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_backward0_affine.mat:md5,177325d18b5a5fa457bd3a2e052463d9"
+                        "test_backward0_affine.mat:md5,50fef7c5c184a6fc228f6b29244d5690"
                     ]
                 ],
                 "backward_image_transform": [
@@ -392,8 +392,8 @@
                             "single_end": false
                         },
                         [
-                            "test_backward0_affine.mat:md5,177325d18b5a5fa457bd3a2e052463d9",
-                            "test_backward1_warp.nii.gz:md5,4ea6f41a8246f3cb0b1ad39c94028c1f"
+                            "test_backward0_affine.mat:md5,50fef7c5c184a6fc228f6b29244d5690",
+                            "test_backward1_warp.nii.gz:md5,6f0cc0dd97f276fd0a64af98ea8a1787"
                         ]
                     ]
                 ],
@@ -404,8 +404,8 @@
                             "single_end": false
                         },
                         [
-                            "test_forward0_warp.nii.gz:md5,464d7b291ab9c9aaead7ecbfec6a6693",
-                            "test_forward1_affine.mat:md5,984ac5023aca49f513af811d0f1e3e89"
+                            "test_forward0_warp.nii.gz:md5,0f292cc2a69b115ef5a23dae9116c25d",
+                            "test_forward1_affine.mat:md5,035d194bd4068828bbc7ded19d1b1523"
                         ]
                     ]
                 ],
@@ -415,7 +415,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_backward1_warp.nii.gz:md5,4ea6f41a8246f3cb0b1ad39c94028c1f"
+                        "test_backward1_warp.nii.gz:md5,6f0cc0dd97f276fd0a64af98ea8a1787"
                     ]
                 ],
                 "fixed_warped": [
@@ -424,7 +424,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_warped_reference.nii.gz:md5,f6969de8c75d8e4a5a6d264c3ac50ab1"
+                        "test_warped_reference.nii.gz:md5,889bc5027dfc6e26c812d834a112cd0e"
                     ]
                 ],
                 "forward_affine": [
@@ -433,7 +433,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_forward1_affine.mat:md5,984ac5023aca49f513af811d0f1e3e89"
+                        "test_forward1_affine.mat:md5,035d194bd4068828bbc7ded19d1b1523"
                     ]
                 ],
                 "forward_image_transform": [
@@ -443,8 +443,8 @@
                             "single_end": false
                         },
                         [
-                            "test_forward0_warp.nii.gz:md5,464d7b291ab9c9aaead7ecbfec6a6693",
-                            "test_forward1_affine.mat:md5,984ac5023aca49f513af811d0f1e3e89"
+                            "test_forward0_warp.nii.gz:md5,0f292cc2a69b115ef5a23dae9116c25d",
+                            "test_forward1_affine.mat:md5,035d194bd4068828bbc7ded19d1b1523"
                         ]
                     ]
                 ],
@@ -455,8 +455,8 @@
                             "single_end": false
                         },
                         [
-                            "test_backward0_affine.mat:md5,177325d18b5a5fa457bd3a2e052463d9",
-                            "test_backward1_warp.nii.gz:md5,4ea6f41a8246f3cb0b1ad39c94028c1f"
+                            "test_backward0_affine.mat:md5,50fef7c5c184a6fc228f6b29244d5690",
+                            "test_backward1_warp.nii.gz:md5,6f0cc0dd97f276fd0a64af98ea8a1787"
                         ]
                     ]
                 ],
@@ -466,7 +466,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_forward0_warp.nii.gz:md5,464d7b291ab9c9aaead7ecbfec6a6693"
+                        "test_forward0_warp.nii.gz:md5,0f292cc2a69b115ef5a23dae9116c25d"
                     ]
                 ],
                 "mqc": [
@@ -475,7 +475,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_registration_anattodwi_mqc.gif:md5,9cbc1ce8755821996dae18080cf0a23c"
+                        "test_registration_anattodwi_mqc.gif:md5,da4f8bb6fcc6f9768a2035e9f10eada5"
                     ]
                 ],
                 "versions": [
@@ -487,6 +487,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-09-03T11:19:51.111129321"
+        "timestamp": "2026-09-04T15:07:55.209316946"
     }
 }
